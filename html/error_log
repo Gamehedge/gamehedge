@@ -1,0 +1,77 @@
+[21-Apr-2016 07:06:56 America/Denver] PHP Fatal error:  Uncaught exception 'GuzzleHttp\Exception\ClientException' with message 'Client error response [url] https://api.ticketevolution.com/v9/events/0 [status code] 404 [reason phrase] Not Found' in /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Exception/RequestException.php:89
+Stack trace:
+#0 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Subscriber/HttpError.php(33): GuzzleHttp\Exception\RequestException::create(Object(GuzzleHttp\Message\Request), Object(GuzzleHttp\Message\Response))
+#1 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Event/Emitter.php(109): GuzzleHttp\Subscriber\HttpError->onComplete(Object(GuzzleHttp\Event\CompleteEvent), 'complete')
+#2 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/RequestFsm.php(91): GuzzleHttp\Event\Emitter->emit('complete', Object(GuzzleHttp\Event\CompleteEvent))
+#3 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/RequestFsm.php(132): GuzzleHttp\RequestFsm->__invoke(Object(GuzzleHttp\Transaction))
+#4 /home/gamehedg/app/vendor/react/promise/src/FulfilledPromise.php(25): Guz in /home/gamehedg/app/vendor/guzzlehttp/command/src/AbstractClient.php on line 171
+[21-Apr-2016 07:15:38 America/Denver] PHP Fatal error:  Uncaught exception 'GuzzleHttp\Exception\ClientException' with message 'Client error response [url] https://api.ticketevolution.com/v9/clients/-1 [status code] 404 [reason phrase] Not Found' in /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Exception/RequestException.php:89
+Stack trace:
+#0 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Subscriber/HttpError.php(33): GuzzleHttp\Exception\RequestException::create(Object(GuzzleHttp\Message\Request), Object(GuzzleHttp\Message\Response))
+#1 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Event/Emitter.php(109): GuzzleHttp\Subscriber\HttpError->onComplete(Object(GuzzleHttp\Event\CompleteEvent), 'complete')
+#2 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/RequestFsm.php(91): GuzzleHttp\Event\Emitter->emit('complete', Object(GuzzleHttp\Event\CompleteEvent))
+#3 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/RequestFsm.php(132): GuzzleHttp\RequestFsm->__invoke(Object(GuzzleHttp\Transaction))
+#4 /home/gamehedg/app/vendor/react/promise/src/FulfilledPromise.php(25): G in /home/gamehedg/app/vendor/guzzlehttp/command/src/AbstractClient.php on line 171
+[21-Apr-2016 07:15:53 America/Denver] PHP Fatal error:  Uncaught exception 'GuzzleHttp\Exception\ClientException' with message 'Client error response [url] https://api.ticketevolution.com/v9/clients/-1 [status code] 404 [reason phrase] Not Found' in /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Exception/RequestException.php:89
+Stack trace:
+#0 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Subscriber/HttpError.php(33): GuzzleHttp\Exception\RequestException::create(Object(GuzzleHttp\Message\Request), Object(GuzzleHttp\Message\Response))
+#1 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Event/Emitter.php(109): GuzzleHttp\Subscriber\HttpError->onComplete(Object(GuzzleHttp\Event\CompleteEvent), 'complete')
+#2 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/RequestFsm.php(91): GuzzleHttp\Event\Emitter->emit('complete', Object(GuzzleHttp\Event\CompleteEvent))
+#3 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/RequestFsm.php(132): GuzzleHttp\RequestFsm->__invoke(Object(GuzzleHttp\Transaction))
+#4 /home/gamehedg/app/vendor/react/promise/src/FulfilledPromise.php(25): G in /home/gamehedg/app/vendor/guzzlehttp/command/src/AbstractClient.php on line 171
+[21-Apr-2016 07:17:02 America/Denver] PHP Fatal error:  Uncaught exception 'GuzzleHttp\Exception\ClientException' with message 'Client error response [url] https://api.ticketevolution.com/v9/clients/-1 [status code] 404 [reason phrase] Not Found' in /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Exception/RequestException.php:89
+Stack trace:
+#0 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Subscriber/HttpError.php(33): GuzzleHttp\Exception\RequestException::create(Object(GuzzleHttp\Message\Request), Object(GuzzleHttp\Message\Response))
+#1 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Event/Emitter.php(109): GuzzleHttp\Subscriber\HttpError->onComplete(Object(GuzzleHttp\Event\CompleteEvent), 'complete')
+#2 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/RequestFsm.php(91): GuzzleHttp\Event\Emitter->emit('complete', Object(GuzzleHttp\Event\CompleteEvent))
+#3 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/RequestFsm.php(132): GuzzleHttp\RequestFsm->__invoke(Object(GuzzleHttp\Transaction))
+#4 /home/gamehedg/app/vendor/react/promise/src/FulfilledPromise.php(25): G in /home/gamehedg/app/vendor/guzzlehttp/command/src/AbstractClient.php on line 171
+[21-Apr-2016 07:41:21 America/Denver] PHP Fatal error:  Uncaught exception 'GuzzleHttp\Exception\ClientException' with message 'Client error response [url] https://api.ticketevolution.com/v9/clients/1451295/credit_cards [status code] 422 [reason phrase] Unprocessable Entity' in /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Exception/RequestException.php:89
+Stack trace:
+#0 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Subscriber/HttpError.php(33): GuzzleHttp\Exception\RequestException::create(Object(GuzzleHttp\Message\Request), Object(GuzzleHttp\Message\Response))
+#1 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Event/Emitter.php(109): GuzzleHttp\Subscriber\HttpError->onComplete(Object(GuzzleHttp\Event\CompleteEvent), 'complete')
+#2 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/RequestFsm.php(91): GuzzleHttp\Event\Emitter->emit('complete', Object(GuzzleHttp\Event\CompleteEvent))
+#3 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/RequestFsm.php(132): GuzzleHttp\RequestFsm->__invoke(Object(GuzzleHttp\Transaction))
+#4 /home/gamehedg/app/vendor/react/promise/sr in /home/gamehedg/app/vendor/guzzlehttp/command/src/AbstractClient.php on line 171
+[21-Apr-2016 08:44:15 America/Denver] PHP Fatal error:  Uncaught exception 'GuzzleHttp\Exception\ClientException' with message 'Client error response [url] https://api.ticketevolution.com/v9/ticket_groups/287402418?ticket_list=false [status code] 404 [reason phrase] Not Found' in /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Exception/RequestException.php:89
+Stack trace:
+#0 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Subscriber/HttpError.php(33): GuzzleHttp\Exception\RequestException::create(Object(GuzzleHttp\Message\Request), Object(GuzzleHttp\Message\Response))
+#1 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Event/Emitter.php(109): GuzzleHttp\Subscriber\HttpError->onComplete(Object(GuzzleHttp\Event\CompleteEvent), 'complete')
+#2 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/RequestFsm.php(91): GuzzleHttp\Event\Emitter->emit('complete', Object(GuzzleHttp\Event\CompleteEvent))
+#3 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/RequestFsm.php(132): GuzzleHttp\RequestFsm->__invoke(Object(GuzzleHttp\Transaction))
+#4 /home/gamehedg/app/vendor/react/promise/ in /home/gamehedg/app/vendor/guzzlehttp/command/src/AbstractClient.php on line 171
+[21-Apr-2016 11:48:42 America/Denver] PHP Fatal error:  Uncaught exception 'GuzzleHttp\Exception\ClientException' with message 'Client error response [url] https://api.ticketevolution.com/v9/events/0 [status code] 404 [reason phrase] Not Found' in /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Exception/RequestException.php:89
+Stack trace:
+#0 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Subscriber/HttpError.php(33): GuzzleHttp\Exception\RequestException::create(Object(GuzzleHttp\Message\Request), Object(GuzzleHttp\Message\Response))
+#1 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Event/Emitter.php(109): GuzzleHttp\Subscriber\HttpError->onComplete(Object(GuzzleHttp\Event\CompleteEvent), 'complete')
+#2 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/RequestFsm.php(91): GuzzleHttp\Event\Emitter->emit('complete', Object(GuzzleHttp\Event\CompleteEvent))
+#3 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/RequestFsm.php(132): GuzzleHttp\RequestFsm->__invoke(Object(GuzzleHttp\Transaction))
+#4 /home/gamehedg/app/vendor/react/promise/src/FulfilledPromise.php(25): Guz in /home/gamehedg/app/vendor/guzzlehttp/command/src/AbstractClient.php on line 171
+[21-Apr-2016 13:39:29 America/Denver] PHP Fatal error:  Uncaught exception 'GuzzleHttp\Exception\ClientException' with message 'Client error response [url] https://api.ticketevolution.com/v9/events/0 [status code] 404 [reason phrase] Not Found' in /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Exception/RequestException.php:89
+Stack trace:
+#0 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Subscriber/HttpError.php(33): GuzzleHttp\Exception\RequestException::create(Object(GuzzleHttp\Message\Request), Object(GuzzleHttp\Message\Response))
+#1 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Event/Emitter.php(109): GuzzleHttp\Subscriber\HttpError->onComplete(Object(GuzzleHttp\Event\CompleteEvent), 'complete')
+#2 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/RequestFsm.php(91): GuzzleHttp\Event\Emitter->emit('complete', Object(GuzzleHttp\Event\CompleteEvent))
+#3 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/RequestFsm.php(132): GuzzleHttp\RequestFsm->__invoke(Object(GuzzleHttp\Transaction))
+#4 /home/gamehedg/app/vendor/react/promise/src/FulfilledPromise.php(25): Guz in /home/gamehedg/app/vendor/guzzlehttp/command/src/AbstractClient.php on line 171
+[21-Apr-2016 15:18:51 America/Denver] PHP Fatal error:  Uncaught exception 'GuzzleHttp\Exception\ClientException' with message 'Client error response [url] https://api.ticketevolution.com/v9/clients/1451433/credit_cards [status code] 422 [reason phrase] Unprocessable Entity' in /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Exception/RequestException.php:89
+Stack trace:
+#0 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Subscriber/HttpError.php(33): GuzzleHttp\Exception\RequestException::create(Object(GuzzleHttp\Message\Request), Object(GuzzleHttp\Message\Response))
+#1 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Event/Emitter.php(109): GuzzleHttp\Subscriber\HttpError->onComplete(Object(GuzzleHttp\Event\CompleteEvent), 'complete')
+#2 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/RequestFsm.php(91): GuzzleHttp\Event\Emitter->emit('complete', Object(GuzzleHttp\Event\CompleteEvent))
+#3 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/RequestFsm.php(132): GuzzleHttp\RequestFsm->__invoke(Object(GuzzleHttp\Transaction))
+#4 /home/gamehedg/app/vendor/react/promise/sr in /home/gamehedg/app/vendor/guzzlehttp/command/src/AbstractClient.php on line 171
+[21-Apr-2016 16:41:52 America/Denver] PHP Fatal error:  Uncaught exception 'GuzzleHttp\Exception\ClientException' with message 'Client error response [url] https://api.ticketevolution.com/v9/events/0 [status code] 404 [reason phrase] Not Found' in /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Exception/RequestException.php:89
+Stack trace:
+#0 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Subscriber/HttpError.php(33): GuzzleHttp\Exception\RequestException::create(Object(GuzzleHttp\Message\Request), Object(GuzzleHttp\Message\Response))
+#1 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Event/Emitter.php(109): GuzzleHttp\Subscriber\HttpError->onComplete(Object(GuzzleHttp\Event\CompleteEvent), 'complete')
+#2 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/RequestFsm.php(91): GuzzleHttp\Event\Emitter->emit('complete', Object(GuzzleHttp\Event\CompleteEvent))
+#3 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/RequestFsm.php(132): GuzzleHttp\RequestFsm->__invoke(Object(GuzzleHttp\Transaction))
+#4 /home/gamehedg/app/vendor/react/promise/src/FulfilledPromise.php(25): Guz in /home/gamehedg/app/vendor/guzzlehttp/command/src/AbstractClient.php on line 171
+[22-Apr-2016 07:19:12 America/Denver] PHP Fatal error:  Uncaught exception 'GuzzleHttp\Exception\ClientException' with message 'Client error response [url] https://api.ticketevolution.com/v9/ticket_groups/295388850?ticket_list=false [status code] 404 [reason phrase] Not Found' in /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Exception/RequestException.php:89
+Stack trace:
+#0 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Subscriber/HttpError.php(33): GuzzleHttp\Exception\RequestException::create(Object(GuzzleHttp\Message\Request), Object(GuzzleHttp\Message\Response))
+#1 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/Event/Emitter.php(109): GuzzleHttp\Subscriber\HttpError->onComplete(Object(GuzzleHttp\Event\CompleteEvent), 'complete')
+#2 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/RequestFsm.php(91): GuzzleHttp\Event\Emitter->emit('complete', Object(GuzzleHttp\Event\CompleteEvent))
+#3 /home/gamehedg/app/vendor/guzzlehttp/guzzle/src/RequestFsm.php(132): GuzzleHttp\RequestFsm->__invoke(Object(GuzzleHttp\Transaction))
+#4 /home/gamehedg/app/vendor/react/promise/ in /home/gamehedg/app/vendor/guzzlehttp/command/src/AbstractClient.php on line 171
