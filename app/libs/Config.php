@@ -3,16 +3,16 @@ class Config {
 	public function __construct() {
 	}
 	public static function get_db_login() {
-		if(MODE == 'live') {
+		if(MODE == 'dev') {
 			return array('db_host' => '127.0.0.1',
                    'db_name' => 'gamehedg_game',
                    'db_user' => 'root',
                    'db_pass' => 'root');
 		} else {
-			return array('db_host' => 'localhost',
-                   'db_name' => 'gamehedg_game',
-                   'db_user' => 'gamehedg_ghuser',
-                   'db_pass' => 'QUgy.Fg(J@ue');
+			return array('db_host' => 'us-cdbr-iron-east-03.cleardb.net',
+                   'db_name' => 'heroku_301a92ea312e126',
+                   'db_user' => 'bd9a5a15117087',
+                   'db_pass' => '656b96be');
 		}
 	}
 	public static function get_team_data($team = '') {
