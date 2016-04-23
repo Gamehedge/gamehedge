@@ -688,6 +688,10 @@
 					</section>
 					<br>
 					<p><strong>Please Note: Gamehedge is a resale ticket marketplace, not the ticket seller. Prices are set by third-party sellers and may be above or below face value.</p>
+                    <br />
+                    <div class="text-center">
+                        <span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script></span>
+                    </div>
 				</div>
 			</div>
 		</form>
