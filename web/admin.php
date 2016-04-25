@@ -1,7 +1,7 @@
 <?php
 session_start();
 set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__FILE__) . '/../');
-require_once 'app/vendor/autoload.php';
+require_once 'vendor/autoload.php';
 require_once 'app/libs/smarty/libs/Smarty.class.php';
 require_once 'app/libs/Config.php';
 require_once 'app/libs/DB.php';
