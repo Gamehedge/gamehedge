@@ -13,7 +13,7 @@ $serverInfo = posix_uname();
 if(strpos($serverInfo['nodename'], 'gamehedge.com') > -1) {
 	define('MODE', 'live');
 } else {
-	define('MODE', 'dev');
+	define('MODE', 'live');
 }
 /**
  * Initialize our Template Engine (smarty - http://www.smarty.net)
