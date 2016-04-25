@@ -818,6 +818,9 @@ main#checkout #shipping_options ul {
 #co-ticket-details input[type="submit"] {
 	width: 100%;
 }
+#co-ticket-details .submit-bt {
+	width: 100%;
+}
 #co-order-submit {
 	margin-top: 30px;
 	padding: 10px;

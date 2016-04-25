@@ -6,7 +6,9 @@
 			<div class="row">
 				<div class="col-md-4">
 					<section id="co-ticket-details">
-						<input type="submit" class="button orange" value="Submit Order" />
+                        <button ladda="procesingOrder" class="button orange submit-bt">
+                            Submit Order
+                        </button>
 						<small>By placing your order, you agree to GameHedge's <a href="/privacy-policy">privacy notice</a> and <a href="/our-terms">terms and conditions</a>.</small>
 						<hr />
 						<h3>Ticket Details</h3>
@@ -681,7 +683,9 @@
 										Total
 										<div ng-bind="total|currency"></div>
 									</div>
-									<input type="submit" class="button orange" value="Submit Order" />
+                                    <button ladda="procesingOrder" class="button orange">
+                                        Submit Order
+                                    </button>
 								</div>
 							</div>
 						</div>

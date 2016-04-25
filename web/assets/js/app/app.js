@@ -1,7 +1,7 @@
 /*! growl-notifications 15-09-2014 */
 !function(){angular.module("growlNotifications.config",[]).value("growlNotifications.config",{debug:!0}),angular.module("growlNotifications.directives",[]),angular.module("growlNotifications.filters",[]),angular.module("growlNotifications.services",[]),angular.module("growlNotifications",["growlNotifications.config","growlNotifications.directives","growlNotifications.filters","growlNotifications.services"])}(),function(){function a(a,c,d){var e={ttl:a.options.ttl||5e3};return{restrict:"AE",scope:!0,controller:b,controllerAs:"$growlNotification",link:function(b,f,g,h){var i=angular.extend({},e,b.$eval(g.growlNotificationOptions));g.ttl&&(i.ttl=b.$eval(g.ttl)),c.move(f,a.element),h.timer=d(function(){c.leave(f)},i.ttl)}}}function b(a,b){this.timer=null,this.remove=function(){b.leave(a),this.timer&&this.timer.cancel&&this.timer.cancel()}}a.$inject=["growlNotifications","$animate","$timeout"],b.$inject=["$element","$animate"],angular.module("growlNotifications.directives").directive("growlNotification",a)}(),function(){function a(a){return{restrict:"AE",link:function(b,c){a.element=c}}}a.$inject=["growlNotifications"],angular.module("growlNotifications.directives").directive("growlNotifications",a)}(),function(){function a(){var a={ttl:5e3};this.setOptions=function(b){return angular.extend(a,b),this},this.ttl=function(b){return angular.isDefined(b)?(a.ttl=b,this):a.ttl},this.$get=function(){function b(){this.options=a,this.element=null}return new b}}angular.module("growlNotifications.services").provider("growlNotifications",a)}();
 
-var app = angular.module('gamehedge', ['ngSanitize', 'growlNotifications'], function($interpolateProvider) {
+var app = angular.module('gamehedge', ['ngSanitize', 'growlNotifications', 'angular-ladda'], function($interpolateProvider) {
 	$interpolateProvider.startSymbol('-!');
 	$interpolateProvider.endSymbol('!-');
 });
@@ -127,6 +127,7 @@ app.controller('CheckoutCtrl', function($scope, $http){
 	$scope.order_data    = order_data;
 	$scope.shipping_data = shipping_data;
 	$scope.accept_terms  = 0;
+    $scope.procesingOrder = false;
     
     if(typeof credit_cards != 'undefined'){
         if(Object.keys(credit_cards).length > 0){
@@ -292,17 +293,22 @@ app.controller('CheckoutCtrl', function($scope, $http){
 					alert('Your passwords do not match.');
 					return false;
 				}
+                $scope.procesingOrder = true;
 				var promise = $http.post('/order/process', $scope.data).success(function(data, status, headers, config) {
 					if(data.status == 1) {
+                        $scope.procesingOrder = false;
 						window.location.href = '/order/confirm';
 					} else if(data.status == 2) {
+                        $scope.procesingOrder = false;
 						alert('Validation Error: ' + data.message);
 					} else {
+                        $scope.procesingOrder = false;
 						alert('There was a problem processing your order.');
 						window.location.href = '/order';
 					}
 				}).error(function(data, status, headers, config) {
 					console.log(data);
+                    $scope.procesingOrder = false;
 				});
 			} else {
 				alert('Please fill out all required fields.');
