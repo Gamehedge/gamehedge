@@ -318,10 +318,38 @@ app.controller('CheckoutCtrl', function($scope, $http){
                                 } 
                         });
                         
-					} else {
+					} else if(data.status == 4){
                         $scope.procesingOrder = false;
-						alert('There was a problem processing your order.');
-						//window.location.href = '/order';
+                        swal({
+                            title: "Transaction error!",
+                            text: data.message,
+                            type: "error",
+                            showCancelButton: false,
+                            confirmButtonColor: "#a8c94b",
+                            confirmButtonText: "OK",
+                            closeOnConfirm: false,
+                            closeOnCancel: false }, 
+                            function(isConfirm){   
+                                if (isConfirm) {     
+                                    window.location.href = '/order';
+                                } 
+                        });
+                    } else {
+                        $scope.procesingOrder = false;
+                        swal({
+                            title: "Error!",
+                            text: "There was a problem processing your order.",
+                            type: "error",
+                            showCancelButton: false,
+                            confirmButtonColor: "#a8c94b",
+                            confirmButtonText: "OK",
+                            closeOnConfirm: false,
+                            closeOnCancel: false }, 
+                            function(isConfirm){   
+                                if (isConfirm) {     
+                                    window.location.href = '/order';
+                                } 
+                        });
 					}
 				}).error(function(data, status, headers, config) {
 					console.log(data);

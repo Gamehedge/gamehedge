@@ -220,12 +220,17 @@ case 'process':
 	try {
 		$order_data = $teClient->createOrders(['orders' => array($oData)]);
 		$order_data = $order_data['orders'][0];
-	} catch(Exception $e) {
-		echo '<pre>';
-		print_r(array($oData));
-		echo $e->getMessage();
-		echo '</pre>';
-		die();
+	} catch (RequestException $e) {
+        $responseCatchString = $e->getResponse()->getBody()->getContents();
+        
+        die(json_encode(array('status'  => 4,
+                        'message' => json_encode($responseCatchString) )));
+        
+		//echo '<pre>';
+		//print_r(array($oData));
+		//echo $e->getMessage();
+		//echo '</pre>';
+		//die();
 	}
     
 	$cost = $num_seats * $tdata['ticket_list'][0]['cost'];
