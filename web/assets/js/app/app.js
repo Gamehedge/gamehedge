@@ -286,11 +286,11 @@ app.controller('CheckoutCtrl', function($scope, $http){
 		if($scope.accept_terms == 1) {
 			if($scope.frmCheckout.$valid) {
 				if(typeof $scope.data.email != 'undefined' && $scope.data.email != $scope.data.email2) {
-					alert('Your email addresses do not match.');
+                    swal({title: "Error!", text: "Your email addresses do not match.", type: "error", confirmButtonColor: "#a8c94b"});
 					return false;
 				}
 				if(typeof $scope.data.password != 'undefined' && $scope.data.password != $scope.data.password2) {
-					alert('Your passwords do not match.');
+                    swal({title: "Error!", text: "Your passwords do not match.", type: "error", confirmButtonColor: "#a8c94b"});
 					return false;
 				}
                 $scope.procesingOrder = true;
@@ -300,21 +300,38 @@ app.controller('CheckoutCtrl', function($scope, $http){
 						window.location.href = '/order/confirm';
 					} else if(data.status == 2) {
                         $scope.procesingOrder = false;
-						alert('Validation Error: ' + data.message);
+                        swal({title: "Validation Error!", text: data.message, type: "error", confirmButtonColor: "#a8c94b"});
+                    } else if(data.status == 3) {
+                        $scope.procesingOrder = false;
+                        swal({
+                            title: "Credit card error!",
+                            text: data.message,
+                            type: "error",
+                            showCancelButton: false,
+                            confirmButtonColor: "#a8c94b",
+                            confirmButtonText: "OK",
+                            closeOnConfirm: false,
+                            closeOnCancel: false }, 
+                            function(isConfirm){   
+                                if (isConfirm) {     
+                                    window.location.href = '/order';
+                                } 
+                        });
+                        
 					} else {
                         $scope.procesingOrder = false;
 						alert('There was a problem processing your order.');
-						window.location.href = '/order';
+						//window.location.href = '/order';
 					}
 				}).error(function(data, status, headers, config) {
 					console.log(data);
                     $scope.procesingOrder = false;
 				});
 			} else {
-				alert('Please fill out all required fields.');
+                swal({title: "Error!", text:  "Please fill out all required fields.", type: "error", confirmButtonColor: "#a8c94b"});
 			}
 		} else {
-			alert('Please accept our terms of Service before you continue.');
+            swal({title: "Warning!", text:  "Please accept our terms of Service before you continues.", type: "warning", confirmButtonColor: "#a8c94b"});
 		}
 	};
 	$scope.updateTotals();

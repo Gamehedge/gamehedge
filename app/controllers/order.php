@@ -1,7 +1,12 @@
 <?php
 require_once 'app/classes/order.php';
 require_once 'app/classes/order-stat.php';
+
+require_once 'vendor/autoload.php';
+
 use \TicketEvolution\Client as TEvoClient;
+use \GuzzleHttp\Exception\RequestException;
+use \GuzzleHttp\Exception\ClientException;
 
 $teClient = new TEvoClient(['baseUrl'    => Config::te_url(),
                             'apiVersion' => Config::te_version(),
@@ -80,16 +85,37 @@ case 'process':
 	if($client->get('te_uid')) {
 		$client_id   = $client->get('te_uid');
 		$client_data = $teClient->showClient(['client_id' => (int)$client_id]);
-		$card_id     = $request['card_id'];
 		$phone_id    = $request['phone_id'];
 		$email_id    = $request['email_id'];
 		$billing_id  = $request['billing_address_id'];
 		$shipping_id = $request['shipping_address_id'];
+        if(isset($request['card_id'])){
+            $card_id     = $request['card_id'];
+        }
+        else {
+            $cc = array('address_id'        => (int)$billing_id,
+                'number'            => $request['card_number'],
+                'expiration_month'  => $request['card_exp_month'],
+                'expiration_year'   => $request['card_exp_year'],
+                'ip_address'        => $ip_address,
+                'phone_number_id'   => (int)$phone_id,
+                'verification_code' => $request['card_cvv2']);
+            try {
+                $cc_data = $teClient->createClientCreditCards(['client_id' => (int)$client_id, 'credit_cards' => array($cc)]);
+                $card_id = $cc_data['credit_cards'][0]['id'];
+            } catch (RequestException $e) {
+                $responseCatchString = $e->getResponse()->getBody()->getContents();
+                $responseCatchArray = json_decode($responseCatchString, true );
+                die(json_encode(array('status'  => 3,
+                        'message' => $responseCatchArray["error"] )));
+            } 
+        }
+        
 	} else {
 		$email       = array('label'            => 'Personal',
                          'address'          => $client->get('email'));
 		$phone       = array('label'            => 'Mobile',
-                         'country_code'     => $request['phone_cc'],
+                         'country_code'     => isset($request['phone_cc']) ? request['phone_cc']: '',
                          'number'           => $request['phone'],
                          'extension'        => isset($request['phone_ext']) ? $request['phone_ext'] : '');
 		$client_arr  = array('name'             => $request['bfirstname'] . ' ' . $request['blastname'],
@@ -104,11 +130,11 @@ case 'process':
 		$baddress = array('label'            => 'Billing Address',
                       'name'             => $request['bfirstname'] . ' ' . $request['blastname'],
                       'street_address'   => $request['baddress1'],
-                      'extended_address' => $request['baddress2'],
+                      'extended_address' => isset($request['baddress2']) ? $request['baddress2'] : '',
                       'locality'         => $request['bcity'],
                       'region'           => $request['bstate'],
                       'postal_code'      => $request['bzipcode'],
-                      'country_code'     => $request['bcountry'],
+                      'country_code'     => isset($request['bcountry']) ? $request['bcountry'] : '',
                       'primary'          => true);
 		if($request['ticket_format'] == 'Physical') {
 			$saddress = array('label'            => 'Shipping Address',
@@ -130,7 +156,8 @@ case 'process':
 		if($request['ticket_format'] == 'Physical') {
 			$shipping_id = $address['id'];
 		} else {
-			$shipping_id = $address['addresses'][1]['id'];
+			//$shipping_id = $address['addresses'][1]['id'];
+            $shipping_id = $address['id'];
 		}
 		$cc = array('address_id'        => (int)$billing_id,
                 'number'            => $request['card_number'],
@@ -140,8 +167,15 @@ case 'process':
                 'phone_number_id'   => (int)$phone_id,
                 'verification_code' => $request['card_cvv2']);
 		if(isset($request['store_card']) && $request['store_card'] == 1) {
-			$cc_data = $teClient->createClientCreditCards(['client_id' => (int)$client_id, 'credit_cards' => array($cc)]);
-			$card_id = $cc_data['credit_cards'][0]['id'];
+            try {
+                $cc_data = $teClient->createClientCreditCards(['client_id' => (int)$client_id, 'credit_cards' => array($cc)]);
+                $card_id = $cc_data['credit_cards'][0]['id'];
+            } catch (RequestException $e) {
+                $responseCatchString = $e->getResponse()->getBody()->getContents();
+                $responseCatchArray = json_decode($responseCatchString, true );
+                die(json_encode(array('status'  => 3,
+                        'message' => $responseCatchArray["error"] )));
+            }
 		}
 	}
 	if(isset($card_id)) {
@@ -193,6 +227,7 @@ case 'process':
 		echo '</pre>';
 		die();
 	}
+    
 	$cost = $num_seats * $tdata['ticket_list'][0]['cost'];
 	foreach($event_data['performances'] AS $teams) {
 		if($teams['primary']) {
@@ -226,6 +261,7 @@ case 'process':
 	$osClass->add();
 	$session->clear_data_order();
 	$_SESSION['order'] = $orderid;
+    
 	header('HTTP/1.1 200 OK');
 	header('Content-type: application/json');
 	echo json_encode(array('status'  => 1,
@@ -372,7 +408,7 @@ case '';
 	$smarty->assign('css', '');
 	$smarty->assign('hscripts', $hscripts);
 	$header   = $smarty->fetch('shared/header.tpl');
-	$fscripts = '<link rel="stylesheet" href="/assets/ladda/ladda-themeless.min.css"><script src="/assets/ladda/spin.min.js"></script><script src="/assets/ladda/ladda.min.js"></script><script src="/assets/angular-ladda/angular-ladda.min.js"></script><script src="/assets/js/app/app.js"></script>';
+	$fscripts = '<link rel="stylesheet" href="/assets/css/sweetalert.css"><link rel="stylesheet" href="/assets/ladda/ladda-themeless.min.css"><script src="/assets/ladda/spin.min.js"></script><script src="/assets/ladda/ladda.min.js"></script><script src="/assets/angular-ladda/angular-ladda.min.js"></script><script src="/assets/js/app/app.js"></script><script src="/assets/js/sweetalert.min.js"></script>';
 	$smarty->assign('fscripts', $fscripts);
 	$footer = $smarty->fetch('shared/footer.tpl');
 	$smarty->assign('header', $header);
