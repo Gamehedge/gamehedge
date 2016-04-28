@@ -16,7 +16,7 @@ case '';
 			</script>
 		';
 	}
-	$fscripts = '<script src="/assets/js/app/app.js"></script>';
+	$fscripts = '<link rel="stylesheet" href="/assets/css/sweetalert.css"><link rel="stylesheet" href="/assets/ladda/ladda-themeless.min.css"><script src="/assets/ladda/spin.min.js"></script><script src="/assets/ladda/ladda.min.js"></script><script src="/assets/angular-ladda/angular-ladda.min.js"></script><script src="/assets/js/app/app.js?v111"></script><script src="/assets/js/sweetalert.min.js"></script>';
 	// Handle Header
 	$smarty->assign('body_tag', '');
 	$smarty->assign('head_tags', 'ng-app="gamehedge"');
