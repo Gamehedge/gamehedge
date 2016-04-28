@@ -51,11 +51,19 @@ class ClientResource extends Resource {
                         'region'           => $this->request['state'],
                         'postal_code'      => $this->request['zipcode'],
                         'country_code'     => 'US');
-			$te_data  = $this->add_address($address);
-			return array('data' => array('status'  => 1,
-                                   'message' => 'Success',
-                                   'payload' => $te_data['addresses'][0]),
-                   'code' => 200);
+			try {
+                $te_data  = $this->add_address($address);
+                return array('data' => array('status'  => 1,
+                                       'message' => 'Success',
+                                       'payload' => $te_data['addresses'][0]),
+                       'code' => 200);
+            } catch (RequestException $e) {
+                $responseCatchString = $e->getResponse()->getBody()->getContents();
+                return array('data' => array('status'  => 0,
+                                         'message' => $responseCatchString),
+                         'code' => 200);
+            }
+            
 			break;
 		case 'PUT':
 			break;
@@ -76,11 +84,19 @@ class ClientResource extends Resource {
                         'region'           => $this->request['state'],
                         'postal_code'      => $this->request['zipcode'],
                         'country_code'     => 'US');
-			$te_data  = $this->add_address($address);
-			return array('data' => array('status'  => 1,
-                                   'message' => 'Success',
-                                   'payload' => $te_data['addresses'][0]),
-                   'code' => 200);
+			try {
+                $te_data  = $this->add_address($address);
+                return array('data' => array('status'  => 1,
+                                       'message' => 'Success',
+                                       'payload' => $te_data['addresses'][0]),
+                       'code' => 200);
+            } catch (RequestException $e) {
+                $responseCatchString = $e->getResponse()->getBody()->getContents();
+                return array('data' => array('status'  => 0,
+                                         'message' => $responseCatchString),
+                         'code' => 200);
+            }
+            
 			break;
 		case 'PUT':
 			break;

@@ -268,6 +268,10 @@
 						</div>
 					</section>
 					<section id="existing-customer" ng-if="existing == 1">
+                        <h2 class="underlined big">How Many Tickets?</h2>
+							<div class="form-group">
+								<select id="qty" name="qty" class="form-control" ng-model="data.qty" ng-options="split for split in order_data.splits" ng-change="updateTotals()"></select>
+							</div>
 						<h2 class="no-margin underlined big">Shipping Information</h2>
 						<div id="shipping_holder" ng-show="!toggle_edit.shipping">
 							<div class="clearfix">
@@ -387,7 +391,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="change_buttons"><a class="button orange medium" ng-click="addShippingAddress()">Submit</a> <a ng-click="toggleAdd('shipping')">Cancel</a></div>
+							<div class="change_buttons"><a ladda="processing_shipping_address" class="button orange medium" ng-click="addShippingAddress()">Submit</a> <a ng-click="toggleAdd('shipping')">Cancel</a></div>
 						</div>
 						<h2 class="underlined big">Payment Method</h2>
 						<div ng-if="!has_card">
@@ -451,7 +455,7 @@
 						<div ng-if="has_card">
 							<div class="clearfix" ng-show="!toggle_edit.credit">
 								<div class="pull-right"><a class="button medium gray" ng-click="toggleEdit('credit')">Edit</a></div>
-								<img src="/assets/img/icon--!credit_card.card_company|lowercase!-.png" alt="-!credit_card.card_company!-" /> -!credit_card.card_company!- ending in -!credit_card.last_digits!-
+								<img ng-src="/assets/img/icon--!credit_card.card_company|lowercase!-.png" alt="-!credit_card.card_company!-" /> -!credit_card.card_company!- ending in -!credit_card.last_digits!-
 							</div>
 							<div id="card_options" ng-show="toggle_edit.credit && !toggle_add.credit">
 								<h3>Your Stored Credit Cards</h3>
@@ -465,7 +469,7 @@
 									</li>
 									<li class="item" ng-repeat="cc in credit_cards">
 										<div class="row">
-											<div class="col-md-6"><label><input type="radio" id="card_id-!cc.id!-" name="card_id" value="-!cc.id!-" ng-model="data.card_id" /> <img src="/assets/img/icon--!cc.card_company|lowercase!-.png" alt="-!cc.card_company!-" /> -!cc.card_company!- ending in -!cc.last_digits!-</div>
+											<div class="col-md-6"><label><input type="radio" id="card_id-!cc.id!-" name="card_id" value="-!cc.id!-" ng-model="data.card_id" /> <img ng-src="/assets/img/icon--!cc.card_company|lowercase!-.png" alt="-!cc.card_company!-" /> -!cc.card_company!- ending in -!cc.last_digits!-</div>
 											<div class="col-md-4">-!cc.name!-</div>
 											<div class="col-md-2">-!cc.expiration_month!-/-!cc.expiration_year!-</div>
 										</div>
@@ -660,7 +664,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="change_buttons"><a class="button orange medium" ng-click="addBillingAddress()">Submit</a> <a ng-click="toggleAdd('billing')">Cancel</a></div>
+							<div class="change_buttons"><a ladda="processing_billing_address" class="button orange medium" ng-click="addBillingAddress()">Submit</a> <a ng-click="toggleAdd('billing')">Cancel</a></div>
 						</div>
 					</section>
 					<h2 class="underlined big">Tickets Ordered</h2>

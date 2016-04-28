@@ -129,7 +129,11 @@ app.controller('CheckoutCtrl', function($scope, $http){
 	$scope.accept_terms  = 0;
     $scope.procesingOrder = false;
     $scope.processing_credit_card = false;
+    $scope.processing_billing_address = false;
+    $scope.processing_shipping_address = false;
     $scope.cdata = {card_number: "", card_exp_month: "01", card_exp_year: "2016", card_cvv2: ""};
+    $scope.sdata = {firstname: "", lastname: "", address1: "", address2: "", city: "", state: "", zipcode: ""};
+    $scope.bdata = {firstname: "", lastname: "", address1: "", address2: "", city: "", state: "", zipcode: ""};
     
     if(typeof credit_cards != 'undefined'){
         if(Object.keys(credit_cards).length > 0){
@@ -150,6 +154,30 @@ app.controller('CheckoutCtrl', function($scope, $http){
             $scope.cdata.card_number = "";
             $scope.cdata.card_exp_month = "01";
             $scope.cdata.card_exp_year = "2016";
+        }
+    });
+    
+    $scope.$watch('toggle_add.shipping', function() {
+        if($scope.toggle_add.shipping == 1){
+            $scope.sdata.address1 = "";
+            $scope.sdata.address2 = "";
+            $scope.sdata.city = "";
+            $scope.sdata.firstname = "";
+            $scope.sdata.lastname = "";
+            $scope.sdata.state = "";
+            $scope.sdata.zipcode = "";
+        }
+    });
+    
+    $scope.$watch('toggle_add.billing', function() {
+        if($scope.toggle_add.billing == 1){
+            $scope.bdata.address1 = "";
+            $scope.bdata.address2 = "";
+            $scope.bdata.city = "";
+            $scope.bdata.firstname = "";
+            $scope.bdata.lastname = "";
+            $scope.bdata.state = "";
+            $scope.bdata.zipcode = "";
         }
     });
     
@@ -192,40 +220,56 @@ app.controller('CheckoutCtrl', function($scope, $http){
 			$scope.toggleEdit('credit');
 		};
 		$scope.addShippingAddress = function() {
-			var payload       = $scope.sdata;
-			payload.api_key   = api_key;
-			payload.client_id = customer_data.id;
-			var promise       = $http.post('/v1/client/shipping', payload).success(function(data, status, headers, config) {
-				if(data.status == 1) {
-					$scope.addresses[data.payload.id] = data.payload;
-					$scope.shipping_address           = data.payload;
-					$scope.data.shipping_address_id   = data.payload.id;
-					$scope.toggleEdit('shipping');
-					$scope.toggleAdd('shipping');
-				} else {
-					alert('Failed to add new Shipping Address.');
-				}
-			}).error(function(data, status, headers, config) {
-				console.log(data);
-			});
+            if($scope.sdata.firstname == "" || $scope.sdata.lastname == "" || $scope.sdata.address1 == "" || $scope.sdata.city == "" || $scope.sdata.state == "" || $scope.sdata.zipcode == ""){
+                swal({title: "Error!", text:  "Please fill out all required fields.", type: "error", confirmButtonColor: "#a8c94b"});
+            }
+            else {
+                var payload       = $scope.sdata;
+                payload.api_key   = api_key;
+                payload.client_id = customer_data.id;
+                $scope.processing_shipping_address = true;
+                var promise       = $http.post('/v1/client/shipping', payload).success(function(data, status, headers, config) {
+                    $scope.processing_shipping_address = false;
+                    if(data.status == 1) {
+                        $scope.addresses[data.payload.id] = data.payload;
+                        $scope.shipping_address           = data.payload;
+                        $scope.data.shipping_address_id   = data.payload.id;
+                        $scope.toggleEdit('shipping');
+                        $scope.toggleAdd('shipping');
+                    } else {
+                        swal({title: "Shipping address error!", text: data.message, type: "error", confirmButtonColor: "#a8c94b"});
+                    }
+                }).error(function(data, status, headers, config) {
+                    $scope.processing_shipping_address = false;
+                    swal({title: "Connection error!", text: "Please verify your internet connection and try again.", type: "error", confirmButtonColor: "#a8c94b"});
+                });   
+            }
 		};
 		$scope.addBillingAddress = function() {
-			var payload       = $scope.bdata;
-			payload.api_key   = api_key;
-			payload.client_id = customer_data.id;
-			var promise       = $http.post('/v1/client/billing', payload).success(function(data, status, headers, config) {
-				if(data.status == 1) {
-					$scope.addresses[data.payload.id] = data.payload;
-					$scope.billing_address            = data.payload;
-					$scope.data.billing_address_id    = data.payload.id;
-					$scope.toggleEdit('billing');
-					$scope.toggleAdd('billing');
-				} else {
-					alert('Failed to add new Billing Address.');
-				}
-			}).error(function(data, status, headers, config) {
-				console.log(data);
-			});
+            if($scope.bdata.firstname == "" || $scope.bdata.lastname == "" || $scope.bdata.address1 == "" || $scope.bdata.city == "" || $scope.bdata.state == "" || $scope.bdata.zipcode == ""){
+                swal({title: "Error!", text:  "Please fill out all required fields.", type: "error", confirmButtonColor: "#a8c94b"});
+            }
+            else {
+                var payload       = $scope.bdata;
+                payload.api_key   = api_key;
+                payload.client_id = customer_data.id;
+                $scope.processing_billing_address = true;
+                var promise       = $http.post('/v1/client/billing', payload).success(function(data, status, headers, config) {
+                    $scope.processing_billing_address = false;
+                    if(data.status == 1) {
+                        $scope.addresses[data.payload.id] = data.payload;
+                        $scope.billing_address            = data.payload;
+                        $scope.data.billing_address_id    = data.payload.id;
+                        $scope.toggleEdit('billing');
+                        $scope.toggleAdd('billing');
+                    } else {
+                        swal({title: "Billing address error!", text: data.message, type: "error", confirmButtonColor: "#a8c94b"});
+                    }
+                }).error(function(data, status, headers, config) {
+                    $scope.processing_billing_address = false;
+                    swal({title: "Connection error!", text: "Please verify your internet connection and try again.", type: "error", confirmButtonColor: "#a8c94b"});
+                });   
+            }
 		};
 		$scope.addCreditCard = function() {
             
@@ -315,6 +359,7 @@ app.controller('CheckoutCtrl', function($scope, $http){
                     swal({title: "Error!", text: "Your passwords do not match.", type: "error", confirmButtonColor: "#a8c94b"});
 					return false;
 				}
+                
                 $scope.procesingOrder = true;
 				var promise = $http.post('/order/process', $scope.data).success(function(data, status, headers, config) {
 					if(data.status == 1) {
@@ -377,6 +422,7 @@ app.controller('CheckoutCtrl', function($scope, $http){
 					console.log(data);
                     $scope.procesingOrder = false;
 				});
+                
 			} else {
                 swal({title: "Error!", text:  "Please fill out all required fields.", type: "error", confirmButtonColor: "#a8c94b"});
 			}
