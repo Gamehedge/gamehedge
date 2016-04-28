@@ -5,12 +5,12 @@ define('API', 'v1');
 if(strpos($serverInfo['nodename'], 'gamehedge.com') > -1) {
 	define('MODE', 'live');
 } else {
-	define('MODE', 'dev');
+	define('MODE', 'live');
 }
 if(MODE == 'dev') {
 } else {
 }
-require_once 'app/vendor/autoload.php';
+require_once 'vendor/autoload.php';
 require_once 'app/libs/API.php';
 try {
 	$api = new API($_REQUEST['request']);

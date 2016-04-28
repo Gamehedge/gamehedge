@@ -4,6 +4,8 @@ require_once 'app/libs/Config.php';
 require_once 'app/libs/Utility.php';
 use \TicketEvolution\Client as TEvoClient;
 use \Firebase\JWT\JWT;
+use \GuzzleHttp\Exception\RequestException;
+use \GuzzleHttp\Exception\ClientException;
 
 class ClientResource extends Resource {
 	public function __construct($id, $verb, $args, $method, $request) {
@@ -99,17 +101,26 @@ class ClientResource extends Resource {
                           'ip_address'        => $ip_address,
                           'phone_number_id'   => (int)$this->request['phone_id'],
                           'verification_code' => $this->request['card_cvv2']);
-			$te_data    = $this->teClient->createClientCreditCards(['client_id' => (int)$this->request['client_id'], 'credit_cards' => array($creditcard)]);
-			if(isset($te_data['status']) && $te_data['status'] == 0) {
-				return array('data' => array('status'  => 0,
-                                     'message' => $te_data['error']),
-                     'code' => 200);
-			} else {
-				return array('data' => array('status'  => 1,
-                                     'message' => 'Success',
-                                     'payload' => $te_data['credit_cards'][0]),
-                     'code' => 200);
-			}
+			try {
+                $te_data    = $this->teClient->createClientCreditCards(['client_id' => (int)$this->request['client_id'], 'credit_cards' => array($creditcard)]);
+                if(isset($te_data['status']) && $te_data['status'] == 0) {
+                    return array('data' => array('status'  => 0,
+                                         'message' => $te_data['error']),
+                         'code' => 200);
+                } else {
+                    return array('data' => array('status'  => 1,
+                                         'message' => 'Success',
+                                         'payload' => $te_data['credit_cards'][0]),
+                         'code' => 200);
+                }
+            } catch (RequestException $e) {
+                $responseCatchString = $e->getResponse()->getBody()->getContents();
+                $responseCatchArray = json_decode($responseCatchString, true );
+                return array('data' => array('status'  => 0,
+                                         'message' => $responseCatchArray["error"]),
+                         'code' => 200);
+            }
+            
 			break;
 		case 'PUT':
 			break;

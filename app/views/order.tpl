@@ -483,13 +483,22 @@
 							<div id="add_new_card" ng-show="toggle_add.credit">
 								<h3>Add New Credit Card</h3>
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-md-8">
 										<div class="form-group">
 											<label for="card_number">Credit Card Number <span>*</span></label>
 											<input type="text" id="card_number" name="card_number" class="form-control" ng-model="cdata.card_number" />
 										</div>
 									</div>
-									<div class="col-md-2">
+									
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="card_cvv2">CVV2 Code <span>*</span></label>
+											<input type="text" id="card_cvv2" name="card_cvv2" class="form-control" ng-model="cdata.card_cvv2" />
+										</div>
+									</div>
+								</div>
+                                <div class="row">
+                                    <div class="col-md-4">
 										<div class="form-group">
 											<label for="card_exp_month">Exp. Month <span>*</span></label>
 											<select id="card_exp_month" name="card_exp_month" class="form-control" ng-model="cdata.card_exp_month">
@@ -508,7 +517,7 @@
 											</select>
 										</div>
 									</div>
-									<div class="col-md-2">
+									<div class="col-md-4">
 										<div class="form-group">
 											<label for="card_exp_year">Exp. Year <span>*</span></label>
 											<select id="card_exp_year" name="card_exp_year" class="form-control" ng-model="cdata.card_exp_year">
@@ -528,14 +537,12 @@
 											</select>
 										</div>
 									</div>
-									<div class="col-md-2">
-										<div class="form-group">
-											<label for="card_cvv2">CVV2 Code <span>*</span></label>
-											<input type="text" id="card_cvv2" name="card_cvv2" class="form-control" ng-model="cdata.card_cvv2" />
-										</div>
-									</div>
-								</div>
-								<div class="change_buttons"><a class="button orange medium" ng-click="addCreditCard()">Submit</a> <a ng-click="toggleAdd('credit')">Cancel</a></div>
+                                    
+                                    <div class="col-md-4">
+                                        <div class="change_buttons"><a ladda="processing_credit_card" class="button orange medium" ng-click="addCreditCard()">Submit</a> <a ng-click="toggleAdd('credit')">Cancel</a></div>
+                                    </div>
+                                </div>
+								
 							</div>
 						</div>
 						<div id="billing_address">

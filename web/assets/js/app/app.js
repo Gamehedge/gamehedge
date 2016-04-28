@@ -128,6 +128,8 @@ app.controller('CheckoutCtrl', function($scope, $http){
 	$scope.shipping_data = shipping_data;
 	$scope.accept_terms  = 0;
     $scope.procesingOrder = false;
+    $scope.processing_credit_card = false;
+    $scope.cdata = {card_number: "", card_exp_month: "01", card_exp_year: "2016", card_cvv2: ""};
     
     if(typeof credit_cards != 'undefined'){
         if(Object.keys(credit_cards).length > 0){
@@ -141,6 +143,15 @@ app.controller('CheckoutCtrl', function($scope, $http){
     else {
         $scope.has_card = false;
     }
+    
+    $scope.$watch('toggle_add.credit', function() {
+        if($scope.toggle_add.credit == 1){
+            $scope.cdata.card_cvv2 = "";
+            $scope.cdata.card_number = "";
+            $scope.cdata.card_exp_month = "01";
+            $scope.cdata.card_exp_year = "2016";
+        }
+    });
     
 	if($scope.existing) {
 		$scope.client_data = customer_data;
@@ -217,24 +228,35 @@ app.controller('CheckoutCtrl', function($scope, $http){
 			});
 		};
 		$scope.addCreditCard = function() {
-			var payload        = $scope.cdata;
-			payload.api_key    = api_key;
-			payload.client_id  = customer_data.id;
-			payload.phone_id   = $scope.data.phone_id;
-			payload.address_id = $scope.data.billing_address_id;
-			var promise        = $http.post('/v1/client/creditcard', payload).success(function(data, status, headers, config) {
-				if(data.status == 1) {
-					$scope.credit_cards[data.payload.id] = data.payload;
-					$scope.credit_card                   = data.payload;
-					$scope.data.card_id                  = data.payload.id;
-					$scope.toggleEdit('credit');
-					$scope.toggleAdd('credit');
-				} else {
-					alert('Failed to add a new Credit Card.');
-				}
-			}).error(function(data, status, headers, config) {
-				console.log(data);
-			});
+            
+            if($scope.cdata.card_number == "" || $scope.cdata.card_cvv2 == ""){
+                swal({title: "Error!", text:  "Please fill out all required fields.", type: "error", confirmButtonColor: "#a8c94b"});
+            }
+            else {
+                var payload        = $scope.cdata;
+                payload.api_key    = api_key;
+                payload.client_id  = customer_data.id;
+			    payload.phone_id   = $scope.data.phone_id;
+			    payload.address_id = $scope.data.billing_address_id;
+                $scope.processing_credit_card = true;
+                var promise        = $http.post('/v1/client/creditcard', payload).success(function(data, status, headers, config) {
+                    $scope.processing_credit_card = false;
+                    if(data.status == 1) {
+                        $scope.credit_cards[data.payload.id] = data.payload;
+                        $scope.credit_card                   = data.payload;
+                        $scope.data.card_id                  = data.payload.id;
+                        $scope.toggleEdit('credit');
+                        $scope.toggleAdd('credit');
+                    } else {
+                        swal({title: "Credit card error!", text: data.message, type: "error", confirmButtonColor: "#a8c94b"});
+                    }
+                }).error(function(data, status, headers, config) {
+                    $scope.processing_credit_card = false;
+                    swal({title: "Connection error!", text: "Please verify your internet connection and try again.", type: "error", confirmButtonColor: "#a8c94b"});
+                });
+                
+            }
+            
 		};
 	} else {
 		$scope.data = {optin: 1, store_card: 1, samebilling: 1, shipping_option: $scope.shipping_data[shipping_id].id, ticket_format: ticket_format, fee: $scope.order_data.service_fee, qty: parseInt($scope.order_data.qty)};
