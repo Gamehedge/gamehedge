@@ -24,6 +24,7 @@ case '';
                   'within'      => 25,
                   'page'        => 1,
                   'per_page'    => 8,
+                  'occurs_at.gte' => date("Y-m-d H:i:s"),
                   'order_by'    => 'events.occurs_at ASC, events.popularity_score DESC');
 	$e_data = $teClient->listEvents($query);
 	$events = $e_data['events'];
