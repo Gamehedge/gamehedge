@@ -6,7 +6,7 @@
 			<div class="row">
 				<div class="col-md-4">
 					<section id="co-ticket-details">
-                        <button ladda="procesingOrder" class="button orange submit-bt">
+                        <button ladda="procesingOrder" class="button orange submit-bt" ng-disabled="toggle_edit['shipping'] == 1 || toggle_edit['billing'] == 1 || toggle_edit['credit'] == 1">
                             Submit Order
                         </button>
 						<small>By placing your order, you agree to GameHedge's <a href="/privacy-policy">privacy notice</a> and <a href="/our-terms">terms and conditions</a>.</small>
@@ -142,7 +142,8 @@
 								</div>
 							</div>
 						</div>
-						<input type="checkbox" id="store_card" name="store_card" ng-model="data.store_card" ng-true-value="1" ng-false-value="0" /> Store my information in our secure system for future purchases.
+                        <!--
+						<input type="checkbox" id="store_card" name="store_card" ng-model="data.store_card" ng-true-value="1" ng-false-value="0" /> Store my information in our secure system for future purchases. -->
 						<h3>Billing Address</h3>
 						<div class="row">
 							<div class="col-md-6">
@@ -246,24 +247,24 @@
 						</div>
 						Phone
 						<div class="row">
-							<div class="col-md-3">
+							<!--div class="col-md-3">
 								<div class="form-group">
 									<label for="phone_cc">Country Code</label>
 									<input type="text" id="phone_cc" name="phone_cc" class="form-control" ng-model="data.phone_cc" />
 								</div>
-							</div>
-							<div class="col-md-6">
+							</div-->
+							<div class="col-md-12">
 								<div class="form-group">
 									<label for="phone">Number <span>*</span></label>
 									<input type="text" id="phone" name="phone" class="form-control" ng-model="data.phone" ng-required="true" />
 								</div>
 							</div>
-							<div class="col-md-3">
+							<!--div class="col-md-3">
 								<div class="form-group">
 									<label for="phone_ext" class="optional">Extension</label>
 									<input type="text" id="phone_ext" name="phone_ext" class="form-control" ng-model="data.phone_ext" />
 								</div>
-							</div>
+							</div-->
 						</div>
 					</section>
 					<section id="existing-customer" ng-if="existing == 1">
@@ -444,7 +445,8 @@
 									</div>
 								</div>
 							</div>
-							<input type="checkbox" id="store_card" name="store_card" ng-model="data.store_card" ng-true-value="1" ng-false-value="0" /> Store my information in our secure system for future purchases.
+                            <!--
+							<input type="checkbox" id="store_card" name="store_card" ng-model="data.store_card" ng-true-value="1" ng-false-value="0" /> Store my information in our secure system for future purchases. -->
 						</div>
 						<div ng-if="has_card">
 							<div class="clearfix" ng-show="!toggle_edit.credit">
@@ -683,7 +685,7 @@
 										Total
 										<div ng-bind="total|currency"></div>
 									</div>
-                                    <button ladda="procesingOrder" class="button orange">
+                                    <button ladda="procesingOrder" class="button orange" ng-disabled="toggle_edit['shipping'] == 1 || toggle_edit['billing'] == 1 || toggle_edit['credit'] == 1">
                                         Submit Order
                                     </button>
 								</div>

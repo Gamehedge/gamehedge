@@ -1054,6 +1054,12 @@ main#admin #order-stats .stat-item span {
 	background: -moz-linear-gradient(top,  #f47a20,  #faa51a);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f47a20', endColorstr='#faa51a');
 }
+
+.orange:disabled {
+    background: #dddddd !important;
+    color: #aaa !important;
+    text-shadow: none;
+}
 /* red */
 .red {
 	color: #faddde;
