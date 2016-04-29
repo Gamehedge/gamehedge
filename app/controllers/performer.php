@@ -10,7 +10,7 @@ if(!isset($id) || $id < 1) {
 	exit;
 }
 $page     = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
-$per_page = 15;
+$per_page = 10;
 // Handle Header
 $smarty->assign('body_tag', '');
 $smarty->assign('head_tags', '');
@@ -23,12 +23,13 @@ $footer = $smarty->fetch('shared/footer.tpl');
 $p_data = $teClient->showPerformer(['performer_id' => (int)$id]);
 $s_data = Utility::get_team_data($p_data['name']);
 $query  = array('performer_id'      => $id,
-                'category_id'       => Config::te_categoryid(),
-                'within'            => 25,
-                'only_with_tickets' => 'all',
+                //'category_id'       => Config::te_categoryid(),
+                //'within'            => 25,
+                //'only_with_tickets' => 'all',
                 'page'              => (int)$page,
-                'per_page'          => (int)$per_page,
-                'order_by'          => 'events.occurs_at ASC, events.popularity_score DESC');
+                'per_page'          => (int)$per_page//,
+                //'order_by'          => 'events.occurs_at ASC, events.popularity_score DESC'
+               );
 if(isset($_GET['home_only']) && $_GET['home_only'] == 1) {
 	$query['primary_performer'] = true;
 }
