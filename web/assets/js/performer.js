@@ -50,7 +50,7 @@ function loadPage(){
                 _html = _html + '<div class="location"><a href="/venue/' + value.venue.id + '/' + value.venue.slug + '">' + value.venue.name + '</a> - ' + value.venue.location + '</div>';
                 _html = _html + '</div>';
                 _html = _html + '<div class="tickets-link">';
-                _html = _html + '<a href="/ticket/' + value.id + '" class="btn-green-gradient">View Tickets <i class="fa fa-angle-right"></i></a>';
+                _html = _html + '<a href="/ticket/' + value.id + '" class="btn-green-gradient">Buy Tickets <i class="fa fa-angle-right"></i></a>';
                 if(value.available_count < 20){
                     _html = _html + '<div class="text-center alert-text">NOT MANY LEFT</div>';
                 }
