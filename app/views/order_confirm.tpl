@@ -18,6 +18,9 @@
 							<div class="location">{$venue_name} - {$venue_location}</div>
 							<div class="ticket">Section {$ticket_section}, Row {$ticket_row}, Seats {$ticket_seats}</div>
                             <div class="hidden" id="TGroupID">{$ticket_id}</div>
+                            <br />
+                            <div class="ticket">DELIVERY TYPE: <strong>{$ticket_format}</strong></div>
+                            <h2 style="margin-top:5px;">TOTAL: ${$order_balance}</h2>
 						</div>
 					</div>
 				</section>

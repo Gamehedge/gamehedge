@@ -296,7 +296,9 @@ case 'confirm':
 	$smarty->assign('ticket_seats', $order->get('seats'));
 	$smarty->assign('ticket_price', number_format($ticket_data['retail_price'], 2));
     $smarty->assign('ticket_id', $ticket_data['id']);
+    $smarty->assign('ticket_format', $ticket_data['format']);
 	$smarty->assign('num_tickets', $order_data['items'][0]['quantity']);
+    $smarty->assign('order_balance', number_format($order_data['balance'], 2));
 	$smarty->assign('order_id', $order_data['oid']);
 	$smarty->assign('body_tag', '');
 	$smarty->assign('head_tags', '');
