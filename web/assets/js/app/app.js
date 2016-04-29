@@ -49,11 +49,11 @@ app.controller('SearchCtrl', function($scope, $http){
 		$scope.searching  = true;
 		if($scope.formSearch.$valid){
 			if($scope.type == 'full') {
-				var api_url = '/v1/search?api_key=' + api_key + '&t=f&q=' + $scope.query;
+				var api_url = '/v1/search?api_key=' + api_key + '&t=f&q=' + $scope.query + '&local_time=' + moment().add(2,'h').format('YYYY-MM-DD HH:mm:ss');
 			} else if($scope.type == 'team') {
-				var api_url = '/v1/search?api_key=' + api_key + '&t=t&q=' + $scope.query;
+				var api_url = '/v1/search?api_key=' + api_key + '&t=t&q=' + $scope.query + '&local_time=' + moment().add(2,'h').format('YYYY-MM-DD HH:mm:ss');
 			} else {
-				var api_url = '/v1/search?api_key=' + api_key + '&t=a&city=' + $scope.city + '&state=' + $scope.state + '&category=' + $scope.category;
+				var api_url = '/v1/search?api_key=' + api_key + '&t=a&city=' + $scope.city + '&state=' + $scope.state + '&category=' + $scope.category + '&local_time=' + moment().add(2,'h').format('YYYY-MM-DD HH:mm:ss');
 			}
 			var promise = $http.get(api_url).success(function(data, status, headers, config) {
 				$scope.searching = false;
@@ -363,7 +363,7 @@ app.controller('CheckoutCtrl', function($scope, $http){
                 $scope.procesingOrder = true;
 				var promise = $http.post('/order/process', $scope.data).success(function(data, status, headers, config) {
 					if(data.status == 1) {
-                        $scope.procesingOrder = false;
+                        //$scope.procesingOrder = false;
 						window.location.href = '/order/confirm';
 					} else if(data.status == 2) {
                         $scope.procesingOrder = false;

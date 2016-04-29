@@ -45,10 +45,11 @@ class SearchResource extends Resource {
 				ini_set('max_execution_time', 300);
 				ini_set('memory_limit', '1024M');
 				// Search for the Team
-				$query       = array('q'           => $this->request['q'],
+				$query       = array('q'   => $this->request['q'],
                              'category_id' => Config::te_categoryid(),
                              'page'        => 1,
                              'per_page'    => 100,
+                             'occurs_at.gte' => $this->request['local_time'],
                              'order_by'    => 'events.occurs_at ASC, events.popularity_score DESC');
 				$events_data = $this->teClient->listEvents($query);
 				$events      = $events_data['events'];
@@ -73,7 +74,7 @@ class SearchResource extends Resource {
 					}
 				}
 				foreach($events AS $i => $e) {
-					if($e.available_count < 1)
+					if($e["available_count"] < 1)
 						continue;
 					/*
 					$tgdata = $this->teClient->listTicketGroups(['event_id' => (int)$e['id'], 'order_by' => 'retail_price']);

@@ -287,6 +287,7 @@ case 'confirm':
 	$ticket_data = unserialize($ticket_data);
 	$date        = new DateTime($event_data['occurs_at'], new DateTimeZone($event_data['venue']['time_zone']));
 	$smarty->assign('event_name', $order_data['items'][0]['ticket_group']['event']['name']);
+    $smarty->assign('event_id', $order_data['items'][0]['ticket_group']['event']['id']);
 	$smarty->assign('event_date', $date->format('D, M j, Y h:i A'));
 	$smarty->assign('venue_name', $event_data['venue']['name']);
 	$smarty->assign('venue_location', $event_data['venue']['location']);
@@ -294,6 +295,7 @@ case 'confirm':
 	$smarty->assign('ticket_row', $order->get('row'));
 	$smarty->assign('ticket_seats', $order->get('seats'));
 	$smarty->assign('ticket_price', number_format($ticket_data['retail_price'], 2));
+    $smarty->assign('ticket_id', $ticket_data['id']);
 	$smarty->assign('num_tickets', $order_data['items'][0]['quantity']);
 	$smarty->assign('order_id', $order_data['oid']);
 	$smarty->assign('body_tag', '');

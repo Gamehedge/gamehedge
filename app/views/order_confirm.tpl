@@ -14,8 +14,10 @@
 						</div>
 						<div class="event">
 							<h1>{$event_name}</h1>
+                            <div class="hidden" id="EventID ">{$event_id}</div>
 							<div class="location">{$venue_name} - {$venue_location}</div>
 							<div class="ticket">Section {$ticket_section}, Row {$ticket_row}, Seats {$ticket_seats}</div>
+                            <div class="hidden" id="TGroupID">{$ticket_id}</div>
 						</div>
 					</div>
 				</section>
