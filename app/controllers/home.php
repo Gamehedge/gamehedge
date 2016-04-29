@@ -12,10 +12,11 @@ $smarty->assign('css', '');
 $smarty->assign('hscripts', '');
 $header = $smarty->fetch('shared/header.tpl');
 // Handle Footer
-$smarty->assign('fscripts', '');
+$smarty->assign('fscripts', '<script src="/assets/js/moment.js"></script><script src="/assets/js/home.js"></script>');
 $footer = $smarty->fetch('shared/footer.tpl');
 switch($verb) {
 case '';
+    /*
 	$ipurl  = 'http://api.ipinfodb.com/v3/ip-city/?key=e12e8a9321c609d76b8c956020e4dd2d0f8f2961357f41ec6fda74e8905b7547&ip=' . Utility::get_ip_address() . '&format=json';
 	$ipdata = json_decode(file_get_contents($ipurl), true);
 	$cs     = $ipdata['cityName'] . ', ' . $ipdata['regionName'];
@@ -28,6 +29,8 @@ case '';
                   'order_by'    => 'events.occurs_at ASC, events.popularity_score DESC');
 	$e_data = $teClient->listEvents($query);
 	$events = $e_data['events'];
+    */
+    $events = array();
 	$smarty->assign('header', $header);
 	$smarty->assign('footer', $footer);
 	$smarty->assign('title', 'Welcome to GameHedge');

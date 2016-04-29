@@ -54,6 +54,9 @@
 				</div>
 			</div>
 			<h2>Upcoming Games Near You</h2>
+            <div id="home-loading-data" class="row text-center">
+                <img src="/assets/img/loadinfo.gif">
+            </div>
 			<div id="upcoming-games" class="row">
 				{foreach $events as $edata}
 					<div class="col-md-3">
