@@ -1,4 +1,7 @@
 {$header}
+<script type="application/javascript">
+    var _id = {$performer_id};
+</script>
 <section id="team-header">
 	<div class="container">
 		<h1>{$title}</h1>
@@ -8,7 +11,17 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-9">
-				<section id="games">
+                <div id="home-loading-data" class="row text-center">
+                    <img src="/assets/img/loadinfo.gif">
+                </div>
+                
+                <section id="games">
+                
+                </section>
+                
+				
+                <section id="games_old">
+                        
 					{if $events|@count gt 0}
 					<div style="margin-bottom: 10px"><label><input type="checkbox" id="only_home" value="1" {$only_home} /> Only show home games</label></div>
 					<ul>
@@ -33,18 +46,18 @@
 						{/foreach}
 					</ul>
 					{else}
-					<p>There are no games available at this time.</p>
+					<!--p>There are no games available at this time.</p-->
 					{/if}
 				</section>
-				{if $pages > 1}
-				<nav role="navigation" class="clearfix">
+				
+				<nav role="navigation" class="clearfix" id="pag_navigation">
 					<ul class="pagination pull-right">
 						{for $i = 1 to $pages}
 						<li{if $i eq $page} class="active"{/if}><a href="{$url}?page={$i}">{$i}</a></li>
 						{/for}
 					</ul>
 				</nav>
-				{/if}
+				
 				<p><strong>Please Note: Gamehedge is a resale ticket marketplace, not the ticket seller. Prices are set by third-party sellers and may be above or below face value.</p>
 			</div>
 			<div class="col-md-3">

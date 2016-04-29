@@ -29,13 +29,26 @@ switch($verb) {
         break;
     
     case 'performer_events':
-        $query  = array('performer_id'      => $_GET["id"],
+        if($_GET["home_only_games"] == 'true'){
+            $query  = array('performer_id'      => $_GET["id"],
                 'category_id'       => Config::te_categoryid(),
-                'page'              => 1,
-                'per_page'          => 10,
+                'page'              => (int)$_GET["page"],
+                'per_page'          => (int)$_GET["per_page"],
+                'occurs_at.gte'     => $_GET["actual_date"],
+                'primary_performer' => true,
                 'order_by'          => 'events.occurs_at ASC, events.popularity_score DESC');
+        }
+        else {
+            $query  = array('performer_id'      => $_GET["id"],
+                'category_id'       => Config::te_categoryid(),
+                'page'              => (int)$_GET["page"],
+                'per_page'          => (int)$_GET["per_page"],
+                'occurs_at.gte'     => $_GET["actual_date"],
+                'order_by'          => 'events.occurs_at ASC, events.popularity_score DESC');
+        }
+        
         $e_data = $teClient->listEvents($query);
-        $data = $e_data['events'];
+        $data = $e_data;
         break;
     default:
         $data = (object) array('error' => 'empty parameters');

@@ -18,10 +18,11 @@ $smarty->assign('css', '');
 $smarty->assign('hscripts', '');
 $header = $smarty->fetch('shared/header.tpl');
 // Handle Footer
-$smarty->assign('fscripts', '');
+$smarty->assign('fscripts', '<script src="/assets/js/moment.js"></script><script src="/assets/js/performer.js"></script>');
 $footer = $smarty->fetch('shared/footer.tpl');
 $p_data = $teClient->showPerformer(['performer_id' => (int)$id]);
 $s_data = Utility::get_team_data($p_data['name']);
+/*
 $query  = array('performer_id'      => $id,
                 'category_id'       => Config::te_categoryid(),
                 'within'            => 25,
@@ -33,6 +34,9 @@ if(isset($_GET['home_only']) && $_GET['home_only'] == 1) {
 	$query['primary_performer'] = true;
 }
 $e_data = $teClient->listEvents($query);
+
+$e_data = array();
+
 $opps   = array();
 if(isset($_GET['home_only']) && $_GET['home_only'] == 1) {
 	$smarty->assign('only_home', 'checked="checked"');
@@ -60,6 +64,10 @@ foreach($e_data['events'] AS $i => $d) {
 asort($opps);
 $pages  = ceil($e_data['total_entries'] / $per_page);
 $events = $e_data['events'];
+*/
+$events = array();
+$pages = 0;
+
 $smarty->assign('header', $header);
 $smarty->assign('footer', $footer);
 $smarty->assign('title', $p_data['name']);
@@ -70,5 +78,6 @@ $smarty->assign('events', $events);
 $smarty->assign('url', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 $smarty->assign('page', $page);
 $smarty->assign('pages', $pages);
+$smarty->assign('performer_id', $id);
 $smarty->display('performer.tpl');
 ?>
