@@ -46,7 +46,13 @@ function loadPage(){
                 _html = _html + '<div class="time">' + moment( String(value.occurs_at).replace("Z", "") ).format('ddd. hh:mm A') + '</div>';
                 _html = _html + '</div>';
                 _html = _html + '<div class="event">';
-                _html = _html + '<div class="name">' + '<a href="/performer/' + value.performances[0].performer.id + '/' + value.performances[0].performer.slug + '" title="' +  value.performances[0].performer.name + '">' + value.performances[0].performer.name + '</a>' + ' at ' + '<a href="/performer/' + value.performances[1].performer.id + '/' + value.performances[1].performer.slug + '" title="' +  value.performances[1].performer.name + '">' + value.performances[1].performer.name + '</a>' + '</div>';
+                if(value.performances[1]){
+                    _html = _html + '<div class="name">' + '<a href="/performer/' + value.performances[0].performer.id + '/' + value.performances[0].performer.slug + '" title="' +  value.performances[0].performer.name + '">' + value.performances[0].performer.name + '</a>' + ' at ' + '<a href="/performer/' + value.performances[1].performer.id + '/' + value.performances[1].performer.slug + '" title="' +  value.performances[1].performer.name + '">' + value.performances[1].performer.name + '</a>' + '</div>';
+                }
+                else {
+                    _html = _html + '<div class="name">' + '<a href="/performer/' + value.performances[0].performer.id + '/' + value.performances[0].performer.slug + '" title="' +  value.performances[0].performer.name + '">' + value.performances[0].performer.name + '</a>' + '</div>';
+                }
+                
                 _html = _html + '<div class="location"><a href="/venue/' + value.venue.id + '/' + value.venue.slug + '">' + value.venue.name + '</a> - ' + value.venue.location + '</div>';
                 _html = _html + '</div>';
                 _html = _html + '<div class="tickets-link">';
