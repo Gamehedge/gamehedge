@@ -8,7 +8,7 @@
 								<ul>
 									<li><a href="/our-terms">Our Terms</a></li>
 									<li><a href="/faq">Frequently Asked</a></li>
-									<li><a href="mailto:stephenkane@gamehedge.com">Contact Us</a></li>
+									<li><a href="/contact">Contact Us</a></li>
 								</ul>
 							</nav>
 						</div>

@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-04-22 23:45:08
+/* Smarty version 3.1.29, created on 2016-04-29 15:08:23
   from "/Users/edgarforero/Documents/Projects/GameHedge/gamehedge/app/views/home.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_571a9b647667c7_37332773',
+  'unifunc' => 'content_57235cc7e7e125_79405392',
   'file_dependency' => 
   array (
     'd8e10883be31644e18314f9e29ec175307e969f7' => 
     array (
       0 => '/Users/edgarforero/Documents/Projects/GameHedge/gamehedge/app/views/home.tpl',
-      1 => 1461336407,
+      1 => 1461935274,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_571a9b647667c7_37332773 ($_smarty_tpl) {
+function content_57235cc7e7e125_79405392 ($_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/Users/edgarforero/Documents/Projects/GameHedge/gamehedge/app/libs/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <section id="hero">
@@ -78,7 +78,10 @@ if (!is_callable('smarty_modifier_date_format')) require_once '/Users/edgarforer
 					</div>
 				</div>
 			</div>
-			<h2>Upcoming Games Near You</h2>
+			<h2 id="upcoming_title">Upcoming Games Near You</h2>
+            <div id="home-loading-data" class="row text-center">
+                <img src="/assets/img/loadinfo.gif">
+            </div>
 			<div id="upcoming-games" class="row">
 				<?php
 $_from = $_smarty_tpl->tpl_vars['events']->value;

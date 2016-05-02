@@ -723,6 +723,19 @@ section#tickets .seat-holder {
 	height: auto;
 }
 
+section#contact-us {
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+section#contact-us form .error {
+    margin-top: 5px;
+    font-style: italic;
+    font-weight: lighter;
+    font-size: 11px;
+    color: red;
+}
+
 section#how-it-works .col-md-3 {
 	margin-top: 15px;
 }

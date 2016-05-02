@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-04-22 23:45:03
+/* Smarty version 3.1.29, created on 2016-05-02 23:08:48
   from "/Users/edgarforero/Documents/Projects/GameHedge/gamehedge/app/views/shared/header.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_571a9b5fe6dee2_74607097',
+  'unifunc' => 'content_5727c1e00cb592_44295068',
   'file_dependency' => 
   array (
     'e3dc94523fd2ab33acccd6703d3e5bc6bc1a4dbf' => 
     array (
       0 => '/Users/edgarforero/Documents/Projects/GameHedge/gamehedge/app/views/shared/header.tpl',
-      1 => 1461336430,
+      1 => 1462223324,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_571a9b5fe6dee2_74607097 ($_smarty_tpl) {
+function content_5727c1e00cb592_44295068 ($_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html lang="en-US" <?php echo $_smarty_tpl->tpl_vars['head_tags']->value;?>
@@ -32,7 +32,7 @@ function content_571a9b5fe6dee2_74607097 ($_smarty_tpl) {
 		<meta http-equiv="x-ua-compatible" content="IE=edge" />
 		<meta name="robots" content="NOINDEX, NOFOLLOW" />
 		<link rel="stylesheet" href="/assets/css/bundle.min.css" />
-		<link rel="stylesheet" href="/assets/css/style.css" />
+		<link rel="stylesheet" href="/assets/css/style.css?v112" />
 		<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 		<?php echo $_smarty_tpl->tpl_vars['css']->value;?>
 

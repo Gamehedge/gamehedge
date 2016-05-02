@@ -105,7 +105,7 @@ $smarty->assign('year', date('Y'));
 // Handle our "index" endpoints
 if($endpoint == '')
 	$endpoint = 'home';
-if(in_array($endpoint, array('how-it-works', 'faq', 'contact', 'our-terms', 'american-league', 'national-league', 'sports', 'site-map', 'privacy-policy'))) {
+if(in_array($endpoint, array('how-it-works', 'faq', 'contact', 'our-terms', 'american-league', 'national-league', 'sports', 'site-map', 'privacy-policy', 'contact-send'))) {
 	$verb     = $endpoint;
 	$endpoint = 'static';
 }
