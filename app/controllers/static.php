@@ -44,8 +44,6 @@ case 'contact-send':
     if(isset($request['name'])){
         $smarty->assign('title', 'Thanks for contact us');
         
-        $to = "edgar@toro-labs.com";
-        
         $subject = "New message using the contact form of www.gamehedge.com from " . $request['email'];
         
         $message = '
@@ -73,8 +71,10 @@ case 'contact-send':
         $mail->Port = 587;
         $mail->SMTPSecure = 'tls';
         $mail->SMTPAuth = true;
-        $mail->Username = "contact@gamehedge.com";
-        $mail->Password = "Gamehedge10036";
+        #$mail->Username = "contact@gamehedge.com";
+        #$mail->Password = "Gamehedge10036";
+        $mail->Username = "edgarforerogranados@gmail.com";
+        $mail->Password = "Granados1";
         $mail->setFrom('contact@gamehedge.com', 'Gamehedge contact system');
         $mail->addAddress('support@gamehedge.com', 'Gamehedge Support');
         
