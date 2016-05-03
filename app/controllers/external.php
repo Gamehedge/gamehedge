@@ -31,10 +31,15 @@ switch($verb) {
     case 'close_events1':
         //$ipAddress = Utility::get_ip_address();
         $ipAddress = "38.105.128.254";
-        $ipurl  = 'http://api.ipinfodb.com/v3/ip-city/?key=e12e8a9321c609d76b8c956020e4dd2d0f8f2961357f41ec6fda74e8905b7547&ip=' . $ipAddress . '&format=json';
-        $ipdata = json_decode(file_get_contents($ipurl), true);
+        $ipurl = "https://geo.pointp.in/b8ed8db7-b44e-438c-b6b7-8b1d9ca06d42/json/". $ipAddress;
+        $json = file_get_contents($ipurl);
+        $location_data = json_decode($json, true);
+        $cs = $location_data['city_name'] . ',' . $location_data['region_code'];
         
-        $cs     = $ipdata['cityName'] . ', ' . $ipdata['regionName'];
+        //$ipurl  = 'http://api.ipinfodb.com/v3/ip-city/?key=e12e8a9321c609d76b8c956020e4dd2d0f8f2961357f41ec6fda74e8905b7547&ip=' . $ipAddress . '&format=json';
+        //$ipdata = json_decode(file_get_contents($ipurl), true);
+        
+        //$cs     = $ipdata['cityName'] . ', ' . $ipdata['regionName'];
         $query  = array('city_state'    => $cs,
                       'category_id'     => Config::te_categoryid(),
                       'within'          => 25,
