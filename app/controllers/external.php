@@ -31,10 +31,11 @@ switch($verb) {
     case 'close_events1':
         //$ipAddress = Utility::get_ip_address();
         $ipAddress = "38.105.128.254";
-        $ipurl  = 'http://api.ipinfodb.com/v3/ip-city/?key=e12e8a9321c609d76b8c956020e4dd2d0f8f2961357f41ec6fda74e8905b7547&ip=' . $ipAddress . '&format=json';
-        /*
-        $ipdata = json_decode(file_get_contents($ipurl), true);
-        $cs     = $ipdata['cityName'] . ', ' . $ipdata['regionName'];
+        //$ipurl  = 'http://api.ipinfodb.com/v3/ip-city/?key=e12e8a9321c609d76b8c956020e4dd2d0f8f2961357f41ec6fda74e8905b7547&ip=' . $ipAddress . '&format=json';
+        //$ipdata = json_decode(file_get_contents($ipurl), true);
+        
+        //$cs     = $ipdata['cityName'] . ', ' . $ipdata['regionName'];
+        $cs = "New York, NY";
         $query  = array('city_state'    => $cs,
                       'category_id'     => Config::te_categoryid(),
                       'within'          => 25,
@@ -44,8 +45,6 @@ switch($verb) {
                       'order_by'        => 'events.occurs_at ASC, events.popularity_score DESC');
         $e_data = $teClient->listEvents($query);
         $data = $e_data['events'];
-        */
-        $data = file_get_contents($ipurl);
         break;
     
     case 'performer_events':
