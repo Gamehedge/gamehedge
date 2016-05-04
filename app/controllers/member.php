@@ -10,6 +10,10 @@ $teClient = new TEvoClient(['baseUrl'    => Config::te_url(),
                             'apiSecret'  => Config::te_api_secret()]);
 switch($verb) {
 case 'request_refund':
+    require_once 'app/classes/order.php';
+    $order = new Order($request['oid']);
+    $order->set('refund', 'requested');
+    
 	header('HTTP/1.1 200 OK');
 	header('Content-Type: application/json');
 	if(!isset($client)) {
@@ -18,8 +22,34 @@ case 'request_refund':
 	$message = "Customer " . $request['name'] . " has requested a GameHedge Refund.\n\nTicket Evolutions Order ID: " . $request['te_id'] . "\n\nLocal Order ID: " . $request['oid'] . "\n\nCustomer ID: " . $request['cid'] . "\n\nCustomer Name: " . $request['name'] . "\n\nCustomer Email: " . $request['email'];
 	$subject = "Refund Request for Order " . $request['te_id'];
 	$headers = 'From: GameHedge <support@gamehedge.com>' . PHP_EOL . 'Reply-To: GameHedge <support@gamehedge.com>' . PHP_EOL . 'X-Mailer: PHP/' . phpversion();
-	mail('support@gamehedge.com', $subject, $message, $headers);
-	die(json_encode(array('status' => 1, 'message' => 'Your GameHedge request has been submitted.')));
+	
+    require_once 'vendor/autoload.php';
+        
+    $mail = new PHPMailer;
+    $mail->isSMTP();
+    $mail->SMTPDebug = 0;
+    $mail->Debugoutput = 'html';
+    $mail->Host = 'smtp.gmail.com';
+    $mail->Port = 587;
+    $mail->SMTPSecure = 'tls';
+    $mail->SMTPAuth = true;
+    #$mail->Username = "contact@gamehedge.com";
+    #$mail->Password = "Gamehedge$10036";
+    $mail->Username = "edgarforerogranados@gmail.com";
+    $mail->Password = "Granados1";
+    $mail->setFrom('contact@gamehedge.com', 'Gamehedge contact system');
+    $mail->addAddress('support@gamehedge.com', 'Gamehedge Support');
+
+    $mail->Subject = $subject;
+    $mail->msgHTML($message);
+    
+    if (!$mail->send()) {
+        die(json_encode(array('status' => 0, 'message' => 'Error processing your request. Please try again.'.$mail->ErrorInfo)));
+    } else {
+        die(json_encode(array('status' => 1, 'message' => 'Your GameHedge request has been submitted.')));
+    }
+    //mail('support@gamehedge.com', $subject, $message, $headers);
+	
 	break;
 case 'login':
 	if(isset($client)) {
@@ -140,7 +170,7 @@ case '';
 	$smarty->assign('hscripts', '');
 	$header = $smarty->fetch('shared/header.tpl');
 	// Handle Footer
-	$smarty->assign('fscripts', '<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>');
+	$smarty->assign('fscripts', '<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script><link rel="stylesheet" href="/assets/css/sweetalert.css"><script src="/assets/js/sweetalert.min.js"></script>');
 	$footer   = $smarty->fetch('shared/footer.tpl');
 	$o_data   = $teClient->listOrders(['buyer_id' => (int)$client->get('te_uid')]);
 	$orders   = new Order;
@@ -181,8 +211,18 @@ case '';
 	$smarty->assign('footer', $footer);
 	$smarty->assign('title', 'My Account');
 	$smarty->assign('name', $client->get('name'));
-	$smarty->assign('last_date', $_SESSION['last_date']);
-	$smarty->assign('last_ip', $_SESSION['last_ip']);
+    if(isset($_SESSION['last_date'])){
+        $smarty->assign('last_date', $_SESSION['last_date']);
+    }
+    else {
+        $smarty->assign('last_date',"");
+    }
+    if(isset($_SESSION['last_ip'])){
+        $smarty->assign('last_ip', $_SESSION['last_ip']);
+    }
+    else {
+        $smarty->assign('last_ip', "");
+    }
 	$smarty->assign('balance', $o_data['balance_sum']);
 	$smarty->assign('num_orders', $o_data['total_entries']);
 	$smarty->assign('num_spent', $o_data['total_sum']);

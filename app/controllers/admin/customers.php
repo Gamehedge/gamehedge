@@ -74,6 +74,7 @@ case '':
 	} else {
 		$custs = $custClass->get_list($page, $per_page);
 	}
+    
 	$pages = ceil($custs['total'] / $per_page);
 	$smarty->assign('body_tag', '');
 	$smarty->assign('head_tags', '');
@@ -84,7 +85,9 @@ case '':
 	$footer = $smarty->fetch('admin/shared/footer.tpl');
 	$smarty->assign('header', $header);
 	$smarty->assign('footer', $footer);
-	$smarty->assign('customers', $custs['customers']);
+    if(isset($custs['customers'])){
+        $smarty->assign('customers', $custs['customers']);
+    }
 	$smarty->assign('url', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 	$smarty->assign('clients', $custs['clients']);
 	$smarty->assign('page', $page);

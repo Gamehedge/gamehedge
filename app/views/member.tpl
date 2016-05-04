@@ -44,7 +44,8 @@
 									<td>{$o.status}</td>
 									<td>
 										{if $o.refund_status eq 'available'}
-										<a href="#refund_msg{$o.id}" class="fancybox">Refund Available</a>
+                                        <a href="javascript:void(0)" onclick="requestRefund('{$o.id}', '{$o.order_id}', '{$customer_id}', '{$customer_name}', '{$customer_email}')" class="fancybox">Refund Available</a>
+										<!--a href="#refund_msg{$o.id}" class="fancybox">Refund Available</a-->
 										<div id="refund_msg{$o.id}" style="display: none">
 											<p>Sorry the game didn't work out as you may have hoped - but you are eligible for a Good Game Guarantee Refund!</p>
 											<p>Simply click on REQUEST REFUND below and you will receive a refund of 50% of your ticket price within 5-10 business days.</p>

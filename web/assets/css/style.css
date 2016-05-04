@@ -880,6 +880,13 @@ main#account #account-options ul li {
 	padding: 2px 0;
 }
 
+@media(min-width: 920px) {
+    .customSweetClass {
+        width: 900px !important;
+        margin-left: -450px !important; 
+    }
+}
+
 /**
  * Admin Section
  **/
@@ -1441,6 +1448,7 @@ section#tickets ul.ticket-list > li .guarantee, .TicketRow .guarantee {
 }
 
 }
+
 
 
 /************* iPhone 5 *************/

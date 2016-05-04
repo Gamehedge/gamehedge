@@ -80,12 +80,13 @@ class OrderModel extends Model {
                                                            'type' => 'datetime'),
                                 'modified_date'   => array('name' => 'modified',
                                                            'type' => 'timestamp'));
-	protected $refund_map = array('none' => 'Not Available', 'available' => 'Refund Available', 'pending' => 'Refund Pending', 'sent' => 'Refunded');
+	protected $refund_map = array('none' => 'Not Available', 'available' => 'Refund Available', 'requested' => 'Refund Requested','pending' => 'Refund Pending', 'sent' => 'Refunded');
 	public function __construct() {
 		parent::__construct();
 	}
 
 	public function get_list($page, $per_page) {
+        $low_limit = 0;
 		$llimit = $per_page * ($page - 1);
 		$hlimit = $low_limit + $per_page;
 		$stmt   = $this->db->prepare('SELECT SQL_CALC_FOUND_ROWS c.id, c.name, c.email, o.* FROM clients c, orders o WHERE o.client_id = c.te_uid ORDER BY o.id DESC LIMIT :llimit, :hlimit');
@@ -96,7 +97,9 @@ class OrderModel extends Model {
 		if($stmt->rowCount() > 0) {
 			$orders = array();
 			while($order = $stmt->fetch(PDO::FETCH_ASSOC)) {
-				$order['refund_text'] = $this->refund_map[$order['refund_status']];
+                if(isset($order['refund_status'])){
+                    $order['refund_text'] = $this->refund_map[$order['refund_status']];
+                }
 				array_push($orders, $order);
 			}
 			return array('orders' => $orders,
@@ -107,6 +110,7 @@ class OrderModel extends Model {
 	}
 
 	public function get_list_by_customer($id, $page, $per_page) {
+        $low_limit = 0;
 		$llimit = $per_page * ($page - 1);
 		$hlimit = $low_limit + $per_page;
 		$stmt   = $this->db->prepare('SELECT SQL_CALC_FOUND_ROWS c.id, c.name, c.email, o.* FROM clients c, orders o WHERE o.client_id = c.te_uid AND c.id = :id ORDER BY o.id DESC LIMIT :llimit, :hlimit');

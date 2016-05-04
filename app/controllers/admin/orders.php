@@ -133,7 +133,7 @@ case '':
 	$smarty->assign('header', $header);
 	$smarty->assign('footer', $footer);
 	$smarty->assign('orders', $orders['orders']);
-	$smarty->assign('refund', array('none' => 'Not Available', 'available' => 'Refund Available', 'pending' => 'Refund Pending', 'sent' => 'Refunded'));
+	$smarty->assign('refund', array('none' => 'Not Available', 'available' => 'Refund Available', 'requested' => 'Refund Requested', 'pending' => 'Refund Pending', 'sent' => 'Refunded'));
 	$smarty->assign('url', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 	$smarty->assign('page', $page);
 	$smarty->assign('pages', $pages);

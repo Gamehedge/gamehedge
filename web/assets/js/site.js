@@ -1,3 +1,27 @@
+function requestRefund(_id, orderId, customerId, customerName, customerEmail){
+    swal({  
+        title: "",
+        text: "<p style='font-size:18px;'><strong>Sorry the game didn't work out as you may have hoped - but you are eligible for a Good Game Guarantee Refund!</strong></p><br/><p>Simply click on REQUEST REFUND below and you will receive a refund of 50% of your ticket price within 5-10 business days.</p><br/><p>The refund will be credited to the credit card that you used to make your purchase.</p><br/><p>If you have any questions, please email us at support@gamehedge.com or give us a jingle at 908-312-FANS (3267).</p><br/><p>Hope your team wins next time!</p>",   
+        customClass: "customSweetClass", 
+        html: true,
+        confirmButtonColor: "#64991e",
+        confirmButtonText: "REQUEST REFUND",
+        showCancelButton: true,   
+        closeOnConfirm: false,   
+        showLoaderOnConfirm: true, 
+    }, 
+    function(isConfirm ){  
+        if (isConfirm) {
+            var data = {te_id: _id, oid: orderId, cid: customerId, name: customerName, email: customerEmail};
+			$.post('/member/request_refund', data, function(data) {
+				swal({title: "", text: data.message, confirmButtonColor: "#64991e"}, function(){
+                    location.reload();
+                });
+			}, 'json');
+        }
+    });
+}
+
 $(document).ready(function(){
 	if($('#home-down-arrow-link').length > 0) {
 		$('#home-down-arrow-link').on('click', function(){
