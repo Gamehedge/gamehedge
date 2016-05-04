@@ -305,7 +305,38 @@ case 'confirm':
 	$smarty->assign('css', '');
 	$smarty->assign('hscripts', '');
 	$header = $smarty->fetch('shared/header.tpl');
-	$smarty->assign('fscripts', '');
+    $analytics_code = "<script>
+//loads up ecommerce plugin google analytics 
+ga('require', 'ecommerce');
+
+//Below given code sends transaction information to google analytics
+ga('ecommerce:addTransaction', {
+  'id': '".$order_data['oid']."',                     // Transaction ID. Required.
+  'affiliation': 'www.gamehedge.com',   // Affiliation or store name.
+  'revenue': '".number_format($order_data['balance'], 2)."',               // Grand Total.
+  'shipping': '0',                  // Shipping.
+  'tax': '0'                     // Tax.
+});
+
+
+//Below given code sends item information to google analytics
+// It should come as many times as many items there in cart
+ga('ecommerce:addItem', {
+  'id': '".$order_data['oid']."',                     // Transaction ID. Required.
+  'name': '".$order_data['items'][0]['ticket_group']['event']['name']."',    // Product name. Required.
+  'sku': '".$ticket_data['id']."',                 // SKU/code.
+  'category': 'baseball',         // Category or variation.
+  'price': '".number_format($order_data['balance'], 2)."',                 // Unit price.
+  'quantity': '".$order_data['items'][0]['quantity']."'                   // Quantity.
+});
+
+//Finally, once you have configured all your ecommerce data , you send the data to Google Analytics using the ecommerce:send command
+ga('ecommerce:send');
+
+
+</script>";
+    
+	$smarty->assign('fscripts', $analytics_code);
 	$footer = $smarty->fetch('shared/footer.tpl');
 	$smarty->assign('header', $header);
 	$smarty->assign('footer', $footer);
