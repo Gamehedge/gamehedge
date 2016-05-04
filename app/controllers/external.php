@@ -35,15 +35,15 @@ switch($verb) {
     case 'close_events1':
         //$ipAddress = Utility::get_ip_address();
         $ipAddress = "38.105.128.254";
-        if(apc_fetch('cs') != null){
-            $cs = apc_fetch('cs');
+        if(isset($_COOKIE["cs"])){
+            $cs = $_COOKIE["cs"];
         }
         else {
             $ipurl = "https://geo.pointp.in/c3f08b81-2120-4f7a-8ca4-2378530fcde1/json/". $ipAddress;
             $json = file_get_contents($ipurl);
             $location_data = json_decode($json, true);
             $cs = $location_data['city_name'] . ',' . $location_data['region_code'];  
-            apc_store('cs', $cs, 43200);
+            setcookie("cs",$cs,time()+43200);
         }
         
         //$ipurl  = 'http://api.ipinfodb.com/v3/ip-city/?key=e12e8a9321c609d76b8c956020e4dd2d0f8f2961357f41ec6fda74e8905b7547&ip=' . $ipAddress . '&format=json';
