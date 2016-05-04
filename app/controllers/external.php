@@ -15,12 +15,22 @@ switch($verb) {
         $ipAddress = Utility::get_ip_address();
         //$ipAddress = "38.105.128.254";
         /* free geo ip API */
-        $ipurl  = 'http://api.ipinfodb.com/v3/ip-city/?key=e12e8a9321c609d76b8c956020e4dd2d0f8f2961357f41ec6fda74e8905b7547&ip=' . $ipAddress . '&format=json';
-        $ipdata = json_decode(file_get_contents($ipurl), true);
-        $cs     = $ipdata['cityName'] . ', ' . $ipdata['regionName'];
+        #$ipurl  = 'http://api.ipinfodb.com/v3/ip-city/?key=e12e8a9321c609d76b8c956020e4dd2d0f8f2961357f41ec6fda74e8905b7547&ip=' . $ipAddress . '&format=json';
+        #$ipdata = json_decode(file_get_contents($ipurl), true);
+        #$cs     = $ipdata['cityName'] . ', ' . $ipdata['regionName'];
     
         /*pay geo ip API */
-        
+        if(isset($_COOKIE["cs"])){
+            $cs = $_COOKIE["cs"];
+        }
+        else {
+            $ipurl = "https://geo.pointp.in/c3f08b81-2120-4f7a-8ca4-2378530fcde1/json/". $ipAddress;
+            $json = file_get_contents($ipurl);
+            $location_data = json_decode($json, true);
+            $cs = $location_data['city_name'] . ',' . $location_data['region_code'];  
+            setcookie("cs",$cs,time()+43200);
+        }    
+    
         $query  = array('city_state'    => $cs,
                       'category_id'     => Config::te_categoryid(),
                       'within'          => 25,
