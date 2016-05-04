@@ -14,9 +14,13 @@ switch($verb) {
     case 'close_events':
         $ipAddress = Utility::get_ip_address();
         //$ipAddress = "38.105.128.254";
+        /* free geo ip API */
         $ipurl  = 'http://api.ipinfodb.com/v3/ip-city/?key=e12e8a9321c609d76b8c956020e4dd2d0f8f2961357f41ec6fda74e8905b7547&ip=' . $ipAddress . '&format=json';
         $ipdata = json_decode(file_get_contents($ipurl), true);
         $cs     = $ipdata['cityName'] . ', ' . $ipdata['regionName'];
+    
+        /*pay geo ip API */
+        
         $query  = array('city_state'    => $cs,
                       'category_id'     => Config::te_categoryid(),
                       'within'          => 25,
@@ -31,10 +35,16 @@ switch($verb) {
     case 'close_events1':
         //$ipAddress = Utility::get_ip_address();
         $ipAddress = "38.105.128.254";
-        $ipurl = "https://geo.pointp.in/b8ed8db7-b44e-438c-b6b7-8b1d9ca06d42/json/". $ipAddress;
-        $json = file_get_contents($ipurl);
-        $location_data = json_decode($json, true);
-        $cs = $location_data['city_name'] . ',' . $location_data['region_code'];
+        if(apc_fetch('cs') != null){
+            $cs = apc_fetch('cs');
+        }
+        else {
+            $ipurl = "https://geo.pointp.in/c3f08b81-2120-4f7a-8ca4-2378530fcde1/json/". $ipAddress;
+            $json = file_get_contents($ipurl);
+            $location_data = json_decode($json, true);
+            $cs = $location_data['city_name'] . ',' . $location_data['region_code'];  
+            apc_store('cs', $cs, 43200);
+        }
         
         //$ipurl  = 'http://api.ipinfodb.com/v3/ip-city/?key=e12e8a9321c609d76b8c956020e4dd2d0f8f2961357f41ec6fda74e8905b7547&ip=' . $ipAddress . '&format=json';
         //$ipdata = json_decode(file_get_contents($ipurl), true);
