@@ -148,39 +148,6 @@ app.controller('CheckoutCtrl', function($scope, $http){
         $scope.has_card = false;
     }
     
-    $scope.$watch('toggle_add.credit', function() {
-        if($scope.toggle_add.credit == 1){
-            $scope.cdata.card_cvv2 = "";
-            $scope.cdata.card_number = "";
-            $scope.cdata.card_exp_month = "01";
-            $scope.cdata.card_exp_year = "2016";
-        }
-    });
-    
-    $scope.$watch('toggle_add.shipping', function() {
-        if($scope.toggle_add.shipping == 1){
-            $scope.sdata.address1 = "";
-            $scope.sdata.address2 = "";
-            $scope.sdata.city = "";
-            $scope.sdata.firstname = "";
-            $scope.sdata.lastname = "";
-            $scope.sdata.state = "";
-            $scope.sdata.zipcode = "";
-        }
-    });
-    
-    $scope.$watch('toggle_add.billing', function() {
-        if($scope.toggle_add.billing == 1){
-            $scope.bdata.address1 = "";
-            $scope.bdata.address2 = "";
-            $scope.bdata.city = "";
-            $scope.bdata.firstname = "";
-            $scope.bdata.lastname = "";
-            $scope.bdata.state = "";
-            $scope.bdata.zipcode = "";
-        }
-    });
-    
 	if($scope.existing) {
 		$scope.client_data = customer_data;
 		$scope.addresses   = addresses;
@@ -195,7 +162,42 @@ app.controller('CheckoutCtrl', function($scope, $http){
 		$scope.billing_address  = $scope.addresses[$scope.data.billing_address_id];
 		$scope.toggle_edit      = {shipping: 0, billing: 0, credit: 0};
 		$scope.toggle_add       = {shipping: 0, billing: 0, credit: 0};
-		$scope.toggleEdit = function(section) {
+		
+        $scope.$watch('toggle_add.credit', function() {
+            if($scope.toggle_add.credit == 1){
+                $scope.cdata.card_cvv2 = "";
+                $scope.cdata.card_number = "";
+                $scope.cdata.card_exp_month = "01";
+                $scope.cdata.card_exp_year = "2016";
+            }
+        });
+
+        $scope.$watch('toggle_add.shipping', function() {
+            if($scope.toggle_add.shipping == 1){
+                $scope.sdata.address1 = "";
+                $scope.sdata.address2 = "";
+                $scope.sdata.city = "";
+                $scope.sdata.firstname = "";
+                $scope.sdata.lastname = "";
+                $scope.sdata.state = "";
+                $scope.sdata.zipcode = "";
+            }
+        });
+
+        $scope.$watch('toggle_add.billing', function() {
+            if($scope.toggle_add.billing == 1){
+                $scope.bdata.address1 = "";
+                $scope.bdata.address2 = "";
+                $scope.bdata.city = "";
+                $scope.bdata.firstname = "";
+                $scope.bdata.lastname = "";
+                $scope.bdata.state = "";
+                $scope.bdata.zipcode = "";
+            }
+        });
+        
+        
+        $scope.toggleEdit = function(section) {
 			if($scope.toggle_edit[section])
 				$scope.toggle_edit[section] = 0;
 			else

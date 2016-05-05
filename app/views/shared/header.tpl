@@ -8,7 +8,7 @@
 		<meta http-equiv="x-ua-compatible" content="IE=edge" />
 		<meta name="robots" content="NOINDEX, NOFOLLOW" />
 		<link rel="stylesheet" href="/assets/css/bundle.min.css" />
-		<link rel="stylesheet" href="/assets/css/style.css?v113" />
+		<link rel="stylesheet" href="/assets/css/style.css?v114" />
 		<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 		{$css}
 		{$hscripts}

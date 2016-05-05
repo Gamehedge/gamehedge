@@ -52,6 +52,6 @@
 		<div growl></div>
 		<script src="/assets/js/bundle.min.js"></script>
 		{$fscripts}
-		<script src="/assets/js/site.js?v110"></script>
+		<script src="/assets/js/site.js?v111"></script>
 	</body>
 </html>

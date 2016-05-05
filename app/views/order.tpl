@@ -1,16 +1,15 @@
 {$header}
 <main id="checkout" ng-controller="CheckoutCtrl">
 	<div class="container">
-		<h1>Secure Checkout</h1>
+        <div class="row vertical-align">
+            <div class="col-md-4"><h1>Secure Checkout</h1></div>
+            <div class="col-md-8 text-right"><p>Contact us: (908) 312-3267 <a href="mailto:support@gamehedge.com">support@gamehedge.com</a></p></div>
+        </div>
+		
 		<form name="frmCheckout" method="POST" ng-submit="process()">
 			<div class="row">
 				<div class="col-md-4">
 					<section id="co-ticket-details">
-                        <button ladda="procesingOrder" class="button orange submit-bt" ng-disabled="toggle_edit['shipping'] == 1 || toggle_edit['billing'] == 1 || toggle_edit['credit'] == 1">
-                            Submit Order
-                        </button>
-						<small>By placing your order, you agree to GameHedge's <a href="/privacy-policy">privacy notice</a> and <a href="/our-terms">terms and conditions</a>.</small>
-						<hr />
 						<h3>Ticket Details</h3>
 						<div class="event">{$event_name}</div>
 						<div class="date">{$event_date}</div>
@@ -21,9 +20,12 @@
 							<div class="col-md-6">Price</div>
 							<div class="col-md-6 text-right"><span ng-bind="order_data.price|currency"></span> ea.</div>
 						</div>
-						<div class="row">
-							<div class="col-md-6">Quantity</div>
-							<div class="col-md-6 text-right" ng-bind="data.qty"></div>
+						<div class="row" style="margin-top:5px; margin-bottom: 5px;">
+							<div class="col-md-9">How many tickets?</div>
+                            <div class="col-md-3">
+								<select style="height:25px;" id="qty" name="qty" class="form-control" ng-model="data.qty" ng-options="split for split in order_data.splits" ng-change="updateTotals()"></select>
+							</div>
+							<!--div class="col-md-6 text-right" ng-bind="data.qty"></div-->
 						</div>
 						<div class="row">
 							<div class="col-md-6">Subtotal</div>
@@ -34,11 +36,31 @@
 							<div class="col-md-6">Service Fee</div>
 							<div class="col-md-6 text-right" ng-bind="data.fee|currency"></div>
 						</div>
-						<div class="row">
+						<!--div class="row">
 							<div class="col-md-6">Tax</div>
 							<div class="col-md-6 text-right">--</div>
-						</div>
-						<div class="row">
+						</div-->
+                        
+                        <div class="row" ng-show="data.ticket_format == 'Eticket'" style="margin-top:5px; margin-bottom: 5px;">
+                            <div class="col-md-6">Shipping</div>
+                            <div class="col-md-6 text-right">Email Delivery</div>
+                        </div>
+                        
+                        <div class="row" ng-show="data.ticket_format == 'Physical'" style="margin-top:5px; margin-bottom: 5px;">
+                            <div class="col-md-6">Shipping Option</div>
+                            <div class="col-md-6">
+                                <select style="height:25px;" class="form-control" name="shipping_option" ng-model="data.shipping_option" ng-change="setShipping()">
+                                    <option ng-repeat="s in shipping_data" value="-!s.id!-">-!s.price|currency!- -!s.name!-</option>
+                                </select>
+                                <!--div id="shipping_options">
+                                    <ul>
+                                        <li ng-repeat="s in shipping_data"><label><input type="radio" id="shipping_option-!s.id!-" name="shipping_option" value="-!s.id!-" ng-model="data.shipping_option" ng-change="setShipping()" /> -!s.price|currency!- -!s.name!-</label></li>
+                                    </ul>
+                                </div-->
+                            </div>
+                        </div>
+                        
+						<div class="row hidden">
 							<div class="col-md-6">Shipping</div>
 							<div class="col-md-6 text-right" ng-bind="shipping.price|currency"></div>
 						</div>
@@ -48,15 +70,22 @@
 							<div class="col-md-6 text-right" ng-bind="total|currency"></div>
 						</div>
 					</section>
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-9">
+                        <h3>GAMEHEDGE PLEDGE</h3>
+                        <p>Authentic tickets delivered in time safe, private transactions, full refund for canceled events</p>
+                        </div>
+                    </div>
 				</div>
 				<div class="col-md-8">
 					<section id="new-customer" ng-if="existing == 0">
 						<div ng-if="!client">
-							<h2 class="underlined big">How Many Tickets?</h2>
-							<div class="form-group">
+							<!--h2 class="underlined big">How Many Tickets?</h2-->
+							<!--div class="form-group">
 								<select id="qty" name="qty" class="form-control" ng-model="data.qty" ng-options="split for split in order_data.splits" ng-change="updateTotals()"></select>
-							</div>
-							<h2 class="underlined big">Register</h2>
+							</div-->
+							<h2 class="underlined big">Register <span style="font-size: 15px; margin-left: 10px;"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" title="For claiming your Good Game Guarantee refund a login and password must be created">WHY?</a></span></h2>
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
@@ -88,60 +117,6 @@
 							<p>Already have an account? Please <a href="/member/login">login</a> before proceeding.</p>
 						</div>
 						<h2 class="underlined big">Billing/Shipping Information</h2>
-						<h3>Credit Card Information</h3>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="card_number">Credit Card Number <span>*</span></label>
-									<input type="text" id="card_number" name="card_number" class="form-control" ng-model="data.card_number" ng-required="true" />
-								</div>
-							</div>
-							<div class="col-md-2">
-								<div class="form-group">
-									<label for="card_exp_month">Exp. Month <span>*</span></label>
-									<select id="card_exp_month" name="card_exp_month" class="form-control" ng-model="data.card_exp_month" ng-required="true">
-										<option value="01">01</option>
-										<option value="02">02</option>
-										<option value="03">03</option>
-										<option value="04">04</option>
-										<option value="05">05</option>
-										<option value="06">06</option>
-										<option value="07">07</option>
-										<option value="08">08</option>
-										<option value="09">09</option>
-										<option value="10">10</option>
-										<option value="11">11</option>
-										<option value="12">12</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-2">
-								<div class="form-group">
-									<label for="card_exp_year">Exp. Year <span>*</span></label>
-									<select id="card_exp_year" name="card_exp_year" class="form-control" ng-model="data.card_exp_year" ng-required="true">
-										<option value="2016">2016</option>
-										<option value="2017">2017</option>
-										<option value="2018">2018</option>
-										<option value="2019">2019</option>
-										<option value="2020">2020</option>
-										<option value="2021">2021</option>
-										<option value="2022">2022</option>
-										<option value="2023">2023</option>
-										<option value="2024">2024</option>
-										<option value="2025">2025</option>
-										<option value="2026">2026</option>
-										<option value="2027">2027</option>
-										<option value="2028">2028</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-2">
-								<div class="form-group">
-									<label for="card_cvv2">CVV2 Code <span>*</span></label>
-									<input type="text" id="card_cvv2" name="card_cvv2" class="form-control" ng-model="data.card_cvv2" ng-required="true" />
-								</div>
-							</div>
-						</div>
                         <!--
 						<input type="checkbox" id="store_card" name="store_card" ng-model="data.store_card" ng-true-value="1" ng-false-value="0" /> Store my information in our secure system for future purchases. -->
 						<h3>Billing Address</h3>
@@ -266,12 +241,81 @@
 								</div>
 							</div-->
 						</div>
+                        
+                        <h2 class="underlined big">Payment Information</h2>
+                        <h3>Credit Card Information</h3>
+						<div class="row">
+                            <div class="col-md-7">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="card_number">Credit Card Number <span>*</span></label>
+                                        <input type="text" id="card_number" name="card_number" class="form-control" ng-model="data.card_number" ng-required="true" />
+                                    </div>
+                                </div>   
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="card_exp_month">Exp. Month <span>*</span></label>
+                                        <select id="card_exp_month" name="card_exp_month" class="form-control" ng-model="data.card_exp_month" ng-required="true">
+                                            <option value="01">01</option>
+                                            <option value="02">02</option>
+                                            <option value="03">03</option>
+                                            <option value="04">04</option>
+                                            <option value="05">05</option>
+                                            <option value="06">06</option>
+                                            <option value="07">07</option>
+                                            <option value="08">08</option>
+                                            <option value="09">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="card_exp_year">Exp. Year <span>*</span></label>
+                                        <select id="card_exp_year" name="card_exp_year" class="form-control" ng-model="data.card_exp_year" ng-required="true">
+                                            <option value="2016">2016</option>
+                                            <option value="2017">2017</option>
+                                            <option value="2018">2018</option>
+                                            <option value="2019">2019</option>
+                                            <option value="2020">2020</option>
+                                            <option value="2021">2021</option>
+                                            <option value="2022">2022</option>
+                                            <option value="2023">2023</option>
+                                            <option value="2024">2024</option>
+                                            <option value="2025">2025</option>
+                                            <option value="2026">2026</option>
+                                            <option value="2027">2027</option>
+                                            <option value="2028">2028</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="card_cvv2">CVV2 Code <span>*</span></label>
+                                        <input type="text" id="card_cvv2" name="card_cvv2" class="form-control" ng-model="data.card_cvv2" ng-required="true" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5" style="margin-top: 25px;">
+                                <div class="col-xs-3 text-center"><img src="/assets/img/icon-amex.png"></div>
+                                <div class="col-xs-3 text-center"><img src="/assets/img/icon-mastercard.png"></div>
+                                <div class="col-xs-3 text-center"><img src="/assets/img/icon-visa.png"></div>
+                                <div class="col-xs-3 text-center"><img src="/assets/img/icon-discover.png"></div>
+                                <div class="col-xs-12 text-center" style="margin-top: 45px;">
+                                    <span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script></span>
+                                </div>
+                            </div>
+							
+						</div>
+                        
 					</section>
 					<section id="existing-customer" ng-if="existing == 1">
-                        <h2 class="underlined big">How Many Tickets?</h2>
-							<div class="form-group">
+                        <!--h2 class="underlined big">How Many Tickets?</h2-->
+							<!--div class="form-group">
 								<select id="qty" name="qty" class="form-control" ng-model="data.qty" ng-options="split for split in order_data.splits" ng-change="updateTotals()"></select>
-							</div>
+							</div-->
 						<h2 class="no-margin underlined big">Shipping Information</h2>
 						<div id="shipping_holder" ng-show="!toggle_edit.shipping">
 							<div class="clearfix">
@@ -667,20 +711,12 @@
 							<div class="change_buttons"><a ladda="processing_billing_address" class="button orange medium" ng-click="addBillingAddress()">Submit</a> <a ng-click="toggleAdd('billing')">Cancel</a></div>
 						</div>
 					</section>
-					<h2 class="underlined big">Tickets Ordered</h2>
-					<div class="row">
+					<h2 class="underlined big hidden">Tickets Ordered</h2>
+					<div class="row hidden">
 						<div class="col-md-6">
 							<strong>{$event_name}</strong><br />
 							{$event_date}<br />
 							<p>Section {$ticket_section}, Row {$ticket_row}</p>
-						</div>
-						<div class="col-md-6" ng-show="data.ticket_format == 'Physical'">
-							<p><strong>Choose a Shipping Option</strong></p>
-							<div id="shipping_options">
-								<ul>
-									<li ng-repeat="s in shipping_data"><label><input type="radio" id="shipping_option-!s.id!-" name="shipping_option" value="-!s.id!-" ng-model="data.shipping_option" ng-change="setShipping()" /> -!s.price|currency!- -!s.name!-</label></li>
-								</ul>
-							</div>
 						</div>
 					</div>
 					<section id="co-order-submit">
@@ -705,10 +741,11 @@
 					</section>
 					<br>
 					<p><strong>Please Note: Gamehedge is a resale ticket marketplace, not the ticket seller. Prices are set by third-party sellers and may be above or below face value.</p>
-                    <br />
-                    <div class="text-center">
-                        <span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script></span>
+                    <div class="row vertical-align">
+                        <div class="col-md-4 text-center"><img src="/assets/img/badge-gamehedge.png" width="150"></div>
+                        <div class="col-md-8"><p style="font-weight: 100;">All GameHedge tickets come with our exclusive Good Game Guarantee at no additional cost to you. So, if the home losses by 5 runs or more, we will refund 50% of the cost of your ticket.</p></div>
                     </div>
+                        
 				</div>
 			</div>
 		</form>
