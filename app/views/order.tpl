@@ -70,7 +70,7 @@
 							<div class="col-md-6 text-right" ng-bind="total|currency"></div>
 						</div>
 					</section>
-                    <div class="row">
+                    <div class="row hidden">
                         <div class="col-md-3"></div>
                         <div class="col-md-9">
                         <h3>GAMEHEDGE PLEDGE</h3>
