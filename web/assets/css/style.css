@@ -808,12 +808,27 @@ main#checkout #shipping_options ul {
 	padding: 0;
 	list-style-type: none;
 }
+
+#checkout .form-group {
+    margin-bottom: 5px !important;
+}
+
 #co-ticket-details {
 	margin-bottom: 15px;
-	padding: 10px 20px;
-	border: 1px solid #c1c1c1;
+	padding: 20px 20px;
+	border: 2px solid #fec200;
 	border-radius: 5px;
+    background-color: #ececec;
 }
+
+#co-ticket-details hr{
+    border-color: #e4e4e4 !important;
+}
+
+#co-ticket-details select{
+    padding: 0px 4px !important;
+}
+
 #co-ticket-details h3 {
 	margin-bottom: 0;
 	font-size: 18px;
@@ -834,12 +849,37 @@ main#checkout #shipping_options ul {
 #co-ticket-details .submit-bt {
 	width: 100%;
 }
+#co-ticket-details h2 {
+    margin-bottom:10px !important;
+    margin-top: 0px;
+}
+#co-ticket-details h3 {
+    margin-bottom:10px !important;
+}
+#co-ticket-details .order-detail {
+    padding-left: 10px;
+}
+#co-ticket-details .total {
+    color: #0fa55b;
+}
+
 #co-order-submit {
 	margin-top: 30px;
 	padding: 10px;
-	border: 1px solid #c1c1c1;
+	border: 1px solid #FEC200;
 	border-radius: 3px;
 }
+
+#co-order-submit .left-section p{
+    margin: 10px 0px 0px 0px !important;
+}
+
+.final-total {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 21px;
+}
+
 section#order-header .event {
 	margin-top: 0;
 }
@@ -891,7 +931,12 @@ main#account #account-options ul li {
     .vertical-align {
         display: flex;
         align-items: center;
-    }   
+    }
+    
+    .vertical-align-bottom {
+        display: flex;
+        align-items: flex-end;
+    }
 }
 
 /**

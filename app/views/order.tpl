@@ -3,36 +3,36 @@
 	<div class="container">
         <div class="row vertical-align">
             <div class="col-md-4"><h1>Secure Checkout</h1></div>
-            <div class="col-md-8 text-right"><p>Contact us: (908) 312-3267 <a href="mailto:support@gamehedge.com">support@gamehedge.com</a></p></div>
+            <div class="col-md-8 text-right"><p>Contact us: <i style="color:#A8C94B" class="fa fa-phone-square" aria-hidden="true"></i> (908) 312-3267</p></div>
         </div>
 		
 		<form name="frmCheckout" method="POST" ng-submit="process()">
 			<div class="row">
 				<div class="col-md-4">
 					<section id="co-ticket-details">
-						<h3>Ticket Details</h3>
+						<h2>Ticket Details</h2>
 						<div class="event">{$event_name}</div>
 						<div class="date">{$event_date}</div>
 						<div class="location">{$venue_name}, {$venue_location}</div>
 						<div class="seats">Section {$ticket_section}, Row {$ticket_row}</div>
 						<h3>Order Summary</h3>
-						<div class="row">
+						<div class="row order-detail">
 							<div class="col-md-6">Price</div>
 							<div class="col-md-6 text-right"><span ng-bind="order_data.price|currency"></span> ea.</div>
 						</div>
-						<div class="row" style="margin-top:5px; margin-bottom: 5px;">
+						<div class="row order-detail" style="margin-top:5px; margin-bottom: 5px;">
 							<div class="col-md-9">How many tickets?</div>
                             <div class="col-md-3">
 								<select style="height:25px;" id="qty" name="qty" class="form-control" ng-model="data.qty" ng-options="split for split in order_data.splits" ng-change="updateTotals()"></select>
 							</div>
 							<!--div class="col-md-6 text-right" ng-bind="data.qty"></div-->
 						</div>
-						<div class="row">
+						<div class="row order-detail">
 							<div class="col-md-6">Subtotal</div>
 							<div class="col-md-6 text-right" ng-bind="subtotal|currency"></div>
 						</div>
 						<hr />
-						<div class="row">
+						<div class="row order-detail">
 							<div class="col-md-6">Service Fee</div>
 							<div class="col-md-6 text-right" ng-bind="data.fee|currency"></div>
 						</div>
@@ -41,12 +41,12 @@
 							<div class="col-md-6 text-right">--</div>
 						</div-->
                         
-                        <div class="row" ng-show="data.ticket_format == 'Eticket'" style="margin-top:5px; margin-bottom: 5px;">
+                        <div class="row order-detail" ng-show="data.ticket_format == 'Eticket'" style="margin-top:5px; margin-bottom: 5px;">
                             <div class="col-md-6">Shipping</div>
                             <div class="col-md-6 text-right">Email Delivery</div>
                         </div>
                         
-                        <div class="row" ng-show="data.ticket_format == 'Physical'" style="margin-top:5px; margin-bottom: 5px;">
+                        <div class="row order-detail" ng-show="data.ticket_format == 'Physical'" style="margin-top:5px; margin-bottom: 5px;">
                             <div class="col-md-6">Shipping Option</div>
                             <div class="col-md-6">
                                 <select style="height:25px;" class="form-control" name="shipping_option" ng-model="data.shipping_option" ng-change="setShipping()">
@@ -60,14 +60,14 @@
                             </div>
                         </div>
                         
-						<div class="row hidden">
+						<div class="row hidden order-detail">
 							<div class="col-md-6">Shipping</div>
 							<div class="col-md-6 text-right" ng-bind="shipping.price|currency"></div>
 						</div>
 						<hr />
-						<div class="row">
-							<div class="col-md-6">Total</div>
-							<div class="col-md-6 text-right" ng-bind="total|currency"></div>
+						<div class="row order-detail">
+							<div class="col-md-6 total">TOTAL</div>
+							<div class="col-md-6 total text-right" ng-bind="total|currency"></div>
 						</div>
 					</section>
                     <div class="row hidden">
@@ -87,13 +87,15 @@
 							</div-->
 							<h2 class="underlined big">Register <span style="font-size: 15px; margin-left: 10px;"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" title="For claiming your Good Game Guarantee refund a login and password must be created">WHY?</a></span></h2>
 							<div class="row">
-								<div class="col-md-6">
+								<div class="col-md-12">
 									<div class="form-group">
 										<label for="email">Email <span>*</span></label>
 										<input type="email" id="email" name="email" class="form-control" ng-model="data.email" ng-required="true" />
 									</div>
 								</div>
-								<div class="col-md-6">
+                            </div>
+                            <div class="row">
+								<div class="col-md-12">
 									<div class="form-group">
 										<label for="email2">Confirm Email <span>*</span></label>
 										<input type="email" id="email2" name="email2" class="form-control" ng-model="data.email2" ng-required="true" />
@@ -101,13 +103,13 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-md-6">
+								<div class="col-md-12">
 									<div class="form-group">
 										<label for="password">Create Password <span>*</span></label>
 										<input type="password" id="password" name="password" class="form-control" ng-model="data.password" ng-required="true" />
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-6 hidden">
 									<div class="form-group">
 										<label for="password2">Confirm Password <span>*</span></label>
 										<input type="password" id="password2" name="password2" class="form-control" ng-model="data.password2" ng-required="true" />
@@ -120,96 +122,98 @@
                         <!--
 						<input type="checkbox" id="store_card" name="store_card" ng-model="data.store_card" ng-true-value="1" ng-false-value="0" /> Store my information in our secure system for future purchases. -->
 						<h3>Billing Address</h3>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="bfirstname">First Name <span>*</span></label>
-									<input type="text" id="bfirstname" name="bfirstname" class="form-control" ng-model="data.bfirstname" ng-required="true" />
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="blastname">Last Name <span>*</span></label>
-									<input type="text" id="blastname" name="blastname" class="form-control" ng-model="data.blastname" ng-required="true" />
-								</div>
-							</div>
-						</div>
 						<div class="form-group">
-							<label for="baddress1">Address <span>*</span></label>
-							<input type="text" id="baddress1" name="baddress1" class="form-control" ng-model="data.baddress1" ng-required="true" />
-						</div>
-						<div class="form-group">
-							<label for="baddress2" class="optional">Address Line 2</label>
-							<input type="text" id="baddress2" name="baddress2" class="form-control" ng-model="data.baddress2" />
-						</div>
+                            <label for="bfirstname">First Name <span>*</span></label>
+                            <input type="text" id="bfirstname" name="bfirstname" class="form-control" ng-model="data.bfirstname" ng-required="true" />
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="blastname">Last Name <span>*</span></label>
+                            <input type="text" id="blastname" name="blastname" class="form-control" ng-model="data.blastname" ng-required="true" />
+                        </div>
+				        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="baddress1">Address <span>*</span></label>
+                                    <input type="text" id="baddress1" name="baddress1" class="form-control" ng-model="data.baddress1" ng-required="true" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="baddress2" class="optional">Address Line 2</label>
+                                    <input type="text" id="baddress2" name="baddress2" class="form-control" ng-model="data.baddress2" />
+                                </div>
+                            </div>
+                        </div>
+						
 						<div class="row">
-							<div class="col-md-5">
+							<div class="col-md-3">
 								<div class="form-group">
 									<label for="bcity">City <span>*</span></label>
 									<input type="text" id="bcity" name="bcity" class="form-control" ng-model="data.bcity" ng-required="true" />
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<div class="form-group">
 									<label for="bstate">State <span>*</span></label>
 									<select id="bstate" name="bstate" class="form-control" ng-model="data.bstate" ng-required="true">
-										<option value="AL">Alabama</option>
-										<option value="AK">Alaska</option>
-										<option value="AZ">Arizona</option>
-										<option value="AR">Arkansas</option>
-										<option value="CA">California</option>
-										<option value="CO">Colorado</option>
-										<option value="CT">Connecticut</option>
-										<option value="DE">Delaware</option>
-										<option value="DC">District Of Columbia</option>
-										<option value="FL">Florida</option>
-										<option value="GA">Georgia</option>
-										<option value="HI">Hawaii</option>
-										<option value="ID">Idaho</option>
-										<option value="IL">Illinois</option>
-										<option value="IN">Indiana</option>
-										<option value="IA">Iowa</option>
-										<option value="KS">Kansas</option>
-										<option value="KY">Kentucky</option>
-										<option value="LA">Louisiana</option>
-										<option value="ME">Maine</option>
-										<option value="MD">Maryland</option>
-										<option value="MA">Massachusetts</option>
-										<option value="MI">Michigan</option>
-										<option value="MN">Minnesota</option>
-										<option value="MS">Mississippi</option>
-										<option value="MO">Missouri</option>
-										<option value="MT">Montana</option>
-										<option value="NE">Nebraska</option>
-										<option value="NV">Nevada</option>
-										<option value="NH">New Hampshire</option>
-										<option value="NJ">New Jersey</option>
-										<option value="NM">New Mexico</option>
-										<option value="NY">New York</option>
-										<option value="NC">North Carolina</option>
-										<option value="ND">North Dakota</option>
-										<option value="OH">Ohio</option>
-										<option value="OK">Oklahoma</option>
-										<option value="OR">Oregon</option>
-										<option value="PA">Pennsylvania</option>
-										<option value="RI">Rhode Island</option>
-										<option value="SC">South Carolina</option>
-										<option value="SD">South Dakota</option>
-										<option value="TN">Tennessee</option>
-										<option value="TX">Texas</option>
-										<option value="UT">Utah</option>
-										<option value="VT">Vermont</option>
-										<option value="VA">Virginia</option>
-										<option value="WA">Washington</option>
-										<option value="WV">West Virginia</option>
-										<option value="WI">Wisconsin</option>
-										<option value="WY">Wyoming</option>
-										<option value="AS">American Samoa</option>
-										<option value="GU">Guam</option>
-										<option value="MP">Northern Mariana Islands</option>
-										<option value="PR">Puerto Rico</option>
-										<option value="UM">United States Minor Outlying Islands</option>
-										<option value="VI">Virgin Islands</option>
+										<option value="AL">AL</option>
+										<option value="AK">AK</option>
+										<option value="AZ">AZ</option>
+										<option value="AR">AR</option>
+										<option value="CA">CA</option>
+										<option value="CO">CO</option>
+										<option value="CT">CT</option>
+										<option value="DE">DE</option>
+										<option value="DC">DC</option>
+										<option value="FL">FL</option>
+										<option value="GA">GA</option>
+										<option value="HI">HI</option>
+										<option value="ID">ID</option>
+										<option value="IL">IL</option>
+										<option value="IN">IN</option>
+										<option value="IA">IA</option>
+										<option value="KS">KS</option>
+										<option value="KY">KY</option>
+										<option value="LA">LA</option>
+										<option value="ME">ME</option>
+										<option value="MD">MD</option>
+										<option value="MA">MA</option>
+										<option value="MI">MI</option>
+										<option value="MN">MN</option>
+										<option value="MS">MS</option>
+										<option value="MO">MO</option>
+										<option value="MT">MT</option>
+										<option value="NE">NE</option>
+										<option value="NV">NV</option>
+										<option value="NH">NH</option>
+										<option value="NJ">NJ</option>
+										<option value="NM">NM</option>
+										<option value="NY">NY</option>
+										<option value="NC">NC</option>
+										<option value="ND">ND</option>
+										<option value="OH">OH</option>
+										<option value="OK">OK</option>
+										<option value="OR">OR</option>
+										<option value="PA">PA</option>
+										<option value="RI">RI</option>
+										<option value="SC">SC</option>
+										<option value="SD">SD</option>
+										<option value="TN">TN</option>
+										<option value="TX">TX</option>
+										<option value="UT">UT</option>
+										<option value="VT">VT</option>
+										<option value="VA">VA</option>
+										<option value="WA">WA</option>
+										<option value="WV">WV</option>
+										<option value="WI">WI</option>
+										<option value="WY">WY</option>
+										<option value="AS">AS</option>
+										<option value="GU">GU</option>
+										<option value="MP">MP</option>
+										<option value="PR">PR</option>
+										<option value="UM">UM</option>
+										<option value="VI">VI</option>
 									</select>
 								</div>
 							</div>
@@ -219,8 +223,14 @@
 									<input type="text" id="bzipcode" name="bzipcode" class="form-control" ng-model="data.bzipcode" ng-required="true" />
 								</div>
 							</div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="phone">Phone Number <span>*</span></label>
+									<input type="text" id="phone" name="phone" class="form-control" ng-model="data.phone" ng-required="true" />
+								</div>
+                            </div>
 						</div>
-						Phone
+						
 						<div class="row">
 							<!--div class="col-md-3">
 								<div class="form-group">
@@ -228,12 +238,6 @@
 									<input type="text" id="phone_cc" name="phone_cc" class="form-control" ng-model="data.phone_cc" />
 								</div>
 							</div-->
-							<div class="col-md-12">
-								<div class="form-group">
-									<label for="phone">Number <span>*</span></label>
-									<input type="text" id="phone" name="phone" class="form-control" ng-model="data.phone" ng-required="true" />
-								</div>
-							</div>
 							<!--div class="col-md-3">
 								<div class="form-group">
 									<label for="phone_ext" class="optional">Extension</label>
@@ -299,11 +303,8 @@
                                 </div>
                             </div>
                             <div class="col-md-5" style="margin-top: 25px;">
-                                <div class="col-xs-3 text-center"><img src="/assets/img/icon-amex.png"></div>
-                                <div class="col-xs-3 text-center"><img src="/assets/img/icon-mastercard.png"></div>
-                                <div class="col-xs-3 text-center"><img src="/assets/img/icon-visa.png"></div>
-                                <div class="col-xs-3 text-center"><img src="/assets/img/icon-discover.png"></div>
-                                <div class="col-xs-12 text-center" style="margin-top: 45px;">
+                                <div class="col-xs-12 text-center"><img src="/assets/img/icon-credit-cars.png"></div>
+                                <div class="col-xs-12 text-center" style="margin-top: 33px;">
                                     <span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script></span>
                                 </div>
                             </div>
@@ -368,63 +369,63 @@
 									<div class="form-group">
 										<label for="sstate">State <span>*</span></label>
 										<select id="sstate" name="sstate" class="form-control" ng-model="sdata.state">
-											<option value="AL">Alabama</option>
-											<option value="AK">Alaska</option>
-											<option value="AZ">Arizona</option>
-											<option value="AR">Arkansas</option>
-											<option value="CA">California</option>
-											<option value="CO">Colorado</option>
-											<option value="CT">Connecticut</option>
-											<option value="DE">Delaware</option>
-											<option value="DC">District Of Columbia</option>
-											<option value="FL">Florida</option>
-											<option value="GA">Georgia</option>
-											<option value="HI">Hawaii</option>
-											<option value="ID">Idaho</option>
-											<option value="IL">Illinois</option>
-											<option value="IN">Indiana</option>
-											<option value="IA">Iowa</option>
-											<option value="KS">Kansas</option>
-											<option value="KY">Kentucky</option>
-											<option value="LA">Louisiana</option>
-											<option value="ME">Maine</option>
-											<option value="MD">Maryland</option>
-											<option value="MA">Massachusetts</option>
-											<option value="MI">Michigan</option>
-											<option value="MN">Minnesota</option>
-											<option value="MS">Mississippi</option>
-											<option value="MO">Missouri</option>
-											<option value="MT">Montana</option>
-											<option value="NE">Nebraska</option>
-											<option value="NV">Nevada</option>
-											<option value="NH">New Hampshire</option>
-											<option value="NJ">New Jersey</option>
-											<option value="NM">New Mexico</option>
-											<option value="NY">New York</option>
-											<option value="NC">North Carolina</option>
-											<option value="ND">North Dakota</option>
-											<option value="OH">Ohio</option>
-											<option value="OK">Oklahoma</option>
-											<option value="OR">Oregon</option>
-											<option value="PA">Pennsylvania</option>
-											<option value="RI">Rhode Island</option>
-											<option value="SC">South Carolina</option>
-											<option value="SD">South Dakota</option>
-											<option value="TN">Tennessee</option>
-											<option value="TX">Texas</option>
-											<option value="UT">Utah</option>
-											<option value="VT">Vermont</option>
-											<option value="VA">Virginia</option>
-											<option value="WA">Washington</option>
-											<option value="WV">West Virginia</option>
-											<option value="WI">Wisconsin</option>
-											<option value="WY">Wyoming</option>
-											<option value="AS">American Samoa</option>
-											<option value="GU">Guam</option>
-											<option value="MP">Northern Mariana Islands</option>
-											<option value="PR">Puerto Rico</option>
-											<option value="UM">United States Minor Outlying Islands</option>
-											<option value="VI">Virgin Islands</option>
+											<option value="AL">AL</option>
+										<option value="AK">AK</option>
+										<option value="AZ">AZ</option>
+										<option value="AR">AR</option>
+										<option value="CA">CA</option>
+										<option value="CO">CO</option>
+										<option value="CT">CT</option>
+										<option value="DE">DE</option>
+										<option value="DC">DC</option>
+										<option value="FL">FL</option>
+										<option value="GA">GA</option>
+										<option value="HI">HI</option>
+										<option value="ID">ID</option>
+										<option value="IL">IL</option>
+										<option value="IN">IN</option>
+										<option value="IA">IA</option>
+										<option value="KS">KS</option>
+										<option value="KY">KY</option>
+										<option value="LA">LA</option>
+										<option value="ME">ME</option>
+										<option value="MD">MD</option>
+										<option value="MA">MA</option>
+										<option value="MI">MI</option>
+										<option value="MN">MN</option>
+										<option value="MS">MS</option>
+										<option value="MO">MO</option>
+										<option value="MT">MT</option>
+										<option value="NE">NE</option>
+										<option value="NV">NV</option>
+										<option value="NH">NH</option>
+										<option value="NJ">NJ</option>
+										<option value="NM">NM</option>
+										<option value="NY">NY</option>
+										<option value="NC">NC</option>
+										<option value="ND">ND</option>
+										<option value="OH">OH</option>
+										<option value="OK">OK</option>
+										<option value="OR">OR</option>
+										<option value="PA">PA</option>
+										<option value="RI">RI</option>
+										<option value="SC">SC</option>
+										<option value="SD">SD</option>
+										<option value="TN">TN</option>
+										<option value="TX">TX</option>
+										<option value="UT">UT</option>
+										<option value="VT">VT</option>
+										<option value="VA">VA</option>
+										<option value="WA">WA</option>
+										<option value="WV">WV</option>
+										<option value="WI">WI</option>
+										<option value="WY">WY</option>
+										<option value="AS">AS</option>
+										<option value="GU">GU</option>
+										<option value="MP">MP</option>
+										<option value="PR">PR</option>
+										<option value="UM">UM</option>
+										<option value="VI">VI</option>
 										</select>
 									</div>
 								</div>
@@ -641,63 +642,63 @@
 									<div class="form-group">
 										<label for="bstate">State <span>*</span></label>
 										<select id="bstate" name="bstate" class="form-control" ng-model="bdata.state">
-											<option value="AL">Alabama</option>
-											<option value="AK">Alaska</option>
-											<option value="AZ">Arizona</option>
-											<option value="AR">Arkansas</option>
-											<option value="CA">California</option>
-											<option value="CO">Colorado</option>
-											<option value="CT">Connecticut</option>
-											<option value="DE">Delaware</option>
-											<option value="DC">District Of Columbia</option>
-											<option value="FL">Florida</option>
-											<option value="GA">Georgia</option>
-											<option value="HI">Hawaii</option>
-											<option value="ID">Idaho</option>
-											<option value="IL">Illinois</option>
-											<option value="IN">Indiana</option>
-											<option value="IA">Iowa</option>
-											<option value="KS">Kansas</option>
-											<option value="KY">Kentucky</option>
-											<option value="LA">Louisiana</option>
-											<option value="ME">Maine</option>
-											<option value="MD">Maryland</option>
-											<option value="MA">Massachusetts</option>
-											<option value="MI">Michigan</option>
-											<option value="MN">Minnesota</option>
-											<option value="MS">Mississippi</option>
-											<option value="MO">Missouri</option>
-											<option value="MT">Montana</option>
-											<option value="NE">Nebraska</option>
-											<option value="NV">Nevada</option>
-											<option value="NH">New Hampshire</option>
-											<option value="NJ">New Jersey</option>
-											<option value="NM">New Mexico</option>
-											<option value="NY">New York</option>
-											<option value="NC">North Carolina</option>
-											<option value="ND">North Dakota</option>
-											<option value="OH">Ohio</option>
-											<option value="OK">Oklahoma</option>
-											<option value="OR">Oregon</option>
-											<option value="PA">Pennsylvania</option>
-											<option value="RI">Rhode Island</option>
-											<option value="SC">South Carolina</option>
-											<option value="SD">South Dakota</option>
-											<option value="TN">Tennessee</option>
-											<option value="TX">Texas</option>
-											<option value="UT">Utah</option>
-											<option value="VT">Vermont</option>
-											<option value="VA">Virginia</option>
-											<option value="WA">Washington</option>
-											<option value="WV">West Virginia</option>
-											<option value="WI">Wisconsin</option>
-											<option value="WY">Wyoming</option>
-											<option value="AS">American Samoa</option>
-											<option value="GU">Guam</option>
-											<option value="MP">Northern Mariana Islands</option>
-											<option value="PR">Puerto Rico</option>
-											<option value="UM">United States Minor Outlying Islands</option>
-											<option value="VI">Virgin Islands</option>
+											<option value="AL">AL</option>
+										<option value="AK">AK</option>
+										<option value="AZ">AZ</option>
+										<option value="AR">AR</option>
+										<option value="CA">CA</option>
+										<option value="CO">CO</option>
+										<option value="CT">CT</option>
+										<option value="DE">DE</option>
+										<option value="DC">DC</option>
+										<option value="FL">FL</option>
+										<option value="GA">GA</option>
+										<option value="HI">HI</option>
+										<option value="ID">ID</option>
+										<option value="IL">IL</option>
+										<option value="IN">IN</option>
+										<option value="IA">IA</option>
+										<option value="KS">KS</option>
+										<option value="KY">KY</option>
+										<option value="LA">LA</option>
+										<option value="ME">ME</option>
+										<option value="MD">MD</option>
+										<option value="MA">MA</option>
+										<option value="MI">MI</option>
+										<option value="MN">MN</option>
+										<option value="MS">MS</option>
+										<option value="MO">MO</option>
+										<option value="MT">MT</option>
+										<option value="NE">NE</option>
+										<option value="NV">NV</option>
+										<option value="NH">NH</option>
+										<option value="NJ">NJ</option>
+										<option value="NM">NM</option>
+										<option value="NY">NY</option>
+										<option value="NC">NC</option>
+										<option value="ND">ND</option>
+										<option value="OH">OH</option>
+										<option value="OK">OK</option>
+										<option value="OR">OR</option>
+										<option value="PA">PA</option>
+										<option value="RI">RI</option>
+										<option value="SC">SC</option>
+										<option value="SD">SD</option>
+										<option value="TN">TN</option>
+										<option value="TX">TX</option>
+										<option value="UT">UT</option>
+										<option value="VT">VT</option>
+										<option value="VA">VA</option>
+										<option value="WA">WA</option>
+										<option value="WV">WV</option>
+										<option value="WI">WI</option>
+										<option value="WY">WY</option>
+										<option value="AS">AS</option>
+										<option value="GU">GU</option>
+										<option value="MP">MP</option>
+										<option value="PR">PR</option>
+										<option value="UM">UM</option>
+										<option value="VI">VI</option>
 										</select>
 									</div>
 								</div>
@@ -720,17 +721,18 @@
 						</div>
 					</div>
 					<section id="co-order-submit">
-						<div class="row">
-							<div class="col-md-8">
-								<p><input type="checkbox" ng-model="data.optin" ng-true-value="1" ng-false-value="0" /> Please send me promotional emails</p>
-								<p><input type="checkbox" ng-model="accept_terms" ng-true-value="1" ng-false-value="0" /> I agree to GameHedge's <a href="/privacy-policy">privacy policy</a> and <a href="/our-terms">terms and conditions</a>.</p>
-								<p>Please verify your order details, and click &quot;Submit Order&quot; to complete the order process.</p>
+						<div class="row vertical-align-bottom">
+							<div class="col-md-8 left-section">
+								<p><input type="checkbox" ng-model="data.optin" ng-true-value="1" ng-false-value="0" /> I would to receive special promotions and updates</p>
+								<p><input type="checkbox" ng-model="accept_terms" ng-true-value="1" ng-false-value="0" /> I agree to GameHedge's <a href="/our-terms">terms and conditions</a>.</p>
+                                <p>I may be ordering tickets above or below face value. All sales are final.</p>
+								<!--p>Please verify your order details, and click &quot;Submit Order&quot; to complete the order process.</p-->
 							</div>
 							<div class="col-md-4">
 								<div class="text-right">
 									<div class="final-total">
-										Total
-										<div ng-bind="total|currency"></div>
+										<strong>Total -! total|currency !- </strong>
+										<!--div ng-bind="total|currency"></div-->
 									</div>
                                     <button ladda="procesingOrder" class="button orange" ng-disabled="toggle_edit['shipping'] == 1 || toggle_edit['billing'] == 1 || toggle_edit['credit'] == 1">
                                         Submit Order
@@ -740,7 +742,7 @@
 						</div>
 					</section>
 					<br>
-					<p><strong>Please Note: Gamehedge is a resale ticket marketplace, not the ticket seller. Prices are set by third-party sellers and may be above or below face value.</p>
+					<!--p><strong>Please Note: Gamehedge is a resale ticket marketplace, not the ticket seller. Prices are set by third-party sellers and may be above or below face value.</p-->
                     <div class="row vertical-align">
                         <div class="col-md-4 text-center"><img src="/assets/img/badge-gamehedge.png" width="150"></div>
                         <div class="col-md-8"><p style="font-weight: 100;">All GameHedge tickets come with our exclusive Good Game Guarantee at no additional cost to you. So, if the home losses by 5 runs or more, we will refund 50% of the cost of your ticket.</p></div>
