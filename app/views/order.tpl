@@ -146,6 +146,8 @@
                                     <input type="text" id="baddress1" name="baddress1" class="form-control" ng-model="data.baddress1" ng-required="true" />
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="baddress2" class="optional">Address Line 2</label>
@@ -225,7 +227,11 @@
 									</select>
 								</div>
 							</div>
-							<div class="col-md-3">
+							
+						</div>
+                        
+                        <div class="row">
+                            <div class="col-md-3">
 								<div class="form-group">
 									<label for="bzipcode">Zip Code <span>*</span></label>
 									<input type="text" id="bzipcode" name="bzipcode" class="form-control" ng-model="data.bzipcode" ng-required="true" />
@@ -237,7 +243,7 @@
 									<input type="text" id="phone" name="phone" class="form-control" ng-model="data.phone" ng-required="true" />
 								</div>
                             </div>
-						</div>
+                        </div>
 						
 						<div class="row">
 							<!--div class="col-md-3">
