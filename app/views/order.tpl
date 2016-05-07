@@ -50,7 +50,7 @@
                             <div class="col-md-6">Shipping Option</div>
                             <div class="col-md-6">
                                 <select style="height:25px;" class="form-control" name="shipping_option" ng-model="data.shipping_option" ng-change="setShipping()">
-                                    <option ng-repeat="s in shipping_data" value="-!s.id!-">-!s.price|currency!- -!s.name!-</option>
+                                    <option ng-repeat="s in shipping_data" value="-!s.id!-" ng-if="s.id == '67797' || s.id == '67791'">-!s.price|currency!- -!s.name!-</option>
                                 </select>
                                 <!--div id="shipping_options">
                                     <ul>

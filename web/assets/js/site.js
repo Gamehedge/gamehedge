@@ -89,4 +89,23 @@ $(document).ready(function(){
 	}
     
     $('[data-toggle="tooltip"]').tooltip();
+    
+    var $scrollingDiv = $("#co-ticket-details");
+    
+    $(window).scroll(function() {
+        if ( $( "#checkout" ).length ) {
+            
+            if ($(window).scrollTop()>133 && $(window).width() >= 990)     
+            {
+                $scrollingDiv.css("position",'relative' ).css("top", ($(window).scrollTop() - 133 ) + 'px' );        
+            } 
+            else 
+            {
+                $scrollingDiv.css("position",'' ).css("top",'' );           
+            }
+            
+        }
+       
+    });
+    
 });
