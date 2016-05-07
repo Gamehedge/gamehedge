@@ -85,9 +85,9 @@
 							<!--div class="form-group">
 								<select id="qty" name="qty" class="form-control" ng-model="data.qty" ng-options="split for split in order_data.splits" ng-change="updateTotals()"></select>
 							</div-->
-							<h2 class="underlined big">Register <span style="font-size: 15px; margin-left: 10px;"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" title="For claiming your Good Game Guarantee refund a login and password must be created">WHY?</a></span></h2>
+							<h2 class="underlined big">Register <span style="font-size: 15px; margin-left: 10px;"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" title="To claiming your Good Game Guarantee refund a login and password must be created">WHY?</a></span></h2>
 							<div class="row">
-								<div class="col-md-12">
+								<div class="col-md-6">
 									<div class="form-group">
 										<label for="email">Email <span>*</span></label>
 										<input type="email" id="email" name="email" class="form-control" ng-model="data.email" ng-required="true" />
@@ -95,7 +95,7 @@
 								</div>
                             </div>
                             <div class="row">
-								<div class="col-md-12">
+								<div class="col-md-6">
 									<div class="form-group">
 										<label for="email2">Confirm Email <span>*</span></label>
 										<input type="email" id="email2" name="email2" class="form-control" ng-model="data.email2" ng-required="true" />
@@ -103,7 +103,7 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-md-12">
+								<div class="col-md-6">
 									<div class="form-group">
 										<label for="password">Create Password <span>*</span></label>
 										<input type="password" id="password" name="password" class="form-control" ng-model="data.password" ng-required="true" />
@@ -122,15 +122,23 @@
                         <!--
 						<input type="checkbox" id="store_card" name="store_card" ng-model="data.store_card" ng-true-value="1" ng-false-value="0" /> Store my information in our secure system for future purchases. -->
 						<h3>Billing Address</h3>
-						<div class="form-group">
-                            <label for="bfirstname">First Name <span>*</span></label>
-                            <input type="text" id="bfirstname" name="bfirstname" class="form-control" ng-model="data.bfirstname" ng-required="true" />
+                        <div class="row">
+				            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="bfirstname">First Name <span>*</span></label>
+                                    <input type="text" id="bfirstname" name="bfirstname" class="form-control" ng-model="data.bfirstname" ng-required="true" />
+                                </div>
+                            </div>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="blastname">Last Name <span>*</span></label>
-                            <input type="text" id="blastname" name="blastname" class="form-control" ng-model="data.blastname" ng-required="true" />
+                        <div class="row">
+				            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="blastname">Last Name <span>*</span></label>
+                                    <input type="text" id="blastname" name="blastname" class="form-control" ng-model="data.blastname" ng-required="true" />
+                                </div>
+                            </div>
                         </div>
+						
 				        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">

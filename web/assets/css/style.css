@@ -860,13 +860,14 @@ main#checkout #shipping_options ul {
     padding-left: 10px;
 }
 #co-ticket-details .total {
-    color: #0fa55b;
+    color: #a8c94b;
+    font-size: 18px;
 }
 
 #co-order-submit {
 	margin-top: 30px;
 	padding: 10px;
-	border: 1px solid #FEC200;
+	border: 1px solid #a8c94b;
 	border-radius: 3px;
 }
 
