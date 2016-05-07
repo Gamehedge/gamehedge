@@ -737,9 +737,15 @@
 					<section id="co-order-submit">
 						<div class="row vertical-align-bottom">
 							<div class="col-md-8 left-section">
-								<p><input type="checkbox" ng-model="data.optin" ng-true-value="1" ng-false-value="0" /> I would like to receive special promotions and updates</p>
-								<p><input type="checkbox" ng-model="accept_terms" ng-true-value="1" ng-false-value="0" /> I agree to GameHedge's <a href="/our-terms">terms and conditions</a>.</p>
-                                <p>I may be ordering tickets above or below face value. All sales are final.</p>
+                                <div class="checkbox">
+                                  <label><input type="checkbox" ng-model="data.optin" ng-true-value="1" ng-false-value="0">I would like to receive special promotions and updates.</label>
+                                </div>
+                                <div class="checkbox">
+                                  <label><input type="checkbox" ng-model="accept_terms" ng-true-value="1" ng-false-value="0">I agree to GameHedge's <a href="/our-terms">terms and conditions</a>.</label>
+                                </div>
+                                <div class="checkbox">
+                                  <label><input type="checkbox" style="visibility: hidden;">I may be ordering tickets above or below face value. All sales are final.</label>
+                                </div>
 								<!--p>Please verify your order details, and click &quot;Submit Order&quot; to complete the order process.</p-->
 							</div>
 							<div class="col-md-4">
