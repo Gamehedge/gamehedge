@@ -751,7 +751,7 @@
 					</section>
 					<br>
 					<!--p><strong>Please Note: Gamehedge is a resale ticket marketplace, not the ticket seller. Prices are set by third-party sellers and may be above or below face value.</p-->
-                    <div class="row vertical-align">
+                    <div class="row vertical-align hidden">
                         <div class="col-md-4 text-center"><img src="/assets/img/badge-gamehedge.png" width="150"></div>
                         <div class="col-md-8"><p style="font-weight: 100;">All GameHedge tickets come with our exclusive Good Game Guarantee at no additional cost to you. So, if the home losses by 5 runs or more, we will refund 50% of the cost of your ticket.</p></div>
                     </div>
