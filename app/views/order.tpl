@@ -112,7 +112,7 @@
 								<div class="col-md-6 hidden">
 									<div class="form-group">
 										<label for="password2">Confirm Password <span>*</span></label>
-										<input type="password" id="password2" name="password2" class="form-control" ng-model="data.password2" ng-required="true" />
+										<input type="password" id="password2" name="password2" class="form-control" ng-model="data.password2" ng-required="false" />
 									</div>
 								</div>
 							</div>
