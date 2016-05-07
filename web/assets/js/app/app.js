@@ -357,11 +357,10 @@ app.controller('CheckoutCtrl', function($scope, $http){
                     swal({title: "Error!", text: "Your email addresses do not match.", type: "error", confirmButtonColor: "#a8c94b"});
 					return false;
 				}
-				//if(typeof $scope.data.password != 'undefined' && $scope.data.password != $scope.data.password2) {
-                if(typeof $scope.data.password != 'undefined') {
-                    swal({title: "Error!", text: "Your passwords do not match.", type: "error", confirmButtonColor: "#a8c94b"});
-					return false;
-				}
+                //if(typeof $scope.data.password != 'undefined') {
+                    //swal({title: "Error!", text: "Your passwords do not match.", type: "error", confirmButtonColor: "#a8c94b"});
+					//return false;
+				//}
                 
                 $scope.procesingOrder = true;
 				var promise = $http.post('/order/process', $scope.data).success(function(data, status, headers, config) {
