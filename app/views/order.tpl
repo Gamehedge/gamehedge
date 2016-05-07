@@ -85,7 +85,7 @@
 							<!--div class="form-group">
 								<select id="qty" name="qty" class="form-control" ng-model="data.qty" ng-options="split for split in order_data.splits" ng-change="updateTotals()"></select>
 							</div-->
-							<h2 class="underlined big">Register <span style="font-size: 15px; margin-left: 10px;"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" title="To claiming your Good Game Guarantee refund a login and password must be created">WHY?</a></span></h2>
+							<h2 class="underlined big">Register <span style="font-size: 15px; margin-left: 10px;"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" title="To claim your Good Game Guarantee refund a login and password must be created">WHY?</a></span></h2>
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
