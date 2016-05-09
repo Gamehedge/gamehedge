@@ -51,6 +51,7 @@
 		</footer>
 		<div growl></div>
 		<script src="/assets/js/bundle.min.js"></script>
+        <script src="/assets/js/bootstrap.min.js"></script>
 		{$fscripts}
 		<script src="/assets/js/site.js?v112"></script>
 	</body>
