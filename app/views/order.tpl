@@ -726,6 +726,10 @@
 							</div>
 							<div class="change_buttons"><a ladda="processing_billing_address" class="button orange medium" ng-click="addBillingAddress()">Submit</a> <a ng-click="toggleAdd('billing')">Cancel</a></div>
 						</div>
+                        <div class="row text-center" style="margin-top:15px;">
+                            <span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script></span>
+                            <script src="https://cdn.ywxi.net/js/inline.js?w=96"></script>
+                        </div>
 					</section>
 					<h2 class="underlined big hidden">Tickets Ordered</h2>
 					<div class="row hidden">
