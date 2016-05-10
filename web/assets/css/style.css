@@ -1240,6 +1240,17 @@ main#admin #order-stats .stat-item span {
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f171ab', endColorstr='#feb1d3');
 }
 
+.performer-green-bt {
+    display: block;
+    width: 100px;
+    padding: 5px 0;
+    background-color: #a8c94b;
+    border-radius: 15px;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+}
+
 .btn-green-gradient {
 	background: rgba(210,255,82,1);
 	background: -moz-linear-gradient(top, rgba(210,255,82,1) 0%, rgba(113,140,38,1) 100%);
