@@ -54,5 +54,6 @@
         <script src="/assets/js/bootstrap.min.js"></script>
 		{$fscripts}
 		<script src="/assets/js/site.js?v112"></script>
+        <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
 	</body>
 </html>

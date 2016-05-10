@@ -320,6 +320,7 @@
                                 <div class="col-xs-12 text-center"><img src="/assets/img/icon-credit-cars.png"></div>
                                 <div class="col-xs-12 text-center" style="margin-top: 33px;">
                                     <span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script></span>
+                                    <script src="https://cdn.ywxi.net/js/inline.js?w=96"></script>
                                 </div>
                             </div>
 							
