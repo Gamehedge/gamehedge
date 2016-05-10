@@ -47,13 +47,13 @@ function loadPage(){
                 _html = _html + '</div>';
                 _html = _html + '<div class="event">';
                 if(value.performances[1]){
-                    _html = _html + '<div class="name">' + '<a href="/performer/' + value.performances[0].performer.id + '/' + value.performances[0].performer.slug + '" title="' +  value.performances[0].performer.name + '">' + value.performances[0].performer.name + '</a>' + ' at ' + '<a href="/performer/' + value.performances[1].performer.id + '/' + value.performances[1].performer.slug + '" title="' +  value.performances[1].performer.name + '">' + value.performances[1].performer.name + '</a>' + '</div>';
+                    _html = _html + '<div class="name">' + value.performances[0].performer.name + ' at ' + value.performances[1].performer.name + '</div>';
                 }
                 else {
-                    _html = _html + '<div class="name">' + '<a href="/performer/' + value.performances[0].performer.id + '/' + value.performances[0].performer.slug + '" title="' +  value.performances[0].performer.name + '">' + value.performances[0].performer.name + '</a>' + '</div>';
+                    _html = _html + '<div class="name">' + value.performances[0].performer.name + '</div>';
                 }
                 
-                _html = _html + '<div class="location"><a href="/venue/' + value.venue.id + '/' + value.venue.slug + '">' + value.venue.name + '</a> - ' + value.venue.location + '</div>';
+                _html = _html + '<div class="location">' + value.venue.name + ' - ' + value.venue.location + '</div>';
                 _html = _html + '</div>';
                 _html = _html + '<div class="tickets-link">';
                 _html = _html + '<a href="/ticket/' + value.id + '" class="btn-green-gradient">Buy Tickets <i class="fa fa-angle-right"></i></a>';

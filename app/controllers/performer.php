@@ -18,7 +18,7 @@ $smarty->assign('css', '');
 $smarty->assign('hscripts', '');
 $header = $smarty->fetch('shared/header.tpl');
 // Handle Footer
-$smarty->assign('fscripts', '<script src="/assets/js/moment.js"></script><script src="/assets/js/performer.js"></script>');
+$smarty->assign('fscripts', '<script src="/assets/js/moment.js"></script><script src="/assets/js/performer.js?v110"></script>');
 $footer = $smarty->fetch('shared/footer.tpl');
 $p_data = $teClient->showPerformer(['performer_id' => (int)$id]);
 $s_data = Utility::get_team_data($p_data['name']);
