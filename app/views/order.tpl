@@ -1,14 +1,16 @@
 {$header}
 <main id="checkout" ng-controller="CheckoutCtrl">
 	<div class="container">
-        <div class="row vertical-align">
-            <div class="col-md-4"><h1>Secure Checkout</h1></div>
-            <div class="col-md-8 text-right" style="vertical-align: middle;"><p>Contact us:  <i style="color:#A8C94B; font-size:1.5em; vertical-align: middle;" class="fa fa-phone-square" aria-hidden="true"></i> <span style="font-size:1.5em; vertical-align: middle;">(908) 312-3267</span></p></div>
-        </div>
-		
 		<form name="frmCheckout" method="POST" ng-submit="process()">
 			<div class="row">
 				<div class="col-md-4">
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1>Secure Checkout</h1>
+                        </div>
+                    </div>
+                    
 					<section id="co-ticket-details">
 						<h2>Ticket Details</h2>
 						<div class="event">{$event_name}</div>
@@ -70,20 +72,25 @@
 							<div class="col-md-6 total text-right" ng-bind="total|currency"></div>
 						</div>
 					</section>
-                    <div class="row hidden">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-9">
-                        <h3>GAMEHEDGE PLEDGE</h3>
-                        <p>Authentic tickets delivered in time safe, private transactions, full refund for canceled events</p>
+                    <div class="row vertical-align hidden">
+                        <div class="col-xs-4 text-center"><img src="/assets/img/pledge.png"></div>
+                        <div class="col-xs-8">
+                            <h3 class="text-center">GAMEHEDGE PLEDGE</h3>
+                            <ul>
+                                <li>Always be in time for the event.</li>
+                                <li>Always be authentic.</li>
+                                <li>Always be refunded if the event is canceled & not rescheduled.</li>
+                            </ul>
                         </div>
                     </div>
 				</div>
 				<div class="col-md-8">
-                    
-                    <div class="row text-left ssl-elements">
-                        <div class="col-md-12">
-                            <span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script></span>
-                            <script src="https://cdn.ywxi.net/js/inline.js?w=96"></script>
+                    <div class="row">
+                         <div class="col-md-12 text-right" style="margin-top: 20px; margin-bottom: -30px;"><p>Contact us:  <i style="color:#A8C94B; font-size:1.5em; vertical-align: middle;" class="fa fa-phone-square" aria-hidden="true"></i> <span style="font-size:1.5em; vertical-align: middle;">(908) 312-3267</span></p>
+                            <div>
+                                <span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script></span>
+                                <script src="https://cdn.ywxi.net/js/inline.js?w=96"></script>
+                            </div>
                         </div>
                     </div>
                     

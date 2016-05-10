@@ -816,7 +816,7 @@ main#checkout #shipping_options ul {
 #co-ticket-details {
 	margin-bottom: 15px;
 	padding: 20px 20px;
-	border: 2px solid #fec200;
+	border: 2px solid #a8c94b;
 	border-radius: 5px;
     background-color: #ececec;
 }
@@ -862,6 +862,7 @@ main#checkout #shipping_options ul {
 #co-ticket-details .total {
     color: #a8c94b;
     font-size: 18px;
+    font-weight: bolder;
 }
 
 #co-order-submit {
