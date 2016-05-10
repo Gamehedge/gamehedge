@@ -934,6 +934,21 @@ main#account #account-options ul li {
     margin-bottom: 10px;
 }
 
+.pledge-checkout {
+    color: gray;
+    font-size: 0.9em;
+}
+
+.pledge-checkout h3 {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: gray;
+}
+
+.pledge-checkout ul {
+    padding-left: 10px;
+}
+
 @media(min-width: 920px) {
     .vertical-align {
         display: flex;

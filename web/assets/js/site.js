@@ -90,7 +90,7 @@ $(document).ready(function(){
     
     $('[data-toggle="tooltip"]').tooltip();
     
-    var $scrollingDiv = $("#co-ticket-details");
+    var $scrollingDiv = $("#co-ticket-details-div");
     
     $(window).scroll(function() {
         if ( $( "#checkout" ).length ) {

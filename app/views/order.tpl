@@ -11,76 +11,78 @@
                         </div>
                     </div>
                     
-					<section id="co-ticket-details">
-						<h2>Ticket Details</h2>
-						<div class="event">{$event_name}</div>
-						<div class="date">{$event_date}</div>
-						<div class="location">{$venue_name}, {$venue_location}</div>
-						<div class="seats">Section {$ticket_section}, Row {$ticket_row}</div>
-						<h3>Order Summary</h3>
-						<div class="row order-detail">
-							<div class="col-md-6">Price</div>
-							<div class="col-md-6 text-right"><span ng-bind="order_data.price|currency"></span> ea.</div>
-						</div>
-						<div class="row order-detail" style="margin-top:5px; margin-bottom: 5px;">
-							<div class="col-md-9">How many tickets?</div>
-                            <div class="col-md-3">
-								<select style="height:25px;" id="qty" name="qty" class="form-control" ng-model="data.qty" ng-options="split for split in order_data.splits" ng-change="updateTotals()"></select>
-							</div>
-							<!--div class="col-md-6 text-right" ng-bind="data.qty"></div-->
-						</div>
-						<div class="row order-detail">
-							<div class="col-md-6">Subtotal</div>
-							<div class="col-md-6 text-right" ng-bind="subtotal|currency"></div>
-						</div>
-						<hr />
-						<div class="row order-detail">
-							<div class="col-md-6">Service Fee</div>
-							<div class="col-md-6 text-right" ng-bind="data.fee|currency"></div>
-						</div>
-						<!--div class="row">
-							<div class="col-md-6">Tax</div>
-							<div class="col-md-6 text-right">--</div>
-						</div-->
-                        
-                        <div class="row order-detail" ng-show="data.ticket_format == 'Eticket'" style="margin-top:5px; margin-bottom: 5px;">
-                            <div class="col-md-6">Shipping</div>
-                            <div class="col-md-6 text-right">Email Delivery</div>
-                        </div>
-                        
-                        <div class="row order-detail" ng-show="data.ticket_format == 'Physical'" style="margin-top:5px; margin-bottom: 5px;">
-                            <div class="col-md-6">Shipping Option</div>
-                            <div class="col-md-6">
-                                <select style="height:25px;" class="form-control" name="shipping_option" ng-model="data.shipping_option" ng-change="setShipping()">
-                                    <option ng-repeat="s in shipping_data" value="-!s.id!-" ng-if="s.id == '67797' || s.id == '67791'">-!s.price|currency!- -!s.name!-</option>
-                                </select>
-                                <!--div id="shipping_options">
-                                    <ul>
-                                        <li ng-repeat="s in shipping_data"><label><input type="radio" id="shipping_option-!s.id!-" name="shipping_option" value="-!s.id!-" ng-model="data.shipping_option" ng-change="setShipping()" /> -!s.price|currency!- -!s.name!-</label></li>
-                                    </ul>
-                                </div-->
+                    <div id="co-ticket-details-div">
+                        <section id="co-ticket-details">
+                            <h2>Ticket Details</h2>
+                            <div class="event">{$event_name}</div>
+                            <div class="date">{$event_date}</div>
+                            <div class="location">{$venue_name}, {$venue_location}</div>
+                            <div class="seats">Section {$ticket_section}, Row {$ticket_row}</div>
+                            <h3>Order Summary</h3>
+                            <div class="row order-detail">
+                                <div class="col-md-6">Price</div>
+                                <div class="col-md-6 text-right"><span ng-bind="order_data.price|currency"></span> ea.</div>
                             </div>
-                        </div>
-                        
-						<div class="row hidden order-detail">
-							<div class="col-md-6">Shipping</div>
-							<div class="col-md-6 text-right" ng-bind="shipping.price|currency"></div>
-						</div>
-						<hr />
-						<div class="row order-detail">
-							<div class="col-md-6 total">TOTAL</div>
-							<div class="col-md-6 total text-right" ng-bind="total|currency"></div>
-						</div>
-					</section>
-                    <div class="row vertical-align hidden">
-                        <div class="col-xs-4 text-center"><img src="/assets/img/pledge.png"></div>
-                        <div class="col-xs-8">
-                            <h3 class="text-center">GAMEHEDGE PLEDGE</h3>
-                            <ul>
-                                <li>Always be in time for the event.</li>
-                                <li>Always be authentic.</li>
-                                <li>Always be refunded if the event is canceled & not rescheduled.</li>
-                            </ul>
+                            <div class="row order-detail" style="margin-top:5px; margin-bottom: 5px;">
+                                <div class="col-md-9">How many tickets?</div>
+                                <div class="col-md-3">
+                                    <select style="height:25px;" id="qty" name="qty" class="form-control" ng-model="data.qty" ng-options="split for split in order_data.splits" ng-change="updateTotals()"></select>
+                                </div>
+                                <!--div class="col-md-6 text-right" ng-bind="data.qty"></div-->
+                            </div>
+                            <div class="row order-detail">
+                                <div class="col-md-6">Subtotal</div>
+                                <div class="col-md-6 text-right" ng-bind="subtotal|currency"></div>
+                            </div>
+                            <hr />
+                            <div class="row order-detail">
+                                <div class="col-md-6">Service Fee</div>
+                                <div class="col-md-6 text-right" ng-bind="data.fee|currency"></div>
+                            </div>
+                            <!--div class="row">
+                                <div class="col-md-6">Tax</div>
+                                <div class="col-md-6 text-right">--</div>
+                            </div-->
+
+                            <div class="row order-detail" ng-show="data.ticket_format == 'Eticket'" style="margin-top:5px; margin-bottom: 5px;">
+                                <div class="col-md-6">Shipping</div>
+                                <div class="col-md-6 text-right">Email Delivery</div>
+                            </div>
+
+                            <div class="row order-detail" ng-show="data.ticket_format == 'Physical'" style="margin-top:5px; margin-bottom: 5px;">
+                                <div class="col-md-6">Shipping Option</div>
+                                <div class="col-md-6">
+                                    <select style="height:25px;" class="form-control" name="shipping_option" ng-model="data.shipping_option" ng-change="setShipping()">
+                                        <option ng-repeat="s in shipping_data" value="-!s.id!-" ng-if="s.id == '67797' || s.id == '67791'">-!s.price|currency!- -!s.name!-</option>
+                                    </select>
+                                    <!--div id="shipping_options">
+                                        <ul>
+                                            <li ng-repeat="s in shipping_data"><label><input type="radio" id="shipping_option-!s.id!-" name="shipping_option" value="-!s.id!-" ng-model="data.shipping_option" ng-change="setShipping()" /> -!s.price|currency!- -!s.name!-</label></li>
+                                        </ul>
+                                    </div-->
+                                </div>
+                            </div>
+
+                            <div class="row hidden order-detail">
+                                <div class="col-md-6">Shipping</div>
+                                <div class="col-md-6 text-right" ng-bind="shipping.price|currency"></div>
+                            </div>
+                            <hr />
+                            <div class="row order-detail">
+                                <div class="col-md-6 total">TOTAL</div>
+                                <div class="col-md-6 total text-right" ng-bind="total|currency"></div>
+                            </div>
+                        </section>
+                        <div class="row vertical-align pledge-checkout">
+                            <div class="col-xs-4 text-center"><img src="/assets/img/pledge.png"></div>
+                            <div class="col-xs-8">
+                                <h3 class="text-center">GAMEHEDGE PLEDGE</h3>
+                                <ul>
+                                    <li>Always be in time for the event.</li>
+                                    <li>Always be authentic.</li>
+                                    <li>Always be refunded if the event is canceled & not rescheduled.</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 				</div>
