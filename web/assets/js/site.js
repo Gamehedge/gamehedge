@@ -95,9 +95,14 @@ $(document).ready(function(){
     $(window).scroll(function() {
         if ( $( "#checkout" ).length ) {
             
+            console.log($(window).scrollTop());
+            //console.log($("footer"));
+            
             if ($(window).scrollTop()>133 && $(window).width() >= 990)     
             {
-                $scrollingDiv.css("position",'relative' ).css("top", ($(window).scrollTop() - 133 ) + 'px' );        
+                if($(window).scrollTop()<720){
+                    $scrollingDiv.css("position",'relative' ).css("top", ($(window).scrollTop() - 133 ) + 'px' );    
+                }      
             } 
             else 
             {
