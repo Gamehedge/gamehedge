@@ -3,7 +3,7 @@
 	<div class="container">
         <div class="row vertical-align">
             <div class="col-md-4"><h1>Secure Checkout</h1></div>
-            <div class="col-md-8 text-right"><p>Contact us: <i style="color:#A8C94B" class="fa fa-phone-square" aria-hidden="true"></i> (908) 312-3267</p></div>
+            <div class="col-md-8 text-right" style="vertical-align: middle;"><p>Contact us:  <i style="color:#A8C94B; font-size:1.5em; vertical-align: middle;" class="fa fa-phone-square" aria-hidden="true"></i> <span style="font-size:1.5em; vertical-align: middle;">(908) 312-3267</span></p></div>
         </div>
 		
 		<form name="frmCheckout" method="POST" ng-submit="process()">
