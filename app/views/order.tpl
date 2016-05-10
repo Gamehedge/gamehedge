@@ -5,6 +5,11 @@
             <div class="col-md-4"><h1>Secure Checkout</h1></div>
             <div class="col-md-8 text-right" style="vertical-align: middle;"><p>Contact us:  <i style="color:#A8C94B; font-size:1.5em; vertical-align: middle;" class="fa fa-phone-square" aria-hidden="true"></i> <span style="font-size:1.5em; vertical-align: middle;">(908) 312-3267</span></p></div>
         </div>
+        
+        <div class="row text-right ssl-elements">
+            <span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script></span>
+            <script src="https://cdn.ywxi.net/js/inline.js?w=96"></script>
+        </div>
 		
 		<form name="frmCheckout" method="POST" ng-submit="process()">
 			<div class="row">
@@ -318,10 +323,6 @@
                             </div>
                             <div class="col-md-5" style="margin-top: 25px;">
                                 <div class="col-xs-12 text-center"><img src="/assets/img/icon-credit-cars.png"></div>
-                                <div class="col-xs-12 text-center" style="margin-top: 33px;">
-                                    <span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script></span>
-                                    <script src="https://cdn.ywxi.net/js/inline.js?w=96"></script>
-                                </div>
                             </div>
 							
 						</div>
@@ -726,10 +727,6 @@
 							</div>
 							<div class="change_buttons"><a ladda="processing_billing_address" class="button orange medium" ng-click="addBillingAddress()">Submit</a> <a ng-click="toggleAdd('billing')">Cancel</a></div>
 						</div>
-                        <div class="row text-center" style="margin-top:15px;">
-                            <span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script></span>
-                            <script src="https://cdn.ywxi.net/js/inline.js?w=96"></script>
-                        </div>
 					</section>
 					<h2 class="underlined big hidden">Tickets Ordered</h2>
 					<div class="row hidden">

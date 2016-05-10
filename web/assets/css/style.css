@@ -929,6 +929,10 @@ main#account #account-options ul li {
     }
 }
 
+.ssl-elements {
+    margin-bottom: 10px;
+}
+
 @media(min-width: 920px) {
     .vertical-align {
         display: flex;
@@ -938,6 +942,11 @@ main#account #account-options ul li {
     .vertical-align-bottom {
         display: flex;
         align-items: flex-end;
+    }
+    
+    .ssl-elements {
+        margin-top: -20px;
+        margin-bottom: 0px;
     }
 }
 
