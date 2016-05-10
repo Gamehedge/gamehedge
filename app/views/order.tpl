@@ -5,11 +5,6 @@
             <div class="col-md-4"><h1>Secure Checkout</h1></div>
             <div class="col-md-8 text-right" style="vertical-align: middle;"><p>Contact us:  <i style="color:#A8C94B; font-size:1.5em; vertical-align: middle;" class="fa fa-phone-square" aria-hidden="true"></i> <span style="font-size:1.5em; vertical-align: middle;">(908) 312-3267</span></p></div>
         </div>
-        
-        <div class="row text-right ssl-elements">
-            <span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script></span>
-            <script src="https://cdn.ywxi.net/js/inline.js?w=96"></script>
-        </div>
 		
 		<form name="frmCheckout" method="POST" ng-submit="process()">
 			<div class="row">
@@ -84,6 +79,14 @@
                     </div>
 				</div>
 				<div class="col-md-8">
+                    
+                    <div class="row text-left ssl-elements">
+                        <div class="col-md-12">
+                            <span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script></span>
+                            <script src="https://cdn.ywxi.net/js/inline.js?w=96"></script>
+                        </div>
+                    </div>
+                    
 					<section id="new-customer" ng-if="existing == 0">
 						<div ng-if="!client">
 							<!--h2 class="underlined big">How Many Tickets?</h2-->
@@ -324,6 +327,12 @@
                             <div class="col-md-5" style="margin-top: 25px;">
                                 <div class="col-xs-12 text-center"><img src="/assets/img/icon-credit-cars.png"></div>
                             </div>
+                            
+                            <div class="col-md-5 text-center" style="margin-top:30px;">
+                                <span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script></span>
+                                <script src="https://cdn.ywxi.net/js/inline.js?w=96"></script>
+                            </div>
+                            
 							
 						</div>
                         
