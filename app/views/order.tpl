@@ -96,7 +96,7 @@
                         </div>
                     </div>
                     
-					<section id="new-customer" ng-if="existing == 0">
+					<section id="new-customer" style="z-index: 1; position: relative;" ng-if="existing == 0">
 						<div ng-if="!client">
 							<!--h2 class="underlined big">How Many Tickets?</h2-->
 							<!--div class="form-group">
