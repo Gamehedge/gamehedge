@@ -141,15 +141,22 @@ case '';
                           Title:"",
                           Visible:false
                         },
-						"id": {
+						"section": {
 							CSSClass: "TicketRow",
 							Formatter: function(RowData, Key, CellValue, FormattedSection) {
 								var Code = "<div>";
-								Code += "<div class=\"seat-link\"><input type=\"button\" onclick=\"BuyNow(\'" + RowData.id + "\',\'" + RowData.price + "\');\" value=\"" + RowData.price + "/ea\"/></div>";
 								Code += "<div class=\"location\">";
 								Code += "<div class=\"section\">Section " + RowData.section + "</div>";
 								Code += "<div class=\"lrow\">Row " + RowData.row + "</div>";
 								Code += "</div>";
+								Code += "</div>";
+								return Code;
+							}
+						},
+                        "quantity": {
+							CSSClass: "TicketRow",
+							Formatter: function(RowData, Key, CellValue, FormattedSection) {
+								var Code = "<div>";
 								Code += "<div class=\"seats\">Qty ";
 								if($.isArray(RowData.quantity)) {
 									var Qnty = RowData.quantity.slice(0).sort(sortD);
@@ -167,11 +174,36 @@ case '';
 								Code += "<span class=\"smallIcon" + (RowData.eticket ? " eTicket\" title=\"Email Delivery" : "") + "\"></span>";
 								Code += "<span class=\"smallIcon" + (RowData.preferred ? " Preferred\" title=\"Preferred Ticket" : "") + "\"></span>";
 								Code += "</div>";
+								Code += "</div>";
+								return Code;
+							}
+						},
+                        "notes": {
+							CSSClass: "TicketRow",
+							Formatter: function(RowData, Key, CellValue, FormattedSection) {
+								var Code = "<div>";
 								if(RowData.notes != null)
-									Code += "<div class=\"note\" title=\"" + RowData.notes + "\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-circle fa-stack-2x\"></i><i class=\"fa fa-info fa-stack-1x fa-inverse\"></i></span></div>";
+									Code += "<div class=\"ticket-cell note\" title=\"" + RowData.notes + "\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-circle fa-stack-2x\"></i><i class=\"fa fa-info fa-stack-1x fa-inverse\"></i></span></div>";
 								else
-									Code += "<div class=\"note\">&nbsp;</div>";
-								Code += "<div class=\"guarantee\">Good Game<br />Guarantee&trade;</div>";
+									Code += "<div class=\"ticket-cell note\">&nbsp;</div>";
+								Code += "</div>";
+								return Code;
+							}
+						},
+                        "guarantee": {
+							CSSClass: "TicketRow",
+							Formatter: function(RowData, Key, CellValue, FormattedSection) {
+								var Code = "<div>";
+								Code += "<div class=\"ticket-cell guarantee\">Good Game<br />Guarantee&trade;</div>";
+								Code += "</div>";
+								return Code;
+							}
+						},
+                        "price": {
+							CSSClass: "TicketRow",
+							Formatter: function(RowData, Key, CellValue, FormattedSection) {
+								var Code = "<div>";
+                                Code += "<div class=\"ticket-cell seat-link\"><input type=\"button\" onclick=\"BuyNow(\'" + RowData.id + "\',\'" + RowData.price + "\');\" value=\"" + RowData.price + "/ea\"/></div>";
 								Code += "</div>";
 								return Code;
 							}
