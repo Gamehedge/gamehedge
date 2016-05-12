@@ -683,7 +683,6 @@ section#tickets ul.ticket-list > li .location .lrow, .TicketRow .location .lrow 
 section#tickets ul.ticket-list > li .seats, .TicketRow .seats {
 	float: left;
 	margin-right: 5px;
-	min-width: 100px;
 }
 section#tickets ul.ticket-list > li .seats .seat {
 	font-family: 'Oswald', sans-serif;
@@ -718,6 +717,40 @@ section#tickets ul.ticket-list > li .seat-link a, section#tickets ul li .buy-lin
 section#tickets .seat-holder {
 	padding: 10px 0;
 }
+
+.TicketRowDesktop {
+    display: none;
+}
+
+@media(min-width: 768px) {
+    .TicketRowDesktop {
+        display: block;
+    }
+    .guarantee-mobile {
+        display: none;
+    }
+    .seats-mobile {
+        display: none;
+    }
+}
+
+@media(max-width: 767px) {
+    .guarantee-mobile {
+        display: block;
+    }
+    .seats-mobile {
+        display: block;
+        min-width: 100px;
+    }
+}
+
+@media(min-width: 1200px) {
+    section#tickets ul.ticket-list > li .seats, .TicketRow .seats {
+        min-width: 110px;
+    }
+}
+
+
 .configuration {
 	width: 100%;
 	height: auto;

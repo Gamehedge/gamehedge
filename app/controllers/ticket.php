@@ -149,12 +149,31 @@ case '';
 								Code += "<div class=\"section\">Section " + RowData.section + "</div>";
 								Code += "<div class=\"lrow\">Row " + RowData.row + "</div>";
 								Code += "</div>";
+                                
+                                Code += "<div class=\"seats seats-mobile\">Qty ";
+								if($.isArray(RowData.quantity)) {
+									var Qnty = RowData.quantity.slice(0).sort(sortD);
+									Code += "<select id=\"Qty" + RowData.id + "\">";
+									for(var x = 0; x < Qnty.length; x++) {
+										Code += "<option>" + Qnty[x] + "</option>";
+									}
+									Code += "</select>";
+								} else {
+									Code += "<span>" + RowData.quantity + "</span>";
+									Code += "<input type=\"hidden\" id=\"Qty" + RowData.id + "\" lang=\"Quantity\" value=\"" + RowData.quantity + "\"/>";
+								}
+								Code += "<div class=\"type\">" + (RowData.eticket ? "Email Delivery" : "Physical Delivery") + "</div>";
+								Code += "<span class=\"smallIcon" + (RowData.notes != "" ? " Note\" title=\"" + RowData.notes : "") + "\"></span>";
+								Code += "<span class=\"smallIcon" + (RowData.eticket ? " eTicket\" title=\"Email Delivery" : "") + "\"></span>";
+								Code += "<span class=\"smallIcon" + (RowData.preferred ? " Preferred\" title=\"Preferred Ticket" : "") + "\"></span>";
+								Code += "</div>";
+                                
 								Code += "</div>";
 								return Code;
 							}
 						},
                         "quantity": {
-							CSSClass: "TicketRow",
+							CSSClass: "TicketRow TicketRowDesktop",
 							Formatter: function(RowData, Key, CellValue, FormattedSection) {
 								var Code = "<div>";
 								Code += "<div class=\"seats\">Qty ";
@@ -191,7 +210,7 @@ case '';
 							}
 						},
                         "guarantee": {
-							CSSClass: "TicketRow",
+							CSSClass: "TicketRow TicketRowDesktop",
 							Formatter: function(RowData, Key, CellValue, FormattedSection) {
 								var Code = "<div>";
 								Code += "<div class=\"ticket-cell guarantee\">Good Game<br />Guarantee&trade;</div>";
@@ -204,6 +223,7 @@ case '';
 							Formatter: function(RowData, Key, CellValue, FormattedSection) {
 								var Code = "<div>";
                                 Code += "<div class=\"ticket-cell seat-link\"><input type=\"button\" onclick=\"BuyNow(\'" + RowData.id + "\',\'" + RowData.price + "\');\" value=\"" + RowData.price + "/ea\"/></div>";
+                                Code += "<div class=\"ticket-cell guarantee guarantee-mobile\">Good Game<br />Guarantee&trade;</div>";
 								Code += "</div>";
 								return Code;
 							}
