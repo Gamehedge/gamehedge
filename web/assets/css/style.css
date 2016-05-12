@@ -672,9 +672,9 @@ section#tickets ul.ticket-list > li .location, .TicketRow .location {
 
 section#tickets ul.ticket-list > li .location .section, .TicketRow .location .section {
 	font-family: 'Oswald', sans-serif;
-	font-size: 22px;
+	font-size: 16px;
 	text-transform: uppercase;
-	line-height: 22px;
+	line-height: 16px;
 }
 section#tickets ul.ticket-list > li .location .lrow, .TicketRow .location .lrow {
 	font-family: 'Oswald', sans-serif;
