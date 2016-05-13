@@ -966,6 +966,11 @@ section#tickets .seat-holder {
     .tuMapGroupsContainer {
         display: none;
     }
+    
+    #new-customer {
+        margin-top: 30px;
+    }
+    
 }
 
 @media(min-width: 1200px) {
