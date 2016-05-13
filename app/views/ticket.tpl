@@ -53,7 +53,19 @@
 	<div class="container">
 		<div id="ChartListContainer">
 			<div class="row">
-				<div class="col-md-6">
+				
+				<div class="col-md-6 col-md-push-6">
+					<!-- Map Container -->
+					<div id="TuMap">
+						<!-- Required Container to load Interactive Map -->
+						<div id="MapContainer" class="MapContainer"></div>
+						<!-- Required Container to Interactive Map's Section Groups/Legends List -->
+						<div id="GroupsContainer" class="GroupsContainer"></div>
+					</div>
+					<div class="flC"></div>
+				</div>
+                
+                <div class="col-md-6 col-md-pull-6">
 					<section id="game-guarantee">
 						<h2>Good Game Guarantee&trade;</h2>
 						<hr />
@@ -64,16 +76,6 @@
 						<!-- Required Container to load Ticket List -->
 						<div id="InventoryContainer"></div>
 					</div>
-				</div>
-				<div class="col-md-6">
-					<!-- Map Container -->
-					<div id="TuMap">
-						<!-- Required Container to load Interactive Map -->
-						<div id="MapContainer" class="MapContainer"></div>
-						<!-- Required Container to Interactive Map's Section Groups/Legends List -->
-						<div id="GroupsContainer" class="GroupsContainer"></div>
-					</div>
-					<div class="flC"></div>
 				</div>
 			</div>
 		</div>

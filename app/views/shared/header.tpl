@@ -10,7 +10,7 @@
         <meta name="keywords" content="Los Angeles Angels Tickets, Houston Astros Tickets, Oakland Athletics Tickets, Toronto Blue Jays Tickets, Atlanta Braves Tickets, Milwaukee Brewers Tickets, St. Louis Cardinals Tickets, Chicago Cubs Tickets, Arizona Diamondbacks Tickets, Los Angeles Dodgers Tickets, San Francisco Giants Tickets, Cleveland Indians Tickets, Seattle Mariners Tickets, Miami Marlins Tickets, New York Mets Tickets, Washington Nationals Tickets, Baltimore Orioles Tickets, San Diego Padres Tickets, Philadelphia Phillies Tickets, Pittsburgh Pirates Tickets, Texas Rangers Tickets, Tampa Bay Rays Tickets, Boston Red Sox Tickets, Cincinnati Reds Tickets, Colorado Rockies Tickets, Kansas City Royals Tickets, Detroit Tigers Tickets, Minneapolis Twins Tickets, Chicago White Sox Tickets, New York Yankees Tickets, MLB Tickets, Major League Baseball Tickets, Angel Stadium of Anaheim, AT&T Park, Busch Stadium, Chase Field, Citi Field, Citizens Bank Park, Comerica Park, Coors Field, Dodger Stadium, Fenway Park, Globe Life Park in Arlington, Great American Ball Park, Kauffman Stadium, Marlins Park, Miller Park, Minute Maid Park, Nationals Park, Oakland Coliseum, Oriole Park at Camden Yards, Petco Park, PNC Park, Progressive Field, Rogers Centre, Safeco Field, Target Field, Tropicana Field, Turner Field, U.S. Cellular Field, Wrigley Field, Yankee Stadium" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" href="/assets/css/bundle.min.css" />
-		<link rel="stylesheet" href="/assets/css/style.css?v128" />
+		<link rel="stylesheet" href="/assets/css/style.css?v129" />
 		<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 		{$css}
 		{$hscripts}
@@ -131,13 +131,13 @@
                         <li><a href="/faq">FAQ</a></li>
                         <li id="nav-user">{if $fname ne ''}<a href="/member/logout">{$fname} Logout</a>{else}<a href="/member/login">Login</a>{/if}</li>
                     </ul>
-                    <form class="navbar-form navbar-right" id="header-search-nav" role="search">
+                    <form class="navbar-form navbar-right" id="header-search-nav" role="search" method="POST" action="/search">
                         <div class="form-group">
                             <label for="query" class="sr-only">Search Team, Venue or Location</label>
                             <div class="input-group">
                                 <input type="text" id="query" name="query" class="form-control" placeholder="Search For Tickets" />
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button" onclick="$('#form-search').submit();"><i class="fa fa-search"></i></button>
+                                    <button class="btn btn-default" type="button" onclick="$('#header-search-nav').submit();"><i class="fa fa-search"></i></button>
                                 </span>
                             </div>
                         </div>

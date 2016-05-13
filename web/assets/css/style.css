@@ -1858,6 +1858,12 @@ section#tickets ul.ticket-list > li .guarantee, .TicketRow .guarantee {
 #habla_window_div {
     right: 80px !important;
 }
+
+@media(max-width: 768px) {
+    #PriceRange {
+        display: none;
+    }
+}
 @media(min-width: 768px) {
 }
 @media(min-width: 992px) {
