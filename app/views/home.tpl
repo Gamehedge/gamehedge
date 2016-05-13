@@ -1,7 +1,10 @@
+<div class="home-header">
+    {$header}
+</div>
+
 <section id="hero">
 	<div id="shader"></div>
 	<div id="wrapper">
-		{$header}
 		<div id="content">
 			<div class="container">
 				<p>Every Ticket Comes With Our Good Game Guarantee!</p>

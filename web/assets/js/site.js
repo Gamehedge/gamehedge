@@ -23,6 +23,16 @@ function requestRefund(_id, orderId, customerId, customerName, customerEmail){
 }
 
 $(document).ready(function(){
+    
+    $('#bs-navbar-collapse-gamehedge').on('hide.bs.collapse', function () {
+        $("#bs-navbar-collapse-gamehedge").css("background","none");
+    })
+    
+     $('#bs-navbar-collapse-gamehedge').on('show.bs.collapse', function () {
+        $("#bs-navbar-collapse-gamehedge").css("background","black");
+    })
+    
+    
 	if($('#home-down-arrow-link').length > 0) {
 		$('#home-down-arrow-link').on('click', function(){
 			$('html, body').animate({
@@ -35,11 +45,13 @@ $(document).ready(function(){
 	}
 	var toid = null;
 	$('header nav ul li#sports-dropdown').mouseover(function(){
-		if(toid == null) {
-			toid = setTimeout(function(){
-				$('header nav ul li#sports-dropdown #sports-dropdown-menu').show();
-			}, 300);
-		}
+        if($(window).width() >= 760){
+            if(toid == null) {
+                toid = setTimeout(function(){
+                    $('header nav ul li#sports-dropdown #sports-dropdown-menu').show();
+                }, 300);
+            }
+        }
 	});
 	$('header nav ul li#sports-dropdown').mouseleave(function(){
 		$('header nav ul li#sports-dropdown #sports-dropdown-menu').hide();
@@ -48,6 +60,13 @@ $(document).ready(function(){
 			toid = null;
 		}
 	});
+    
+    $('header nav ul li#sports-dropdown').click(function(){
+        if($(window).width() < 760){
+            alert("jejej");
+        }
+	});
+    
 	if($('.ajax-form').length > 0) {
 		$('.ajax-form').submit(function(e){
 			e.preventDefault();
