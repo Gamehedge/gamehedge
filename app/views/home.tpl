@@ -31,7 +31,7 @@
 				<div class="col-md-3">
 					<div class="guarantee-item margin-divider-half">
 						<div class="img-holder"><img src="/assets/img/icon-tickets.png" alt="Tickets" /></div>
-						<p>Find your game &amp; purchase your tickets from GameHedge. Every ticket comes with our Good Game Guarantee!</p>
+						<p>Find your game &amp; purchase your tickets. Every ticket comes with our Good Game Guarantee at no additional cost!</p>
 					</div>
 				</div>
 				<div class="col-md-3">
