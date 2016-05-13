@@ -69,7 +69,7 @@
 					<ul>
 						<li>
 							<div class="img-holder"><img src="/assets/img/icon-tickets.png" alt="Tickets" /></div>
-							<p>Find your game &amp; purchase your tickets from GameHedge. Every ticket comes with our Good Game Guarantee!</p>
+							<p>Find your game &amp; purchase your tickets. Every ticket comes with our Good Game Guarantee at no additional cost!</p>
 						</li>
 						<li><i class="fa fa-angle-down"></i></li>
 						<li>
