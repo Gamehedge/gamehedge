@@ -962,6 +962,10 @@ section#tickets .seat-holder {
         display: block;
         min-width: 100px;
     }
+    
+    .tuMapGroupsContainer {
+        display: none;
+    }
 }
 
 @media(min-width: 1200px) {

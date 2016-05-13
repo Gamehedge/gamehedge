@@ -153,14 +153,14 @@ case '';
                                 Code += "<div class=\"seats seats-mobile\">Qty ";
 								if($.isArray(RowData.quantity)) {
 									var Qnty = RowData.quantity.slice(0).sort(sortD);
-									Code += "<select id=\"Qty" + RowData.id + "\">";
+									Code += "<select id=\"QtyMob" + RowData.id + "\">";
 									for(var x = 0; x < Qnty.length; x++) {
 										Code += "<option>" + Qnty[x] + "</option>";
 									}
 									Code += "</select>";
 								} else {
 									Code += "<span>" + RowData.quantity + "</span>";
-									Code += "<input type=\"hidden\" id=\"Qty" + RowData.id + "\" lang=\"Quantity\" value=\"" + RowData.quantity + "\"/>";
+									Code += "<input type=\"hidden\" id=\"QtyMob" + RowData.id + "\" lang=\"Quantity\" value=\"" + RowData.quantity + "\"/>";
 								}
 								Code += "<div class=\"type\">" + (RowData.eticket ? "Email Delivery" : "Physical Delivery") + "</div>";
 								Code += "<span class=\"smallIcon" + (RowData.notes != "" ? " Note\" title=\"" + RowData.notes : "") + "\"></span>";
@@ -418,10 +418,17 @@ case '';
 				}).tuMap("Refresh");
 			}
 			function BuyNow(Id, Price) {
-				var Qty = 1;
-				if($("#Qty" + Id)) {
-					Qty = parseInt($("#Qty" + Id).val());
-				}
+                var Qty = 1;
+                if($( window ).width() > 768){
+                    if($("#Qty" + Id)) {
+                        Qty = parseInt($("#Qty" + Id).val());
+                    }   
+                }
+                else {
+                    if($("#QtyMob" + Id)) {
+                        Qty = parseInt($("#QtyMob" + Id).val());
+                    }
+                }
 				var data = {event_id: event_id, tgroup_id: Id, price: parseFloat(Price.substring(1).replace(/[^\d\.\-\ ]/g, "")), qty: Qty};
 				$.post(\'/order/add\', data, function(data) {
 					if(data.status == 1)
