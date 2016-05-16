@@ -20,8 +20,8 @@
                             <div class="seats">Section {$ticket_section}, Row {$ticket_row}</div>
                             <h3>Order Summary</h3>
                             <div class="row order-detail">
-                                <div class="col-md-6">Price</div>
-                                <div class="col-md-6 text-right"><span ng-bind="order_data.price|currency"></span> ea.</div>
+                                <div class="col-xs-6">Price</div>
+                                <div class="col-xs-6 text-right"><span ng-bind="order_data.price|currency"></span> ea.</div>
                             </div>
                             <div class="row order-detail" style="margin-top:5px; margin-bottom: 5px;">
                                 <div class="col-md-9">How many tickets?</div>
@@ -31,13 +31,13 @@
                                 <!--div class="col-md-6 text-right" ng-bind="data.qty"></div-->
                             </div>
                             <div class="row order-detail">
-                                <div class="col-md-6">Subtotal</div>
-                                <div class="col-md-6 text-right" ng-bind="subtotal|currency"></div>
+                                <div class="col-xs-6">Subtotal</div>
+                                <div class="col-xs-6 text-right" ng-bind="subtotal|currency"></div>
                             </div>
                             <hr />
                             <div class="row order-detail">
-                                <div class="col-md-6">Service Fee</div>
-                                <div class="col-md-6 text-right" ng-bind="data.fee|currency"></div>
+                                <div class="col-xs-6">Service Fee</div>
+                                <div class="col-xs-6 text-right" ng-bind="data.fee|currency"></div>
                             </div>
                             <!--div class="row">
                                 <div class="col-md-6">Tax</div>
@@ -45,13 +45,13 @@
                             </div-->
 
                             <div class="row order-detail" ng-show="data.ticket_format == 'Eticket'" style="margin-top:5px; margin-bottom: 5px;">
-                                <div class="col-md-6">Shipping</div>
-                                <div class="col-md-6 text-right">Email Delivery</div>
+                                <div class="col-xs-6">Shipping</div>
+                                <div class="col-xs-6 text-right">Email Delivery</div>
                             </div>
 
                             <div class="row order-detail" ng-show="data.ticket_format == 'Physical'" style="margin-top:5px; margin-bottom: 5px;">
-                                <div class="col-md-6">Shipping Option</div>
-                                <div class="col-md-6">
+                                <div class="col-xs-6">Shipping Option</div>
+                                <div class="col-xs-6">
                                     <select style="height:25px;" class="form-control" name="shipping_option" ng-model="data.shipping_option" ng-change="setShipping()">
                                         <option ng-repeat="s in shipping_data" value="-!s.id!-" ng-if="s.id == '67797' || s.id == '67791'">-!s.price|currency!- -!s.name!-</option>
                                     </select>
@@ -64,13 +64,13 @@
                             </div>
 
                             <div class="row hidden order-detail">
-                                <div class="col-md-6">Shipping</div>
-                                <div class="col-md-6 text-right" ng-bind="shipping.price|currency"></div>
+                                <div class="col-xs-6">Shipping</div>
+                                <div class="col-xs-6 text-right" ng-bind="shipping.price|currency"></div>
                             </div>
                             <hr />
                             <div class="row order-detail">
-                                <div class="col-md-6"><h2 style="color:black;">TOTAL</h2></div>
-                                <div class="col-md-6 text-right"><h2 style="color:black;"> -!total|currency!- </h2></div>
+                                <div class="col-xs-6"><h2 style="color:black;">TOTAL</h2></div>
+                                <div class="col-xs-6 text-right"><h2 style="color:black;"> -!total|currency!- </h2></div>
                             </div>
                             {if $ticket_in_hand eq 0}
                                 <hr />
@@ -82,7 +82,7 @@
                             
                         </section>
                         <div class="row vertical-align pledge-checkout">
-                            <div class="col-xs-4 text-center"><img src="/assets/img/pledge.png"></div>
+                            <div class="col-xs-4 text-center"><img src="/assets/img/pledge.png" width="90px"></div>
                             <div class="col-xs-8">
                                 <h3 class="text-center">GAMEHEDGE PLEDGE</h3>
                                 <ul>
@@ -763,7 +763,7 @@
 						</div>
 					</div>
 					<section id="co-order-submit">
-						<div class="row vertical-align-bottom">
+						<div class="row vertical-align-bottom" style="align-items: flex-start;">
 							<div class="col-md-8 left-section">
                                 <div class="checkbox">
                                   <label><input type="checkbox" ng-model="data.optin" ng-true-value="1" ng-false-value="0">I would like to receive special promotions and updates.</label>
