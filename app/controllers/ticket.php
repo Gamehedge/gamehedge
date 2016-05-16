@@ -63,7 +63,9 @@ case '';
                        'quantity'  => $tgData['splits'],
                        'eticket'   => $tgData['eticket'],
                        'notes'     => $tgData['public_notes'],
-                       'ticket_id' => 'range');
+                       'ticket_id' => 'range',
+                       'in_hand'   => $tgData['in_hand'],
+                       'in_hand_on' => $tgData['in_hand_on']);
 		$num_tickets += $tgData['ticket_states']['available'];
 	}
 	$sc_data = array('MinPrice' => '$' . number_format($lprice, 2), 'MaxPrice' => '$' . number_format($hprice, 2), 'TicketCounts' => $num_tickets, 'Tickets' => $sc_data);
@@ -201,10 +203,12 @@ case '';
 							CSSClass: "TicketRow",
 							Formatter: function(RowData, Key, CellValue, FormattedSection) {
 								var Code = "<div>";
-								if(RowData.notes != null)
-									Code += "<div class=\"ticket-cell note\" title=\"" + RowData.notes + "\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-circle fa-stack-2x\"></i><i class=\"fa fa-info fa-stack-1x fa-inverse\"></i></span></div>";
-								else
-									Code += "<div class=\"ticket-cell note\">&nbsp;</div>";
+								if(RowData.notes != null){
+                                    Code += "<div class=\"ticket-cell note\" title=\"" + RowData.notes + "\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-circle fa-stack-2x\"></i><i class=\"fa fa-info fa-stack-1x fa-inverse\"></i></span></div>";
+                                }
+								else {
+                                    Code += "<div class=\"ticket-cell note\">&nbsp;</div>";
+                                }	
 								Code += "</div>";
 								return Code;
 							}

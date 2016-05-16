@@ -13,7 +13,7 @@
                     
                     <div id="co-ticket-details-div">
                         <section id="co-ticket-details">
-                            <h2>Ticket Details</h2>
+                            <h3 style="margin-top:0px;">Ticket Details</h3>
                             <div class="event">{$event_name}</div>
                             <div class="date">{$event_date}</div>
                             <div class="location">{$venue_name}, {$venue_location}</div>
@@ -69,9 +69,17 @@
                             </div>
                             <hr />
                             <div class="row order-detail">
-                                <div class="col-md-6 total">TOTAL</div>
-                                <div class="col-md-6 total text-right" ng-bind="total|currency"></div>
+                                <div class="col-md-6"><h2 style="color:black;">TOTAL</h2></div>
+                                <div class="col-md-6 text-right"><h2 style="color:black;"> -!total|currency!- </h2></div>
                             </div>
+                            {if $ticket_in_hand eq 0}
+                                <hr />
+                                <div class="row order-detail">
+                                    <div class="col-md-4">Notes:</div>
+                                    <div class="col-md-8 text-right">{$ticket_notes}</div>
+                                </div>
+                            {/if}
+                            
                         </section>
                         <div class="row vertical-align pledge-checkout">
                             <div class="col-xs-4 text-center"><img src="/assets/img/pledge.png"></div>
@@ -770,7 +778,7 @@
 							</div>
 							<div class="col-md-4">
 								<div class="text-right">
-									<div class="final-total">
+									<div class="final-total" style="color:black;">
 										<strong>Total -! total|currency !- </strong>
 										<!--div ng-bind="total|currency"></div-->
 									</div>
