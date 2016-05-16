@@ -105,6 +105,11 @@ case '';
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$(document).tooltip();
+                
+                if($( window ).width() < 768){
+                    $("#data_footer").css("display", "none");
+                }
+                
 				/************************************************************
 				MapContainer Height to view complete chart
 				************************************************************/
