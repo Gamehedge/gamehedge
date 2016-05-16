@@ -108,6 +108,7 @@ case '';
                 
                 if($( window ).width() < 768){
                     $("#data_footer").css("display", "none");
+                    $("#hr_footer").css("display", "none");
                 }
                 
 				/************************************************************

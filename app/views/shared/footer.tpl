@@ -38,7 +38,7 @@
 						</div>
 					</div>
 				</div>
-				<hr />
+				<hr id="hr_footer" />
 				<div class="footer-bottom clearfix">
 					Copyright {$year}: GameHedge, LLC &middot; All Rights Reserved.
 					<div class="pull-right">
