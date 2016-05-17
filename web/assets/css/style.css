@@ -703,10 +703,8 @@ section#games ul li:nth-child(even) {
 	background-color: #f6f6f6;
 }
 section#games ul li .date, section#game-header .date, section#order-header .date {
-	float: left;
-	width: 85px;
-	margin-right: 20px;
-	padding: 5px 0;
+	max-width: 85px;
+	padding: 2px 0;
 	background-color: #fff;
 	border: 1px solid #c1c1c1;
 	border-radius: 5px;
@@ -715,34 +713,59 @@ section#games ul li .date, section#game-header .date, section#order-header .date
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3) inset;
 	text-align: center;
 }
+@media(min-width: 768px) {
+    section#games ul li .date, section#game-header .date, section#order-header .date {
+        float: left;
+        width: 85px;
+        margin-right: 20px;
+        padding: 5px 0;
+    }  
+    section#games ul li .event, section#game-header .event, section#order-header .event {
+        float: left;
+        margin-top: 12px;
+    }
+    section#games ul li .date .day, section#game-header .date .day, section#order-header .date .day {
+        font-size: 26px;
+        line-height: 26px;
+    }
+    section#games ul li .event .name, section#game-header .event h1, section#order-header .event h1 {
+        font-size: 24px;
+        line-height: 24px;
+    }
+    section#games ul li .event .location, section#game-header .event .location, section#order-header .event .location {
+        font-size: 16px;
+        line-height: 16px;
+    }
+    section#game-header {
+        padding: 10px 0;
+    }
+}
+
+
 section#games ul li .date .month, section#game-header .date .month, section#order-header .date .month {
 	font-size: 12px;
 	text-transform: uppercase;
 }
 section#games ul li .date .day, section#game-header .date .day, section#order-header .date .day {
 	color: #a8c94b;
-	font-size: 26px;
+	font-size: 14px;
 	font-weight: bold;
-	line-height: 26px;
+	line-height: 16px;
 }
 section#games ul li .date .time, section#game-header .date .time, section#order-header .date .time {
 	font-size: 10px;
 }
-section#games ul li .event, section#game-header .event, section#order-header .event {
-	float: left;
-	margin-top: 12px;
-}
 section#games ul li .event .name, section#game-header .event h1, section#order-header .event h1 {
 	margin: 0;
-	font-size: 24px;
+	font-size: 18px;
 	text-transform: uppercase;
-	line-height: 24px;
+	line-height: 18px;
 }
 section#games ul li .event .location, section#game-header .event .location, section#order-header .event .location {
 	margin-top: 5px;
-	font-size: 16px;
+	font-size: 12px;
 	text-transform: uppercase;
-	line-height: 16px;
+	line-height: 12px;
 }
 section#games ul li .tickets-link {
 	float: right;
@@ -814,7 +837,7 @@ aside#gamehedge-about ul li:nth-child(even) {
 }
 section#game-header {
 	margin-bottom: 30px;
-	padding: 10px 0;
+	padding: 4px 0;
 	background-color: #e4e4e4;
 	border-bottom: 1px solid #c1c1c1;
 	font-family: 'Oswald', sans-serif;
@@ -831,8 +854,35 @@ section#game-guarantee hr {
 section#game-guarantee p {
 	font-size: 12px;
 }
+
+@media(min-width: 768px) {
+    .Filters {
+        margin-bottom: 30px;
+    }
+    .filter-outside-container{
+        display: none;
+    }
+}
+
+@media(max-width: 768px) {
+    .Filters {
+        border-bottom: 1px solid #c1c1c1;
+    }
+}
+
+.filter-outside-container {
+    
+}
+
+.filter-outside {
+    max-width: 200px;
+    background-color: #f3f3f3;
+    margin: 0 auto;
+    border-bottom: 2px solid #c1c1c1;
+    padding: 4px;
+}
+
 .Filters {
-	margin-bottom: 30px;
 	background-color: #f3f3f3;
 	padding: 10px;
 }
@@ -1869,7 +1919,7 @@ section#tickets ul.ticket-list > li .guarantee, .TicketRow .guarantee {
 }
 
 @media(max-width: 768px) {
-    #PriceRange {
+    #PriceRange, #filterPriceSection {
         display: none;
     }
 }

@@ -23,6 +23,12 @@ function requestRefund(_id, orderId, customerId, customerName, customerEmail){
 }
 
 $(document).ready(function(){
+    $(".Filters").slideUp();
+    
+    
+    $(".filter-outside").click(function(){
+        $(".Filters").slideToggle();
+    });
     
     $('#bs-navbar-collapse-gamehedge').on('hide.bs.collapse', function () {
         $("#bs-navbar-collapse-gamehedge").css("background","none");

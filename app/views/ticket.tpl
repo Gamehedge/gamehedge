@@ -1,16 +1,19 @@
 {$header}
 <section id="game-header" style="margin-bottom: 0 !important;">
 	<div class="container clearfix">
-		<div class="date">
-			<div class="month">{$event_date|date_format:"F"}</div>
-			<div class="day">{$event_date|date_format:"j"}</div>
-			<div class="time">{$event_date|date_format:"D. h:i A"}</div>
-		</div>
-		<div class="event">
-			<h1>{$event_name}</h1>
-			<div class="location">{$venue_name} - {$venue_location}</div>
-		</div>
-	</div>
+        
+            <div class="date col-xs-3">
+                <div class="month">{$event_date|date_format:"F"}</div>
+                <div class="day">{$event_date|date_format:"j"}</div>
+                <div class="time">{$event_date|date_format:"D. h:i A"}</div>
+            </div>
+            <div class="event col-xs-9">
+                <h1>{$event_name}</h1>
+                <div class="location">{$venue_name} - {$venue_location}</div>
+            </div>
+        
+    </div>
+	
 </section>
 <main>
 	<div class="Filters">
@@ -43,13 +46,18 @@
 					<label for="Parking"><input type="checkbox" id="Parking" class="Custom" /> Parking Only</label>
 					<label for="ETicket"><input type="checkbox" id="ETicket" class="Custom" /> eTickets Only</label>
 				</div>
-				<div class="filter-item">
+				<div class="filter-item" id="filterPriceSection">
 					<span class="filter-label">Price Filter:</span><br />
 					<div id="PriceRange"></div>
 				</div>
 			</div>
 		</div>
 	</div>
+    
+    <div class="filter-outside-container">
+        <div class="filter-outside text-center">FILTERS</div>
+    </div>
+    
 	<div class="container">
 		<div id="ChartListContainer">
 			<div class="row">
