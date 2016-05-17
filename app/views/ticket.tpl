@@ -78,7 +78,7 @@
 					<section id="game-guarantee">
 						<h2>Good Game Guarantee&trade;</h2>
 						<hr />
-						<p>All GameHedge tickets come with our exclusive Good Game Guarantee at no additional cost to you. So, if the home team loses by 5 runs or more, we will refund 50% of the cost of your ticket. No gimmicks. No catches.</p>
+						<p>All GameHedge tickets come with our exclusive Good Game Guarantee at no additional cost to you. So, if the home team loses by 5 runs or more, we will refund 50% of the price of your ticket. No gimmicks. No catches.</p>
 					</section>
 					<!-- List Container -->
 					<div class="TicketListContainer" id="ListContainer">
