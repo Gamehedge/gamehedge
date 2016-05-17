@@ -1125,6 +1125,18 @@ main#checkout #shipping_options ul {
     margin-bottom: 5px !important;
 }
 
+@media(max-width: 768px) {
+    #co-ticket-details {
+        padding: 10px 10px !important;
+        font-size: 12px;
+    }
+    
+    #co-ticket-details hr {
+        margin-top: 3px;
+        margin-bottom: 3px;
+    }
+}
+
 #co-ticket-details {
 	margin-bottom: 15px;
 	padding: 20px 20px;
