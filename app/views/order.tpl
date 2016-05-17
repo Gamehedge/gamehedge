@@ -98,8 +98,8 @@
                     <div class="row">
                          <div class="col-md-12 text-right" style="margin-top: 20px; margin-bottom: -30px;"><p>Contact us:  <i style="color:#A8C94B; font-size:1.5em; vertical-align: middle;" class="fa fa-phone-square" aria-hidden="true"></i> <span style="font-size:1.5em; vertical-align: middle;"><a href="tel:908-312-3267">(908) 312-3267</a></span></p>
                             <div>
-                                <span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script></span>
-                                <script src="https://cdn.ywxi.net/js/inline.js?w=96"></script>
+                                <!--span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script></span>
+                                <script src="https://cdn.ywxi.net/js/inline.js?w=96"></script-->
                             </div>
                         </div>
                     </div>
@@ -118,15 +118,14 @@
 										<input type="email" id="email" name="email" class="form-control" ng-model="data.email" ng-required="true" />
 									</div>
 								</div>
-                            </div>
-                            <div class="row">
-								<div class="col-md-6">
+                                
+                                <div class="col-md-6">
 									<div class="form-group">
 										<label for="email2">Confirm Email <span>*</span></label>
 										<input type="email" id="email2" name="email2" class="form-control" ng-model="data.email2" ng-required="true" />
 									</div>
 								</div>
-							</div>
+                            </div>
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
@@ -147,7 +146,7 @@
                         <h2 class="underlined big">Payment Information</h2>
                         <h3 class="hidden">Credit Card Information</h3>
 						<div class="row">
-                            <div class="col-md-7">
+                            <div class="col-md-7" style="margin-left:-15px;">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="card_number">Credit Card Number <span>*</span></label>
@@ -200,7 +199,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-5" style="margin-top: 25px;">
+                            <div class="col-md-5" style="margin-top: 25px; margin-right:15px;">
                                 <div class="col-xs-12 text-center"><img src="/assets/img/icon-credit-cars.png"></div>
                             </div>
                             
@@ -223,9 +222,7 @@
                                     <input type="text" id="bfirstname" name="bfirstname" class="form-control" ng-model="data.bfirstname" ng-required="true" />
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-				            <div class="col-md-6">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="blastname">Last Name <span>*</span></label>
                                     <input type="text" id="blastname" name="blastname" class="form-control" ng-model="data.blastname" ng-required="true" />
@@ -240,8 +237,7 @@
                                     <input type="text" id="baddress1" name="baddress1" class="form-control" ng-model="data.baddress1" ng-required="true" />
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
+                            
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="baddress2" class="optional">Address Line 2</label>
@@ -321,10 +317,7 @@
 									</select>
 								</div>
 							</div>
-							
-						</div>
-                        
-                        <div class="row">
+                            
                             <div class="col-md-3">
 								<div class="form-group">
 									<label for="bzipcode">Zip Code <span>*</span></label>
@@ -337,7 +330,8 @@
 									<input type="text" id="phone" name="phone" class="form-control" ng-model="data.phone" ng-required="true" />
 								</div>
                             </div>
-                        </div>
+							
+						</div>
 						
 						<div class="row">
 							<!--div class="col-md-3">
