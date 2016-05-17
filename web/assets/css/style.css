@@ -713,6 +713,36 @@ section#games ul li .date, section#game-header .date, section#order-header .date
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3) inset;
 	text-align: center;
 }
+
+@media(max-width: 768px) {
+    section#games ul li .date {
+        display: inline-block;
+    }
+    section#games ul li .event {
+        display: inline-block;
+    }
+    
+    section#games ul li {
+        padding: 10px 10px;
+    }
+    section#games ul li .event .name {
+        font-size: 16px !important;
+        line-height: 18px !important;
+    }
+    section#games ul li .event .location {
+        font-size: 11px !important;
+        line-height: 11px !important;
+    }
+    section#games .performer-green-bt {
+        width: 100%;
+    }
+    section#games ul li .tickets-link {
+        margin-top: 5px !important;
+    }
+    
+    
+}
+
 @media(min-width: 768px) {
     section#games ul li .date, section#game-header .date, section#order-header .date {
         float: left !important;
