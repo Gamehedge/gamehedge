@@ -757,7 +757,7 @@ section#games ul li .date .time, section#game-header .date .time, section#order-
 }
 section#games ul li .event .name, section#game-header .event h1, section#order-header .event h1 {
 	margin: 0;
-	font-size: 18px;
+	font-size: 19px;
 	text-transform: uppercase;
 	line-height: 18px;
 }
@@ -867,6 +867,19 @@ section#game-guarantee p {
 @media(max-width: 768px) {
     .Filters {
         border-bottom: 1px solid #c1c1c1;
+    }
+    
+    section#game-guarantee h2 {
+        margin: 0;
+        font-size: 18px !important;
+        text-align: center;
+        margin-top: 5px;
+    }
+    section#game-guarantee hr {
+        margin: 3px 0;
+    }
+    section#game-guarantee p {
+        font-size: 10px !important;
     }
 }
 
