@@ -4,6 +4,7 @@
 		<title>GameHedge</title>
 		<base href="/">
 		<meta charset="UTF-8">
+        <meta name="msvalidate.01" content="5DDC938B85354771CDA3121D7D35F5BC" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<meta http-equiv="x-ua-compatible" content="IE=edge" />
         <meta name="description" content="GameHedge is a unique secondary market for fans to buy tickets to sporting events. Every ticket purchased on GameHedge comes with the Good Game Guarantee – fans get back 50% of the ticket price if the home team loses by the specified number of runs/points." /> 
