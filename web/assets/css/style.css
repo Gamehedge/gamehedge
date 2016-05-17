@@ -1287,17 +1287,28 @@ main#account #account-options ul li {
 
 .pledge-checkout {
     color: gray;
-    font-size: 0.9em;
+    font-size: 0.8em;
+    border: solid 2px #777777;
 }
 
 .pledge-checkout h3 {
     font-size: 1.6em;
     font-weight: bold;
     color: gray;
+    margin-top: 5px;
+}
+
+.pledge-checkout p {
+    margin: 0px;
 }
 
 .pledge-checkout ul {
-    padding-left: 10px;
+    padding-left: 5px;
+    margin-bottom: 5px;
+}
+
+.pledge-checkout img {
+    margin: 5px;
 }
 
 @media(min-width: 920px) {

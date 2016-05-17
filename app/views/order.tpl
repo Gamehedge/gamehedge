@@ -81,17 +81,21 @@
                             {/if}
                             
                         </section>
-                        <div class="row vertical-align pledge-checkout">
-                            <div class="col-xs-4 text-center"><img src="/assets/img/pledge.png" width="90px"></div>
-                            <div class="col-xs-8">
-                                <h3 class="text-center">GAMEHEDGE PLEDGE</h3>
-                                <ul>
-                                    <li>Always be in time for the event.</li>
-                                    <li>Always be authentic.</li>
-                                    <li>Always be refunded if the event is canceled & not rescheduled.</li>
-                                </ul>
+                        <div class="container-fluid">
+                            <div class="row vertical-align pledge-checkout">
+                                <div class="col-xs-4 text-center"><img src="/assets/img/pledge.png" width="90px"></div>
+                                <div class="col-xs-8">
+                                    <h3 class="text-center">GAMEHEDGE PLEDGE</h3>
+                                    <p><strong>Tickets Will:</strong></p>
+                                    <ul>
+                                        <li>Always be in time for the event.</li>
+                                        <li>Always be refunded if the event is canceled & not rescheduled.</li>
+                                        <li>Always be authentic.</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
+                        
                     </div>
 				</div>
 				<div class="col-md-8">
