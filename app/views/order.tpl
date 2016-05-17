@@ -96,7 +96,7 @@
 				</div>
 				<div class="col-md-8">
                     <div class="row">
-                         <div class="col-md-12 text-right" style="margin-top: 20px; margin-bottom: -30px;"><p>Contact us:  <i style="color:#A8C94B; font-size:1.5em; vertical-align: middle;" class="fa fa-phone-square" aria-hidden="true"></i> <span style="font-size:1.5em; vertical-align: middle;"><a href="tel:908-312-3267">(908) 312-3267</a></span></p>
+                         <div class="col-md-12 text-right" style="margin-top: 20px;"><p>Contact us:  <i style="color:#A8C94B; font-size:1.5em; vertical-align: middle;" class="fa fa-phone-square" aria-hidden="true"></i> <span style="font-size:1.5em; vertical-align: middle;"><a href="tel:908-312-3267">(908) 312-3267</a></span></p>
                             <div>
                                 <!--span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script></span>
                                 <script src="https://cdn.ywxi.net/js/inline.js?w=96"></script-->
