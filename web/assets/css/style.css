@@ -1309,6 +1309,8 @@ main#account #account-options ul li {
 
 .pledge-checkout img {
     margin: 5px;
+    width: 100%;
+    max-width: 100px;
 }
 
 @media(min-width: 920px) {
