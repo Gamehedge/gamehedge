@@ -22,14 +22,43 @@ function requestRefund(_id, orderId, customerId, customerName, customerEmail){
     });
 }
 
+var filtersOpen = true;
+var MapOpen = true;
+
 $(document).ready(function(){
     
     if($(window).width() <= 768){
-        $(".Filters").slideUp();
+        $(".Filters").slideUp(0);
+        $("#TuMap").slideUp(0); 
+        
+        filtersOpen = false;
+        MapOpen = false;
     }
     
-    $(".filter-outside").click(function(){
-        $(".Filters").slideToggle();
+    $(".filter-comp").click(function(){
+        if(filtersOpen == true){
+            filtersOpen = false;
+            $(".Filters").slideUp(400);
+        }
+        else {
+            $(".Filters").slideDown(400);
+            filtersOpen = true;
+        }
+    });
+    
+    $(".map-filter").click(function(){
+        if(MapOpen == true){
+            MapOpen = false;
+            $("#TuMap").slideUp(400);
+        }
+        else {
+            $("#TuMap").slideDown(400);
+            MapOpen = true;
+            
+            setTimeout(function(){
+                $("#MapContainer").tuMap("Refresh","Reset");
+            }, 0);
+        }
     });
     
     $('#bs-navbar-collapse-gamehedge').on('hide.bs.collapse', function () {

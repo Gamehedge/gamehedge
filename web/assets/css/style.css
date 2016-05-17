@@ -871,15 +871,29 @@ section#game-guarantee p {
 }
 
 .filter-outside-container {
-    
+    text-align: center;
 }
 
 .filter-outside {
     max-width: 200px;
+    min-width: 150px;
     background-color: #f3f3f3;
     margin: 0 auto;
     border-bottom: 2px solid #c1c1c1;
     padding: 4px;
+    display: inline-block;
+}
+
+.filter-comp {
+    margin-right: -1px; 
+    border-radius: 0px 0px 0px 10px;
+    border-right: solid 1px #c1c1c1;
+}
+
+.map-filter {
+    margin-left: -1px; 
+    border-radius: 0px 0px 10px 0px;
+    border-left: solid 1px #c1c1c1;
 }
 
 .Filters {

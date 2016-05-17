@@ -55,7 +55,8 @@
 	</div>
     
     <div class="filter-outside-container">
-        <div class="filter-outside text-center">FILTERS</div>
+        <div class="filter-outside filter-comp text-center">FILTERS</div>
+        <div class="filter-outside map-filter text-center">MAP</div>
     </div>
     
 	<div class="container">

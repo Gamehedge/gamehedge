@@ -334,6 +334,7 @@ case '';
 						}
 					}).tuMap("Refresh");
 				});
+                
 			});
 			/************************************************************
 			Sorting Quantity Array (Optional)
