@@ -24,8 +24,8 @@
                                 <div class="col-xs-6 text-right"><span ng-bind="order_data.price|currency"></span> ea.</div>
                             </div>
                             <div class="row order-detail" style="margin-top:5px; margin-bottom: 5px;">
-                                <div class="col-xs-9">How many tickets?</div>
-                                <div class="col-xs-3">
+                                <div class="col-xs-8">How many tickets?</div>
+                                <div class="col-xs-4">
                                     <select style="height:25px;" id="qty" name="qty" class="form-control" ng-model="data.qty" ng-options="split for split in order_data.splits" ng-change="updateTotals()"></select>
                                 </div>
                                 <!--div class="col-md-6 text-right" ng-bind="data.qty"></div-->
