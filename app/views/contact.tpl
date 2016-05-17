@@ -4,6 +4,11 @@
         <h1 class="text-center">{$title}</h1>
         <section id="contact-us">
             <div class="row">
+                <div class="col-md-12 text-center" style="font-size:18px; margin-bottom:10px;">
+                    <img width="40px" src="/assets/img/icon_home.png"><div style="display:inline; margin-left:10px;">GameHedde 1460 Broadway New York, NY 10036</div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-6">
                     <div class="col-md-12 text-center">
                         <img width="100" src="/assets/img/phone_icon_grey.png">
