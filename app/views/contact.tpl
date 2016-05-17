@@ -5,7 +5,7 @@
         <section id="contact-us">
             <div class="row">
                 <div class="col-md-12 text-center" style="font-size:18px; margin-bottom:10px;">
-                    <img width="40px" src="/assets/img/icon_home.png"><div style="display:inline; margin-left:10px;">GameHedde 1460 Broadway New York, NY 10036</div>
+                    <img width="40px" src="/assets/img/icon_home.png"><div style="display:inline; margin-left:10px;">GameHedge 1460 Broadway New York, NY 10036</div>
                 </div>
             </div>
             <div class="row">
