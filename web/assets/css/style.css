@@ -715,29 +715,29 @@ section#games ul li .date, section#game-header .date, section#order-header .date
 }
 @media(min-width: 768px) {
     section#games ul li .date, section#game-header .date, section#order-header .date {
-        float: left;
-        width: 85px;
-        margin-right: 20px;
-        padding: 5px 0;
+        float: left !important;
+        width: 85px !important;
+        margin-right: 20px !important;
+        padding: 5px 0 !important;
     }  
     section#games ul li .event, section#game-header .event, section#order-header .event {
-        float: left;
-        margin-top: 12px;
+        float: left !important;
+        margin-top: 12px !important;
     }
     section#games ul li .date .day, section#game-header .date .day, section#order-header .date .day {
-        font-size: 26px;
-        line-height: 26px;
+        font-size: 26px !important;
+        line-height: 26px !important;
     }
     section#games ul li .event .name, section#game-header .event h1, section#order-header .event h1 {
-        font-size: 24px;
-        line-height: 24px;
+        font-size: 24px !important;
+        line-height: 24px !important;
     }
     section#games ul li .event .location, section#game-header .event .location, section#order-header .event .location {
-        font-size: 16px;
-        line-height: 16px;
+        font-size: 16px !important;
+        line-height: 16px !important;
     }
     section#game-header {
-        padding: 10px 0;
+        padding: 10px 0 !important;
     }
 }
 
