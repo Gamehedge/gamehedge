@@ -23,8 +23,10 @@ function requestRefund(_id, orderId, customerId, customerName, customerEmail){
 }
 
 $(document).ready(function(){
-    $(".Filters").slideUp();
     
+    if($(window).width() <= 768){
+        $(".Filters").slideUp();
+    }
     
     $(".filter-outside").click(function(){
         $(".Filters").slideToggle();
