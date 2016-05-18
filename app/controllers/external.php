@@ -24,6 +24,10 @@ switch($verb) {
             $cs = $_COOKIE["cs"];
         }
         else {
+            if($ipAddress == "::1"){
+                $ipAddress = "38.105.128.254";   
+            }
+            
             $ipurl = "https://geo.pointp.in/c3f08b81-2120-4f7a-8ca4-2378530fcde1/json/". $ipAddress;
             $json = file_get_contents($ipurl);
             $location_data = json_decode($json, true);

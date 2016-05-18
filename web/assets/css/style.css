@@ -567,6 +567,14 @@ body#home main h2 {
 	color: #fff;
 	text-transform: uppercase;
 }
+
+@media (max-width: 768px) {
+    #home .game-item .tickets {
+        width: 50%;
+        margin: 0 auto;
+    }
+}
+
 #home #team-divisions {
 	margin-top: 15px;
 }
@@ -1672,7 +1680,7 @@ main#admin #order-stats .stat-item span {
 
 @media (max-width: 768px) {
     .clearfix .tickets-link .btn-green-gradient {
-        width: 50% !important;
+        width: 50% !important';
         margin: 0 auto;
     }
 }
