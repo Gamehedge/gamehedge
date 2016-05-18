@@ -18,10 +18,11 @@ $smarty->assign('css', '');
 $smarty->assign('hscripts', '');
 $header = $smarty->fetch('shared/header.tpl');
 // Handle Footer
-$smarty->assign('fscripts', '<script src="/assets/js/moment.js"></script><script src="/assets/js/performer.js?v110"></script>');
+$smarty->assign('fscripts', '<script src="/assets/js/moment.js"></script><script src="/assets/js/performer.js?v111"></script>');
 $footer = $smarty->fetch('shared/footer.tpl');
 $p_data = $teClient->showPerformer(['performer_id' => (int)$id]);
 $s_data = Utility::get_team_data($p_data['name']);
+$p_slug = $p_data['slug'];
 /*
 $query  = array('performer_id'      => $id,
                 'category_id'       => Config::te_categoryid(),
@@ -79,5 +80,6 @@ $smarty->assign('url', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 $smarty->assign('page', $page);
 $smarty->assign('pages', $pages);
 $smarty->assign('performer_id', $id);
+$smarty->assign('p_slug', $p_slug);
 $smarty->display('performer.tpl');
 ?>

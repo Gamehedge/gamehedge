@@ -9,17 +9,24 @@ function changePage(_new_page){
 }
 
 function switchOnlyGames(){
-    if(_home_only_games == true){
-        _home_only_games = false;
+    if(String(window.location.pathname).indexOf("-home") > 0){
+        //alert("home");
+        window.location = "/performer/" + String(_id) + "/" + _slug + "-tickets"
     }
     else {
-        _home_only_games = true;
+        //alert("not home");
+        window.location = "/performer/" + String(_id) + "/" + _slug + "-tickets-home"
     }
-    _page = 1;
-    loadPage();
 }
 
 function loadPage(){
+    if(String(window.location.pathname).indexOf("-home") > 0){
+        _home_only_games = true;
+    }
+    else {
+        _home_only_games = false;
+    }
+    
     $("#pag_navigation").html("");
     $("#games").slideUp(300);
     $("#home-loading-data").slideDown(300);

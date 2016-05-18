@@ -1,6 +1,7 @@
 {$header}
 <script type="application/javascript">
     var _id = {$performer_id};
+    var _slug = "{$p_slug}";
 </script>
 <section id="team-header">
 	<div class="container">
