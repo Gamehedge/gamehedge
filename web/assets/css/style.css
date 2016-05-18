@@ -562,6 +562,8 @@ body#home main h2 {
 	background-color: #a8c94b;
 	padding: 5px 0;
 	border-radius: 15px;
+    width: 60%;
+    margin: 0 auto;
 }
 #home .game-item .tickets a {
 	color: #fff;
