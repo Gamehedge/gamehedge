@@ -91,7 +91,8 @@ class SearchResource extends Resource {
 					*/
 					$p_list = array();
 					foreach($e['performances'] AS $p) {
-						array_push($p_list, '<a href="/performer/' . $p['performer']['id'] . '/' . $p['performer']['slug'] . '" title="' . $p['performer']['name'] . '">' . $p['performer']['name'] . '</a>');
+						//array_push($p_list, '<a href="/performer/' . $p['performer']['id'] . '/' . $p['performer']['slug'] . '" title="' . $p['performer']['name'] . '">' . $p['performer']['name'] . '</a>');
+                        array_push($p_list, $p['performer']['name']);
 					}
 					$events[$i]['name']      = implode(' at ', $p_list);
 					$events[$i]['occurs_at'] = strtotime($e['occurs_at']) * 1000;

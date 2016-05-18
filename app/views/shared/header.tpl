@@ -54,11 +54,11 @@
                                             <h2>American League: East</h2>
                                             <nav role="navigation">
                                                 <ul>
-                                                    <li><a href="/performer/16425/baltimore-orioles">Baltimore Orioles</a></li>
-                                                    <li><a href="/performer/15532/boston-red-sox">Boston Red Sox</a></li>
-                                                    <li><a href="/performer/15533/new-york-yankees">New York Yankees</a></li>
-                                                    <li><a href="/performer/15534/tampa-bay-rays">Tampa Bay Rays</a></li>
-                                                    <li><a href="/performer/15535/toronto-blue-jays">Toronto Blue Jays</a></li>
+                                                    <li><a href="/performer/16425/baltimore-orioles-tickets">Baltimore Orioles</a></li>
+                                                    <li><a href="/performer/15532/boston-red-sox-tickets">Boston Red Sox</a></li>
+                                                    <li><a href="/performer/15533/new-york-yankees-tickets">New York Yankees</a></li>
+                                                    <li><a href="/performer/15534/tampa-bay-rays-tickets">Tampa Bay Rays</a></li>
+                                                    <li><a href="/performer/15535/toronto-blue-jays-tickets">Toronto Blue Jays</a></li>
                                                 </ul>
                                             </nav>
                                         </div>
@@ -66,11 +66,11 @@
                                             <h2>American League: Central</h2>
                                             <nav role="navigation">
                                                 <ul>
-                                                    <li><a href="/performer/15536/chicago-white-sox">Chicago White Sox</a></li>
-                                                    <li><a href="/performer/15537/cleveland-indians">Cleveland Indians</a></li>
-                                                    <li><a href="/performer/15538/detroit-tigers">Detroit Tigers</a></li>
-                                                    <li><a href="/performer/15539/kansas-city-royals">Kansas City Royals</a></li>
-                                                    <li><a href="/performer/15540/minnesota-twins">Minnesota Twins</a></li>
+                                                    <li><a href="/performer/15536/chicago-white-sox-tickets">Chicago White Sox</a></li>
+                                                    <li><a href="/performer/15537/cleveland-indians-tickets">Cleveland Indians</a></li>
+                                                    <li><a href="/performer/15538/detroit-tigers-tickets">Detroit Tigers</a></li>
+                                                    <li><a href="/performer/15539/kansas-city-royals-tickets">Kansas City Royals</a></li>
+                                                    <li><a href="/performer/15540/minnesota-twins-tickets">Minnesota Twins</a></li>
                                                 </ul>
                                             </nav>
                                         </div>
@@ -78,11 +78,11 @@
                                             <h2>American League: West</h2>
                                             <nav role="navigation">
                                                 <ul>
-                                                    <li><a href="/performer/15552/houston-astros">Houston Astros</a></li>
-                                                    <li><a href="/performer/15541/los-angeles-angels">Los Angeles Angels</a></li>
-                                                    <li><a href="/performer/15542/oakland-athletics">Oakland Athletics</a></li>
-                                                    <li><a href="/performer/15543/seattle-mariners">Seattle Mariners</a></li>
-                                                    <li><a href="/performer/15544/texas-rangers">Texas Rangers</a></li>
+                                                    <li><a href="/performer/15552/houston-astros-tickets">Houston Astros</a></li>
+                                                    <li><a href="/performer/15541/los-angeles-angels-tickets">Los Angeles Angels</a></li>
+                                                    <li><a href="/performer/15542/oakland-athletics-tickets">Oakland Athletics</a></li>
+                                                    <li><a href="/performer/15543/seattle-mariners-tickets">Seattle Mariners</a></li>
+                                                    <li><a href="/performer/15544/texas-rangers-tickets">Texas Rangers</a></li>
                                                 </ul>
                                             </nav>
                                         </div>
@@ -92,11 +92,11 @@
                                             <h2>National League: East</h2>
                                             <nav role="navigation">
                                                 <ul>
-                                                    <li><a href="/performer/15545/atlanta-braves">Atlanta Braves</a></li>
-                                                    <li><a href="/performer/15546/miami-marlins">Miami Marlins</a></li>
-                                                    <li><a href="/performer/15547/new-york-mets">New York Mets</a></li>
-                                                    <li><a href="/performer/15548/philadelphia-phillies">Philadelphia Phillies</a></li>
-                                                    <li><a href="/performer/15549/washington-nationals">Washington Nationals</a></li>
+                                                    <li><a href="/performer/15545/atlanta-braves-tickets">Atlanta Braves</a></li>
+                                                    <li><a href="/performer/15546/miami-marlins-tickets">Miami Marlins</a></li>
+                                                    <li><a href="/performer/15547/new-york-mets-tickets">New York Mets</a></li>
+                                                    <li><a href="/performer/15548/philadelphia-phillies-tickets">Philadelphia Phillies</a></li>
+                                                    <li><a href="/performer/15549/washington-nationals-tickets">Washington Nationals</a></li>
                                                 </ul>
                                             </nav>
                                         </div>
@@ -104,11 +104,11 @@
                                             <h2>National League: Central</h2>
                                             <nav role="navigation">
                                                 <ul>
-                                                    <li><a href="/performer/15550/chicago-cubs">Chicago Cubs</a></li>
-                                                    <li><a href="/performer/15551/cincinnati-reds">Cincinnati Reds</a></li>
-                                                    <li><a href="/performer/15553/milwaukee-brewers">Milwaukee Brewers</a></li>
-                                                    <li><a href="/performer/15554/pittsburgh-pirates">Pittsburgh Pirates</a></li>
-                                                    <li><a href="/performer/15555/st-louis-cardinals">St. Louis Cardinals</a></li>
+                                                    <li><a href="/performer/15550/chicago-cubs-tickets">Chicago Cubs</a></li>
+                                                    <li><a href="/performer/15551/cincinnati-reds-tickets">Cincinnati Reds</a></li>
+                                                    <li><a href="/performer/15553/milwaukee-brewers-tickets">Milwaukee Brewers</a></li>
+                                                    <li><a href="/performer/15554/pittsburgh-pirates-tickets">Pittsburgh Pirates</a></li>
+                                                    <li><a href="/performer/15555/st-louis-cardinals-tickets">St. Louis Cardinals</a></li>
                                                 </ul>
                                             </nav>
                                         </div>
@@ -116,11 +116,11 @@
                                             <h2>National League: West</h2>
                                             <nav role="navigation">
                                                 <ul>
-                                                    <li><a href="/performer/15556/arizona-diamondbacks">Arizona Diamondbacks</a></li>
-                                                    <li><a href="/performer/15557/colorado-rockies">Colorado Rockies</a></li>
-                                                    <li><a href="/performer/15558/los-angeles-dodgers">Los Angeles Dodgers</a></li>
-                                                    <li><a href="/performer/15559/san-diego-padres">San Diego Padres</a></li>
-                                                    <li><a href="/performer/15560/san-francisco-giants">San Francisco Giants</a></li>
+                                                    <li><a href="/performer/15556/arizona-diamondbacks-tickets">Arizona Diamondbacks</a></li>
+                                                    <li><a href="/performer/15557/colorado-rockies-tickets">Colorado Rockies</a></li>
+                                                    <li><a href="/performer/15558/los-angeles-dodgers-tickets">Los Angeles Dodgers</a></li>
+                                                    <li><a href="/performer/15559/san-diego-padres-tickets">San Diego Padres</a></li>
+                                                    <li><a href="/performer/15560/san-francisco-giants-tickets">San Francisco Giants</a></li>
                                                 </ul>
                                             </nav>
                                         </div>
