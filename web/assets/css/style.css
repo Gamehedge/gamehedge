@@ -734,7 +734,8 @@ section#games ul li .date, section#game-header .date, section#order-header .date
         line-height: 11px !important;
     }
     section#games .performer-green-bt {
-        width: 100%;
+        width: 50%;
+        margin: 0 auto;
     }
     section#games ul li .tickets-link {
         margin-top: 5px !important;
