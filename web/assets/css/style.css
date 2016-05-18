@@ -1670,6 +1670,12 @@ main#admin #order-stats .stat-item span {
     text-decoration: none;
 }
 
+@media (max-width: 768px) {
+    .clearfix .tickets-link .btn-green-gradient {
+        width: 50% !important;
+        margin: 0 auto;
+    }
+}
 .btn-green-gradient {
 	background: rgba(210,255,82,1);
 	background: -moz-linear-gradient(top, rgba(210,255,82,1) 0%, rgba(113,140,38,1) 100%);

@@ -95,16 +95,16 @@
 			<section id="games">
 				<ul>
 					<li class="clearfix" ng-repeat="e in events">
-						<div class="date">
+						<div class="date col-md-2 col-xs-3">
 							<div class="month">-!e.occurs_at | date:'MMMM'!-</div>
 							<div class="day">-!e.occurs_at | date:'d'!-</div>
 							<div class="time">-!e.occurs_at | date:'EEE. hh:mm a':'+0000'!-</div>
 						</div>
-						<div class="event">
+						<div class="event col-md-8 col-xs-9">
 							<div class="name" ng-bind-html="e.name"></div>
 							<div class="location"><a href="/venue/-!e.venue.id!-/-!e.venue.slug!-">-!e.venue.name!-</a> - -!e.venue.location!-</div>
 						</div>
-						<div class="tickets-link">
+						<div class="tickets-link col-md-2 col-xs-12">
 							<!--<a href="/ticket/-!e.id!-" class="btn-green-gradient">from <span>-!e.low_price|currency!- <i class="fa fa-angle-right"></i></a>-->
 							<a href="/ticket/-!e.id!-" class="btn-green-gradient">View Tickets <i class="fa fa-angle-right"></i></a>
 							<div class="text-center alert-text" ng-show="e.available_count < 20">NOT MANY LEFT</div>
