@@ -6,8 +6,8 @@
 				<div class="col-md-4">
                     
                     <div class="row">
-                        <div class="col-md-12">
-                            <h1>Secure Checkout</h1>
+                        <div class="col-md-12" style="height:30px;">
+                            <h1 class="hidden">Secure Checkout</h1>
                         </div>
                     </div>
                     
