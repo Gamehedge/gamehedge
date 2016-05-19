@@ -118,12 +118,12 @@ case 'customer-report':
 				$lparts      = explode('|', $row['event_location']);
 				$venue       = $lparts[0];
 				$seats       = explode(', ', $row['ticket_seats']);
-				$qty         = count($seats);
+				$qty         = $row['ticket_seats'];
 				$low_seat    = min($seats);
 				$high_seat   = max($seats);
 				$price       = $order_data['items'][0]['ticket_group']['retail_price'];
-				$tmp_array   = array($row['te_order_id'], date('Y-m-d h:iA', strtotime($row['create_date'])), $row['event_name'], $row['event_home_team'], $row['event_away_team'], date('Y-m-d h:iA', strtotime($row['event_date'])), $venue, $row['ticket_section'], $row['ticket_row'], $low_seat, $high_seat);
-				$header_row  = array('Order ID', 'Order Date', 'Event Name', 'Home Team', 'Away Team', 'Event Date', 'Venue', 'Section', 'Row', 'Seat From', 'Seat To');
+				$tmp_array   = array($row['te_order_id'], date('Y-m-d h:iA', strtotime($row['create_date'])), $row['event_name'], $row['event_home_team'], $row['event_away_team'], date('Y-m-d h:iA', strtotime($row['event_date'])), $venue, $row['ticket_section'], $row['ticket_row']);
+				$header_row  = array('Order ID', 'Order Date', 'Event Name', 'Home Team', 'Away Team', 'Event Date', 'Venue', 'Section', 'Row');
 				switch($verb) {
 				case 'sales-summary':
 					$service_fee  = $order_data['service_fee'];
