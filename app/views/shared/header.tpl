@@ -13,8 +13,8 @@
 		
         <link rel="stylesheet" href="/assets/css/bundle.min.css">
 		<link rel="stylesheet" href="/assets/css/style.css?v143">
-		<link rel="stylesheet" href="/assets/css/jquery-ui.css" media="none" onload="if(media!='all')media='all'">
-        <noscript><link rel="stylesheet" href="/assets/css/jquery-ui.css"></noscript>
+		<link rel="stylesheet" href="/assets/css/jquery-ui.min.css" media="none" onload="if(media!='all')media='all'">
+        <noscript><link rel="stylesheet" href="/assets/css/jquery-ui.min.css"></noscript>
 		{$css}
 		{$hscripts}
 	</head>
