@@ -199,6 +199,7 @@ case 'process':
                       'service_type'     => "LEAST_EXPENSIVE",
                       'type'             => $shipping_data['shipping_option']['provider'],
                       'address_id'       => $shipping_id,
+                      'phone_number_id'  => $request['phone_id'],
                       'ship_to_name'     => $request['sfirstname'] . ' ' . $request['slastname']);
 	} else {
 		$shipment = array('items'            => array($ship_item),
