@@ -12,7 +12,7 @@ $smarty->assign('css', '');
 $smarty->assign('hscripts', '');
 $header = $smarty->fetch('shared/header.tpl');
 // Handle Footer
-$smarty->assign('fscripts', '<script src="/assets/js/moment.js"></script><script src="/assets/js/home.js"></script>');
+$smarty->assign('fscripts', '<script src="/assets/js/moment.min.js"></script><script src="/assets/js/home.js"></script>');
 $footer = $smarty->fetch('shared/footer.tpl');
 switch($verb) {
 case '';
