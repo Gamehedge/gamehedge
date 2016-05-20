@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" href="/assets/css/bundle.min.css" />
 		<link rel="stylesheet" href="/assets/css/style.css?v143" />
-		<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+		<link rel="stylesheet" href="/assets/css/jquery-ui.css">
 		{$css}
 		{$hscripts}
 	</head>
