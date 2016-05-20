@@ -51,7 +51,26 @@
 	<h2>Sales Detail Report - SCA</h2>
 	<div class="form-wrapper">
 		<form action="/admin/reports/sales-detail" method="POST">
-			<div class="form-group">
+            
+            <div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="event-date-start-r2">Event Date Start Range</label>
+						<input type="text" id="event-date-start-r2" name="event-date-start" class="form-control" placeholder="YYYY-MM-DD" />
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="event-date-end-r2">Event Date End Range</label>
+						<input type="text" id="event-date-end-r2" name="event-date-end" class="form-control" placeholder="YYYY-MM-DD" />
+					</div>
+				</div>
+			</div>
+            
+            
+            
+            
+			<div class="form-group hidden">
 				<label for="event-date-r2">Event Date</label>
 				<input type="text" id="event-date-r2" name="event-date" class="form-control" placeholder="YYYY-MM-DD" />
 			</div>

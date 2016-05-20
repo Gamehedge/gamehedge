@@ -89,6 +89,17 @@ case 'customer-report':
 		}
 		break;
 	case 'sales-detail':
+        if( !empty($request['event-date-start']) && !empty($request['event-date-end']) ) {
+			$filter[] = "AND DATE(event_date) >= '" . $request['event-date-start'] . "' AND DATE(event_date) <= '" . $request['event-date-end'] . "'";
+		}
+        else if( !empty($request['event-date-start']) && empty($request['event-date-end']) ){
+            $filter[] = "AND DATE(event_date) >= '" . $request['event-date-start'] . "'";
+        }
+        else if( empty($request['event-date-start']) && !empty($request['event-date-end']) ){
+            $filter[] = "AND DATE(event_date) <= '" . $request['event-date-end'] . "'";
+        }
+        
+        break;
 	case 'sales-profit':
 		if(!empty($request['event-date'])) {
 			$filter[] = "AND DATE(event_date) = '" . $request['event-date'] . "'";
