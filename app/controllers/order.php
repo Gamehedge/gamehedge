@@ -196,8 +196,8 @@ case 'process':
                      'seat_order'             => 'consecutive');
 	if(isset($shipping_data)) {
 		$shipment = array('items'            => array($ship_item),
-                      'service_type'     => $shipping_data['shipping_option']['service_type'],
-                      'type'             => $shipping_data['shipping_option']['type'],
+                      'service_type'     => "LEAST_EXPENSIVE",
+                      'type'             => $shipping_data['shipping_option']['provider'],
                       'address_id'       => $shipping_id,
                       'ship_to_name'     => $request['sfirstname'] . ' ' . $request['slastname']);
 	} else {
