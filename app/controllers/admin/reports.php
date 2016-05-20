@@ -122,7 +122,9 @@ case 'customer-report':
 				$low_seat    = min($seats);
 				$high_seat   = max($seats);
 				$price       = $order_data['items'][0]['ticket_group']['retail_price'];
-				$tmp_array   = array($row['te_order_id'], date('Y-m-d h:iA', strtotime($row['create_date'])), $row['event_name'], $row['event_home_team'], $row['event_away_team'], date('Y-m-d h:iA', strtotime($row['event_date'])), $venue, $row['ticket_section'], $row['ticket_row']);
+                $create_date = new DateTime($row['create_date'], new DateTimeZone('UTC'));
+                $create_date->setTimezone(new DateTimeZone("America/New_York"));
+				$tmp_array   = array($row['te_order_id'], $create_date->format('Y-m-d h:iA'), $row['event_name'], $row['event_home_team'], $row['event_away_team'], date('Y-m-d h:iA', strtotime($row['event_date'])), $venue, $row['ticket_section'], $row['ticket_row']);
 				$header_row  = array('Order ID', 'Order Date', 'Event Name', 'Home Team', 'Away Team', 'Event Date', 'Venue', 'Section', 'Row');
 				switch($verb) {
 				case 'sales-summary':
