@@ -1,4 +1,5 @@
 {$header}
+{$menu}
 <div class="pull-right" style="margin-top: 5px; padding-right: 10px">
 	<p>Last login: {$last_date} from {$last_ip}</p>
 </div>

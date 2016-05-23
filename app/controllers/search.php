@@ -23,10 +23,12 @@ case '';
 	$smarty->assign('css', '');
 	$smarty->assign('hscripts', $hscripts);
 	$header = $smarty->fetch('shared/header.tpl');
+    $menu = $smarty->fetch('shared/menu.tpl');
 	// Handle Footer
 	$smarty->assign('fscripts', $fscripts);
 	$footer = $smarty->fetch('shared/footer.tpl');
 	$smarty->assign('header', $header);
+    $smarty->assign('menu', $menu);
 	$smarty->assign('footer', $footer);
 	$smarty->assign('title', 'Search Tickets');
 	$smarty->display('search.tpl');

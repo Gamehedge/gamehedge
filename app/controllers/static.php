@@ -5,10 +5,12 @@ $smarty->assign('head_tags', '');
 $smarty->assign('css', '');
 $smarty->assign('hscripts', '');
 $header = $smarty->fetch('shared/header.tpl');
+$menu = $smarty->fetch('shared/menu.tpl');
 // Handle Footer
 $smarty->assign('fscripts', '');
 $footer = $smarty->fetch('shared/footer.tpl');
 $smarty->assign('header', $header);
+$smarty->assign('menu', $menu);
 $smarty->assign('footer', $footer);
 switch($verb) {
 case 'how-it-works':

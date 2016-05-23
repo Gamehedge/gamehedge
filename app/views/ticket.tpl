@@ -1,4 +1,5 @@
 {$header}
+{$menu}
 <section id="game-header" style="margin-bottom: 0 !important;">
 	<div class="container clearfix">
         

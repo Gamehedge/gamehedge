@@ -306,6 +306,7 @@ case 'confirm':
 	$smarty->assign('css', '');
 	$smarty->assign('hscripts', '');
 	$header = $smarty->fetch('shared/header.tpl');
+    $menu = $smarty->fetch('shared/menu.tpl');
     $analytics_code = "<script>
 //loads up ecommerce plugin google analytics 
 ga('require', 'ecommerce');
@@ -340,6 +341,7 @@ ga('ecommerce:send');
 	$smarty->assign('fscripts', $analytics_code);
 	$footer = $smarty->fetch('shared/footer.tpl');
 	$smarty->assign('header', $header);
+    $smarty->assign('menu', $menu);
 	$smarty->assign('footer', $footer);
 	$smarty->display('order_confirm.tpl');
 	break;
@@ -449,10 +451,12 @@ case '';
 	$smarty->assign('css', '');
 	$smarty->assign('hscripts', $hscripts);
 	$header   = $smarty->fetch('shared/header.tpl');
+    $menu = $smarty->fetch('shared/menu.tpl');
 	$fscripts = '<link rel="stylesheet" href="/assets/css/sweetalert.css"><link rel="stylesheet" href="/assets/ladda/ladda-themeless.min.css"><script src="/assets/ladda/spin.min.js"></script><script src="/assets/ladda/ladda.min.js"></script><script src="/assets/angular-ladda/angular-ladda.min.js"></script><script src="/assets/js/app/app.js?v112"></script><script src="/assets/js/sweetalert.min.js"></script>';
 	$smarty->assign('fscripts', $fscripts);
 	$footer = $smarty->fetch('shared/footer.tpl');
 	$smarty->assign('header', $header);
+    $smarty->assign('menu', $menu);
 	$smarty->assign('footer', $footer);
 	$smarty->assign('event_name', $event['name']);
 	$smarty->assign('event_date', $date->format('D, M j, Y h:i A'));

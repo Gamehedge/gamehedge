@@ -17,6 +17,7 @@ $smarty->assign('head_tags', '');
 $smarty->assign('css', '');
 $smarty->assign('hscripts', '');
 $header = $smarty->fetch('shared/header.tpl');
+$menu = $smarty->fetch('shared/menu.tpl');
 // Handle Footer
 $smarty->assign('fscripts', '');
 $footer = $smarty->fetch('shared/footer.tpl');
@@ -52,6 +53,7 @@ foreach($e_data['events'] AS $i => $d) {
 $pages  = ceil($e_data['total_entries'] / $per_page);
 $events = $e_data['events'];
 $smarty->assign('header', $header);
+$smarty->assign('menu', $menu);
 $smarty->assign('footer', $footer);
 $smarty->assign('name', $v_data['name']);
 $smarty->assign('location', $v_data['address']['street_address'] . ', ' . $v_data['address']['location'] . ' ' . $v_data['address']['postal_code'] . ' ' . $v_data['address']['country_code']);

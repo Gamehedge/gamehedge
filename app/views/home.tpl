@@ -1,5 +1,6 @@
+{$header}
 <div class="home-header">
-    {$header}
+    {$menu}
 </div>
 
 <section id="hero">

@@ -62,10 +62,12 @@ case 'login':
 	$smarty->assign('css', '');
 	$smarty->assign('hscripts', '');
 	$header = $smarty->fetch('shared/header.tpl');
+    $menu = $smarty->fetch('shared/menu.tpl');
 	// Handle Footer
 	$smarty->assign('fscripts', '');
 	$footer = $smarty->fetch('shared/footer.tpl');
 	$smarty->assign('header', $header);
+    $smarty->assign('menu', $menu);
 	$smarty->assign('footer', $footer);
 	// Handle Main
 	$smarty->assign('title', 'Login');
@@ -163,6 +165,7 @@ case 'profile':
 	$smarty->assign('css', '');
 	$smarty->assign('hscripts', '');
 	$header = $smarty->fetch('shared/header.tpl');
+    $menu = $smarty->fetch('shared/menu.tpl');
 	// Handle Footer
 	$smarty->assign('fscripts', '');
 	$footer = $smarty->fetch('shared/footer.tpl');
@@ -175,6 +178,7 @@ case 'profile':
 		$smarty->assign('ordered', 0);
 	}
 	$smarty->assign('header', $header);
+    $smarty->assign('menu', $menu);
 	$smarty->assign('footer', $footer);
 	$smarty->assign('title', 'Your Profile');
 	$smarty->assign('name', $client->get('name'));
@@ -193,6 +197,7 @@ case '';
 	$smarty->assign('css', '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" />');
 	$smarty->assign('hscripts', '');
 	$header = $smarty->fetch('shared/header.tpl');
+    $menu = $smarty->fetch('shared/menu.tpl');
 	// Handle Footer
 	$smarty->assign('fscripts', '<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script><link rel="stylesheet" href="/assets/css/sweetalert.css"><script src="/assets/js/sweetalert.min.js"></script>');
 	$footer   = $smarty->fetch('shared/footer.tpl');
@@ -232,6 +237,7 @@ case '';
 	$smarty->assign('customer_name', $client->get('name'));
 	$smarty->assign('customer_email', $client->get('email'));
 	$smarty->assign('header', $header);
+    $smarty->assign('menu', $menu);
 	$smarty->assign('footer', $footer);
 	$smarty->assign('title', 'My Account');
 	$smarty->assign('name', $client->get('name'));

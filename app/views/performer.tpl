@@ -1,4 +1,5 @@
 {$header}
+{$menu}
 <script type="application/javascript">
     var _id = {$performer_id};
     var _slug = "{$p_slug}";
