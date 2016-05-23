@@ -118,9 +118,33 @@ case 'forgot_process':
 	$password  = $cdata['password'];
 	$message   = "Your requested log in details are below.\n\nUsername: $email\nPassword: $password\n\nIf you did not request your account details, please contact support immediately.\n\nThank you,\nGameHedge Support";
 	$subject   = "Your GameHedge Login";
-	$headers   = 'From: GameHedge <support@gamehedge.com>' . PHP_EOL . 'Reply-To: GameHedge <support@gamehedge.com>' . PHP_EOL . 'X-Mailer: PHP/' . phpversion();
-	mail($email, $subject, $message, $headers);
-	die(json_encode(array('status' => 1, 'message' => '/member/login')));
+    
+    require_once 'vendor/autoload.php';
+        
+    $mail = new PHPMailer;
+    $mail->isSMTP();
+    $mail->SMTPDebug = 0;
+    $mail->Debugoutput = 'html';
+    $mail->Host = 'smtp.gmail.com';
+    $mail->Port = 587;
+    $mail->SMTPSecure = 'tls';
+    $mail->SMTPAuth = true;
+    #$mail->Username = "contact@gamehedge.com";
+    #$mail->Password = "Gamehedge10036";
+    $mail->Username = "edgarforerogranados@gmail.com";
+    $mail->Password = "Granados1";
+    $mail->setFrom('contact@gamehedge.com', 'Gamehedge contact system');
+    $mail->addAddress($email);
+
+    $mail->Subject = $subject;
+    $mail->msgHTML($message);
+    
+    if (!$mail->send()) {
+        echo "Mailer Error: " . $mail->ErrorInfo;
+    } else {
+        die(json_encode(array('status' => 1, 'message' => '/member/login')));
+    }
+	
 	break;
 case 'logout':
 	$session->delete();
