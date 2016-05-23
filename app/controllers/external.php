@@ -97,6 +97,16 @@ switch($verb) {
         $e_data = $teClient->listEvents($query);
         $data = $e_data;
         break;
+    case 'promo_codes':
+        $query  = array(
+            'code'              => 'edgar',
+            'page'              => 1,
+            'per_page'          => 10
+        );
+        $e_data = $teClient->listPromotionCodes($query);
+        $data = $e_data;
+        break;
+    
     default:
         $data = (object) array('error' => 'empty parameters');
 }
