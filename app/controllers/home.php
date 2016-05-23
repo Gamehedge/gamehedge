@@ -11,6 +11,7 @@ $smarty->assign('head_tags', '');
 $smarty->assign('css', '');
 $smarty->assign('hscripts', '');
 $header = $smarty->fetch('shared/header.tpl');
+$menu = $smarty->fetch('shared/menu.tpl');
 // Handle Footer
 $smarty->assign('fscripts', '<script src="/assets/js/moment.min.js"></script><script src="/assets/js/home.js"></script>');
 $footer = $smarty->fetch('shared/footer.tpl');
@@ -32,6 +33,7 @@ case '';
     */
     $events = array();
 	$smarty->assign('header', $header);
+    $smarty->assign('menu', $menu);
 	$smarty->assign('footer', $footer);
 	$smarty->assign('title', 'Welcome to GameHedge');
 	$smarty->assign('events', $events);

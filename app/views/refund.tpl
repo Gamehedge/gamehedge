@@ -1,4 +1,5 @@
 {$header}
+{$menu}
 <main id="checkout" ng-controller="CheckoutCtrl">
 	<div class="container">
 		<h1>Secure Checkout</h1>

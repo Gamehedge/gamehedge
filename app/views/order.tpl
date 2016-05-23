@@ -1,4 +1,5 @@
 {$header}
+{$menu}
 <main id="checkout" ng-controller="CheckoutCtrl">
 	<div class="container">
 		<form name="frmCheckout" method="POST" ng-submit="process()">

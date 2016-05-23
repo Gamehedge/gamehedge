@@ -1,4 +1,5 @@
 {$header}
+{$menu}
 <main ng-controller="SearchCtrl">
 	<div class="container">
 		<h1>{$title}</h1>

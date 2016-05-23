@@ -1,4 +1,5 @@
 {$header}
+{$menu}
 <section id="venue-header">
 	<div class="container">
 		<h1>{$name}</h1>

@@ -17,6 +17,7 @@ $smarty->assign('head_tags', '');
 $smarty->assign('css', '');
 $smarty->assign('hscripts', '');
 $header = $smarty->fetch('shared/header.tpl');
+$menu = $smarty->fetch('shared/menu.tpl');
 // Handle Footer
 $smarty->assign('fscripts', '<script src="/assets/js/moment.js"></script><script src="/assets/js/performer.js?v111"></script>');
 $footer = $smarty->fetch('shared/footer.tpl');
@@ -70,6 +71,7 @@ $events = array();
 $pages = 0;
 
 $smarty->assign('header', $header);
+$smarty->assign('menu', $menu);
 $smarty->assign('footer', $footer);
 $smarty->assign('title', $p_data['name']);
 $smarty->assign('division', str_replace('American League', 'AL', str_replace('National League', 'NL', $s_data['division'])));
