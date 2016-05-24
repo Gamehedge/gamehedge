@@ -409,7 +409,17 @@ case '';
 	}
 	$service_fee = $teClient->listServiceFeesSettings();
 	if(isset($client) && !empty($client->get('te_uid'))) {
-		$client_data = $teClient->showClient(['client_id' => (int)$client->get('te_uid')]);
+        if($client->get('te_uid') != -1){
+            $client_data = $teClient->showClient(['client_id' => (int)$client->get('te_uid')]);
+        }
+        else {
+            $session->delete();
+            session_destroy();
+            header('Location: /');
+            exit;
+            break;
+        }
+		
 		$addresses   = array();
 		foreach($client_data['addresses'] AS $address) {
 			$addresses[$address['id']] = $address;
@@ -479,7 +489,7 @@ case '';
 	$smarty->assign('ticket_section', $tgroup['section']);
     $smarty->assign('ticket_notes', $tgroup['public_notes']);
     $smarty->assign('ticket_in_hand', $tgroup['in_hand']);
-     $smarty->assign('ticket_in_hand_on', $tgroup['in_hand_on']);
+    $smarty->assign('ticket_in_hand_on', $tgroup['in_hand_on']);
 	$smarty->assign('ticket_row', $tgroup['row']);
 	$smarty->display('order.tpl');
 	break;
