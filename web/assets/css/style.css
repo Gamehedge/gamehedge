@@ -2017,6 +2017,12 @@ section#tickets ul.ticket-list > li .guarantee, .TicketRow .guarantee {
     right: 80px !important;
 }
 
+.container-password-change {
+    margin-top: 20px;
+    border: 1px solid #a8c94b;
+    border-radius: 3px;
+}
+
 @media(max-width: 768px) {
     #PriceRange, #filterPriceSection {
         display: none;

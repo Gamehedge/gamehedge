@@ -118,7 +118,7 @@ case 'forgot_process':
 	$cdata     = $custClass->get_by_email($request['email']);
 	$email     = $cdata['email'];
 	$password  = $cdata['password'];
-	$message   = "Your requested log in details are below.\n\nUsername: $email\nPassword: $password\n\nIf you did not request your account details, please contact support immediately.\n\nThank you,\nGameHedge Support";
+	$message   = "<p>Your requested log in details are below.</p><br /><strong>Username:</strong> $email<br /><strong>Password:</strong> $password<br /><p>If you did not request your account details, please contact support immediately.</p><p>Thank you,</p><p>GameHedge Support</p>";
 	$subject   = "Your GameHedge Login";
     
     require_once 'vendor/autoload.php';
@@ -186,6 +186,20 @@ case 'profile':
 	$smarty->assign('last_ip', $_SESSION['last_ip']);
 	$smarty->display('member-profile.tpl');
 	break;
+case 'change_password':
+    header('HTTP/1.1 200 OK');
+	header('Content-Type: application/json');
+	if(empty($request['password']) )
+		die(json_encode(array('status' => 0, 'message' => 'Please enter a password.')));
+    
+    if(isset($client)) {
+        $client->set("password", $request['password']);
+        die(json_encode(array('status' => 1, 'message' => 'Password successfully saved.')));
+    }
+    else {
+        die(json_encode(array('status' => 0, 'message' => 'Must be logged in.')));
+    }
+    break;
 case '';
 	if(!isset($client)) {
 		header('Location: /login');

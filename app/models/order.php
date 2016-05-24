@@ -135,7 +135,9 @@ class OrderModel extends Model {
 	public function get($id) {
 		$data = parent::get($id);
 		if($data) {
-			$data['refund_txt'] = $this->refund_map[$data['refund']];
+            if($data['refund']){
+                $data['refund_txt'] = $this->refund_map[$data['refund']];
+            }
 			$data['total']      = round($data['total'] / 100, 2);
 			$data['cost']       = round($data['cost'] / 100, 2);
 			return $data;

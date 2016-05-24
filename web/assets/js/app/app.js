@@ -434,3 +434,48 @@ app.controller('CheckoutCtrl', function($scope, $http){
 	};
 	$scope.updateTotals();
 });
+
+app.controller('ConfirmCtrl', function($scope, $http){
+    
+    $scope.isloading = false;
+    $scope.password = "";
+    
+    $scope.sendPassword = function(){
+        
+        if($scope.password != ""){
+            $scope.isloading = true;
+            $scope.data = {password: $scope.password};
+            var promise = $http.post('/member/change_password', $scope.data).success(function(data, status, headers, config) {
+                $scope.isloading = false;
+                if(data.status == 1){
+                    swal({
+                        title: "Ready!",
+                        text: data.message,
+                        type: "success",
+                        showCancelButton: false,
+                        confirmButtonColor: "#a8c94b",
+                        confirmButtonText: "OK",
+                        closeOnConfirm: false,
+                        closeOnCancel: false }, 
+                        function(isConfirm){   
+                            if (isConfirm) {     
+                                window.location.href = '/';
+                            } 
+                    });
+                }
+                else {
+                    swal({title: "Error!", text:  data.message, type: "error", confirmButtonColor: "#a8c94b"})
+                }
+            }).error(function(data, status, headers, config) {
+                console.log(data);
+                $scope.isloading = false;
+                swal({title: "Error!", text:  "Please try again.", type: "error", confirmButtonColor: "#a8c94b"})
+            });
+        }
+        else {
+            swal({title: "Error!", text:  "Please fill the password field.", type: "error", confirmButtonColor: "#a8c94b"});
+        }
+        
+        
+    }
+});

@@ -131,11 +131,11 @@
 									</div>
 								</div>
                             </div>
-							<div class="row">
+							<div class="row hidden">
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="password">Create Password <span>*</span></label>
-										<input type="password" id="password" name="password" class="form-control" ng-model="data.password" ng-required="true" />
+										<input type="password" id="password" name="password" class="form-control" ng-model="data.password" ng-required="false" />
 									</div>
 								</div>
 								<div class="col-md-6 hidden">

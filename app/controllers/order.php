@@ -31,9 +31,13 @@ case 'process':
 			die(json_encode(array('status'  => 2,
                             'message' => 'The email address already exists.')));
 		}
+        
+        $bytes = openssl_random_pseudo_bytes(5);
+        $password   = bin2hex($bytes);
+        
 		$user_id = $client->add(array('name'      => $request['bfirstname'] . ' ' . $request['blastname'],
                                   'email'     => $request['email'],
-                                  'password'  => $request['password'],
+                                  'password'  => $password,
                                   'optin'     => $request['optin'],
                                   'last_ip'   => Utility::get_ip_address(),
                                   'last_date' => date('Y-m-d H:i:s')));
@@ -302,7 +306,9 @@ case 'confirm':
     $smarty->assign('order_balance', number_format($order_data['balance'], 2));
 	$smarty->assign('order_id', $order_data['oid']);
 	$smarty->assign('body_tag', '');
-	$smarty->assign('head_tags', '');
+	//$smarty->assign('head_tags', 'ng-app="gamehedge"');
+    $smarty->assign('head_tags', 'ng-app="gamehedge"');
+    $fscripts = '<link rel="stylesheet" href="/assets/css/sweetalert.css"><link rel="stylesheet" href="/assets/ladda/ladda-themeless.min.css"><script src="/assets/ladda/spin.min.js"></script><script src="/assets/ladda/ladda.min.js"></script><script src="/assets/angular-ladda/angular-ladda.min.js"></script><script src="/assets/js/app/app.js?v113"></script><script src="/assets/js/sweetalert.min.js"></script>';
 	$smarty->assign('css', '');
 	$smarty->assign('hscripts', '');
 	$header = $smarty->fetch('shared/header.tpl');
@@ -338,7 +344,7 @@ ga('ecommerce:send');
 
 </script>";
     
-	$smarty->assign('fscripts', $analytics_code);
+	$smarty->assign('fscripts', $analytics_code . " " . $fscripts);
 	$footer = $smarty->fetch('shared/footer.tpl');
 	$smarty->assign('header', $header);
     $smarty->assign('menu', $menu);
@@ -452,7 +458,7 @@ case '';
 	$smarty->assign('hscripts', $hscripts);
 	$header   = $smarty->fetch('shared/header.tpl');
     $menu = $smarty->fetch('shared/menu.tpl');
-	$fscripts = '<link rel="stylesheet" href="/assets/css/sweetalert.css"><link rel="stylesheet" href="/assets/ladda/ladda-themeless.min.css"><script src="/assets/ladda/spin.min.js"></script><script src="/assets/ladda/ladda.min.js"></script><script src="/assets/angular-ladda/angular-ladda.min.js"></script><script src="/assets/js/app/app.js?v112"></script><script src="/assets/js/sweetalert.min.js"></script>';
+	$fscripts = '<link rel="stylesheet" href="/assets/css/sweetalert.css"><link rel="stylesheet" href="/assets/ladda/ladda-themeless.min.css"><script src="/assets/ladda/spin.min.js"></script><script src="/assets/ladda/ladda.min.js"></script><script src="/assets/angular-ladda/angular-ladda.min.js"></script><script src="/assets/js/app/app.js?v113"></script><script src="/assets/js/sweetalert.min.js"></script>';
 	$smarty->assign('fscripts', $fscripts);
 	$footer = $smarty->fetch('shared/footer.tpl');
 	$smarty->assign('header', $header);
