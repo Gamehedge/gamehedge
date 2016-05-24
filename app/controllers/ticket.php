@@ -56,6 +56,17 @@ case '';
                     'total_price' => $tgData['retail_price'],
                     'ticket_id'   => 'range');
 		$team_data = Config::get_team_data($performer_name);
+        if(isset($team_data['mapid'])){
+            $mapElement = 'MapId: "' . $team_data['mapid'] . '",';
+        }
+        else{
+            $mapElement = 'EventInfo: {
+                            Venue: "' . $event_data['venue']['name'] . '",
+                            EventName: "' . $event_data['name'] . '",
+                            EventDate: "' . $date->format('Y-m-d\TH:i') . '"
+                        },';
+        }
+        
 		$sc_data[] = array('id'        => $tgData['id'],
                        'section'   => $tgData['section'],
                        'row'       => $tgData['row'],
@@ -73,7 +84,6 @@ case '';
 		<script type="text/javascript">
 			var api_key     = \'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC93d3cuZ2FtZWhlZGdlLmNvbSIsImlhdCI6MTQ1OTU0ODQ5MSwiZXhwIjoxNDkxMDg0NDkxLCJkYXRhIjp7Imhvc3RuYW1lIjoid3d3LmdhbWVoZWRnZS5jb20ifX0.sr5aSFIe9cgbipqIZ2t3yX_jBL1XvYygffneLLRLCOg\';
 			var event_id    = ' . $id . ';
-			var map_id      = \'' . $team_data['mapid'] . '\';
 			var tickets     = ' . json_encode($data) . ';
 			var sc_tickets  = ' . json_encode($sc_data) . ';
 			var num_tickets = ' . $num_tickets . ';
@@ -137,7 +147,7 @@ case '';
 				Initialize Ticket Utils Interactive Map
 				************************************************************/
 				$("#MapContainer").tuMap({
-					MapId: map_id,
+					' . $mapElement . '
 					ControlsPosition: "Inside",
 					FailoverMapUrl: "https://static.ticketutils.com/Charts/No-Seating-Chart.jpg",
 					ColorScheme: 1,
