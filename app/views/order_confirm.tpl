@@ -37,7 +37,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <br/>
-                            <p>To do a refund request, is necesary that you create a password. To do that, please fill the next field:</p>
+                            <p>To claim you Good Game Guarantee refund a password must be created to complete your account setup:</p>
                         </div> 
                     </div>
 
