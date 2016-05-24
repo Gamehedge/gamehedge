@@ -439,6 +439,11 @@ app.controller('ConfirmCtrl', function($scope, $http){
     
     $scope.isloading = false;
     $scope.password = "";
+    $scope.is_client_new = false;
+    
+    if(is_client_new == 1){
+        $scope.is_client_new = true;
+    }
     
     $scope.sendPassword = function(){
         

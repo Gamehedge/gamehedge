@@ -31,7 +31,7 @@
 			<div class="col-md-6">
 			</div>
 		</div>
-        <div class="container">
+        <div class="container" ng-show="is_client_new">
             <div class="row">
                 <div class="col-md-6 container-password-change">
                     <div class="row">

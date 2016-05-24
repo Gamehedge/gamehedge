@@ -194,6 +194,7 @@ case 'change_password':
     
     if(isset($client)) {
         $client->set("password", $request['password']);
+        unset($_SESSION['is_client_new']);
         die(json_encode(array('status' => 1, 'message' => 'Password successfully saved.')));
     }
     else {

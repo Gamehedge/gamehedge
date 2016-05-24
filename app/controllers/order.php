@@ -46,6 +46,7 @@ case 'process':
 			$client = new Client($user_id);
 			$_SESSION['last_ip']   = Utility::get_ip_address();
 			$_SESSION['last_date'] = date('Y-m-d H:i:s');
+            $_SESSION['is_client_new'] = 1;
 		} else {
 			die(json_encode(array('status'  => 2,
                             'message' => 'Failed to create your account. Please contact customer support.')));
@@ -313,6 +314,12 @@ case 'confirm':
 	$smarty->assign('hscripts', '');
 	$header = $smarty->fetch('shared/header.tpl');
     $menu = $smarty->fetch('shared/menu.tpl');
+    if(isset($_SESSION['is_client_new'])){
+        $add_tag = "<script>var is_client_new = 1;</script>";
+    }
+    else {
+        $add_tag = "<script>var is_client_new = 0;</script>";
+    }
     $analytics_code = "<script>
 //loads up ecommerce plugin google analytics 
 ga('require', 'ecommerce');
@@ -344,7 +351,7 @@ ga('ecommerce:send');
 
 </script>";
     
-	$smarty->assign('fscripts', $analytics_code . " " . $fscripts);
+	$smarty->assign('fscripts', $analytics_code . " " . $fscripts . " " . $add_tag);
 	$footer = $smarty->fetch('shared/footer.tpl');
 	$smarty->assign('header', $header);
     $smarty->assign('menu', $menu);
