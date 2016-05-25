@@ -93,7 +93,7 @@
                             <div class="row vertical-align pledge-checkout hidden">
                                 <div class="col-xs-4 text-center"><img src="/assets/img/pledge.png" width="90px"></div>
                                 <div class="col-xs-8">
-                                    <h3 class="text-center">GAMEHEDGE PLEDGE</h3>
+                                    <h4 class="text-center">GAMEHEDGE PLEDGE</h4>
                                     <p><strong>Tickets Will:</strong></p>
                                     <ul>
                                         <li>Always be in time for the event.</li>
