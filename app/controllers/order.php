@@ -474,7 +474,7 @@ case '';
 	$smarty->assign('css', '');
 	$smarty->assign('hscripts', $hscripts);
 	$header   = $smarty->fetch('shared/header.tpl');
-    $menu = $smarty->fetch('shared/menu.tpl');
+    $menu = $smarty->fetch('shared/header_no_menu.tpl');
 	$fscripts = '<link rel="stylesheet" href="/assets/css/sweetalert.css"><link rel="stylesheet" href="/assets/ladda/ladda-themeless.min.css"><script src="/assets/ladda/spin.min.js"></script><script src="/assets/ladda/ladda.min.js"></script><script src="/assets/angular-ladda/angular-ladda.min.js"></script><script src="/assets/js/app/app.js?v113"></script><script src="/assets/js/sweetalert.min.js"></script>';
 	$smarty->assign('fscripts', $fscripts);
 	$footer = $smarty->fetch('shared/footer.tpl');

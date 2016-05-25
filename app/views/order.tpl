@@ -83,7 +83,14 @@
                             
                         </section>
                         <div class="container-fluid">
-                            <div class="row vertical-align pledge-checkout">
+                            <div class="row text-center">
+                                <img src="/assets/img/Checkout-badge.jpg" width="100%">
+                            </div>
+                            <div class="row text-center" style="margin-top:10px;">
+                                <img src="/assets/img/Checkout-pledge.jpg" width="100%">
+                            </div>
+                            
+                            <div class="row vertical-align pledge-checkout hidden">
                                 <div class="col-xs-4 text-center"><img src="/assets/img/pledge.png" width="90px"></div>
                                 <div class="col-xs-8">
                                     <h3 class="text-center">GAMEHEDGE PLEDGE</h3>
@@ -769,7 +776,7 @@
                                   <label><input type="checkbox" ng-model="data.optin" ng-true-value="1" ng-false-value="0">I would like to receive special promotions and updates.</label>
                                 </div>
                                 <div class="checkbox">
-                                  <label><input type="checkbox" ng-model="accept_terms" ng-true-value="1" ng-false-value="0">I agree to GameHedge's <a href="/our-terms">terms and conditions</a>.</label>
+                                  <label><input type="checkbox" ng-model="accept_terms" ng-true-value="1" ng-false-value="0">I agree to GameHedge's <a target="_blank" href="/our-terms">terms and conditions</a>.</label>
                                 </div>
                                 <div class="checkbox hidden">
                                   <label><input type="checkbox" style="visibility: hidden;">I may be ordering tickets above or below face value. All sales are final.</label>

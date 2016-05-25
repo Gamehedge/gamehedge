@@ -100,7 +100,7 @@ $(document).ready(function(){
     
     $('header nav ul li#sports-dropdown').click(function(){
         if($(window).width() < 760){
-            alert("jejej");
+            //alert("jejej");
         }
 	});
     
@@ -154,10 +154,10 @@ $(document).ready(function(){
             console.log($(window).scrollTop());
             //console.log($("footer"));
             
-            if ($(window).scrollTop()>133 && $(window).width() >= 990)     
+            if ($(window).scrollTop()>80 && $(window).width() >= 990)     
             {
-                if($(window).scrollTop()<720){
-                    $scrollingDiv.css("position",'relative' ).css("top", ($(window).scrollTop() - 133 ) + 'px' );    
+                if($(window).scrollTop()<300){
+                    $scrollingDiv.css("position",'relative' ).css("top", ($(window).scrollTop() - 80 ) + 'px' );    
                 }      
             } 
             else 
