@@ -11,6 +11,18 @@ switch($verb) {
     case '':
         $data = (object) array('error' => 'empty parameters');
         break;
+
+    case 'test':
+        $query  = array('performer_id'      => 16425,//$_GET["id"],
+            'category_id'       => Config::te_categoryid(),
+            'page'              => 1,//(int)$_GET["page"],
+            'per_page'          => 1000,//(int)$_GET["per_page"],
+            //'occurs_at.gte'     => $_GET["actual_date"],
+            //'order_by'          => 'events.occurs_at ASC, events.popularity_score DESC');
+            );
+        $e_data = $teClient->listEvents($query);
+        $data = $e_data;
+        break;
     case 'close_events':
         $ipAddress = Utility::get_ip_address();
         //$ipAddress = "38.105.128.254";
