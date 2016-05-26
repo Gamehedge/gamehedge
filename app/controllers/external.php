@@ -1,5 +1,7 @@
 <?php
 
+require_once 'app/classes/event.php';
+
 use \TicketEvolution\Client as TEvoClient;
 
 $teClient = new TEvoClient(['baseUrl'    => Config::te_url(),
@@ -21,7 +23,12 @@ switch($verb) {
             //'order_by'          => 'events.occurs_at ASC, events.popularity_score DESC');
             );
         $e_data = $teClient->listEvents($query);
-        $data = $e_data;
+        foreach($e_data['events'] AS $tevo_event) {
+            $event = new Event;
+            $eventData = array('te_uid' => $tevo_event["id"]);
+            $eventId = $event->add($eventData);
+        }
+        $data = [];
         break;
     case 'close_events':
         $ipAddress = Utility::get_ip_address();
