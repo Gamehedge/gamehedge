@@ -1,6 +1,6 @@
 <?php
 /**
- * Handles Client Data
+ * Handles Events Data
  *
  * @author joey <joey@faintllc.com>
  * @since v0.0.1

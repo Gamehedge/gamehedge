@@ -1,10 +1,14 @@
 <?php
-use \TicketEvolution\Client as TEvoClient;
+
+require_once 'app/classes/performer.php';
+
+/*use \TicketEvolution\Client as TEvoClient;
 
 $teClient = new TEvoClient(['baseUrl'    => Config::te_url(),
                             'apiVersion' => Config::te_version(),
                             'apiToken'   => Config::te_api_token(),
                             'apiSecret'  => Config::te_api_secret()]);
+*/
 if(!isset($id) || $id < 1) {
 	header('Location: /');
 	exit;
@@ -21,8 +25,11 @@ $menu = $smarty->fetch('shared/menu.tpl');
 // Handle Footer
 $smarty->assign('fscripts', '<script src="/assets/js/moment.js"></script><script src="/assets/js/performer.js?v111"></script>');
 $footer = $smarty->fetch('shared/footer.tpl');
-$p_data = $teClient->showPerformer(['performer_id' => (int)$id]);
-$s_data = Utility::get_team_data($p_data['name']);
+//$p_data = $teClient->showPerformer(['performer_id' => (int)$id]);
+$performer = new Performer;
+$p_data = $performer->te_to_gh((int)$id);
+$p_name = $p_data['name'];
+$s_data = Utility::get_team_data($p_name);
 $p_slug = $p_data['slug'];
 /*
 $query  = array('performer_id'      => $id,
@@ -73,9 +80,9 @@ $pages = 0;
 $smarty->assign('header', $header);
 $smarty->assign('menu', $menu);
 $smarty->assign('footer', $footer);
-$smarty->assign('title', $p_data['name']);
+$smarty->assign('title', $p_name);
 $smarty->assign('division', str_replace('American League', 'AL', str_replace('National League', 'NL', $s_data['division'])));
-$smarty->assign('name', Utility::strip_team_city($p_data['name']));
+$smarty->assign('name', Utility::strip_team_city($p_name));
 $smarty->assign('team', $s_data);
 $smarty->assign('events', $events);
 $smarty->assign('url', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));

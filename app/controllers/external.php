@@ -1,6 +1,7 @@
 <?php
 
 require_once 'app/classes/event.php';
+require_once 'app/classes/performer.php';
 
 use \TicketEvolution\Client as TEvoClient;
 
@@ -13,9 +14,9 @@ switch($verb) {
     case '':
         $data = (object) array('error' => 'empty parameters');
         break;
-
-    case 'test':
     /*
+    case 'test':
+    
         ///////// THIS SCRIPT IS THE ONE THAT UPDATES THE DATABASE FOR THE EVENTS EVERYNIGHT
         $query  = array(//'performer_id'      => 16425,//$_GET["id"],
             'category_id'       => Config::te_categoryid(),
@@ -59,10 +60,56 @@ switch($verb) {
                 $eventId = $event->add($eventData);
             }
         }
-        */
+        ///////// THIS SCRIPT IS TO UPDAT THE DATABASE FOR THE PERFORMERS
         //$data = $e_data;
-        $data = [];
-        break;
+        $query  = array(16425,
+                15532,
+                15533,
+                15534,
+                15535,
+                15536,
+                15537,
+                15538,
+                15539,
+                15540,
+                15552,
+                15541,
+                15542,
+                15543,
+                15544,
+                15545,
+                15546,
+                15547,
+                15548,
+                15549,
+                15550,
+                15551,
+                15553,
+                15554,
+                15555,
+                15556,
+                15557,
+                15558,
+                15559,
+                15560);
+        foreach($query AS $perf_id) {
+            $p_data = $teClient->showPerformer(['performer_id' => $perf_id]);
+            $slug = $p_data['slug'];
+            $name = $p_data['name'];
+            $performer = new Performer;
+            $test = $performer->te_to_gh($perf_id);
+            if($test == false){
+                $eventData = array('te_uid' => $perf_id,
+                    'te_name' => $name,
+                    'te_slug' => $slug,
+                );
+                $eventId = $performer->add($eventData);
+            }
+        }
+        $performer = new Performer;
+        $p_data = $performer->te_to_gh(15554);
+        $data = $p_data;
+        break;*/
     case 'close_events':
         $ipAddress = Utility::get_ip_address();
         //$ipAddress = "38.105.128.254";
