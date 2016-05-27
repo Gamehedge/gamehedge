@@ -1,7 +1,7 @@
 <?php 
 	require_once 'app/classes/event.php';
 	
-	use \TicketEvolution\Client as TEvoClient;
+	use TicketEvolution\Client as TEvoClient;
 
 	$teClient = new TEvoClient(['baseUrl'    => Config::te_url(),
 	                            'apiVersion' => Config::te_version(),
