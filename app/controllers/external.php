@@ -61,7 +61,7 @@ switch($verb) {
         }
         */
         //$data = $e_data;
-        $data = []
+        $data = [];
         break;
     case 'close_events':
         $ipAddress = Utility::get_ip_address();
