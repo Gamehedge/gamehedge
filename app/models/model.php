@@ -79,6 +79,10 @@ class Model {
 						$stmt->bindValue(':' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
 						$stmt->bindValue(':u' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
 						break;
+					case 'datetime':
+						$stmt->bindValue(':' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
+						$stmt->bindValue(':u' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
+						break;
 					}
 				} else {
 					$stmt->bindValue(':' . $fdata['name'], null, PDO::PARAM_INT);

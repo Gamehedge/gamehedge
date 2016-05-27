@@ -13,4 +13,10 @@ class Event extends Base {
 		$this->model = new EventModel;
 		parent::__construct($id);
 	}
+	public function te_to_gh($id) {
+		return $this->model->get_by_teid($id);
+	}
+	public function get_list($query) {
+		return $this->model->get_list($query);
+	}
 }
