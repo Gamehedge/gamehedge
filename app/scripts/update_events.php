@@ -8,7 +8,6 @@
 	                            'apiToken'   => Config::te_api_token(),
 	                            'apiSecret'  => Config::te_api_secret()]);
 
-	switch($verb) {
 	$query  = array(//'performer_id'      => 16425,//$_GET["id"],
         'category_id'       => Config::te_categoryid(),
         'page'              => 1,//(int)$_GET["page"],
