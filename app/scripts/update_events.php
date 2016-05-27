@@ -1,7 +1,11 @@
 <?php 
 	require_once 'app/classes/event.php';
-	
+	require_once 'app/libs/Config.php';
+
 	use TicketEvolution\Client as TEvoClient;
+
+	// Require Composer’s autoloader
+	require 'vendor/autoload.php';
 
 	$teClient = new TEvoClient(['baseUrl'    => Config::te_url(),
 	                            'apiVersion' => Config::te_version(),
@@ -17,8 +21,11 @@
         );
     $e_data = $teClient->listEvents($query);
     $data = [];
+    $index = 0;
     foreach($e_data['events'] AS $tevo_event) {
         $event = new Event;
+        $index = $index + 1;
+        print $index;
         $test = $event->te_to_gh($tevo_event["id"]);
         if($test == false){
             $date = date('Y-m-d H:i:s', strtotime(str_replace('-', '/', $tevo_event["occurs_at"])));
