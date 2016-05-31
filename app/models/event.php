@@ -47,7 +47,7 @@ class EventModel extends Model {
             $page = $query["page"];
             $per_page = $query["per_page"];
             $id = $query["performer_id"];
-            $ldate = date('Y-m-d H:i:s', strtotime(str_replace('-', '/',  $query["occurs_at.gte"])));
+            $ldate = date('Y-m-d H:i:s', strtotime(str_replace('-', '/',  $query["occurs_at.gte"])) + 60*60*2);
             $llimit = $per_page * ($page - 1);
             $hlimit = $llimit + $per_page;
             if(array_key_exists("primary_performer",$query)){
