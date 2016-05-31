@@ -344,16 +344,14 @@ app.controller('CheckoutCtrl', function($scope, $http){
 	};
 	$scope.updateTotals = function() {
 		if($scope.data.percent == true && $scope.data.discount != 0){
-			alert("You will recive a " + $scope.data.discount + "% discount");
-			$scope.subtotal = ($scope.data.qty * $scope.order_data.price) * (1 - ($scope.data.discount/100));
+			$scope.subtotal = ($scope.data.qty * $scope.order_data.price)
 			$scope.getFees();
-			$scope.total = $scope.subtotal + parseFloat($scope.data.fee) + parseFloat($scope.shipping.price);
+			$scope.total = ($scope.subtotal + parseFloat($scope.data.fee) + parseFloat($scope.shipping.price)) * (1 - ($scope.data.discount/100));;
 		}
 		else if($scope.data.percent == false && $scope.data.discount != 0){
-			alert("You will recive a $" + $scope.data.discount + " discount");
-			$scope.subtotal = ($scope.data.qty * $scope.order_data.price) - $scope.data.discount;
+			$scope.subtotal = ($scope.data.qty * $scope.order_data.price);
 			$scope.getFees();
-			$scope.total = $scope.subtotal + parseFloat($scope.data.fee) + parseFloat($scope.shipping.price);
+			$scope.total = ($scope.subtotal + parseFloat($scope.data.fee) + parseFloat($scope.shipping.price)) - $scope.data.discount;
 		}
 		else{
 			$scope.subtotal = $scope.data.qty * $scope.order_data.price;
@@ -465,6 +463,12 @@ app.controller('CheckoutCtrl', function($scope, $http){
 			if($scope.promo_codes[i].code == $scope.data.current_code){
 				$scope.data.discount = $scope.promo_codes[i].value;
 				$scope.data.percent = $scope.promo_codes[i].percentage;
+				if($scope.data.percent == true && $scope.data.discount != 0){
+					alert("You will recive a " + $scope.data.discount + "% discount");
+				}
+				else if($scope.data.percent == false && $scope.data.discount != 0){
+					alert("You will recive a $" + $scope.data.discount + " discount");
+				}
 				$scope.updateTotals();
 				return;
 			}
