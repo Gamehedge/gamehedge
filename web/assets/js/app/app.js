@@ -343,12 +343,14 @@ app.controller('CheckoutCtrl', function($scope, $http){
 		}
 	};
 	$scope.updateTotals = function() {
-		if($scope.data.percent == true){
+		if($scope.data.percent == true && $scope.data.discount != 0){
+			alert("You will recive a " + $scope.data.discount + "% discount");
 			$scope.subtotal = ($scope.data.qty * $scope.order_data.price) * (1 - ($scope.data.discount/100));
 			$scope.getFees();
 			$scope.total = $scope.subtotal + parseFloat($scope.data.fee) + parseFloat($scope.shipping.price);
 		}
-		else if($scope.data.percent == false){
+		else if($scope.data.percent == false && $scope.data.discount != 0){
+			alert("You will recive a $" + $scope.data.discount + " discount");
 			$scope.subtotal = ($scope.data.qty * $scope.order_data.price) - $scope.data.discount;
 			$scope.getFees();
 			$scope.total = $scope.subtotal + parseFloat($scope.data.fee) + parseFloat($scope.shipping.price);
