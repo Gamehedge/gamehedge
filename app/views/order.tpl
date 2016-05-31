@@ -31,6 +31,22 @@
                                 </div>
                                 <!--div class="col-md-6 text-right" ng-bind="data.qty"></div-->
                             </div>
+
+                                <!--PARTIAL CODING FOR PROMO TESTING-->
+                            <div class="row order-detail" style="margin-top:5px; margin-bottom: 5px;">
+                                <div class="col-xs-8">Promo code</div>
+                                <div class="col-xs-4">
+                                    <input style="height:25px;" id="promo_code" name="promo_code" class="form-control" ng-model="data.current_code" ng-change="checkPromos()">
+                                </div>
+                                
+                            </div>
+
+
+
+
+
+
+
                             <div class="row order-detail">
                                 <div class="col-xs-6">Subtotal</div>
                                 <div class="col-xs-6 text-right" ng-bind="subtotal|currency"></div>

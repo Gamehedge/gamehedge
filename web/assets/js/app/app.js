@@ -134,7 +134,6 @@ app.controller('CheckoutCtrl', function($scope, $http){
     $scope.cdata = {card_number: "", card_exp_month: "01", card_exp_year: "2016", card_cvv2: ""};
     $scope.sdata = {firstname: "", lastname: "", address1: "", address2: "", city: "", state: "", zipcode: ""};
     $scope.bdata = {firstname: "", lastname: "", address1: "", address2: "", city: "", state: "", zipcode: ""};
-    
     if(typeof credit_cards != 'undefined'){
         if(Object.keys(credit_cards).length > 0){
             $scope.has_card = true;
@@ -344,9 +343,21 @@ app.controller('CheckoutCtrl', function($scope, $http){
 		}
 	};
 	$scope.updateTotals = function() {
-		$scope.subtotal = $scope.data.qty * $scope.order_data.price;
-		$scope.getFees();
-		$scope.total = ($scope.data.qty * $scope.order_data.price) + parseFloat($scope.data.fee) + parseFloat($scope.shipping.price);
+		if($scope.data.percent == true){
+			$scope.subtotal = ($scope.data.qty * $scope.order_data.price) * (1 - ($scope.data.discount/100));
+			$scope.getFees();
+			$scope.total = $scope.subtotal + parseFloat($scope.data.fee) + parseFloat($scope.shipping.price);
+		}
+		else if($scope.data.percent == false){
+			$scope.subtotal = ($scope.data.qty * $scope.order_data.price) - $scope.data.discount;
+			$scope.getFees();
+			$scope.total = $scope.subtotal + parseFloat($scope.data.fee) + parseFloat($scope.shipping.price);
+		}
+		else{
+			$scope.subtotal = $scope.data.qty * $scope.order_data.price;
+			$scope.getFees();
+			$scope.total = ($scope.data.qty * $scope.order_data.price) + parseFloat($scope.data.fee) + parseFloat($scope.shipping.price);
+		}
 	};
 	$scope.process = function() {
 		if(typeof $scope.toggleSame != 'undefined')
@@ -432,6 +443,37 @@ app.controller('CheckoutCtrl', function($scope, $http){
             swal({title: "Warning!", text:  "Please accept our terms of Service before you continues.", type: "warning", confirmButtonColor: "#a8c94b"});
 		}
 	};
+	$scope.getPromos = function() {
+		var req = {
+		method: 'GET',
+		url: '/external/promo_codes',
+		data: { code: 'edgar' },
+		}
+		$http(req).then(
+			function(response){
+				console.log(response.data);
+				$scope.promo_codes = response.data.promotion_codes;
+			}, 
+			function(response){
+				console.log("something went wrong");
+			});
+	}
+	$scope.checkPromos = function() {
+		for(i=0;i<$scope.promo_codes.length;i++){
+			if($scope.promo_codes[i].code == $scope.data.current_code){
+				$scope.data.discount = $scope.promo_codes[i].value;
+				$scope.data.percent = $scope.promo_codes[i].percentage;
+				$scope.updateTotals();
+				return;
+			}
+			else{
+				$scope.data.discount = 0;
+				$scope.data.percent = false;
+				$scope.updateTotals();
+			}
+		}
+	}
+	$scope.getPromos();
 	$scope.updateTotals();
 });
 
