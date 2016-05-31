@@ -24,8 +24,6 @@
     $index = 0;
     foreach($e_data['events'] AS $tevo_event) {
         $event = new Event;
-        $index = $index + 1;
-        print $index;
         $test = $event->te_to_gh($tevo_event["id"]);
         if($test == false){
             $date = date('Y-m-d H:i:s', strtotime(str_replace('-', '/', $tevo_event["occurs_at"])));
@@ -57,5 +55,4 @@
             $eventId = $event->add($eventData);
         }
     }
-    print "Current time: " . time();
 ?>
