@@ -45,33 +45,65 @@ function loadPage(){
         if(json.events && json.events.length > 0){
             _html = _html + "<ul>";
             $.each(json.events, function( index, value ) {
-                
-                _html = _html + '<li class="clearfix">';
-                _html = _html + '<a href="/ticket/' + value.id + '">'
-                _html = _html + '<div class="date col-md-2 col-xs-3">';
-                _html = _html + '<div class="month">' + moment( String(value.occurs_at).replace("Z", "") ).format('MMMM') + '</div>';
-                _html = _html + '<div class="day">' + moment( String(value.occurs_at).replace("Z", "") ).format('D') + '</div>';
-                _html = _html + '<div class="time">' + moment( String(value.occurs_at).replace("Z", "") ).format('ddd. hh:mm A') + '</div>';
-                _html = _html + '</div>';
-                _html = _html + '<div class="event col-md-8 col-xs-9">';
-                if(value.performances[1]){
-                    _html = _html + '<div class="name">' + value.performances[0].performer.name + ' at ' + value.performances[1].performer.name + '</div>';
+                var dateTodaytxt = moment().add(2,'h').format('YYYY-MM-DDTHH:mm:ss');
+                var dateEventtxt = value.occurs_at.replace("Z", "");
+                var dateToday = new Date(dateTodaytxt);
+                var dateEvent = new Date(dateEventtxt);
+                if(dateEvent < dateToday){
+                    _html = _html + '<li class="clearfix">';
+                    _html = _html + '<div>'
+                    _html = _html + '<div class="date col-md-2 col-xs-3">';
+                    _html = _html + '<div class="month">' + moment( String(value.occurs_at).replace("Z", "") ).format('MMMM') + '</div>';
+                    _html = _html + '<div class="day">' + moment( String(value.occurs_at).replace("Z", "") ).format('D') + '</div>';
+                    _html = _html + '<div class="time">' + moment( String(value.occurs_at).replace("Z", "") ).format('ddd. hh:mm A') + '</div>';
+                    _html = _html + '</div>';
+                    _html = _html + '<div class="event col-md-8 col-xs-9">';
+                    if(value.performances[1]){
+                        _html = _html + '<div class="name">' + value.performances[0].performer.name + ' at ' + value.performances[1].performer.name + '</div>';
+                    }
+                    else {
+                        _html = _html + '<div class="name">' + value.performances[0].performer.name + '</div>';
+                    }
+                    
+                    _html = _html + '<div class="location">' + value.venue.name + ' - ' + value.venue.location + '</div>';
+                    _html = _html + '</div>';
+                    _html = _html + '<div class="tickets-link col-md-2 col-xs-12">';
+                    _html = _html + '<div class="performer-green-bt btn-green-gradient">Sold Out <i class="fa fa-angle-right"></i></div>';
+                    
+                    
+                    _html = _html + '</div>';
+                    _html = _html + '</div>';
+                    _html = _html + '</li>';
                 }
-                else {
-                    _html = _html + '<div class="name">' + value.performances[0].performer.name + '</div>';
+                else{
+                    _html = _html + '<li class="clearfix">';
+                    _html = _html + '<a href="/ticket/' + value.id + '">'
+                    _html = _html + '<div class="date col-md-2 col-xs-3">';
+                    _html = _html + '<div class="month">' + moment( String(value.occurs_at).replace("Z", "") ).format('MMMM') + '</div>';
+                    _html = _html + '<div class="day">' + moment( String(value.occurs_at).replace("Z", "") ).format('D') + '</div>';
+                    _html = _html + '<div class="time">' + moment( String(value.occurs_at).replace("Z", "") ).format('ddd. hh:mm A') + '</div>';
+                    _html = _html + '</div>';
+                    _html = _html + '<div class="event col-md-8 col-xs-9">';
+                    if(value.performances[1]){
+                        _html = _html + '<div class="name">' + value.performances[0].performer.name + ' at ' + value.performances[1].performer.name + '</div>';
+                    }
+                    else {
+                        _html = _html + '<div class="name">' + value.performances[0].performer.name + '</div>';
+                    }
+                    
+                    _html = _html + '<div class="location">' + value.venue.name + ' - ' + value.venue.location + '</div>';
+                    _html = _html + '</div>';
+                    _html = _html + '<div class="tickets-link col-md-2 col-xs-12">';
+                    _html = _html + '<div class="performer-green-bt btn-green-gradient">Buy Tickets <i class="fa fa-angle-right"></i></div>';
+                    if(value.available_count < 20){
+                        _html = _html + '<div class="text-center alert-text">NOT MANY LEFT</div>';
+                    }
+                    
+                    _html = _html + '</div>';
+                    _html = _html + '</a>';
+                    _html = _html + '</li>';
                 }
                 
-                _html = _html + '<div class="location">' + value.venue.name + ' - ' + value.venue.location + '</div>';
-                _html = _html + '</div>';
-                _html = _html + '<div class="tickets-link col-md-2 col-xs-12">';
-                _html = _html + '<div class="performer-green-bt btn-green-gradient">Buy Tickets <i class="fa fa-angle-right"></i></div>';
-                if(value.available_count < 20){
-                    _html = _html + '<div class="text-center alert-text">NOT MANY LEFT</div>';
-                }
-                
-                _html = _html + '</div>';
-                _html = _html + '</a>';
-                _html = _html + '</li>';
                
                 
             });
