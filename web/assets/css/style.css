@@ -663,7 +663,8 @@ section#team-header, section#venue-header {
 	margin-bottom: 30px;
 	padding: 60px 0;
 	background: transparent url('/assets/img/team-hero2.jpg') 0 0 no-repeat;
-	background-size: 100% 100%;
+	background-size: cover;
+	background-position: center center;
 }
 section#team-header h1 , section#venue-header h1{
 	margin: 0;
