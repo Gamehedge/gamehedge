@@ -725,6 +725,16 @@ section#games ul li .date, section#game-header .date, section#order-header .date
 	text-align: center;
 }
 
+#formCheckout .underlined{
+	font-size: 14px;
+    font-family: 'Arial Nova',sans-serif;
+    color: black;
+}
+
+#formCheckout input, #formCheckout select{
+	font-size: 12px;
+    font-family: 'Arial Nova',sans-serif;
+}
 @media(max-width: 768px) {
     section#games ul li .date {
         display: inline-block;
@@ -1098,6 +1108,15 @@ section#tickets .seat-holder {
     }
 }
 
+#badges-order{
+	height: 180px;
+}
+
+@media(max-width: 560px) {
+    #badges-order{
+		height: 280px;
+	}
+}
 
 .configuration {
 	width: 100%;
@@ -1213,6 +1232,13 @@ main#checkout #shipping_options ul {
 	border-radius: 5px;
     background-color: #ececec;
 }
+.order-detail-cont {
+	margin-bottom: 15px;
+	padding: 20px 20px;
+	border: 1px solid lightgray;
+	border-radius: 5px;
+}
+
 
 #co-ticket-details hr{
     border-color: #e4e4e4 !important;
@@ -1330,7 +1356,11 @@ main#account #account-options ul li {
 .pledge-checkout {
     color: gray;
     font-size: 0.8em;
-    border: solid 2px #777777;
+    border: solid 1px #777777;
+    border-color: lightgray;
+    margin-left: -5px;
+    margin-right: -5px;
+    height: 100%;
 }
 
 .pledge-checkout h3 {

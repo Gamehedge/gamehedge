@@ -68,7 +68,7 @@ function loadPage(){
                     _html = _html + '<div class="location">' + value.venue.name + ' - ' + value.venue.location + '</div>';
                     _html = _html + '</div>';
                     _html = _html + '<div class="tickets-link col-md-2 col-xs-12">';
-                    _html = _html + '<div class="performer-green-bt btn-green-gradient">Sold Out <i class="fa fa-angle-right"></i></div>';
+                    _html = _html + '<div class="performer-green-bt btn-green-gradient">Sold Out</i></div>';
                     
                     
                     _html = _html + '</div>';

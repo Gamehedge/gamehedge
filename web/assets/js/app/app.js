@@ -131,6 +131,7 @@ app.controller('CheckoutCtrl', function($scope, $http){
     $scope.processing_credit_card = false;
     $scope.processing_billing_address = false;
     $scope.processing_shipping_address = false;
+    $scope.show_prom = false;
     $scope.cdata = {card_number: "", card_exp_month: "01", card_exp_year: "2016", card_cvv2: ""};
     $scope.sdata = {firstname: "", lastname: "", address1: "", address2: "", city: "", state: "", zipcode: ""};
     $scope.bdata = {firstname: "", lastname: "", address1: "", address2: "", city: "", state: "", zipcode: ""};
@@ -346,19 +347,25 @@ app.controller('CheckoutCtrl', function($scope, $http){
 		if($scope.data.percent == true && $scope.data.discount != 0){
 			$scope.subtotal = ($scope.data.qty * $scope.order_data.price)
 			$scope.getFees();
-			$scope.total = ($scope.subtotal + parseFloat($scope.data.fee) + parseFloat($scope.shipping.price)) * (1 - ($scope.data.discount/100));;
+			$scope.total = ($scope.subtotal + parseFloat($scope.data.fee) + parseFloat($scope.shipping.price)) * (1 - ($scope.data.discount/100));
+			document.getElementById("promo_value").innerHTML = "-"+(($scope.subtotal + parseFloat($scope.data.fee) + parseFloat($scope.shipping.price)) * ($scope.data.discount/100)).toFixed(2);
 		}
 		else if($scope.data.percent == false && $scope.data.discount != 0){
 			$scope.subtotal = ($scope.data.qty * $scope.order_data.price);
 			$scope.getFees();
 			$scope.total = ($scope.subtotal + parseFloat($scope.data.fee) + parseFloat($scope.shipping.price)) - $scope.data.discount;
+			document.getElementById("promo_value").innerHTML = "-"+String($scope.data.discount);
 		}
 		else{
 			$scope.subtotal = $scope.data.qty * $scope.order_data.price;
 			$scope.getFees();
 			$scope.total = ($scope.data.qty * $scope.order_data.price) + parseFloat($scope.data.fee) + parseFloat($scope.shipping.price);
+			document.getElementById("promo_value").innerHTML = "";
 		}
 	};
+	$scope.show_promo = function(){
+		$scope.show_prom = true;
+	}
 	$scope.process = function() {
 		if(typeof $scope.toggleSame != 'undefined')
 			$scope.toggleSame();
@@ -463,12 +470,6 @@ app.controller('CheckoutCtrl', function($scope, $http){
 			if($scope.promo_codes[i].code == $scope.data.current_code){
 				$scope.data.discount = $scope.promo_codes[i].value;
 				$scope.data.percent = $scope.promo_codes[i].percentage;
-				if($scope.data.percent == true && $scope.data.discount != 0){
-					alert("You will recive a " + $scope.data.discount + "% discount");
-				}
-				else if($scope.data.percent == false && $scope.data.discount != 0){
-					alert("You will recive a $" + $scope.data.discount + " discount");
-				}
 				$scope.updateTotals();
 				return;
 			}

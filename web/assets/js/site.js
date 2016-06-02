@@ -144,29 +144,29 @@ $(document).ready(function(){
 		});
 	}
     
-    $('[data-toggle="tooltip"]').tooltip();
+    // $('[data-toggle="tooltip"]').tooltip();
     
-    var $scrollingDiv = $("#co-ticket-details-div");
+    // var $scrollingDiv = $("#co-ticket-details-div");
     
-    $(window).scroll(function() {
-        if ( $( "#checkout" ).length ) {
+    // $(window).scroll(function() {
+    //     if ( $( "#checkout" ).length ) {
             
-            console.log($(window).scrollTop());
-            //console.log($("footer"));
+    //         console.log($(window).scrollTop());
+    //         //console.log($("footer"));
             
-            if ($(window).scrollTop()>80 && $(window).width() >= 990)     
-            {
-                if($(window).scrollTop()<300){
-                    $scrollingDiv.css("position",'relative' ).css("top", ($(window).scrollTop() - 80 ) + 'px' );    
-                }      
-            } 
-            else 
-            {
-                $scrollingDiv.css("position",'' ).css("top",'' );           
-            }
+    //         if ($(window).scrollTop()>80 && $(window).width() >= 990)     
+    //         {
+    //             if($(window).scrollTop()<300){
+    //                 $scrollingDiv.css("position",'relative' ).css("top", ($(window).scrollTop() - 80 ) + 'px' );    
+    //             }      
+    //         } 
+    //         else 
+    //         {
+    //             $scrollingDiv.css("position",'' ).css("top",'' );           
+    //         }
             
-        }
+    //     }
        
-    });
+    // });
     
 });
