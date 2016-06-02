@@ -902,7 +902,7 @@
 <script src="/assets/js/bundle.min.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
 {$fscripts}
-<script src="/assets/js/site.js?v114"></script>
+<script src="/assets/js/site.js?v115"></script>
 <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
 
 {literal}
