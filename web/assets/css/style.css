@@ -725,13 +725,14 @@ section#games ul li .date, section#game-header .date, section#order-header .date
 	text-align: center;
 }
 
-#formCheckout .underlined{
+#formCheckout h2{
 	font-size: 14px;
     font-family: 'Arial Nova',sans-serif;
     color: black;
+    text-transform: none;
 }
 
-#formCheckout input, #formCheckout select{
+#formCheckout input, #formCheckout select, #formCheckout p, #formCheckout div{
 	font-size: 12px;
     font-family: 'Arial Nova',sans-serif;
 }
@@ -1354,7 +1355,7 @@ main#account #account-options ul li {
 }
 
 .pledge-checkout {
-    color: gray;
+    color: black;
     font-size: 0.8em;
     border: solid 1px #777777;
     border-color: lightgray;

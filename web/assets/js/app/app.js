@@ -152,11 +152,11 @@ app.controller('CheckoutCtrl', function($scope, $http){
 		$scope.client_data = customer_data;
 		$scope.addresses   = addresses;
 		if($scope.has_card) {
-			$scope.data         = {optin: 1, shipping_address_id: $scope.client_data.primary_shipping_address.id, billing_address_id: $scope.client_data.primary_billing_address.id, card_id: $scope.client_data.primary_credit_card.id, phone_id: $scope.client_data.primary_phone_number.id, email_id: $scope.client_data.primary_email_address.id, shipping_option: $scope.shipping_data[shipping_id].id, ticket_format: ticket_format, fee: $scope.order_data.service_fee, qty: parseInt($scope.order_data.qty)};
+			$scope.data         = {optin: 0, shipping_address_id: $scope.client_data.primary_shipping_address.id, billing_address_id: $scope.client_data.primary_billing_address.id, card_id: $scope.client_data.primary_credit_card.id, phone_id: $scope.client_data.primary_phone_number.id, email_id: $scope.client_data.primary_email_address.id, shipping_option: $scope.shipping_data[shipping_id].id, ticket_format: ticket_format, fee: $scope.order_data.service_fee, qty: parseInt($scope.order_data.qty)};
             $scope.credit_cards = credit_cards;
 			$scope.credit_card  = $scope.credit_cards[$scope.data.card_id];
 		} else {
-			$scope.data         = {optin: 1, shipping_address_id: $scope.client_data.primary_shipping_address.id, billing_address_id: $scope.client_data.primary_billing_address.id, phone_id: $scope.client_data.primary_phone_number.id, email_id: $scope.client_data.primary_email_address.id, shipping_option: $scope.shipping_data[shipping_id].id, ticket_format: ticket_format, fee: $scope.order_data.service_fee, qty: parseInt($scope.order_data.qty)};
+			$scope.data         = {optin: 0, shipping_address_id: $scope.client_data.primary_shipping_address.id, billing_address_id: $scope.client_data.primary_billing_address.id, phone_id: $scope.client_data.primary_phone_number.id, email_id: $scope.client_data.primary_email_address.id, shipping_option: $scope.shipping_data[shipping_id].id, ticket_format: ticket_format, fee: $scope.order_data.service_fee, qty: parseInt($scope.order_data.qty)};
 		}
 		$scope.shipping_address = $scope.addresses[$scope.data.shipping_address_id];
 		$scope.billing_address  = $scope.addresses[$scope.data.billing_address_id];
@@ -305,7 +305,7 @@ app.controller('CheckoutCtrl', function($scope, $http){
             
 		};
 	} else {
-		$scope.data = {optin: 1, store_card: 1, samebilling: 1, shipping_option: $scope.shipping_data[shipping_id].id, ticket_format: ticket_format, fee: $scope.order_data.service_fee, qty: parseInt($scope.order_data.qty)};
+		$scope.data = {optin: 0, store_card: 1, samebilling: 1, shipping_option: $scope.shipping_data[shipping_id].id, ticket_format: ticket_format, fee: $scope.order_data.service_fee, qty: parseInt($scope.order_data.qty)};
 		$scope.toggleSame = function() {
 			if($scope.data.samebilling) {
 				$scope.data.sfirstname = $scope.data.bfirstname;

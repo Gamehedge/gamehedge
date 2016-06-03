@@ -3,6 +3,14 @@
 <main id="checkout" ng-controller="CheckoutCtrl">
 	<div class="container">
 		<form name="frmCheckout" method="POST" ng-submit="process()" id="formCheckout">
+        <div class="row">
+                            <div class="col-md-12 text-right" style="margin-top: 20px;">
+                                <p>Contact us:  <i style="color:#A8C94B; font-size:1.5em; vertical-align: middle;" class="fa fa-phone-square" aria-hidden="true"></i> <span style="font-size:1.5em; vertical-align: middle;"><a href="tel:908-312-3267">(908) 312-3267</a></span>
+                                </p>
+                                
+                            </div>
+
+                        </div>
 			<div class="row">
 				
 				<div class="col-md-7" >
@@ -59,7 +67,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="checkbox">
+                                <div class="checkbox hidden">
                                     <label><input type="checkbox" ng-model="data.optin" ng-true-value="1" ng-false-value="0">I would like to receive special promotions and updates.</label>
                                 </div>
                             </div>
@@ -695,13 +703,13 @@
                                 <div class="col-xs-6" style="height:100%;padding-left:35px;">
                                     <div class="row pledge-checkout ">
                                         <div class="col-xs-12">
-                                            <h4 class="text-center">GAMEHEDGE PLEDGE</h4>
+                                            <h2 class="text-center" style="margin-bottom: 10px;">GAMEHEDGE PLEDGE</h2>
                                         </div>
                                         <div class="col-xs-4 text-center"><img src="/assets/img/pledge.png" width="90px"></div>
                                         <div class="col-xs-8">
                                             
                                             <p class="text-center"><strong>Tickets Will:</strong></p>
-                                            <br>
+                                            
                                             <ul>
                                                 <li>Always be in time for the event.</li>
                                                 <li>Always be refunded if the event is canceled & not rescheduled.</li>
@@ -713,7 +721,7 @@
                                 <div class="col-xs-6" style="height:100%;padding-right:35px;">
                                     <div class="row pledge-checkout ">
                                         <div class="col-xs-12">
-                                            <h4 class="text-center">GAMEHEDGE PLEDGE</h4>
+                                            <h2 class="text-center" style="margin-bottom: 10px;">GOOD GAME GUARANTEE</h2>
                                         </div>
                                         <div class="col-xs-4 text-center"><img src="/assets/img/badge-gamehedge.png" width="90px"></div>
                                         <div class="col-xs-8">
@@ -770,17 +778,10 @@
                             <h1 class="hidden">Secure Checkout</h1>
                         </div>
                     </div>
-                    <div class="row">
-                            <div class="col-md-12 text-right" style="margin-top: 20px;">
-                                <p>Contact us:  <i style="color:#A8C94B; font-size:1.5em; vertical-align: middle;" class="fa fa-phone-square" aria-hidden="true"></i> <span style="font-size:1.5em; vertical-align: middle;"><a href="tel:908-312-3267">(908) 312-3267</a></span>
-                                </p>
-                                
-                            </div>
-
-                        </div>
+                    
                     <div id="co-ticket-details-div">
                         <section class="order-detail-cont">
-                            <h2 class="event underlined big"><strong>{$event_name}</strong></h2>
+                            <h2 class="event underlined big">{$event_name}</h2>
                             <div class="date">{$event_date}</div>
                             <div class="location">{$venue_name}, {$venue_location}</div>
                             <div class="seats">Section {$ticket_section}, Row {$ticket_row}</div>
