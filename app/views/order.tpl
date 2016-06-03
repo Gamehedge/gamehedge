@@ -23,10 +23,6 @@
                         <div class="row">
                             <div class="col-md-12 text-right" style="margin-top: 20px;">
                                 <p>Already have an account? Please <a href="/member/login">login</a> before proceeding.</p>
-                                <div>
-                                    <!--span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script></span>
-                                    <script src="https://cdn.ywxi.net/js/inline.js?w=96"></script-->
-                                </div>
                             </div>
 
                         </div>
@@ -75,68 +71,67 @@
                             <h2 class="underlined big" style="height: 30px;"">Payment Information <img src="/assets/img/icon-credit-cars.png" style="height: 23px;float: right;"></h2>
                             <h3 class="hidden">Credit Card Information</h3>
                             <div class="row">
-                                  <div class="col-md-8">
-                                        <div class="form-group">
-                                            <!-- <label for="card_number">Credit Card Number <span>*</span></label> -->
-                                            <input type="text" id="card_number" name="card_number" class="form-control" ng-model="data.card_number" ng-required="true" placeholder="Credit Card Number *" />
-                                        </div>
-                                    </div> 
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <!-- <label for="card_cvv2">CVV2 Code <span>*</span></label> -->
-                                            <input type="text" id="card_cvv2" name="card_cvv2" class="form-control" ng-model="data.card_cvv2" ng-required="true" placeholder="CVV2 Code *" />
-                                        </div>
-                                    </div>  
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <!-- <label for="card_exp_month">Exp. Month <span>*</span></label> -->
-                                            <select id="card_exp_month" name="card_exp_month" class="form-control" ng-model="data.card_exp_month" ng-required="true" >
-                                                <option value="" disabled selected>Exp. Month *</option>
-                                                <option value="01">01</option>
-                                                <option value="02">02</option>
-                                                <option value="03">03</option>
-                                                <option value="04">04</option>
-                                                <option value="05">05</option>
-                                                <option value="06">06</option>
-                                                <option value="07">07</option>
-                                                <option value="08">08</option>
-                                                <option value="09">09</option>
-                                                <option value="10">10</option>
-                                                <option value="11">11</option>
-                                                <option value="12">12</option>
-                                            </select>
-                                        </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <!-- <label for="card_number">Credit Card Number <span>*</span></label> -->
+                                        <input type="text" id="card_number" name="card_number" class="form-control" ng-model="data.card_number" ng-required="true" placeholder="Credit Card Number *" />
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <!-- <label for="card_exp_year">Exp. Year <span>*</span></label> -->
-                                            <select id="card_exp_year" name="card_exp_year" class="form-control" ng-model="data.card_exp_year" ng-required="true">
-                                                <option value="" disabled selected>Exp. Year *</option>
-                                                <option value="2016">2016</option>
-                                                <option value="2017">2017</option>
-                                                <option value="2018">2018</option>
-                                                <option value="2019">2019</option>
-                                                <option value="2020">2020</option>
-                                                <option value="2021">2021</option>
-                                                <option value="2022">2022</option>
-                                                <option value="2023">2023</option>
-                                                <option value="2024">2024</option>
-                                                <option value="2025">2025</option>
-                                                <option value="2026">2026</option>
-                                                <option value="2027">2027</option>
-                                                <option value="2028">2028</option>
-                                            </select>
-                                        </div>
+                                </div> 
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <!-- <label for="card_cvv2">CVV2 Code <span>*</span></label> -->
+                                        <input type="text" id="card_cvv2" name="card_cvv2" class="form-control" ng-model="data.card_cvv2" ng-required="true" placeholder="CVV2 Code *" />
                                     </div>
-                                    
-                                
-                                
+                                </div> 
+                            </div> 
+                            <div class="row" style="margin-top:10px;">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <!-- <label for="card_exp_month">Exp. Month <span>*</span></label> -->
+                                        <select id="card_exp_month" name="card_exp_month" class="form-control" ng-model="data.card_exp_month" ng-required="true" >
+                                            <option value="" disabled selected>Exp. Month *</option>
+                                            <option value="01">01</option>
+                                            <option value="02">02</option>
+                                            <option value="03">03</option>
+                                            <option value="04">04</option>
+                                            <option value="05">05</option>
+                                            <option value="06">06</option>
+                                            <option value="07">07</option>
+                                            <option value="08">08</option>
+                                            <option value="09">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <!-- <label for="card_exp_year">Exp. Year <span>*</span></label> -->
+                                        <select id="card_exp_year" name="card_exp_year" class="form-control" ng-model="data.card_exp_year" ng-required="true">
+                                            <option value="" disabled selected>Exp. Year *</option>
+                                            <option value="2016">2016</option>
+                                            <option value="2017">2017</option>
+                                            <option value="2018">2018</option>
+                                            <option value="2019">2019</option>
+                                            <option value="2020">2020</option>
+                                            <option value="2021">2021</option>
+                                            <option value="2022">2022</option>
+                                            <option value="2023">2023</option>
+                                            <option value="2024">2024</option>
+                                            <option value="2025">2025</option>
+                                            <option value="2026">2026</option>
+                                            <option value="2027">2027</option>
+                                            <option value="2028">2028</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="col-md-6 text-center">
-                                    <span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script></span>
+                                    <span id="siteseal">
+                                        <script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script>
+                                    </span>
                                     <script src="https://cdn.ywxi.net/js/inline.js?w=96"></script>
                                 </div>
-                                
-                                
                             </div>
                             
                             <h2 class="underlined big">Billing Address</h2>
@@ -859,15 +854,15 @@
                             <hr />
                             
                             <div class="row order-detail" style="margin-top:5px; margin-bottom: 5px;">
-                                <div class="col-xs-8">
-                                    <div class="checkbox" style="">
-                                      <label><input type="checkbox" ng-model="accept_terms" ng-true-value="1" ng-false-value="0">I agree to GameHedge's <a target="_blank" href="/our-terms">terms and conditions</a>.</label>
+                                <div class="col-xs-9">
+                                    <div class="checkbox" style="margin-top:0;margin-bottom:20px;">
+                                      <label style="margin-top:3z;"><input type="checkbox" ng-model="accept_terms" ng-true-value="1" ng-false-value="0">I agree to GameHedge's <a target="_blank" href="/our-terms">terms and conditions</a>.</label>
                                     </div>
                                     <div class="checkbox hidden">
                                       <label><input type="checkbox" style="visibility: hidden;">I may be ordering tickets above or below face value. All sales are final.</label>
                                     </div>
                                 </div>
-                                <div class="col-xs-4 text-right">Total -!total|currency!- </div>
+                                <div class="col-xs-3 text-right" style="font-size:14px;">Total -!total|currency!- </div>
                                 <div class="col-xs-12 text-center">
                                     <button ladda="procesingOrder" class="button green" ng-disabled="toggle_edit['shipping'] == 1 || toggle_edit['billing'] == 1 || toggle_edit['credit'] == 1">
                                             Submit Order

@@ -1359,6 +1359,7 @@ main#account #account-options ul li {
     font-size: 0.8em;
     border: solid 1px #777777;
     border-color: lightgray;
+    border-radius: 5px;
     margin-left: -5px;
     margin-right: -5px;
     height: 100%;

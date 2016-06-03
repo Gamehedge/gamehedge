@@ -143,6 +143,27 @@ $(document).ready(function(){
 			}, 'json');
 		});
 	}
+    $(document).ready(function(){
+        sealCheck = 0;
+        checkSeal();
+    });
+    function checkSeal(){
+        setTimeout(function(){
+            var numberSeal = $("img[src='https://seal.godaddy.com/images/3/en/siteseal_gd_3_h_d_m.gif']").length;
+            if(numberSeal <= 1){
+                sealCheck += 1;
+                if (sealCheck == 100) {
+                    return;
+                }
+                else{
+                    checkSeal();
+                }
+            }
+            else{
+                $("img[src='https://seal.godaddy.com/images/3/en/siteseal_gd_3_h_d_m.gif']").last().remove();
+            }
+        },10)
+    }
     
     // $('[data-toggle="tooltip"]').tooltip();
     
