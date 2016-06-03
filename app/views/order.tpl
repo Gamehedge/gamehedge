@@ -20,14 +20,15 @@
                         </div>
                     </div> -->
                     <div class="order-detail-cont">
-                        <div class="row" ng-if="existing == 0>
+                        
+                        
+                        <section id="new-customer" style="z-index: 1; position: relative;" ng-if="existing == 0">
+                        <div class="row">
                             <div class="col-md-12 text-right" style="margin-top: 20px;">
                                 <p id="already_acc">Already have an account? Please <a href="/member/login">login</a> before proceeding.</p>
                             </div>
 
                         </div>
-                        
-                        <section id="new-customer" style="z-index: 1; position: relative;" ng-if="existing == 0">
                             <div ng-if="!client">
                                 <!--h2 class="underlined big">How Many Tickets?</h2-->
                                 <!--div class="form-group">
@@ -273,7 +274,7 @@
                             </div>
                             
                         </section>
-                        <section id="existing-customer" ng-if="existing == 1">
+                        <section id="existing-customer" style="z-index: 1; position: relative;" ng-if="existing == 1">
                             <!--h2 class="underlined big">How Many Tickets?</h2-->
                                 <!--div class="form-group">
                                     <select id="qty" name="qty" class="form-control" ng-model="data.qty" ng-options="split for split in order_data.splits" ng-change="updateTotals()"></select>
