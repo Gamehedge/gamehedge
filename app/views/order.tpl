@@ -695,7 +695,7 @@
                                 <img src="/assets/img/Checkout-pledge.jpg" width="100%">
                             </div> -->
                             <div class="row" style="height:100%">
-                                <div class="col-xs-6" style="height:100%;padding-left:35px;">
+                                <div class="col-xs-12 col-md-6 left_badge" style="height:100%;padding-left:35px;">
                                     <div class="row pledge-checkout ">
                                         <div class="col-xs-12">
                                             <h2 class="text-center" style="margin-bottom: 10px;">GAMEHEDGE PLEDGE</h2>
@@ -713,7 +713,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xs-6" style="height:100%;padding-right:35px;">
+                                <div class="col-xs-12 col-md-6 right_badge" style="height:100%;padding-right:35px;">
                                     <div class="row pledge-checkout ">
                                         <div class="col-xs-12">
                                             <h2 class="text-center" style="margin-bottom: 10px;">GOOD GAME GUARANTEE</h2>
@@ -722,7 +722,7 @@
                                         <div class="col-xs-8">
                                             
                                             <p class="text-left"><strong>With every ticket:</strong></p>
-                                            <br>
+                                            
                                             If the home team loses by 5 runs or more, GameHedge will refund 50% of your ticket price at no additional cost to you.
                                         </div>
                                     </div>

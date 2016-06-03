@@ -1112,10 +1112,28 @@ section#tickets .seat-holder {
 #badges-order{
 	height: 180px;
 }
-
-@media(max-width: 560px) {
+.left_badge{
+	height:100%;
+	padding-left:35px;
+}
+.right_badge{
+	height:100%;
+	padding-right:35px;
+}
+@media(max-width: 991px) {
     #badges-order{
-		height: 280px;
+		height: auto;
+	}
+	.left_badge{
+		height:100%;
+		padding-left:35px;
+		padding-right:35px;
+		margin-bottom: 5px;
+	}
+	.right_badge{
+		height:100%;
+		padding-left:35px;
+		padding-right:35px;
 	}
 }
 
