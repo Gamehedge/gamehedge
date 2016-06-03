@@ -4,8 +4,8 @@
 	<div class="container">
 		<form name="frmCheckout" method="POST" ng-submit="process()" id="formCheckout">
         <div class="row">
-                            <div class="col-md-12 text-right" style="margin-top: 20px;">
-                                <p>Contact us:  <i style="color:#A8C94B; font-size:1.5em; vertical-align: middle;" class="fa fa-phone-square" aria-hidden="true"></i> <span style="font-size:1.5em; vertical-align: middle;"><a href="tel:908-312-3267">(908) 312-3267</a></span>
+                            <div class="col-md-12 text-right">
+                                <p style="margin-top:10px;">Contact us:  <i style="color:#A8C94B; font-size:1.5em; vertical-align: middle;" class="fa fa-phone-square" aria-hidden="true"></i> <span style="font-size:1.5em; vertical-align: middle;"><a href="tel:908-312-3267">(908) 312-3267</a></span>
                                 </p>
                                 
                             </div>
@@ -14,15 +14,15 @@
 			<div class="row">
 				
 				<div class="col-md-7" >
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-12" style="height:30px;">
                             <h1 class="hidden">Secure Checkout</h1>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="order-detail-cont">
                         <div class="row">
                             <div class="col-md-12 text-right" style="margin-top: 20px;">
-                                <p>Already have an account? Please <a href="/member/login">login</a> before proceeding.</p>
+                                <p id="already_acc">Already have an account? Please <a href="/member/login">login</a> before proceeding.</p>
                             </div>
 
                         </div>
@@ -695,7 +695,7 @@
                                 <img src="/assets/img/Checkout-pledge.jpg" width="100%">
                             </div> -->
                             <div class="row" style="height:100%">
-                                <div class="col-xs-12 col-md-6 left_badge" style="height:100%;padding-left:35px;">
+                                <div class="col-xs-12 col-md-6 left_badge">
                                     <div class="row pledge-checkout ">
                                         <div class="col-xs-12">
                                             <h2 class="text-center" style="margin-bottom: 10px;">GAMEHEDGE PLEDGE</h2>
@@ -705,15 +705,13 @@
                                             
                                             <p class="text-left"><strong>Tickets Will:</strong></p>
                                             
-                                            <ul>
-                                                <li>Always be in time for the event.</li>
-                                                <li>Always be refunded if the event is canceled & not rescheduled.</li>
-                                                <li>Always be authentic.</li>
-                                            </ul>
+                                                <p class="text-left">- Always be in time for the event.</p>
+                                                <p class="text-left">- Always be refunded if the event is canceled & not rescheduled.</p>
+                                                <p class="text-left">- Always be authentic.</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-md-6 right_badge" style="height:100%;padding-right:35px;">
+                                <div class="col-xs-12 col-md-6 right_badge">
                                     <div class="row pledge-checkout ">
                                         <div class="col-xs-12">
                                             <h2 class="text-center" style="margin-bottom: 10px;">GOOD GAME GUARANTEE</h2>
@@ -768,11 +766,11 @@
 				</div>
                 <div class="col-md-5" >
                     
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-12" style="height:30px;"m>
                             <h1 class="hidden">Secure Checkout</h1>
                         </div>
-                    </div>
+                    </div> -->
                     
                     <div id="co-ticket-details-div">
                         <section class="order-detail-cont">

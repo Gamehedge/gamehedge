@@ -1097,9 +1097,6 @@ section#tickets .seat-holder {
         display: none;
     }
     
-    #new-customer {
-        margin-top: 30px;
-    }
     
 }
 
@@ -1115,9 +1112,11 @@ section#tickets .seat-holder {
 .left_badge{
 	height:100%;
 	padding-left:35px;
+	padding-right:10px;
 }
 .right_badge{
 	height:100%;
+	padding-left:10px;
 	padding-right:35px;
 }
 @media(max-width: 991px) {
@@ -1258,6 +1257,17 @@ main#checkout #shipping_options ul {
 	border-radius: 5px;
 }
 
+#already_acc{
+	margin:0;
+	margin-bottom:-16px;
+}
+
+@media(max-width: 530px) {
+	#already_acc{
+	margin:0;
+	margin-bottom:10px;
+}
+}
 
 #co-ticket-details hr{
     border-color: #e4e4e4 !important;
