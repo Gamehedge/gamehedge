@@ -723,7 +723,7 @@
                                             
                                             <p class="text-left"><strong>With every ticket:</strong></p>
                                             <br>
-                                            if the home team looses by 5 runs or more, GameHedge will refund 50% of your ticket price at no additional cost to you.
+                                            If the home team loses by 5 runs or more, GameHedge will refund 50% of your ticket price at no additional cost to you.
                                         </div>
                                     </div>
                                 </div>
@@ -862,7 +862,7 @@
                                       <label><input type="checkbox" style="visibility: hidden;">I may be ordering tickets above or below face value. All sales are final.</label>
                                     </div>
                                 </div>
-                                <div class="col-xs-3 text-right" style="font-size:14px;">Total -!total|currency!- </div>
+                                <div class="col-xs-3 text-right" style="font-size:14px;"><strong>Total -!total|currency!- </strong></div>
                                 <div class="col-xs-12 text-center">
                                     <button ladda="procesingOrder" class="button green" ng-disabled="toggle_edit['shipping'] == 1 || toggle_edit['billing'] == 1 || toggle_edit['credit'] == 1">
                                             Submit Order
