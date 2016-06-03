@@ -22,13 +22,13 @@
                     <div class="order-detail-cont">
                         
                         
-                        <section id="new-customer" style="z-index: 1; position: relative;" ng-if="existing == 0">
-                        <div class="row">
-                            <div class="col-md-12 text-right" style="margin-top: 20px;">
-                                <p id="already_acc">Already have an account? Please <a href="/member/login">login</a> before proceeding.</p>
-                            </div>
+                        <section id="new-customer" style="z-index: 1; position: relative;" ng-if="existing == 0" ng-if="!client">
+                            <div class="row" ng-if="!client" >
+                                <div class="col-md-12 text-right" style="margin-top: 20px;">
+                                    <p id="already_acc">Already have an account? Please <a href="/member/login">login</a> before proceeding.</p>
+                                </div>
 
-                        </div>
+                            </div>
                             <div ng-if="!client">
                                 <!--h2 class="underlined big">How Many Tickets?</h2-->
                                 <!--div class="form-group">
