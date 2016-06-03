@@ -703,7 +703,7 @@
                                         <div class="col-xs-4 text-center"><img src="/assets/img/pledge.png" width="90px"></div>
                                         <div class="col-xs-8">
                                             
-                                            <p class="text-center"><strong>Tickets Will:</strong></p>
+                                            <p class="text-left"><strong>Tickets Will:</strong></p>
                                             
                                             <ul>
                                                 <li>Always be in time for the event.</li>
@@ -721,7 +721,7 @@
                                         <div class="col-xs-4 text-center"><img src="/assets/img/badge-gamehedge.png" width="90px"></div>
                                         <div class="col-xs-8">
                                             
-                                            <p class="text-center"><strong>With every ticket:</strong></p>
+                                            <p class="text-left"><strong>With every ticket:</strong></p>
                                             <br>
                                             if the home team looses by 5 runs or more, GameHedge will refund 50% of your ticket price at no additional cost to you.
                                         </div>
@@ -788,7 +788,7 @@
                             <div class="row order-detail" style="margin-top:5px; margin-bottom: 5px;">
                                 <div class="col-xs-8">Quantity</div>
                                 <div class="col-xs-4">
-                                    <select style="height:25px;" id="qty" name="qty" class="form-control" ng-model="data.qty" ng-options="split for split in order_data.splits" ng-change="updateTotals()"></select>
+                                    <select style="height:28px;" id="qty" name="qty" class="form-control" ng-model="data.qty" ng-options="split for split in order_data.splits" ng-change="updateTotals()"></select>
                                 </div>
                                 <!--div class="col-md-6 text-right" ng-bind="data.qty"></div-->
                             </div>
@@ -816,7 +816,7 @@
                             <div class="row order-detail" ng-show="data.ticket_format == 'Physical'" style="margin-top:5px; margin-bottom: 5px;">
                                 <div class="col-xs-6">Shipping Option</div>
                                 <div class="col-xs-6">
-                                    <select style="height:25px;" class="form-control" name="shipping_option" ng-model="data.shipping_option" ng-change="setShipping()">
+                                    <select style="height:28px;" class="form-control" name="shipping_option" ng-model="data.shipping_option" ng-change="setShipping()">
                                         <option ng-repeat="s in shipping_data" value="-!s.id!-" ng-if="s.id == '67797' || s.id == '67791'">-!s.price|currency!- -!s.name!-</option>
                                     </select>
                                     <!--div id="shipping_options">
@@ -848,7 +848,7 @@
                             </div>
                             <div class="row order-detail" style="margin-top:5px; margin-bottom: 5px;" ng-show="show_prom">
                                 <div class="col-xs-6">
-                                    <input style="height:25px;" id="promo_code" name="promo_code" class="form-control" ng-model="data.current_code" ng-change="checkPromos()" placeholder="Promo code">
+                                    <input style="height:28px;" id="promo_code" name="promo_code" class="form-control" ng-model="data.current_code" ng-change="checkPromos()" placeholder="Promo code">
                                 </div>
                             </div>
                             <hr />
