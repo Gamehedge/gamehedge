@@ -20,7 +20,7 @@
                         </div>
                     </div> -->
                     <div class="order-detail-cont">
-                        <div class="row">
+                        <div class="row" ng-if="existing == 0>
                             <div class="col-md-12 text-right" style="margin-top: 20px;">
                                 <p id="already_acc">Already have an account? Please <a href="/member/login">login</a> before proceeding.</p>
                             </div>
