@@ -152,7 +152,7 @@ $(document).ready(function(){
             var numberSeal = $("img[src='https://seal.godaddy.com/images/3/en/siteseal_gd_3_h_d_m.gif']").length;
             if(numberSeal <= 1){
                 sealCheck += 1;
-                if (sealCheck == 100) {
+                if (sealCheck == 1000) {
                     return;
                 }
                 else{
@@ -162,7 +162,7 @@ $(document).ready(function(){
             else{
                 $("img[src='https://seal.godaddy.com/images/3/en/siteseal_gd_3_h_d_m.gif']").last().remove();
             }
-        },10)
+        },1)
     }
     
     // $('[data-toggle="tooltip"]').tooltip();
