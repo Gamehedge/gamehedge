@@ -70,7 +70,7 @@
                             </div>
                             
                             <h2 class="underlined big" style="height: 30px;"">Payment Information <img src="/assets/img/icon-credit-cars.png" style="height: 23px;float: right;"></h2>
-                            <h3 class="hidden">Credit Card Information</h3>
+                            <h2 class="hidden">Credit Card Information</h2>
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="form-group">
@@ -138,7 +138,7 @@
                             <h2 class="underlined big">Billing Address</h2>
                             <!--
                             <input type="checkbox" id="store_card" name="store_card" ng-model="data.store_card" ng-true-value="1" ng-false-value="0" /> Store my information in our secure system for future purchases. -->
-                            <h3 class="hidden">Billing Address</h3>
+                            <h2 class="underlined big" class="hidden">Billing Address</h2>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -289,15 +289,15 @@
                                 </div>
                             </div>
                             <div id="shipping_edit" ng-show="toggle_edit.shipping && !toggle_add.shipping">
-                                <h3>Your Stored Addresses</h3>
+                                <h2 class="underlined big">Your Stored Addresses</h2>
                                 <ul>
                                     <li ng-repeat="a in addresses"><label><input type="radio" id="shipping_address_id--!a.id!-" name="shipping_address_id" value="-!a.id!-" ng-model="data.shipping_address_id" /> <strong>-!a.name!-</strong>, -!a.street_address!-, -!a.locality!-, -!a.region!- -!a.postal_code!- -!a.country_code!-</label></li>
                                     <li><a ng-click="toggleAdd('shipping')"><i class="fa fa-plus"></i> Add a new address</a></li>
                                 </ul>
-                                <div class="change_buttons"><a class="button orange medium" ng-click="setShippingAddress()">Update</a> <a ng-click="toggleEdit('shipping')">Cancel</a></div>
+                                <div class="change_buttons"><a class="button green medium" ng-click="setShippingAddress()">Update</a> <a ng-click="toggleEdit('shipping')">Cancel</a></div>
                             </div>
                             <div id="add_shipping_address" ng-show="toggle_add.shipping">
-                                <h3>Add a New Address</h3>
+                                <h2 class="underlined big">Add a New Address</h2>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -399,21 +399,21 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="change_buttons"><a ladda="processing_shipping_address" class="button orange medium" ng-click="addShippingAddress()">Submit</a> <a ng-click="toggleAdd('shipping')">Cancel</a></div>
+                                <div class="change_buttons"><a ladda="processing_shipping_address" class="button green medium" ng-click="addShippingAddress()">Submit</a> <a ng-click="toggleAdd('shipping')">Cancel</a></div>
                             </div>
                             <h2 class="underlined big">Payment Method</h2>
                             <div ng-if="!has_card">
-                                <h3>Credit Card Information</h3>
+                                <h2 class="underlined big">Credit Card Information</h2>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="card_number">Credit Card Number <span>*</span></label>
-                                            <input type="text" id="card_number" name="card_number" class="form-control" ng-model="data.card_number" ng-required="true" />
+                                            <!-- <label for="card_number">Credit Card Number <span>*</span></label> -->
+                                            <input type="text" id="card_number" name="card_number" class="form-control" ng-model="data.card_number" ng-required="true" placeholder="Credit Card Number *" />
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <label for="card_exp_month">Exp. Month <span>*</span></label>
+                                            <!-- <label for="card_exp_month">Exp. Month <span>*</span></label> -->
                                             <select id="card_exp_month" name="card_exp_month" class="form-control" ng-model="data.card_exp_month" ng-required="true">
                                                 <option value="" disabled selected>Exp. Month *</option>
                                                 <option value="01">01</option>
@@ -433,7 +433,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <label for="card_exp_year">Exp. Year <span>*</span></label>
+                                            <!-- <label for="card_exp_year">Exp. Year <span>*</span></label> -->
                                             <select id="card_exp_year" name="card_exp_year" class="form-control" ng-model="data.card_exp_year" ng-required="true">
                                                 <option value="" disabled selected>Exp. Year *</option>
                                                 <option value="2016">2016</option>
@@ -455,7 +455,7 @@
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <!-- <label for="card_cvv2">CVV2 Code <span>*</span></label> -->
-                                            <input type="text" id="card_cvv2" name="card_cvv2" class="form-control" ng-model="data.card_cvv2" ng-required="true" placeholder="CVV2 Code *" />
+                                            <input type="text" id="card_cvv2" name="card_cvv2" class="form-control" ng-model="data.card_cvv2" ng-required="true" placeholder="CVV2 *" />
                                         </div>
                                     </div>
                                 </div>
@@ -468,7 +468,7 @@
                                     <img ng-src="/assets/img/icon--!credit_card.card_company|lowercase!-.png" alt="-!credit_card.card_company!-" /> -!credit_card.card_company!- ending in -!credit_card.last_digits!-
                                 </div>
                                 <div id="card_options" ng-show="toggle_edit.credit && !toggle_add.credit">
-                                    <h3>Your Stored Credit Cards</h3>
+                                    <h2 class="underlined big">Your Stored Credit Cards</h2>
                                     <ul>
                                         <li class="header">
                                             <div class="row">
@@ -492,10 +492,10 @@
                                             </div>
                                         </li>
                                     </ul>
-                                    <div class="change_buttons"><a class="button orange medium" ng-click="setCreditCard()">Update</a> <a ng-click="toggleEdit('credit')">Cancel</a></div>
+                                    <div class="change_buttons"><a class="button green medium" ng-click="setCreditCard()">Update</a> <a ng-click="toggleEdit('credit')">Cancel</a></div>
                                 </div>
                                 <div id="add_new_card" ng-show="toggle_add.credit">
-                                    <h3>Add New Credit Card</h3>
+                                    <h2 class="underlined big">Add New Credit Card</h2>
                                     <div class="row">
                                         <div class="col-md-8">
                                             <div class="form-group">
@@ -555,7 +555,7 @@
                                         </div>
                                         
                                         <div class="col-md-4">
-                                            <div class="change_buttons"><a ladda="processing_credit_card" class="button orange medium" ng-click="addCreditCard()">Submit</a> <a ng-click="toggleAdd('credit')">Cancel</a></div>
+                                            <div class="change_buttons"><a ladda="processing_credit_card" class="button green medium" ng-click="addCreditCard()">Submit</a> <a ng-click="toggleAdd('credit')">Cancel</a></div>
                                         </div>
                                     </div>
                                     
@@ -566,16 +566,16 @@
                                     <strong>Billing Address:</strong> -!billing_address.name!-</strong>, -!billing_address.street_address!-, -!billing_address.locality!-, -!billing_address.region!- -!billing_address.postal_code!- -!billing_address.country_code!- <a ng-click="toggleEdit('billing')">Change</a>
                                 </div>
                                 <div id="billing_edit" ng-show="toggle_edit.billing && !toggle_add.billing">
-                                    <h3>Your Stored Addresses</h3>
+                                    <h2 class="underlined big">Your Stored Addresses</h2>
                                     <ul>
                                         <li ng-repeat="a in addresses"><label><input type="radio" id="billing_address_id--!a.id!-" name="billing_address_id" value="-!a.id!-" ng-model="data.billing_address_id" /> <strong>-!a.name!-</strong>, -!a.street_address!-, -!a.locality!-, -!a.region!- -!a.postal_code!- -!a.country_code!-</label></li>
                                         <li><a ng-click="toggleAdd('billing')"><i class="fa fa-plus"></i> Add a new address</a></li>
                                     </ul>
-                                    <div class="change_buttons"><a class="button orange medium" ng-click="setBillingAddress()">Update</a> <a ng-click="toggleEdit('billing')">Cancel</a></div>
+                                    <div class="change_buttons"><a class="button green medium" ng-click="setBillingAddress()">Update</a> <a ng-click="toggleEdit('billing')">Cancel</a></div>
                                 </div>
                             </div>
                             <div id="add_billing_address" ng-show="toggle_add.billing">
-                                <h3>Add a New Address</h3>
+                                <h2 class="underlined big">Add a New Address</h2>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -677,7 +677,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="change_buttons"><a ladda="processing_billing_address" class="button orange medium" ng-click="addBillingAddress()">Submit</a> <a ng-click="toggleAdd('billing')">Cancel</a></div>
+                                <div class="change_buttons"><a ladda="processing_billing_address" class="button green medium" ng-click="addBillingAddress()">Submit</a> <a ng-click="toggleAdd('billing')">Cancel</a></div>
                             </div>
                         </section>
                         <h2 class="underlined big hidden">Tickets Ordered</h2>
@@ -748,7 +748,7 @@
                                             <strong>Total -! total|currency !- </strong>
                                             <!--div ng-bind="total|currency"></div
                                         </div>
-                                        <button ladda="procesingOrder" class="button orange" ng-disabled="toggle_edit['shipping'] == 1 || toggle_edit['billing'] == 1 || toggle_edit['credit'] == 1">
+                                        <button ladda="procesingOrder" class="button green" ng-disabled="toggle_edit['shipping'] == 1 || toggle_edit['billing'] == 1 || toggle_edit['credit'] == 1">
                                             Submit Order
                                         </button>
                                     </div>

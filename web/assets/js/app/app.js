@@ -365,6 +365,7 @@ app.controller('CheckoutCtrl', function($scope, $http){
 	};
 	$scope.show_promo = function(){
 		$scope.show_prom = true;
+		
 	}
 	$scope.process = function() {
 		if(typeof $scope.toggleSame != 'undefined')
@@ -381,7 +382,7 @@ app.controller('CheckoutCtrl', function($scope, $http){
 				//}
                 
                 $scope.procesingOrder = true;
-				var promise = $http.post('/order/process', $scope.data).success(function(data, status, headers, config) {
+                var promise = $http.post('/order/process', $scope.data).success(function(data, status, headers, config) {
 					if(data.status == 1) {
                         //$scope.procesingOrder = false;
 						window.location.href = '/order/confirm';

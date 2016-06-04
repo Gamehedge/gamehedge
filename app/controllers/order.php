@@ -184,13 +184,13 @@ case 'process':
 		}
 	}
 	if(isset($card_id)) {
-		$payments = array('amount'         => number_format($total, 2),
+		$payments = array('amount'         => number_format($total, 2, '.', ''),
                       'type'           => 'credit_card',
                       'credit_card_id' => $card_id);
 	} else {
 		unset($cc['address_id']);
 		unset($cc['phone_number_id']);
-		$payments = array('amount'      => number_format($total, 2),
+		$payments = array('amount'      => number_format($total, 2, '.', ''),
                       'type'        => 'credit_card',
                       'credit_card' => $cc);
 	}
@@ -300,11 +300,11 @@ case 'confirm':
 	$smarty->assign('ticket_section', $order->get('section'));
 	$smarty->assign('ticket_row', $order->get('row'));
 	$smarty->assign('ticket_seats', $order->get('seats'));
-	$smarty->assign('ticket_price', number_format($ticket_data['retail_price'], 2));
+	$smarty->assign('ticket_price', number_format($ticket_data['retail_price'], 2 '.', ''));
     $smarty->assign('ticket_id', $ticket_data['id']);
     $smarty->assign('ticket_format', $ticket_data['format']);
 	$smarty->assign('num_tickets', $order_data['items'][0]['quantity']);
-    $smarty->assign('order_balance', number_format($order_data['balance'], 2));
+    $smarty->assign('order_balance', number_format($order_data['balance'], 2 '.', ''));
 	$smarty->assign('order_id', $order_data['oid']);
 	$smarty->assign('body_tag', '');
 	//$smarty->assign('head_tags', 'ng-app="gamehedge"');
@@ -328,7 +328,7 @@ ga('require', 'ecommerce');
 ga('ecommerce:addTransaction', {
   'id': '".$order_data['oid']."',                     // Transaction ID. Required.
   'affiliation': 'www.gamehedge.com',   // Affiliation or store name.
-  'revenue': '".number_format($order_data['balance'], 2)."',               // Grand Total.
+  'revenue': '".number_format($order_data['balance'], 2 '.', '')."',               // Grand Total.
   'shipping': '0',                  // Shipping.
   'tax': '0'                     // Tax.
 });
@@ -341,7 +341,7 @@ ga('ecommerce:addItem', {
   'name': '".$order_data['items'][0]['ticket_group']['event']['name']."',    // Product name. Required.
   'sku': '".$ticket_data['id']."',                 // SKU/code.
   'category': 'baseball',         // Category or variation.
-  'price': '".number_format($order_data['balance'], 2)."',                 // Unit price.
+  'price': '".number_format($order_data['balance'], 2 '.', '')."',                 // Unit price.
   'quantity': '".$order_data['items'][0]['quantity']."'                   // Quantity.
 });
 
