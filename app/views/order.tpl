@@ -712,13 +712,13 @@
                                         <div class="col-xs-12">
                                             <h2 class="text-center" style="margin-bottom: 10px;">GAMEHEDGE PLEDGE</h2>
                                         </div>
-                                        <div class="col-xs-4 text-center" style="padding:0"><img src="/assets/img/pledge.png" width="90px"></div>
-                                        <div class="col-xs-8">
+                                        <div class="col-xs-3 text-center" style="padding:0"><img src="/assets/img/pledge.png" width="90px"></div>
+                                        <div class="col-xs-9">
                                             
                                             <p class="text-left"><strong>Tickets Will:</strong></p>
                                             
                                                 <p class="text-left">- Always be in time for the event.</p>
-                                                <p class="text-left">- Always be refunded if the event is canceled & not rescheduled.</p>
+                                                <p class="text-left">- Always be refunded if event is canceled & not rescheduled.</p>
                                                 <p class="text-left">- Always be authentic.</p>
                                         </div>
                                     </div>
@@ -728,8 +728,8 @@
                                         <div class="col-xs-12">
                                             <h2 class="text-center" style="margin-bottom: 10px;">GOOD GAME GUARANTEE</h2>
                                         </div>
-                                        <div class="col-xs-4 text-center"  style="padding:0"><img src="/assets/img/badge-gamehedge.png" width="90px"></div>
-                                        <div class="col-xs-8">
+                                        <div class="col-xs-3 text-center"  style="padding:0"><img src="/assets/img/badge-gamehedge.png" width="90px"></div>
+                                        <div class="col-xs-9">
                                             
                                             <p class="text-left"><strong>With every ticket:</strong></p>
                                             
