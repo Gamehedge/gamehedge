@@ -143,30 +143,51 @@ $(document).ready(function(){
 			}, 'json');
 		});
 	}
-    
-    $('[data-toggle="tooltip"]').tooltip();
-    
-    var $scrollingDiv = $("#co-ticket-details-div");
-    
-    $(window).scroll(function() {
-        if ( $( "#checkout" ).length ) {
-            
-            console.log($(window).scrollTop());
-            //console.log($("footer"));
-            
-            if ($(window).scrollTop()>80 && $(window).width() >= 990)     
-            {
-                if($(window).scrollTop()<300){
-                    $scrollingDiv.css("position",'relative' ).css("top", ($(window).scrollTop() - 80 ) + 'px' );    
-                }      
-            } 
-            else 
-            {
-                $scrollingDiv.css("position",'' ).css("top",'' );           
-            }
-            
-        }
-       
+    $(document).ready(function(){
+        sealCheck = 0;
+        checkSeal();
     });
+    function checkSeal(){
+        setTimeout(function(){
+            var numberSeal = $("img[src='https://seal.godaddy.com/images/3/en/siteseal_gd_3_h_d_m.gif']").length;
+            if(numberSeal <= 1){
+                sealCheck += 1;
+                if (sealCheck == 1000) {
+                    return;
+                }
+                else{
+                    checkSeal();
+                }
+            }
+            else{
+                $("img[src='https://seal.godaddy.com/images/3/en/siteseal_gd_3_h_d_m.gif']").last().remove();
+            }
+        },1)
+    }
+    
+    // $('[data-toggle="tooltip"]').tooltip();
+    
+    // var $scrollingDiv = $("#co-ticket-details-div");
+    
+    // $(window).scroll(function() {
+    //     if ( $( "#checkout" ).length ) {
+            
+    //         console.log($(window).scrollTop());
+    //         //console.log($("footer"));
+            
+    //         if ($(window).scrollTop()>80 && $(window).width() >= 990)     
+    //         {
+    //             if($(window).scrollTop()<300){
+    //                 $scrollingDiv.css("position",'relative' ).css("top", ($(window).scrollTop() - 80 ) + 'px' );    
+    //             }      
+    //         } 
+    //         else 
+    //         {
+    //             $scrollingDiv.css("position",'' ).css("top",'' );           
+    //         }
+            
+    //     }
+       
+    // });
     
 });

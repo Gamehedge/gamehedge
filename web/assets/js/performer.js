@@ -45,7 +45,6 @@ function loadPage(){
         if(json.events && json.events.length > 0){
             _html = _html + "<ul>";
             $.each(json.events, function( index, value ) {
-                
                 var dateTodaytxt = moment().add(2,'h').format('YYYY-MM-DDTHH:mm:ss');
                 var dateEventtxt = value.occurs_at.replace("Z", "");
                 var dateToday = new Date(dateTodaytxt);
@@ -69,7 +68,7 @@ function loadPage(){
                     _html = _html + '<div class="location">' + value.venue.name + ' - ' + value.venue.location + '</div>';
                     _html = _html + '</div>';
                     _html = _html + '<div class="tickets-link col-md-2 col-xs-12">';
-                    _html = _html + '<div class="performer-green-bt btn-green-gradient">Sold Out <i class="fa fa-angle-right"></i></div>';
+                    _html = _html + '<div class="performer-green-bt btn-green-gradient">Sold Out</i></div>';
                     
                     
                     _html = _html + '</div>';
@@ -104,6 +103,7 @@ function loadPage(){
                     _html = _html + '</a>';
                     _html = _html + '</li>';
                 }
+                
                
                 
             });

@@ -199,9 +199,9 @@ switch($verb) {
         break;
     case 'promo_codes':
         $query  = array(
-            'code'              => 'edgar',
+            //'code'              => 'edgar',
             'page'              => 1,
-            'per_page'          => 10
+            'per_page'          => 10000
         );
         $e_data = $teClient->listPromotionCodes($query);
         $data = $e_data;

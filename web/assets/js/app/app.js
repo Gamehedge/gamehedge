@@ -131,10 +131,10 @@ app.controller('CheckoutCtrl', function($scope, $http){
     $scope.processing_credit_card = false;
     $scope.processing_billing_address = false;
     $scope.processing_shipping_address = false;
+    $scope.show_prom = false;
     $scope.cdata = {card_number: "", card_exp_month: "01", card_exp_year: "2016", card_cvv2: ""};
     $scope.sdata = {firstname: "", lastname: "", address1: "", address2: "", city: "", state: "", zipcode: ""};
     $scope.bdata = {firstname: "", lastname: "", address1: "", address2: "", city: "", state: "", zipcode: ""};
-    
     if(typeof credit_cards != 'undefined'){
         if(Object.keys(credit_cards).length > 0){
             $scope.has_card = true;
@@ -152,11 +152,11 @@ app.controller('CheckoutCtrl', function($scope, $http){
 		$scope.client_data = customer_data;
 		$scope.addresses   = addresses;
 		if($scope.has_card) {
-			$scope.data         = {optin: 1, shipping_address_id: $scope.client_data.primary_shipping_address.id, billing_address_id: $scope.client_data.primary_billing_address.id, card_id: $scope.client_data.primary_credit_card.id, phone_id: $scope.client_data.primary_phone_number.id, email_id: $scope.client_data.primary_email_address.id, shipping_option: $scope.shipping_data[shipping_id].id, ticket_format: ticket_format, fee: $scope.order_data.service_fee, qty: parseInt($scope.order_data.qty)};
+			$scope.data         = {optin: 0, shipping_address_id: $scope.client_data.primary_shipping_address.id, billing_address_id: $scope.client_data.primary_billing_address.id, card_id: $scope.client_data.primary_credit_card.id, phone_id: $scope.client_data.primary_phone_number.id, email_id: $scope.client_data.primary_email_address.id, shipping_option: $scope.shipping_data[shipping_id].id, ticket_format: ticket_format, fee: $scope.order_data.service_fee, qty: parseInt($scope.order_data.qty)};
             $scope.credit_cards = credit_cards;
 			$scope.credit_card  = $scope.credit_cards[$scope.data.card_id];
 		} else {
-			$scope.data         = {optin: 1, shipping_address_id: $scope.client_data.primary_shipping_address.id, billing_address_id: $scope.client_data.primary_billing_address.id, phone_id: $scope.client_data.primary_phone_number.id, email_id: $scope.client_data.primary_email_address.id, shipping_option: $scope.shipping_data[shipping_id].id, ticket_format: ticket_format, fee: $scope.order_data.service_fee, qty: parseInt($scope.order_data.qty)};
+			$scope.data         = {optin: 0, shipping_address_id: $scope.client_data.primary_shipping_address.id, billing_address_id: $scope.client_data.primary_billing_address.id, phone_id: $scope.client_data.primary_phone_number.id, email_id: $scope.client_data.primary_email_address.id, shipping_option: $scope.shipping_data[shipping_id].id, ticket_format: ticket_format, fee: $scope.order_data.service_fee, qty: parseInt($scope.order_data.qty)};
 		}
 		$scope.shipping_address = $scope.addresses[$scope.data.shipping_address_id];
 		$scope.billing_address  = $scope.addresses[$scope.data.billing_address_id];
@@ -305,7 +305,7 @@ app.controller('CheckoutCtrl', function($scope, $http){
             
 		};
 	} else {
-		$scope.data = {optin: 1, store_card: 1, samebilling: 1, shipping_option: $scope.shipping_data[shipping_id].id, ticket_format: ticket_format, fee: $scope.order_data.service_fee, qty: parseInt($scope.order_data.qty)};
+		$scope.data = {optin: 0, store_card: 1, samebilling: 1, shipping_option: $scope.shipping_data[shipping_id].id, ticket_format: ticket_format, fee: $scope.order_data.service_fee, qty: parseInt($scope.order_data.qty)};
 		$scope.toggleSame = function() {
 			if($scope.data.samebilling) {
 				$scope.data.sfirstname = $scope.data.bfirstname;
@@ -344,10 +344,29 @@ app.controller('CheckoutCtrl', function($scope, $http){
 		}
 	};
 	$scope.updateTotals = function() {
-		$scope.subtotal = $scope.data.qty * $scope.order_data.price;
-		$scope.getFees();
-		$scope.total = ($scope.data.qty * $scope.order_data.price) + parseFloat($scope.data.fee) + parseFloat($scope.shipping.price);
+		if($scope.data.percent == true && $scope.data.discount != 0){
+			$scope.subtotal = ($scope.data.qty * $scope.order_data.price)
+			$scope.getFees();
+			$scope.total = ($scope.subtotal + parseFloat($scope.data.fee) + parseFloat($scope.shipping.price)) * (1 - ($scope.data.discount/100));
+			document.getElementById("promo_value").innerHTML = "-"+(($scope.subtotal + parseFloat($scope.data.fee) + parseFloat($scope.shipping.price)) * ($scope.data.discount/100)).toFixed(2);
+		}
+		else if($scope.data.percent == false && $scope.data.discount != 0){
+			$scope.subtotal = ($scope.data.qty * $scope.order_data.price);
+			$scope.getFees();
+			$scope.total = ($scope.subtotal + parseFloat($scope.data.fee) + parseFloat($scope.shipping.price)) - $scope.data.discount;
+			document.getElementById("promo_value").innerHTML = "-"+String($scope.data.discount);
+		}
+		else{
+			$scope.subtotal = $scope.data.qty * $scope.order_data.price;
+			$scope.getFees();
+			$scope.total = ($scope.data.qty * $scope.order_data.price) + parseFloat($scope.data.fee) + parseFloat($scope.shipping.price);
+			document.getElementById("promo_value").innerHTML = "";
+		}
 	};
+	$scope.show_promo = function(){
+		$scope.show_prom = true;
+		
+	}
 	$scope.process = function() {
 		if(typeof $scope.toggleSame != 'undefined')
 			$scope.toggleSame();
@@ -363,8 +382,8 @@ app.controller('CheckoutCtrl', function($scope, $http){
 				//}
                 
                 $scope.procesingOrder = true;
-				var promise = $http.post('/order/process', $scope.data).success(function(data, status, headers, config) {
-					if(data.status == 1) {
+                var promise = $http.post('/order/process', $scope.data).success(function(data, status, headers, config) {
+                	if(data.status == 1) {
                         //$scope.procesingOrder = false;
 						window.location.href = '/order/confirm';
 					} else if(data.status == 2) {
@@ -432,6 +451,37 @@ app.controller('CheckoutCtrl', function($scope, $http){
             swal({title: "Warning!", text:  "Please accept our terms of Service before you continues.", type: "warning", confirmButtonColor: "#a8c94b"});
 		}
 	};
+	$scope.getPromos = function() {
+		var req = {
+		method: 'GET',
+		url: '/external/promo_codes',
+		data: { code: 'edgar' },
+		}
+		$http(req).then(
+			function(response){
+				console.log(response.data);
+				$scope.promo_codes = response.data.promotion_codes;
+			}, 
+			function(response){
+				console.log("something went wrong");
+			});
+	}
+	$scope.checkPromos = function() {
+		for(i=0;i<$scope.promo_codes.length;i++){
+			if($scope.promo_codes[i].code == $scope.data.current_code){
+				$scope.data.discount = $scope.promo_codes[i].value;
+				$scope.data.percent = $scope.promo_codes[i].percentage;
+				$scope.updateTotals();
+				return;
+			}
+			else{
+				$scope.data.discount = 0;
+				$scope.data.percent = false;
+				$scope.updateTotals();
+			}
+		}
+	}
+	$scope.getPromos();
 	$scope.updateTotals();
 });
 
