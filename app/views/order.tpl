@@ -706,15 +706,13 @@
                             <div class="row text-center" style="margin-top:10px;">
                                 <img src="/assets/img/Checkout-pledge.jpg" width="100%">
                             </div> -->
-                            <div class="row" style="height:100%">
+                            <div class="row" style="height:100%;">
                                 <div class="col-xs-12 col-md-6 left_badge">
                                     <div class="row pledge-checkout ">
-                                        <div class="col-xs-12">
-                                            <h2 class="text-center" style="margin-bottom: 10px;">GAMEHEDGE PLEDGE</h2>
-                                        </div>
-                                        <div class="col-xs-3 text-center" style="padding:0"><img src="/assets/img/pledge.png" width="90px"></div>
-                                        <div class="col-xs-9">
-                                            
+                                        
+                                        <div class="col-xs-4 text-center" style="padding:0"><img src="/assets/img/pledge.png" style="max-height:156px"></div>
+                                        <div class="col-xs-8" style="padding-right: 0;">
+                                            <h2 class="text-center" style="margin-bottom: 10px;"><strong>GAMEHEDGE PLEDGE</strong></h2>
                                             <p class="text-left"><strong>Tickets Will:</strong></p>
                                             
                                                 <p class="text-left">- Always be in time for the event.</p>
@@ -724,13 +722,13 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-md-6 right_badge">
-                                    <div class="row pledge-checkout ">
+                                    <div class="row pledge-checkout " >
                                         <div class="col-xs-12">
-                                            <h2 class="text-center" style="margin-bottom: 10px;">GOOD GAME GUARANTEE</h2>
-                                        </div>
-                                        <div class="col-xs-3 text-center"  style="padding:0"><img src="/assets/img/badge-gamehedge.png" width="90px"></div>
-                                        <div class="col-xs-9">
                                             
+                                        </div>
+                                        <div class="col-xs-5 col-sm-4 col-md-5 text-center"  style="padding:0"><img src="/assets/img/badge-gamehedge.png"></div>
+                                        <div class="col-xs-7 col-sm-8 col-md-7" style="padding-right: 0;">
+                                            <h2 class="text-center" style="margin-bottom: 10px;margin-top:4px"><strong>GOOD GAME GUARANTEE</strong></h2>
                                             <p class="text-left"><strong>With every ticket:</strong></p>
                                             
                                             If the home team loses by 5 runs or more, GameHedge will refund 50% of your ticket price at no additional cost to you.

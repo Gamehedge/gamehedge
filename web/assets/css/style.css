@@ -1110,7 +1110,7 @@ section#tickets .seat-holder {
 }
 
 #badges-order{
-	height: 180px;
+	height: 150px;
 }
 .left_badge{
 	height:100%;
@@ -1121,6 +1121,11 @@ section#tickets .seat-holder {
 	height:100%;
 	padding-left:10px;
 	padding-right:35px;
+}
+@media(max-width: 1199px) {
+    #badges-order{
+		height: 180px;
+	}
 }
 @media(max-width: 991px) {
     #badges-order{
@@ -1415,7 +1420,8 @@ main#account #account-options ul li {
 .pledge-checkout img {
     margin: 5px;
     width: 100%;
-    max-width: 100px;
+    max-width: 130px;
+    max-height: 130px;
 }
 
 @media(min-width: 920px) {
