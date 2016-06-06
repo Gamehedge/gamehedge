@@ -700,7 +700,7 @@
                                         <div class="col-xs-12">
                                             <h2 class="text-center" style="margin-bottom: 10px;">GAMEHEDGE PLEDGE</h2>
                                         </div>
-                                        <div class="col-xs-4 text-center"><img src="/assets/img/pledge.png" width="90px"></div>
+                                        <div class="col-xs-4 text-center" style="padding:0"><img src="/assets/img/pledge.png" width="90px"></div>
                                         <div class="col-xs-8">
                                             
                                             <p class="text-left"><strong>Tickets Will:</strong></p>
@@ -716,7 +716,7 @@
                                         <div class="col-xs-12">
                                             <h2 class="text-center" style="margin-bottom: 10px;">GOOD GAME GUARANTEE</h2>
                                         </div>
-                                        <div class="col-xs-4 text-center"><img src="/assets/img/badge-gamehedge.png" width="90px"></div>
+                                        <div class="col-xs-4 text-center"  style="padding:0"><img src="/assets/img/badge-gamehedge.png" width="90px"></div>
                                         <div class="col-xs-8">
                                             
                                             <p class="text-left"><strong>With every ticket:</strong></p>
