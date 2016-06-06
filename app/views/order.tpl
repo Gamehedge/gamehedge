@@ -793,7 +793,7 @@
                     <div id="co-ticket-details-div"  style="height:100%">
                         <section class="order-detail-cont">
                             <div class="hidden-xs hidden-sm col-md-12" style=" padding: 0;margin-bottom: 12px;">
-                                <h2 class="event underlined big">Other Details</h2>
+                                <h2 class="event underlined big">Event Details</h2>
                                 <div>{$event_name}</div>
                                 <div class="date">{$event_date}</div>
                                 <div class="location">{$venue_name}, {$venue_location}</div>
