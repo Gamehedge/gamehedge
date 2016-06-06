@@ -23,6 +23,12 @@
                         
                         
                         <section id="new-customer" style="z-index: 1; position: relative;" ng-if="existing == 0" ng-if="!client">
+                            <div class="hidden-md hidden-lg " style=" padding: 0;margin-bottom: 12px;">
+                                <h2 class="event underlined big">{$event_name}</h2>
+                                <div class="date">{$event_date}</div>
+                                <div class="location">{$venue_name}, {$venue_location}</div>
+                                <div class="seats">Section {$ticket_section}, Row {$ticket_row}</div>
+                            </div>
                             <div class="row" ng-if="!client" >
                                 <div class="col-md-12 text-right" style="margin-top: 20px;">
                                     <p id="already_acc">Already have an account? Please <a href="/member/login">login</a> before proceeding.</p>
@@ -774,10 +780,12 @@
                     
                     <div id="co-ticket-details-div">
                         <section class="order-detail-cont">
-                            <h2 class="event underlined big">{$event_name}</h2>
-                            <div class="date">{$event_date}</div>
-                            <div class="location">{$venue_name}, {$venue_location}</div>
-                            <div class="seats">Section {$ticket_section}, Row {$ticket_row}</div>
+                            <div class="hidden-xs hidden-sm col-md-12" style=" padding: 0;margin-bottom: 12px;">
+                                <h2 class="event underlined big">{$event_name}</h2>
+                                <div class="date">{$event_date}</div>
+                                <div class="location">{$venue_name}, {$venue_location}</div>
+                                <div class="seats">Section {$ticket_section}, Row {$ticket_row}</div>
+                            </div>
                             <h2 class="underlined big">Order Summary</h2>
                             <div class="row order-detail">
                                 <div class="col-xs-6">Ticket Price</div>

@@ -666,6 +666,9 @@ section#team-header, section#venue-header {
 	background-size: cover;
 	background-position: center center;
 }
+section#team-header{
+	padding: 120px 0 0 0;
+}
 section#team-header h1 , section#venue-header h1{
 	margin: 0;
 	margin-bottom: 5px;
