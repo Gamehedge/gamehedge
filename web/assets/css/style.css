@@ -1109,18 +1109,33 @@ section#tickets .seat-holder {
     }
 }
 
+.order_row{
+	height: 575px;
+}
+
+@media(max-width: 1199px) {
+    .order_row{
+		height: 545px;
+	}
+}
+@media(max-width: 991px) {
+    .order_row{
+		height: auto;
+	}
+}
+
 #badges-order{
 	height: 150px;
 }
 .left_badge{
 	height:100%;
-	padding-left:35px;
-	padding-right:10px;
+	padding-left:30px;
+	padding-right:15px;
 }
 .right_badge{
 	height:100%;
-	padding-left:10px;
-	padding-right:35px;
+	padding-left:15px;
+	padding-right:30px;
 }
 @media(max-width: 1199px) {
     #badges-order{
@@ -1133,14 +1148,14 @@ section#tickets .seat-holder {
 	}
 	.left_badge{
 		height:100%;
-		padding-left:35px;
-		padding-right:35px;
+		padding-left:30px;
+		padding-right:30px;
 		margin-bottom: 5px;
 	}
 	.right_badge{
 		height:100%;
-		padding-left:35px;
-		padding-right:35px;
+		padding-left:30px;
+		padding-right:30px;
 	}
 }
 
@@ -1263,6 +1278,7 @@ main#checkout #shipping_options ul {
 	padding: 20px 20px;
 	border: 1px solid lightgray;
 	border-radius: 5px;
+	height: 100%;
 }
 
 #already_acc{

@@ -11,15 +11,15 @@
                             </div>
 
                         </div>
-			<div class="row">
+			<div class="row order_row">
 				
-				<div class="col-md-7" >
+				<div class="col-md-7" style="height:100%">
                     <!-- <div class="row">
                         <div class="col-md-12" style="height:30px;">
                             <h1 class="hidden">Secure Checkout</h1>
                         </div>
                     </div> -->
-                    <div class="order-detail-cont">
+                    <div class="order-detail-cont" >
                         
                         
                         <section id="new-customer" style="z-index: 1; position: relative;" ng-if="existing == 0" ng-if="!client">
@@ -133,7 +133,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6 text-center">
+                                <div class="col-md-6 text-center" style="margin-top: -3px;">
                                     <span id="siteseal">
                                         <script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script>
                                     </span>
@@ -290,7 +290,7 @@
                                 <div class="location">{$venue_name}, {$venue_location}</div>
                                 <div class="seats">Section {$ticket_section}, Row {$ticket_row}</div>
                             </div>
-                            <h2 class="no-margin underlined big">Shipping Information</h2>
+                            <h2 class="underlined big">Shipping Information</h2>
                             <div id="shipping_holder" ng-show="!toggle_edit.shipping">
                                 <div class="clearfix">
                                     <div class="pull-right"><a class="button medium gray" ng-click="toggleEdit('shipping')">Edit</a></div>
@@ -782,7 +782,7 @@
                     
                         
 				</div>
-                <div class="col-md-5" >
+                <div class="col-md-5"  style="height:100%">
                     
                     <!-- <div class="row">
                         <div class="col-md-12" style="height:30px;"m>
@@ -790,10 +790,11 @@
                         </div>
                     </div> -->
                     
-                    <div id="co-ticket-details-div">
+                    <div id="co-ticket-details-div"  style="height:100%">
                         <section class="order-detail-cont">
                             <div class="hidden-xs hidden-sm col-md-12" style=" padding: 0;margin-bottom: 12px;">
-                                <h2 class="event underlined big">{$event_name}</h2>
+                                <h2 class="event underlined big">Other Details</h2>
+                                <div>{$event_name}</div>
                                 <div class="date">{$event_date}</div>
                                 <div class="location">{$venue_name}, {$venue_location}</div>
                                 <div class="seats">Section {$ticket_section}, Row {$ticket_row}</div>
