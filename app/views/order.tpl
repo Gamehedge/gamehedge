@@ -284,6 +284,12 @@
                                 <!--div class="form-group">
                                     <select id="qty" name="qty" class="form-control" ng-model="data.qty" ng-options="split for split in order_data.splits" ng-change="updateTotals()"></select>
                                 </div-->
+                            <div class="hidden-md hidden-lg " style=" padding: 0;margin-bottom: 12px;">
+                                <h2 class="event underlined big">{$event_name}</h2>
+                                <div class="date">{$event_date}</div>
+                                <div class="location">{$venue_name}, {$venue_location}</div>
+                                <div class="seats">Section {$ticket_section}, Row {$ticket_row}</div>
+                            </div>
                             <h2 class="no-margin underlined big">Shipping Information</h2>
                             <div id="shipping_holder" ng-show="!toggle_edit.shipping">
                                 <div class="clearfix">
