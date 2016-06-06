@@ -383,6 +383,7 @@ app.controller('CheckoutCtrl', function($scope, $http){
                 
                 $scope.procesingOrder = true;
                 var promise = $http.post('/order/process', $scope.data).success(function(data, status, headers, config) {
+                	alert("Status "+String(data.status));
 					if(data.status == 1) {
                         //$scope.procesingOrder = false;
 						window.location.href = '/order/confirm';
