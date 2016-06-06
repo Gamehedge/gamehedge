@@ -706,7 +706,7 @@
                             <div class="row text-center" style="margin-top:10px;">
                                 <img src="/assets/img/Checkout-pledge.jpg" width="100%">
                             </div> -->
-                            <div class="row" style="height:100%;">
+                            <!-- <div class="row" style="height:100%;">
                                 <div class="col-xs-12 col-md-6 left_badge">
                                     <div class="row pledge-checkout ">
                                         
@@ -734,6 +734,14 @@
                                             If the home team loses by 5 runs or more, GameHedge will refund 50% of your ticket price at no additional cost to you.
                                         </div>
                                     </div>
+                                </div>
+                            </div> -->
+                            <div class="row" style="height:100%;">
+                                <div class="col-xs-12 col-md-6 left_badge text-center">
+                                   <img src="/assets/img/Checkout-pledge.jpg" style="width: 100%; max-width:433px;max-height:160px;">
+                                </div>
+                                <div class="col-xs-12 col-md-6 right_badge text-center">
+                                    <img src="/assets/img/Checkout-badge.jpg" style="width: 100%; max-width:433px;max-height:160px;">
                                 </div>
                             </div>
                         </div>
