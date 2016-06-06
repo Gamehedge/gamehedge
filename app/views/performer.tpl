@@ -6,7 +6,7 @@
 </script>
 <section id="team-header">
 	<div class="container">
-		<h1>{$title}</h1>
+		<h1 style="color: #333333;text-transform: none;">{$title}</h1>
 	</div>
 </section>
 <main>

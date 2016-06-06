@@ -135,7 +135,6 @@
                                 </div>
                             </div>
                             
-                            <h2 class="underlined big">Billing Address</h2>
                             <!--
                             <input type="checkbox" id="store_card" name="store_card" ng-model="data.store_card" ng-true-value="1" ng-false-value="0" /> Store my information in our secure system for future purchases. -->
                             <h2 class="underlined big" class="hidden">Billing Address</h2>
