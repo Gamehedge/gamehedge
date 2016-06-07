@@ -421,7 +421,8 @@ footer .footer-bottom {
 #home section#hero #wrapper #content {
 	position: relative;
 	z-index: 4;
-    padding-top: 120px;
+    padding-top: 65px;
+    padding-bottom: 65px;
 	/*top: 30%;
 	-webkit-transform: translateY(-30%);
 	-ms-transform: translateY(-30%);
@@ -509,7 +510,10 @@ body#home h1, body#home main h2 {
 }
 body#home main h2 {
 	margin: 10px 0 10px 0;
-	font-size: 42px;
+	font-size: 28px;
+	font-family: 'Arial Nova',sans-serif;
+	text-transform: none;
+	color: black;
 }
 #home .guarantee-item, section#how-it-works {
 	text-align: center;

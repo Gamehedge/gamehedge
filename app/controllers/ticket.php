@@ -465,7 +465,7 @@ case '';
 	$smarty->assign('css', '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" />');
 	$smarty->assign('hscripts', $hscripts);
 	$header = $smarty->fetch('shared/header.tpl');
-    $menu = $smarty->fetch('shared/menu.tpl');
+    $menu = $smarty->fetch('shared/menu2.tpl');
 	// Handle Footer
 	$smarty->assign('fscripts', $fscripts);
 	$footer = $smarty->fetch('shared/footer.tpl');

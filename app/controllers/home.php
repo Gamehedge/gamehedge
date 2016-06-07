@@ -11,7 +11,7 @@ $smarty->assign('head_tags', '');
 $smarty->assign('css', '');
 $smarty->assign('hscripts', '');
 $header = $smarty->fetch('shared/header.tpl');
-$menu = $smarty->fetch('shared/menu.tpl');
+$menu = $smarty->fetch('shared/menu2.tpl');
 // Handle Footer
 $smarty->assign('fscripts', '<script src="/assets/js/moment.min.js"></script><script src="/assets/js/home.js"></script>');
 $footer = $smarty->fetch('shared/footer.tpl');
