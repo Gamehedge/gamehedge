@@ -867,7 +867,7 @@
                             </div>
                             <div class="row order-detail" style="margin-top:5px; margin-bottom: 5px;" ng-show="show_prom">
                                 <div class="col-xs-6">
-                                    <input style="height:28px;" id="promo_code" name="promo_code" class="form-control" ng-model="data.current_code" ng-change="checkPromos()" placeholder="Promo code">
+                                    <input style="height:28px;" id="promo_code" name="promo_code" class="form-control" ng-model="data.current_code" ng-change="checkPromos()" placeholder="Promo code" type="text" autocorrect="off" autocapitalize="none">
                                 </div>
                             </div>
                             <hr />
