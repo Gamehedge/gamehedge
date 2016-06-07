@@ -154,7 +154,7 @@ a {
 .sports-dropdown-menu {
 	position: absolute;
 	top: 26px;
-	left: -375px !important;
+	/*left: -375px !important;*/
 	z-index: 6001;
 	width: 670px;
 	border-bottom: 3px solid #a8c94b;
@@ -520,7 +520,7 @@ body#home main h2 {
 }
 #home .guarantee-item .img-holder, section#how-it-works .guarantee-item .img-holder {
 	margin-bottom: 0px;
-	height: 138px;
+	height: 60px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -531,9 +531,7 @@ body#home main h2 {
 	}
 }
 #home .guarantee-item img, section#how-it-works .guarantee-item img {
-	width: 100%;
-	max-width: 150px;
-	height: auto;
+	height: 100%;
 }
 #home .guarantee-item p, section#how-it-works .guarantee-item p {
 	margin: 0;

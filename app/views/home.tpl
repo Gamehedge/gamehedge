@@ -32,32 +32,24 @@
 		<div id="results" ng-if="events.length > 0">
 			<h2>How Does the Good Game Guarantee Work?</h2>
 			<div class="row">
-				<div class="col-md-2"></div>
-				<div class="col-md-2">
+				<div class="col-md-4">
 					<div class="guarantee-item margin-divider-half">
 						<div class="img-holder"><img src="/assets/img/icon-tickets.png" alt="Tickets" /></div>
-						<p>Find your game &amp; purchase your tickets. Every ticket comes with our Good Game Guarantee at no additional cost!</p>
+						<p>Purchase your tickets. Every ticket comes with our Good Game Guarantee at no aditional cost.</p>
 					</div>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-4">
 					<div class="guarantee-item margin-divider-half">
-						<div class="img-holder"><img src="/assets/img/icon-stadium.png" alt="Stadium" /></div>
-						<p>Attend the game &amp; enjoy your team with no worries.</p>
+						<div class="img-holder"><img src="/assets/img/icon-stadium.png" alt="Scoreboard" /></div>
+						<p>If the home team loses by five or more runs, you recieve 50% of the ticket price back.</p>
 					</div>
 				</div>
-				<div class="col-md-2">
-					<div class="guarantee-item margin-divider-half">
-						<div class="img-holder"><img src="/assets/img/icon-scoreboard.png" alt="Scoreboard" /></div>
-						<p>If the home team loses by five or more runs, you get 50% of the ticket price back.</p>
-					</div>
-				</div>
-				<div class="col-md-2">
+				<div class="col-md-4">
 					<div class="guarantee-item margin-divider-half">
 						<div class="img-holder"><img src="/assets/img/icon-handshake.png" alt="Handshake" /></div>
-						<p>Just come back to GameHedge.com for your refund!</p>
+						<p>Just log on to GameHedge.com to claim your refund!</p>
 					</div>
 				</div>
-				<div class="col-md-2"></div>
 			</div>
 			<h2 id="upcoming_title">Upcoming Games Near You</h2>
             <div id="home-loading-data" class="row text-center">
