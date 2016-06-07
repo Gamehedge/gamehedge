@@ -510,6 +510,10 @@ body#home h1, body#home main h2 {
 }
 body#home main h2 {
 	margin: 10px 0 10px 0;
+	font-size: 42px;
+}
+.headerNew {
+	margin: 10px 0 10px 0;
 	font-size: 28px;
 	font-family: 'Arial Nova',sans-serif;
 	text-transform: none;
@@ -518,7 +522,7 @@ body#home main h2 {
 #home .guarantee-item, section#how-it-works {
 	text-align: center;
 }
-#home .guarantee-item .img-holder, section#how-it-works .guarantee-item .img-holder {
+#home .guarantee-item .img-holder, section#how-it-works .guarantee-item .img-holder, .img-holder-performer {
 	margin-bottom: 0px;
 	height: 60px;
 	display: flex;
@@ -530,7 +534,7 @@ body#home main h2 {
 		display: block;
 	}
 }
-#home .guarantee-item img, section#how-it-works .guarantee-item img {
+#home .guarantee-item img, section#how-it-works .guarantee-item img, .img-holder-performer img {
 	height: 100%;
 }
 #home .guarantee-item p, section#how-it-works .guarantee-item p {
@@ -825,13 +829,13 @@ section#games ul li .date .time, section#game-header .date .time, section#order-
 section#games ul li .event .name, section#game-header .event h1, section#order-header .event h1 {
 	margin: 0;
 	font-size: 19px;
-	text-transform: uppercase;
+	/*text-transform: uppercase;*/
 	line-height: 18px;
 }
 section#games ul li .event .location, section#game-header .event .location, section#order-header .event .location {
 	margin-top: 5px;
 	font-size: 12px;
-	text-transform: uppercase;
+	/*text-transform: uppercase;*/
 	line-height: 12px;
 }
 section#games ul li .tickets-link {

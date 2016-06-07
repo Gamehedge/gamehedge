@@ -30,7 +30,7 @@
 <main>
 	<div class="container">
 		<div id="results" ng-if="events.length > 0">
-			<h2>How Does the Good Game Guarantee Work?</h2>
+			<h2 class="headerNew">How Does the Good Game Guarantee Work?</h2>
 			<div class="row">
 				<div class="col-md-4">
 					<div class="guarantee-item margin-divider-half">
@@ -51,7 +51,7 @@
 					</div>
 				</div>
 			</div>
-			<h2 id="upcoming_title">Upcoming Games Near You</h2>
+			<h2 class="headerNew" id="upcoming_title">Upcoming Games Near You</h2>
             <div id="home-loading-data" class="row text-center">
                 <img src="/assets/img/loadinfo.gif">
             </div>
