@@ -738,10 +738,10 @@
                             </div> -->
                             <div class="row" style="height:100%;">
                                 <div class="col-xs-12 col-md-6 left_badge text-center">
-                                   <img src="/assets/img/GameHedgePledgeWhiteLine.jpeg" style="width: 100%; max-width:433px;max-height:160px;">
+                                   <img src="/assets/img/Resized Pledge Badge.jpeg" style="width: 100%; max-width:433px;max-height:160px;">
                                 </div>
                                 <div class="col-xs-12 col-md-6 right_badge text-center">
-                                    <img src="/assets/img/GGGBigWhiteLine.jpeg" style="width: 100%; max-width:433px;max-height:160px;">
+                                    <img src="/assets/img/GGGBadgeResized.jpeg" style="width: 100%; max-width:433px;max-height:160px;">
                                 </div>
                             </div>
                         </div>
