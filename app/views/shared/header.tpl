@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		
         <link rel="stylesheet" href="/assets/css/bundle.min.css?v1">
-		<link rel="stylesheet" href="/assets/css/style.css?v155">
+		<link rel="stylesheet" href="/assets/css/style.css?v157">
 		<link rel="stylesheet" href="/assets/css/jquery-ui.min.css" media="none" onload="if(media!='all')media='all'">
         <noscript><link rel="stylesheet" href="/assets/css/jquery-ui.min.css"></noscript>
 		{$css}

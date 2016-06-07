@@ -662,9 +662,18 @@ body#home main h2 {
 section#team-header, section#venue-header {
 	margin-bottom: 30px;
 	padding: 60px 0;
-	background: transparent url('/assets/img/team-hero2.jpg') 0 0 no-repeat;
+	background: transparent url('/assets/img/HeaderBatter.jpeg') 0 0 no-repeat;
 	background-size: cover;
 	background-position: center center;
+	margin-top: -80px;
+}
+@media(max-width: 991px) {
+	section#team-header, section#venue-header {
+		background: transparent url('/assets/img/MobileHitter.jpeg') 0 0 no-repeat;
+		background-size: cover;
+		background-position: center center;
+	    margin-top: -80px;
+	}
 }
 section#team-header{
 	padding: 120px 0 0 0;
