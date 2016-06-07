@@ -365,7 +365,7 @@ app.controller('CheckoutCtrl', function($scope, $http){
 	};
 	$scope.show_promo = function(){
 		$scope.show_prom = true;
-		
+		console.log("Shown");
 	}
 	$scope.process = function() {
 		if(typeof $scope.toggleSame != 'undefined')
