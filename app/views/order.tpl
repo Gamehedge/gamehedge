@@ -1,8 +1,8 @@
 {$header}
 {$menu}
 <main id="checkout" ng-controller="CheckoutCtrl">
-	<div class="container">
-		<form name="frmCheckout" method="POST" ng-submit="process()" id="formCheckout">
+    <div class="container">
+        <form name="frmCheckout" method="POST" ng-submit="process()" id="formCheckout">
         <div class="row">
                             <div class="col-md-12 text-right">
                                 <p style="margin-top:10px;">Contact us:  <i style="color:#A8C94B; font-size:1.5em; vertical-align: middle;" class="fa fa-phone-square" aria-hidden="true"></i> <span style="font-size:1.5em; vertical-align: middle;"><a href="tel:908-312-3267">(908) 312-3267</a></span>
@@ -11,9 +11,9 @@
                             </div>
 
                         </div>
-			<div class="row order_row">
-				
-				<div class="col-md-7" style="height:100%">
+            <div class="row order_row">
+                
+                <div class="col-md-7" style="height:100%">
                     <!-- <div class="row">
                         <div class="col-md-12" style="height:30px;">
                             <h1 class="hidden">Secure Checkout</h1>
@@ -738,10 +738,10 @@
                             </div> -->
                             <div class="row" style="height:100%;">
                                 <div class="col-xs-12 col-md-6 left_badge text-center">
-                                   <img src="/assets/img/GameHedgePledgeWhiteLine.jpeg" style="width: 100%; max-width:433px;max-height:160px;">
+                                   <img src="/assets/img/Resized Pledge Badge.jpeg" style="width: 100%; max-width:433px;max-height:160px;">
                                 </div>
                                 <div class="col-xs-12 col-md-6 right_badge text-center">
-                                    <img src="/assets/img/GGGBigWhiteLine.jpeg" style="width: 100%; max-width:433px;max-height:160px;">
+                                    <img src="/assets/img/GGGBadgeResized.jpeg" style="width: 100%; max-width:433px;max-height:160px;">
                                 </div>
                             </div>
                         </div>
@@ -781,7 +781,7 @@
                     </div>
                     
                         
-				</div>
+                </div>
                 <div class="col-md-5"  style="height:100%">
                     
                     <!-- <div class="row">
@@ -895,9 +895,9 @@
                         
                     </div>
                 </div>
-			</div>
-		</form>
-	</div>
+            </div>
+        </form>
+    </div>
 </main>
 <iframe frameborder="0" height="1" scrolling="no" src="/order/ks" width="1"></iframe>
 
