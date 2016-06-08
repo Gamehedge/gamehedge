@@ -14,30 +14,29 @@
 <main>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
+			
+			<div class="col-md-9">
 				<h2 class="headerNew text-center">How Does the Good Game Guarantee Work?</h2>
 				<div class="row">
 					<div class="col-md-4">
 						<div class="guarantee-item margin-divider-half">
 							<div class="img-holder-performer"><img src="/assets/img/icon-tickets.png" alt="Tickets" /></div>
-							<p>Purchase your tickets. Every ticket comes with our Good Game Guarantee at no aditional cost.</p>
+							<p class="text-center" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Purchase your tickets. Every ticket comes with our Good Game Guarantee at no aditional cost.</p>
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="guarantee-item margin-divider-half">
 							<div class="img-holder-performer"><img src="/assets/img/icon-stadium.png" alt="Scoreboard" /></div>
-							<p>If the home team loses by five or more runs, you recieve 50% of the ticket price back.</p>
+							<p class="text-center" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">If the home team loses by five or more runs, you receive 50% of the ticket price back.</p>
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="guarantee-item margin-divider-half">
 							<div class="img-holder-performer"><img src="/assets/img/icon-handshake.png" alt="Handshake" /></div>
-							<p>Just log on to GameHedge.com to claim your refund!</p>
+							<p class="text-center" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Just log on to GameHedge.com to claim your refund!</p>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-md-9">
                 <div id="home-loading-data" class="row text-center">
                     <img src="/assets/img/loadinfo.gif">
                 </div>
@@ -89,7 +88,7 @@
 			</div>
 			<div class="col-md-3">
 				<aside id="gamehedge-about">
-					<p>Your Team. Your Tickets.</p>
+					<!-- <p>Your Team. Your Tickets.</p> -->
 					<!-- <img src="/assets/img/logo-grey.png" alt="GameHedge" /> -->
 					<div class="sub-text">{$team.subtext}</div>
 					<!-- <h2>Here's How it Works</h2>

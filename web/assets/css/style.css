@@ -514,9 +514,9 @@ body#home main h2 {
 }
 .headerNew {
 	margin: 10px 0 10px 0;
-	font-size: 28px;
+	font-size: 28px !important;
 	font-family: 'Arial Nova',sans-serif;
-	text-transform: none;
+	text-transform: capitalize;
 	color: black;
 }
 #home .guarantee-item, section#how-it-works {
@@ -528,6 +528,7 @@ body#home main h2 {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	margin-bottom: 20px;
 }
 @-moz-document url-prefix() {
 	body#home .guarantee-item .img-holder, section#how-it-works .guarantee-item .img-holder {
@@ -540,6 +541,7 @@ body#home main h2 {
 #home .guarantee-item p, section#how-it-works .guarantee-item p {
 	margin: 0;
 	font-size: 12px;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 #home .game-item {
 	margin-top: 20px;

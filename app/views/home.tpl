@@ -41,7 +41,7 @@
 				<div class="col-md-4">
 					<div class="guarantee-item margin-divider-half">
 						<div class="img-holder"><img src="/assets/img/icon-stadium.png" alt="Scoreboard" /></div>
-						<p>If the home team loses by five or more runs, you recieve 50% of the ticket price back.</p>
+						<p>If the home team loses by five or more runs, you receive 50% of the ticket price back.</p>
 					</div>
 				</div>
 				<div class="col-md-4">
