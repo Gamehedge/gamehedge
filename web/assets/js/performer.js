@@ -31,7 +31,7 @@ function loadPage(){
     $("#games").slideUp(300);
     $("#home-loading-data").slideDown(300);
     
-    $.getJSON( "/external/performer_events", {actual_date: moment().add(2,'h').format('YYYY-MM-DD HH:mm:ss'), id: _id, page: _page, per_page: _per_page, home_only_games: _home_only_games} )
+    $.getJSON( "/external/performer_events", {actual_date: moment().format('YYYY-MM-DD HH:mm:ss'), id: _id, page: _page, per_page: _per_page, home_only_games: _home_only_games} )
       .done(function( json ) {
         var _html = "";
         $("#home-loading-data").slideUp(300);
@@ -49,6 +49,8 @@ function loadPage(){
                 var dateEventtxt = value.occurs_at.replace("Z", "");
                 var dateToday = new Date(dateTodaytxt);
                 var dateEvent = new Date(dateEventtxt);
+                console.log(dateEvent)
+                console.log(dateToday)
                 if(dateEvent < dateToday){
                     _html = _html + '<li class="clearfix">';
                     _html = _html + '<div>'
@@ -67,7 +69,7 @@ function loadPage(){
                     
                     _html = _html + '<div class="location">' + value.venue.name + ' - ' + value.venue.location + '</div>';
                     _html = _html + '</div>';
-                    _html = _html + '<div class="tickets-link col-md-2 col-xs-12 text-center" style="padding: 0;">>';
+                    _html = _html + '<div class="tickets-link col-md-2 col-xs-12 text-center" style="padding: 0;">';
                     _html = _html + '<button  style="text-transform:none;" class="button green">Sold Out</button>';
                     
                     
@@ -98,7 +100,6 @@ function loadPage(){
                     if(value.available_count < 20){
                         _html = _html + '<div class="text-center alert-text">NOT MANY LEFT</div>';
                     }
-                    console.log(value);
                     _html = _html + '</div>';
                     _html = _html + '</a>';
                     _html = _html + '</li>';
