@@ -94,11 +94,11 @@ function loadPage(){
                     _html = _html + '<div class="location">' + value.venue.name + ' - ' + value.venue.location + '</div>';
                     _html = _html + '</div>';
                     _html = _html + '<div class="tickets-link col-md-2 col-xs-12">';
-                    _html = _html + '<div class="performer-green-bt btn-green-gradient">Buy Tickets <i class="fa fa-angle-right"></i></div>';
+                    _html = _html + '<div class="performer-green-bt btn-green-gradient">From $' + value.min_price + ' <i class="fa fa-angle-right"></i></div>';
                     if(value.available_count < 20){
                         _html = _html + '<div class="text-center alert-text">NOT MANY LEFT</div>';
                     }
-                    
+                    console.log(value);
                     _html = _html + '</div>';
                     _html = _html + '</a>';
                     _html = _html + '</li>';

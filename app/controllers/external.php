@@ -22,7 +22,7 @@ switch($verb) {
                                 'apiSecret'  => Config::te_api_secret()]);
 
     $query  = array(//'performer_id'      => 16425,//$_GET["id"],
-        'min_and_max_price' => true,
+        'min_and_max_price' => "true",
         'category_id'       => Config::te_categoryid(),
         'page'              => 1,//(int)$_GET["page"],
         'per_page'          => 1,//(int)$_GET["per_page"],
@@ -31,7 +31,8 @@ switch($verb) {
         //'order_by'          => 'events.occurs_at ASC, events.popularity_score DESC');
         );
     $e_data = $teClient->listEvents($query);
-    $data = $e_data;
+    $event = new Event(121192);
+    $data = $event;
     /*
         ///////// THIS SCRIPT IS THE ONE THAT UPDATES THE DATABASE FOR THE EVENTS EVERYNIGHT
         $query  = array(//'performer_id'      => 16425,//$_GET["id"],

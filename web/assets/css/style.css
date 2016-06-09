@@ -667,6 +667,25 @@ body#home main h2 {
 	text-decoration: none;
 }
 
+.GGGdiv {
+    height: 56px;
+    line-height: 56px;
+    text-align: center;
+    border-right: gray;
+    border-left: gray;
+    border-width: 1px;
+    border-style: solid;
+    border-bottom: none;
+    border-top: none;
+    }
+.GGGtext{
+	font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 12px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+
 section#team-header, section#venue-header {
 	margin-bottom: 30px;
 	padding: 60px 0;
