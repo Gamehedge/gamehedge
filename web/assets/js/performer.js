@@ -68,7 +68,7 @@ function loadPage(){
                     _html = _html + '<div class="location">' + value.venue.name + ' - ' + value.venue.location + '</div>';
                     _html = _html + '</div>';
                     _html = _html + '<div class="tickets-link col-md-2 col-xs-12">';
-                    _html = _html + '<div class="performer-green-bt btn-green-gradient">Sold Out</i></div>';
+                    _html = _html + '<button  style="text-transform:none;width: 104%;" class="button green">Sold Out</button>';
                     
                     
                     _html = _html + '</div>';
@@ -94,7 +94,7 @@ function loadPage(){
                     _html = _html + '<div class="location">' + value.venue.name + ' - ' + value.venue.location + '</div>';
                     _html = _html + '</div>';
                     _html = _html + '<div class="tickets-link col-md-2 col-xs-12">';
-                    _html = _html + '<div class="performer-green-bt btn-green-gradient">From $' + value.min_price + '</div>';
+                    _html = _html + '<button style="text-transform:none;width: 104%;" class="button green">From $' + value.min_price + '</button>';
                     if(value.available_count < 20){
                         _html = _html + '<div class="text-center alert-text">NOT MANY LEFT</div>';
                     }

@@ -242,7 +242,7 @@ case '';
 							CSSClass: "TicketRow",
 							Formatter: function(RowData, Key, CellValue, FormattedSection) {
 								var Code = "<div>";
-                                Code += "<div class=\"ticket-cell seat-link\"><input class =\"button green\" type=\"button\" onclick=\"BuyNow(\'" + RowData.id + "\',\'" + RowData.price + "\');\" value=\"" + RowData.price + "/ea\"/></div>";
+                                Code += "<div class=\"ticket-cell seat-link\"><button class =\"button green\" type=\"button\" onclick=\"BuyNow(\'" + RowData.id + "\',\'" + RowData.price + "\');\">" + RowData.price + "ea</button></div>";
                                 Code += "<div class=\"ticket-cell guarantee guarantee-mobile\">Good Game<br />Guarantee&trade;</div>";
 								Code += "</div>";
 								return Code;
@@ -358,6 +358,7 @@ case '';
 				if("' . $date->format('Y/m/d') . '" == output){
 					$("#ETicket").prop( "checked", true );
 					$("#eticketsCont").hide();
+					FilterTickets();
 				}
 			});
 			/************************************************************

@@ -36,20 +36,20 @@
 					<div class="row">
 						<div class="col-md-4">
 							<div class="guarantee-item margin-divider-half">
-								<div class="img-holder"><img src="/assets/img/icon-tickets.png" alt="Tickets"></div>
+								<div class="img-holder" style="height: 100px;"><img src="/assets/img/icon-tickets.png" alt="Tickets"></div>
 								<p>Find your game &amp; purchase your tickets. Every ticket comes with our Good Game Guarantee at no additional cost!</p>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="guarantee-item margin-divider-half">
-								<div class="img-holder"><img src="/assets/img/icon-stadium.png" alt="Stadium"></div>
-								<p>Attend the game &amp; enjoy your team with no worries.</p>
+								<div class="img-holder" style="height: 100px;"><img src="/assets/img/icon-stadium.png" alt="Stadium"></div>
+								<p>If the home team loses by five or more runs you get 50% of the ticket price back.</p>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="guarantee-item margin-divider-half">
-								<div class="img-holder"><img src="/assets/img/icon-handshake.png" alt="Handshake"></div>
-								<p>Just come back to GameHedge.com for your refund!</p>
+								<div class="img-holder" style="height: 100px;"><img src="/assets/img/icon-handshake.png" alt="Handshake"></div>
+								<p>Just log in to your account to claim your refund!</p>
 							</div>
 						</div>
 					</div>
@@ -177,6 +177,7 @@
 									<li><a href="/performer/15560/san-francisco-giants-tickets">San Francisco Giants</a></li>
 								</ul>
 							</nav>
+
 							<h2>National League: West</h2>
 						</div>
 					</div>
@@ -199,7 +200,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-4"><img src="/assets/img/badge-gamehedge.png" alt="GameHedge" /></div>
-				<div class="col-md-8"><a class="button green" href="/faq">Still Have Questions?</a></div>
+				<div class="col-md-8"><button style="font-size: 20px;text-transform: uppercase;text-decoration: none;" class="button green" href="/faq">Still Have Questions?</button></div>
 			</div>
 		</div>
 	</section>
