@@ -17,7 +17,7 @@ $(document).ready(function(){
                 _html = _html + '</div>';
                 //_html = _html + '<div class="location margin-divider-half"><i class="fa fa-map-marker"></i> <a href="/venue/' + value.venue.id + '/' + value.venue.slug + '">' + value.venue.name + '</a></div>';
                 _html = _html + '<div class="location margin-divider-half"><i class="fa fa-map-marker"></i></div>';
-                _html = _html + '<button class="button green" onclick="document.location.href = href="/ticket/' + value.id + '">Buy Tickets</button>';
+                _html = _html + '<button class="button green" onclick="document.location.href=\'/ticket/' + value.id + '\'">Buy Tickets</button>';
                 _html = _html + '</div>';
                 _html = _html + '</div>';
             });
