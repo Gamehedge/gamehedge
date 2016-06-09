@@ -13,6 +13,7 @@
 	                            'apiSecret'  => Config::te_api_secret()]);
 
 	$query  = array(//'performer_id'      => 16425,//$_GET["id"],
+        'min_and_max_price' => "true",
         'category_id'       => Config::te_categoryid(),
         'page'              => 1,//(int)$_GET["page"],
         'per_page'          => 100000,//(int)$_GET["per_page"],
