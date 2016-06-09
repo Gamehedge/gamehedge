@@ -242,7 +242,7 @@ case '';
 							CSSClass: "TicketRow",
 							Formatter: function(RowData, Key, CellValue, FormattedSection) {
 								var Code = "<div>";
-                                Code += "<div class=\"ticket-cell seat-link\"><input type=\"button\" onclick=\"BuyNow(\'" + RowData.id + "\',\'" + RowData.price + "\');\" value=\"" + RowData.price + "/ea\"/></div>";
+                                Code += "<div class=\"ticket-cell seat-link\"><input class =\"button green\" type=\"button\" onclick=\"BuyNow(\'" + RowData.id + "\',\'" + RowData.price + "\');\" value=\"" + RowData.price + "/ea\"/></div>";
                                 Code += "<div class=\"ticket-cell guarantee guarantee-mobile\">Good Game<br />Guarantee&trade;</div>";
 								Code += "</div>";
 								return Code;
@@ -344,7 +344,21 @@ case '';
 						}
 					}).tuMap("Refresh");
 				});
-                
+				/*****************************************************
+				check date to hide physical Ticket
+				********************************************************/
+				var d = new Date();
+
+				var month = d.getMonth()+1;
+				var day = d.getDate();
+
+				var output = d.getFullYear() + "/" +
+				    (month<10 ? "0" : "") + month + "/" +
+				    (day<10 ? "0" : "") + day;
+				if("' . $date->format('Y/m/d') . '" == output){
+					$("#ETicket").prop( "checked", true );
+					$("#eticketsCont").hide();
+				}
 			});
 			/************************************************************
 			Sorting Quantity Array (Optional)
@@ -458,6 +472,7 @@ case '';
 						alert(\'There was an error adding your tickets to the cart. (\' + data.message + \')\');
 				}, \'json\');
 			}
+
 		</script>';
 	// Handle Header
 	$smarty->assign('body_tag', '');

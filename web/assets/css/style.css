@@ -677,13 +677,19 @@ body#home main h2 {
     border-style: solid;
     border-bottom: none;
     border-top: none;
-    }
+}
 .GGGtext{
 	font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
     font-size: 12px;
     display: inline-block;
     vertical-align: middle;
     line-height: normal;
+}
+
+@media(max-width: 991px) {
+	.GGGdiv {
+	    border: none;
+    }
 }
 
 section#team-header, section#venue-header {

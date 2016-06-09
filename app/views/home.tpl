@@ -30,49 +30,77 @@
 <main>
 	<div class="container">
 		<div id="results" ng-if="events.length > 0">
-			<h2 class="headerNew text-center">How Does the Good Game Guarantee Work?</h2>
-				<div class="row">
-					<div class="col-md-2">
-						<div class="guarantee-item margin-divider-half">
-							<div class="img-holder-performer"><img src="/assets/img/icon-tickets.png" alt="Tickets" /></div>
+			<div class="row">
+				<div class="col-md-12 hidden-xs hidden-sm">
+					<h2 class="headerNew text-center">How Does the Good Game Guarantee Work?</h2>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="guarantee-item margin-divider-half">
+								<div class="img-holder"><img src="/assets/img/icon-tickets.png" alt="Tickets"></div>
+								<p>Find your game &amp; purchase your tickets. Every ticket comes with our Good Game Guarantee at no additional cost!</p>
+							</div>
 						</div>
-					</div>
-					<div class="col-md-3 GGGdiv">
-						<p class="text-center GGGtext">Good Game Guarantee on every ticket at no additional cost!</p>
-					</div>
-					<div class="col-md-2">
-						<div class="guarantee-item margin-divider-half">
-							<div class="img-holder-performer"><img src="/assets/img/icon-stadium.png" alt="Scoreboard" /></div>
+						<div class="col-md-4">
+							<div class="guarantee-item margin-divider-half">
+								<div class="img-holder"><img src="/assets/img/icon-stadium.png" alt="Stadium"></div>
+								<p>Attend the game &amp; enjoy your team with no worries.</p>
+							</div>
 						</div>
-					</div>
-					<div class="col-md-3 GGGdiv">
-						<p class="text-center GGGtext">If the home team loses by five or more runs- Log on to claim your 50% refund!</p>
-					</div>
-					<div class="col-md-2">
-						<div class="guarantee-item margin-divider-half">
-							<div class="img-holder-performer"><img src="/assets/img/icon-handshake.png" alt="Handshake" /></div>
+						<div class="col-md-4">
+							<div class="guarantee-item margin-divider-half">
+								<div class="img-holder"><img src="/assets/img/icon-handshake.png" alt="Handshake"></div>
+								<p>Just come back to GameHedge.com for your refund!</p>
+							</div>
 						</div>
 					</div>
 				</div>
-			<h2 class="headerNew" id="upcoming_title">Upcoming Games Near You</h2>
-            <div id="home-loading-data" class="row text-center">
-                <img src="/assets/img/loadinfo.gif">
-            </div>
-			<div id="upcoming-games" class="row">
-				{foreach $events as $edata}
-					<div class="col-md-3">
-						<div class="game-item">
-							<div class="date">{$edata.occurs_at|date_format:"l, M j"}</div>
-							<div class="name margin-divider-half">
-								{$edata.performances[0].performer.name}<br />
-								<span>vs</span><br />
-								{$edata.performances[1].performer.name}
+			</div>
+			<div class="row">
+				<h2 class="headerNew" id="upcoming_title">Upcoming Games Near You</h2>
+	            <div id="home-loading-data" class="row text-center">
+	                <img src="/assets/img/loadinfo.gif">
+	            </div>
+				<div id="upcoming-games" class="row">
+					{foreach $events as $edata}
+						<div class="col-md-3">
+							<div class="game-item">
+								<div class="date">{$edata.occurs_at|date_format:"l, M j"}</div>
+								<div class="name margin-divider-half">
+									{$edata.performances[0].performer.name}<br />
+									<span>vs</span><br />
+									{$edata.performances[1].performer.name}
+								</div>
+								<div class="location margin-divider-half"><i class="fa fa-map-marker"></i> <a href="/venue/{$edata.venue.id}/{$edata.venue.slug}">{$edata.venue.name}</a></div>
+								<div class="tickets margin-divider-half"><a href="/ticket/{$edata.id}">Buy Tickets</a></div>
 							</div>
-							<div class="location margin-divider-half"><i class="fa fa-map-marker"></i> <a href="/venue/{$edata.venue.id}/{$edata.venue.slug}">{$edata.venue.name}</a></div>
-							<div class="tickets margin-divider-half"><a href="/ticket/{$edata.id}">Buy Tickets</a></div>
+						</div>
+					{/foreach}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 hidden-md hidden-lg">
+					<h2 class="headerNew text-center">How Does the Good Game Guarantee Work?</h2>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="guarantee-item margin-divider-half">
+								<div class="img-holder"><img src="/assets/img/icon-tickets.png" alt="Tickets"></div>
+								<p>Find your game &amp; purchase your tickets. Every ticket comes with our Good Game Guarantee at no additional cost!</p>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="guarantee-item margin-divider-half">
+								<div class="img-holder"><img src="/assets/img/icon-stadium.png" alt="Stadium"></div>
+								<p>Attend the game &amp; enjoy your team with no worries.</p>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="guarantee-item margin-divider-half">
+								<div class="img-holder"><img src="/assets/img/icon-handshake.png" alt="Handshake"></div>
+								<p>Just come back to GameHedge.com for your refund!</p>
+							</div>
 						</div>
 					</div>
-				{/foreach}
+				</div>
 			</div>
 			<div id="team-divisions">
 				<div class="row">
@@ -171,7 +199,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-4"><img src="/assets/img/badge-gamehedge.png" alt="GameHedge" /></div>
-				<div class="col-md-8"><a href="/faq">Still Have Questions?</a></div>
+				<div class="col-md-8"><a class="button green" href="/faq">Still Have Questions?</a></div>
 			</div>
 		</div>
 	</section>

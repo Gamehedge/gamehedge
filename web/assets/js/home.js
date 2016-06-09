@@ -15,8 +15,9 @@ $(document).ready(function(){
                 _html = _html + '<span>vs</span><br />';
                 _html = _html + value.performances[1].performer.name;
                 _html = _html + '</div>';
-                _html = _html + '<div class="location margin-divider-half"><i class="fa fa-map-marker"></i> <a href="/venue/' + value.venue.id + '/' + value.venue.slug + '">' + value.venue.name + '</a></div>';
-                _html = _html + '<div class="tickets margin-divider-half"><a href="/ticket/' + value.id + '">Buy Tickets</a></div>';
+                //_html = _html + '<div class="location margin-divider-half"><i class="fa fa-map-marker"></i> <a href="/venue/' + value.venue.id + '/' + value.venue.slug + '">' + value.venue.name + '</a></div>';
+                _html = _html + '<div class="location margin-divider-half"><i class="fa fa-map-marker"></i></div>';
+                _html = _html + '<button class="button green" onclick="document.location.href = href="/ticket/' + value.id + '">Buy Tickets</button>';
                 _html = _html + '</div>';
                 _html = _html + '</div>';
             });
