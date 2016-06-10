@@ -421,7 +421,7 @@ footer .footer-bottom {
 #home section#hero #wrapper #content {
 	position: relative;
 	z-index: 4;
-    padding-top: 65px;
+    padding-top: 75px;
     padding-bottom: 65px;
 	/*top: 30%;
 	-webkit-transform: translateY(-30%);
@@ -460,7 +460,7 @@ footer .footer-bottom {
 }
 #home section#hero #wrapper #content #hero-search {
 	margin: 0 auto;
-	margin-top: 30px;
+	margin-top: 20px;
 	width: 90%;
 	max-width: 450px;
     margin-bottom: 40px;
@@ -545,10 +545,13 @@ body#home main h2 {
 }
 #home .game-item {
 	margin-top: 20px;
-	padding: 15px;
-	border: 1px solid #333;
-	background-color: #f2f2f2;
-	text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #333;
+    background-color: #f2f2f2;
+    text-align: center;
+    max-width: 270px;
+    padding-bottom: 10px;
 }
 #home .game-item .date {
 	font-size: 12px;

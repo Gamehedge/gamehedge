@@ -45,7 +45,7 @@ function loadPage(){
         if(json.events && json.events.length > 0){
             _html = _html + "<ul>";
             $.each(json.events, function( index, value ) {
-                var dateTodaytxt = moment().add(2,'h').format('YYYY-MM-DDTHH:mm:ss');
+                var dateTodaytxt = moment().add(1,'h').format('YYYY-MM-DDTHH:mm:ss');
                 var dateEventtxt = value.occurs_at.replace("Z", "");
                 var dateToday = new Date(dateTodaytxt);
                 var dateEvent = new Date(dateEventtxt);

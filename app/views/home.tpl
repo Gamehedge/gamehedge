@@ -49,7 +49,7 @@
 						<div class="col-md-4">
 							<div class="guarantee-item margin-divider-half">
 								<div class="img-holder" style="height: 100px;"><img src="/assets/img/icon-handshake.png" alt="Handshake"></div>
-								<p>Just log in to your account to claim your refund!</p>
+								<p>Just come back to GameHedge to claim your refund!</p>
 							</div>
 						</div>
 					</div>
