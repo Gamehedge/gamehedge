@@ -114,6 +114,22 @@ case '';
 		<!-- jQuery UI Library, Used for Price Slider -->
 		<script type="text/javascript">
 			$(document).ready(function() {
+				/*****************************************************
+				check date to hide physical Ticket
+				********************************************************/
+				var d = new Date();
+
+				var month = d.getMonth()+1;
+				var day = d.getDate();
+
+				var output = d.getFullYear() + "/" +
+				    (month<10 ? "0" : "") + month + "/" +
+				    (day<10 ? "0" : "") + day;
+				if("' . $date->format('Y/m/d') . '" == output){
+					$("#ETicket").prop( "checked", true );
+					$("#eticketsCont").hide();
+				}
+				
 				$(document).tooltip();
                 
                 if($( window ).width() < 768){
@@ -344,22 +360,7 @@ case '';
 						}
 					}).tuMap("Refresh");
 				});
-				/*****************************************************
-				check date to hide physical Ticket
-				********************************************************/
-				var d = new Date();
-
-				var month = d.getMonth()+1;
-				var day = d.getDate();
-
-				var output = d.getFullYear() + "/" +
-				    (month<10 ? "0" : "") + month + "/" +
-				    (day<10 ? "0" : "") + day;
-				if("' . $date->format('Y/m/d') . '" == output){
-					$("#ETicket").prop( "checked", true );
-					$("#eticketsCont").hide();
-					FilterTickets();
-				}
+				
 			});
 			/************************************************************
 			Sorting Quantity Array (Optional)
