@@ -90,7 +90,7 @@
 						<div class="col-md-4">
 							<div class="guarantee-item margin-divider-half">
 								<div class="img-holder"><img src="/assets/img/icon-stadium.png" alt="Stadium"></div>
-								<p>Attend the game &amp; enjoy your team with no worries.</p>
+								<p>f the home team loses by five or more runs you get 50% of the ticket price back.</p>
 							</div>
 						</div>
 						<div class="col-md-4">
