@@ -14,9 +14,26 @@ switch($verb) {
     case '':
         $data = (object) array('error' => 'empty parameters');
         break;
-    /*
-    case 'test':
     
+    case 'test':
+        $teClient = new TEvoClient(['baseUrl'    => Config::te_url(),
+                                'apiVersion' => Config::te_version(),
+                                'apiToken'   => Config::te_api_token(),
+                                'apiSecret'  => Config::te_api_secret()]);
+
+    $query  = array(//'performer_id'      => 16425,//$_GET["id"],
+        'min_and_max_price' => "true",
+        'category_id'       => Config::te_categoryid(),
+        'page'              => 1,//(int)$_GET["page"],
+        'per_page'          => 1,//(int)$_GET["per_page"],
+        
+        //'occurs_at.gte'     => $_GET["actual_date"],
+        //'order_by'          => 'events.occurs_at ASC, events.popularity_score DESC');
+        );
+    $e_data = $teClient->listEvents($query);
+    $event = new Event(121192);
+    $data = $event;
+    /*
         ///////// THIS SCRIPT IS THE ONE THAT UPDATES THE DATABASE FOR THE EVENTS EVERYNIGHT
         $query  = array(//'performer_id'      => 16425,//$_GET["id"],
             'category_id'       => Config::te_categoryid(),
@@ -108,8 +125,8 @@ switch($verb) {
         }
         $performer = new Performer;
         $p_data = $performer->te_to_gh(15554);
-        $data = $p_data;
-        break;*/
+        $data = $p_data;*/
+        break;
     case 'close_events':
         $ipAddress = Utility::get_ip_address();
         //$ipAddress = "38.105.128.254";

@@ -17,7 +17,7 @@ $smarty->assign('head_tags', '');
 $smarty->assign('css', '');
 $smarty->assign('hscripts', '');
 $header = $smarty->fetch('shared/header.tpl');
-$menu = $smarty->fetch('shared/menu.tpl');
+$menu = $smarty->fetch('shared/menu2.tpl');
 // Handle Footer
 $smarty->assign('fscripts', '');
 $footer = $smarty->fetch('shared/footer.tpl');

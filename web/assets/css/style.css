@@ -154,7 +154,7 @@ a {
 .sports-dropdown-menu {
 	position: absolute;
 	top: 26px;
-	left: -375px !important;
+	/*left: -375px !important;*/
 	z-index: 6001;
 	width: 670px;
 	border-bottom: 3px solid #a8c94b;
@@ -421,7 +421,8 @@ footer .footer-bottom {
 #home section#hero #wrapper #content {
 	position: relative;
 	z-index: 4;
-    padding-top: 120px;
+    padding-top: 75px;
+    padding-bottom: 65px;
 	/*top: 30%;
 	-webkit-transform: translateY(-30%);
 	-ms-transform: translateY(-30%);
@@ -459,7 +460,7 @@ footer .footer-bottom {
 }
 #home section#hero #wrapper #content #hero-search {
 	margin: 0 auto;
-	margin-top: 30px;
+	margin-top: 20px;
 	width: 90%;
 	max-width: 450px;
     margin-bottom: 40px;
@@ -511,36 +512,46 @@ body#home main h2 {
 	margin: 10px 0 10px 0;
 	font-size: 42px;
 }
+.headerNew {
+	margin: 10px 0 10px 0;
+	font-size: 28px !important;
+	font-family: 'Arial Nova',sans-serif;
+	text-transform: capitalize;
+	color: black;
+}
 #home .guarantee-item, section#how-it-works {
 	text-align: center;
 }
-#home .guarantee-item .img-holder, section#how-it-works .guarantee-item .img-holder {
+#home .guarantee-item .img-holder, section#how-it-works .guarantee-item .img-holder, .img-holder-performer {
 	margin-bottom: 0px;
-	height: 138px;
+	height: 60px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	margin-bottom: 20px;
 }
 @-moz-document url-prefix() {
 	body#home .guarantee-item .img-holder, section#how-it-works .guarantee-item .img-holder {
 		display: block;
 	}
 }
-#home .guarantee-item img, section#how-it-works .guarantee-item img {
-	width: 100%;
-	max-width: 150px;
-	height: auto;
+#home .guarantee-item img, section#how-it-works .guarantee-item img, .img-holder-performer img {
+	height: 100%;
 }
 #home .guarantee-item p, section#how-it-works .guarantee-item p {
 	margin: 0;
 	font-size: 12px;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 #home .game-item {
 	margin-top: 20px;
-	padding: 15px;
-	border: 1px solid #333;
-	background-color: #f2f2f2;
-	text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #333;
+    background-color: #f2f2f2;
+    text-align: center;
+    max-width: 270px;
+    padding-bottom: 10px;
 }
 #home .game-item .date {
 	font-size: 12px;
@@ -659,12 +670,46 @@ body#home main h2 {
 	text-decoration: none;
 }
 
+.GGGdiv {
+    height: 56px;
+    line-height: 56px;
+    text-align: center;
+    border-right: gray;
+    border-left: gray;
+    border-width: 1px;
+    border-style: solid;
+    border-bottom: none;
+    border-top: none;
+}
+.GGGtext{
+	font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 12px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+@media(max-width: 991px) {
+	.GGGdiv {
+	    border: none;
+    }
+}
+
 section#team-header, section#venue-header {
 	margin-bottom: 30px;
 	padding: 60px 0;
-	background: transparent url('/assets/img/team-hero2.jpg') 0 0 no-repeat;
+	background: transparent url('/assets/img/HeaderBatter.jpeg') 0 0 no-repeat;
 	background-size: cover;
 	background-position: center center;
+	margin-top: -80px;
+}
+@media(max-width: 991px) {
+	section#team-header, section#venue-header {
+		background: transparent url('/assets/img/MobileHitter.jpeg') 0 0 no-repeat;
+		background-size: cover;
+		background-position: center center;
+	    margin-top: -80px;
+	}
 }
 section#team-header{
 	padding: 120px 0 0 0;
@@ -814,13 +859,13 @@ section#games ul li .date .time, section#game-header .date .time, section#order-
 section#games ul li .event .name, section#game-header .event h1, section#order-header .event h1 {
 	margin: 0;
 	font-size: 19px;
-	text-transform: uppercase;
+	/*text-transform: uppercase;*/
 	line-height: 18px;
 }
 section#games ul li .event .location, section#game-header .event .location, section#order-header .event .location {
 	margin-top: 5px;
 	font-size: 12px;
-	text-transform: uppercase;
+	/*text-transform: uppercase;*/
 	line-height: 12px;
 }
 section#games ul li .tickets-link {

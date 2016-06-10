@@ -490,7 +490,7 @@
                                         </li>
                                         <li class="item" ng-repeat="cc in credit_cards">
                                             <div class="row">
-                                                <div class="col-md-6"><label><input type="radio" id="card_id-!cc.id!-" name="card_id" value="-!cc.id!-" ng-model="data.card_id" /> <img ng-src="/assets/img/icon--!cc.card_company|lowercase!-.png" alt="-!cc.card_company!-" /> -!cc.card_company!- ending in -!cc.last_digits!-</div>
+                                                <div class="col-md-6"><label><input type="radio" id="card_id-!cc.id!-" name="card_id" value="-!cc.id!-" ng-model="data.card_id" /> <img ng-src="/assets/img/icon--!cc.card_company|lowercase!-.png" alt="-!cc.card_company!-" /> -!cc.card_company!- ending in -!cc.last_digits!-</label></div>
                                                 <div class="col-md-4">-!cc.name!-</div>
                                                 <div class="col-md-2">-!cc.expiration_month!-/-!cc.expiration_year!-</div>
                                             </div>

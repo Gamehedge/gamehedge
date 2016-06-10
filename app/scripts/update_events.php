@@ -22,7 +22,6 @@
         );
     $e_data = $teClient->listEvents($query);
     $data = [];
-    $index = 0;
     foreach($e_data['events'] AS $tevo_event) {
         $event = new Event;
         $test = $event->te_to_gh($tevo_event["id"]);
@@ -54,6 +53,11 @@
                 );
             }
             $eventId = $event->add($eventData);
+            echo "created";
         }
+        else{
+            echo "exists";
+        }
+        
     }
 ?>

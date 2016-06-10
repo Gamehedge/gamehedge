@@ -45,7 +45,7 @@
 				<div class="filter-item">
 					<span class="filter-label">Show Only:</span><br />
 					<label for="Parking"><input type="checkbox" id="Parking" class="Custom" /> Parking Only</label>
-					<label for="ETicket"><input type="checkbox" id="ETicket" class="Custom" /> eTickets Only</label>
+					<label id="eticketsCont" for="ETicket"><input type="checkbox" id="ETicket" class="Custom" /> eTickets Only</label>
 				</div>
 				<div class="filter-item" id="filterPriceSection">
 					<span class="filter-label">Price Filter:</span><br />

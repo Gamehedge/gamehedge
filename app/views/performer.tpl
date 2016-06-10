@@ -1,5 +1,7 @@
 {$header}
-{$menu}
+<div class="home-header">
+    {$menu}
+</div>
 <script type="application/javascript">
     var _id = {$performer_id};
     var _slug = "{$p_slug}";
@@ -12,6 +14,32 @@
 <main>
 	<div class="container">
 		<div class="row">
+			<div class="col-md-9">
+				<div class="row">
+					<div class="col-md-2">
+						<div class="guarantee-item margin-divider-half">
+							<div class="img-holder-performer"><img src="/assets/img/icon-tickets.png" alt="Tickets" /></div>
+						</div>
+					</div>
+					<div class="col-md-3 GGGdiv">
+						<p class="text-center GGGtext">Good Game Guarantee on every ticket at no additional cost!</p>
+					</div>
+					<div class="col-md-2">
+						<div class="guarantee-item margin-divider-half">
+							<div class="img-holder-performer"><img src="/assets/img/icon-stadium.png" alt="Scoreboard" /></div>
+						</div>
+					</div>
+					<div class="col-md-3 GGGdiv">
+						<p class="text-center GGGtext">If the home team loses by five or more runs- Log on to claim your 50% refund!</p>
+					</div>
+					<div class="col-md-2">
+						<div class="guarantee-item margin-divider-half">
+							<div class="img-holder-performer"><img src="/assets/img/icon-handshake.png" alt="Handshake" /></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3"></div>
 			<div class="col-md-9">
                 <div id="home-loading-data" class="row text-center">
                     <img src="/assets/img/loadinfo.gif">
@@ -64,10 +92,10 @@
 			</div>
 			<div class="col-md-3">
 				<aside id="gamehedge-about">
-					<p>Your Team. Your Tickets.</p>
-					<img src="/assets/img/logo-grey.png" alt="GameHedge" />
+					<!-- <p>Your Team. Your Tickets.</p> -->
+					<!-- <img src="/assets/img/logo-grey.png" alt="GameHedge" /> -->
 					<div class="sub-text">{$team.subtext}</div>
-					<h2>Here's How it Works</h2>
+					<!-- <h2>Here's How it Works</h2>
 					<ul>
 						<li>
 							<div class="img-holder"><img src="/assets/img/icon-tickets.png" alt="Tickets" /></div>
@@ -88,7 +116,7 @@
 							<div class="img-holder"><img src="/assets/img/icon-handshake.png" alt="Handshake" /></div>
 							<p>Just come back to GameHedge.com for your refund!</p>
 						</li>
-					</ul>
+					</ul> -->
 				</aside>
 			</div>
 		</div>
