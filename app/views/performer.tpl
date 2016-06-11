@@ -14,7 +14,7 @@
 <main>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-9">
+			<div class="hidden-xs hidden-sm col-md-9">
 				<div class="row">
 					<div class="col-md-2">
 						<div class="guarantee-item margin-divider-half">
@@ -39,7 +39,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3"></div>
+			<div class="hidden-xs hidden-sm col-md-3"></div>
 			<div class="col-md-9">
                 <div id="home-loading-data" class="row text-center">
                     <img src="/assets/img/loadinfo.gif">
@@ -89,6 +89,31 @@
 				</nav>
 				
 				<p><strong>Please Note: Gamehedge is a resale ticket marketplace, not the ticket seller. Prices are set by third-party sellers and may be above or below face value.</p>
+			</div>
+			<div class="hidden-md hidden-lg col-xs-12">
+				<div class="row">
+					<div class="col-md-2">
+						<div class="guarantee-item margin-divider-half">
+							<div class="img-holder-performer"><img src="/assets/img/icon-tickets.png" alt="Tickets" /></div>
+						</div>
+					</div>
+					<div class="col-md-3 GGGdiv">
+						<p class="text-center GGGtext">Good Game Guarantee on every ticket at no additional cost!</p>
+					</div>
+					<div class="col-md-2">
+						<div class="guarantee-item margin-divider-half">
+							<div class="img-holder-performer"><img src="/assets/img/icon-stadium.png" alt="Scoreboard" /></div>
+						</div>
+					</div>
+					<div class="col-md-3 GGGdiv">
+						<p class="text-center GGGtext">If the home team loses by five or more runs- Log on to claim your 50% refund!</p>
+					</div>
+					<div class="col-md-2">
+						<div class="guarantee-item margin-divider-half">
+							<div class="img-holder-performer"><img src="/assets/img/icon-handshake.png" alt="Handshake" /></div>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="col-md-3">
 				<aside id="gamehedge-about">
