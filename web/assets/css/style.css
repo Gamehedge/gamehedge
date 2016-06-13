@@ -815,6 +815,8 @@ section#games ul li .date, section#game-header .date, section#order-header .date
     section#games ul li .tickets-link {
         margin-top: 5px !important;
     }
+
+
     
     
 }
@@ -864,7 +866,7 @@ section#games ul li .date .time, section#game-header .date .time, section#order-
 section#games ul li .event .name, section#game-header .event h1, section#order-header .event h1 {
 	margin: 0;
 	font-size: 19px;
-	/*text-transform: uppercase;*/
+	text-transform: none;
 	line-height: 18px;
 }
 section#games ul li .event .location, section#game-header .event .location, section#order-header .event .location {
@@ -953,6 +955,7 @@ section#game-header h1 {
 }
 section#game-guarantee h2 {
 	margin: 0;
+	text-transform: none;
 }
 section#game-guarantee hr {
 	margin: 5px 0;
@@ -970,24 +973,7 @@ section#game-guarantee p {
     }
 }
 
-@media(max-width: 768px) {
-    .Filters {
-        border-bottom: 1px solid #c1c1c1;
-    }
-    
-    section#game-guarantee h2 {
-        margin: 0;
-        font-size: 18px !important;
-        text-align: center;
-        margin-top: 5px;
-    }
-    section#game-guarantee hr {
-        margin: 3px 0;
-    }
-    section#game-guarantee p {
-        font-size: 10px !important;
-    }
-}
+
 
 .filter-outside-container {
     text-align: center;
@@ -1076,7 +1062,7 @@ section#tickets ul.ticket-list > li .location, .TicketRow .location {
 section#tickets ul.ticket-list > li .location .section, .TicketRow .location .section {
 	font-family: 'Oswald', sans-serif;
 	font-size: 16px;
-	text-transform: uppercase;
+	text-transform: none;
 	line-height: 16px;
 }
 section#tickets ul.ticket-list > li .location .lrow, .TicketRow .location .lrow {
@@ -2163,6 +2149,37 @@ section#tickets ul.ticket-list > li .guarantee, .TicketRow .guarantee {
     #PriceRange, #filterPriceSection {
         display: none;
     }
+}
+@media(max-width: 768px) {
+    .Filters {
+        border-bottom: 1px solid #c1c1c1;
+    }
+    
+    section#game-guarantee h2 {
+        margin: 0;
+        font-size: 16px !important;
+        text-align: center;
+        margin-top: 5px;
+    }
+    section#game-guarantee hr {
+        margin: 3px 0;
+    }
+    section#game-guarantee p {
+        font-size: 10px !important;
+    }
+    section#tickets ul.ticket-list > li .location .section, .TicketRow .location .section, section#tickets ul.ticket-list > li .location .lrow, .TicketRow .location .lrow, section#tickets ul.ticket-list > li .seats, .TicketRow .seats{
+    	font-size: 13px;
+    }
+    section#tickets ul.ticket-list > li .guarantee, .TicketRow .guarantee, .TicketRow .type, .TicketRow .seats-mobile{
+    	font-size: 11px;	
+    }
+    section#games ul li .event .name, section#game-header .event h1, section#order-header .event h1{
+    	 font-size: 14px;
+    }
+    section#games ul li .event .location, section#game-header .event .location, section#order-header .event .location, section#tickets ul.ticket-list > li .seat-link, .TicketRow .seat-link{
+    	font-size: 11px;
+    }
+    
 }
 @media(min-width: 768px) {
 }
