@@ -28,13 +28,20 @@
                                 <div class="date">{$event_date}</div>
                                 <div class="location">{$venue_name}, {$venue_location}</div>
                                 <div class="seats">Section {$ticket_section}, Row {$ticket_row}</div>
+                                <div class="row order-detail" style="margin-top:5px; margin-bottom: 5px;">
+                                <div class="col-xs-8">Quantity</div>
+                                    <div class="col-xs-4">
+                                        <select style="height:28px;" id="qty" name="qty" class="form-control" ng-model="data.qty" ng-options="split for split in order_data.splits" ng-change="updateTotals()"></select>
+                                    </div>
+                                    <!--div class="col-md-6 text-right" ng-bind="data.qty"></div-->
+                                </div>
                             </div>
-                            <div class="row" ng-if="!client" >
+                            <!-- <div class="row" ng-if="!client" >
                                 <div class="col-md-12 text-right" style="margin-top: 20px;">
                                     <p id="already_acc">Already have an account? Please <a href="/member/login">login</a> before proceeding.</p>
                                 </div>
 
-                            </div>
+                            </div> -->
                             <div ng-if="!client">
                                 <!--h2 class="underlined big">How Many Tickets?</h2-->
                                 <!--div class="form-group">
@@ -805,14 +812,13 @@
                                 <div class="col-xs-6 text-right"><span ng-bind="order_data.price|currency"></span> ea.</div>
                             </div>
                             <div class="row order-detail" style="margin-top:5px; margin-bottom: 5px;">
-                                <div class="col-xs-8">Quantity</div>
-                                <div class="col-xs-4">
+                                <div class="col-md-8 hidden-xs hidden-sm">Quantity</div>
+                                <div class="col-md-4 hidden-xs hidden-sm">
                                     <select style="height:28px;" id="qty" name="qty" class="form-control" ng-model="data.qty" ng-options="split for split in order_data.splits" ng-change="updateTotals()"></select>
                                 </div>
-                                <!--div class="col-md-6 text-right" ng-bind="data.qty"></div-->
+                                <div class="col-xs-6 hidden-md hidden-lg">Quantity</div>
+                                <div class="col-xs-6 hidden-md hidden-lg text-right" ng-bind="data.qty"></div>
                             </div>
-
-                                
                             <div class="row order-detail">
                                 <div class="col-xs-6">Subtotal</div>
                                 <div class="col-xs-6 text-right" ng-bind="subtotal|currency"></div>
