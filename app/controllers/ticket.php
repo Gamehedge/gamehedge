@@ -176,26 +176,15 @@ case '';
                           Visible:false
                         },
 						"section": {
-							CSSClass: "TicketRow",
+							CSSClass: "TicketRow firstRow",
 							Formatter: function(RowData, Key, CellValue, FormattedSection) {
 								var Code = "<div>";
 								Code += "<div class=\"location\">";
-								Code += "<div class=\"section\">Section " + RowData.section + "</div>";
-								Code += "<div class=\"lrow\">Row " + RowData.row + "</div>";
+								Code += "<div class=\"section\">Section " + RowData.section.toLowerCase() + "</div>";
+								Code += "<div class=\"lrow\">Row " + RowData.row.toLowerCase() + "</div>";
 								Code += "</div>";
                                 
-                                Code += "<div class=\"seats seats-mobile\">Qty ";
-								if($.isArray(RowData.quantity)) {
-									var Qnty = RowData.quantity.slice(0).sort(sortD);
-									Code += "<select id=\"QtyMob" + RowData.id + "\">";
-									for(var x = 0; x < Qnty.length; x++) {
-										Code += "<option>" + Qnty[x] + "</option>";
-									}
-									Code += "</select>";
-								} else {
-									Code += "<span>" + RowData.quantity + "</span>";
-									Code += "<input type=\"hidden\" id=\"QtyMob" + RowData.id + "\" lang=\"Quantity\" value=\"" + RowData.quantity + "\"/>";
-								}
+                                
 								Code += "<div class=\"type\">" + (RowData.eticket ? "Email Delivery" : "Physical Delivery") + "</div>";
 								Code += "<span class=\"smallIcon" + (RowData.notes != "" ? " Note\" title=\"" + RowData.notes : "") + "\"></span>";
 								Code += "<span class=\"smallIcon" + (RowData.eticket ? " eTicket\" title=\"Email Delivery" : "") + "\"></span>";
@@ -235,8 +224,20 @@ case '';
 							CSSClass: "TicketRow",
 							Formatter: function(RowData, Key, CellValue, FormattedSection) {
 								var Code = "<div>";
+								Code += "<div class=\"seats seats-mobile\"><div>Qty ";
+								if($.isArray(RowData.quantity)) {
+									var Qnty = RowData.quantity.slice(0).sort(sortD);
+									Code += "<select id=\"QtyMob" + RowData.id + "\">";
+									for(var x = 0; x < Qnty.length; x++) {
+										Code += "<option>" + Qnty[x] + "</option>";
+									}
+									Code += "</select></div>";
+								} else {
+									Code += "<span>" + RowData.quantity + "</span>";
+									Code += "<input type=\"hidden\" id=\"QtyMob" + RowData.id + "\" lang=\"Quantity\" value=\"" + RowData.quantity + "\"/>";
+								}
 								if(RowData.notes != null){
-                                    Code += "<div class=\"ticket-cell note\" title=\"" + RowData.notes + "\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-circle fa-stack-2x\"></i><i class=\"fa fa-info fa-stack-1x fa-inverse\"></i></span></div>";
+                                    Code += "<div style=\"width: 100%;\" class=\"ticket-cell note\" title=\"" + RowData.notes + "\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-circle fa-stack-2x\"></i><i class=\"fa fa-info fa-stack-1x fa-inverse\"></i></span></div>";
                                 }
 								else {
                                     Code += "<div class=\"ticket-cell note\">&nbsp;</div>";
@@ -258,8 +259,8 @@ case '';
 							CSSClass: "TicketRow",
 							Formatter: function(RowData, Key, CellValue, FormattedSection) {
 								var Code = "<div>";
-                                Code += "<div class=\"ticket-cell seat-link\"><button style=\"text-transform: none;\" class =\"button green\" type=\"button\" onclick=\"BuyNow(\'" + RowData.id + "\',\'" + RowData.price + "\');\">" + RowData.price + "ea</button></div>";
-                                Code += "<div class=\"ticket-cell guarantee guarantee-mobile\">Good Game<br />Guarantee&trade;</div>";
+                                Code += "<div class=\"ticket-cell seat-link\"><button style=\"text-transform: none;\" class =\"button green\" type=\"button\" onclick=\"BuyNow(\'" + RowData.id + "\',\'" + RowData.price + "\');\">" + RowData.price.split(".")[0] + "ea</button></div>";
+                                Code += "<div class=\"ticket-cell guarantee guarantee-mobile\">Good Game Guarantee&trade;</div>";
 								Code += "</div>";
 								return Code;
 							}

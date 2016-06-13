@@ -1062,8 +1062,9 @@ section#tickets ul.ticket-list > li .location, .TicketRow .location {
 section#tickets ul.ticket-list > li .location .section, .TicketRow .location .section {
 	font-family: 'Oswald', sans-serif;
 	font-size: 16px;
-	text-transform: none;
+	text-transform: capitalize;
 	line-height: 16px;
+	text-transform: capitalize;
 }
 section#tickets ul.ticket-list > li .location .lrow, .TicketRow .location .lrow {
 	font-family: 'Oswald', sans-serif;
@@ -2041,33 +2042,34 @@ main#admin #order-stats .stat-item span {
 		text-align: center;
 	}
 
-section#tickets ul.ticket-list > li .seat-link, .TicketRow .seat-link {
-	float: right;
-	margin-top: 6px;
-}
+	section#tickets ul.ticket-list > li .seat-link, .TicketRow .seat-link {
+		float: right;
+		margin-top: 6px;
+	}
 
-section#tickets ul.ticket-list > li .location, .TicketRow .location {
-	float: none;
-	margin-right: 20px;
-}
+	section#tickets ul.ticket-list > li .location, .TicketRow .location {
+		float: none;
+		margin-right: 20px;
+	}
 
-section#tickets ul.ticket-list > li .seats, .TicketRow .seats {
-	float: left;
-	margin-right: 0px;
-}
+	section#tickets ul.ticket-list > li .seats, .TicketRow .seats {
+		float: left;
+		margin-right: 0px;
+	}
 
-.TicketRow .note {
-	margin-top: 5px;
-	margin-right: 10px;
-	float: left;
-	width: 35px;
-}
+	.TicketRow .note {
+		margin-top: 5px;
+		margin-right: 10px;
+		float: left;
+		width: 35px;
+	}
 
-section#tickets ul.ticket-list > li .guarantee, .TicketRow .guarantee {
-	float: right;
-	margin-top: 4px;
-	margin-right: 14px;
-}
+	section#tickets ul.ticket-list > li .guarantee, .TicketRow .guarantee {
+		float: none;
+		margin-top: 4px;
+		margin-right: 0px;
+		font-size: 6px;
+	}
 
 }
 
@@ -2150,7 +2152,7 @@ section#tickets ul.ticket-list > li .guarantee, .TicketRow .guarantee {
         display: none;
     }
 }
-@media(max-width: 768px) {
+@media(max-width: 436px) {
     .Filters {
         border-bottom: 1px solid #c1c1c1;
     }
@@ -2170,8 +2172,14 @@ section#tickets ul.ticket-list > li .guarantee, .TicketRow .guarantee {
     section#tickets ul.ticket-list > li .location .section, .TicketRow .location .section, section#tickets ul.ticket-list > li .location .lrow, .TicketRow .location .lrow, section#tickets ul.ticket-list > li .seats, .TicketRow .seats{
     	font-size: 13px;
     }
-    section#tickets ul.ticket-list > li .guarantee, .TicketRow .guarantee, .TicketRow .type, .TicketRow .seats-mobile{
+    section#tickets ul.ticket-list > li .guarantee, .TicketRow .type, .TicketRow .seats-mobile{
     	font-size: 11px;	
+    }
+    .TicketRow {
+    	text-align: center !important;
+    }
+    .firstRow {
+    	text-align: left !important;
     }
     section#games ul li .event .name, section#game-header .event h1, section#order-header .event h1{
     	 font-size: 14px;
