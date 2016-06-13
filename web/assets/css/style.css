@@ -2182,10 +2182,13 @@ main#admin #order-stats .stat-item span {
     	text-align: left !important;
     }
     section#games ul li .event .name, section#game-header .event h1, section#order-header .event h1{
-    	 font-size: 14px;
+    	font-size: 14px;
     }
     section#games ul li .event .location, section#game-header .event .location, section#order-header .event .location, section#tickets ul.ticket-list > li .seat-link, .TicketRow .seat-link{
     	font-size: 11px;
+    }
+    .firstRow .type{
+    	font-size: 7px;
     }
     
 }
