@@ -2061,7 +2061,7 @@ main#admin #order-stats .stat-item span {
 		margin-top: 5px;
 		margin-right: 10px;
 		float: left;
-		width: 35px;
+		width: 100%;
 	}
 
 	section#tickets ul.ticket-list > li .guarantee, .TicketRow .guarantee {

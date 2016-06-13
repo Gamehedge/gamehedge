@@ -180,11 +180,12 @@ case '';
 							Formatter: function(RowData, Key, CellValue, FormattedSection) {
 								var Code = "<div>";
 								Code += "<div class=\"location\">";
-								Code += "<div class=\"section\">Section " + RowData.section.toLowerCase() + "</div>";
+								Code += "<div class=\"section\">" + RowData.section.toLowerCase() + "</div>";
 								Code += "<div class=\"lrow\">Row " + RowData.row.toLowerCase() + "</div>";
 								Code += "</div>";
                                 
-                                
+                                Code += "<div class=\"seats seats-mobile\">";
+								
 								Code += "<div class=\"type\">" + (RowData.eticket ? "Email Delivery" : "Physical Delivery") + "</div>";
 								Code += "<span class=\"smallIcon" + (RowData.notes != "" ? " Note\" title=\"" + RowData.notes : "") + "\"></span>";
 								Code += "<span class=\"smallIcon" + (RowData.eticket ? " eTicket\" title=\"Email Delivery" : "") + "\"></span>";
@@ -224,20 +225,21 @@ case '';
 							CSSClass: "TicketRow",
 							Formatter: function(RowData, Key, CellValue, FormattedSection) {
 								var Code = "<div>";
-								Code += "<div class=\"seats seats-mobile\"><div>Qty ";
+								Code += "<div class=\"seats seats-mobile\">Qty ";
 								if($.isArray(RowData.quantity)) {
 									var Qnty = RowData.quantity.slice(0).sort(sortD);
 									Code += "<select id=\"QtyMob" + RowData.id + "\">";
 									for(var x = 0; x < Qnty.length; x++) {
 										Code += "<option>" + Qnty[x] + "</option>";
 									}
-									Code += "</select></div>";
+									Code += "</select>";
 								} else {
 									Code += "<span>" + RowData.quantity + "</span>";
 									Code += "<input type=\"hidden\" id=\"QtyMob" + RowData.id + "\" lang=\"Quantity\" value=\"" + RowData.quantity + "\"/>";
 								}
+								Code += "</div>";
 								if(RowData.notes != null){
-                                    Code += "<div style=\"width: 100%;\" class=\"ticket-cell note\" title=\"" + RowData.notes + "\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-circle fa-stack-2x\"></i><i class=\"fa fa-info fa-stack-1x fa-inverse\"></i></span></div>";
+                                    Code += "<div class=\"ticket-cell note\" title=\"" + RowData.notes + "\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-circle fa-stack-2x\"></i><i class=\"fa fa-info fa-stack-1x fa-inverse\"></i></span></div>";
                                 }
 								else {
                                     Code += "<div class=\"ticket-cell note\">&nbsp;</div>";
