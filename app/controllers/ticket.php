@@ -180,7 +180,7 @@ case '';
 							Formatter: function(RowData, Key, CellValue, FormattedSection) {
 								var Code = "<div>";
 								Code += "<div class=\"location\">";
-								Code += "<div class=\"section\">" + RowData.section.toLowerCase() + "</div>";
+								Code += "<div class=\"section\">Sec " + RowData.section.toLowerCase() + "</div>";
 								Code += "<div class=\"lrow\">Row " + RowData.row.toLowerCase() + "</div>";
 								Code += "</div>";
                                 
