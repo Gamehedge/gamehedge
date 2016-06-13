@@ -56,7 +56,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<h2 class="headerNew" id="upcoming_title">Upcoming Games Near You</h2>
+				<h2 class="headerNew headerNew2" id="upcoming_title">Upcoming Games Near You</h2>
 	            <div id="home-loading-data" class="row text-center">
 	                <img src="/assets/img/loadinfo.gif">
 	            </div>

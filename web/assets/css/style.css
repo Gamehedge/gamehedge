@@ -519,6 +519,11 @@ body#home main h2 {
 	text-transform: capitalize;
 	color: black;
 }
+@media (max-width: 991px) {
+    .headerNew2 {
+		font-size: 22px !important;
+	}
+}
 #home .guarantee-item, section#how-it-works {
 	text-align: center;
 }
