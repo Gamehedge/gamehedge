@@ -1,7 +1,7 @@
 {$header}
-<div class="mobile-menu hidden-sm hidden-md hidden-lg">
+<!-- <div class="mobile-menu hidden-sm hidden-md hidden-lg">
 	{$menu}
-</div>
+</div> -->
 <div class="desktop-menu hidden-xs">
 	{$menu}
 </div>
