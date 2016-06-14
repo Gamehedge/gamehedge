@@ -196,7 +196,22 @@ case '';
 								return Code;
 							}
 						},
-                        "quantity": {
+                        "notes": {
+							CSSClass: "TicketRow",
+							Formatter: function(RowData, Key, CellValue, FormattedSection) {
+								var Code = "<div>";
+								
+								if(RowData.notes != null){
+                                    Code += "<div class=\"ticket-cell note\" title=\"" + RowData.notes + "\"><img src=\"/assets/img/icon__info_1x.png\"></div>";
+                                }
+								else {
+                                    Code += "<div class=\"ticket-cell note\">&nbsp;</div>";
+                                }	
+								Code += "</div>";
+								return Code;
+							}
+						},
+						"quantity": {
 							CSSClass: "TicketRow",
 							Formatter: function(RowData, Key, CellValue, FormattedSection) {
 								var Code = "<div>";
@@ -217,21 +232,6 @@ case '';
 								Code += "<span class=\"smallIcon" + (RowData.eticket ? " eTicket\" title=\"Email Delivery" : "") + "\"></span>";
 								Code += "<span class=\"smallIcon" + (RowData.preferred ? " Preferred\" title=\"Preferred Ticket" : "") + "\"></span>";
 								Code += "</div>";
-								Code += "</div>";
-								return Code;
-							}
-						},
-                        "notes": {
-							CSSClass: "TicketRow",
-							Formatter: function(RowData, Key, CellValue, FormattedSection) {
-								var Code = "<div>";
-								
-								if(RowData.notes != null){
-                                    Code += "<div class=\"ticket-cell note\" title=\"" + RowData.notes + "\"><span class=\"fa-stack fa-lg i_icon_mobile2\"><i class=\"fa fa-circle fa-stack-2x i_icon_mobile\"></i><i class=\"fa fa-info fa-stack-1x fa-inverse i_icon_mobile2\"></i></span></div>";
-                                }
-								else {
-                                    Code += "<div class=\"ticket-cell note\">&nbsp;</div>";
-                                }	
 								Code += "</div>";
 								return Code;
 							}

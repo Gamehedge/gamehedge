@@ -2055,6 +2055,7 @@ main#admin #order-stats .stat-item span {
 	section#tickets ul.ticket-list > li .seats, .TicketRow .seats {
 		float: left;
 		margin-right: 0px;
+		margin-bottom: 5px;
 	}
 
 	.TicketRow .note {
