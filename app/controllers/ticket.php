@@ -249,8 +249,8 @@ case '';
 							CSSClass: "TicketRow",
 							Formatter: function(RowData, Key, CellValue, FormattedSection) {
 								var Code = "<div>";
-                                Code += "<div class=\"ticket-cell seat-link\"><button style=\"text-transform: none;\" class =\"button green\" type=\"button\" onclick=\"BuyNow(\'" + RowData.id + "\',\'" + RowData.price + "\');\">" + RowData.price.split(".")[0] + "ea</button></div>";
-                                Code += "<div class=\"ticket-cell guarantee guarantee-mobile\">Good Game Guarantee&trade;</div>";
+                                Code += "<div class=\"ticket-cell seat-link\"><button style=\"text-transform: none;\" class =\"button green\" type=\"button\" onclick=\"BuyNow(\'" + RowData.id + "\',\'" + RowData.price + "\');\">" + RowData.price.split(".")[0] + "ea</button>";
+                                Code += "<div class=\"ticket-cell guarantee guarantee-mobile\">Good Game Guarantee&trade;</div></div>";
 								Code += "</div>";
 								return Code;
 							}
