@@ -447,16 +447,16 @@ case '';
 			}
 			function BuyNow(Id, Price) {
                 var Qty = 1;
-                if($( window ).width() > 768){
+                //if($( window ).width() > 768){
                     if($("#Qty" + Id)) {
                         Qty = parseInt($("#Qty" + Id).val());
                     }   
-                }
-                else {
+                //}
+                /*else {
                     if($("#QtyMob" + Id)) {
                         Qty = parseInt($("#QtyMob" + Id).val());
                     }
-                }
+                }*/
 				var data = {event_id: event_id, tgroup_id: Id, price: parseFloat(Price.substring(1).replace(/[^\d\.\-\ ]/g, "")), qty: Qty};
 				$.post(\'/order/add\', data, function(data) {
 					if(data.status == 1)
