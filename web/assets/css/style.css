@@ -2070,6 +2070,9 @@ main#admin #order-stats .stat-item span {
 		margin-right: 0px;
 		font-size: 6px;
 	}
+	.tuMapTicketList td.TicketRow{
+		padding: 1px;
+	}
 
 }
 
