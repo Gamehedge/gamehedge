@@ -180,8 +180,8 @@ case '';
 							Formatter: function(RowData, Key, CellValue, FormattedSection) {
 								var Code = "<div>";
 								Code += "<div class=\"location\">";
-								Code += "<div class=\"section\">Section <strong>" + RowData.section + "</strong></div>";
-								Code += "<div class=\"lrow\">Row <strong>" + RowData.row + "</strong></div>";
+								Code += "<div class=\"section\">Section <span class=\"bolded_text\">" + RowData.section + "</span></div>";
+								Code += "<div class=\"lrow\">Row <span class=\"bolded_text\">" + RowData.row + "</span></div>";
 								Code += "</div>";
                                 
                                 Code += "<div class=\"seats seats-mobile\">";

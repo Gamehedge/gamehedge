@@ -2236,6 +2236,9 @@ main#admin #order-stats .stat-item span {
     .firstRow .type{
     	font-size: 7px;
     }
+    .bolded_text{
+    	font-weight: bolder;
+    }
     
 }
 @media(min-width: 768px) {
