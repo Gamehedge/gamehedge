@@ -1,16 +1,23 @@
 {$header}
-{$menu}
+<div class="mobile-menu hidden-sm hidden-md hidden-lg">
+	{$menu}
+</div>
+<div class="desktop-menu hidden-xs">
+	{$menu}
+</div>
+
 <section id="game-header" style="margin-bottom: 0 !important;">
 	<div class="container clearfix">
         
-            <div class="date col-xs-3">
+            <!-- <div class="date col-xs-3">
                 <div class="month">{$event_date|date_format:"F"}</div>
                 <div class="day">{$event_date|date_format:"j"}</div>
                 <div class="time">{$event_date|date_format:"D. h:i A"}</div>
-            </div>
-            <div class="event col-xs-9">
+            </div> -->
+            <div class="event col-xs-12 text-center">
                 <h1>{$event_name}</h1>
                 <div class="location">{$venue_name} - {$venue_location}</div>
+                <div class="location">{$event_date|date_format:"D, F  j h:i A"}</div>
             </div>
         
     </div>

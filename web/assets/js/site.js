@@ -29,10 +29,10 @@ $(document).ready(function(){
     
     if($(window).width() <= 768){
         $(".Filters").slideUp(0);
-        $("#TuMap").slideUp(0); 
+        $("#TuMap").slideDown(400); 
         
         filtersOpen = false;
-        MapOpen = false;
+        MapOpen = true;
     }
     
     $(".filter-comp").click(function(){

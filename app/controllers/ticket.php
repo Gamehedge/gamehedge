@@ -176,26 +176,16 @@ case '';
                           Visible:false
                         },
 						"section": {
-							CSSClass: "TicketRow",
+							CSSClass: "TicketRow firstRow",
 							Formatter: function(RowData, Key, CellValue, FormattedSection) {
 								var Code = "<div>";
 								Code += "<div class=\"location\">";
-								Code += "<div class=\"section\">Section " + RowData.section + "</div>";
-								Code += "<div class=\"lrow\">Row " + RowData.row + "</div>";
+								Code += "<div class=\"section\">Section <span class=\"bolded_text\">" + RowData.section + "</span></div>";
+								Code += "<div class=\"lrow\">Row <span class=\"bolded_text\">" + RowData.row + "</span></div>";
 								Code += "</div>";
                                 
-                                Code += "<div class=\"seats seats-mobile\">Qty ";
-								if($.isArray(RowData.quantity)) {
-									var Qnty = RowData.quantity.slice(0).sort(sortD);
-									Code += "<select id=\"QtyMob" + RowData.id + "\">";
-									for(var x = 0; x < Qnty.length; x++) {
-										Code += "<option>" + Qnty[x] + "</option>";
-									}
-									Code += "</select>";
-								} else {
-									Code += "<span>" + RowData.quantity + "</span>";
-									Code += "<input type=\"hidden\" id=\"QtyMob" + RowData.id + "\" lang=\"Quantity\" value=\"" + RowData.quantity + "\"/>";
-								}
+                                Code += "<div class=\"seats seats-mobile\">";
+								
 								Code += "<div class=\"type\">" + (RowData.eticket ? "Email Delivery" : "Physical Delivery") + "</div>";
 								Code += "<span class=\"smallIcon" + (RowData.notes != "" ? " Note\" title=\"" + RowData.notes : "") + "\"></span>";
 								Code += "<span class=\"smallIcon" + (RowData.eticket ? " eTicket\" title=\"Email Delivery" : "") + "\"></span>";
@@ -206,8 +196,23 @@ case '';
 								return Code;
 							}
 						},
-                        "quantity": {
-							CSSClass: "TicketRow TicketRowDesktop",
+                        "notes": {
+							CSSClass: "TicketRow",
+							Formatter: function(RowData, Key, CellValue, FormattedSection) {
+								var Code = "<div>";
+								
+								if(RowData.notes != null){
+                                    Code += "<div class=\"ticket-cell note\" title=\"" + RowData.notes + "\"><img src=\"/assets/img/icon__info_1x.png\"></div>";
+                                }
+								else {
+                                    Code += "<div class=\"ticket-cell note\">&nbsp;</div>";
+                                }	
+								Code += "</div>";
+								return Code;
+							}
+						},
+						"quantity": {
+							CSSClass: "TicketRow",
 							Formatter: function(RowData, Key, CellValue, FormattedSection) {
 								var Code = "<div>";
 								Code += "<div class=\"seats\">Qty ";
@@ -222,25 +227,11 @@ case '';
 									Code += "<span>" + RowData.quantity + "</span>";
 									Code += "<input type=\"hidden\" id=\"Qty" + RowData.id + "\" lang=\"Quantity\" value=\"" + RowData.quantity + "\"/>";
 								}
-								Code += "<div class=\"type\">" + (RowData.eticket ? "Email Delivery" : "Physical Delivery") + "</div>";
+								Code += "<div class=\"type hidden-xs hidden-sm\">" + (RowData.eticket ? "Email Delivery" : "Physical Delivery") + "</div>";
 								Code += "<span class=\"smallIcon" + (RowData.notes != "" ? " Note\" title=\"" + RowData.notes : "") + "\"></span>";
 								Code += "<span class=\"smallIcon" + (RowData.eticket ? " eTicket\" title=\"Email Delivery" : "") + "\"></span>";
 								Code += "<span class=\"smallIcon" + (RowData.preferred ? " Preferred\" title=\"Preferred Ticket" : "") + "\"></span>";
 								Code += "</div>";
-								Code += "</div>";
-								return Code;
-							}
-						},
-                        "notes": {
-							CSSClass: "TicketRow",
-							Formatter: function(RowData, Key, CellValue, FormattedSection) {
-								var Code = "<div>";
-								if(RowData.notes != null){
-                                    Code += "<div class=\"ticket-cell note\" title=\"" + RowData.notes + "\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-circle fa-stack-2x\"></i><i class=\"fa fa-info fa-stack-1x fa-inverse\"></i></span></div>";
-                                }
-								else {
-                                    Code += "<div class=\"ticket-cell note\">&nbsp;</div>";
-                                }	
 								Code += "</div>";
 								return Code;
 							}
@@ -258,8 +249,8 @@ case '';
 							CSSClass: "TicketRow",
 							Formatter: function(RowData, Key, CellValue, FormattedSection) {
 								var Code = "<div>";
-                                Code += "<div class=\"ticket-cell seat-link\"><button style=\"text-transform: none;\" class =\"button green\" type=\"button\" onclick=\"BuyNow(\'" + RowData.id + "\',\'" + RowData.price + "\');\">" + RowData.price + "ea</button></div>";
-                                Code += "<div class=\"ticket-cell guarantee guarantee-mobile\">Good Game<br />Guarantee&trade;</div>";
+                                Code += "<div class=\"ticket-cell seat-link\"><button style=\"text-transform: none;\" class =\"button green\" type=\"button\" onclick=\"BuyNow(\'" + RowData.id + "\',\'" + RowData.price + "\');\">" + RowData.price.split(".")[0] + "ea</button>";
+                                Code += "<div class=\"ticket-cell guarantee guarantee-mobile\">Good Game Guarantee&trade;</div></div>";
 								Code += "</div>";
 								return Code;
 							}
@@ -483,12 +474,14 @@ case '';
 	$smarty->assign('hscripts', $hscripts);
 	$header = $smarty->fetch('shared/header.tpl');
     $menu = $smarty->fetch('shared/menu2.tpl');
+    $menu_mobile = $smarty->fetch('shared/header_no_menu.tpl');
 	// Handle Footer
 	$smarty->assign('fscripts', $fscripts);
 	$footer = $smarty->fetch('shared/footer.tpl');
 	// Handle Main
 	$smarty->assign('header', $header);
     $smarty->assign('menu', $menu);
+    $smarty->assign('menu_mobile', $menu_mobile);
 	$smarty->assign('footer', $footer);
 	$smarty->assign('event_name', $event_data['name']);
 	//$smarty->assign('event_date', $event_data['occurs_at']);
