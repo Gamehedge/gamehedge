@@ -2239,6 +2239,9 @@ main#admin #order-stats .stat-item span {
     .bolded_text{
     	font-weight: bolder;
     }
+    .tuMapControlsContainer{
+    	display: none;
+    }
     
 }
 @media(min-width: 768px) {
