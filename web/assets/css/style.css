@@ -2225,7 +2225,7 @@ main#admin #order-stats .stat-item span {
     }
     .firstRow {
     	text-align: left !important;
-    	width: 36%;
+    	width: 25%;
     }
     section#games ul li .event .name, section#game-header .event h1, section#order-header .event h1{
     	font-size: 14px;
