@@ -2049,7 +2049,7 @@ main#admin #order-stats .stat-item span {
 
 	section#tickets ul.ticket-list > li .location, .TicketRow .location {
 		float: none;
-		margin-right: 20px;
+		margin-right: 0px;
 	}
 
 	section#tickets ul.ticket-list > li .seats, .TicketRow .seats {
@@ -2210,11 +2210,11 @@ main#admin #order-stats .stat-item span {
     	font-size: 10px;	
     }
     .i_icon_mobile{
-    	font-size: 27px;
+    	font-size: 20px;
     }
     .i_icon_mobile2{
     	font-size: 13px;
-    	margin-top: -3px;
+    	margin-top: -2px;
     }
     .TicketRow {
     	text-align: center !important;
