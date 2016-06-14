@@ -2204,10 +2204,17 @@ main#admin #order-stats .stat-item span {
         font-size: 10px !important;
     }
     section#tickets ul.ticket-list > li .location .section, .TicketRow .location .section, section#tickets ul.ticket-list > li .location .lrow, .TicketRow .location .lrow, section#tickets ul.ticket-list > li .seats, .TicketRow .seats{
-    	font-size: 13px;
+    	font-size: 10px;
     }
     section#tickets ul.ticket-list > li .guarantee, .TicketRow .type, .TicketRow .seats-mobile{
-    	font-size: 11px;	
+    	font-size: 10px;	
+    }
+    .i_icon_mobile{
+    	font-size: 27px;
+    }
+    .i_icon_mobile2{
+    	font-size: 13px;
+    	margin-top: -3px;
     }
     .TicketRow {
     	text-align: center !important;

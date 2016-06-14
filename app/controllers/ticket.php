@@ -180,8 +180,8 @@ case '';
 							Formatter: function(RowData, Key, CellValue, FormattedSection) {
 								var Code = "<div>";
 								Code += "<div class=\"location\">";
-								Code += "<div class=\"section\">Sec " + RowData.section.toLowerCase() + "</div>";
-								Code += "<div class=\"lrow\">Row " + RowData.row.toLowerCase() + "</div>";
+								Code += "<div class=\"section\">Section " + RowData.section + "</div>";
+								Code += "<div class=\"lrow\">Row " + RowData.row + "</div>";
 								Code += "</div>";
                                 
                                 Code += "<div class=\"seats seats-mobile\">";
@@ -239,7 +239,7 @@ case '';
 								}
 								Code += "</div>";
 								if(RowData.notes != null){
-                                    Code += "<div class=\"ticket-cell note\" title=\"" + RowData.notes + "\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-circle fa-stack-2x\"></i><i class=\"fa fa-info fa-stack-1x fa-inverse\"></i></span></div>";
+                                    Code += "<div class=\"ticket-cell note\" title=\"" + RowData.notes + "\"><span class=\"fa-stack fa-lg i_icon_mobile2\"><i class=\"fa fa-circle fa-stack-2x i_icon_mobile\"></i><i class=\"fa fa-info fa-stack-1x fa-inverse\"></i></span></div>";
                                 }
 								else {
                                     Code += "<div class=\"ticket-cell note\">&nbsp;</div>";
