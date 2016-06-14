@@ -2146,7 +2146,41 @@ main#admin #order-stats .stat-item span {
     border: 1px solid #a8c94b;
     border-radius: 3px;
 }
+.mobile-menu .navbar-gamehedge{
+	/*height: 40px;*/
+    padding: 0;
+    min-height: 40px;
+}
 
+.mobile-menu .logo-image{
+	width: 50%
+}
+.mobile-menu .navbar-header .navbar-brand{
+	height: 100%;
+    padding: 10px 15px;
+}
+.mobile-menu .navbar-toggle{
+	display: block;
+    width: 10px;
+    height: 2px;
+    padding: 7px 8px;
+}
+
+.mobile-menu .navbar-toggle .icon-bar{
+	width: 14px;
+}
+
+.mobile-menu  .navbar-toggle .icon-bar+.icon-bar{
+	margin-top: 2px;
+    width: 14px;
+
+}
+
+.mobile-menu .navbar-default .navbar-toggle{
+	margin: 7px;
+    height: 26px;
+    width: 30px;
+}
 @media(max-width: 768px) {
     #PriceRange, #filterPriceSection {
         display: none;

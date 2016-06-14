@@ -486,12 +486,14 @@ case '';
 	$smarty->assign('hscripts', $hscripts);
 	$header = $smarty->fetch('shared/header.tpl');
     $menu = $smarty->fetch('shared/menu2.tpl');
+    $menu_mobile = $smarty->fetch('shared/header_no_menu.tpl');
 	// Handle Footer
 	$smarty->assign('fscripts', $fscripts);
 	$footer = $smarty->fetch('shared/footer.tpl');
 	// Handle Main
 	$smarty->assign('header', $header);
     $smarty->assign('menu', $menu);
+    $smarty->assign('menu_mobile', $menu_mobile);
 	$smarty->assign('footer', $footer);
 	$smarty->assign('event_name', $event_data['name']);
 	//$smarty->assign('event_date', $event_data['occurs_at']);
