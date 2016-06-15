@@ -23,7 +23,7 @@ $smarty->assign('hscripts', '');
 $header = $smarty->fetch('shared/header.tpl');
 $menu = $smarty->fetch('shared/menu2.tpl');
 // Handle Footer
-$smarty->assign('fscripts', '<script src="/assets/js/moment.js"></script><script src="/assets/js/performer.js?v118"></script>');
+$smarty->assign('fscripts', '<script src="/assets/js/moment.js"></script><script src="/assets/js/performer.js?v119"></script>');
 $footer = $smarty->fetch('shared/footer.tpl');
 //$p_data = $teClient->showPerformer(['performer_id' => (int)$id]);
 $performer = new Performer;

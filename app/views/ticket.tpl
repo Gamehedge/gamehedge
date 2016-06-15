@@ -63,8 +63,11 @@
 	</div>
     
     <div class="filter-outside-container">
-        <div class="filter-outside filter-comp text-center">FILTERS</div>
-        <div class="filter-outside map-filter text-center">MAP</div>
+        <!-- <div class="filter-outside filter-comp text-center">FILTERS</div>
+        <div class="filter-outside map-filter text-center">MAP</div> -->
+        <img src="/assets/img/icon-gear.png" class="filter-comp">
+        <img src="/assets/img/icon-stadium-128.png" class="map-filter">
+        
     </div>
     
 	<div class="container">
@@ -84,9 +87,9 @@
                 
                 <div class="col-md-6 col-md-pull-6">
 					<section id="game-guarantee">
-						<h2>Good Game Guarantee&trade;</h2>
+						<div class="GGGShow noselect"><h2>Good Game Guarantee&trade; <span class="glyphicon glyphicon-chevron-down hidden-lg hidden-md" aria-hidden="true"></span></h2></div>
 						<hr />
-						<p>All GameHedge tickets come with our exclusive Good Game Guarantee at no additional cost to you. So, if the home team loses by 5 runs or more, we will refund 50% of the price of your ticket. No gimmicks. No catches.</p>
+						<p id="GGGText_Tickets">All GameHedge tickets come with our exclusive Good Game Guarantee at no additional cost to you. So, if the home team loses by 5 runs or more, we will refund 50% of the price of your ticket. No gimmicks. No catches.</p>
 					</section>
 					<!-- List Container -->
 					<div class="TicketListContainer" id="ListContainer">

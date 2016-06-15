@@ -24,15 +24,17 @@ function requestRefund(_id, orderId, customerId, customerName, customerEmail){
 
 var filtersOpen = true;
 var MapOpen = true;
+var GGGOpen = true;
 
 $(document).ready(function(){
     
     if($(window).width() <= 768){
         $(".Filters").slideUp(0);
         $("#TuMap").slideDown(400); 
-        
+        $("#GGGText_Tickets").slideUp(0);
         filtersOpen = false;
         MapOpen = true;
+        GGGOpen = false;
     }
     
     $(".filter-comp").click(function(){
@@ -43,6 +45,16 @@ $(document).ready(function(){
         else {
             $(".Filters").slideDown(400);
             filtersOpen = true;
+        }
+    });
+    $(".GGGShow").click(function(){
+        if(GGGOpen == true){
+            GGGOpen = false;
+            $("#GGGText_Tickets").slideUp(400);
+        }
+        else {
+            $("#GGGText_Tickets").slideDown(400);
+            GGGOpen = true;
         }
     });
     

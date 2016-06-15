@@ -116,7 +116,7 @@ case '';
 			$(document).ready(function() {
 				/*****************************************************
 				check date to hide physical Ticket
-				********************************************************/
+				*******************************************************
 				var d = new Date();
 
 				var month = d.getMonth()+1;
@@ -135,7 +135,7 @@ case '';
                 if($( window ).width() < 768){
                     $("#data_footer").css("display", "none");
                     $("#hr_footer").css("display", "none");
-                }
+                }*/
                 
 				/************************************************************
 				MapContainer Height to view complete chart

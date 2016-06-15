@@ -67,7 +67,8 @@
 								<div class="location"><a href="/venue/{$edata.venue.id}/{$edata.venue.slug}">{$edata.venue.name}</a> - {$edata.venue.location}</div>
 							</div>
 							<div class="tickets-link">
-								<a href="/ticket/{$edata.id}" class="btn-green-gradient">from <span>${$edata.low_price} <i class="fa fa-angle-right"></i></a>
+								<!-- <a href="/ticket/{$edata.id}" class="btn-green-gradient">from <span>${$edata.low_price} <i class="fa fa-angle-right"></i></a> -->
+								<a href="/ticket/{$edata.id}" class="btn-green-gradient">Buy Tickets</a>
 								{if $edata.available_count < 20}
 									<div class="text-center alert-text">NOT MANY LEFT</div>
 								{/if}
