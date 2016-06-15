@@ -129,13 +129,13 @@ case '';
 					$("#ETicket").prop( "checked", true );
 					$("#eticketsCont").hide();
 				}
-				
+				*/
 				$(document).tooltip();
                 
                 if($( window ).width() < 768){
                     $("#data_footer").css("display", "none");
                     $("#hr_footer").css("display", "none");
-                }*/
+                }
                 
 				/************************************************************
 				MapContainer Height to view complete chart

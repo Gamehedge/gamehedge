@@ -993,7 +993,7 @@ section#game-guarantee p {
     /*margin-right: -1px; 
     border-radius: 0px 0px 0px 10px;
     border-right: solid 1px #c1c1c1;*/
-    height: 50px;
+    height: 30px;
     cursor: pointer;
 }
 
@@ -1001,7 +1001,7 @@ section#game-guarantee p {
     /*margin-left: -1px; 
     border-radius: 0px 0px 10px 0px;
     border-left: solid 1px #c1c1c1;*/
-    height: 50px;
+    height: 30px;
     cursor: pointer;
 }
 
