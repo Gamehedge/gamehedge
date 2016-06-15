@@ -97,7 +97,7 @@ function loadPage(){
                     _html = _html + '</div>';
                     _html = _html + '<div class="tickets-link col-md-2 col-xs-12 text-center" style="padding: 0;">';
                     //_html = _html + '<button style="text-transform:none" class="button green ">From $' + value.min_price + '</button>';
-                    _html = _html + '<button style="text-transform:none" class="button green ">Buy Tickets</button>';
+                    _html = _html + '<button style="text-transform:none" class="button green ">BUY TICKETS</button>';
                     if(value.available_count < 20){
                         _html = _html + '<div class="text-center alert-text">NOT MANY LEFT</div>';
                     }
