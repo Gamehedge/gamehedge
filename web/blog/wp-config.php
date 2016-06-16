@@ -77,6 +77,9 @@ $table_prefix = 'wp_kegp_';
  *
  * @link https://codex.wordpress.org/Debugging_in_WordPress
  */
+
+define('DISABLE_WP_CRON', true);
+
 define('WP_DEBUG', false);
 
 /* That's all, stop editing! Happy blogging. */
