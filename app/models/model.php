@@ -15,6 +15,7 @@ class Model {
 	protected $table;
 	protected $pk;
 	protected $pk_auto   = true;
+	protected $unique    = array();
 	public $fields       = array();
 	protected $field_map = array();
 
@@ -53,21 +54,22 @@ class Model {
 				}
 			}
 		}
-		foreach($this->field_map AS $dbk => $fdata) {
-			if($dbk == $this->pk) {
-				$sql = rtrim($sql, ', ') . ') ON CONFLICT (' . $dbk . ') DO UPDATE SET ';
-				break;
-			}
+		if(count($this->unique) == 0){
+			$conflict_query = $this->pk;
 		}
+		else{
+			$conflict_query = $this->unique[0];
+		}
+		$sql = rtrim($sql, ', ') . ') ON CONFLICT (' . $conflict_query . ') DO UPDATE SET ';
 		foreach($this->field_map AS $dbk => $fdata) {
-			if($fdata['name'] != 'created' && $fdata['name'] != 'modified') {
-				if($dbk == $this->pk && $this->pk_auto) {
-					$sql .= $dbk . ' = CURRVAL('. $this->table . '.' . $dbk . '), ';
-				} else if($fdata['name'] == 'last_date') {
-					$sql .= $dbk . ' = NOW(), ';
-				} else {
-					$sql .= $dbk . ' = :u' . $fdata['name'] . ', ';
-				}
+			if($fdata['name'] != 'created' && $fdata['name'] != 'modified' && $dbk != $this->pk) {
+				/*if($dbk == $this->pk && $this->pk_auto) {
+					$sql .= $dbk . ' = '. $this->table . '.' . $dbk . ', ';
+				} else *///if($fdata['name'] == 'last_date') {
+					$sql .= $dbk . ' = EXCLUDED.' . $dbk . ', ';
+				//} else {
+				//	$sql .= $dbk . ' = :u' . $fdata['name'] . ', ';
+				//}
 			}
 		}
 		$sql  = rtrim($sql, ', ');
@@ -75,39 +77,35 @@ class Model {
 		foreach($ifields AS $dbk => $fdata) {
 			if($fdata['name'] != 'created' && $fdata['name'] != 'modified' && $fdata['name'] != 'last_date') {
 				if(isset($data[$fdata['name']])) {
-					if($fdata['name'] == "id"){
-						echo $this->table;
-						echo $data[$fdata['name']];
-					}
 					switch($fdata['type']) {
 					case 'int':
 						$stmt->bindValue(':' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_INT);
-						$stmt->bindValue(':u' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_INT);
+						//$stmt->bindValue(':u' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_INT);
 						break;
 					case 'string':
 						if($data[$fdata['name']] == ""){
 							$stmt->bindValue(':' . $fdata['name'], "0", PDO::PARAM_STR);
-							$stmt->bindValue(':u' . $fdata['name'], "0", PDO::PARAM_STR);
+							//$stmt->bindValue(':u' . $fdata['name'], "0", PDO::PARAM_STR);
 						}
 						else{
 							$stmt->bindValue(':' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
-							$stmt->bindValue(':u' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
+							//$stmt->bindValue(':u' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
 						}
 						break;
 					case 'datetime':
 						if($data[$fdata['name']] == ""){
 							$stmt->bindValue(':' . $fdata['name'], "0", PDO::PARAM_STR);
-							$stmt->bindValue(':u' . $fdata['name'], "0", PDO::PARAM_STR);
+							//$stmt->bindValue(':u' . $fdata['name'], "0", PDO::PARAM_STR);
 						}
 						else{
 							$stmt->bindValue(':' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
-							$stmt->bindValue(':u' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
+							//$stmt->bindValue(':u' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
 						}	
 						break;
 					}
 				} else {
 					$stmt->bindValue(':' . $fdata['name'], null, PDO::PARAM_INT);
-					$stmt->bindValue(':u' . $fdata['name'], null, PDO::PARAM_INT);
+					//$stmt->bindValue(':u' . $fdata['name'], null, PDO::PARAM_INT);
 				}
 			}
 		}

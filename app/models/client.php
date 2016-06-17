@@ -20,6 +20,7 @@ class ClientModel extends Model {
                                'last_date' => null,
                                'created'   => null,
                                'modified'  => null);
+	protected $unique = array('email');
 	protected $field_map = array('id'              => array('name' => 'id',
                                                           'type' => 'int'),
                                'name'            => array('name' => 'name',
