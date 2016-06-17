@@ -15,7 +15,7 @@ class OrderStat {
 	}
 
 	public function add() {
-		$stmt = $this->db->prepare("INSERT INTO order_stats (num, stat_date) VALUES (1, NOW()) ON DUPLICATE KEY UPDATE num = num + 1");
+		$stmt = $this->db->prepare("INSERT INTO order_stats (num, stat_date) VALUES (1, NOW()) ON CONFLICT (" . $this->db->pk . ") DO UPDATE SET num = EXCLUDED.num + 1");
 		return $stmt->execute();
 	}
 
