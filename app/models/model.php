@@ -14,6 +14,7 @@ class Model {
 	protected $db;
 	protected $table;
 	protected $pk;
+	protected $sequence;
 	protected $pk_auto   = true;
 	protected $unique    = array();
 	public $fields       = array();
@@ -63,13 +64,7 @@ class Model {
 		$sql = rtrim($sql, ', ') . ') ON CONFLICT (' . $conflict_query . ') DO UPDATE SET ';
 		foreach($this->field_map AS $dbk => $fdata) {
 			if($fdata['name'] != 'created' && $fdata['name'] != 'modified' && $dbk != $this->pk) {
-				/*if($dbk == $this->pk && $this->pk_auto) {
-					$sql .= $dbk . ' = '. $this->table . '.' . $dbk . ', ';
-				} else *///if($fdata['name'] == 'last_date') {
-					$sql .= $dbk . ' = EXCLUDED.' . $dbk . ', ';
-				//} else {
-				//	$sql .= $dbk . ' = :u' . $fdata['name'] . ', ';
-				//}
+				$sql .= $dbk . ' = EXCLUDED.' . $dbk . ', ';
 			}
 		}
 		$sql  = rtrim($sql, ', ');
@@ -110,7 +105,7 @@ class Model {
 			}
 		}
 		$stmt->execute();
-		return $this->db->lastInsertId();
+		return $this->db->lastInsertId($this->sequence);
 	}
 
 	public function delete($id) {

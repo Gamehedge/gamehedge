@@ -29,7 +29,7 @@ class OrderStat {
 		} else {
 			$stats['today'] = 0;
 		}
-		$stmt = $this->db->prepare("SELECT SUM(num) AS num FROM order_stats WHERE WEEK(stat_date) = WEEK(NOW()) AND YEAR(stat_date) = YEAR(NOW())");
+		$stmt = $this->db->prepare("SELECT SUM(num) AS num FROM order_stats WHERE DATE_PART('week', stat_date::timestamp) = DATE_PART('week', NOW()::timestamp) AND DATE_PART('year', stat_date::timestamp) = DATE_PART('year', NOW()::timestamp)");
 		$stmt->execute();
 		if($stmt->rowCount() > 0) {
 			$result        = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -37,7 +37,7 @@ class OrderStat {
 		} else {
 			$stats['week'] = 0;
 		}
-		$stmt = $this->db->prepare("SELECT SUM(num) AS num FROM order_stats WHERE MONTH(stat_date) = MONTH(NOW()) AND YEAR(stat_date) = YEAR(NOW())");
+		$stmt = $this->db->prepare("SELECT SUM(num) AS num FROM order_stats WHERE DATE_PART('month', stat_date::timestamp) = DATE_PART('month', NOW()::timestamp) AND DATE_PART('year', stat_date::timestamp) = DATE_PART('year', NOW()::timestamp)");
 		$stmt->execute();
 		if($stmt->rowCount() > 0) {
 			$result         = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -45,7 +45,7 @@ class OrderStat {
 		} else {
 			$stats['month'] = 0;
 		}
-		$stmt = $this->db->prepare("SELECT SUM(num) AS num FROM order_stats WHERE YEAR(stat_date) = YEAR(NOW())");
+		$stmt = $this->db->prepare("SELECT SUM(num) AS num FROM order_stats WHERE DATE_PART('year', stat_date::timestamp) = DATE_PART('year', NOW()::timestamp)");
 		$stmt->execute();
 		if($stmt->rowCount() > 0) {
 			$result        = $stmt->fetch(PDO::FETCH_ASSOC);

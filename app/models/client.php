@@ -10,6 +10,7 @@ require_once 'app/models/model.php';
 class ClientModel extends Model {
 	protected $table     = 'clients';
 	protected $pk        = 'id';
+	protected $sequence  = 'client_sequence';
 	public $fields       = array('id'        => null,
                                'name'      => null,
                                'email'     => null,

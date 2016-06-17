@@ -11,6 +11,7 @@ class OrderModel extends Model {
 	protected $table      = 'orders';
 	protected $pk         = 'id';
 	protected $pk_auto    = true;
+  protected $sequence  = 'order_sequence';
 	public $fields        = array('id'          => null,
                                 'client_id'   => null,
                                 'client_name' => null,
@@ -34,6 +35,7 @@ class OrderModel extends Model {
                                 'refund'      => null,
                                 'created'     => null,
                                 'modified'    => null);
+  protected $unique = array('te_order_id');
 	protected $field_map  = array('id'              => array('name' => 'id',
                                                            'type' => 'int'),
                                 'client_id'       => array('name' => 'client_id',
@@ -86,12 +88,11 @@ class OrderModel extends Model {
 	}
 
 	public function get_list($page, $per_page) {
-    $low_limit = 0;
-		$llimit = $per_page * ($page - 1);
-		$hlimit = $low_limit + $per_page;
+    $llimit = $per_page * ($page - 1);
+		$hlimit = $llimit + $per_page;
     $delta_limit = $hlimit - $llimit;
 		$stmt   = $this->db->prepare('SELECT c.id, c.name, c.email, o.* FROM clients c, orders o WHERE o.client_id = c.te_uid ORDER BY o.id DESC LIMIT :delta_limit OFFSET :llimit');
-    $total_query = $this->db->prepare('SELECT COUNT(*) FROM clients c, orders o WHERE o.client_id = c.te_uid ORDER BY o.id');
+    $total_query = $this->db->prepare('SELECT COUNT(o.*),COUNT(c.*) FROM clients c, orders o WHERE o.client_id = c.te_uid');
 		$stmt->bindValue(':llimit', $llimit, PDO::PARAM_INT);
 		$stmt->bindValue(':delta_limit', $delta_limit, PDO::PARAM_INT);
 		$stmt->execute();
@@ -114,9 +115,8 @@ class OrderModel extends Model {
 	}
 
 	public function get_list_by_customer($id, $page, $per_page) {
-        $low_limit = 0;
-		$llimit = $per_page * ($page - 1);
-		$hlimit = $low_limit + $per_page;
+    $llimit = $per_page * ($page - 1);
+		$hlimit = $llimit + $per_page;
     $delta_limit = $hlimit - $llimit;
 		$stmt   = $this->db->prepare('SELECT c.id, c.name, c.email, o.* FROM clients c, orders o WHERE o.client_id = c.te_uid AND c.id = :id ORDER BY o.id DESC LIMIT :delta_limit OFFSET :llimit');
     $total_query = $this->db->prepare('SELECT COUNT(*) FROM clients c, orders o WHERE o.client_id = c.te_uid AND c.id = :id');

@@ -10,6 +10,7 @@ require_once 'app/models/model.php';
 class AdminModel extends Model {
 	protected $table     = 'admin';
 	protected $pk        = 'id';
+	protected $sequence  = 'admin_sequence';
 	public $fields       = array('id'        => null,
                                'username'  => null,
                                'password'  => null,
@@ -20,6 +21,7 @@ class AdminModel extends Model {
                                'last_date' => null,
                                'created'   => null,
                                'modified'  => null);
+	protected $unique = array('email');
 	protected $field_map = array('id'              => array('name' => 'id',
                                                           'type' => 'int'),
                                'username'        => array('name' => 'username',

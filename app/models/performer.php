@@ -10,6 +10,7 @@ require_once 'app/models/model.php';
 class PerformerModel extends Model {
 	protected $table     = 'performers';
 	protected $pk        = 'id';
+      protected $sequence  = 'performers_sequence';
 	public $fields       = array('id'               => null,
                                'te_uid'               => null,
                                'te_name'              => null,
