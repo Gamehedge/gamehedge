@@ -9,10 +9,14 @@ class Config {
                    'db_user' => 'root',
                    'db_pass' => 'root');
 		} else {
-			return array('db_host' => 'us-cdbr-iron-east-03.cleardb.net',
+      return array('db_host' => 'ec2-54-235-183-28.compute-1.amazonaws.com',
+                   'db_name' => 'd7catr87jassh8',
+                   'db_user' => 'vzqcqmhxtstyzs',
+                   'db_pass' => 'yny_HY7Z0t4OhV5eJ8fpkiodop');
+			/*return array('db_host' => 'us-cdbr-iron-east-03.cleardb.net',
                    'db_name' => 'heroku_301a92ea312e126',
                    'db_user' => 'bd9a5a15117087',
-                   'db_pass' => '656b96be');
+                   'db_pass' => '656b96be');*/
 		}
 	}
 	public static function get_team_data($team = '') {

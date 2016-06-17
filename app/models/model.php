@@ -53,11 +53,16 @@ class Model {
 				}
 			}
 		}
-		$sql = rtrim($sql, ', ') . ') ON DUPLICATE KEY UPDATE ';
+		foreach($this->field_map AS $dbk => $fdata) {
+			if($dbk == $this->pk) {
+				$sql = rtrim($sql, ', ') . ') ON CONFLICT (' . $dbk . ') DO UPDATE SET ';
+				break;
+			}
+		}
 		foreach($this->field_map AS $dbk => $fdata) {
 			if($fdata['name'] != 'created' && $fdata['name'] != 'modified') {
 				if($dbk == $this->pk && $this->pk_auto) {
-					$sql .= $dbk . ' = LAST_INSERT_ID(' . $dbk . '), ';
+					$sql .= $dbk . ' = CURRVAL('. $this->table . '.' . $dbk . '), ';
 				} else if($fdata['name'] == 'last_date') {
 					$sql .= $dbk . ' = NOW(), ';
 				} else {
@@ -70,18 +75,34 @@ class Model {
 		foreach($ifields AS $dbk => $fdata) {
 			if($fdata['name'] != 'created' && $fdata['name'] != 'modified' && $fdata['name'] != 'last_date') {
 				if(isset($data[$fdata['name']])) {
+					if($fdata['name'] == "id"){
+						echo $this->table;
+						echo $data[$fdata['name']];
+					}
 					switch($fdata['type']) {
 					case 'int':
 						$stmt->bindValue(':' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_INT);
 						$stmt->bindValue(':u' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_INT);
 						break;
 					case 'string':
-						$stmt->bindValue(':' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
-						$stmt->bindValue(':u' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
+						if($data[$fdata['name']] == ""){
+							$stmt->bindValue(':' . $fdata['name'], "0", PDO::PARAM_STR);
+							$stmt->bindValue(':u' . $fdata['name'], "0", PDO::PARAM_STR);
+						}
+						else{
+							$stmt->bindValue(':' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
+							$stmt->bindValue(':u' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
+						}
 						break;
 					case 'datetime':
-						$stmt->bindValue(':' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
-						$stmt->bindValue(':u' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
+						if($data[$fdata['name']] == ""){
+							$stmt->bindValue(':' . $fdata['name'], "0", PDO::PARAM_STR);
+							$stmt->bindValue(':u' . $fdata['name'], "0", PDO::PARAM_STR);
+						}
+						else{
+							$stmt->bindValue(':' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
+							$stmt->bindValue(':u' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
+						}	
 						break;
 					}
 				} else {

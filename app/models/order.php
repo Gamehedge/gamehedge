@@ -86,14 +86,18 @@ class OrderModel extends Model {
 	}
 
 	public function get_list($page, $per_page) {
-        $low_limit = 0;
+    $low_limit = 0;
 		$llimit = $per_page * ($page - 1);
 		$hlimit = $low_limit + $per_page;
-		$stmt   = $this->db->prepare('SELECT SQL_CALC_FOUND_ROWS c.id, c.name, c.email, o.* FROM clients c, orders o WHERE o.client_id = c.te_uid ORDER BY o.id DESC LIMIT :llimit, :hlimit');
+    $delta_limit = $hlimit - $llimit;
+		$stmt   = $this->db->prepare('SELECT c.id, c.name, c.email, o.* FROM clients c, orders o WHERE o.client_id = c.te_uid ORDER BY o.id DESC LIMIT :delta_limit OFFSET :llimit');
+    $total_query = $this->db->prepare('SELECT COUNT(*) FROM clients c, orders o WHERE o.client_id = c.te_uid ORDER BY o.id');
 		$stmt->bindValue(':llimit', $llimit, PDO::PARAM_INT);
-		$stmt->bindValue(':hlimit', $hlimit, PDO::PARAM_INT);
+		$stmt->bindValue(':delta_limit', $delta_limit, PDO::PARAM_INT);
 		$stmt->execute();
-		$total_records = $this->db->query('SELECT FOUND_ROWS();')->fetch(PDO::FETCH_COLUMN);
+    $total_query->execute();
+		$total_records = $total_query->fetch(PDO::FETCH_ASSOC);
+    $total_records = $total_records["count"];
 		if($stmt->rowCount() > 0) {
 			$orders = array();
 			while($order = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -113,12 +117,17 @@ class OrderModel extends Model {
         $low_limit = 0;
 		$llimit = $per_page * ($page - 1);
 		$hlimit = $low_limit + $per_page;
-		$stmt   = $this->db->prepare('SELECT SQL_CALC_FOUND_ROWS c.id, c.name, c.email, o.* FROM clients c, orders o WHERE o.client_id = c.te_uid AND c.id = :id ORDER BY o.id DESC LIMIT :llimit, :hlimit');
-		$stmt->bindValue(':id', $id, PDO::PARAM_INT);
+    $delta_limit = $hlimit - $llimit;
+		$stmt   = $this->db->prepare('SELECT c.id, c.name, c.email, o.* FROM clients c, orders o WHERE o.client_id = c.te_uid AND c.id = :id ORDER BY o.id DESC LIMIT :delta_limit OFFSET :llimit');
+    $total_query = $this->db->prepare('SELECT COUNT(*) FROM clients c, orders o WHERE o.client_id = c.te_uid AND c.id = :id');
+		$total_query->bindValue(':id', $id, PDO::PARAM_INT);
+    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 		$stmt->bindValue(':llimit', $llimit, PDO::PARAM_INT);
-		$stmt->bindValue(':hlimit', $hlimit, PDO::PARAM_INT);
+		$stmt->bindValue(':delta_limit', $delta_limit, PDO::PARAM_INT);
 		$stmt->execute();
-		$total_records = $this->db->query('SELECT FOUND_ROWS();')->fetch(PDO::FETCH_COLUMN);
+    $total_query->execute();
+		$total_records = $total_query->fetch(PDO::FETCH_ASSOC);
+    $total_records = $total_records["count"];
 		if($stmt->rowCount() > 0) {
 			$orders = array();
 			while($order = $stmt->fetch(PDO::FETCH_ASSOC)) {

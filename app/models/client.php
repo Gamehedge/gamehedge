@@ -47,11 +47,15 @@ class ClientModel extends Model {
 	public function get_list($page, $per_page) {
 		$llimit = $per_page * ($page - 1);
 		$hlimit = $llimit + $per_page;
-		$stmt   = $this->db->prepare('SELECT SQL_CALC_FOUND_ROWS id, name, email, te_uid, create_date FROM clients ORDER BY name ASC LIMIT :llimit, :hlimit');
+		$delta_limit = $hlimit - $llimit;
+		$stmt   = $this->db->prepare('SELECT id, name, email, te_uid, create_date FROM clients ORDER BY name ASC LIMIT :delta_limit OFFSET :llimit');
+		$total_query = $this->db->prepare('SELECT COUNT(*) FROM clients');
 		$stmt->bindValue(':llimit', $llimit);
-		$stmt->bindValue(':hlimit', $hlimit);
+		$stmt->bindValue(':delta_limit', $delta_limit);
 		$stmt->execute();
-		$total_records = $this->db->query('SELECT FOUND_ROWS();')->fetch(PDO::FETCH_COLUMN);
+		$total_query->execute();
+		$total_records = $total_query->fetch(PDO::FETCH_ASSOC);
+        $total_records = $total_records["count"];
 		if($stmt->rowCount() > 0) {
 			$clients = array();
 			while($client = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -83,12 +87,19 @@ class ClientModel extends Model {
 	public function find($q, $page, $per_page) {
 		$llimit = $per_page * ($page - 1);
 		$hlimit = $llimit + $per_page;
-		$stmt   = $this->db->prepare('SELECT SQL_CALC_FOUND_ROWS id, name, email, te_uid, create_date FROM clients WHERE name LIKE :qname OR email LIKE :qemail ORDER BY name ASC LIMIT :llimit, :hlimit');
+		$delta_limit = $hlimit - $llimit;
+		$stmt   = $this->db->prepare('SELECT id, name, email, te_uid, create_date FROM clients WHERE name LIKE :qname OR email LIKE :qemail ORDER BY name ASC LIMIT :delta_limit OFFSET :llimit');
+		$total_query = $this->db->prepare('SELECT COUNT(*) FROM clients WHERE name LIKE :qname OR email LIKE :qemail');
 		$stmt->bindValue(':qname', '%' . $q . '%', PDO::PARAM_STR);
 		$stmt->bindValue(':qemail', '%' . $q . '%', PDO::PARAM_STR);
 		$stmt->bindValue(':llimit', $llimit, PDO::PARAM_INT);
-		$stmt->bindValue(':hlimit', $hlimit, PDO::PARAM_INT);
+		$stmt->bindValue(':delta_limit', $delta_limit, PDO::PARAM_INT);
+		$total_query->bindValue(':qname', '%' . $q . '%', PDO::PARAM_STR);
+		$total_query->bindValue(':qemail', '%' . $q . '%', PDO::PARAM_STR);
 		$stmt->execute();
+		$total_query->execute();
+		$total_records = $total_query->fetch(PDO::FETCH_ASSOC);
+        $total_records = $total_records["count"];
 		if($stmt->rowCount() > 0) {
 			$clients = array();
 			while($client = $stmt->fetch(PDO::FETCH_ASSOC)) {
