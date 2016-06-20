@@ -991,7 +991,7 @@ section#game-guarantee p {
     transition: opacity 0.5s;
 }
 .press-info img{
-	height: 50px;
+	height: 30px;
 }
 @media(max-width: 991px) {
     #press_images img{
@@ -999,6 +999,10 @@ section#game-guarantee p {
 		margin:0;
 		width: 13.2%;
 	}
+	#press_images{
+	padding-right: 10px;
+    padding-left: 10px;
+}
 }
 /* Disable grayscale on hover */
 #press_images img:hover {
