@@ -25,6 +25,19 @@
 				</div>
 			</div>
 		</div>
+		<div id="press_images">
+			<div class="left-images">
+				<a target="_blanlk" href="http://www.usatoday.com/story/sports/mlb/2016/06/15/gamehedge-refunds-50-percent-ticket-price-if-home-team-loses-big/85931138/"><img src="/assets/img/press/USA Today.png"></a>
+				<a target="_blanlk" href="http://www.cnbc.com/2016/06/17/upstarts-bring-new-game-to-resale-tickets-for-fans.html"><img src="/assets/img/press/CNBC.png"></a>
+				<a target="_blanlk" href="http://www.scout.com/story/1679115-ticket-website-offer-refunds-for-losing"><img src="/assets/img/press/Scout.png"></a>
+				<a target="_blanlk" href="http://www.baseballprospectus.com/article.php?articleid=29564"><img src="/assets/img/press/Baseball Prospectus.png"></a>
+			</div>
+			<div class="right-images">
+				<a target="_blanlk" href=""><img src="/assets/img/press/ESPN Radio.gif"></a>
+				<a target="_blanlk" href="MSN: Ticket marketplace offers refunds if team loses big"><img src="/assets/img/press/MSN.png"></a>
+				<a target="_blanlk" href="http://finance.yahoo.com/news/gamehedge-launches-revolutionary-sports-ticket-130800271.html;_ylt=AwrC1DHW.GJXoREA8xWTmYlQ;_ylu=X3oDMTEzc2p0NzZlBGNvbG8DYmYxBHBvcwMyBHZ0aWQDVklEUFJEXzEEc2VjA3Nj"><img src="/assets/img/press/Yahoo Finance.png"></a>
+			</div>
+		</div>
 	</div>
 </section>
 <main>

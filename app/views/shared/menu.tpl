@@ -16,6 +16,7 @@
         <div class="collapse navbar-collapse" id="bs-navbar-collapse-gamehedge">
 
             <ul class="nav navbar-nav navbar-right nav-gamehedge">
+                <li><a href="/press">PRESS</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MLB <span class="caret"></span></a>
                     <ul class="dropdown-menu sports-dropdown-menu">
