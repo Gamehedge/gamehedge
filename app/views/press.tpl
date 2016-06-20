@@ -45,33 +45,47 @@
 		<h4 class="text-center" style=" font-size:35px;">GameHedge News</h4>
 		<div class="row" style="margin-bottom: 50px;margin-top: 50px;">
 			<div class="col-xs-3"></div>
-			<div class="col-xs-6 text-center">
+			<div class="col-xs-6 text-center press-info">
+				<img src="/assets/img/press2/USA Today.jpg">
 				<p><a href="http://www.usatoday.com/story/sports/mlb/2016/06/15/gamehedge-refunds-50-percent-ticket-price-if-home-team-loses-big/85931138/">USA Today: Ticket marketplace to offer refunds if home team loses big</a></p>
 				<br>
+				<img src="/assets/img/press2/Scout.png">
 				<p><a href="http://www.scout.com/story/1679115-ticket-website-offer-refunds-for-losing">Scout:  New Ticket Website Rewarding Fans of Bad Teams</a></p>
 				<br>
+				<img src="/assets/img/press2/CNBC-logo.jpg">
 				<p><a href="http://www.cnbc.com/2016/06/17/upstarts-bring-new-game-to-resale-tickets-for-fans.html">CNBC:  Upstarts bring new game to resale tickets for fans</a></p>
 				<br>
+				<img src="/assets/img/press2/Yahoo Finance.png">
 				<p><a href="http://finance.yahoo.com/news/gamehedge-launches-revolutionary-sports-ticket-130800271.html;_ylt=AwrC1DHW.GJXoREA8xWTmYlQ;_ylu=X3oDMTEzc2p0NzZlBGNvbG8DYmYxBHBvcwMyBHZ0aWQDVklEUFJEXzEEc2VjA3Nj">Yahoo Finance: GameHedge Launches Revolutionary Sports Ticket Marketplace Created To Give Something Back To Loyal Fans When The Game Doesn't Go Their Way</a></p>
 				<br>
+				<img src="/assets/img/press2/Baseball Prospectus.gif">
 				<p><a href="http://www.baseballprospectus.com/article.php?articleid=29564">Baseball Prospectus:  BP Daily Podcast</a></p>
 				<br>
+				<img src="/assets/img/press2/Yardbarker.jpg">
 				<p><a href="http://www.yardbarker.com/mlb/articles/new_ticket_website_offers_fans_refunds_for_home_team_blowouts/s1_13156_21116701">Yardbarker: New ticket website offers fans refunds for home-team blowouts</a></p>
 				<br>
+				<img src="/assets/img/press2/MSN.png">
 				<p><a href="http://www.msn.com/en-us/sports/mlb/ticket-marketplace-offers-refunds-if-team-loses-big/ar-AAh5Gl9">MSN: Ticket marketplace offers refunds if team loses big</a></p>
 				<br>
+				<img src="/assets/img/press2/Comeback.png">
 				<p><a href="http://thecomeback.com/blog/tech/ticket-website-blowouts-refunds.html">The Comback: New Ticket Website Offers Fans Refund For Home-Team blowouts </a></p>
 				<br>
+				<img src="/assets/img/press2/Daily Dot.png">
 				<p><a href="http://www.dailydot.com/entertainment/game-hedge-secondary-ticket-launches/">The Daily Dot: The ticket app that will give you a refund if the game sucks</a></p>
 				<br>
+				<img src="/assets/img/press2/vocativ.png">
 				<p><a href="http://www.vocativ.com/330153/refunds-for-blowout-games-this-startup-is-trying-it/">Vocativ: Refunds For Blowout Games? This Startup Is Trying It</a></p>
 				<br>
+				<img src="/assets/img/press2/Kare 11.png">
 				<p><a href="http://www.kare11.com/news/ticket-marketplace-to-offer-refunds-if-home-team-loses-big/245569067">Kare 11:  Ticket marketplace to offer refunds if home team loses big</a></p>
 				<br>
+				<img src="/assets/img/press2/700 WLW.png">
 				<p><a href="http://m.700wlw.iheart.com/onair/lance-mcalister-7818/what-about-this-good-game-guarantee-14820612/">700 LWL: What about this "Good Game Guarantee" at GABP?</a></p>
 				<br>
+				<img src="/assets/img/press2/ESPN 980 DC.jpg">
 				<p><a href="http://cdn.stationcaster.com/stations/wtem/media/mpeg/06_17_16_DMV_Game_Time_Hr3-1466215513.mp3">ESPN980 Radio: DMV Game Time</a></p>
 				<br>
+				<img src="/assets/img/press2/ESPN 1530.png">
 				<p><a href="http://espn1530.iheart.com/onair/lance-mcalister-7818/what-about-this-good-game-guarantee-14820612/">ESPN1530 Radio: What about this "Good Game Guarantee" at GABP?</a></p>
 				<p style="margin-top: 50px;">Contact us: Public Relations</p>
 				<p>Press Inquiry</p>

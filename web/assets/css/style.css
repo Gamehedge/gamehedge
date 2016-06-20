@@ -990,6 +990,16 @@ section#game-guarantee p {
     -webkit-transition: opacity 0.5s; /* For Safari 3.1 to 6.0 */
     transition: opacity 0.5s;
 }
+.press-info img{
+	height: 50px;
+}
+@media(max-width: 991px) {
+    #press_images img{
+		height: auto;
+		margin:0;
+		width: 13.2%;
+	}
+}
 /* Disable grayscale on hover */
 #press_images img:hover {
   	filter: none;
