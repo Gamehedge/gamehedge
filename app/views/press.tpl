@@ -26,13 +26,22 @@
 			</div>
 		</div>
 		<div id="press_images">
-			<div class="left-images">
+			<div class="left-images hidden-xs hidden-sm">
 				<img src="/assets/img/press/USA Today.png">
 				<img src="/assets/img/press/CNBC.png">
 				<img src="/assets/img/press/Scout.png">
 				<img src="/assets/img/press/Baseball Prospectus.png">
 			</div>
-			<div class="right-images">
+			<div class="right-images hidden-xs hidden-sm">
+				<img src="/assets/img/press/ESPN Radio.png">
+				<img src="/assets/img/press/MSN.png">
+				<img src="/assets/img/press/Yahoo Finance.png">	
+			</div>
+			<div class="mobile-images hidden-md hidden-lg">
+				<img src="/assets/img/press/USA Today.png">
+				<img src="/assets/img/press/CNBC.png">
+				<img src="/assets/img/press/Scout.png">
+				<img src="/assets/img/press/Baseball Prospectus.png">
 				<img src="/assets/img/press/ESPN Radio.png">
 				<img src="/assets/img/press/MSN.png">
 				<img src="/assets/img/press/Yahoo Finance.png">	
