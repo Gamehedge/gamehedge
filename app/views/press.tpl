@@ -53,8 +53,8 @@
 	<div class="container">
 		<h4 class="text-center" style=" font-size:35px;">GameHedge News</h4>
 		<div class="row" style="margin-bottom: 50px;margin-top: 50px;">
-			<div class="col-xs-3"></div>
-			<div class="col-xs-6 text-center press-info">
+			<div class="col-sm-3 hidden-xs"></div>
+			<div class="col-sm-6 col-xs-12 text-center press-info">
 				<img src="/assets/img/press2/USAToday.png">
 				<p><a href="http://www.usatoday.com/story/sports/mlb/2016/06/15/gamehedge-refunds-50-percent-ticket-price-if-home-team-loses-big/85931138/">USA Today: Ticket marketplace to offer refunds if home team loses big</a></p>
 				<br>
