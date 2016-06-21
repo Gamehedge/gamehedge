@@ -28,8 +28,8 @@
 		<div id="press_images">
 			<div class="left-images hidden-xs hidden-sm">
 				<img src="/assets/img/press/Scout.png">
+				<img src="/assets/img/press/Crain's NY White.png">
 				<img src="/assets/img/press/USA Today.png">
-				<img src="/assets/img/press/Crain's NY White.png"
 				<img src="/assets/img/press/CNBC.png">
 			</div>
 			<div class="right-images hidden-xs hidden-sm">
