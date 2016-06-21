@@ -64,6 +64,9 @@
 				<img src="/assets/img/press2/CNBC-logo.png">
 				<p><a href="http://www.cnbc.com/2016/06/17/upstarts-bring-new-game-to-resale-tickets-for-fans.html">CNBC:  Upstarts bring new game to resale tickets for fans</a></p>
 				<br>
+				<img src="/assets/img/press2/Crain's NY Black.png">
+				<p><a href="http://www.crainsnewyork.com/article/20160621/TECHNOLOGY/160629961/sports-ticket-reseller-offers-refunds-if-your-team-gets-waxed">Crain's NY:  Sports-ticket reseller offers refunds if your team gets waxed</a></p>
+				<br>
 				<img src="/assets/img/press2/Yahoo Finance.png">
 				<p><a href="http://finance.yahoo.com/news/gamehedge-launches-revolutionary-sports-ticket-130800271.html;_ylt=AwrC1DHW.GJXoREA8xWTmYlQ;_ylu=X3oDMTEzc2p0NzZlBGNvbG8DYmYxBHBvcwMyBHZ0aWQDVklEUFJEXzEEc2VjA3Nj">Yahoo Finance: GameHedge Launches Revolutionary Sports Ticket Marketplace Created To Give Something Back To Loyal Fans When The Game Doesn't Go Their Way</a></p>
 				<br>
