@@ -40,10 +40,10 @@
 			<div class="mobile-images hidden-md hidden-lg">
 				<img src="/assets/img/press2/Scout.png">
 				<img src="/assets/img/press2/Baseball Prospectus.png">
-				<img src="/assets/img/press2/USA Today.png">
-				<img src="/assets/img/press2/CNBC.png">
+				<img src="/assets/img/press2/USA Today copy.png">
+				<img src="/assets/img/press2/CNBC copy.png">
 				<img src="/assets/img/press2/Yahoo Finance.png">	
-				<img src="/assets/img/press2/ESPN Radio.png">
+				<img src="/assets/img/press2/ESPN Radio copy.png">
 				<img src="/assets/img/press2/MSN.png">
 			</div>
 		</div>
