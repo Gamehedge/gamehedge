@@ -92,7 +92,7 @@
 				<p><a href="http://m.700wlw.iheart.com/onair/lance-mcalister-7818/what-about-this-good-game-guarantee-14820612/">700 LWL: What about this "Good Game Guarantee" at GABP?</a></p>
 				<br>
 				<img src="/assets/img/press2/ESPN 980 DC.png">
-				<p><a href="http://cdn.stationcaster.com/stations/wtem/media/mpeg/06_17_16_DMV_Game_Time_Hr3-1466215513.mp3">ESPN980 Radio: DMV Game Time</a></p>
+				<p><a href="https://soundcloud.com/user-371492790/gamehedge-on-espn980-radio-dmv-game-time-washington-dc">ESPN980 Radio: DMV Game Time</a></p>
 				<br>
 				<img src="/assets/img/press2/ESPN 1530.png">
 				<p><a href="http://espn1530.iheart.com/onair/lance-mcalister-7818/what-about-this-good-game-guarantee-14820612/">ESPN1530 Radio: What about this "Good Game Guarantee" at GABP?</a></p>
