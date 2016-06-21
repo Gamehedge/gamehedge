@@ -21,6 +21,7 @@
 									<li><a href="/blog">GameHedge Blog</a></li>
 									<li><a href="/how-it-works">How it Works</a></li>
 									<li><a href="/member">My Account</a></li>
+									<li><a href="/press">Press</a></li>
 								</ul>
 							</nav>
 						</div>

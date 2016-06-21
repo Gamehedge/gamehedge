@@ -422,7 +422,7 @@ footer .footer-bottom {
 	position: relative;
 	z-index: 4;
     padding-top: 75px;
-    padding-bottom: 65px;
+    padding-bottom: 0px;
 	/*top: 30%;
 	-webkit-transform: translateY(-30%);
 	-ms-transform: translateY(-30%);
@@ -973,8 +973,56 @@ section#game-guarantee p {
     }
 }
 
-
-
+#press_images{
+	padding: 10px;
+    padding-right: 50px;
+    padding-left: 50px;
+}
+#press_images img{
+	height: 30px;
+	margin-right: 10px;
+	margin-left: 10px;
+	filter: gray; /* IE6-9 */
+  	filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
+    -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    -webkit-transition: opacity 0.5s; /* For Safari 3.1 to 6.0 */
+    transition: opacity 0.5s;
+}
+.press-info img{
+	height: 30px;
+}
+@media(max-width: 991px) {
+    #press_images img{
+		height: auto;
+		margin:0;
+		width: 13.2%;
+	}
+	#press_images{
+	padding-right: 10px;
+    padding-left: 10px;
+}
+}
+/* Disable grayscale on hover */
+#press_images img:hover {
+  	filter: none;
+    -webkit-filter: grayscale(0);
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+#press_images .left-images{
+	left: 0px;
+	width: 49.5%;
+    display: inline-block;
+    text-align: left;
+}
+#press_images .right-images{
+	right: 0px;
+	width: 49.5%;
+    display: inline-block;
+    text-align: right;
+}
 .filter-outside-container {
     text-align: center;
 }
