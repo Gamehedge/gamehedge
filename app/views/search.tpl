@@ -108,7 +108,7 @@
                             </div>
                             <div class="tickets-link col-md-2 col-xs-12">
                                 <!--<a href="/ticket/-!e.id!-" class="btn-green-gradient">from <span>-!e.low_price|currency!- <i class="fa fa-angle-right"></i></a>-->
-                                <div class="performer-green-bt btn-green-gradient">View Tickets <i class="fa fa-angle-right"></i></div>
+                                <button style="text-transform:none" class="button green ">View Tickets <i class="fa fa-angle-right"></i></button>
                                 <div class="text-center alert-text" ng-show="e.available_count < 20">NOT MANY LEFT</div>
                             </div>
                         </a>
