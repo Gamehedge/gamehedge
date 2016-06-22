@@ -446,6 +446,7 @@ case '';
 				}).tuMap("Refresh");
 			}
 			function BuyNow(Id, Price) {
+
                 var Qty = 1;
                 //if($( window ).width() > 768){
                     if($("#Qty" + Id)) {
@@ -458,12 +459,15 @@ case '';
                     }
                 }*/
 				var data = {event_id: event_id, tgroup_id: Id, price: parseFloat(Price.substring(1).replace(/[^\d\.\-\ ]/g, "")), qty: Qty};
-				$.post(\'/order/add\', data, function(data) {
+				
+				$.post("/order/add", data, function(data) {
+					console.log(data)
 					if(data.status == 1)
 						window.location.href = \'/order\';
 					else
 						alert(\'There was an error adding your tickets to the cart. (\' + data.message + \')\');
 				}, \'json\');
+				
 			}
 
 		</script>';

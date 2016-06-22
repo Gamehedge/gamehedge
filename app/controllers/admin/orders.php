@@ -16,10 +16,11 @@ case 'refund_status':
 	header('HTTP/1.1 200 OK');
 	header('Content-Type: application/json');
 	$order = new Order($request['id']);
+	//echo json_encode($order->set('refund', $request['status']));
 	if($order->set('refund', $request['status'])) {
-		die(json_encode(array('status' => 1, 'message' => 'OK')));
+	 	die(json_encode(array('status' => 1, 'message' => 'OK')));
 	} else {
-		die(json_encode(array('status' => 0, 'message' => 'There was an error setting order Refund Status.')));
+	 	die(json_encode(array('status' => 0, 'message' => 'There was an error setting order Refund Status.')));
 	}
 	break;
 case 'refund':

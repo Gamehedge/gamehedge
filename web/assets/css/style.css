@@ -983,12 +983,13 @@ section#game-guarantee p {
 	margin-right: 10px;
 	margin-left: 10px;
 	filter: gray; /* IE6-9 */
-  	filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
-    -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+  	filter: grayscale(1) brightness(0) invert(1) alpha(opacity=50); /* Microsoft Edge and Firefox 35+ */
+    -webkit-filter: grayscale(1) brightness(0) invert(1); /* Google Chrome, Safari 6+ & Opera 15+ */
     opacity: 0.5;
-    filter: alpha(opacity=50);
-    -webkit-transition: opacity 0.5s; /* For Safari 3.1 to 6.0 */
-    transition: opacity 0.5s;
+    -moz-transition: .15s ease-in-out;
+    -o-transition: .15s ease-in-out;
+    -webkit-transition: .15s ease-in-out;
+    
 }
 .press-info img{
 	height: 30px;

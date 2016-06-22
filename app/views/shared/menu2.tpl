@@ -100,6 +100,7 @@
                         </div>
                     </ul>
                 </li>
+
                 <li id="nav-user">{if $fname ne ''}<a href="/member/logout">{$fname} Logout</a>{else}<a href="/member/login">Login</a>{/if}</li>
             </ul>
         </div>

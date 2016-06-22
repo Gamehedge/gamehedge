@@ -10,6 +10,7 @@ require_once 'app/models/model.php';
 class EventModel extends Model {
 	protected $table     = 'events';
 	protected $pk        = 'id';
+  protected $sequence  = 'events_sequence2';
 	public $fields       = array('id'                     => null,
                                'te_uid'                   => null,
                                'te_performer_home_id'     => null,
@@ -50,27 +51,40 @@ class EventModel extends Model {
             $ldate = date('Y-m-d H:i:s', strtotime(str_replace('-', '/',  $query["occurs_at.gte"])));
             $llimit = $per_page * ($page - 1);
             $hlimit = $llimit + $per_page;
+            $delta_limit = $hlimit - $llimit;
             if(array_key_exists("primary_performer",$query)){
                   if($query["primary_performer"] == true){
-                        $stmt = $this->db->prepare('SELECT SQL_CALC_FOUND_ROWS data_event FROM events WHERE te_performer_home_id = :teid AND te_date > :ldate ORDER BY te_date ASC LIMIT :llimit, :hlimit');
+                        $stmt = $this->db->prepare('SELECT data_event FROM events WHERE te_performer_home_id = :teid AND te_date > :ldate ORDER BY te_date ASC LIMIT :delta_limit OFFSET :llimit');
+                        $total_query = $this->db->prepare('SELECT COUNT(*) FROM events WHERE te_performer_home_id = :teid AND te_date > :ldate');
                         $stmt->bindValue(':teid', $id, PDO::PARAM_INT);
+                        $total_query->bindValue(':teid', $id, PDO::PARAM_INT);
                   }
                   else{
-                        $stmt   = $this->db->prepare('SELECT SQL_CALC_FOUND_ROWS data_event FROM events WHERE (te_performer_home_id = :teid OR te_performer_visit_id = :teid2) AND te_date > :ldate ORDER BY te_date ASC LIMIT :llimit, :hlimit');
+                        $stmt   = $this->db->prepare('SELECT data_event FROM events WHERE (te_performer_home_id = :teid OR te_performer_visit_id = :teid2) AND te_date > :ldate ORDER BY te_date ASC LIMIT :delta_limit OFFSET :llimit');
+                        $total_query = $this->db->prepare('SELECT COUNT(*) FROM events WHERE (te_performer_home_id = :teid OR te_performer_visit_id = :teid2) AND te_date > :ldate');
                         $stmt->bindValue(':teid', $id, PDO::PARAM_INT);
                         $stmt->bindValue(':teid2', $id, PDO::PARAM_INT);
+                        $total_query->bindValue(':teid', $id, PDO::PARAM_INT);
+                        $total_query->bindValue(':teid2', $id, PDO::PARAM_INT);
                   }
             }
             else{
-                  $stmt   = $this->db->prepare('SELECT SQL_CALC_FOUND_ROWS data_event FROM events WHERE (te_performer_home_id = :teid OR te_performer_visit_id = :teid2) AND te_date > :ldate ORDER BY te_date ASC LIMIT :llimit, :hlimit');
+                  $stmt   = $this->db->prepare('SELECT data_event FROM events WHERE (te_performer_home_id = :teid OR te_performer_visit_id = :teid2) AND te_date > :ldate ORDER BY te_date ASC LIMIT :delta_limit OFFSET :llimit');
+                  $total_query = $this->db->prepare('SELECT COUNT(*) FROM events WHERE (te_performer_home_id = :teid OR te_performer_visit_id = :teid2) AND te_date > :ldate');
                   $stmt->bindValue(':teid', $id, PDO::PARAM_INT);
                   $stmt->bindValue(':teid2', $id, PDO::PARAM_INT);
+                  $total_query->bindValue(':teid', $id, PDO::PARAM_INT);
+                  $total_query->bindValue(':teid2', $id, PDO::PARAM_INT);
+                  
             }
             $stmt->bindValue(':llimit', $llimit);
             $stmt->bindValue(':ldate', $ldate);
-            $stmt->bindValue(':hlimit', $hlimit);
+            $stmt->bindValue(':delta_limit', $delta_limit);
+            $total_query->bindValue(':ldate', $ldate);
             $stmt->execute();
-            $total_records = $this->db->query('SELECT FOUND_ROWS();')->fetch(PDO::FETCH_COLUMN);
+            $total_query->execute();
+            $total_records = $total_query->fetch(PDO::FETCH_ASSOC);
+            $total_records = $total_records["count"];
             if($stmt->rowCount() > 0) {
                   $events = array();
                   while($event = $stmt->fetch(PDO::FETCH_ASSOC)) {

@@ -14,7 +14,9 @@ class Model {
 	protected $db;
 	protected $table;
 	protected $pk;
+	protected $sequence;
 	protected $pk_auto   = true;
+	protected $unique    = array();
 	public $fields       = array();
 	protected $field_map = array();
 
@@ -53,16 +55,16 @@ class Model {
 				}
 			}
 		}
-		$sql = rtrim($sql, ', ') . ') ON DUPLICATE KEY UPDATE ';
+		if(count($this->unique) == 0){
+			$conflict_query = $this->pk;
+		}
+		else{
+			$conflict_query = $this->unique[0];
+		}
+		$sql = rtrim($sql, ', ') . ') ON CONFLICT (' . $conflict_query . ') DO UPDATE SET ';
 		foreach($this->field_map AS $dbk => $fdata) {
-			if($fdata['name'] != 'created' && $fdata['name'] != 'modified') {
-				if($dbk == $this->pk && $this->pk_auto) {
-					$sql .= $dbk . ' = LAST_INSERT_ID(' . $dbk . '), ';
-				} else if($fdata['name'] == 'last_date') {
-					$sql .= $dbk . ' = NOW(), ';
-				} else {
-					$sql .= $dbk . ' = :u' . $fdata['name'] . ', ';
-				}
+			if($fdata['name'] != 'created' && $fdata['name'] != 'modified' && $dbk != $this->pk) {
+				$sql .= $dbk . ' = EXCLUDED.' . $dbk . ', ';
 			}
 		}
 		$sql  = rtrim($sql, ', ');
@@ -73,25 +75,37 @@ class Model {
 					switch($fdata['type']) {
 					case 'int':
 						$stmt->bindValue(':' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_INT);
-						$stmt->bindValue(':u' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_INT);
+						//$stmt->bindValue(':u' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_INT);
 						break;
 					case 'string':
-						$stmt->bindValue(':' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
-						$stmt->bindValue(':u' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
+						if($data[$fdata['name']] == ""){
+							$stmt->bindValue(':' . $fdata['name'], "0", PDO::PARAM_STR);
+							//$stmt->bindValue(':u' . $fdata['name'], "0", PDO::PARAM_STR);
+						}
+						else{
+							$stmt->bindValue(':' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
+							//$stmt->bindValue(':u' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
+						}
 						break;
 					case 'datetime':
-						$stmt->bindValue(':' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
-						$stmt->bindValue(':u' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
+						if($data[$fdata['name']] == ""){
+							$stmt->bindValue(':' . $fdata['name'], "0", PDO::PARAM_STR);
+							//$stmt->bindValue(':u' . $fdata['name'], "0", PDO::PARAM_STR);
+						}
+						else{
+							$stmt->bindValue(':' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
+							//$stmt->bindValue(':u' . $fdata['name'], $data[$fdata['name']], PDO::PARAM_STR);
+						}	
 						break;
 					}
 				} else {
 					$stmt->bindValue(':' . $fdata['name'], null, PDO::PARAM_INT);
-					$stmt->bindValue(':u' . $fdata['name'], null, PDO::PARAM_INT);
+					//$stmt->bindValue(':u' . $fdata['name'], null, PDO::PARAM_INT);
 				}
 			}
 		}
 		$stmt->execute();
-		return $this->db->lastInsertId();
+		return $this->db->lastInsertId($this->sequence);
 	}
 
 	public function delete($id) {

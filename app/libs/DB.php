@@ -21,7 +21,8 @@ class DB {
 	public static function getInstance() {
 		if(!self::$objInstance) {
 			$dbData = Config::get_db_login();
-			self::$objInstance = new PDO('mysql:host=' . $dbData['db_host'] . ';dbname=' . $dbData['db_name'] . ';charset=utf8', $dbData['db_user'], $dbData['db_pass']);
+			// self::$objInstance = new PDO('mysql:host=' . $dbData['db_host'] . ';dbname=' . $dbData['db_name'] . ';charset=utf8', $dbData['db_user'], $dbData['db_pass']);
+			self::$objInstance = new PDO('pgsql:host=' . $dbData['db_host'] . ';dbname=' . $dbData['db_name'] , $dbData['db_user'], $dbData['db_pass']);
 			self::$objInstance->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 			self::$objInstance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		}
