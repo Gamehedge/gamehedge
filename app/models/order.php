@@ -11,7 +11,7 @@ class OrderModel extends Model {
 	protected $table      = 'orders';
 	protected $pk         = 'id';
 	protected $pk_auto    = true;
-  protected $sequence  = 'order_sequence';
+  protected $sequence  = 'orders_sequence2';
 	public $fields        = array('id'          => null,
                                 'client_id'   => null,
                                 'client_name' => null,

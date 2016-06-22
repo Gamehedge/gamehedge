@@ -9,10 +9,10 @@ class Config {
                    'db_user' => 'root',
                    'db_pass' => 'root');
 		} else {
-      return array('db_host' => 'ec2-54-235-183-28.compute-1.amazonaws.com',
-                   'db_name' => 'd7catr87jassh8',
-                   'db_user' => 'vzqcqmhxtstyzs',
-                   'db_pass' => 'yny_HY7Z0t4OhV5eJ8fpkiodop');
+      return array('db_host' => 'ec2-52-205-32-57.compute-1.amazonaws.com',
+                   'db_name' => 'dc9h0enmereqie',
+                   'db_user' => 'ub4gng2ua54f0v',
+                   'db_pass' => 'p8lecbljjthgik309cn9dnj09vk');
 			/*return array('db_host' => 'us-cdbr-iron-east-03.cleardb.net',
                    'db_name' => 'heroku_301a92ea312e126',
                    'db_user' => 'bd9a5a15117087',

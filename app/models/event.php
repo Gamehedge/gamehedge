@@ -10,7 +10,7 @@ require_once 'app/models/model.php';
 class EventModel extends Model {
 	protected $table     = 'events';
 	protected $pk        = 'id';
-  protected $sequence  = 'events_sequence';
+  protected $sequence  = 'events_sequence2';
 	public $fields       = array('id'                     => null,
                                'te_uid'                   => null,
                                'te_performer_home_id'     => null,

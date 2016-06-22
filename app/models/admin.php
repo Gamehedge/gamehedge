@@ -10,7 +10,7 @@ require_once 'app/models/model.php';
 class AdminModel extends Model {
 	protected $table     = 'admin';
 	protected $pk        = 'id';
-	protected $sequence  = 'admin_sequence';
+	protected $sequence  = 'admin_sequence2';
 	public $fields       = array('id'        => null,
                                'username'  => null,
                                'password'  => null,
