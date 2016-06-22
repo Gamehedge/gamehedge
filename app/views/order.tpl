@@ -287,6 +287,19 @@
                             
                         </section>
                         <section id="existing-customer" style="z-index: 1; position: relative;" ng-if="existing == 1">
+                            <div class="hidden-md hidden-lg " style=" padding: 0;margin-bottom: 12px;">
+                                <h2 class="event underlined big">{$event_name}</h2>
+                                <div class="date">{$event_date}</div>
+                                <div class="location">{$venue_name}, {$venue_location}</div>
+                                <div class="seats">Section {$ticket_section}, Row {$ticket_row}</div>
+                                <div class="row order-detail" style="margin-top:5px; margin-bottom: 5px;">
+                                <div class="col-xs-8">Quantity</div>
+                                    <div class="col-xs-4">
+                                        <select style="height:28px;" id="qty" name="qty" class="form-control" ng-model="data.qty" ng-options="split for split in order_data.splits" ng-change="updateTotals()"></select>
+                                    </div>
+                                    <!--div class="col-md-6 text-right" ng-bind="data.qty"></div-->
+                                </div>
+                            </div>
                             <!--h2 class="underlined big">How Many Tickets?</h2-->
                                 <!--div class="form-group">
                                     <select id="qty" name="qty" class="form-control" ng-model="data.qty" ng-options="split for split in order_data.splits" ng-change="updateTotals()"></select>
