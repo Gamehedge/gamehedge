@@ -95,7 +95,7 @@
 				<img src="/assets/img/press2/700 WLW.png">
 				<p><a href="http://m.700wlw.iheart.com/onair/lance-mcalister-7818/what-about-this-good-game-guarantee-14820612/">700 LWL: What about this "Good Game Guarantee" at GABP?</a></p>
 				<br>
-				<img src="/assets/img/press2/Fox 910AZ.png">
+				<img src="/assets/img/press2/Fox 910AZ2.png">
 				<p><a href="https://soundcloud.com/user-371492790/fox-sports-910am-the-freaks-wkenny-and-crash-phoenix-az">Fox Sports 910am The Freaks with Kenny and Crash</a></p>
 				<br>
 				<img src="/assets/img/press2/ESPN 1530.png">
