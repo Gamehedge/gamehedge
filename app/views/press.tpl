@@ -68,8 +68,8 @@
 				<img src="/assets/img/press2/Yahoo Finance.png">
 				<p><a href="http://finance.yahoo.com/news/gamehedge-launches-revolutionary-sports-ticket-130800271.html;_ylt=AwrC1DHW.GJXoREA8xWTmYlQ;_ylu=X3oDMTEzc2p0NzZlBGNvbG8DYmYxBHBvcwMyBHZ0aWQDVklEUFJEXzEEc2VjA3Nj">Yahoo Finance: GameHedge Launches Revolutionary Sports Ticket Marketplace Created To Give Something Back To Loyal Fans When The Game Doesn't Go Their Way</a></p>
 				<br>
-				<img src="/assets/img/press2/Baseball Prospectus.png">
-				<p><a href="http://www.baseballprospectus.com/article.php?articleid=29564">Baseball Prospectus:  BP Daily Podcast</a></p>
+				<img src="/assets/img/press2/SportTechie SM.png">
+				<p><a href="http://www.sporttechie.com/2016/06/23/gamehedge-gives-you-money-back-if-your-team-performs-poorly/">Sport Techie: GameHedge Gives You Money Back If Your Team Performs Poorly</a></p>
 				<br>
 				<img src="/assets/img/press2/Yardbarker.png">
 				<p><a href="http://www.yardbarker.com/mlb/articles/new_ticket_website_offers_fans_refunds_for_home_team_blowouts/s1_13156_21116701">Yardbarker: New ticket website offers fans refunds for home-team blowouts</a></p>
@@ -85,6 +85,9 @@
 				<br>
 				<img src="/assets/img/press2/vocativ.png">
 				<p><a href="http://www.vocativ.com/330153/refunds-for-blowout-games-this-startup-is-trying-it/">Vocativ: Refunds For Blowout Games? This Startup Is Trying It</a></p>
+				<br>
+				<img src="/assets/img/press2/Baseball Prospectus.png">
+				<p><a href="http://www.baseballprospectus.com/article.php?articleid=29564">Baseball Prospectus:  BP Daily Podcast</a></p>
 				<br>
 				<img src="/assets/img/press2/Kare 11.png">
 				<p><a href="http://www.kare11.com/news/ticket-marketplace-to-offer-refunds-if-home-team-loses-big/245569067">Kare 11:  Ticket marketplace to offer refunds if home team loses big</a></p>
