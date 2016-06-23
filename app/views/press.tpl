@@ -89,11 +89,14 @@
 				<img src="/assets/img/press2/Kare 11.png">
 				<p><a href="http://www.kare11.com/news/ticket-marketplace-to-offer-refunds-if-home-team-loses-big/245569067">Kare 11:  Ticket marketplace to offer refunds if home team loses big</a></p>
 				<br>
+				<img src="/assets/img/press2/ESPN 980">
+				<p><a href="https://soundcloud.com/user-371492790/gamehedge-on-espn980-radio-dmv-game-time-washington-dc">ESPN 980 Radio: DMV Game Time</a></p>
+				<br>
 				<img src="/assets/img/press2/700 WLW.png">
 				<p><a href="http://m.700wlw.iheart.com/onair/lance-mcalister-7818/what-about-this-good-game-guarantee-14820612/">700 LWL: What about this "Good Game Guarantee" at GABP?</a></p>
 				<br>
-				<img src="/assets/img/press2/Fox 910 AZ Sports Blue.png">
-				<p><a href="https://soundcloud.com/user-371492790/fox-sports-910am-the-freaks-wkenny-and-crash-phoenix-az">Fox Sports 910 The Freaks with Kenny and Crash</a></p>
+				<img src="/assets/img/press2/Fox 910AZ.png">
+				<p><a href="https://soundcloud.com/user-371492790/fox-sports-910am-the-freaks-wkenny-and-crash-phoenix-az">Fox Sports 910am The Freaks with Kenny and Crash</a></p>
 				<br>
 				<img src="/assets/img/press2/ESPN 1530.png">
 				<p><a href="http://espn1530.iheart.com/onair/lance-mcalister-7818/what-about-this-good-game-guarantee-14820612/">ESPN1530 Radio: What about this "Good Game Guarantee" at GABP?</a></p>
