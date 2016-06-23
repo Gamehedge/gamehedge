@@ -114,6 +114,23 @@ class OrderModel extends Model {
 		}
 	}
 
+  public function get_full_list() {
+    $stmt   = $this->db->prepare('SELECT c.id, c.name, c.email, o.* FROM clients c, orders o WHERE o.client_id = c.te_uid ORDER BY o.id DESC');
+    $stmt->execute();
+    if($stmt->rowCount() > 0) {
+      $orders = array();
+      while($order = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                if(isset($order['refund_status'])){
+                    $order['refund_text'] = $this->refund_map[$order['refund_status']];
+                }
+        array_push($orders, $order);
+      }
+      return array('orders' => $orders,
+                );
+    } else {
+      return false;
+    }
+  }
 	public function get_list_by_customer($id, $page, $per_page) {
     $llimit = $per_page * ($page - 1);
 		$hlimit = $llimit + $per_page;

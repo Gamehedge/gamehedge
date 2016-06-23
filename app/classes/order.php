@@ -18,6 +18,10 @@ class Order extends Base {
 		return $this->model->get_list($page, $per_page);
 	}
 
+	public function get_full_list() {
+		return $this->model->get_full_list();
+	}
+
 	public function get_list_by_customer($id, $page = 1, $per_page = 25) {
 		$data = $this->model->get_list_by_customer($id, $page, $per_page);
 		if(isset($data['orders']) && is_array($data['orders'])) {

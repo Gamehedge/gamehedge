@@ -28,7 +28,9 @@ h3 {
 a {
 	cursor: pointer;
 }
-
+#order-list th{
+	cursor: pointer;
+}
 
 .logo-image {
 	width: 100%;

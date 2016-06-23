@@ -29,6 +29,141 @@ app.filter('range', function(){
 		return input;
 	};
 });
+app.controller('AdminOrderController', function($scope, $filter,$http){
+	$scope.refund_op = [
+		{
+			'name':'Not Available',
+			'value':'none',
+		},
+		{
+			'name':'Refund Available',
+			'value':'available',
+		},
+		{
+			'name':'Refund Requested',
+			'value':'requested',
+		},
+		{
+			'name':'Refund Pending',
+			'value':'pending',
+		},
+		{
+			'name':'Refunded',
+			'value':'sent',
+		},
+	]
+	$scope.orderby = '-id';
+	$scope.searchText = "";
+	$scope.initDate = "";
+	$scope.endDate = "";
+	$scope.currentPage = 0;
+    $scope.pageSize = 25;
+    $scope.totalItems = 0;
+    $scope.pages = [];
+    $scope.filtered = [];
+    $scope.searching = true;
+    $scope.changePage = function(index){
+    	$scope.currentPage = index;
+    }
+    $scope.textFilter = function(){
+    	$scope.filtered = $filter('searchFilter')($scope.orders.orders,$scope.searchText);
+    	$scope.filtered = $filter('dateFilter')($scope.filtered,$scope.initDate,$scope.endDate);
+    	$scope.totalItems = $scope.filtered .length;
+    	$scope.pages = new Array(Math.ceil($scope.totalItems/$scope.pageSize));
+    	$scope.currentPage = 0;
+    }
+    $scope.order = function(filter){
+		if($scope.orderby == filter || $scope.orderby == '-'+filter){
+			if($scope.orderby.indexOf('-') == -1){
+				$scope.orderby = '-'+filter;
+			}
+			else{
+				$scope.orderby = filter;
+			}
+		}
+		else{
+			if(filter == "name"){
+				$scope.orderby = filter;
+			}
+			else{
+				$scope.orderby = '-'+filter;
+			}
+		}
+	}
+	$scope.get_list = function(){
+		var api_url = "/admin/orders/full_list";
+		var promise = $http.get(api_url).success(function(data, status, headers, config) {
+			$scope.orders = data;
+			$scope.filtered = $scope.orders.orders
+			$scope.totalItems = $scope.orders.orders.length;
+			$scope.pages = new Array(Math.ceil($scope.totalItems/$scope.pageSize))
+			$scope.searching = false;
+			console.log($scope.orders);
+		}).error(function(data, status, headers, config) {
+			alert('error');
+		});
+
+	}
+	$scope.get_list();
+
+});
+//Filter to format the time from postgres to angular
+app.filter('timeformat', function () {
+  return function (input) {
+      return input.replace(' ', 'T')+'Z';
+  };
+});
+app.filter('searchFilter', function () {
+  return function (input,searchText) {
+  		filtered = [];
+  		if(searchText == ""){
+  			filtered = input
+  		}
+  		else{
+  			for(i=0;i<input.length;i++){
+  				if(input[i].name.toLowerCase().indexOf(searchText.toLowerCase()) != -1){
+  					filtered.push(input[i])
+  				}
+  				else if(input[i].event_name.toLowerCase().indexOf(searchText.toLowerCase()) != -1){
+  					filtered.push(input[i])
+  				}
+  			}
+  			
+  		}
+  		return filtered;
+  };
+});
+app.filter('dateFilter', function () {
+  return function (input,initDate,endDate) {
+  		filtered = [];
+  		if(initDate == "" || endDate == "" ){
+  			filtered = input
+  		}
+  		else if(initDate == null || endDate == null ){
+  			filtered = input
+  		}
+  		else{
+  			for(i=0;i<input.length;i++){
+  				var e_date = new Date(input[i].event_date);
+  				e_date = e_date.setHours(0,0,0,0);
+  				if(initDate <= e_date && e_date <= endDate){
+  					filtered.push(input[i])
+  				}
+  			}
+  		}
+  		return filtered;
+  };
+});
+app.filter('startFrom', function() {
+    return function(input, start) {
+    	if(input){
+    		start = +start; //parse to int
+        	return input.slice(start);
+    	}
+    	return []
+        
+    }
+});
 app.controller('SearchCtrl', function($scope, $http){
 	$scope.type       = 'full';
 	$scope.query      = '';

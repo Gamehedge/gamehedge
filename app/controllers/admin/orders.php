@@ -118,18 +118,25 @@ case 'view':
 	}
 	$smarty->display('admin/orders_view.tpl');
 	break;
+case 'full_list':
+	$orderClass = new Order;
+	$orders     = $orderClass->get_full_list();
+	$smarty->assign('myarray', $orders);
+	$smarty->display('external.tpl');
+	break;
 case '':
 	$page       = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
 	$per_page   = 25;
 	$orderClass = new Order;
 	$orders     = $orderClass->get_list($page, $per_page);
 	$pages      = ceil($orders['total'] / $per_page);
+	$fscripts = '<link rel="stylesheet" href="/assets/css/sweetalert.css"><link rel="stylesheet" href="/assets/ladda/ladda-themeless.min.css"><script src="/assets/ladda/spin.min.js"></script><script src="/assets/ladda/ladda.min.js"></script><script src="/assets/angular-ladda/angular-ladda.min.js"></script><script src="/assets/js/moment.js"></script><script src="/assets/js/app/app.js?v112"></script><script src="/assets/js/sweetalert.min.js"></script>';
+	$smarty->assign('fscripts', $fscripts);
 	$smarty->assign('body_tag', '');
-	$smarty->assign('head_tags', '');
 	$smarty->assign('css', '');
 	$smarty->assign('hscripts', '');
+	$smarty->assign('head_tags', 'ng-app="gamehedge"');
 	$header = $smarty->fetch('admin/shared/header.tpl');
-	$smarty->assign('fscripts', '');
 	$footer = $smarty->fetch('admin/shared/footer.tpl');
 	$smarty->assign('header', $header);
 	$smarty->assign('footer', $footer);
