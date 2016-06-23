@@ -1,7 +1,7 @@
 {$header}
 <main ng-controller="AdminOrderController">
-<div ng-if="searching"><i class="fa fa-circle-o-notch fa-lg fa-spin"></i>Loading records...</div>
-<section ng-if="!searching" id="order-list">
+<div ng-show="searching"><i class="fa fa-circle-o-notch fa-lg fa-spin"></i>Loading records...</div>
+<section ng-show="!searching" id="order-list">
 	<h2>Order List</h2>
 	<div class="row">
 		<div class="col-md-3"><label>Search (by Name and Event)</label></div>
@@ -23,7 +23,7 @@
 
 	</nav>
 	{/literal}
-	<p style="text-align:right;">-!filtered.length!- total records</p>
+	<p style="text-align:right;">-!totalItems!- total records</p>
 	<table class="table table-striped">
 		<thead>
 			<tr>

@@ -68,7 +68,7 @@ app.controller('AdminOrderController', function($scope, $filter,$http){
     $scope.textFilter = function(){
     	$scope.filtered = $filter('searchFilter')($scope.orders.orders,$scope.searchText);
     	$scope.filtered = $filter('dateFilter')($scope.filtered,$scope.initDate,$scope.endDate);
-    	$scope.totalItems = $scope.filtered .length;
+    	$scope.totalItems = $scope.filtered.length;
     	$scope.pages = new Array(Math.ceil($scope.totalItems/$scope.pageSize));
     	$scope.currentPage = 0;
     }
