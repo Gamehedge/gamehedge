@@ -89,7 +89,7 @@
 				<img src="/assets/img/press2/Kare 11.png">
 				<p><a href="http://www.kare11.com/news/ticket-marketplace-to-offer-refunds-if-home-team-loses-big/245569067">Kare 11:  Ticket marketplace to offer refunds if home team loses big</a></p>
 				<br>
-				<img src="/assets/img/press2/ESPN 980">
+				<img src="/assets/img/press2/ESPN 980.png">
 				<p><a href="https://soundcloud.com/user-371492790/gamehedge-on-espn980-radio-dmv-game-time-washington-dc">ESPN 980 Radio: DMV Game Time</a></p>
 				<br>
 				<img src="/assets/img/press2/700 WLW.png">
