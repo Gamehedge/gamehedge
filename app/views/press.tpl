@@ -30,8 +30,8 @@
 				<div class="spacing_div"><img src="/assets/img/press2/Scout.png"></div>
 				<div class="spacing_div"><img src="/assets/img/press/Crain's NY White.png"></div>
 				<div class="spacing_div"><img src="/assets/img/press2/USA Today copy.png"></div>
-				<div class="spacing_div"><img src="/assets/img/press2/Sports Illustrated Red.png"></div>
 				<div class="spacing_div"><img src="/assets/img/press2/CNBC copy.png"></div>
+				<div class="spacing_div"><img src="/assets/img/press2/Sports Illustrated Red.png"></div>
 				<div class="spacing_div"><img src="/assets/img/press2/Yahoo Finance.png"></div>
 				<div class="spacing_div"><img src="/assets/img/press2/ESPN Radio copy.png"></div>
 			</div>
@@ -42,6 +42,7 @@
 				<img src="/assets/img/press2/CNBC copy.png">
 				<img src="/assets/img/press2/Yahoo Finance.png">	
 				<img src="/assets/img/press2/ESPN Radio copy.png">
+				<img src="/assets/img/press2/MSN.png">
 			</div>
 		</div>
 	</div>
