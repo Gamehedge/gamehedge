@@ -34,7 +34,6 @@
 				<div class="spacing_div"><img src="/assets/img/press2/CNBC copy.png"></div>
 				<div class="spacing_div"><img src="/assets/img/press2/Yahoo Finance.png"></div>
 				<div class="spacing_div"><img src="/assets/img/press2/ESPN Radio copy.png"></div>
-				<div class="spacing_div"><img src="/assets/img/press2/MSN.png"></div>
 			</div>
 			<div class="mobile-images hidden-md hidden-lg">
 				<img src="/assets/img/press2/Sports Illustrated Red.png">
@@ -59,7 +58,7 @@
 				<img src="/assets/img/press2/Sports Illustrated Red.png">
 				<p><a href="http://www.si.com/tech-media/2016/06/24/gamehedge-cash-money-back">Sports Illustrated: GameHedge gives cash back on ticket purchases for bad games</a></p>
 				<br>
-				<img src="/assets/img/press2/Sports Illustrated Red.png">
+				<img src="/assets/img/press2/Scout.png">
 				<p><a href="http://www.scout.com/story/1679115-ticket-website-offer-refunds-for-losing">Scout:  New Ticket Website Rewarding Fans of Bad Teams</a></p>
 				<br>
 				<img src="/assets/img/press2/CNBC-logo.png">
