@@ -57,6 +57,9 @@
 				<p><a href="http://www.usatoday.com/story/sports/mlb/2016/06/15/gamehedge-refunds-50-percent-ticket-price-if-home-team-loses-big/85931138/">USA Today: Ticket marketplace to offer refunds if home team loses big</a></p>
 				<br>
 				<img src="/assets/img/press2/Scout.png">
+				<p><a href="http://www.si.com/tech-media/2016/06/24/gamehedge-cash-money-back">Sports Illustrated: GameHedge gives cash back on ticket purchases for bad games</a></p>
+				<br>
+				<img src="/assets/img/press2/Scout.png">
 				<p><a href="http://www.scout.com/story/1679115-ticket-website-offer-refunds-for-losing">Scout:  New Ticket Website Rewarding Fans of Bad Teams</a></p>
 				<br>
 				<img src="/assets/img/press2/CNBC-logo.png">
