@@ -42,6 +42,7 @@
 				<img src="/assets/img/press2/CNBC copy.png">
 				<img src="/assets/img/press2/Yahoo Finance.png">	
 				<img src="/assets/img/press2/ESPN Radio copy.png">
+				<img src="/assets/img/press2/MSN.png">
 			</div>
 		</div>
 	</div>
