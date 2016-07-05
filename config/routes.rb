@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       resources :orders, :defaults => { :format => 'json' }
       resources :order_stats, :defaults => { :format => 'json' }
       resources :performers, :defaults => { :format => 'json' }
+      resources :divisions, :defaults => { :format => 'json' }
+      resources :sports, :defaults => { :format => 'json' }
     end
   end
   

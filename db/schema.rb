@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160705164624) do
+ActiveRecord::Schema.define(version: 20160705231027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,19 @@ ActiveRecord::Schema.define(version: 20160705164624) do
 
   add_index "clients", ["email"], name: "clients_email_idx", unique: true, using: :btree
 
+  create_table "divisions", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "te_uid"
+    t.integer  "sport_id"
+    t.integer  "division_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "divisions", ["division_id"], name: "index_divisions_on_division_id", using: :btree
+  add_index "divisions", ["sport_id"], name: "index_divisions_on_sport_id", using: :btree
+
   create_table "events", force: :cascade do |t|
     t.integer  "te_uid"
     t.integer  "te_performer_home_id"
@@ -142,12 +155,14 @@ ActiveRecord::Schema.define(version: 20160705164624) do
   add_index "orders", ["te_order_id"], name: "orders_te_order_id_idx", unique: true, using: :btree
 
   create_table "performers", id: false, force: :cascade do |t|
-    t.integer "id",                  default: "nextval('performers_sequence2'::regclass)", null: false
+    t.integer "id",                      default: "nextval('performers_sequence2'::regclass)", null: false
     t.integer "te_uid"
-    t.string  "te_name", limit: 255
-    t.string  "te_slug", limit: 255
+    t.string  "te_name",     limit: 255
+    t.string  "te_slug",     limit: 255
+    t.integer "division_id"
   end
 
+  add_index "performers", ["division_id"], name: "index_performers_on_division_id", using: :btree
   add_index "performers", ["id"], name: "performers_id_idx", unique: true, using: :btree
   add_index "performers", ["te_name"], name: "performers_te_name_idx", using: :btree
   add_index "performers", ["te_slug"], name: "performers_te_slug_idx", using: :btree
@@ -159,4 +174,15 @@ ActiveRecord::Schema.define(version: 20160705164624) do
     t.datetime "modified_date"
   end
 
+  create_table "sports", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "te_uid"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_foreign_key "divisions", "divisions"
+  add_foreign_key "divisions", "sports"
+  add_foreign_key "performers", "divisions"
 end

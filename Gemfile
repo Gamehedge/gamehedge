@@ -58,3 +58,11 @@ gem 'rails_12factor', group: :production
 ruby "2.3.0"
 
 gem 'puma'
+
+gem 'ticketevolution-ruby', :require => 'ticket_evolution'
+
+# fo s3
+
+gem 'aws-sdk'
+
+gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
