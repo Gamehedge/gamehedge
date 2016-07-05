@@ -83,6 +83,7 @@ test:
 #
 production:
   <<: *default
-  database: gamehedge_production
-  username: gamehedge
-  password: <%= ENV['GAMEHEDGE_DATABASE_PASSWORD'] %>
+  database: dc9h0enmereqie
+  username: ub4gng2ua54f0v
+  password: p8lecbljjthgik309cn9dnj09vk
+  host: ec2-52-205-32-57.compute-1.amazonaws.com
