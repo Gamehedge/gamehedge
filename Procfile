@@ -1,1 +1,1 @@
-web: vendor/bin/heroku-php-apache2 web/
+web: bundle exec puma -C config/puma.rb
