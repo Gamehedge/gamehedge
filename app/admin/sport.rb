@@ -3,7 +3,17 @@ ActiveAdmin.register Sport do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
-permit_params :id, :name, :description, :sport_id, :division_id
+permit_params :id, :name, :description, :te_uid, :image
+
+form multipart: true do |f|
+    f.inputs "Sport details" do
+      	f.input :name
+      	f.input :description
+      	f.input :te_uid
+      	f.input :image, :as => :file, required: false
+    end
+    f.actions
+end
 #
 # or
 #

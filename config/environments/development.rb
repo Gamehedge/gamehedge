@@ -41,4 +41,13 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   Paperclip.options[:command_path] = "/opt/local/bin/convert/"
+
+  config.paperclip_defaults = {
+      :storage => :s3,
+      :s3_credentials => {
+          :bucket => 'gamehedge-ruby',
+          :access_key_id => 'AKIAJDUQP33RLEE6KC6Q',
+          :secret_access_key => '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'
+      }
+  }
 end

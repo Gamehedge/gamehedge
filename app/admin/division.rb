@@ -3,7 +3,7 @@ ActiveAdmin.register Division do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
-permit_params :id, :name, :description, :te_uid
+permit_params :id, :name, :description, :te_uid, :sport_id, :division_id, :image
 #
 # or
 #

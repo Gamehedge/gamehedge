@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160705231027) do
+ActiveRecord::Schema.define(version: 20160706175333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,8 +101,12 @@ ActiveRecord::Schema.define(version: 20160705231027) do
     t.integer  "te_uid"
     t.integer  "sport_id"
     t.integer  "division_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "divisions", ["division_id"], name: "index_divisions_on_division_id", using: :btree
@@ -155,11 +159,15 @@ ActiveRecord::Schema.define(version: 20160705231027) do
   add_index "orders", ["te_order_id"], name: "orders_te_order_id_idx", unique: true, using: :btree
 
   create_table "performers", id: false, force: :cascade do |t|
-    t.integer "id",                      default: "nextval('performers_sequence2'::regclass)", null: false
-    t.integer "te_uid"
-    t.string  "te_name",     limit: 255
-    t.string  "te_slug",     limit: 255
-    t.integer "division_id"
+    t.integer  "id",                             default: "nextval('performers_sequence2'::regclass)", null: false
+    t.integer  "te_uid"
+    t.string   "te_name",            limit: 255
+    t.string   "te_slug",            limit: 255
+    t.integer  "division_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "performers", ["division_id"], name: "index_performers_on_division_id", using: :btree
@@ -178,8 +186,12 @@ ActiveRecord::Schema.define(version: 20160705231027) do
     t.string   "name"
     t.text     "description"
     t.integer  "te_uid"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_foreign_key "divisions", "divisions"
