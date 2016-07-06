@@ -10,8 +10,8 @@ class HomeController < ApplicationController
 	                      #               responses. Any 'Logger' instance object
 	                      #               is valid. EX: Logger.new('log/te_api.log')
 	})
-	@performers = @connection.performers.list({:id => 15533}).to_json
-	@categories = @connection.categories.list().to_json
+	@performers = @connection.performers.list({:category_id => 3}).to_json
+	@categories = @connection.categories.list({:id => 15533}).to_json
 	render json: @performers
   end
 end

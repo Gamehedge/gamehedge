@@ -45,9 +45,11 @@ Rails.application.configure do
   config.paperclip_defaults = {
       :storage => :s3,
       :s3_credentials => {
-          :bucket => 'gamehedge-ruby',
+          :bucket => 'gamehedgenew',
           :access_key_id => 'AKIAJDUQP33RLEE6KC6Q',
-          :secret_access_key => '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'
-      }
+          :secret_access_key => 'l7O7KwDGC/AHuCVXCYRTkz5so/d3/RDslBBlDdX+',
+      },
+      :s3_region => 'us-west-2',
+      :s3_permissions => 'public-read',
   }
 end
