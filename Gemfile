@@ -66,3 +66,9 @@ gem 'ticketevolution-ruby', :require => 'ticket_evolution'
 gem 'aws-sdk'
 
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+
+# AngularJS
+
+gem 'bower-rails'
+
+gem 'angular-rails-templates'
