@@ -41,7 +41,7 @@
 				</div>
 				<hr id="hr_footer" />
 				<div class="footer-bottom clearfix">
-				    © {$year} GameHedge LLC. All Rights Reserved. Patent Pending.
+				    © {$year} GameHedge and Good Game Guarantee are trademarks of GameHedge LLC. All Rights Reserved. Patent Pending.
 					<div class="pull-right">
 						<nav role="navigation">
 							<a href="/privacy-policy">Privacy Policy</a> | <a href="/our-terms">Terms</a>
