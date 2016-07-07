@@ -72,3 +72,4 @@ gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 gem 'bower-rails'
 
 gem 'angular-rails-templates'
+
