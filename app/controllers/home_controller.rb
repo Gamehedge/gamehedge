@@ -12,6 +12,6 @@ class HomeController < ApplicationController
 	})
 	@performers = @connection.performers.list({:category_id => 3}).to_json
 	@categories = @connection.categories.list({:id => 15533}).to_json
-	render json: @performers
+	#render json: @performers
   end
 end

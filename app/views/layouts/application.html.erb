@@ -2,11 +2,14 @@
 <html>
 <head>
   <title>Gamehedge</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width" />
+  <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body ng-app="gamehedge">
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
 <%= yield %>
