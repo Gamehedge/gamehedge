@@ -52,4 +52,5 @@ Rails.application.configure do
       :s3_region => 'us-west-2',
       :s3_permissions => 'public-read',
   }
+  config.assets.precompile += ['active_admin.css']
 end

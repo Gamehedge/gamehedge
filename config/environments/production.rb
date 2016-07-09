@@ -88,5 +88,5 @@ Rails.application.configure do
           :region => ENV["AWS_REGION"]
       }
   }
-
+config.assets.precompile += ['active_admin.css']
 end

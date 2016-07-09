@@ -10,7 +10,7 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
+ 
  *= require_self
  */
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap-sprockets";
@@ -19,16 +19,16 @@
 
 @font-face {
 	font-family: 'Montserrat';
-	src: url('/assets/fonts/Montserrat-Regular.otf');
+	src: font_url('Montserrat-Regular.otf');
 }
 #font-face {
 	font-family: 'Montserrat';
-	src: url('/assets/fonts/Montserrat-Bold.otf');
+	src: font_url('Montserrat-Bold.otf');
 	font-weight: bold;
 }
 @font-face {
 	font-family: 'Oswald';
-	src: url('/assets/fonts/Oswald-Regular.ttf');
+	src: font_url('Oswald-Regular.ttf');
 }
 html, body {
 	font-family: 'Montserrat', "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -415,7 +415,7 @@ footer .footer-bottom {
 #home section#hero {
 	position: relative;
 	/*height: 35vh;*/
-	background: transparent url('/assets/img/home-hero.jpg') no-repeat center center fixed;
+	background: transparent image_url('home-hero.jpg') no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -460,7 +460,7 @@ footer .footer-bottom {
     }
     
     #home section#hero {
-        background: transparent url('/assets/img/home-hero.jpg') no-repeat center center;
+        background: transparent image_url('home-hero.jpg') no-repeat center center;
         background-size: cover;
     }   
 }
@@ -722,14 +722,14 @@ body#home main h2 {
 section#team-header, section#venue-header {
 	margin-bottom: 30px;
 	padding: 60px 0;
-	background: transparent url('/assets/img/HeaderBatter.jpeg') 0 0 no-repeat;
+	background: transparent image_url('HeaderBatter.jpeg') 0 0 no-repeat;
 	background-size: cover;
 	background-position: center center;
 	margin-top: -80px;
 }
 @media(max-width: 991px) {
 	section#team-header, section#venue-header {
-		background: transparent url('/assets/img/MobileHitter.jpeg') 0 0 no-repeat;
+		background: transparent image_url('MobileHitter.jpeg') 0 0 no-repeat;
 		background-size: cover;
 		background-position: center center;
 	    margin-top: -80px;

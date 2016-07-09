@@ -10,10 +10,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body ng-app="gamehedge">
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
 <%= yield %>
-
-
+<p class="notice hidden"><%= notice %></p>
+<p class="alert hidden"><%= alert %></p>
 </body>
 </html>

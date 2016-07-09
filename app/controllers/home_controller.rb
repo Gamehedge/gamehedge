@@ -12,6 +12,16 @@ class HomeController < ApplicationController
 	})
 	@performers = @connection.performers.list({:category_id => 3}).to_json
 	@categories = @connection.categories.list({:id => 15533}).to_json
-	#render json: @performers
+ 	
+	#Update passwords from old database
+	# @users = Client.all()
+
+	# @users.each do |user|
+	#   user.password = user.temporal_pass
+	# 	user.password_confirmation = user.temporal_pass
+	# 	user.save
+	# end
+
+	
   end
 end
