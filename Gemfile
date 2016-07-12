@@ -53,7 +53,11 @@ gem 'rails-api'
 
 # Heroku 
 
-gem 'rails_12factor', group: :production
+group :production do
+  gem "rails_12factor"
+  gem "rails_stdout_logging"
+  gem "rails_serve_static_assets"
+end
 
 ruby "2.3.0"
 
@@ -76,4 +80,12 @@ gem 'angular-rails-templates'
 # Get IP address and location
 
 gem 'geocoder'
+
+
+
+
+gem 'heroku'
+gem 'rails_12factor'
+gem 'rails_log_stdout', github: 'heroku/rails_log_stdout'
+gem 'rails3_serve_static_assets', github: 'heroku/rails3_serve_static_assets'
 
