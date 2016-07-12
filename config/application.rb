@@ -35,5 +35,6 @@ module Gamehedge
     config.to_prepare do
       DeviseController.respond_to :html, :json
     end
+    config.assets.js_compressor = Uglifier.new(mangle: false)
   end
 end
