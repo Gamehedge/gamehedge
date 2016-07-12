@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  get 'events/near'
+
   devise_for :clients
   get 'home/index'
-
+  get 'events/near'
   devise_for :admin_users, ActiveAdmin::Devise.config
   
   ActiveAdmin.routes(self)

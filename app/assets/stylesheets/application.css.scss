@@ -521,13 +521,13 @@ footer .footer-bottom {
 #home section#hero #home-down-arrow img {
 	cursor: pointer;
 }
-body#home main {
+#home main {
 	margin-bottom: 0;
 }
-body#home h1, body#home main h2 {
+#home h1, #home main h2 {
 	text-align: center;
 }
-body#home main h2 {
+#home main h2 {
 	margin: 10px 0 10px 0;
 	font-size: 42px;
 }
@@ -555,7 +555,7 @@ body#home main h2 {
 	margin-bottom: 20px;
 }
 @-moz-document url-prefix() {
-	body#home .guarantee-item .img-holder, section#how-it-works .guarantee-item .img-holder {
+	#home .guarantee-item .img-holder, section#how-it-works .guarantee-item .img-holder {
 		display: block;
 	}
 }
@@ -649,7 +649,7 @@ body#home main h2 {
 #home #team-divisions .division-item nav ul li:hover {
 	background-color: #000;
 }
-#home #team-divisions .division-item nav ul li a, body#home #team-divisions .division-item nav ul li a:hover, body#home #team-divisions .division-item nav ul li a:active, body#home #team-divisions .division-item nav ul li a:focus {
+#home #team-divisions .division-item nav ul li a, #home #team-divisions .division-item nav ul li a:hover, #home #team-divisions .division-item nav ul li a:active, #home #team-divisions .division-item nav ul li a:focus {
 	display: block;
 	color: #fff;
 	text-decoration: none;
@@ -683,7 +683,7 @@ body#home main h2 {
 	max-width: 120px;
 	height: auto;
 }
-#home section#home-why .row:nth-child(2) > div:last-child a, body#home section#home-why .row:nth-child(2) > div:last-child a:hover {
+#home section#home-why .row:nth-child(2) > div:last-child a, #home section#home-why .row:nth-child(2) > div:last-child a:hover {
 	display: inline-block;
 	padding: 10px 60px;
 	border-radius: 24px;
@@ -2092,24 +2092,24 @@ main#admin #order-stats .stat-item span {
 		padding: 54px 0px;
 	}
 
-	body#home section#hero {
+	#home section#hero {
 		/*height:48vh;*/
 	}
 
-	body#home main h2 {
+	#home main h2 {
 		font-size:30px;
 	}
 
-	body#home #team-divisions .division-item h2 {
+	#home #team-divisions .division-item h2 {
 		font-size: 30px;
 	}
 
-	body#home section#home-why .row:nth-child(2) > div:last-child a {
+	#home section#home-why .row:nth-child(2) > div:last-child a {
 		padding: 10px 20px 10px 20px;
 		margin: 10% 0% 0% 10%;
 	}
 
-	body#home section#hero #wrapper #content #hero-search {
+	#home section#hero #wrapper #content #hero-search {
 		padding: 0 0 0 0;
 	}
 
@@ -2167,36 +2167,36 @@ main#admin #order-stats .stat-item span {
 		display:none;
 	}
 
-	body#home section#hero {
+	#home section#hero {
 		/*height:54vh;*/
 	}
 
-	body#home main h2 {
+	#home main h2 {
 		font-size:30px;
 	}
 
-	body#home #team-divisions .division-item h2 {
+	#home #team-divisions .division-item h2 {
 		font-size: 25px;
 	}
 
-	body#home #team-divisions .division-item nav {
+	#home #team-divisions .division-item nav {
 		margin: 0 32px;
 	}
 
-	body#home #team-divisions .division-item nav ul li{
+	#home #team-divisions .division-item nav ul li{
 		width: 130%;
 	}
 
-	body#home section#home-why .row:nth-child(2) > div:last-child a {
+	#home section#home-why .row:nth-child(2) > div:last-child a {
 		font-size: 16px;
 	}
 
-	body#home section#home-why .row:nth-child(2) > div:last-child a {
+	#home section#home-why .row:nth-child(2) > div:last-child a {
 		padding: 10px 20px 10px 20px;
 		margin: 10% 0% 0% 10%;
 	}
 
-	body#home section#hero #wrapper #content #hero-search {
+	#home section#hero #wrapper #content #hero-search {
 		padding: 0 0 0 0;
 	}
 

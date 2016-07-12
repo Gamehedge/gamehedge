@@ -73,3 +73,7 @@ gem 'bower-rails'
 
 gem 'angular-rails-templates'
 
+# Get IP address and location
+
+gem 'geocoder'
+
