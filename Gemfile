@@ -61,11 +61,12 @@ end
 
 ruby "2.3.0"
 
+
 gem 'puma'
 
 gem 'ticketevolution-ruby', :require => 'ticket_evolution'
 
-# fo s3
+# for s3
 
 gem 'aws-sdk'
 
@@ -80,12 +81,4 @@ gem 'angular-rails-templates'
 # Get IP address and location
 
 gem 'geocoder'
-
-
-
-
-gem 'heroku'
-gem 'rails_12factor'
-gem 'rails_log_stdout', github: 'heroku/rails_log_stdout'
-gem 'rails3_serve_static_assets', github: 'heroku/rails3_serve_static_assets'
 
