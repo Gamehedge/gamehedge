@@ -78,6 +78,8 @@ gem 'bower-rails'
 
 gem 'angular-rails-templates'
 
+gem 'bootstrap-sass', '~> 3.3.6'
+
 # Get IP address and location
 
 gem 'geocoder'
