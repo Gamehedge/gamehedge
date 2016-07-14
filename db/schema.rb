@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160712222347) do
+ActiveRecord::Schema.define(version: 20160714212043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -144,18 +144,18 @@ ActiveRecord::Schema.define(version: 20160712222347) do
   add_index "order_stats", ["id"], name: "id_index", unique: true, using: :btree
 
   create_table "orders", force: :cascade do |t|
-    t.integer  "client_id",                                    null: false
-    t.string   "client_name",     limit: 80
-    t.integer  "te_order_id",     limit: 8
-    t.string   "event_name",      limit: 255
-    t.string   "event_home_team", limit: 100
-    t.string   "event_away_team", limit: 100
-    t.string   "event_date",      limit: 20
-    t.string   "event_location",  limit: 765
-    t.string   "ticket_section",  limit: 100
-    t.string   "ticket_row",      limit: 50
-    t.string   "ticket_seats",    limit: 50
-    t.string   "ticket_format",   limit: 24
+    t.integer  "client_id",                                     null: false
+    t.string   "client_name",      limit: 80
+    t.integer  "te_order_id",      limit: 8
+    t.string   "event_name",       limit: 255
+    t.string   "event_home_team",  limit: 100
+    t.string   "event_away_team",  limit: 100
+    t.string   "event_date",       limit: 20
+    t.string   "event_location",   limit: 765
+    t.string   "ticket_section",   limit: 100
+    t.string   "ticket_row",       limit: 50
+    t.string   "ticket_seats",     limit: 50
+    t.string   "ticket_format",    limit: 24
     t.integer  "total"
     t.integer  "cost"
     t.text     "order_data"
@@ -163,9 +163,10 @@ ActiveRecord::Schema.define(version: 20160712222347) do
     t.text     "event_data"
     t.text     "home_team_data"
     t.text     "away_team_data"
-    t.string   "refund_status",   limit: 20,  default: "none"
+    t.string   "refund_status",    limit: 20,  default: "none"
     t.datetime "create_date"
     t.datetime "modified_date"
+    t.integer  "refund_status_id"
   end
 
   add_index "orders", ["te_order_id"], name: "orders_te_order_id_idx", unique: true, using: :btree
@@ -189,6 +190,12 @@ ActiveRecord::Schema.define(version: 20160712222347) do
   add_index "performers", ["te_slug"], name: "performers_te_slug_idx", using: :btree
   add_index "performers", ["te_uid"], name: "performers_te_uid_idx", using: :btree
 
+  create_table "refund_statuses", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "session_data", primary_key: "sess_id", force: :cascade do |t|
     t.text     "sess_data"
     t.datetime "create_date"
@@ -209,6 +216,7 @@ ActiveRecord::Schema.define(version: 20160712222347) do
 
   add_foreign_key "divisions", "divisions"
   add_foreign_key "divisions", "sports"
+  add_foreign_key "orders", "refund_statuses"
   add_foreign_key "performers", "divisions"
   add_foreign_key "performers", "sports"
 end

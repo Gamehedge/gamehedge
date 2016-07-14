@@ -1,11 +1,12 @@
 class HomeController < ApplicationController
+	
   def index
   	
 	#render json: @events
+	
 
-
-
-
+	@event = Order.all.first.order_data
+	render json: Php.unserialize(@event) #=> {"foo"=>"bar"}
 	#Populate performers script
 	
 	# @performers = @connection.performers.list({:category_id => 21})
