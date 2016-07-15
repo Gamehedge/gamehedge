@@ -5,8 +5,14 @@ class HomeController < ApplicationController
 	#render json: @events
 	
 
-	@event = Order.all.first.order_data
-	render json: Php.unserialize(@event) #=> {"foo"=>"bar"}
+	@events = Order.all
+	@events.each do |event|
+		date = DateTime.strptime(event.event_date, '%Y-%m-%dT%H:%M:%SZ')
+		event.real_event_date = date
+		event.save
+	end
+	render json: "success"
+	#render json: Php.unserialize(@event) #=> {"foo"=>"bar"}
 	#Populate performers script
 	
 	# @performers = @connection.performers.list({:category_id => 21})

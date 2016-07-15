@@ -44,8 +44,13 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
+#Active admin and tools for it
 
 gem "activeadmin", github: "activeadmin"
+
+gem 'responsive_active_admin'
+
+gem 'activeadmin-axlsx'
 
 gem 'devise'
 

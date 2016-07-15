@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160714212043) do
+ActiveRecord::Schema.define(version: 20160715165713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -167,6 +167,7 @@ ActiveRecord::Schema.define(version: 20160714212043) do
     t.datetime "create_date"
     t.datetime "modified_date"
     t.integer  "refund_status_id"
+    t.datetime "real_event_date"
   end
 
   add_index "orders", ["te_order_id"], name: "orders_te_order_id_idx", unique: true, using: :btree
