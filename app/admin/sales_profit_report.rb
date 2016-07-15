@@ -1,4 +1,4 @@
-ActiveAdmin.register Order, as: 'SalesDetailReport' do
+ActiveAdmin.register Order, as: 'SalesProfitReport' do
 
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -20,6 +20,8 @@ index :download_links => [:csv] do
     column :number_of_tickets
     column :sale_price_per_ticket
     column :ticket_total
+    column :broker_name
+    column :cost_per_ticket
 end
 filter :create_date, label: 'Order Date Range'
 filter :real_event_date, label: 'Event Date Range'
@@ -39,6 +41,8 @@ csv do
     column :number_of_tickets
     column :sale_price_per_ticket
     column :ticket_total
+    column :broker_name
+    column :cost_per_ticket
 end
 
 #

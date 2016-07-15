@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   	
 	# Update dates for events
 	
-
+	render json: Php.unserialize(Order.where(te_order_id: 3074944).first.order_data) #=> {"foo"=>"bar"}
 	# @events = Order.all
 	# @events.each do |event|
 	# 	date = DateTime.strptime(event.event_date, '%Y-%m-%dT%H:%M:%SZ')

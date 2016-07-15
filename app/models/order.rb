@@ -15,4 +15,20 @@ class Order < ActiveRecord::Base
 	def ticket_total
 		return Php.unserialize(self.order_data)['subtotal']
 	end
+	def broker_name
+		return Php.unserialize(self.ticket_data)['office']['name']
+	end
+	def cost_per_ticket
+		return Php.unserialize(self.order_data)['items'][0]['ticket_group']['wholesale_price']
+	end
+	def service_fee
+		return Php.unserialize(self.order_data)['service_fee']
+	end
+	def shipping_fee
+		return Php.unserialize(self.order_data)['shipping']
+	end
+	def total
+		return Php.unserialize(self.order_data)['total']
+	end
+	
 end
