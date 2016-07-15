@@ -27,7 +27,7 @@ class Order < ActiveRecord::Base
 	def shipping_fee
 		return Php.unserialize(self.order_data)['shipping']
 	end
-	def total
+	def order_total
 		return Php.unserialize(self.order_data)['total']
 	end
 	
