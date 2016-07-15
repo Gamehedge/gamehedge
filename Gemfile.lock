@@ -50,9 +50,6 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    activeadmin-axlsx (2.0.1)
-      activeadmin (>= 0.5.0)
-      axlsx
     activejob (4.2.6)
       activesupport (= 4.2.6)
       globalid (>= 0.3.0)
@@ -84,10 +81,6 @@ GEM
       jmespath (~> 1.0)
     aws-sdk-resources (2.3.22)
       aws-sdk-core (= 2.3.22)
-    axlsx (2.0.1)
-      htmlentities (~> 4.3.1)
-      nokogiri (>= 1.4.1)
-      rubyzip (~> 1.0.0)
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -132,7 +125,6 @@ GEM
     has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
-    htmlentities (4.3.4)
     i18n (0.7.0)
     inherited_resources (1.6.0)
       actionpack (>= 3.2, < 5)
@@ -223,7 +215,6 @@ GEM
       railties (>= 4.2.0, < 5.1)
     responsive_active_admin (0.0.5)
       activeadmin
-    rubyzip (1.0.0)
     sass (3.4.22)
     sass-rails (5.0.5)
       railties (>= 4.0.0, < 6)
@@ -272,7 +263,6 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
-  activeadmin-axlsx
   angular-rails-templates
   aws-sdk
   bootstrap-sass (~> 3.3.6)

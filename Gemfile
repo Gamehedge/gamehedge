@@ -50,7 +50,7 @@ gem "activeadmin", github: "activeadmin"
 
 gem 'responsive_active_admin'
 
-gem 'activeadmin-axlsx'
+#gem 'activeadmin-axlsx', github: "ybart/activeadmin-axlsx"
 
 gem 'devise'
 
