@@ -26,6 +26,8 @@ index :download_links => [:csv] do
 end
 filter :create_date, label: 'Order Date Range'
 filter :real_event_date, label: 'Event Date Range'
+filter :evet_home_team, label: 'Home Team'
+filter :event_location, label: 'Venue'
 
 csv do 
 	column ("Order Id")  { |order| order.te_order_id }
