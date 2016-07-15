@@ -26,6 +26,7 @@ index :download_links => [:csv] do
     column :order_total
     column :broker_name
     column :cost_per_ticket
+    column :order_status
 end
 filter :create_date, label: 'Order Date Range'
 filter :real_event_date, label: 'Event Date Range'
@@ -48,11 +49,14 @@ csv do
     column ("Row")  { |order| order.ticket_row }
     column ("Customer Name")  { |order| order.client_name }
     column :customer_email
-    column :number_of_tickets
     column :sale_price_per_ticket
     column :ticket_total
+    column :service_fee
+    column :shipping_fee
+    column :order_total
     column :broker_name
     column :cost_per_ticket
+    column :order_status
 end
 
 #

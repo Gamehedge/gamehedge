@@ -7,8 +7,7 @@ ActiveAdmin.register Order, as: 'SalesDetailReport' do
 config.clear_action_items!
 
 index :download_links => [:csv] do
-	config.clear_action_items!
-    selectable_column
+	selectable_column
     column ("Order Id")  { |order| order.te_order_id }
     column ("Order Date")  { |order| order.create_date }
     column :event_name
@@ -23,6 +22,7 @@ index :download_links => [:csv] do
     column :number_of_tickets
     column :sale_price_per_ticket
     column :ticket_total
+    column :order_status
 end
 filter :create_date, label: 'Order Date Range'
 filter :real_event_date, label: 'Event Date Range'
@@ -48,6 +48,7 @@ csv do
     column :number_of_tickets
     column :sale_price_per_ticket
     column :ticket_total
+    column :order_status
 end
 
 #
