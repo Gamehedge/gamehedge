@@ -5,6 +5,13 @@ ActiveAdmin.register Sport do
 #
 permit_params :id, :name, :description, :te_uid, :image
 
+index :download_links => false do
+    selectable_column
+    column ("TEVO Id")  { |sport| sport.te_uid }
+    column :name
+    actions
+end
+
 form multipart: true do |f|
     f.inputs "Sport details" do
       	f.input :name

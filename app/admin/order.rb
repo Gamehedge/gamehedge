@@ -3,22 +3,32 @@ ActiveAdmin.register Order do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
-permit_params :refund_stat
+permit_params :refund_status_id
 
-index do
+index :download_links => false do
   selectable_column
-  column :id
-  column :create_date
-  column :client_name
+  column ("Order Id")  { |order| order.te_order_id }
+  column ("Order Date")  { |order| order.create_date }
+  column ("Customer Name")  { |order| order.client_name }
   column :event_name
-  column :event_date
-  column :refund_stat
+  column ("Event Date")  { |order| order.real_event_date }
+  column :refund_status
+  column :order_status
   actions
   # ...
 end
+
+filter :create_date, label: 'Order Date Range'
+filter :te_order_id, label: 'Order Id'
+filter :event_name
+filter :order_status
+filter :refund_status_id
+filter :client_name, label: 'Customer Name'
+
+
 form do |f|
     f.inputs "Sport details" do
-      	f.input :refund_stat, :as => :select, :collection => RefundStatus.all
+      	f.input :refund_status, :as => :select, :collection => RefundStatus.all
     end
     f.actions
 end

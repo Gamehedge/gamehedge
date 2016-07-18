@@ -3,7 +3,15 @@ ActiveAdmin.register Event do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
-permit_params :id, :te_uid, :te_performer_home_id, :te_performer_visit_id, :te_date, :data_event
+permit_params 
+
+index :download_links => false do
+    selectable_column
+    column :te_uid
+    column :te_performer_home_id
+    column :te_performer_visit_id
+    column :te_uid
+end
 #
 # or
 #

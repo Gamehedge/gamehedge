@@ -32,6 +32,7 @@ filter :create_date, label: 'Order Date Range'
 filter :real_event_date, label: 'Event Date Range'
 filter :te_order_id, label: 'Order Id'
 filter :event_name
+filter :order_status
 filter :event_home_team, label: 'Home Team'
 filter :event_away_team, label: 'Away Team'
 filter :event_location, label: 'Venue'
