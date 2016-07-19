@@ -24,13 +24,52 @@ ActiveAdmin.register Order do
   filter :te_order_id, label: 'Order Id'
   filter :event_name
   filter :order_status
-  filter :refund_status_id
+  filter :refund_status_id, as: :select, collection: proc { RefundStatus.all }
   filter :client_name, label: 'Customer Name'
 
+  batch_action :refund_status_to_not_available_on do |ids|
+      Order.find(ids).each do |perf|
+          perf.refund_status_id = 1
+          perf.save
+      end
+      redirect_to collection_path, alert: "The Performers selected have been modified."
+  end
+
+  batch_action :refund_status_to_available_on do |ids|
+      Order.find(ids).each do |perf|
+          perf.refund_status_id = 2
+          perf.save
+      end
+      redirect_to collection_path, alert: "The Performers selected have been modified."
+  end
+
+  batch_action :refund_status_to_requested_on do |ids|
+      Order.find(ids).each do |perf|
+          perf.refund_status_id = 3
+          perf.save
+      end
+      redirect_to collection_path, alert: "The Performers selected have been modified."
+  end
+
+  batch_action :refund_status_to_pending_on do |ids|
+      Order.find(ids).each do |perf|
+          perf.refund_status_id = 4
+          perf.save
+      end
+      redirect_to collection_path, alert: "The Performers selected have been modified."
+  end
+
+  batch_action :refund_status_to_refunded_on do |ids|
+      Order.find(ids).each do |perf|
+          perf.refund_status_id = 5
+          perf.save
+      end
+      redirect_to collection_path, alert: "The Performers selected have been modified."
+  end
 
   form do |f|
       f.inputs "Sport details" do
-        	f.input :refund_status, :as => :select, :collection => RefundStatus.all
+        	f.input :refund_status_id, :as => :select, :collection => RefundStatus.all
       end
       f.actions
   end
