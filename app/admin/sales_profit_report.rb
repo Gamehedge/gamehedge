@@ -9,11 +9,11 @@ config.clear_action_items!
 index :download_links => [:csv] do
     selectable_column
     column ("Order Id")  { |order| order.te_order_id }
-    column ("Order Date")  { |order| order.create_date }
+    column :order_date
     column :event_name
     column ("Home Team")  { |order| order.event_home_team }
     column ("Away Team")  { |order| order.event_away_team }
-    column ("Event Date")  { |order| order.real_event_date }
+    column :event_date
     column ("Venue")  { |order| order.event_location }
     column ("Section")  { |order| order.ticket_section }
     column ("Row")  { |order| order.ticket_row }
@@ -28,7 +28,7 @@ index :download_links => [:csv] do
     column :cost_per_ticket
     column :order_status
 end
-filter :create_date, label: 'Order Date Range'
+filter :order_date, label: 'Order Date Range', as: :date_range
 filter :real_event_date, label: 'Event Date Range'
 filter :te_order_id, label: 'Order Id'
 filter :event_name

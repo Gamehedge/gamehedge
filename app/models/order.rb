@@ -31,4 +31,20 @@ class Order < ActiveRecord::Base
 	def order_total
 		return Php.unserialize(self.order_data)['total']
 	end
+	def order_date
+	    Time.zone = 'Eastern Time (US & Canada)'
+	    return self.create_date
+	end
+	def event_date
+	    Time.zone = 'UTC'
+	    return self.real_event_date
+	end
+	# Filter for the order date in EST date 
+	ransacker :order_date, type: :datetime,
+	  	formatter: -> (date) { Time.zone = 'Eastern Time (US & Canada)'
+	  		date.beginning_of_day } do |parent|
+	  	parent.table[:create_date]
+	end
+
+  
 end

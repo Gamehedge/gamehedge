@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160718194129) do
+ActiveRecord::Schema.define(version: 20160719212107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -192,6 +192,15 @@ ActiveRecord::Schema.define(version: 20160718194129) do
   add_index "performers", ["te_slug"], name: "performers_te_slug_idx", using: :btree
   add_index "performers", ["te_uid"], name: "performers_te_uid_idx", using: :btree
 
+  create_table "players", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "performer_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "players", ["performer_id"], name: "index_players_on_performer_id", using: :btree
+
   create_table "refund_statuses", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -221,4 +230,5 @@ ActiveRecord::Schema.define(version: 20160718194129) do
   add_foreign_key "orders", "refund_statuses"
   add_foreign_key "performers", "divisions"
   add_foreign_key "performers", "sports"
+  add_foreign_key "players", "performers"
 end
