@@ -5,7 +5,7 @@ ActiveAdmin.register Order do
   #
   permit_params :refund_status_id
 
- 
+  menu :if => proc{ current_admin_user.permissions.where(:name => "Order").any? }
 
   index :download_links => false do
     selectable_column

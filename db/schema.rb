@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160719212107) do
+ActiveRecord::Schema.define(version: 20160721203702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,14 @@ ActiveRecord::Schema.define(version: 20160719212107) do
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "admin_users_permissions", force: :cascade do |t|
+    t.integer "admin_user_id"
+    t.integer "permission_id"
+  end
+
+  add_index "admin_users_permissions", ["admin_user_id"], name: "index_admin_users_permissions_on_admin_user_id", using: :btree
+  add_index "admin_users_permissions", ["permission_id"], name: "index_admin_users_permissions_on_permission_id", using: :btree
 
   create_table "clients", id: :bigserial, force: :cascade do |t|
     t.string   "name",                   limit: 80,              null: false
@@ -191,6 +199,12 @@ ActiveRecord::Schema.define(version: 20160719212107) do
   add_index "performers", ["te_name"], name: "performers_te_name_idx", using: :btree
   add_index "performers", ["te_slug"], name: "performers_te_slug_idx", using: :btree
   add_index "performers", ["te_uid"], name: "performers_te_uid_idx", using: :btree
+
+  create_table "permissions", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "players", force: :cascade do |t|
     t.string   "name"

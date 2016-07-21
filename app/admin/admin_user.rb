@@ -1,5 +1,5 @@
 ActiveAdmin.register AdminUser do
-  permit_params :email, :password, :password_confirmation
+  permit_params :email, :password, :password_confirmation, permissions_attributes:[:id,:name, :_destroy], admin_users_permissions_attributes:[:id,:admin_user_id,:permission_id, :_destroy]
 
   index do
     selectable_column
@@ -21,6 +21,11 @@ ActiveAdmin.register AdminUser do
       f.input :email
       f.input :password
       f.input :password_confirmation
+    end
+    f.inputs "Permissions" do
+      f.has_many :admin_users_permissions, :allow_destroy => true do |s|
+        s.input :permission
+      end
     end
     f.actions
   end
