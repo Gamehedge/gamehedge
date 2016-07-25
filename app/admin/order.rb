@@ -3,12 +3,7 @@ ActiveAdmin.register Order do
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :refund_status_id
-
-  after_update :send_y_mail
-  def send_y_mail
-    #some data has been updated
-  end
+  permit_params :refund_status_id, :email
 
   menu :if => proc{ current_admin_user.permissions.where(:name => "Order").any? }
 

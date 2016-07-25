@@ -46,5 +46,13 @@ class Order < ActiveRecord::Base
 	  	parent.table[:create_date]
 	end
 
+	after_update :send_refund_mail
+  
+	def send_refund_mail
+		if self.refund_status_id == 2
+	    	OrderMailer.refund_email(self.id).deliver
+	    end
+	    #some data has been updated
+	end
   
 end
