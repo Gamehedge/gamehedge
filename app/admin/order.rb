@@ -5,6 +5,11 @@ ActiveAdmin.register Order do
   #
   permit_params :refund_status_id
 
+  after_update :send_y_mail
+  def send_y_mail
+    #some data has been updated
+  end
+
   menu :if => proc{ current_admin_user.permissions.where(:name => "Order").any? }
 
   index :download_links => false do

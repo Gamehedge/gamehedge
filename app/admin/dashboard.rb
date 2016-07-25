@@ -5,29 +5,34 @@ ActiveAdmin.register_page "Dashboard" do
   content title: proc{ I18n.t("active_admin.dashboard") } do
     div class: "blank_slate_container", id: "dashboard_default_message" do
       span class: "blank_slate" do
-        span I18n.t("active_admin.dashboard_welcome.welcome")
-        small I18n.t("active_admin.dashboard_welcome.call_to_action")
+        span "Order Stats"
       end
     end
 
     # Here is an example of a simple dashboard with columns and panels.
     #
-    # columns do
-    #   column do
-    #     panel "Recent Posts" do
-    #       ul do
-    #         Post.recent(5).map do |post|
-    #           li link_to(post.title, admin_post_path(post))
-    #         end
-    #       end
-    #     end
-    #   end
-
-    #   column do
-    #     panel "Info" do
-    #       para "Welcome to ActiveAdmin."
-    #     end
-    #   end
-    # end
+    columns do
+      
+      column do
+        panel "TODAY" do
+          para Order.where(:create_date => (Date.today).beginning_of_day..Date.today.end_of_day).count
+        end
+      end
+      column do
+        panel "THIS WEEK" do
+          para Order.where(:create_date => (Date.today).beginning_of_week..Date.today.end_of_day).count
+        end
+      end
+      column do
+        panel "THIS MONTH" do
+          para Order.where(:create_date => (Date.today).beginning_of_month..Date.today.end_of_day).count
+        end
+      end
+      column do
+        panel "THIS YEAR" do
+          para Order.where(:create_date => (Date.today).beginning_of_year..Date.today.end_of_day).count
+        end
+      end
+    end
   end # content
 end
