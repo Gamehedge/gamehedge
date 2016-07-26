@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160721203702) do
+ActiveRecord::Schema.define(version: 20160726204209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -192,6 +192,7 @@ ActiveRecord::Schema.define(version: 20160721203702) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.integer  "sport_id"
+    t.integer  "venue_id"
   end
 
   add_index "performers", ["division_id"], name: "index_performers_on_division_id", using: :btree
@@ -199,6 +200,7 @@ ActiveRecord::Schema.define(version: 20160721203702) do
   add_index "performers", ["te_name"], name: "performers_te_name_idx", using: :btree
   add_index "performers", ["te_slug"], name: "performers_te_slug_idx", using: :btree
   add_index "performers", ["te_uid"], name: "performers_te_uid_idx", using: :btree
+  add_index "performers", ["venue_id"], name: "index_performers_on_venue_id", using: :btree
 
   create_table "permissions", force: :cascade do |t|
     t.string   "name"
@@ -239,10 +241,53 @@ ActiveRecord::Schema.define(version: 20160721203702) do
     t.datetime "image_updated_at"
   end
 
+  create_table "tile_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tiles", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "tile_type_id"
+    t.integer  "sport_id"
+    t.integer  "performer_id"
+    t.integer  "venue_id"
+    t.string   "link"
+    t.string   "slug"
+    t.boolean  "has_geolocation"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.string   "good_game_guarantee"
+  end
+
+  add_index "tiles", ["performer_id"], name: "index_tiles_on_performer_id", using: :btree
+  add_index "tiles", ["sport_id"], name: "index_tiles_on_sport_id", using: :btree
+  add_index "tiles", ["tile_type_id"], name: "index_tiles_on_tile_type_id", using: :btree
+  add_index "tiles", ["venue_id"], name: "index_tiles_on_venue_id", using: :btree
+
+  create_table "venues", force: :cascade do |t|
+    t.string   "name"
+    t.text     "address"
+    t.integer  "te_uid"
+    t.string   "location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "divisions", "divisions"
   add_foreign_key "divisions", "sports"
   add_foreign_key "orders", "refund_statuses"
   add_foreign_key "performers", "divisions"
   add_foreign_key "performers", "sports"
+  add_foreign_key "performers", "venues"
   add_foreign_key "players", "performers"
+  add_foreign_key "tiles", "performers"
+  add_foreign_key "tiles", "sports"
+  add_foreign_key "tiles", "tile_types"
+  add_foreign_key "tiles", "venues"
 end

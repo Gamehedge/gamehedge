@@ -43,99 +43,23 @@
       </div>
     </div>
   </section>
-  <main>
-    <div class="container">
-      <div id="results">
-        <div class="row">
-          <div class="col-md-12 hidden-xs hidden-sm">
-            <h2 class="headerNew text-center">How Does the Good Game Guarantee Work?</h2>
-            <div class="row">
-              <div class="col-md-4">
-                <div class="guarantee-item margin-divider-half">
-                  <div class="img-holder" style="height: 100px;"><img src="<%= image_url "icon-tickets.png" %>" alt="Tickets"></div>
-                  <p>Find your game &amp; purchase your tickets. Every ticket comes with our Good Game Guarantee at no additional cost!</p>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="guarantee-item margin-divider-half">
-                  <div class="img-holder" style="height: 100px;"><img src="<%= image_url "icon-stadium.png" %>" alt="Stadium"></div>
-                  <p>If the home team loses by five or more runs you get 50% of the ticket price back.</p>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="guarantee-item margin-divider-half">
-                  <div class="img-holder" style="height: 100px;"><img src="<%= image_url "icon-handshake.png" %>" alt="Handshake"></div>
-                  <p>Just come back to GameHedge to claim your refund!</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="home-loading-data" class="row text-center" ng-if="loading != 5">
-          <img src="<%= image_url "loadinfo.gif" %>">
-        </div>
-        <div class="row" ng-if="sports" ng-repeat="sport in sports">
-          <h2 class="headerNew headerNew2" id="upcoming_title" ng-if="sport.near_events.length > 0">{{sport.name}} Upcoming Games Near You</h2>
-            <div id="upcoming-games" class="row">
-              <div class="col-md-3" ng-repeat="event in sport.near_events" style="height:180px">
-                <div class="game-item">
-                  <div class="date">{{event.occurs_at  | date:'EEEE, MMM dd'}}</div>
-                  <div class="name margin-divider-half">
-                    {{event.performances[0].performer.name}}<br />
-                    <span>vs</span><br />
-                    {{event.performances[1].performer.name}}
-                  </div>
-                  <div class="location margin-divider-half"><i class="fa fa-map-marker"></i> <a href="/venue/{{event.venue.id}}/{{event.venue.slug}}">{{event.venue.name}}</a></div>
-                  <div class="tickets margin-divider-half"><a href="/ticket/{{event.id}}">Buy Tickets</a></div>
-                </div>
-              </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12 hidden-md hidden-lg">
-            <h2 class="headerNew text-center">How Does the Good Game Guarantee Work?</h2>
-            <div class="row">
-              <div class="col-md-4">
-                <div class="guarantee-item margin-divider-half">
-                  <div class="img-holder"><img src="<%= image_url "icon-tickets.png" %>" alt="Tickets"></div>
-                  <p>Find your game &amp; purchase your tickets. Every ticket comes with our Good Game Guarantee at no additional cost!</p>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="guarantee-item margin-divider-half">
-                  <div class="img-holder"><img src="<%= image_url "icon-stadium.png" %>" alt="Stadium"></div>
-                  <p>If the home team loses by five or more runs you get 50% of the ticket price back.</p>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="guarantee-item margin-divider-half">
-                  <div class="img-holder"><img src="<%= image_url "icon-handshake.png" %>" alt="Handshake"></div>
-                  <p>Just come back to GameHedge.com for your refund!</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <section id="home-why">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4"><img src="<%= image_url "icon-fans.png" %>" alt="Fans" /></div>
-          <div class="col-md-8">
-            <h2>The GameHedge Story</h2>
-            <p>We are fans like you.</p>
-            <p>We invest our time, our passion and our cash supporting our teams. Sometimes things are amazing! Our favorite hitter launches a walk-off rocket to the upper deck; our QB throws a TD to the back of the end zone with 12 ticks left; or our rookie sharp-shooter hits a fade away 3 at the buzzer. Woo hoo!!</p>
-            <p>But ... sometimes the team just doesn't return the love. You spend $400 on tix for the family, fight traffic for 3 hours and then ... well it's 6-0 in the fourth and your ace flame thrower heads to the showers with a tweaked hammie. If you're a true fan, you've been there.</p>
-            <p>That's why we created GameHedge.</p>
-            <p>When you bleed for your team ... GameHedge has a Band-Aid.</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4"><img src="<%= image_url "badge-gamehedge.png" %>" alt="GameHedge" /></div>
-          <div class="col-md-8"><button style="font-size: 20px;text-transform: uppercase;text-decoration: none;" class="button green" onclick="window.location.href = '/faq'">Still Have Questions?</button></div>
-        </div>
-      </div>
-    </section>
-  </main>
+ 
+
+  <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
+
+  <div class="box col3">
+    ...
+  </div>
+
+  <div class="box col1">
+    <p>Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. </p>
+  </div>
+
+  <div class="box col2">
+    <p>
+      <a href="http://www.flickr.com/photos/nemoorange/3319714470/" title="Whitlow's on Wilson by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3008/3319714470_c05a5cb5a8_m.jpg" alt="Whitlow's on Wilson" /></a>
+    </p>
+  </div>
+  ...
+</div>
 </span>

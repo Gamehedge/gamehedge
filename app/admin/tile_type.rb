@@ -1,9 +1,9 @@
-ActiveAdmin.register OrderStat do
+ActiveAdmin.register TileType do
 
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
-permit_params :id, :num, :stat_date
+permit_params :name
 #
 # or
 #

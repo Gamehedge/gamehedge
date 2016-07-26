@@ -19,3 +19,4 @@
 //= require angular-devise
 //= require_tree .
 //= require_tree ./templates
+//= require masonry/jquery.masonry

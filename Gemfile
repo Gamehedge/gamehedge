@@ -96,3 +96,7 @@ gem 'geocoder'
 
 gem 'php-serial'
 
+# For tiles on home
+
+gem 'masonry-rails'
+

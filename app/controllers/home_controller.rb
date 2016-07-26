@@ -3,6 +3,7 @@ class HomeController < ApplicationController
   def index
   	
 
+  	
   	# *******************Update dates for events*******************
 	
 	# render json: Php.unserialize(Order.where(te_order_id: 3074944).first.order_data) #=> {"foo"=>"bar"}

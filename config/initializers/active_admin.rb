@@ -270,5 +270,6 @@ ActiveAdmin.setup do |config|
   #
   # config.include_default_association_filters = true
   
+  config.register_javascript 'tiles.js'
   
 end
