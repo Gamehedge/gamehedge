@@ -17,6 +17,7 @@
 //= require angular-route/angular-route
 //= require angular-rails-templates
 //= require angular-devise
+//= require masonry/jquery.masonry
+//= require masonry/modernizr-transitions
 //= require_tree .
 //= require_tree ./templates
-//= require masonry/jquery.masonry

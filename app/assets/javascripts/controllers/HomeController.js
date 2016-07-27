@@ -3,27 +3,23 @@ controllers = angular.module('gamehedge')
 controllers.controller('HomeController', function($scope,$http){
 	
 	$scope.loading = 0;
-	$scope.getSports = function(){
+	$scope.getTiles = function(){
 		$http({
 		  	method: 'GET',
-		  	url: '/api/v1/sports/',
+		  	url: '/api/v1/tiles/',
 		  	headers: {
 			   'Authorization': "Token token=TokenHere",
 			},
 		}).then(function successCallback(response) {
-			$scope.sports = response.data;
-			for(i=0;i<$scope.sports.length;i++){
-				$scope.sports[i].near_events = $scope.getNear($scope.sports[i].te_uid,i);
-			}
-
-			// this callback will be called asynchronously
-		    // when the response is available
+			$scope.tiles = response.data;
+			console.log($scope.tiles);
 		}, function errorCallback(response) {
 			console.log(response);
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		});
 	}
+
 	$scope.getNear = function(id,i){
 		$http({
 		  	method: 'GET',
@@ -41,5 +37,10 @@ controllers.controller('HomeController', function($scope,$http){
 		    // or server returns response with an error status.
 		});
 	}
-	$scope.getSports();
+	$('.grid').masonry({
+	  itemSelector: '.grid-item',
+	  columnWidth: 160,
+	  gutterWidth: 20,
+	});
+	$scope.getTiles();
 });

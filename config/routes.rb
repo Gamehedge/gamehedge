@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   
   ActiveAdmin.routes(self)
   root "home#index"
+  get "login" => "home#index"
   namespace :api do
     namespace :v1 do
       resources :clients, :defaults => { :format => 'json' }
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
       resources :performers, :defaults => { :format => 'json' }
       resources :divisions, :defaults => { :format => 'json' }
       resources :sports, :defaults => { :format => 'json' }
+      resources :tiles, :defaults => { :format => 'json' }
     end
   end
   
