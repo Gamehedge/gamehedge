@@ -21,4 +21,8 @@ class EventsController < ApplicationController
 		@events = @connection.events.list({:category_id => request.GET["id"], :lat => info.data["latitude"], :lon => info.data["longitude"], :within => 25,:page => 1, :per_page => 8, :order_by => 'events.occurs_at ASC, events.popularity_score DESC'})#, :occurs_at => DateTime.now.iso8601(), })
 		render json: @events
 	end
+	def next
+		@events = TicketEvolutionService.new({:type => request.GET["type"], :id => request.GET["id"], :page => request.GET["page"], :source => request.GET["source"], :perpage => request.GET["perpage"]}).list
+		render json: @events
+	end
 end

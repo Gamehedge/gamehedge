@@ -18,7 +18,7 @@ class Api::V1::TilesController < ApplicationApiController
       @tiles = Tile.where(data_params)
     end
     respond_to do |format|
-      format.json { render json: @tiles.to_json(:only => [:id, :name, :link, :slug, :has_geolocation, :image], :include => {:sport => {:only =>[:id, :name, :description]},:performer => {:only =>[:id, :te_name]},:venue => {:only =>[:id, :name, :description]},:tile_type => {:only =>[:id, :name]}})}
+      format.json { render json: @tiles.to_json(:only => [:id, :name, :link, :slug, :has_geolocation], :include => {:sport => {:only =>[:id, :te_uid, :name, :description]},:performer => {:only =>[:id, :te_uid, :te_name]},:venue => {:only =>[:id, :te_uid, :name, :description]},:tile_type => {:only =>[:id, :name]}}, :methods => [:image_url])}
       format.xml { render xml: @tiles }
     end
   end

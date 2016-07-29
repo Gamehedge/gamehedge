@@ -23,12 +23,16 @@
 
 * { box-sizing: border-box; }
 
-body { font-family: sans-serif; }
+body { 
+	font-family: sans-serif;
+	background-color: #eaeaea;
+}
 
 /* ---- grid ---- */
 
 .grid {
-  max-width: 1072px;
+ 	max-width: 1072px;
+  	margin-top: 30px;
 }
 
 /* clearfix */
@@ -41,15 +45,99 @@ body { font-family: sans-serif; }
 /* ---- grid-item ---- */
 
 .grid-item {
-  width: 30%;
-  height: 120px;
-  float: left;
-  /* vertical gutter */
-  margin-bottom: 20px;
-  background: #D26;
-  border: 2px solid #333;
-  border-color: hsla(0, 0%, 0%, 0.5);
-  border-radius: 5px;
+	width: 30%;
+	float: left;
+	/* vertical gutter */
+	margin-bottom: 20px;
+	background-color: #bababa;
+    padding-top: 15px;
+    padding-bottom: 4px;
+}
+
+.grid-item img{
+	width: 100%;
+}
+
+.grid-item .tile-event {
+	background-color: white;
+    border-width: 0;
+    border-bottom-width: 1px;
+    border-style: solid;
+    border-color: #d8d8d8;
+    text-align: center;
+}
+
+.grid-item .tile-event p{
+	margin: 0;
+}
+
+.grid-item .tile-event .date-holder{
+	padding: 18px 0 13px 0;
+}
+
+.grid-item .tile-event .event-holder{
+	text-align: left;
+	padding: 11px 0 14px 0;
+}
+
+.grid-item .tile-event .event1{
+	font-size: 16px;
+	color: #005e9b;
+}
+
+.grid-item .tile-event .event1 .vs{
+	color: #525252;
+}
+
+.grid-item .tile-event .event2{
+	font-size: 16px;
+	color: #005e9b;
+}
+
+.grid-item .tile-event .event3{
+	font-size: 12px;
+	color: #005e9b;
+}
+
+.grid-item .tile-event .event3 .at{
+	color: #525252;
+}
+
+.grid-item .tile-event .event4{
+	font-size: 12px;
+	color: #d01720;
+}
+
+.grid-item .tile-event .date1{
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+	color: #d01720;
+}
+
+.grid-item .tile-event .date2{
+	font-size: 36px;
+	text-align: center;
+	color: #000000;
+	margin: -12px 0 -8px 0;
+}
+
+.grid-item .tile-event .date3{
+	font-size: 14px;
+	text-align: center;
+	color: #d6d6d6;
+}
+
+.grid .performer-name{
+	position: absolute;
+	background-color: #93aa52;
+    color: white;
+    padding: 0 6px;
+    font-family: Montserrat;
+    font-size: 12px;
+    text-align: center;
+    border-radius: 3px;
+    margin: 10px 0 0 10px;
 }
 
 .grid-item--height2 { height: 200px; }
@@ -67,6 +155,102 @@ body { font-family: sans-serif; }
         width: 100%;
     }  
 }
+
+.navbar-leagues{
+	text-align: center;
+    padding-top: 24px;
+}
+
+.navbar-leagues a{
+	font-family: Montserrat;
+	font-size: 18px;
+	text-align: center;
+	color: #ffffff;
+	margin-left: 15px;
+    margin-right: 15px;
+}
+
+.navbar-leagues a:hover{
+	color: #ffffff;
+}
+.navbar-myaccount{
+	text-align: right;
+	padding-right: 40px;
+	padding-top: 25px;
+    height: 30px;
+}
+
+.navbar-myaccount a{
+	font-family: Montserrat;
+	font-size: 18px;
+	text-align: center;
+	color: #ffffff;
+}
+
+.navbar-myaccount .myaccount-btn{
+	font-family: Montserrat;
+	font-size: 18px;
+	text-align: center;
+	color: #ffffff;
+	background: none;
+    border-width: 0;
+}
+.navbar-myaccount .user-icon{
+	height: 32px;
+    margin-top: -7px;
+}
+
+.navbar-myaccount .dropdown-icon{
+	height: 23px;
+    margin-top: -4px;
+}
+
+#home section#hero #wrapper #content #hero-search img{
+	position: absolute;
+    height: 38px;
+    margin: 13px 0 0 25px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @font-face {
@@ -420,7 +604,6 @@ header nav ul li#sports-dropdown #sports-dropdown-menu ul li a {
 }
 main {
 	margin-bottom: 30px;
-	background-color: #fff;
 }
 footer {
 	padding: 60px 0 30px 0;
@@ -467,7 +650,7 @@ footer .footer-bottom {
 #home section#hero {
 	position: relative;
 	/*height: 35vh;*/
-	background: transparent image_url('home-hero.jpg') no-repeat center center fixed;
+	background: transparent image_url('HeaderBatter.jpeg') no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -525,25 +708,26 @@ footer .footer-bottom {
 	color: #a8c94b;
 }
 #home section#hero #wrapper #content p {
-	font-size: 18px;
+	font-size: 36px;
 	text-align: center;
-	text-transform: uppercase;
+	margin-bottom: 25px;
 }
 #home section#hero #wrapper #content #hero-search {
 	margin: 0 auto;
-	margin-top: 20px;
+	margin-top: 50px;
 	width: 90%;
-	max-width: 450px;
+	max-width: 700px;
     margin-bottom: 40px;
 }
 #home section#hero #wrapper #content #hero-search .form-group {
 	margin: 0;
 }
 #home section#hero #wrapper #content #hero-search .form-control {
-	height: 46px;
+	height: 60px;
 	border: 0;
-	border-top-left-radius: 23px;
-	border-bottom-left-radius: 23px;
+	border-radius: 5px;
+	padding-left: 78px;
+	font-size: 24px;
 }
 #home section#hero #wrapper #content #hero-search .btn {
 	height: 46px;

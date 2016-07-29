@@ -88,6 +88,8 @@ Rails.application.configure do
       },
       :s3_region => ENV['AWS_REGION'],
       :s3_permissions => 'public-read',
+      :url =>':s3_domain_url',
+      :path => '/:class/:attachment/:id_partition/:style/:filename',
   }
   config.assets.precompile += ['active_admin.css']
 

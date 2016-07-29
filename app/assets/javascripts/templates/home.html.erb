@@ -4,24 +4,19 @@
     <div id="wrapper">
       <div id="content">
         <div class="container">
-          <p>Every Ticket Comes With Our Good Game Guarantee!</p>
           <div id="hero-search">
             <form id="form-home-search" name="formSearch" method="POST" action="/search">
               <input type="hidden" name="type" value="full" />
               <div class="form-group">
-                <label for="query" class="sr-only">Search Team, Stadium or City</label>
-                <div class="input-group">
-                  <input type="text" id="home-query" name="query" class="form-control" placeholder="Search by Team, Stadium or City..." />
-                  <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" onclick="$('#form-home-search').submit();"><i class="fa fa-search"></i></button>
-                  </span>
-                </div>
+                <img src="<%= image_url "search icon.png" %>">
+                <input type="text" id="home-query" name="query" class="form-control" placeholder="Search by team, league, game, stadium or city..." />
               </div>
             </form>
           </div>
+          <p>Every Ticket Comes With Our Good Game Guarantee!</p>
         </div>
       </div>
-      <div id="press_images">
+     <!--  <div id="press_images">
         <div class="mobile-images hidden-xs hidden-sm">
           <div class="spacing_div"><img src="<%= image_url "press2/Scout.png" %>"></div>
           <div class="spacing_div"><img src="<%= image_url "press/Crain's NY White.png" %>"></div>
@@ -41,64 +36,28 @@
           <img src="<%= image_url "press2/MSN.png" %>">
         </div>
       </div>
-    </div>
+    </div> -->
   </section>
 
   <main>
     <div class="container">
       <div id="results">
-        <div class="row">
-          <div class="col-md-12 hidden-xs hidden-sm">
-            <h2 class="headerNew text-center">How Does the Good Game Guarantee Work?</h2>
-            <div class="row">
-              <div class="col-md-4">
-                <div class="guarantee-item margin-divider-half">
-                  <div class="img-holder" style="height: 100px;"><img src="<%= image_url "icon-tickets.png" %>" alt="Tickets"></div>
-                  <p>Find your game &amp; purchase your tickets. Every ticket comes with our Good Game Guarantee at no additional cost!</p>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="guarantee-item margin-divider-half">
-                  <div class="img-holder" style="height: 100px;"><img src="<%= image_url "icon-stadium.png" %>" alt="Stadium"></div>
-                  <p>If the home team loses by five or more runs you get 50% of the ticket price back.</p>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="guarantee-item margin-divider-half">
-                  <div class="img-holder" style="height: 100px;"><img src="<%= image_url "icon-handshake.png" %>" alt="Handshake"></div>
-                  <p>Just come back to GameHedge to claim your refund!</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="grid has-gutters transitions-enabled centered clearfix masonry">
           <div class="grid-item" ng-repeat="tile in tiles track by $index">
-            
-          </div>
-          
-        </div>
-
-        <div class="row">
-          <div class="col-xs-12 hidden-md hidden-lg">
-            <h2 class="headerNew text-center">How Does the Good Game Guarantee Work?</h2>
-            <div class="row">
-              <div class="col-md-4">
-                <div class="guarantee-item margin-divider-half">
-                  <div class="img-holder"><img src="<%= image_url "icon-tickets.png" %>" alt="Tickets"></div>
-                  <p>Find your game &amp; purchase your tickets. Every ticket comes with our Good Game Guarantee at no additional cost!</p>
+            <div class="performer-name">{{tile.performer.te_name | uppercase}}</div>
+            <img src="{{tile.image_url}}">
+            <div ng-repeat="event in tile.events | limitTo:3" class="tile-event">
+              <div class="row">
+                <div class="col-xs-4 date-holder">
+                  <p class="date1">{{event.occurs_at | date:'MMM' | uppercase}}</p>
+                  <p class="date2">{{event.occurs_at | date:'dd' | uppercase}}</p>
+                  <p class="date3">{{event.occurs_at | date:'EEE' | uppercase}}</p>  
                 </div>
-              </div>
-              <div class="col-md-4">
-                <div class="guarantee-item margin-divider-half">
-                  <div class="img-holder"><img src="<%= image_url "icon-stadium.png" %>" alt="Stadium"></div>
-                  <p>If the home team loses by five or more runs you get 50% of the ticket price back.</p>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="guarantee-item margin-divider-half">
-                  <div class="img-holder"><img src="<%= image_url "icon-handshake.png" %>" alt="Handshake"></div>
-                  <p>Just come back to GameHedge.com for your refund!</p>
+                <div class="col-xs-8 event-holder">
+                  <p class="event1">{{event.performances[0].performer.name}} <span class="vs">vs.</span></p>
+                  <p class="event2">{{event.performances[1].performer.name}}</p>
+                  <p class="event3"><span class="at">{{event.occurs_at | date:'h:mm a' | uppercase}} at</span> {{event.venue.name}}</p>
+                  <p class="event4">{{event.available_count}} tickets left</p>
                 </div>
               </div>
             </div>

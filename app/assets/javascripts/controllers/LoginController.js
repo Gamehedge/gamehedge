@@ -1,6 +1,7 @@
 controllers = angular.module('gamehedge')
 
 controllers.controller('LoginController', function($scope,$rootScope,Auth,$location){
+    $rootScope.locat = $location.url();
     Auth.currentUser().then(function(user) {
         // User was logged in, or Devise returned
         // previously authenticated session.
