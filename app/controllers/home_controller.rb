@@ -2,7 +2,8 @@ class HomeController < ApplicationController
 	
   def index
   	
-
+  	require 'date'
+	@year = Date.today.strftime("%Y")
   	
   	# *******************Update dates for events*******************
 	

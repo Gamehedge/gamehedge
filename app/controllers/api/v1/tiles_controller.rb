@@ -13,12 +13,12 @@ class Api::V1::TilesController < ApplicationApiController
 
   def index
     if params[:data] == nil
-      @tiles = Tile.all
+      @tiles = Tile.all.order(:position)
     else
-      @tiles = Tile.where(data_params)
+      @tiles = Tile.where(data_params).order(:position)
     end
     respond_to do |format|
-      format.json { render json: @tiles.to_json(:only => [:id, :name, :link, :slug, :has_geolocation], :include => {:sport => {:only =>[:id, :te_uid, :name, :description]},:performer => {:only =>[:id, :te_uid, :te_name]},:venue => {:only =>[:id, :te_uid, :name, :description]},:tile_type => {:only =>[:id, :name]}}, :methods => [:image_url])}
+      format.json { render json: @tiles.to_json(:only => [:id, :name, :link, :slug, :description, :position, :has_geolocation], :include => {:sport => {:only =>[:id, :te_uid, :name, :description]},:performer => {:only =>[:id, :te_uid, :te_name]},:venue => {:only =>[:id, :te_uid, :name, :description]},:tile_type => {:only =>[:id, :name]}}, :methods => [:image_url])}
       format.xml { render xml: @tiles }
     end
   end

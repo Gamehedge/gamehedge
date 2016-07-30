@@ -1,9 +1,10 @@
 controllers = angular.module('gamehedge')
 
-controllers.controller('HomeController', function($scope,$rootScope,$http,$location){
-	$scope.loading = 0;
+controllers.controller('HomeController', function($scope,$rootScope,$http,$location,$timeout){
 	$scope.TilesIndex = 0;
+	$scope.loading = true;
 	$rootScope.locat = $location.url();
+	
 	$scope.getTiles = function(){
 		$http({
 		  	method: 'GET',
@@ -13,10 +14,13 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 			},
 		}).then(function successCallback(response) {
 			$scope.tiles = response.data;
+			for(i=0;i<$scope.tiles.length;i++){
+				$scope.tiles[i].ready = false;
+			}
+			$scope.loading = false;
 			$scope.TilesIndex = 0;
-			$scope.getNextEvents();
-				
-			
+			$scope.updateMasonry();
+		    $scope.getNextEvents();
 		}, function errorCallback(response) {
 			console.log(response);
 		    // called asynchronously if an error occurs
@@ -24,30 +28,47 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 		});
 	}
 
+	$scope.updateMasonry = function(){
+		$timeout(function () {
+	        $('.grid').masonry({
+			  	itemSelector: '.grid-item',
+			  	columnWidth: 160,
+			  	gutterWidth: 20,
+			});
+	    }, 100);
+	}
+
 	$scope.getNextEvents = function(){
 		var id = 0;
-		if($scope.tiles[$scope.TilesIndex].tile_type.id == '1'){
-			id = $scope.tiles[$scope.TilesIndex].sport.te_uid;
-			source = "league";
-		}
-		else if($scope.tiles[$scope.TilesIndex].tile_type.id == '2'){
-			id = $scope.tiles[$scope.TilesIndex].performer.te_uid;	
-			source = "team";
-		}
-		else if($scope.tiles[$scope.TilesIndex].tile_type.id == '3'){
-			id = $scope.tiles[$scope.TilesIndex].venue.te_uid;
-			source = "venue";
+		source = "";
+		if($scope.tiles[$scope.TilesIndex].tile_type != undefined){
+			if($scope.tiles[$scope.TilesIndex].tile_type.id == '1'){
+				id = $scope.tiles[$scope.TilesIndex].sport.te_uid;
+				source = "league";
+			}
+			else if($scope.tiles[$scope.TilesIndex].tile_type.id == '2'){
+				id = $scope.tiles[$scope.TilesIndex].performer.te_uid;	
+				source = "team";
+			}
+			else if($scope.tiles[$scope.TilesIndex].tile_type.id == '3'){
+				id = $scope.tiles[$scope.TilesIndex].venue.te_uid;
+				source = "venue";
+			}
 		}
 		$http({
 		  	method: 'GET',
 		  	url: '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10',
 		}).then(function successCallback(response2) {
 			$scope.tiles[$scope.TilesIndex].events = response2.data;
-			for(j=$scope.tiles[$scope.TilesIndex].events.length - 1;j>=0;j--){
-				if($scope.tiles[$scope.TilesIndex].events[j].performances.length != 2){
-					$scope.tiles[$scope.TilesIndex].events.splice(j,1);
+			if($scope.tiles[$scope.TilesIndex].events != null){
+				for(j=$scope.tiles[$scope.TilesIndex].events.length - 1;j>=0;j--){
+					if($scope.tiles[$scope.TilesIndex].events[j].performances.length != 2){
+						$scope.tiles[$scope.TilesIndex].events.splice(j,1);
+					}
 				}
 			}
+			$scope.tiles[$scope.TilesIndex].ready = true;
+			$scope.updateMasonry();
 			$scope.TilesIndex += 1;
 			if($scope.TilesIndex < $scope.tiles.length){
 				$scope.getNextEvents();
@@ -79,10 +100,8 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 		    // or server returns response with an error status.
 		});
 	}
-	$('.grid').masonry({
-	  itemSelector: '.grid-item',
-	  columnWidth: 160,
-	  gutterWidth: 20,
-	});
+
+	//Initializers
+
 	$scope.getTiles();
 });

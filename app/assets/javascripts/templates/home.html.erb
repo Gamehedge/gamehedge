@@ -16,48 +16,41 @@
           <p>Every Ticket Comes With Our Good Game Guarantee!</p>
         </div>
       </div>
-     <!--  <div id="press_images">
-        <div class="mobile-images hidden-xs hidden-sm">
-          <div class="spacing_div"><img src="<%= image_url "press2/Scout.png" %>"></div>
-          <div class="spacing_div"><img src="<%= image_url "press/Crain's NY White.png" %>"></div>
-          <div class="spacing_div"><img src="<%= image_url "press2/USA Today copy.png" %>"></div>
-          <div class="spacing_div"><img src="<%= image_url "press2/CNBC copy.png" %>"></div>
-          <div class="spacing_div"><img src="<%= image_url "press2/Sports Illustrated Red.png" %>"></div>
-          <div class="spacing_div"><img src="<%= image_url "press2/Yahoo Finance.png" %>"></div>
-          <div class="spacing_div"><img src="<%= image_url "press2/ESPN Radio copy.png" %>"></div>
-        </div>
-        <div class="mobile-images hidden-md hidden-lg">
-          <img src="<%= image_url "press2/Sports Illustrated Red.png" %>">
-          <img src="<%= image_url "press2/USA Today copy.png" %>">
-          <img src="<%= image_url "press/Crain's NY White.png" %>">
-          <img src="<%= image_url "press2/CNBC copy.png" %>">
-          <img src="<%= image_url "press2/Yahoo Finance.png" %>">  
-          <img src="<%= image_url "press2/ESPN Radio copy.png" %>">
-          <img src="<%= image_url "press2/MSN.png" %>">
-        </div>
-      </div>
-    </div> -->
+    </div>
   </section>
 
   <main>
     <div class="container">
-      <div id="results">
+      <div id="home-loading-data" class="row text-center" ng-if="loading">
+        <img src="<%= image_url "loadinfo.gif" %>">
+      </div>
+      <div id="results" ng-if="!loading">
         <div class="grid has-gutters transitions-enabled centered clearfix masonry">
-          <div class="grid-item" ng-repeat="tile in tiles track by $index">
-            <div class="performer-name">{{tile.performer.te_name | uppercase}}</div>
-            <img src="{{tile.image_url}}">
-            <div ng-repeat="event in tile.events | limitTo:3" class="tile-event">
-              <div class="row">
-                <div class="col-xs-4 date-holder">
-                  <p class="date1">{{event.occurs_at | date:'MMM' | uppercase}}</p>
-                  <p class="date2">{{event.occurs_at | date:'dd' | uppercase}}</p>
-                  <p class="date3">{{event.occurs_at | date:'EEE' | uppercase}}</p>  
-                </div>
-                <div class="col-xs-8 event-holder">
-                  <p class="event1">{{event.performances[0].performer.name}} <span class="vs">vs.</span></p>
-                  <p class="event2">{{event.performances[1].performer.name}}</p>
-                  <p class="event3"><span class="at">{{event.occurs_at | date:'h:mm a' | uppercase}} at</span> {{event.venue.name}}</p>
-                  <p class="event4">{{event.available_count}} tickets left</p>
+          <div class="grid-item" ng-repeat="tile in tiles track by $index" >
+            <div id="home-loading-data" class="row text-center" ng-if="!tile.ready">
+              <img src="<%= image_url "loadinfo.gif" %>">
+            </div>
+            <div ng-if="tile.ready">
+              <div class="performer-name" ng-if="tile.tile_type.id == 2">{{tile.performer.te_name | uppercase}}</div>
+              <img src="{{tile.image_url}}">
+              <div class="info-container" ng-if="tile.tile_type.id == 1 || tile.tile_type.id == 3">
+                <div ng-if="tile.tile_type.id == 1" class="tile-title">{{tile.sport.name}} Games</div>
+                <div ng-if="tile.tile_type.id == 3" class="tile-title">{{tile.venue.name}}</div>
+                <div class="tile-description">{{tile.description}}</div>
+              </div>
+              <div ng-repeat="event in tile.events | limitTo:3" class="tile-event">
+                <div class="row">
+                  <div class="col-xs-4 date-holder">
+                    <p class="date1">{{event.occurs_at | date:'MMM' | uppercase}}</p>
+                    <p class="date2">{{event.occurs_at | date:'dd' | uppercase}}</p>
+                    <p class="date3">{{event.occurs_at | date:'EEE' | uppercase}}</p>  
+                  </div>
+                  <div class="col-xs-8 event-holder">
+                    <p class="event1">{{event.performances[0].performer.name}} <span class="vs">vs.</span></p>
+                    <p class="event2">{{event.performances[1].performer.name}}</p>
+                    <p class="event3"><span class="at">{{event.occurs_at | date:'h:mm a' | uppercase}} at</span> {{event.venue.name}}</p>
+                    <p class="event4">{{event.available_count}} tickets left</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -65,24 +58,54 @@
         </div>
       </div>
     </div>
-    <section id="home-why">
+    <section id="press_images">
+      <div class="feautured-in">AS FEATURED IN</div>
+      <div class="mobile-images hidden-xs hidden-sm">
+        <div class="spacing_div"><img src="<%= image_url "press2/Scout.png" %>"></div>
+        <div class="spacing_div"><img src="<%= image_url "press/Crain's NY White.png" %>"></div>
+        <div class="spacing_div"><img src="<%= image_url "press2/USA Today copy.png" %>"></div>
+        <div class="spacing_div"><img src="<%= image_url "press2/CNBC copy.png" %>"></div>
+        <div class="spacing_div"><img src="<%= image_url "press2/Sports Illustrated Red.png" %>"></div>
+        <div class="spacing_div"><img src="<%= image_url "press2/Yahoo Finance.png" %>"></div>
+        <div class="spacing_div"><img src="<%= image_url "press2/ESPN Radio copy.png" %>"></div>
+      </div>
+      <div class="mobile-images hidden-md hidden-lg">
+        <img src="<%= image_url "press2/Sports Illustrated Red.png" %>">
+        <img src="<%= image_url "press2/USA Today copy.png" %>">
+        <img src="<%= image_url "press/Crain's NY White.png" %>">
+        <img src="<%= image_url "press2/CNBC copy.png" %>">
+        <img src="<%= image_url "press2/Yahoo Finance.png" %>">  
+        <img src="<%= image_url "press2/ESPN Radio copy.png" %>">
+        <img src="<%= image_url "press2/MSN.png" %>">
+      </div>
+    </section>
+    <section id="how-video">
+      <div class="feautured-in">HOW DOES THE GOOD GAME GUARANTEE WORK</div>
       <div class="container">
         <div class="row">
-          <div class="col-md-4"><img src="<%= image_url "icon-fans.png" %>" alt="Fans" /></div>
-          <div class="col-md-8">
-            <h2>The GameHedge Story</h2>
-            <p>We are fans like you.</p>
-            <p>We invest our time, our passion and our cash supporting our teams. Sometimes things are amazing! Our favorite hitter launches a walk-off rocket to the upper deck; our QB throws a TD to the back of the end zone with 12 ticks left; or our rookie sharp-shooter hits a fade away 3 at the buzzer. Woo hoo!!</p>
-            <p>But ... sometimes the team just doesn't return the love. You spend $400 on tix for the family, fight traffic for 3 hours and then ... well it's 6-0 in the fourth and your ace flame thrower heads to the showers with a tweaked hammie. If you're a true fan, you've been there.</p>
-            <p>That's why we created GameHedge.</p>
-            <p>When you bleed for your team ... GameHedge has a Band-Aid.</p>
+          <div class="col-xs-12">
+            <div class="videoWrapper">
+              <iframe src="https://player.vimeo.com/video/153604637" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><p><a href="https://vimeo.com/153604637">GameHedge Video</a> from <a href="https://vimeo.com/user41979068">Warren Friss</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+            </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-4"><img src="<%= image_url "badge-gamehedge.png" %>" alt="GameHedge" /></div>
-          <div class="col-md-8"><button style="font-size: 20px;text-transform: uppercase;text-decoration: none;" class="button green" onclick="window.location.href = '/faq'">Still Have Questions?</button></div>
-        </div>
       </div>
+    </section>
+    <section id="home-why">
+      <div class="feautured-in">WE ARE FANS LIKE YOU</div>
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="col-md-8">
+                <p>We invest our time, our passion and our cash supporting our teams. Sometimes things are amazing! Our favorite hitter launches a walk-off rocket to the upper deck; our QB throws a TD to the back of the end zone with 12 ticks left; or our rookie sharp-shooter hits a fade away 3 at the buzzer. Woo hoo!!</p>
+                <p>But ... sometimes the team just doesn't return the love. You spend $400 on tix for the family, fight traffic for 3 hours and then ... well it's 6-0 in the fourth and your ace flame thrower heads to the showers with a tweaked hammie. If you're a true fan, you've been there.</p>
+                <p>That's why we created GameHedge.</p>
+                <p>When you bleed for your team ... GameHedge has a Band-Aid.</p>
+              </div>
+              <div class="col-md-4"><img src="<%= image_url "icon-fans.png" %>" alt="Fans" /></div>
+            </div>
+          </div>
+        </div>
     </section>
   </main>
 </span>
