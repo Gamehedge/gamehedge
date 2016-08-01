@@ -21,6 +21,7 @@
 @import 'masonry/gutters';
 @import 'masonry/transitions';
 
+
 * { box-sizing: border-box; }
 
 body { 
@@ -187,6 +188,48 @@ body {
     }  
 }
 
+.navbar-fixed-top, .navbar-fixed-bottom{
+	position: absolute;
+    z-index: 1030;
+    left:auto;
+    right: auto;
+}
+
+.navbar-toggle{
+	margin-right: 0;
+}
+
+.navbar-default .navbar-toggle{
+	border: none;
+}
+
+.navbar-default .navbar-toggle .icon-bar{
+	background-color: white;
+	width: 20px;
+    height: 4px;
+    border-radius: 2px;
+}
+
+.navbar-default .navbar-toggle img{
+	width: 100%;
+	filter: gray; /* IE6-9 */
+	filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+  	filter: grayscale(1) brightness(0) invert(1); /* Microsoft Edge and Firefox 35+ */
+  	-webkit-filter: grayscale(1) brightness(0) invert(1);
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
+	background: none;
+}
+.navbar-default .navbar-toggle .search-button{
+	padding: 8px;
+    margin-top: 3px;
+}
+.navbar-default{
+	background: none;
+	border: none;
+}
+
 .navbar-leagues{
 	text-align: center;
     padding-top: 24px;
@@ -243,10 +286,133 @@ body {
 }
 
 
+.mobile-menu{
+	background-color:#373d3f;
+	position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+}
 
+.no-scrolling{
+	overflow: hidden;
+}
 
+.mobile-menu.ng-enter, .mobile-menu.ng-leave {
+  -webkit-transition: 0.5s linear all;
+  transition:all linear 0.5s;
+}
 
+.mobile-menu.ng-enter,
+.mobile-menu.ng-leave.ng-leave-active {
+  opacity:0;
+}
 
+.mobile-menu.ng-leave,
+.mobile-menu.ng-enter.ng-enter-active {
+  opacity:1;
+}
+
+.mobile-menu .img-header{
+	height: 15px;
+	display: block;
+    margin-top: 21px;
+    margin-left: 25px;
+}
+
+.mobile-menu-header{
+	height: 60px;
+	width: 100%;
+	background-color: #333333;
+}
+
+.mobile-menu-footer{
+	height: 120px;
+	width: 100%;
+	background-color: #333333;
+	position:absolute;
+	bottom:0;
+}
+
+.mobile-menu-footer h2{
+    font-size: 20px;
+    font-family: Montserrat;
+    color: #bababa;
+    text-align: center;
+    text-transform: none;
+    margin-bottom: 16px;
+}
+
+.mobile-menu-footer .footer-social-media img{
+	margin: 0 10px;
+    height: 40px;
+}
+
+.footer-social-media .col-xs-4{
+	text-align:center;
+}
+
+.mobile-menu-header .search-header{
+	margin-top: 11px;
+    font-size: 24px;
+}
+
+.mobile-menu-header .search-header img{
+	height: 35px;
+	filter: gray; /* IE6-9 */
+	filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+  	filter: grayscale(1) brightness(0) invert(1); /* Microsoft Edge and Firefox 35+ */
+  	-webkit-filter: grayscale(1) brightness(0) invert(1);
+}
+.mobile-menu-header .search-header input{
+	width: 80%;
+    border: none;
+    background: none;
+    color: white;
+}
+
+.mobile-menu-header .search-header input:focus{
+	outline:none;
+}
+
+.logo-image.menu {
+	width: 92%
+}
+
+.mobile-menu p{
+	font-size: 20px;
+	color: #ffffff;
+}
+
+.mobile-menu a{
+	font-size: 18px;
+	color: #ffffff;
+}
+
+.mobile-menu .menu-row{
+	margin: 15px 0;
+}
+
+.menu-row .user-icon{
+	width: 38px;
+    right: 0px;
+    position: absolute;
+    top: -4px;
+
+}
+
+.menu-row.separator{
+    margin-top: 80px;
+}
+
+.mobile-menu .menu-container{
+	top: 0;
+    bottom: 0;
+    position: absolute;
+    margin: 60px 0 120px 0;
+    overflow: scroll;
+    width: 100%;
+}
 
 
 
@@ -320,33 +486,31 @@ a {
 	width: 100%;
 	max-width: 300px;
 	height: auto;
+	padding-top: 20px;
 }
 
 @media (max-width: 991px) {
     .logo-image {
         width: 100%;
-        max-width: 210px;
         height: auto;
         margin-top: 3px;
+        display: block;
+	    margin: auto;
+	    padding: 15px
     }  
-}
-
-.navbar-gamehedge {
-    background: none;
-    border: none;
-    z-index: 10;
 }
 
 .nav-gamehedge {
     margin-top: 25px;
 }
 
-
 .navbar-gamehedge {
     margin-bottom: 0px;
-    padding-bottom: 17px;
     background-color: #333;
     border-radius: 0px;
+    background: none;
+    border: none;
+    z-index: 10;
 }
 
 @media (max-width: 991px) {
@@ -476,9 +640,7 @@ a {
 }
 
 @media (max-width: 991px) {
-    .navbar-header {
-        float: none;
-    }
+    
     .navbar-toggle {
         display: block;
     }
@@ -740,7 +902,7 @@ footer .footer-signature img{
 #home section#hero {
 	position: relative;
 	/*height: 35vh;*/
-	background: transparent image_url('HeaderBatter.jpeg') no-repeat center center fixed;
+	background: transparent image_url('HeaderBatter.jpeg') center;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -774,6 +936,12 @@ footer .footer-signature img{
 	color: #fff;
 }
 
+#home section#hero #wrapper #content p {
+	font-size: 36px;
+	text-align: center;
+	margin-bottom: 25px;
+}
+
 @media(max-width: 992px) {
     #home section#hero #wrapper #content {
         padding-top: 80px;
@@ -785,9 +953,15 @@ footer .footer-signature img{
     }
     
     #home section#hero {
-        background: transparent image_url('home-hero.jpg') no-repeat center center;
-        background-size: cover;
-    }   
+        height: 300px;
+    }
+
+    #home section#hero #wrapper #content p{
+    	font-size: 20px;
+    	margin-bottom: 0;
+	    position: absolute;
+	    bottom: -206px;
+    }
 }
 
 #home section#hero #wrapper #content h1 {
@@ -797,11 +971,7 @@ footer .footer-signature img{
 #home section#hero #wrapper #content h1 span {
 	color: #a8c94b;
 }
-#home section#hero #wrapper #content p {
-	font-size: 36px;
-	text-align: center;
-	margin-bottom: 25px;
-}
+
 #home section#hero #wrapper #content #hero-search {
 	margin: 0 auto;
 	margin-top: 50px;
@@ -1342,6 +1512,22 @@ section#game-guarantee p {
 	color: #a9a9a9;
 }
 
+@media(max-width: 991px) {
+	#home-why .feautured-in, #press_images .feautured-in, #how-video .feautured-in{
+    	font-size: 20px;
+    }
+    #home-why p{
+    	font-size: 14px;	
+    }
+    #home-why img{
+    	width: 100%;
+    }
+    .footer-nav img{
+    	margin-top:80px;
+    }
+}
+
+
 #press_images .spacing_div{
 	width:13.5%;
 	display:inline-block;
@@ -1371,6 +1557,7 @@ section#game-guarantee p {
 	#press_images{
 	padding-right: 10px;
     padding-left: 10px;
+
 }
 }
 /* Disable grayscale on hover */
@@ -2558,41 +2745,7 @@ main#admin #order-stats .stat-item span {
     border: 1px solid #a8c94b;
     border-radius: 3px;
 }
-.mobile-menu .navbar-gamehedge{
-	/*height: 40px;*/
-    padding: 0;
-    min-height: 40px;
-}
 
-.mobile-menu .logo-image{
-	width: 50%
-}
-.mobile-menu .navbar-header .navbar-brand{
-	height: 100%;
-    padding: 10px 15px;
-}
-.mobile-menu .navbar-toggle{
-	display: block;
-    width: 10px;
-    height: 2px;
-    padding: 7px 8px;
-}
-
-.mobile-menu .navbar-toggle .icon-bar{
-	width: 14px;
-}
-
-.mobile-menu  .navbar-toggle .icon-bar+.icon-bar{
-	margin-top: 2px;
-    width: 14px;
-
-}
-
-.mobile-menu .navbar-default .navbar-toggle{
-	margin: 7px;
-    height: 26px;
-    width: 30px;
-}
 .noselect {
 	cursor: pointer;
     -webkit-touch-callout: none; /* iOS Safari */

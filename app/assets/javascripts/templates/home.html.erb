@@ -4,7 +4,7 @@
     <div id="wrapper">
       <div id="content">
         <div class="container">
-          <div id="hero-search">
+          <div id="hero-search" class="hidden-sm hidden-xs">
             <form id="form-home-search" name="formSearch" method="POST" action="/search">
               <input type="hidden" name="type" value="full" />
               <div class="form-group">
@@ -95,15 +95,14 @@
       <div class="feautured-in">WE ARE FANS LIKE YOU</div>
         <div class="container">
           <div class="row">
-            <div class="col-xs-12">
-              <div class="col-md-8">
-                <p>We invest our time, our passion and our cash supporting our teams. Sometimes things are amazing! Our favorite hitter launches a walk-off rocket to the upper deck; our QB throws a TD to the back of the end zone with 12 ticks left; or our rookie sharp-shooter hits a fade away 3 at the buzzer. Woo hoo!!</p>
-                <p>But ... sometimes the team just doesn't return the love. You spend $400 on tix for the family, fight traffic for 3 hours and then ... well it's 6-0 in the fourth and your ace flame thrower heads to the showers with a tweaked hammie. If you're a true fan, you've been there.</p>
-                <p>That's why we created GameHedge.</p>
-                <p>When you bleed for your team ... GameHedge has a Band-Aid.</p>
-              </div>
-              <div class="col-md-4"><img src="<%= image_url "icon-fans.png" %>" alt="Fans" /></div>
+            <div class="col-xs-12 hidden-md hidden-lg"><img src="<%= image_url "icon-fans.png" %>" alt="Fans" /></div>
+            <div class="col-md-8">
+              <p>We invest our time, our passion and our cash supporting our teams. Sometimes things are amazing! Our favorite hitter launches a walk-off rocket to the upper deck; our QB throws a TD to the back of the end zone with 12 ticks left; or our rookie sharp-shooter hits a fade away 3 at the buzzer. Woo hoo!!</p>
+              <p>But ... sometimes the team just doesn't return the love. You spend $400 on tix for the family, fight traffic for 3 hours and then ... well it's 6-0 in the fourth and your ace flame thrower heads to the showers with a tweaked hammie. If you're a true fan, you've been there.</p>
+              <p>That's why we created GameHedge.</p>
+              <p>When you bleed for your team ... GameHedge has a Band-Aid.</p>
             </div>
+            <div class="col-md-4 hidden-sm hidden-xs"><img src="<%= image_url "icon-fans.png" %>" alt="Fans" /></div>
           </div>
         </div>
     </section>

@@ -1,28 +1,156 @@
-<div ng-class="{'home-header': global.locat == '/'}" ng-controller="MenuBarController">
-    <nav class="navbar navbar-default navbar-gamehedge">
-        <div class="navbar-header col-md-4">
-            
+<div ng-controller="MenuBarController">
+<div class="mobile-menu" ng-if="showMainMenu">
+    <div class="mobile-menu-header">
+        <div class="row">
+            <div class="col-xs-2">
+                <div ng-click="hideMenus()">
+                    <img src="<%= image_url "close-menu.png" %>" class="img-header">
+                </div>
+            </div>
+            <div class="navbar-header col-xs-8">
+                <a href="/#/" ng-click="hideMenus()">
+                    <img class="logo-image menu" alt="GameHedge" src="<%= image_url "logo.png" %>">
+                </a>
+            </div>
+            <div class="col-xs-2"></div>
+        </div>
+    </div>
+    <div class="menu-container">
+        <div class="row menu-row" ng-show="!$root.isLoggedin">
+            <div class="col-xs-3"><img class="user-icon" src="<%= image_url "profile icon.png" %>"></div>
+            <div class="col-xs-9"><a href="/#/login" ng-click="hideMenus()">Login</a></div>
+        </div>
+        <div class="row menu-row" ng-show="$root.isLoggedin">
+            <div class="col-xs-3"><img class="user-icon" src="<%= image_url "profile icon.png" %>"></div>
+            <div class="col-xs-9"><p>{{$root.user.name | uppercase}}</p></div>
+        </div>
+        <div class="row menu-row" ng-show="$root.isLoggedin">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-9"><a href="/#/member" ng-click="hideMenus()">Your profile</a></div>
+        </div>
+        <div class="row menu-row" ng-show="$root.isLoggedin">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-9"><a  href="/#/order-history" ng-click="hideMenus()">Order history</a></div>
+        </div>
+        <div class="row menu-row" ng-show="$root.isLoggedin">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-9"><a ng-click="logout()" ng-click="hideMenus()">Logout</a></div>
+        </div>
 
-            <a class="navbar-brand" href="/#/">
+        <div class="row menu-row separator">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-9"><a href="/#/press/" ng-click="hideMenus()">Press</a></div>
+        </div>
+        <div class="row menu-row">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-9"><a href="/blog/" ng-click="hideMenus()">Blog</a></div>
+        </div>
+        <div class="row menu-row">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-9"><a href="/#/faq/" ng-click="hideMenus()">FAQ</a></div>
+        </div>
+        <div class="row menu-row">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-9"><a href="/#/contact/" ng-click="hideMenus()">Contact Us</a></div>
+        </div>
+    </div>
+    <div class="mobile-menu-footer">
+        <h2>Connect with us</h2>
+        <nav role="navigation" class="footer-social-media">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <a href="http://www.facebook.com/gamehedge" target="_blank"><img src="<%= image_url "facebook-footer.png" %>" alt="Facebook" /></a>          
+                    </div>
+                    <div class="col-xs-4">
+                        <a href="http://www.twitter.com/gamehedge" target="_blank"><img src="<%= image_url "twitter-footer.png" %>" alt="Twitter" /></a>          
+                    </div>
+                    <div class="col-xs-4">
+                        <a href="http://www.instagram.com/gamehedge" target="_blank"><img src="<%= image_url "instagram-footer.png" %>" alt="Instagram" /></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div class="mobile-menu" ng-if="showSearchMenu">
+    <div class="mobile-menu-header">
+        <div class="row">
+            <div class="col-xs-2">
+                <div ng-click="hideMenus()">
+                    <img src="<%= image_url "close-menu.png" %>" class="img-header">
+                </div>
+            </div>
+            <div class="navbar-header search-header col-xs-8">
+                <img src="<%= image_url "search icon.png" %>">
+                <input type="text" name="search" placeholder="search tickets">
+            </div>
+            <div class="col-xs-2"></div>
+        </div>
+    </div>
+    <div class="results-container">
+        
+    </div>
+    <div class="mobile-menu-footer">
+        <h2>Connect with us</h2>
+        <nav role="navigation" class="footer-social-media">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <a href="http://www.facebook.com/gamehedge" target="_blank"><img src="<%= image_url "facebook-footer.png" %>" alt="Facebook" /></a>          
+                    </div>
+                    <div class="col-xs-4">
+                        <a href="http://www.twitter.com/gamehedge" target="_blank"><img src="<%= image_url "twitter-footer.png" %>" alt="Twitter" /></a>          
+                    </div>
+                    <div class="col-xs-4">
+                        <a href="http://www.instagram.com/gamehedge" target="_blank"><img src="<%= image_url "instagram-footer.png" %>" alt="Instagram" /></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div ng-class="{'home-header': $root.locat == '/'}">
+    <nav class="navbar navbar-default navbar-gamehedge">
+
+        <div class="col-xs-2 hidden-md hidden-lg">
+            <div class="navbar navbar-default navbar-fixed-top">
+                <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target="#slideMenu" data-canvas="body" ng-click="showSlideMain()">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+        </div>
+        <div class="navbar-header col-md-4 col-xs-8">
+            <a href="/#/">
                 <img class="logo-image" alt="GameHedge" src="<%= image_url "logo.png" %>">
             </a>
         </div>
-
-        <div class="navbar-leagues col-md-4">
+        <div class="col-xs-2 hidden-md hidden-lg">
+            <div class="navbar navbar-default navbar-fixed-top">
+                <button id="search-button" type="button" class="navbar-toggle" data-toggle="offcanvas" data-target="#searchMenu" data-canvas="body" ng-click="showSlideSearch()">
+                    <img src="<%= image_url "search icon.png" %>">
+                </button>
+            </div>
+        </div>
+        <div class="navbar-leagues col-md-4 hidden-sm hidden-xs">
             <a class="" href="">MLB</a>
             <a class="" href="">NFL</a>
             <a class="" href="">NBA</a>
             <a class="" href="">NHL</a>
             <a class="" href="">NCAA</a>
         </div>
-        <div class="navbar-myaccount col-md-4">
-            <div class="dropdown" ng-show="global.isLoggedin">
+        <div class="navbar-myaccount col-md-4 hidden-sm hidden-xs">
+            <div class="dropdown" ng-show="$root.isLoggedin">
                 <button class="dropdown-toggle myaccount-btn" type="button" data-toggle="dropdown"><img class="user-icon" src="<%= image_url "profile icon.png" %>">MY ACCOUNT<img class="dropdown-icon" src="<%= image_url "dropdown.png" %>"></button>
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a ng-click="logout()" ng-show="global.isLoggedin">Logout</a></li>
+                    <li><a ng-click="logout()" ng-show="$root.isLoggedin">Logout</a></li>
                 </ul>
             </div>
-            <a href="/#/login" ng-show="!global.isLoggedin"><img class="user-icon" src="<%= image_url "profile icon.png" %>">LOGIN</a>
+            <a href="/#/login" ng-show="!$root.isLoggedin"><img class="user-icon" src="<%= image_url "profile icon.png" %>">LOGIN</a>
         </div>
     </nav>
 </div>
@@ -32,27 +160,27 @@
 <footer>
     <div class="container">
         <div class="row" id="data_footer">
-            <div class="col-md-3">
+            <div class="col-md-3 hidden-xs hidden-sm">
                 <div class="footer-nav">
                     <h2>What to Know</h2>
                     <nav role="navigation">
                         <ul>
-                            <li><a href="/our-terms">Terms</a></li>
-                            <li><a href="/faq">Privacy</a></li>
-                            <li><a href="/faq">FAQ</a></li>
-                            <li><a href="/contact">Contact Us</a></li>
+                            <li><a href="/#/our-terms">Terms</a></li>
+                            <li><a href="/#/faq">Privacy</a></li>
+                            <li><a href="/#/faq">FAQ</a></li>
+                            <li><a href="/#/contact">Contact Us</a></li>
                         </ul>
                     </nav>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 hidden-xs hidden-sm">
                 <div class="footer-nav">
                     <h2>Important Links</h2>
                     <nav role="navigation">
                         <ul>
-                            <li><a href="/how-it-works">How it Works</a></li>
-                            <li><a href="/member">My Account</a></li>
-                            <li><a href="/press">Press</a></li>
+                            <li><a href="/#/how-it-works">How it Works</a></li>
+                            <li><a href="/#/member">My Account</a></li>
+                            <li><a href="/#/press">Press</a></li>
                             <li><a href="/blog">Blog</a></li>
                         </ul>
                     </nav>
@@ -62,9 +190,22 @@
                 <div class="footer-nav">
                     <h2>Connect with us</h2>
                     <nav role="navigation" class="footer-social-media">
-                        <a href="http://www.facebook.com/gamehedge" target="_blank"><img src="<%= image_url "facebook-footer.png" %>" alt="Facebook" /></a>
-                        <a href="http://www.twitter.com/gamehedge" target="_blank"><img src="<%= image_url "twitter-footer.png" %>" alt="Twitter" /></a>
-                        <a href="http://www.instagram.com/gamehedge" target="_blank"><img src="<%= image_url "instagram-footer.png" %>" alt="Instagram" /></a>
+                        <a href="http://www.facebook.com/gamehedge" target="_blank" class="hidden-sm hidden-xs"><img src="<%= image_url "facebook-footer.png" %>" alt="Facebook" /></a>
+                        <a href="http://www.twitter.com/gamehedge" target="_blank" class="hidden-sm hidden-xs"><img src="<%= image_url "twitter-footer.png" %>" alt="Twitter" /></a>
+                        <a href="http://www.instagram.com/gamehedge" target="_blank" class="hidden-sm hidden-xs"><img src="<%= image_url "instagram-footer.png" %>" alt="Instagram" /></a>
+                        <div class="container hidden-md hidden-lg">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <a href="http://www.facebook.com/gamehedge" target="_blank"><img src="<%= image_url "facebook-footer.png" %>" alt="Facebook" /></a>          
+                                </div>
+                                <div class="col-xs-4">
+                                    <a href="http://www.twitter.com/gamehedge" target="_blank"><img src="<%= image_url "twitter-footer.png" %>" alt="Twitter" /></a>          
+                                </div>
+                                <div class="col-xs-4">
+                                    <a href="http://www.instagram.com/gamehedge" target="_blank"><img src="<%= image_url "instagram-footer.png" %>" alt="Instagram" /></a>
+                                </div>
+                            </div>
+                        </div>
                     </nav>
                     <h3>Enter email to receive updates and deals</h3>
                     <div class="footer-email-container">
@@ -74,7 +215,7 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <div class="footer-nav">
+                <div class="footer-nav text-center">
                     <div class="col-md-4"><img src="<%= image_url "badge-gamehedge.png" %>" alt="GameHedge" /></div>
                 </div>
             </div>
@@ -88,5 +229,6 @@
     </div>
 </footer>
 <div growl></div>
+</div>
         
    

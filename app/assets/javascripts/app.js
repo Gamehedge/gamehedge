@@ -3,6 +3,7 @@ app = angular.module('gamehedge',[
   'ngRoute',
   'Devise',
   'templates',
+  'ngAnimate',
 ])
 
 app.config([ '$routeProvider','$locationProvider','AuthProvider',

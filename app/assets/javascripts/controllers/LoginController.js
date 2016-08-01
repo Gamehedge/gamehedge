@@ -32,7 +32,8 @@ controllers.controller('LoginController', function($scope,$rootScope,Auth,$locat
 
         $scope.$on('devise:login', function(event, currentUser) {
             // after a login, a hard refresh, a new tab
-            console.log("logged in");
+            console.log(currentUser);
+            $rootScope.user = currentUser;
             $rootScope.isLoggedin = true;
             $location.path('/');
         });
