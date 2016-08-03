@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'home/index'
   get 'events/near'
   get 'events/next'
+  resources :search
   devise_for :admin_users, ActiveAdmin::Devise.config
   
   ActiveAdmin.routes(self)

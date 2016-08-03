@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160729205636) do
+ActiveRecord::Schema.define(version: 20160802225835) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(version: 20160729205636) do
     t.integer  "te_performer_visit_id"
     t.text     "data_event"
     t.datetime "te_date"
+    t.string   "name"
   end
 
   add_index "events", ["te_performer_home_id"], name: "events_te_performer_home_id_idx", using: :btree
@@ -193,6 +194,7 @@ ActiveRecord::Schema.define(version: 20160729205636) do
     t.datetime "image_updated_at"
     t.integer  "sport_id"
     t.integer  "venue_id"
+    t.string   "name"
   end
 
   add_index "performers", ["division_id"], name: "index_performers_on_division_id", using: :btree

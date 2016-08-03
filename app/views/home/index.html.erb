@@ -1,5 +1,5 @@
 <div ng-controller="MenuBarController">
-<div class="mobile-menu" ng-if="showMainMenu">
+<div class="mobile-menu main-menu-transition" ng-if="showMainMenu">
     <div class="mobile-menu-header">
         <div class="row">
             <div class="col-xs-2">
@@ -74,9 +74,8 @@
     </div>
 </div>
 
-<div class="mobile-menu" ng-if="showSearchMenu">
+<div class="mobile-menu search-menu-transition" ng-if="showSearchMenu">
     <div class="mobile-menu-header">
-        <div class="row">
             <div class="col-xs-2">
                 <div ng-click="hideMenus()">
                     <img src="<%= image_url "close-menu.png" %>" class="img-header">
@@ -87,7 +86,7 @@
                 <input type="text" name="search" placeholder="search tickets">
             </div>
             <div class="col-xs-2"></div>
-        </div>
+        
     </div>
     <div class="results-container">
         
@@ -95,8 +94,7 @@
     <div class="mobile-menu-footer">
         <h2>Connect with us</h2>
         <nav role="navigation" class="footer-social-media">
-            <div class="container">
-                <div class="row">
+            
                     <div class="col-xs-4">
                         <a href="http://www.facebook.com/gamehedge" target="_blank"><img src="<%= image_url "facebook-footer.png" %>" alt="Facebook" /></a>          
                     </div>
@@ -106,8 +104,7 @@
                     <div class="col-xs-4">
                         <a href="http://www.instagram.com/gamehedge" target="_blank"><img src="<%= image_url "instagram-footer.png" %>" alt="Instagram" /></a>
                     </div>
-                </div>
-            </div>
+               
         </nav>
     </div>
 </div>
@@ -130,8 +127,8 @@
             </a>
         </div>
         <div class="col-xs-2 hidden-md hidden-lg">
-            <div class="navbar navbar-default navbar-fixed-top">
-                <button id="search-button" type="button" class="navbar-toggle" data-toggle="offcanvas" data-target="#searchMenu" data-canvas="body" ng-click="showSlideSearch()">
+            <div class="navbar navbar-default navbar-fixed-top right">
+                <button type="button" class="navbar-toggle search-button" style="padding-top:0;" data-toggle="offcanvas" data-target="#searchMenu" data-canvas="body" ng-click="showSlideSearch()">
                     <img src="<%= image_url "search icon.png" %>">
                 </button>
             </div>

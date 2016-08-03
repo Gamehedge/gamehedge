@@ -10,4 +10,9 @@ class Performer < ActiveRecord::Base
 	def display_name
 		return self.te_name
 	end
+	after_create :update_url
+
+  	def update_url
+	     self.update_attributes(:url => '/performers/' + String(self.id), :priority => 1)
+  	end
 end
