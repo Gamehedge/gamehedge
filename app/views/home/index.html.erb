@@ -73,23 +73,26 @@
         </nav>
     </div>
 </div>
-
+<script type="text/ng-template" id="typeahead/bind-node.html">
+    <a href="/#{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
+</script>
 <div class="mobile-menu search-menu-transition" ng-if="showSearchMenu">
     <div class="mobile-menu-header">
+            <div class="navbar-header search-header col-xs-10">
+                <img src="<%= image_url "search icon.png" %>">
+                <input type="text" placeholder="search tickets" ng-model="searchTerm" ng-change="getSearchHints(searchTerm)">
+            </div>
             <div class="col-xs-2">
                 <div ng-click="hideMenus()">
                     <img src="<%= image_url "close-menu.png" %>" class="img-header">
                 </div>
             </div>
-            <div class="navbar-header search-header col-xs-8">
-                <img src="<%= image_url "search icon.png" %>">
-                <input type="text" name="search" placeholder="search tickets">
-            </div>
-            <div class="col-xs-2"></div>
         
     </div>
     <div class="results-container">
-        
+        <div ng-repeat="result in searchResults">
+            <a ng-href="result.url" ng-click="hideMenus()">{{result.name}}</a>
+        </div>
     </div>
     <div class="mobile-menu-footer">
         <h2>Connect with us</h2>

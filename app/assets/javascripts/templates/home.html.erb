@@ -5,11 +5,11 @@
       <div id="content">
         <div class="container">
           <div id="hero-search" class="hidden-sm hidden-xs">
-            <form id="form-home-search" name="formSearch" method="POST" action="/search">
+            <form id="form-home-search" name="formSearch" method="POST" action="/search/">
               <input type="hidden" name="type" value="full" />
               <div class="form-group">
                 <img src="<%= image_url "search icon.png" %>">
-                <input type="text" id="home-query" name="query" class="form-control" placeholder="Search by team, league, game, stadium or city..." />
+                <input type="text" class="form-control" placeholder="Search by team, league, game, stadium or player..." ng-model="searchTerm" uib-typeahead="hint.name for hint in getSearchHints($viewValue)" typeahead-template-url="typeahead/bind-node.html">
               </div>
             </form>
           </div>
@@ -18,6 +18,10 @@
       </div>
     </div>
   </section>
+
+  <script type="text/ng-template" id="typeahead/bind-node.html">
+    <a href="/#{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
+  </script>
 
   <main>
     <div class="container">

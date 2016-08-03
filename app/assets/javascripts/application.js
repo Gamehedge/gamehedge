@@ -20,5 +20,6 @@
 //= require angular-animate
 //= require masonry/jquery.masonry
 //= require masonry/modernizr-transitions
+//= require angular-ui-bootstrap-tpls
 //= require_tree .
 //= require_tree ./templates

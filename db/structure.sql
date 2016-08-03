@@ -41,6 +41,20 @@ CREATE EXTENSION IF NOT EXISTS pg_stat_statements WITH SCHEMA public;
 COMMENT ON EXTENSION pg_stat_statements IS 'track execution statistics of all SQL statements executed';
 
 
+--
+-- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pg_trgm; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching based on trigrams';
+
+
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -1469,4 +1483,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160802232011');
 INSERT INTO schema_migrations (version) VALUES ('20160802233717');
 
 INSERT INTO schema_migrations (version) VALUES ('20160802234201');
+
+INSERT INTO schema_migrations (version) VALUES ('20160803213423');
 

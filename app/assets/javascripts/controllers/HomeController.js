@@ -1,6 +1,6 @@
 controllers = angular.module('gamehedge')
 
-controllers.controller('HomeController', function($scope,$rootScope,$http,$location,$timeout){
+controllers.controller('HomeController', function($scope,$rootScope,$http,$location,$timeout,dataService){
 	$scope.TilesIndex = 0;
 	$scope.loading = true;
 	$rootScope.locat = $location.url();
@@ -100,6 +100,17 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 		    // or server returns response with an error status.
 		});
 	}
+
+	//Search call
+
+	$scope.getSearchHints = function(val) {
+        return dataService.getData("/search/?search=" + val + "&limit=10")
+            .then(function(response){
+            	console.log(response)
+                return response;
+        });
+    };	
+	  
 
 	//Initializers
 
