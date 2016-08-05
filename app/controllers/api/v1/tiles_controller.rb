@@ -19,14 +19,14 @@ class Api::V1::TilesController < ApplicationApiController
     end
     respond_to do |format|
       format.json { render json: @tiles.to_json(:only => [:id, :name, :link, :slug, :description, :position, :has_geolocation], :include => {:sport => {:only =>[:id, :te_uid, :name, :description]},:performer => {:only =>[:id, :te_uid, :te_name]},:venue => {:only =>[:id, :te_uid, :name, :description]},:tile_type => {:only =>[:id, :name]}}, :methods => [:image_url])}
-      format.xml { render xml: @tiles }
+      format.xml { render xml: @tiles.to_json(:only => [:id, :name, :link, :slug, :description, :position, :has_geolocation], :include => {:sport => {:only =>[:id, :te_uid, :name, :description]},:performer => {:only =>[:id, :te_uid, :te_name]},:venue => {:only =>[:id, :te_uid, :name, :description]},:tile_type => {:only =>[:id, :name]}}, :methods => [:image_url])}
     end
   end
 
   def show
     respond_to do |format|
-      format.json { render json: @tile }
-      format.xml { render xml: @tile }
+      format.json { render json: @tile.to_json(:only => [:id, :name, :link, :slug, :description, :position, :has_geolocation], :include => {:sport => {:only =>[:id, :te_uid, :name, :description]},:performer => {:only =>[:id, :te_uid, :te_name]},:venue => {:only =>[:id, :te_uid, :name, :description]},:tile_type => {:only =>[:id, :name]}}, :methods => [:image_url])}
+      format.xml { render xml: @tile.to_json(:only => [:id, :name, :link, :slug, :description, :position, :has_geolocation], :include => {:sport => {:only =>[:id, :te_uid, :name, :description]},:performer => {:only =>[:id, :te_uid, :te_name]},:venue => {:only =>[:id, :te_uid, :name, :description]},:tile_type => {:only =>[:id, :name]}}, :methods => [:image_url])}
     end
   end
 

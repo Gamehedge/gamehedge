@@ -577,16 +577,18 @@ body {
 }
 
 .leagues #divisions .divisions-container .main-division{
-	padding-top: 100px;
-	padding-bottom: 100px;
+	padding-top: 60px;
+	padding-bottom: 50px;
 	font-size: 20px;
 }
 .leagues #divisions .divisions-container .small-division{
 	font-size: 24px;
+	margin-top: 35px;
 }
 
 .leagues #divisions .divisions-container .small-division .small-division-back{
 	background-color: #d8d8d8;
+	margin-top: 7px;
 }
 
 .leagues #divisions .divisions-container .small-division .small-division-front{
@@ -595,22 +597,118 @@ body {
     margin-bottom: 5px;
 }
 
+.leagues #divisions .divisions-container .main-division-container{
+	padding: 0 40px;
+}
 
+.leagues #divisions .divisions-container .performer-detail{
+	padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 0;
+    border-bottom: solid 1px #d8d8d8;
+    text-align: left;
+    height: 100px;
+}
 
+@media(max-width: 992px) {
+	.leagues #divisions .divisions-container .performer-detail{
+		height: auto;
+		min-height: 100px;
+	}
+}
 
+.leagues #divisions .divisions-container .image{
+	overflow: hidden;
+    height: 100%;
+    position: relative;
+    display: list-item;
+}
 
+.leagues #divisions .divisions-container .image .helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
 
+.leagues #divisions .divisions-container .image img{
+	width:100%;
+	vertical-align: middle;
+}
 
+.leagues #divisions .divisions-container .name a{
+	font-size: 20px;
+	color: #000000;
+}
 
+.leagues #divisions .divisions-container .name p{
+	font-size: 14px;
+	color: #525252;
+}
 
+.leagues #divisions .divisions-container .name p a{
+	font-size: 14px;
+	color: #337ab7;
+}
 
+.dummy {
+    padding-top: 100%; /* forces 1:1 aspect ratio */
+}
 
+.leagues #divisions .img-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+    text-align:center; /* Align center inline elements */
+    font: 0/0 a;
+}
 
+.leagues #divisions .img-container .centerer {
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+}
 
+.leagues #divisions .img-container img {
+    vertical-align: middle;
+    display: inline-block;
+}
 
+.leagues #divisions th {
+	font-size: 10px;
+    text-align: center;
+    color: #ffffff;
+    font-weight: lighter;
+    width: 30px;
+    height: 15px;
+    background-color: #878787;
+}
 
+.leagues #divisions td {
+	font-size: 18px;
+    text-align: center;
+    color: #878787;
+    width: 30px;
+    height: 30px;
+    background-color: #f2f2f2;
+}
 
+.leagues #divisions table {
+    margin-top: 10px;
+}
 
+.leagues #about .page-title{
+	margin-top: 174px;
+	margin-bottom: 91px;
+}
+
+.leagues #about .page-title .description{
+	font-size: 20px;
+	text-align: justify;
+	color: #a9a9a9;
+}
 
 
 
@@ -1069,7 +1167,7 @@ footer .footer-signature img{
 #home section#hero {
 	position: relative;
 	/*height: 35vh;*/
-	background: transparent image_url('HeaderBatter.jpeg') center;
+	background: transparent image_url('home-hero.jpg') center;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -1653,18 +1751,19 @@ section#game-guarantee p {
     padding-left: 0;
 	margin-bottom: 120px;
 }
-#press_images .feautured-in{
+
+.page-title{
 	font-size: 36px;
 	text-align: center;
 	color: #000000;
+}
+
+#press_images .page-title{
 	margin-bottom: 65px;
     margin-top: 65px;
 }
 
-#how-video .feautured-in{
-	font-size: 36px;
-	text-align: center;
-	color: #000000;
+#how-video .page-title{
 	margin-bottom: 65px;
 }
 
@@ -1672,10 +1771,7 @@ section#game-guarantee p {
 	margin-bottom: 50px;
 }
 
-#home-why .feautured-in{
-	font-size: 36px;
-	text-align: center;
-	color: #000000;
+#home-why .page-title{
 	margin-bottom: 65px;
 	margin-top: 65px;
 }
@@ -1687,7 +1783,7 @@ section#game-guarantee p {
 }
 
 @media(max-width: 991px) {
-	#home-why .feautured-in, #press_images .feautured-in, #how-video .feautured-in{
+	#home-why .page-title, #press_images .page-title, #how-video .page-title{
     	font-size: 20px;
     }
     #home-why p{

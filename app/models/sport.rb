@@ -12,7 +12,7 @@ class Sport < ActiveRecord::Base
   	end
 
   	def image_url
-        image.url
+      image.url
     end
     def image_url_medium
     	image.url(:medium)

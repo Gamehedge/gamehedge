@@ -27,6 +27,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
                 console.log("Performers");
             	console.log(response);
                 $scope.performers = response;
+                $scope.loading = false;
         });
 	};
 
@@ -42,6 +43,6 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
 	  
 
 	//Initializers
-
+    $scope.loading = true;
 	$scope.getLeagueInfo();
 });

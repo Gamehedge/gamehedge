@@ -18,15 +18,16 @@ class Api::V1::PerformersController < ApplicationApiController
       @performers = Performer.where(data_params)
     end
     respond_to do |format|
-      format.json { render json: @performers }
-      format.xml { render xml: @performers }
+      format.json { render json: @performers.to_json(:only => [:id, :name, :wins, :losses, :te_slug, :division_id], :include => {:sport => {:only =>[:id, :te_uid, :name, :description]},:division => {:only =>[:id, :te_name]},:venue => {:only =>[:id, :te_uid, :name, :description, :url]}}, :methods => [:image_url, :image_url_medium, :image_url_thumb])}
+
+      format.xml { render xml: @performers.to_json(:only => [:id, :name, :wins, :losses, :te_slug, :division_id], :include => {:sport => {:only =>[:id, :te_uid, :name, :description]},:division => {:only =>[:id, :te_name]},:venue => {:only =>[:id, :te_uid, :name, :description]}}, :methods => [:image_url, :image_url_medium, :image_url_thumb])}
     end
   end
 
   def show
     respond_to do |format|
-      format.json { render json: @performer }
-      format.xml { render xml: @performer }
+      format.json { render json: @performer.to_json(:only => [:id, :name, :wins, :losses, :te_slug, :division_id], :include => {:sport => {:only =>[:id, :te_uid, :name, :description]},:division => {:only =>[:id, :te_name]},:venue => {:only =>[:id, :te_uid, :name, :description, :url]}}, :methods => [:image_url, :image_url_medium, :image_url_thumb])}
+      format.xml { render xml: @performer.to_json(:only => [:id, :name, :wins, :losses, :te_slug, :division_id], :include => {:sport => {:only =>[:id, :te_uid, :name, :description]},:division => {:only =>[:id, :te_name]},:venue => {:only =>[:id, :te_uid, :name, :description, :url]}}, :methods => [:image_url, :image_url_medium, :image_url_thumb])}
     end
   end
 
