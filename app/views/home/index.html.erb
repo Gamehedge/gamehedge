@@ -137,20 +137,26 @@
             </div>
         </div>
         <div class="navbar-leagues col-md-4 hidden-sm hidden-xs">
-            <a class="" href="">MLB</a>
-            <a class="" href="">NFL</a>
-            <a class="" href="">NBA</a>
-            <a class="" href="">NHL</a>
-            <a class="" href="">NCAA</a>
+            <a class="" href="/#/leagues/{{league.id}}" ng-repeat="league in leagueList | orderBy:'name' track by $index">{{league.name | uppercase}}</a>
         </div>
-        <div class="navbar-myaccount col-md-4 hidden-sm hidden-xs">
+
+        <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs" >
+            <div class="press" ng-show="$root.locat == '/'">
+                <a ><img class="user-icon" src="<%= image_url "press-icon.png" %>">PRESS</a>
+            </div>
+            </div>
+        <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs">
             <div class="dropdown" ng-show="$root.isLoggedin">
-                <button class="dropdown-toggle myaccount-btn" type="button" data-toggle="dropdown"><img class="user-icon" src="<%= image_url "profile icon.png" %>">MY ACCOUNT<img class="dropdown-icon" src="<%= image_url "dropdown.png" %>"></button>
+                <button class="dropdown-toggle myaccount-btn" type="button" data-toggle="dropdown"><img class="user-icon" src="<%= image_url "profile icon.png" %>">{{$root.user.name | uppercase}}<img class="dropdown-icon" src="<%= image_url "dropdown.png" %>"></button>
                 <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="/#/member">Your Profile</a></li>
+                    <li><a href="/#/order_history">Order History</a></li>
                     <li><a ng-click="logout()" ng-show="$root.isLoggedin">Logout</a></li>
                 </ul>
             </div>
-            <a href="/#/login" ng-show="!$root.isLoggedin"><img class="user-icon" src="<%= image_url "profile icon.png" %>">LOGIN</a>
+            <div class="dropdown login" ng-show="!$root.isLoggedin">
+                <a href="/#/login"><img class="user-icon" src="<%= image_url "profile icon.png" %>">LOGIN</a>
+            </div>
         </div>
     </nav>
 </div>

@@ -21,6 +21,10 @@ app.config([ '$routeProvider','$locationProvider','AuthProvider',
             templateUrl: "login.html",
             controller: 'LoginController',
         })
+        .when('/leagues/:leagueId', {
+            templateUrl: "league.html",
+            controller: 'LeagueController',
+        })
         .otherwise({
             redirectTo: '/'
         });

@@ -4,6 +4,6 @@ class Venue < ActiveRecord::Base
 	after_create :update_url
 
   	def update_url
-	     self.update_attributes(:url => '/venues/' + String(self.id), :priority => 3)
+	     self.update_attributes(:url => '/venues/' + String(self.id))
   	end
 end

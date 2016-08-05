@@ -1,0 +1,69 @@
+<span id="home" class=leagues>
+  <section id="hero">
+    <div id="shader"></div>
+    <div id="wrapper">
+      <div id="content">
+        <div class="container">
+          <div id="hero-search" class="hidden-sm hidden-xs">
+            <form id="form-home-search" name="formSearch" method="POST" action="/search/">
+              <input type="hidden" name="type" value="full" />
+              <div class="form-group">
+                <img src="<%= image_url "search icon.png" %>">
+                <input type="text" class="form-control" placeholder="Search by team, league, game, stadium or player..." ng-model="searchTerm" uib-typeahead="hint.name for hint in getSearchHints($viewValue)" typeahead-template-url="typeahead/bind-node.html">
+              </div>
+            </form>
+          </div>
+          <p>{{league.name | uppercase}} Tickets with Good Game Guarantee!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script type="text/ng-template" id="typeahead/bind-node.html">
+    <a href="/#{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
+  </script>
+  <section id="league">
+    <div class="container ggg-container">
+      <div class="row ggg-content text-center">
+        <h4>How Does the Good Game Guarantee Work?</h4>
+        <div class="col-md-4 text-center">
+          <img src="<%= image_url "icon-tickets.png" %>">
+          <p>Find your game and purchase your tickets. Every ticket comes with our Good Game Guarantee at no additional cots!</p>
+        </div>
+        <div class="col-md-4 text-center">
+          <img src="<%= image_url "icon-stadium.png" %>">
+          <p>If the home team looses by {{league.ggg}} you get 50% of the ticket price back.</p>
+        </div>
+        <div class="col-md-4 text-center">
+          <img src="<%= image_url "icon-handshake.png" %>">
+          <p>Just come back to GameHedge to claim your refund!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="divisions">
+    <div class="container divisions-container">
+      <div class="col-md-6 text-center" ng-repeat="main_division in divisions | filter:is_main_division=true">
+          <p class="main-division">{{main_division.name}}</p>
+          <div class="small-division" ng-repeat="division in divisions | filter:{'is_main_division' : 'false', 'division_id' : main_division.id}">
+            {{main_division.name | uppercase}} {{division.name | uppercase}} TICKETS
+            <div class="small-division-back row">
+              <div class="small-division-front">
+                <div ng-repeat="performer in performers | filter:{'division_id' : division.id}">
+                  <div class="col-xs-2">
+                    <img src="{{performer.image_url}}">
+                  </div>
+                  <div class="col-xs-8">
+                    {{performer.name}}
+                  </div>
+                  <div class="col-xs-2">
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </section>
+</span>

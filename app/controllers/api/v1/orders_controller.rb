@@ -12,7 +12,7 @@ class Api::V1::OrdersController < ApplicationApiController
   end
 
   def index
-    if params[:data] == nil
+    if params == nil
       @orders = Order.all
     else
       @orders = Order.where(data_params)
@@ -72,7 +72,7 @@ class Api::V1::OrdersController < ApplicationApiController
   end
 
   def data_params
-    params.require(:data).permit(:id, :modelo, :marca, :capacidad, :user_id)
+    params.permit(:id, :client_id, :client_name, :te_order_id, :event_name, :event_home_team, :event_away_team, :event_date, :event_location, :refund_status_id, :real_event_date)
   end
 
   private

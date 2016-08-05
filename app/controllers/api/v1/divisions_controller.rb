@@ -12,7 +12,7 @@ class Api::V1::DivisionsController < ApplicationApiController
   end
 
   def index
-    if params[:data] == nil
+    if params == nil
       @divisions = Division.all
     else
       @divisions = Division.where(data_params)
@@ -72,7 +72,7 @@ class Api::V1::DivisionsController < ApplicationApiController
   end
 
   def data_params
-    params.require(:data).permit(:id, :modelo, :marca, :capacidad, :user_id)
+    params.permit(:id, :name, :description, :te_uid, :sport_id, :division_id, :image, :is_main_division)
   end
 
   private

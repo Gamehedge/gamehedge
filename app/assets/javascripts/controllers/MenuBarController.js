@@ -1,6 +1,8 @@
 app = angular.module('gamehedge')
 
-app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,dataService){
+app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,dataService, $http){
+
+
 	//The global variable locat gets the current location.path
 	Auth.currentUser().then(function(user) {
         // User was logged in, or Devise returned
@@ -12,13 +14,13 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
         // unauthenticated error
         $rootScope.isLoggedin = false;
     });
-    var config = {
-        headers: {
-            'X-HTTP-Method-Override': 'DELETE'
-        }
-    };
     $scope.logout = function(){
         $scope.hideMenus();
+        var config = {
+            headers: {
+                'X-HTTP-Method-Override': 'DELETE'
+            }
+        };
     	Auth.logout(config).then(function(oldUser) {
             // alert(oldUser.name + "you're signed out now.");
             console.log("logged out");
@@ -55,5 +57,26 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
         });
     };
 
-    $scope.appendToElement = window.document.querySelector('#results');
+    $scope.getLeagues = function(){
+        $http({
+            method: 'GET',
+            url: '/api/v1/sports',
+            headers: {
+               'Authorization': 'Token token="TokenHere"'
+            },
+        }).then(function successCallback(response) {
+
+            $scope.leagueList = response.data;
+            console.log($scope.leagueList)
+            // this callback will be called asynchronously
+            // when the response is available
+        }, function errorCallback(response) {
+            console.location(response);
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
+    }
+    // Initializers
+
+    $scope.getLeagues();
 });

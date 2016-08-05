@@ -12,7 +12,7 @@ class Api::V1::TilesController < ApplicationApiController
   end
 
   def index
-    if params[:data] == nil
+    if params == nil
       @tiles = Tile.all.order(:position)
     else
       @tiles = Tile.where(data_params).order(:position)
@@ -72,7 +72,7 @@ class Api::V1::TilesController < ApplicationApiController
   end
 
   def data_params
-    params.require(:data).permit(:id, :modelo, :marca, :capacidad, :user_id)
+    params.permit(:id, :modelo, :marca, :capacidad, :user_id)
   end
 
   private

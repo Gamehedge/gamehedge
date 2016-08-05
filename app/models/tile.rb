@@ -9,4 +9,10 @@ class Tile < ActiveRecord::Base
   	def image_url
         image.url
     end
+    def image_url_medium
+    	image.url(:medium)
+    end
+    def image_url_thumb
+    	image.url(:thumb)
+    end
 end

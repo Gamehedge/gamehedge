@@ -12,7 +12,7 @@ class Api::V1::ClientsController < ApplicationApiController
   end
 
   def index
-    if params[:data] == nil
+    if params == nil
       @clients = Client.all
     else
       @clients = Client.where(data_params)
@@ -72,7 +72,7 @@ class Api::V1::ClientsController < ApplicationApiController
   end
 
   def data_params
-    params.require(:data).permit(:id, :modelo, :marca, :capacidad, :user_id)
+    params.permit(:name, :email, :te_uid)
   end
 
   private

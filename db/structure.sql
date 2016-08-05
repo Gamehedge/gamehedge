@@ -384,8 +384,7 @@ CREATE TABLE events (
     data_event text,
     te_date timestamp without time zone,
     name character varying,
-    url character varying,
-    priority integer
+    url character varying
 );
 
 
@@ -431,7 +430,8 @@ CREATE TABLE performers (
     venue_id integer,
     name character varying,
     url character varying,
-    priority integer
+    wins integer,
+    losses integer
 );
 
 
@@ -462,8 +462,7 @@ CREATE TABLE venues (
     location character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    url character varying,
-    priority integer
+    url character varying
 );
 
 
@@ -713,7 +712,7 @@ CREATE TABLE sports (
     image_file_size integer,
     image_updated_at timestamp without time zone,
     url character varying,
-    priority integer
+    ggg character varying
 );
 
 
@@ -1485,4 +1484,8 @@ INSERT INTO schema_migrations (version) VALUES ('20160802233717');
 INSERT INTO schema_migrations (version) VALUES ('20160802234201');
 
 INSERT INTO schema_migrations (version) VALUES ('20160803213423');
+
+INSERT INTO schema_migrations (version) VALUES ('20160804210655');
+
+INSERT INTO schema_migrations (version) VALUES ('20160805000841');
 

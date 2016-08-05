@@ -12,7 +12,7 @@ class Api::V1::PerformersController < ApplicationApiController
   end
 
   def index
-    if params[:data] == nil
+    if params == nil
       @performers = Performer.all
     else
       @performers = Performer.where(data_params)
@@ -72,7 +72,7 @@ class Api::V1::PerformersController < ApplicationApiController
   end
 
   def data_params
-    params.require(:data).permit(:id, :modelo, :marca, :capacidad, :user_id)
+    params.permit(:id, :name, :te_slug, :image, :division_id, :sport_id)
   end
 
   private

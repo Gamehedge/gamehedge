@@ -8,6 +8,16 @@ class Sport < ActiveRecord::Base
   	after_create :update_url
 
   	def update_url
-	     self.update_attributes(:url => '/leagues/' + String(self.id), :priority => 2)
+	     self.update_attributes(:url => '/leagues/' + String(self.id))
   	end
+
+  	def image_url
+        image.url
+    end
+    def image_url_medium
+    	image.url(:medium)
+    end
+    def image_url_thumb
+    	image.url(:thumb)
+    end
 end

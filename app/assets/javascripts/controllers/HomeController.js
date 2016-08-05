@@ -35,7 +35,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 			  	columnWidth: 160,
 			  	gutterWidth: 20,
 			});
-	    }, 100);
+	    }, 500);
 	}
 
 	$scope.getNextEvents = function(){

@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   
   ActiveAdmin.routes(self)
   root "home#index"
-  get "login" => "home#index"
+  
+
+
   namespace :api do
     namespace :v1 do
       resources :clients, :defaults => { :format => 'json' }
@@ -24,6 +26,7 @@ Rails.application.routes.draw do
     end
   end
   
+  match "*path" => "home#index", via: [:get, :post]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

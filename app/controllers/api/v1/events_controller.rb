@@ -12,7 +12,7 @@ class Api::V1::EventsController < ApplicationApiController
   end
 
   def index
-    if params[:data] == nil
+    if params == nil
       @events = Event.all
     else
       @events = Event.where(data_params)
@@ -72,7 +72,7 @@ class Api::V1::EventsController < ApplicationApiController
   end
 
   def data_params
-    params.require(:data).permit(:id, :modelo, :marca, :capacidad, :user_id)
+    params.permit(:id, :te_uid, :te_performer_home_id, :te_performer_visit_id, :te_date, :name)
   end
 
   private
