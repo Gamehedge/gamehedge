@@ -610,13 +610,6 @@ body {
     height: 100px;
 }
 
-@media(max-width: 992px) {
-	.leagues #divisions .divisions-container .performer-detail{
-		height: auto;
-		min-height: 100px;
-	}
-}
-
 .leagues #divisions .divisions-container .image{
 	overflow: hidden;
     height: 100%;
@@ -701,16 +694,46 @@ body {
 
 .leagues #about .page-title{
 	margin-top: 174px;
-	margin-bottom: 91px;
+	margin-bottom: 60px;
 }
 
-.leagues #about .page-title .description{
+.leagues #about .container{
+	margin-bottom: 60px;
+}
+
+.leagues #about .description{
 	font-size: 20px;
 	text-align: justify;
 	color: #a9a9a9;
 }
 
-
+@media(max-width: 992px) {
+	.leagues #divisions .divisions-container .performer-detail{
+		height: auto;
+		min-height: 100px;
+	}
+	.leagues #divisions .divisions-container{
+	    padding-left: 0;
+    	padding-right: 0;
+	}
+	.leagues #divisions .divisions-container .main-division-container{
+		padding:0;
+	}
+	.leagues #divisions .divisions-container .small-division .small-division-back{
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.leagues #divisions .divisions-container .performer-detail{
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.leagues #divisions .img-container{
+		margin-left: 15px;
+	}
+	.leagues #about .description{
+		font-size: 15px;
+	}	
+}
 
 
 
