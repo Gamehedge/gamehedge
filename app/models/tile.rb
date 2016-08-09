@@ -6,6 +6,18 @@ class Tile < ActiveRecord::Base
 	has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }
   	validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
+    after_update :update_url
+
+    def update_url
+        if self.tile_type_id == 1
+            self.update_column(:url, '/leagues/' + String(self.sport.id))
+        elsif self.tile_type_id == 2
+            self.update_column(:url, '/performers/' + String(self.performer.te_uid))
+        elsif self.tile_type_id == 3
+            self.update_column(:url, '/venues/' + String(self.venue.te_uid))
+        end
+    end
+
   	def image_url
         image.url
     end

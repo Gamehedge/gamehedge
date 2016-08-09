@@ -795,7 +795,8 @@ CREATE TABLE tiles (
     image_updated_at timestamp without time zone,
     good_game_guarantee character varying,
     "position" integer,
-    description character varying
+    description character varying,
+    url character varying
 );
 
 
@@ -1526,4 +1527,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160808203903');
 INSERT INTO schema_migrations (version) VALUES ('20160808220850');
 
 INSERT INTO schema_migrations (version) VALUES ('20160809155533');
+
+INSERT INTO schema_migrations (version) VALUES ('20160809211945');
 
