@@ -59,6 +59,9 @@ gem 'devise'
 
 gem 'rails-api'
 
+gem 'will_paginate'
+
+
 # Heroku 
 
 group :production do

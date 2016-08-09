@@ -5,6 +5,13 @@ class HomeController < ApplicationController
   	require 'date'
 	@year = Date.today.strftime("%Y")
   	
+	
+  	# Event.all.each do |e|
+  	# 	e.location = ActiveSupport::JSON.decode(e.data_event)["venue"]["location"]
+  	# 	e.save
+  	# end
+  	
+  	# render json: "s"
   	# *******************Update dates for events*******************
 	
 	# render json: Php.unserialize(Order.where(te_order_id: 3074944).first.order_data) #=> {"foo"=>"bar"}

@@ -388,7 +388,8 @@ CREATE TABLE events (
     home_performer_id integer,
     away_performer_id integer,
     venue_id integer,
-    occurs_at timestamp without time zone
+    occurs_at timestamp without time zone,
+    location character varying
 );
 
 
@@ -1523,4 +1524,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160808174617');
 INSERT INTO schema_migrations (version) VALUES ('20160808203903');
 
 INSERT INTO schema_migrations (version) VALUES ('20160808220850');
+
+INSERT INTO schema_migrations (version) VALUES ('20160809155533');
 

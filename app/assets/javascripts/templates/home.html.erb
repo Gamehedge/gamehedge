@@ -52,9 +52,9 @@
                     <p class="date3">{{event.occurs_at | date:'EEE' | uppercase}}</p>  
                   </div>
                   <div class="col-xs-8 event-holder">
-                    <p class="event1">{{event.performances[0].performer.name}} <span class="vs">vs.</span></p>
-                    <p class="event2">{{event.performances[1].performer.name}}</p>
-                    <p class="event3"><span class="at">{{event.occurs_at | date:'h:mm a' | uppercase}} at</span> {{event.venue.name}}</p>
+                    <p><a class="event1" href="{{event.performances[0].performer.url}}">{{event.performances[0].performer.name}}</a> <span class="vs">vs.</span></p>
+                    <p><a class="event2" href="{{event.performances[1].performer.url}}">{{event.performances[1].performer.name}}</a></p>
+                    <p class="event3"><span class="at">{{event.occurs_at | date:'h:mm a' | uppercase}} at</span> <a href="{{event.venue.url}}">{{event.venue.name}}</a></p>
                     <p class="event4">{{event.available_count}} tickets left</p>
                   </div>
                 </div>

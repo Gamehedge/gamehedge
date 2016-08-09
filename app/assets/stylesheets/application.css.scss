@@ -78,7 +78,7 @@ body {
 
 .grid-item .tile-event .event-holder{
 	text-align: left;
-	padding: 11px 0 14px 0;
+	padding: 11px 20px 14px 0;
 }
 
 .grid-item .tile-event .event1{
@@ -717,14 +717,15 @@ body {
 }
 
 .performers #performer .ggg-container{
-    background-color: #e1e1e1;
+    background-color: #ffffff;
     padding: 24px 42px;
+    height: 800px;
 }
 
 .performers #performer .ggg-container img{
     width: 60%;
     margin-bottom: 15px;
-    margin-bottom: 65px;
+    margin-top: 65px;
 }
 
 .performers #performer .ggg-container p{
@@ -770,21 +771,80 @@ body {
 
 .performers #performer .date-holder{
     padding: 10px 0;
+    padding-right: 40px;
 }
 
 .performers #performer .event-info {
     height: 100px;
-    line-height: 100px;
+    line-height: 75px;
     text-align: center;
 }
 
 .performers #performer .event-info span {
     display: inline-block;
     vertical-align: middle;
-    line-height: normal;      
+    line-height: normal;
+    text-align: left;
+    width: 100%;
+}
+
+.performers #performer .event-info p{
+    margin: 0;
+}
+
+.performers #performer .event-main-holder{
+    padding: 0px 40px;
+}
+
+.performers #performer .event-info .first-line{
+    font-size: 20px;
+}
+
+.performers #performer .event-info .second-line{
+    font-size: 14px;
+}
+.performers #performer button{
+    margin: 30px 0;
+    background-color: #91c33f;
+    border-radius: 3px;
+    border: none;
+    color: #fff;
+    width: 100%;
+    height: 38px;
+}
+.performers #performer button:hover{
+    background-color: #818f32;
+}
+
+.performers #performer .load-more-btn {
+    width: 150px;
+    height: 40px;
+}
+
+.performers #about .description{
+    font-size: 20px;
+    text-align: justify;
+    color: #505050;
+    margin-bottom: 40px;
+    margin-top: 30px;  
+}
+
+.performers #about .page-title {
+    margin-top: 80px;
+}
+
+@media(min-width: 992px) {
+    .performers #performer .event-main-holder {
+        max-height: 800px;
+        overflow: scroll;
+    }
 }
 
 @media(max-width: 992px) {
+    .row{
+        margin-right:0;
+        margin-left:0;   
+    }
 	.leagues #divisions .divisions-container .performer-detail{
 		height: auto;
 		min-height: 100px;
@@ -810,6 +870,48 @@ body {
 	.leagues #about .description{
 		font-size: 15px;
 	}
+    #league .ggg-container{
+        background: none;
+    }
+    .performers #performer .date-holder{
+        padding-right: 0;
+    }
+
+    .performers #performer .event-main-holder{
+        padding: 0px 0;
+    }
+    .performers #performer .container{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+    .performers #performer .event-info{
+        height: 130px;
+        line-height: 129px;
+    }
+    .performers #performer .event-holder .date1 {
+        margin-top: 13px;
+    }
+    .performers #performer button {
+        height: 44px;
+        margin: 40px 0;
+    }
+    .performers #about .page-title {
+        margin-top: 40px;
+        text-align: center;
+    }
+    .performers #about .description {
+        font-size: 15px;
+    }
+
+    .performers #performer .ggg-container{
+        margin: 20px;
+        height: auto;
+    }
+}
+
+no-padding{
+    padding:0;
 }
 
 
@@ -1323,9 +1425,9 @@ footer .footer-signature img{
 
     #home section#hero #wrapper #content p{
     	font-size: 20px;
-    	margin-bottom: 0;
-	    position: absolute;
+    	margin-bottom: 20px;
 	    bottom: -206px;
+        text-align: center;
     }
 }
 

@@ -8,7 +8,7 @@ class Api::V1::PerformersController < ApplicationApiController
   before_filter :fetch_user, :except => [:index, :create]
 
   def fetch_user
-    @performer = Performer.find_by_id(params[:id])
+    @performer = Performer.where(te_uid: params[:id]).first
   end
 
   def index

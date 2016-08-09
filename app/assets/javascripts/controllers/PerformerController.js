@@ -8,7 +8,6 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
             	console.log(response);
                 $scope.performer  = response;
                 $scope.getEvents();
-                $scope.loading = false;
         });
 	};
 
@@ -19,10 +18,16 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
         function AddZero(num) {
             return (num >= 0 && num < 10) ? "0" + num : num + "";
         }
-        apiService.getData('/api/v1/events/?selected_team='+$scope.performer.id+'&today_date='+today_date)
+        apiService.getData('/api/v1/events/?selected_team='+$scope.performer.id+'&today_date='+today_date+'&page='+$scope.page+'&per_page=10')
             .then(function(response){
                 console.log("Events");
-                $scope.events = response;
+                $scope.events = $scope.events.concat(response.data);
+                if($scope.events.length < Number(response.total)){
+                    $scope.load_more = true;
+                }
+                else{
+                    $scope.load_more = false;   
+                }
                 console.log($scope.events);
                 $scope.loading = false;
         });
@@ -37,9 +42,20 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
                 return response;
         });
     };	
+
+    $scope.loadMore = function(){
+        $scope.loading = true;
+        $scope.load_more = false; 
+        $scope.page += 1;
+        $scope.getEvents();
+    }
 	  
 
 	//Initializers
     $scope.loading = true;
+    $scope.page = 1;
+    $scope.load_more = false;
+    $scope.events = []
 	$scope.getPerformerInfo();
+    
 });
