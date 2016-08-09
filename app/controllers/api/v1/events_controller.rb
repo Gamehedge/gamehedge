@@ -15,18 +15,25 @@ class Api::V1::EventsController < ApplicationApiController
     if params == nil
       @events = Event.all
     else
-      @events = Event.where(data_params)
+      if params[:selected_team] == nil
+        @events = Event.where(data_params).where("occurs_at >=?", params[:today_date])
+      else
+        @events = Event.where( 
+          Event.arel_table[:home_performer_id].eq(params[:selected_team]).or(
+          Event.arel_table[:away_performer_id].eq(params[:selected_team])) 
+        ).where("occurs_at >=?", params[:today_date])
+      end
     end
     respond_to do |format|
-      format.json { render json: @events }
-      format.xml { render xml: @events }
+      format.json { render json: @events.to_json(:only => [:id, :name, :te_uid, :te_date, :url, :occurs_at], :include => {:home_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:away_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:venue => {:only =>[:id, :te_uid, :name, :description, :url]}})}
+      format.xml { render xml: @events.to_json(:only => [:id, :name, :te_uid, :te_date, :url, :occurs_at], :include => {:home_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:away_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:venue => {:only =>[:id, :te_uid, :name, :description, :url]}})}
     end
   end
 
   def show
     respond_to do |format|
-      format.json { render json: @event }
-      format.xml { render xml: @event }
+      format.json { render json: @event.to_json(:only => [:id, :name, :te_uid, :te_date, :url, :occurs_at], :include => {:home_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:away_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:venue => {:only =>[:id, :te_uid, :name, :description, :url]}})}
+      format.xml { render xml: @event.to_json(:only => [:id, :name, :te_uid, :te_date, :url, :occurs_at], :include => {:home_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:away_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:venue => {:only =>[:id, :te_uid, :name, :description, :url]}})}
     end
   end
 
@@ -72,7 +79,7 @@ class Api::V1::EventsController < ApplicationApiController
   end
 
   def data_params
-    params.permit(:id, :te_uid, :te_performer_home_id, :te_performer_visit_id, :te_date, :name)
+    params.permit(:id, :te_uid, :te_performer_home_id, :te_performer_visit_id, :te_date, :name, :home_performer_id, :away_performer_id, :occurs_at)
   end
 
   private

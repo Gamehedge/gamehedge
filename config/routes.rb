@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       resources :divisions, :defaults => { :format => 'json' }
       resources :sports, :defaults => { :format => 'json' }
       resources :tiles, :defaults => { :format => 'json' }
+      resources :venues, :defaults => { :format => 'json' }
     end
   end
   

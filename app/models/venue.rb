@@ -1,6 +1,7 @@
 class Venue < ActiveRecord::Base
 	has_many :tiles
 	has_many :performers
+	has_many :events
 	after_create :update_url
 
   	def update_url

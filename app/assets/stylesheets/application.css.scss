@@ -109,7 +109,7 @@ body {
 
 .grid-item .tile-event .event4{
 	font-size: 12px;
-	color: #d01720;
+	color: #000000;
 	width: 94%;
 }
 
@@ -117,7 +117,7 @@ body {
 	font-size: 14px;
 	font-weight: bold;
 	text-align: center;
-	color: #d01720;
+	color: #91c33f;
 }
 
 .grid-item .tile-event .date2{
@@ -577,9 +577,9 @@ body {
 }
 
 .leagues #divisions .divisions-container .main-division{
-	padding-top: 60px;
-	padding-bottom: 50px;
-	font-size: 20px;
+	padding-top: 30px;
+    padding-bottom: 30px;
+	font-size: 35px;
 }
 .leagues #divisions .divisions-container .small-division{
 	font-size: 24px;
@@ -707,6 +707,83 @@ body {
 	color: #a9a9a9;
 }
 
+.performers #about .page-title{
+    text-align: left;
+    font-size: 36px;
+}
+
+.performers #performer{
+    padding-top:20px;
+}
+
+.performers #performer .ggg-container{
+    background-color: #e1e1e1;
+    padding: 24px 42px;
+}
+
+.performers #performer .ggg-container img{
+    width: 60%;
+    margin-bottom: 15px;
+    margin-bottom: 65px;
+}
+
+.performers #performer .ggg-container p{
+    font-size: 10px;
+    color: #525252;
+}
+
+.performers #performer .event-holder-back{
+    background-color: #bababa;
+    padding-top: 15px;
+    padding-bottom: 5px;
+    margin-bottom: 18px;
+}
+
+.performers #performer .event-holder{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    background-color: #ffffff;
+}
+
+.performers #performer .event-holder .date1{
+    font-size: 18px;
+    font-weight: bold;
+    color: #91c33f;
+    margin-top:0;
+    margin-bottom:-20px;
+}
+
+.performers #performer .event-holder .date2{
+    font-size: 48px;
+    color: #000000;
+    margin-top:0;
+    margin-bottom:0;
+}
+
+.performers #performer .event-holder .date3{
+    font-size: 18px;
+    color: #d6d6d6;
+    margin-top:-15px;
+    margin-bottom:0;
+}
+
+.performers #performer .date-holder{
+    padding: 10px 0;
+}
+
+.performers #performer .event-info {
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+}
+
+.performers #performer .event-info span {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;      
+}
+
 @media(max-width: 992px) {
 	.leagues #divisions .divisions-container .performer-detail{
 		height: auto;
@@ -732,7 +809,7 @@ body {
 	}
 	.leagues #about .description{
 		font-size: 15px;
-	}	
+	}
 }
 
 

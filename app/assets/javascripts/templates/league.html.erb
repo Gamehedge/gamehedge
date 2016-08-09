@@ -46,13 +46,13 @@
   </div>
   <section id="divisions" ng-if="!loading">
     <div class="container divisions-container">
-      <div class="col-md-6 text-center main-division-container" ng-repeat="main_division in divisions | filter:is_main_division=true">
+      <div class="col-md-6 text-center main-division-container" ng-repeat="main_division in divisions | filter:is_main_division=true | orderBy:'name'">
           <p class="main-division">{{main_division.name}}</p>
           <div class="small-division" ng-repeat="division in divisions | filter:{'is_main_division' : 'false', 'division_id' : main_division.id}">
             {{main_division.name | uppercase}} {{division.name | uppercase}} TICKETS
             <div class="small-division-back row">
               <div class="small-division-front">
-                <div class="row performer-detail" ng-repeat="performer in performers | filter:{'division_id' : division.id}">
+                <div class="row performer-detail" ng-repeat="performer in performers | filter:{'division_id' : division.id} | orderBy: ['-wins','name']">
                   <div class="col-xs-3 image">
                     <div class="dummy"></div>
                     <div class="img-container">

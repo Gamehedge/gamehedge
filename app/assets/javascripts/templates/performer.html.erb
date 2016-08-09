@@ -1,0 +1,83 @@
+<span id="home" class=performers>
+  <section id="hero" style="background: transparent url({{performer.image_cover}}) center;background-size:cover;">
+    <div id="shader"></div>
+    <div id="wrapper">
+      <div id="content">
+        <div class="container">
+          <div id="hero-search" class="hidden-sm hidden-xs">
+            <form id="form-home-search" name="formSearch" method="POST" action="/search/">
+              <input type="hidden" name="type" value="full" />
+              <div class="form-group">
+                <img src="<%= image_url "search icon.png" %>">
+                <input type="text" class="form-control" placeholder="Search by team, league, game, stadium or player..." ng-model="searchTerm" uib-typeahead="hint.name for hint in getSearchHints($viewValue)" typeahead-template-url="typeahead/bind-node.html">
+              </div>
+            </form>
+          </div>
+          <p>{{performer.name}} Tickets</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script type="text/ng-template" id="typeahead/bind-node.html">
+    <a href="/#{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
+  </script>
+  <section id="performer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9 text-center">
+          <div class="row event-holder-back" ng-repeat="event in events | orderBy:'-occurs_at' track by $index">
+            <div class="event-holder">
+              <div class="col-xs-2 date-holder">
+                <p class="date1">{{event.occurs_at | date:'MMM' | uppercase}}</p>
+                <p class="date2">{{event.occurs_at | date:'dd' | uppercase}}</p>
+                <p class="date3">{{event.occurs_at | date:'EEE' | uppercase}}</p>  
+              </div>
+              <div class="col-xs-8 event-info">
+                <span>
+                  <p><a href="{{event.home_performer.url}}">{{event.home_performer.name}}</a> vs <a href="{{event.away_performer.url}}">{{event.away_performer.name}}</a></p>
+                  <p>{{event.occurs_at | date:'hh' | uppercase}}:{{event.occurs_at | date:'mm' | uppercase}} {{event.occurs_at | date:'a' | uppercase}} at <a href="{{event.venue.url}}">{{event.venue.name}}</a> </p>
+                </span>
+              </div>
+              <div class="col-xs-2 ">
+              <button>Buy tickets</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 text-center ggg-container">
+          <h4>How Does the Good Game Guarantee Work?</h4>
+          <div class="text-center">
+            <img src="<%= image_url "icon-tickets.png" %>">
+            <p>Find your game and purchase your tickets. Every ticket comes with our Good Game Guarantee at no additional cots!</p>
+          </div>
+          <div class="text-center">
+            <img src="<%= image_url "icon-stadium.png" %>">
+            <p>If the home team looses by {{league.ggg}} you get 50% of the ticket price back.</p>
+          </div>
+          <div class="text-center">
+            <img src="<%= image_url "icon-handshake.png" %>">
+            <p>Just come back to GameHedge to claim your refund!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="home-loading-data" class="row text-center" ng-if="loading">
+    <img src="<%= image_url "loadinfo.gif" %>">
+  </div>
+  
+  <section id="about">
+    <div class="container">
+      <div class="page-title">About {{performer.name}}</div>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 description">
+            {{league.description}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</span>
