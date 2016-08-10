@@ -17,6 +17,10 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
                 console.log("Divisions");
             	console.log(response);
                 $scope.divisions = response;
+                var len = $scope.divisions.length;
+                var mid = len / 2;
+                $scope.divisions_first  = $scope.divisions.slice(0, mid);  
+                $scope.divisions_last = $scope.divisions.slice(mid, len);
                 $scope.getPerformers();
         });
 	};

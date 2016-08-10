@@ -6,6 +6,7 @@ index :download_links => false do
   column :position
   column :name
   column :tile_type
+  column :has_geolocation
   actions
   
 end

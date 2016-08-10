@@ -46,7 +46,7 @@
   </div>
   <section id="divisions" ng-if="!loading">
     <div class="container divisions-container">
-      <div class="col-md-6 text-center main-division-container" ng-repeat="main_division in divisions | filter:is_main_division=true | orderBy:'name'">
+      <div ng-show="league.id != 5" class="col-md-6 text-center main-division-container" ng-repeat="main_division in divisions | filter:is_main_division=true | orderBy:'name'">
           <p class="main-division">{{main_division.name}}</p>
           <div class="small-division" ng-repeat="division in divisions | filter:{'is_main_division' : 'false', 'division_id' : main_division.id}">
             {{main_division.name | uppercase}} {{division.name | uppercase}} TICKETS
@@ -93,6 +93,104 @@
             </div>
           </div>
       </div>
+
+
+
+      <div ng-show="league.id == 5" class="col-md-6 text-center main-division-container">
+          <div class="small-division" ng-repeat="division in divisions_first | filter:{'is_main_division' : 'true', 'division_id' : main_division.id}">
+            {{division.name | uppercase}} TICKETS
+            <div class="small-division-back row">
+              <div class="small-division-front">
+                <div class="row performer-detail" ng-repeat="performer in performers | filter:{'division_id' : division.id} | orderBy: ['-wins','name']">
+                  <div class="col-xs-3 image">
+                    <div class="dummy"></div>
+                    <div class="img-container">
+                      <div class="centerer"></div>
+                      <a href="{{performer.url}}"><img src="{{performer.image_url_medium}}"></a>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-md-7 name">
+                    <a href="{{performer.url}}">{{performer.name}}</a>
+                    <p>Stadium <a href="{{performer.venue.url}}">{{performer.venue.name}}</a></p>
+                  </div>
+                  <div class="col-xs-3 col-md-2 score">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>
+                            W
+                          </th>
+                          <th>
+                            L
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            {{performer.wins}}<span ng-show="performer.wins == '' || performer.wins == null">-</span>
+                          </td>
+                          <td>
+                            {{performer.losses}}<span ng-show="performer.losses == '' || performer.wins == null">-</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div ng-show="league.id == 5" class="col-md-6 text-center main-division-container">
+          <div class="small-division" ng-repeat="division in divisions_last | filter:{'is_main_division' : 'true', 'division_id' : main_division.id}">
+            {{division.name | uppercase}} TICKETS
+            <div class="small-division-back row">
+              <div class="small-division-front">
+                <div class="row performer-detail" ng-repeat="performer in performers | filter:{'division_id' : division.id} | orderBy: ['-wins','name']">
+                  <div class="col-xs-3 image">
+                    <div class="dummy"></div>
+                    <div class="img-container">
+                      <div class="centerer"></div>
+                      <a href="{{performer.url}}"><img src="{{performer.image_url_medium}}"></a>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-md-7 name">
+                    <a href="{{performer.url}}">{{performer.name}}</a>
+                    <p>Stadium <a href="{{performer.venue.url}}">{{performer.venue.name}}</a></p>
+                  </div>
+                  <div class="col-xs-3 col-md-2 score">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>
+                            W
+                          </th>
+                          <th>
+                            L
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            {{performer.wins}}<span ng-show="performer.wins == '' || performer.wins == null">-</span>
+                          </td>
+                          <td>
+                            {{performer.losses}}<span ng-show="performer.losses == '' || performer.wins == null">-</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+
+
     </div>
   </section>
   <section id="about">
