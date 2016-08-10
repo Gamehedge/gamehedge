@@ -197,8 +197,8 @@
     <div class="page-title">ABOUT {{league.name | uppercase}}</div>
     <div class="container">
       <div class="row">
-        <div class="col-xs-12 description">
-          {{league.description}}
+        <div class="col-xs-12 description" bind-unsafe-html="league.description">
+          
         </div>
       </div>
     </div>
