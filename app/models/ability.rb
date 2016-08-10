@@ -13,7 +13,8 @@ class Ability
             can :manage, Kernel.const_get(permission.name)
         end
     end
-    can :manage, TileType
+    # can :manage, Permission
+    # can :manage, TileType
     # if user.role == "admin"
     #     can :manage, :all
     # else

@@ -9,6 +9,12 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   
   ActiveAdmin.routes(self)
+  get '/admin/performers/new/quick_add' => 'admin/performers#quick_add', as: :admin_performer_quick_add
+  post '/admin/performers/quick_create' => 'admin/performers#quick_create', as: :admin_performer_quick_create
+
+  get '/admin/performers/:id/edit/quick_edit' => 'admin/performers#quick_edit', as: :admin_performer_quick_edit
+  patch '/admin/performers/:id/quick_update' => 'admin/performers#quick_update', as: :admin_performer_quick_update
+
   root "home#index"
   
 
