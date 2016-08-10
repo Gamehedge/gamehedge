@@ -40,6 +40,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 
 	$scope.getNextEvents = function(){
 		var id = 0;
+		var url = "";
 		source = "";
 		if($scope.tiles[$scope.TilesIndex].tile_type != undefined){
 			if($scope.tiles[$scope.TilesIndex].tile_type.id == '1'){
@@ -55,10 +56,18 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 				source = "venue";
 			}
 		}
+		console.log($scope.tiles[$scope.TilesIndex].has_geolocation);
+		if($scope.tiles[$scope.TilesIndex].has_geolocation == true){
+			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true&latitude='+$scope.location.latitude+'&longitude='+$scope.location.longitude;
+		}
+		else{
+			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10';
+		}
 		$http({
 		  	method: 'GET',
-		  	url: '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10',
+		  	url: url,
 		}).then(function successCallback(response2) {
+			console.log(response2)
 			$scope.tiles[$scope.TilesIndex].events = response2.data;
 			if($scope.tiles[$scope.TilesIndex].events != null){
 				for(j=$scope.tiles[$scope.TilesIndex].events.length - 1;j>=0;j--){
@@ -110,9 +119,22 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
                 return response;
         });
     };	
-	  
 
+    $scope.getLocation = function(){
+  	    if (navigator.geolocation) {
+	        navigator.geolocation.getCurrentPosition(showPosition);
+	    } else {
+	        console.log = "No geolocation enabled";
+	        $scope.getTiles();
+	    }
+		function showPosition(position) {
+			$scope.location = position.coords;
+			console.log($scope.location);
+			$scope.getTiles();
+		}
+	}
 	//Initializers
-
-	$scope.getTiles();
+	$scope.getLocation()
+	
+    
 });

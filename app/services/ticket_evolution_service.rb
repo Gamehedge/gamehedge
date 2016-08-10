@@ -14,6 +14,9 @@ class TicketEvolutionService
       @name = params[:name]
       @email = params[:email]
       @source = params[:source]
+      @latitude = params[:latitude]
+      @longitude = params[:longitude]
+      @geolocated = params[:geolocated]
       
       @connection = TicketEvolution::Connection.new({
           :token => '5bfd4b6110681d224a8c1fa6333f375f',       # => (required) The API token, used to identify you
@@ -48,15 +51,28 @@ class TicketEvolutionService
   def list
     case @type
     when 'events'
-      case @source
-      when 'venue'
-        @events = @connection.events.list({:venue_id => @id, :page => @page, :per_page => @perpage, :order_by => 'events.occurs_at ASC, events.popularity_score DESC'})
-      when 'team'
-        @events = @connection.events.list({:performer_id => @id, :page => @page, :per_page => @perpage, :order_by => 'events.occurs_at ASC, events.popularity_score DESC'})
-      when 'league'
-        @events = @connection.events.list({:category_id => @id, :page => @page, :per_page => @perpage, :order_by => 'events.occurs_at ASC, events.popularity_score DESC'})
+      if @geolocated == "true"
+        case @source
+        when 'venue'
+          @events = @connection.events.list({:venue_id => @id, :page => @page, :per_page => @perpage, :order_by => 'events.occurs_at ASC, events.popularity_score DESC'})
+        when 'team'
+          @events = @connection.events.list({:performer_id => @id, :page => @page, :per_page => @perpage, :lat => @latitude, :lon => @longitude, :order_by => 'events.occurs_at ASC, events.popularity_score DESC'})
+        when 'league'
+          @events = @connection.events.list({:category_id => @id, :page => @page, :per_page => @perpage, :lat => @latitude, :lon => @longitude, :order_by => 'events.occurs_at ASC, events.popularity_score DESC'})
+        else
+          puts "Invalid type parameter, please check and try again"
+        end
       else
-        puts "Invalid type parameter, please check and try again"
+        case @source
+        when 'venue'
+          @events = @connection.events.list({:venue_id => @id, :page => @page, :per_page => @perpage, :order_by => 'events.occurs_at ASC, events.popularity_score DESC'})
+        when 'team'
+          @events = @connection.events.list({:performer_id => @id, :page => @page, :per_page => @perpage, :order_by => 'events.occurs_at ASC, events.popularity_score DESC'})
+        when 'league'
+          @events = @connection.events.list({:category_id => @id, :page => @page, :per_page => @perpage, :order_by => 'events.occurs_at ASC, events.popularity_score DESC'})
+        else
+          puts "Invalid type parameter, please check and try again"
+        end
       end
       return @events
     else
