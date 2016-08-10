@@ -20,7 +20,9 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 			$scope.loading = false;
 			$scope.TilesIndex = 0;
 			$scope.updateMasonry();
-		    $scope.getNextEvents();
+			for(i=0;i<$scope.tiles.length;i++){
+				$scope.getNextEvents(i);	
+			}
 		}, function errorCallback(response) {
 			console.log(response);
 		    // called asynchronously if an error occurs
@@ -38,26 +40,25 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 	    }, 500);
 	}
 
-	$scope.getNextEvents = function(){
+	$scope.getNextEvents = function(index){
 		var id = 0;
 		var url = "";
 		source = "";
-		if($scope.tiles[$scope.TilesIndex].tile_type != undefined){
-			if($scope.tiles[$scope.TilesIndex].tile_type.id == '1'){
-				id = $scope.tiles[$scope.TilesIndex].sport.te_uid;
+		if($scope.tiles[index].tile_type != undefined){
+			if($scope.tiles[index].tile_type.id == '1'){
+				id = $scope.tiles[index].sport.te_uid;
 				source = "league";
 			}
-			else if($scope.tiles[$scope.TilesIndex].tile_type.id == '2'){
-				id = $scope.tiles[$scope.TilesIndex].performer.te_uid;	
+			else if($scope.tiles[index].tile_type.id == '2'){
+				id = $scope.tiles[index].performer.te_uid;	
 				source = "team";
 			}
-			else if($scope.tiles[$scope.TilesIndex].tile_type.id == '3'){
-				id = $scope.tiles[$scope.TilesIndex].venue.te_uid;
+			else if($scope.tiles[index].tile_type.id == '3'){
+				id = $scope.tiles[index].venue.te_uid;
 				source = "venue";
 			}
 		}
-		console.log($scope.tiles[$scope.TilesIndex].has_geolocation);
-		if($scope.tiles[$scope.TilesIndex].has_geolocation == true){
+		if($scope.tiles[index].has_geolocation == true){
 			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true';
 		}
 		else{
@@ -67,22 +68,18 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 		  	method: 'GET',
 		  	url: url,
 		}).then(function successCallback(response2) {
-			console.log(response2)
-			$scope.tiles[$scope.TilesIndex].events = response2.data;
-			if($scope.tiles[$scope.TilesIndex].events != null){
-				for(j=$scope.tiles[$scope.TilesIndex].events.length - 1;j>=0;j--){
-					if($scope.tiles[$scope.TilesIndex].events[j].performances.length != 2){
-						$scope.tiles[$scope.TilesIndex].events.splice(j,1);
+			$scope.tiles[index].events = response2.data;
+			if($scope.tiles[index].events != null){
+				for(j=$scope.tiles[index].events.length - 1;j>=0;j--){
+					if($scope.tiles[index].events[j].performances.length != 2){
+						$scope.tiles[index].events.splice(j,1);
 					}
 				}
 			}
-			$scope.tiles[$scope.TilesIndex].ready = true;
+			$scope.tiles[index].ready = true;
 			$scope.updateMasonry();
-			$scope.TilesIndex += 1;
-			if($scope.TilesIndex < $scope.tiles.length){
-				$scope.getNextEvents();
-			}
-			else{
+			index += 1;
+			if(index >= $scope.tiles.length){
 				console.log($scope.tiles);
 			}
 		}, function errorCallback(response2) {
