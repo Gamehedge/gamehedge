@@ -812,6 +812,12 @@ body {
     width: 100%;
     height: 38px;
 }
+
+.performers #performer .a-btn, .performers #performer .a-btn:hover{
+    color: #fff;
+    text-decoration: none;
+}
+
 .performers #performer button:hover{
     background-color: #818f32;
 }
