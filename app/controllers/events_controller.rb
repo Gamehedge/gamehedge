@@ -12,13 +12,7 @@ class EventsController < ApplicationController
 		                      #               responses. Any 'Logger' instance object
 		                      #               is valid. EX: Logger.new('log/te_api.log')
 		})
-		if request.remote_ip == "127.0.0.1"
-			info = Geocoder.search("150.210.231.30").first
-		else
-			info = Geocoder.search(request.remote_ip).first
-		end
-
-		@events = @connection.events.list({:category_id => request.GET["id"], :lat => info.data["latitude"], :lon => info.data["longitude"], :within => 25,:page => 1, :per_page => 8, :order_by => 'events.occurs_at ASC, events.popularity_score DESC'})#, :occurs_at => DateTime.now.iso8601(), })
+		@events = @connection.venues.list()
 		render json: @events
 	end
 	def next

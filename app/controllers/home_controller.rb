@@ -5,6 +5,30 @@ class HomeController < ApplicationController
   	require 'date'
 	@year = Date.today.strftime("%Y")
   	
+  	# @connection = TicketEvolution::Connection.new({
+   #        :token => '5bfd4b6110681d224a8c1fa6333f375f',       # => (required) The API token, used to identify you
+   #        :secret => 'g3iR2RLeuzQA9vhDGfw5hRtGMnMDsimyOfQAJ4bi',      # => (required) The API secret, used to sign requests
+   #                      #               More info: [http://developer.ticketevolution.com/signature_tool](http://developer.ticketevolution.com/signature_tool))
+   #        :version => 9,      # => (required) API version to use - the correct version at the time of this writing is 9
+   #        :mode => :production,  # => (optional) Specifies the server environment to use Valid options: :production or :sandbox
+   #        :logger => nil      # => (optional) Object to use for logging requests and
+   #                      #               responses. Any 'Logger' instance object
+   #                      #               is valid. EX: Logger.new('log/te_api.log')
+   #    })
+
+
+  	# Performer.all.each do |p|
+  	# 	@performer = @connection.performers.show(p.te_uid)
+  	# 	if @performer["venue"] != nil
+	  # 		vid = @performer["venue"]["id"]
+	  # 		@venue = @connection.venues.show(vid)
+	  # 		if Venue.where(te_uid: @venue["id"]).first.name == "abc"
+	  # 			Venue.create(name: @venue["name"], address: @venue["address"], te_uid: @venue["id"], location: @venue["location"])
+	  # 		end
+	  # 	end
+  	# end
+
+  	# render json: "s"
 	
   	# Event.all.each do |e|
   	# 	e.location = ActiveSupport::JSON.decode(e.data_event)["venue"]["location"]

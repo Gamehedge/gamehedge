@@ -833,12 +833,6 @@ body {
     margin-top: 80px;
 }
 
-@media(min-width: 992px) {
-    .performers #performer .event-main-holder {
-        max-height: 800px;
-        overflow: scroll;
-    }
-}
 
 @media(max-width: 992px) {
     .row{
