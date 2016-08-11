@@ -12,7 +12,7 @@ class EventsController < ApplicationController
 		                      #               responses. Any 'Logger' instance object
 		                      #               is valid. EX: Logger.new('log/te_api.log')
 		})
-		@events = @connection.venues.list(:per_page => 100000)
+		@events = @connection.events.list(:per_page => 100000, :category_id => 21)
 		render json: @events
 	end
 	def next
