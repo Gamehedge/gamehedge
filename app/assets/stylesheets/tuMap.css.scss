@@ -374,39 +374,3 @@
     height:100%;
 }
 
-
-
-<!--[if IE 6]> 
-
-/* IE6 css fixer v0.95: Mon, 13 Jan 2014 10:32:56 +0100 */
-
-/* ============================================= */
-/* safe settings                                 */
-
-/* add display:inline to floated elements */
-.tuMapGroupsContainer .tuMapGroupColor,
-.tuMapGroupsContainer .tuMapGroupTitle,
-.tuMapSectionViewContainer .CloseButton,
-.tuMapTooltip .SectionViewClose,
-.tuMapPreferredFilter div,.tuMapGroupsContainer > div {display:inline;}
-
-/* fix negative margins */
-.tuMapTicketList .Notes,
-.tuMapTooltip .SectionViewZoom,
-.tuMapTooltip .SectionColor,
-.tuMapTooltip .SectionViewClose {position:relative; zoom:1;}
-
-/* add transparancy */
-.LoaddingWrapper {filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80);}
-
-
-/* add zoom:1; display:inline; to inline-block elements */
-.tuMapPreferredFilter span.Icon,
-.tuMapTicketList th.Sort span,
-.tuMapTicketList .Notes,
-.tuMapTooltip .SectionColor,
-.tuMapControl {zoom:1; display:inline;}
-
-/* add overflow:visible to (submit) buttons */
- input, button {overflow:visible;}
- <![endif]-->

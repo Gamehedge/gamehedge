@@ -17,22 +17,17 @@ class EventsController < ApplicationController
 	end
 	def next
 		if request.GET["geolocated"] == "true"
-			# if request.GET["latitude"] == nil || request.GET["longitude"] == nil
-			# 	if request.remote_ip == "127.0.0.1"
-			# 		info = Geocoder.search("150.210.231.30").first
-			# 	else
-			# 		info = Geocoder.search(request.remote_ip).first
-			# 	end
-			# 	latitude = info.data["latitude"]
-			# 	longitude = info.data["longitude"]
-			# else
-			# 	latitude = request.GET["latitude"]
-			# 	longitude = request.GET["longitude"]
-			# end
-			if request.remote_ip == "127.0.0.1"
-				info = Geocoder.search("150.210.231.30").first
+			if request.GET["latitude"] == nil || request.GET["longitude"] == nil
+				if request.remote_ip == "127.0.0.1"
+					info = Geocoder.search("150.210.231.30").first
+				else
+					info = Geocoder.search(request.remote_ip).first
+				end
+				latitude = info.data["latitude"]
+				longitude = info.data["longitude"]
 			else
-				info = Geocoder.search(request.remote_ip).first
+				latitude = request.GET["latitude"]
+				longitude = request.GET["longitude"]
 			end
 			latitude = info.data["latitude"]
 			longitude = info.data["longitude"]
