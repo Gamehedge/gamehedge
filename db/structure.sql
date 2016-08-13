@@ -389,7 +389,9 @@ CREATE TABLE events (
     away_performer_id integer,
     venue_id integer,
     occurs_at timestamp without time zone,
-    location character varying
+    location character varying,
+    te_venue_id integer,
+    sport_id integer
 );
 
 
@@ -1403,6 +1405,14 @@ ALTER TABLE ONLY performers
 
 
 --
+-- Name: fk_rails_d93e51e875; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY events
+    ADD CONSTRAINT fk_rails_d93e51e875 FOREIGN KEY (sport_id) REFERENCES sports(id);
+
+
+--
 -- Name: fk_rails_dca24e4416; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1535,4 +1545,8 @@ INSERT INTO schema_migrations (version) VALUES ('20160809155533');
 INSERT INTO schema_migrations (version) VALUES ('20160809211945');
 
 INSERT INTO schema_migrations (version) VALUES ('20160810234449');
+
+INSERT INTO schema_migrations (version) VALUES ('20160812162815');
+
+INSERT INTO schema_migrations (version) VALUES ('20160812232300');
 

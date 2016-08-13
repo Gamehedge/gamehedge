@@ -3,6 +3,7 @@ class Event < ActiveRecord::Base
 	belongs_to :home_performer, class_name: "Performer", foreign_key: "home_performer_id"
 	belongs_to :away_performer, class_name: "Performer", foreign_key: "away_performer_id"
 	belongs_to :venue
+	belongs_to :sport
   	def update_url
 	     self.update_attributes(:url => '/events/' + String(self.id))
   	end

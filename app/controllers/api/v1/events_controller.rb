@@ -33,7 +33,7 @@ class Api::V1::EventsController < ApplicationApiController
       total = @events.count
       @events = @events.paginate(:page => params[:page],  :per_page => per_page)
       @events2 = { }
-      @events2[:data] = ActiveSupport::JSON.decode(@events.to_json(:only => [:id, :name, :te_uid, :te_date, :url, :occurs_at, :location], :include => {:home_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:away_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:venue => {:only =>[:id, :te_uid, :name, :description, :url]}}))
+      @events2[:data] = ActiveSupport::JSON.decode(@events.to_json(:only => [:id, :name, :te_uid, :te_date, :url, :occurs_at, :location], :include => {:home_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:away_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:sport => {:only =>[:id, :name, :te_uid, :description, :url, :ggg]},:venue => {:only =>[:id, :te_uid, :name, :description, :url]}}))
       @events2[:total] = total
       @events2[:page] = params[:page]
       @events2[:per_page] = per_page
@@ -46,8 +46,8 @@ class Api::V1::EventsController < ApplicationApiController
 
   def show
     respond_to do |format|
-      format.json { render json: @event.to_json(:only => [:id, :name, :te_uid, :te_date, :url, :occurs_at, :location], :include => {:home_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:away_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:venue => {:only =>[:id, :te_uid, :name, :description, :url]}})}
-      format.xml { render xml: @event.to_json(:only => [:id, :name, :te_uid, :te_date, :url, :occurs_at, :location], :include => {:home_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:away_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:venue => {:only =>[:id, :te_uid, :name, :description, :url]}})}
+      format.json { render json: @event.to_json(:only => [:id, :name, :te_uid, :te_date, :url, :occurs_at, :location], :include => {:home_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:away_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:sport => {:only =>[:id, :name, :te_uid, :description, :url, :ggg]},:venue => {:only =>[:id, :te_uid, :name, :description, :url]}})}
+      format.xml { render xml: @event.to_json(:only => [:id, :name, :te_uid, :te_date, :url, :occurs_at, :location], :include => {:home_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:away_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:sport => {:only =>[:id, :name, :te_uid, :description, :url, :ggg]},:venue => {:only =>[:id, :te_uid, :name, :description, :url]}})}
     end
   end
 
