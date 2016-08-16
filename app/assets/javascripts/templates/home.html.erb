@@ -15,6 +15,16 @@
           </div>
           <p>Every Ticket Comes With Our Good Game Guarantee!</p>
         </div>
+        <div class="press-images hidden-xs hidden-sm">
+          <div class="container">
+            <div class="spacing-div">AS FEATURED IN</div>
+            <div class="spacing-div"><img src="<%= image_url "press2/CNBC copy.png" %>"></div>
+            <div class="spacing-div"><img src="<%= image_url "press2/USA Today copy.png" %>"></div>
+            <div class="spacing-div"><img src="<%= image_url "press2/Sports Illustrated Red.png" %>"></div>
+            <div class="spacing-div"><img src="<%= image_url "press2/Yahoo Finance.png" %>"></div>
+            <div class="spacing-div"><img src="<%= image_url "press2/ESPN Radio copy.png" %>"></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -24,65 +34,108 @@
   </script>
 
   <main>
-    <div class="container">
-      <div id="home-loading-data" class="row text-center" ng-if="loading">
-        <img src="<%= image_url "loadinfo.gif" %>">
-      </div>
-      <div id="results" ng-if="!loading">
-        <div class="grid has-gutters transitions-enabled centered clearfix masonry">
-          <div class="grid-item" ng-repeat="tile in tiles track by $index" >
-            <div id="home-loading-data" class="row text-center" ng-if="!tile.ready">
-              <img src="<%= image_url "loadinfo.gif" %>">
-            </div>
-            <div ng-if="tile.ready">
-              <div class="performer-name" ng-if="tile.tile_type.id == 1">{{tile.sport.name | uppercase}}</div>
-              <div class="performer-name" ng-if="tile.tile_type.id == 2">{{tile.performer.name | uppercase}}</div>
-              <div class="performer-name" ng-if="tile.tile_type.id == 3">{{tile.venue.name | uppercase}}</div>
-              <a href="{{tile.url}}"><img src="{{tile.image_url}}"></a>
-              <div class="info-container" ng-if="tile.tile_type.id == 1 || tile.tile_type.id == 3">
-                <div ng-if="tile.tile_type.id == 1" class="tile-title">{{tile.sport.name}} Games</div>
-                <div ng-if="tile.tile_type.id == 3" class="tile-title">{{tile.venue.name}}</div>
-                <div class="tile-description">{{tile.description}}</div>
+    <section id="good-game-guarantee">
+      <div class="container">
+        <div class="title">HOW THE GOOD GAME GUARANTEE WORKS</div>
+
+        <div class="content-background">
+          <div class="content">
+            <div class="col-md-4 division">
+              <div class="col-xs-5 section">
+                <img src="<%= image_url "icon ticket.png" %>">
               </div>
-              <div ng-repeat="event in tile.events | limitTo:3" class="tile-event">
-                <div class="row">
-                  <div class="col-xs-4 date-holder">
-                    <p class="date1">{{event.occurs_at | date:'MMM' | uppercase}}</p>
-                    <p class="date2">{{event.occurs_at | date:'dd' | uppercase}}</p>
-                    <p class="date3">{{event.occurs_at | date:'EEE' | uppercase}}</p>  
-                  </div>
-                  <div class="col-xs-8 event-holder">
-                    <p><a class="event1" href="{{event.performances[0].performer.url}}">{{event.performances[0].performer.name}}</a> <span class="vs">vs.</span></p>
-                    <p><a class="event2" href="{{event.performances[1].performer.url}}">{{event.performances[1].performer.name}}</a></p>
-                    <p class="event3"><span class="at">{{event.occurs_at | date:'h:mm a' | uppercase}} at</span> <a href="{{event.venue.url}}">{{event.venue.name}}</a></p>
-                    <p class="event4">{{event.available_count}} tickets left</p>
-                  </div>
+              <div class="col-xs-7 section2">
+                <h2>BUY TICKETS</h2>
+                <p>
+                  Find your game and purchase your tickets.<br><br>
+                  Good Game Guarantee included at no additional cost with every ticket.
+                </p>
+              </div>
+            </div>
+            <div class="col-md-4 division center-div">
+              <div class="col-xs-5 section">
+                <img src="<%= image_url "icon stadium.png" %>">
+              </div>
+              <div class="col-xs-7 section2">
+                <h2>ENJOY GAME</h2>
+                <p>
+                  If the home team loses by below amount, you get 50% of ticket price back.
+                </p>
+                <div class="col-xs-6 block">
+                  <img class="icon-img" src="<%= image_url "football icon.png" %>">
+                  17 PTS
                 </div>
+                <div class="col-xs-6 block">
+                  <img class="icon-img" src="<%= image_url "basketball icon.png" %>">
+                  19 PTS
+                </div>
+                <div class="col-xs-6 block">
+                  <img class="icon-img" src="<%= image_url "baseball icon.png" %>">
+                  5 RUNS
+                </div>
+                <div class="col-xs-6 block">
+                  <img class="icon-img" src="<%= image_url "hockey icon.png" %>">
+                  4 GOALS
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 division">
+              <div class="col-xs-5 section">
+                <img src="<%= image_url "icon coin.png" %>">
+              </div>
+              <div class="col-xs-7 section2">
+                <h2>CLAIM MONEY</h2>
+                <p>
+                  Simply come back to GameHedge.com to claim your refund.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <section id="press_images">
-      <div class="page-title">AS FEATURED IN</div>
-      <div class="mobile-images hidden-xs hidden-sm">
-        <div class="spacing_div"><img src="<%= image_url "press2/Scout.png" %>"></div>
-        <div class="spacing_div"><img src="<%= image_url "press/Crain's NY White.png" %>"></div>
-        <div class="spacing_div"><img src="<%= image_url "press2/USA Today copy.png" %>"></div>
-        <div class="spacing_div"><img src="<%= image_url "press2/CNBC copy.png" %>"></div>
-        <div class="spacing_div"><img src="<%= image_url "press2/Sports Illustrated Red.png" %>"></div>
-        <div class="spacing_div"><img src="<%= image_url "press2/Yahoo Finance.png" %>"></div>
-        <div class="spacing_div"><img src="<%= image_url "press2/ESPN Radio copy.png" %>"></div>
-      </div>
-      <div class="mobile-images hidden-md hidden-lg">
-        <img src="<%= image_url "press2/Sports Illustrated Red.png" %>">
-        <img src="<%= image_url "press2/USA Today copy.png" %>">
-        <img src="<%= image_url "press/Crain's NY White.png" %>">
-        <img src="<%= image_url "press2/CNBC copy.png" %>">
-        <img src="<%= image_url "press2/Yahoo Finance.png" %>">  
-        <img src="<%= image_url "press2/ESPN Radio copy.png" %>">
-        <img src="<%= image_url "press2/MSN.png" %>">
+    </section>
+    <section id="tiles">
+      <div class="container">
+        <div id="home-loading-data" class="row text-center" ng-if="loading">
+          <img src="<%= image_url "loadinfo.gif" %>">
+        </div>
+        <div id="results" ng-if="!loading">
+          <div class="grid row">
+            <div class="grid-item" ng-repeat="tile in tiles track by $index" >
+              <div id="home-loading-data" class="row text-center" ng-if="!tile.ready">
+                <img src="<%= image_url "loadinfo.gif" %>">
+              </div>
+              <div ng-if="tile.ready">
+                <div class="performer-name" ng-if="tile.tile_type.id == 1">{{tile.sport.name | uppercase}}</div>
+                <div class="performer-name" ng-if="tile.tile_type.id == 2">{{tile.performer.name | uppercase}}</div>
+                <div class="performer-name" ng-if="tile.tile_type.id == 3">{{tile.venue.name | uppercase}}</div>
+                <a href="{{tile.url}}"><img src="{{tile.image_url}}"></a>
+                <div class="info-container" ng-if="tile.tile_type.id == 1 || tile.tile_type.id == 3">
+                  <div ng-if="tile.tile_type.id == 1" class="tile-title">{{tile.sport.name}} Games</div>
+                  <div ng-if="tile.tile_type.id == 3" class="tile-title">{{tile.venue.name}}</div>
+                  <div class="tile-description">{{tile.description}}</div>
+                </div>
+                <div ng-repeat="event in tile.events | limitTo:3" class="tile-event">
+                  <a href="{{event.url}}">
+                    <div class="row">
+                      <div class="col-xs-4 date-holder">
+                        <p class="date1">{{event.occurs_at | date:'MMM' | uppercase}}</p>
+                        <p class="date2">{{event.occurs_at | date:'dd' | uppercase}}</p>
+                        <p class="date3">{{event.occurs_at | date:'EEE' | uppercase}}</p>  
+                      </div>
+                      <div class="col-xs-8 event-holder">
+                        <p><span class="event1" href="{{event.performances[0].performer.url}}">{{event.performances[0].performer.name}}</span> <span class="vs">vs.</span></p>
+                        <p><span class="event2" href="{{event.performances[1].performer.url}}">{{event.performances[1].performer.name}}</span></p>
+                        <p class="event3"><span class="at">{{event.occurs_at | date:'h:mm a' | uppercase}} at</span> <span href="{{event.venue.url}}">{{event.venue.name}}</span></p>
+                        <p class="event4">{{event.available_count}} tickets left</p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
     <section id="how-video">

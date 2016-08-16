@@ -31,13 +31,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 	}
 
 	$scope.updateMasonry = function(){
-		$timeout(function () {
-	        $('.grid').masonry({
-			  	itemSelector: '.grid-item',
-			  	columnWidth: 160,
-			  	gutterWidth: 20,
-			});
-	    }, 500);
+		
 	}
 
 	$scope.getNextEvents = function(index){
