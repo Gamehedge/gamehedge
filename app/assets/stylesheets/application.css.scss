@@ -784,6 +784,14 @@ body {
     width: 100%;
 }
 
+.performers #performer .event-info span.at{
+    color: black;
+    width: auto;
+    display: inherit;
+    vertical-align: inherit;
+    line-height: inherit;
+}
+
 .performers #performer .event-info p{
     margin: 0;
 }

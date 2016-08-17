@@ -119,16 +119,28 @@
                   <a href="{{event.url}}">
                     <div class="row">
                       <div class="col-xs-4 date-holder">
-                        <p class="date1">{{event.occurs_at | date:'MMM' | uppercase}}</p>
-                        <p class="date2">{{event.occurs_at | date:'dd' | uppercase}}</p>
-                        <p class="date3">{{event.occurs_at | date:'EEE' | uppercase}}</p>  
+                        <p class="date1">{{event.occurs_at | date:'MMM' : 'UTC' | uppercase}}</p>
+                        <p class="date2">{{event.occurs_at | date:'dd' : 'UTC' | uppercase}}</p>
+                        <p class="date3">{{event.occurs_at | date:'EEE' : 'UTC' | uppercase}}</p>  
                       </div>
-                      <div class="col-xs-8 event-holder">
-                        <p><span class="event1" href="{{event.performances[0].performer.url}}">{{event.performances[0].performer.name}}</span> <span class="vs">vs.</span></p>
-                        <p><span class="event2" href="{{event.performances[1].performer.url}}">{{event.performances[1].performer.name}}</span></p>
-                        <p class="event3"><span class="at">{{event.occurs_at | date:'h:mm a' | uppercase}} at</span> <span href="{{event.venue.url}}">{{event.venue.name}}</span></p>
+
+
+                      <div class="col-xs-8 event-holder" ng-show="event.performances[0].primary == true">
+                        <p><span class="event1" href="{{event.performances[1].performer.url}}">{{event.performances[1].performer.name}}</span> <span class="at">at</span></p>
+                        <p><span class="event2" href="{{event.performances[0].performer.url}}">{{event.performances[0].performer.name}}</span></p>
+                        <p class="event3"><span class="at" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD</span><span class="at" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'h:mm a' : 'UTC' | uppercase}} at</span> <span href="{{event.venue.url}}">{{event.venue.name}}</span></p>
                         <p class="event4">{{event.available_count}} tickets left</p>
                       </div>
+
+
+                      <div class="col-xs-8 event-holder" ng-show="event.performances[1].primary == true">
+                        <p><span class="event1" href="{{event.performances[0].performer.url}}">{{event.performances[0].performer.name}}</span> <span class="at">at</span></p>
+                        <p><span class="event2" href="{{event.performances[1].performer.url}}">{{event.performances[1].performer.name}}</span></p>
+                        <p class="event3"><span class="at" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD</span><span class="at" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'h:mm a' : 'UTC' | uppercase}} at</span> <span href="{{event.venue.url}}">{{event.venue.name}}</span></p>
+                        <p class="event4">{{event.available_count}} tickets left</p>
+                      </div>
+
+
                     </div>
                   </a>
                 </div>

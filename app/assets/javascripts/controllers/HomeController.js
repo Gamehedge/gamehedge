@@ -121,5 +121,5 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 	//Initializers
 	$scope.getTiles();
 	$window.scrollTo(0, 0);
-    
+    $scope.compareDate =  "2015-09-05T00:00:00.000Z"
 });

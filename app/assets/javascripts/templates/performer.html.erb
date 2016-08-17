@@ -103,8 +103,8 @@
               </div>
               <div class="col-xs-7 col-md-8 event-info">
                 <span>
-                  <p class="first-line"><a href="{{event.url}}">{{event.home_performer.name}} vs {{event.away_performer.name}}</a></p>
-                  <p class="second-line" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'hh' : 'UTC'| uppercase}}:{{event.occurs_at | date:'mm' : 'UTC'| uppercase}} {{event.occurs_at | date:'a' : 'UTC'| uppercase}} at <a href="{{event.venue.url}}">{{event.venue.name}}</a> - {{event.location}}</p>
+                  <p class="first-line"><a href="{{event.url}}">{{event.away_performer.name}} <span class="at">at</span> {{event.home_performer.name}}</a></p>
+                  <p class="second-line" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'hh:mm a' : 'UTC'| uppercase}} at <a href="{{event.venue.url}}">{{event.venue.name}}</a> - {{event.location}}</p>
                   <p class="second-line" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD at <a href="{{event.venue.url}}">{{event.venue.name}}</a> - {{event.location}}</p>
                 </span>
               </div>
