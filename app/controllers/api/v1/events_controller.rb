@@ -21,7 +21,7 @@ class Api::V1::EventsController < ApplicationApiController
         @events = Event.where( 
           Event.arel_table[:home_performer_id].eq(params[:selected_team]).or(
           Event.arel_table[:away_performer_id].eq(params[:selected_team])) 
-        ).where("occurs_at >=?", params[:today_date]).order("occurs_at")
+        ).where(data_params).where("occurs_at >=?", params[:today_date]).order("occurs_at")
       end
     end
     if(params[:page] != nil)

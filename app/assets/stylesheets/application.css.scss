@@ -15,11 +15,6 @@
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
-@import 'masonry/basic';
-@import 'masonry/centered';
-@import 'masonry/fluid';
-@import 'masonry/gutters';
-@import 'masonry/transitions';
 
 
 * { box-sizing: border-box; }
@@ -573,34 +568,6 @@ body {
     filter: alpha(opacity=100);
 }
 
-#league .ggg-container{
-	background-color: #d8d8d8;
-    margin-top: 25px;
-    margin-bottom: 25px;
-}
-
-#league .ggg-container img{
-	height: 100px;
-}
-
-#league .ggg-container p{
-	font-size: 12px;
-	color: #525252;
-	padding: 20px 0;
-}
-
-#league .ggg-container h4{
-	font-size: 20px;
-	color: #333333;
-	margin-bottom:20px;
-}
-
-#league .ggg-content{
-	background-color: #ffffff;
-    margin-top: 17px;
-    margin-bottom: 5px;
-}
-
 .leagues #divisions .divisions-container .main-division{
 	padding-top: 30px;
     padding-bottom: 30px;
@@ -741,6 +708,10 @@ body {
     padding-top:20px;
 }
 
+.performers #performer .row{
+    margin: 0;
+}
+
 .performers #performer .ggg-container{
     background-color: #ffffff;
     padding: 24px 42px;
@@ -819,6 +790,7 @@ body {
 
 .performers #performer .event-main-holder{
     padding: 0px 40px;
+    padding-left: 0;
 }
 
 .performers #performer .event-info .first-line{
@@ -864,6 +836,28 @@ body {
     margin-top: 80px;
 }
 
+.performers #performer .btns-container{
+    display: flex;
+    margin-left: 50px;
+    margin-bottom: 20px;
+}
+
+.performers #performer .btns-container button{
+    background: none;
+    border: none;
+    color: black;
+    margin: 0 15px;
+    padding: 0 17px;
+    width: auto;
+}
+
+.performers #performer .btns-container button.active{
+    background-color: #d8d8d8;
+}
+
+.performers #performer .btns-container button:focus{
+    outline: none;
+}
 
 #good-game-guarantee .content-background{
     background-color: #bababa;
@@ -1008,9 +1002,6 @@ body {
 	.leagues #about .description{
 		font-size: 15px;
 	}
-    #league .ggg-container{
-        background: none;
-    }
     .performers #performer .date-holder{
         padding-right: 0;
     }

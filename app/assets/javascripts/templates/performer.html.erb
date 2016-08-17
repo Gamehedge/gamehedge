@@ -22,25 +22,78 @@
   <script type="text/ng-template" id="typeahead/bind-node.html">
     <a href="/#{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
   </script>
+  <section id="good-game-guarantee">
+    <div class="container">
+      <div class="title">HOW THE GOOD GAME GUARANTEE WORKS</div>
+
+      <div class="content-background">
+        <div class="content">
+          <div class="col-md-4 division">
+            <div class="col-xs-5 section">
+              <img src="<%= image_url "icon ticket.png" %>">
+            </div>
+            <div class="col-xs-7 section2">
+              <h2>BUY TICKETS</h2>
+              <p>
+                Find your game and purchase your tickets.<br><br>
+                Good Game Guarantee included at no additional cost with every ticket.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4 division center-div">
+            <div class="col-xs-5 section">
+              <img src="<%= image_url "icon stadium.png" %>">
+            </div>
+            <div class="col-xs-7 section2">
+              <h2>ENJOY GAME</h2>
+              <p>
+                If the home team loses by below amount, you get 50% of ticket price back.
+              </p>
+              <div class="col-xs-6 block">
+                <img class="icon-img" src="<%= image_url "football icon.png" %>">
+                17 PTS
+              </div>
+              <div class="col-xs-6 block">
+                <img class="icon-img" src="<%= image_url "basketball icon.png" %>">
+                19 PTS
+              </div>
+              <div class="col-xs-6 block">
+                <img class="icon-img" src="<%= image_url "baseball icon.png" %>">
+                5 RUNS
+              </div>
+              <div class="col-xs-6 block">
+                <img class="icon-img" src="<%= image_url "hockey icon.png" %>">
+                4 GOALS
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 division">
+            <div class="col-xs-5 section">
+              <img src="<%= image_url "icon coin.png" %>">
+            </div>
+            <div class="col-xs-7 section2">
+              <h2>CLAIM MONEY</h2>
+              <p>
+                Simply come back to GameHedge.com to claim your refund.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   <section id="performer">
     <div class="container" >
       <div class="row">
-        <div class="hidden-md hidden-lg text-center ggg-container">
-          <h4>How Does the Good Game Guarantee Work?</h4>
-          <div class="text-center">
-            <img src="<%= image_url "icon-tickets.png" %>">
-            <p>Find your game and purchase your tickets. Every ticket comes with our Good Game Guarantee at no additional cots!</p>
-          </div>
-          <div class="text-center">
-            <img src="<%= image_url "icon-stadium.png" %>">
-            <p>If the home team looses by {{league.ggg}} you get 50% of the ticket price back.</p>
-          </div>
-          <div class="text-center">
-            <img src="<%= image_url "icon-handshake.png" %>">
-            <p>Just come back to GameHedge to claim your refund!</p>
-          </div>
-        </div>
         <div class="col-md-9 text-center event-main-holder">
+          <div class="btns-container">
+            <button ng-click="toogleHome(true)" ng-class="{'active': all_games}">
+              All games
+            </button>
+            <button ng-click="toogleHome(false)" ng-class="{'active': !all_games}">
+              Home Games only
+            </button>
+          </div>
           <div class="row event-holder-back" ng-repeat="event in events track by $index">
             <div class="event-holder">
               <div class="col-xs-2 date-holder">

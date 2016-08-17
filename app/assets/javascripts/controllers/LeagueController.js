@@ -1,6 +1,6 @@
 app = angular.module('gamehedge')
 
-app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataService, apiService){
+app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataService,apiService,$window){
 	$scope.getLeagueInfo = function(){
 		return apiService.getData('/api/v1/sports/'+$routeParams.leagueId)
             .then(function(response){
@@ -49,4 +49,5 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
 	//Initializers
     $scope.loading = true;
 	$scope.getLeagueInfo();
+    $window.scrollTo(0, 0);
 });

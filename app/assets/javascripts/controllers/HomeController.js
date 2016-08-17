@@ -1,6 +1,6 @@
 controllers = angular.module('gamehedge')
 
-controllers.controller('HomeController', function($scope,$rootScope,$http,$location,$timeout,dataService){
+controllers.controller('HomeController', function($scope,$rootScope,$http,$location,$timeout,dataService,$window){
 	$scope.TilesIndex = 0;
 	$scope.loading = true;
 	$rootScope.locat = $location.url();
@@ -19,7 +19,6 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 			}
 			$scope.loading = false;
 			$scope.TilesIndex = 0;
-			$scope.updateMasonry();
 			for(i=0;i<$scope.tiles.length;i++){
 				$scope.getNextEvents(i);	
 			}
@@ -28,10 +27,6 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		});
-	}
-
-	$scope.updateMasonry = function(){
-		
 	}
 
 	$scope.getNextEvents = function(index){
@@ -71,7 +66,6 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 				}
 			}
 			$scope.tiles[index].ready = true;
-			$scope.updateMasonry();
 			index += 1;
 			if(index >= $scope.tiles.length){
 				console.log($scope.tiles);
@@ -125,7 +119,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 	// 	}
 	// }
 	//Initializers
-	$scope.getTiles()
-	
+	$scope.getTiles();
+	$window.scrollTo(0, 0);
     
 });

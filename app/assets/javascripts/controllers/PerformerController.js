@@ -1,6 +1,6 @@
 app = angular.module('gamehedge')
 
-app.controller('PerformerController', function($scope,$rootScope,$routeParams,dataService, apiService){
+app.controller('PerformerController', function($scope,$rootScope,$routeParams,dataService, apiService,$window){
 	$scope.getPerformerInfo = function(){
 		apiService.getData('/api/v1/performers/'+$routeParams.performerId)
             .then(function(response){
@@ -18,7 +18,14 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
         function AddZero(num) {
             return (num >= 0 && num < 10) ? "0" + num : num + "";
         }
-        apiService.getData('/api/v1/events/?selected_team='+$scope.performer.id+'&today_date='+today_date+'&page='+$scope.page+'&per_page=10')
+        var url = "";
+        if($scope.all_games == true){
+            url = '/api/v1/events/?selected_team='+$scope.performer.id+'&today_date='+today_date+'&page='+$scope.page+'&per_page=10';
+        }
+        else{
+            url = '/api/v1/events/?selected_team='+$scope.performer.id+'&today_date='+today_date+'&page='+$scope.page+'&per_page=10&home_performer_id='+String($scope.performer.id);
+        }
+        apiService.getData(url)
             .then(function(response){
                 console.log("Events");
                 $scope.events = $scope.events.concat(response.data);
@@ -32,6 +39,17 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
                 $scope.loading = false;
         });
     };
+
+    $scope.toogleHome = function(home){
+        if($scope.all_games != home){
+            $scope.loading = true;
+            $scope.load_more = false;
+            $scope.page = 1;
+            $scope.events = []
+            $scope.all_games = home;
+            $scope.getEvents()    
+        }
+    }
 
 	//Search call
 
@@ -53,9 +71,10 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
 
 	//Initializers
     $scope.loading = true;
+    $scope.all_games = true;
     $scope.page = 1;
     $scope.load_more = false;
     $scope.events = []
 	$scope.getPerformerInfo();
-    
+    $window.scrollTo(0, 0);
 });

@@ -103,8 +103,6 @@ gem 'geocoder'
 gem 'php-serial'
 
 
-gem 'masonry-rails'
-
 # Used for the search
 
 gem 'textacular'

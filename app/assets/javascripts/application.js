@@ -18,8 +18,6 @@
 //= require angular-rails-templates
 //= require angular-devise
 //= require angular-animate
-//= require masonry/jquery.masonry
-//= require masonry/modernizr-transitions
 //= require angular-ui-bootstrap-tpls
 //= require jquery
 //= require_tree .

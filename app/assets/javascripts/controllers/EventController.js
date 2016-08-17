@@ -1,6 +1,6 @@
 controllers = angular.module('gamehedge')
 
-controllers.controller('EventController', function($scope,$routeParams,dataService,apiService){
+controllers.controller('EventController', function($scope,$routeParams,dataService,apiService,$window){
 
 	$scope.getEventInfo = function(){
 		return apiService.getData('/api/v1/events/'+$routeParams.eventId)
@@ -47,4 +47,5 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	    });
 	};
 	$scope.getEventInfo();
+	$window.scrollTo(0, 0);
 });

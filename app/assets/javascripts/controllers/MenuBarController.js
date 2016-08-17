@@ -1,6 +1,6 @@
 app = angular.module('gamehedge')
 
-app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,dataService, $http){
+app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,dataService,$http){
 
 
 	//The global variable locat gets the current location.path
