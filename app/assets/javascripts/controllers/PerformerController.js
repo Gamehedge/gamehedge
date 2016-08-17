@@ -35,20 +35,22 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
                 else{
                     $scope.load_more = false;   
                 }
+                $scope.disable_toogle = false;
                 console.log($scope.events);
                 $scope.loading = false;
         });
     };
 
     $scope.toogleHome = function(home){
-        if($scope.all_games != home){
+        if($scope.all_games != home && !$scope.disable_toogle){
+            $scope.disable_toogle = true;
             $scope.loading = true;
             $scope.load_more = false;
             $scope.page = 1;
             $scope.events = []
             $scope.all_games = home;
             $scope.getEvents()    
-        }
+        }   
     }
 
 	//Search call
@@ -70,6 +72,7 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
 	  
 
 	//Initializers
+    $scope.disable_toogle = false;
     $scope.loading = true;
     $scope.all_games = true;
     $scope.page = 1;

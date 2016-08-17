@@ -103,7 +103,7 @@
               </div>
               <div class="col-xs-7 col-md-8 event-info">
                 <span>
-                  <p class="first-line"><a href="{{event.home_performer.url}}">{{event.home_performer.name}}</a> vs <a href="{{event.away_performer.url}}">{{event.away_performer.name}}</a></p>
+                  <p class="first-line"><a href="{{event.url}}">{{event.home_performer.name}} vs {{event.away_performer.name}}</a></p>
                   <p class="second-line">{{event.occurs_at | date:'hh' | uppercase}}:{{event.occurs_at | date:'mm' | uppercase}} {{event.occurs_at | date:'a' | uppercase}} at <a href="{{event.venue.url}}">{{event.venue.name}}</a> - {{event.location}}</p>
                 </span>
               </div>

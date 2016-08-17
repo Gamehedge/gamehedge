@@ -16,7 +16,7 @@ class HomeController < ApplicationController
    #                      #               is valid. EX: Logger.new('log/te_api.log')
    #    })
 
-
+  	
   	# Performer.all.each do |p|
   	# 	@performer = @connection.performers.show(p.te_uid)
   	# 	if @performer["venue"] != nil
