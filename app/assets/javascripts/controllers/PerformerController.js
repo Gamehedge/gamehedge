@@ -79,5 +79,6 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
     $scope.load_more = false;
     $scope.events = []
 	$scope.getPerformerInfo();
+    $scope.compareDate =  "2015-09-05T00:00:00.000Z"
     $window.scrollTo(0, 0);
 });

@@ -97,14 +97,15 @@
           <div class="row event-holder-back" ng-repeat="event in events track by $index">
             <div class="event-holder">
               <div class="col-xs-2 date-holder">
-                <p class="date1">{{event.occurs_at | date:'MMM' | uppercase}}</p>
-                <p class="date2">{{event.occurs_at | date:'dd' | uppercase}}</p>
-                <p class="date3">{{event.occurs_at | date:'EEE' | uppercase}}</p>  
+                <p class="date1">{{event.occurs_at | date:'MMM': 'UTC' | uppercase}}</p>
+                <p class="date2">{{event.occurs_at | date:'dd' : 'UTC'| uppercase}}</p>
+                <p class="date3">{{event.occurs_at | date:'EEE': 'UTC' | uppercase}}</p>  
               </div>
               <div class="col-xs-7 col-md-8 event-info">
                 <span>
                   <p class="first-line"><a href="{{event.url}}">{{event.home_performer.name}} vs {{event.away_performer.name}}</a></p>
-                  <p class="second-line">{{event.occurs_at | date:'hh' | uppercase}}:{{event.occurs_at | date:'mm' | uppercase}} {{event.occurs_at | date:'a' | uppercase}} at <a href="{{event.venue.url}}">{{event.venue.name}}</a> - {{event.location}}</p>
+                  <p class="second-line" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'hh' : 'UTC'| uppercase}}:{{event.occurs_at | date:'mm' : 'UTC'| uppercase}} {{event.occurs_at | date:'a' : 'UTC'| uppercase}} at <a href="{{event.venue.url}}">{{event.venue.name}}</a> - {{event.location}}</p>
+                  <p class="second-line" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD at <a href="{{event.venue.url}}">{{event.venue.name}}</a> - {{event.location}}</p>
                 </span>
               </div>
               <div class="col-xs-3 col-md-2">
