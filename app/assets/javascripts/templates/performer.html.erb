@@ -131,6 +131,7 @@
             <h2>TESTIMONIALS</h2>
             <p>Why {{performer.name}} fans love GameHedge!</p>
             <div ng-repeat="t in testimonials" class="testimonial">
+              <img src="<%= image_url "quote icon.png" %>" class="quote">
               <p>
                 {{t.description}}<br><br>
                 <span class="author">-{{t.author}}</span>
