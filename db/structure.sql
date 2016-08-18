@@ -474,7 +474,8 @@ CREATE TABLE venues (
     image_file_name character varying,
     image_content_type character varying,
     image_file_size integer,
-    image_updated_at timestamp without time zone
+    image_updated_at timestamp without time zone,
+    description text
 );
 
 
@@ -1611,4 +1612,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160812162815');
 INSERT INTO schema_migrations (version) VALUES ('20160812232300');
 
 INSERT INTO schema_migrations (version) VALUES ('20160817202446');
+
+INSERT INTO schema_migrations (version) VALUES ('20160818181226');
 

@@ -2,7 +2,7 @@ class Api::V1::VenuesController < ApplicationApiController
   include ActionController::HttpAuthentication::Token::ControllerMethods
   include ActionController::MimeResponds
   TOKEN = "TokenHere"
-  before_action :authenticate
+  #before_action :authenticate
 
   skip_before_filter :authenticate_user! # we do not need devise authentication here
   before_filter :fetch_user, :except => [:index, :create]
@@ -18,7 +18,7 @@ class Api::V1::VenuesController < ApplicationApiController
       @venues = Venue.where(data_params)
     end
     respond_to do |format|
-      format.json { render json: @venues.to_json(:only => [:id, :name, :address, :te_uid, :location, :url])}
+      format.json { render json: @venues.to_json(:only => [:id, :name, :address, :te_uid, :location, :url], :include => :performers)}
 
       format.xml { render xml: @venues.to_json(:only => [:id, :name, :address, :te_uid, :location, :url])}
     end
@@ -26,7 +26,7 @@ class Api::V1::VenuesController < ApplicationApiController
 
   def show
     respond_to do |format|
-      format.json { render json: @venue.to_json(:only => [:id, :name, :address, :te_uid, :location, :url])}
+      format.json { render json: @venue.to_json(:only => [:id, :name, :address, :te_uid, :location, :url], :include => :performers)}
       format.xml { render xml: @venue.to_json(:only => [:id, :name, :address, :te_uid, :location, :url])}
     end
   end

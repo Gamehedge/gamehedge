@@ -93,7 +93,7 @@ class Api::V1::EventsController < ApplicationApiController
   end
 
   def data_params
-    params.permit(:id, :te_uid, :te_performer_home_id, :te_performer_visit_id, :te_date, :name, :home_performer_id, :away_performer_id, :occurs_at, :location)
+    params.permit(:id, :te_uid, :te_performer_home_id, :te_performer_visit_id, :te_date, :name, :home_performer_id, :away_performer_id, :occurs_at, :location, :venue_id)
   end
 
   private

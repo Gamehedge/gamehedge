@@ -29,6 +29,10 @@ app.config([ '$routeProvider','$locationProvider','AuthProvider',
             templateUrl: "performer.html",
             controller: 'PerformerController',
         })
+        .when('/venues/:venueId', {
+            templateUrl: "venue.html",
+            controller: 'VenueController',
+        })
         .when('/events/:eventId', {
             templateUrl: "event.html",
             controller: 'EventController',

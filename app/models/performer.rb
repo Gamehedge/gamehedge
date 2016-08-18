@@ -16,7 +16,7 @@ class Performer < ActiveRecord::Base
 	after_create :update_url
 
   	def update_url
-	     self.update_attributes(:url => '/performers/' + String(self.id))
+	     self.update_attributes(:url => '/performers/' + String(self.te_uid))
   	end
 
   	def image_url
