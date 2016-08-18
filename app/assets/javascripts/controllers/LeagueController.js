@@ -1,6 +1,6 @@
 app = angular.module('gamehedge')
 
-app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataService,apiService,$window){
+app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataService,apiService,$window,$http){
 	$scope.getLeagueInfo = function(){
 		return apiService.getData('/api/v1/sports/'+$routeParams.leagueId)
             .then(function(response){
@@ -8,6 +8,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
             	console.log(response);
                 $scope.league  = response;
                 $scope.getDivisions();
+                $scope.getNextEvents();
         });
 	};
 
@@ -44,10 +45,35 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
                 return response;
         });
     };	
-	  
+	$scope.getNextEvents = function(){
+        id = $scope.league.te_uid;
+        source = "league";
+        url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true';
+        $http({
+            method: 'GET',
+            url: url,
+        }).then(function successCallback(response2) {
+            $scope.next_events = response2.data;
+            if($scope.next_events != null){
+                for(j=$scope.next_events.length - 1;j>=0;j--){
+                    if($scope.next_events[j].performances.length != 2){
+                        $scope.next_events.splice(j,1);
+                    }
+                }
+            }
+            $scope.ready = true;
+            console.log("Next events");
+            console.log($scope.next_events);
+        }, function errorCallback(response2) {
+            console.log(response2);
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
+    }
 
 	//Initializers
     $scope.loading = true;
+    $scope.next_events = [];
 	$scope.getLeagueInfo();
     $window.scrollTo(0, 0);
 });

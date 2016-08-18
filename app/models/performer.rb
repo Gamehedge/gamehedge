@@ -4,13 +4,14 @@ class Performer < ActiveRecord::Base
 	belongs_to :sport
 	belongs_to :venue
 	has_many :players
+  has_many :testimonials
   has_many :home_events, class_name: "Event", foreign_key: "home_performer_id"
   has_many :away_events, class_name: "Event", foreign_key: "away_performer_id"
 	has_many :tiles
-	has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }
+	has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100#" }
   	validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 	def display_name
-		return self.te_name
+		return self.name
 	end
 	after_create :update_url
 

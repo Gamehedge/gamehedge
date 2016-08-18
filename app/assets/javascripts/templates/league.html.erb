@@ -47,9 +47,9 @@
             <div class="col-xs-7 section2">
               <h2>ENJOY GAME</h2>
               <p>
-                If the home team loses by below amount, you get 50% of ticket price back.
+                If the home team loses by {{league.ggg}}, you get 50% of ticket price back.
               </p>
-              <div class="col-xs-6 block">
+              <!-- <div class="col-xs-6 block">
                 <img class="icon-img" src="<%= image_url "football icon.png" %>">
                 17 PTS
               </div>
@@ -64,7 +64,7 @@
               <div class="col-xs-6 block">
                 <img class="icon-img" src="<%= image_url "hockey icon.png" %>">
                 4 GOALS
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="col-md-4 division">
@@ -79,6 +79,37 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+  <section id="near-events" ng-show="next_events.length != 0">
+    <div class="container">
+      <div class="title">UPCOMING GAMES NEAR YOU</div>
+      <div ng-repeat="event in next_events | limitTo:4" class="col-md-3">
+        <a href="{{event.url}}">
+          <div class="back">
+            <div class="front">
+              <div class="date-holder">
+                <div class="date-inner">
+                  <p class="date1">{{event.occurs_at | date:'MMM' : 'UTC' | uppercase}}</p>
+                  <p class="date2">{{event.occurs_at | date:'dd' : 'UTC' | uppercase}}</p>
+                  <p class="date3">{{event.occurs_at | date:'EEE' : 'UTC' | uppercase}}</p>  
+                </div>
+              </div>
+              <div class="event-holder" ng-show="event.performances[0].primary == true">
+                <p class="teams">{{event.performances[1].performer.name}}<span class="at"> at </span>{{event.performances[0].performer.name}}</p>
+                <p class="event3"><span class="at" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD</span><span class="at" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'h:mm a' : 'UTC' | uppercase}} at</span> <span class="stadium">{{event.venue.name}}</span></p>
+                <p class="event4">{{event.available_count}} tickets left</p>
+              </div>
+              <div class="event-holder" ng-show="event.performances[1].primary == true">
+                 <p class="teams">{{event.performances[0].performer.name}}<span class="at"> at </span>{{event.performances[1].performer.name}}</p>
+                <p class="event3"><span class="at" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD</span><span class="at" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'h:mm a' : 'UTC' | uppercase}} at</span> <span class="stadium">{{event.venue.name}}</span></p>
+                <p class="event4">{{event.available_count}} tickets left</p>
+              </div>
+              <button>Buy Tickets</button>
+            </div>
+          </div>
+        </a>
       </div>
     </div>
   </section>

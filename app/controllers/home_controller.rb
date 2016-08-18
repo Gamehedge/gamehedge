@@ -15,8 +15,9 @@ class HomeController < ApplicationController
    #                      #               responses. Any 'Logger' instance object
    #                      #               is valid. EX: Logger.new('log/te_api.log')
    #    })
-
+  	# @performers = @connection.performers.list({:category_id => 21, :per_page => 100000})
   	
+
   	# Performer.all.each do |p|
   	# 	@performer = @connection.performers.show(p.te_uid)
   	# 	if @performer["venue"] != nil

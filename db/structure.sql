@@ -748,6 +748,43 @@ ALTER SEQUENCE sports_id_seq OWNED BY sports.id;
 
 
 --
+-- Name: testimonials; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE testimonials (
+    id integer NOT NULL,
+    author character varying,
+    description text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    performer_id integer,
+    image_file_name character varying,
+    image_content_type character varying,
+    image_file_size integer,
+    image_updated_at timestamp without time zone
+);
+
+
+--
+-- Name: testimonials_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE testimonials_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: testimonials_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE testimonials_id_seq OWNED BY testimonials.id;
+
+
+--
 -- Name: tile_types; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -904,6 +941,13 @@ ALTER TABLE ONLY sports ALTER COLUMN id SET DEFAULT nextval('sports_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY testimonials ALTER COLUMN id SET DEFAULT nextval('testimonials_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY tile_types ALTER COLUMN id SET DEFAULT nextval('tile_types_id_seq'::regclass);
 
 
@@ -1047,6 +1091,14 @@ ALTER TABLE ONLY session_data
 
 ALTER TABLE ONLY sports
     ADD CONSTRAINT sports_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: testimonials_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY testimonials
+    ADD CONSTRAINT testimonials_pkey PRIMARY KEY (id);
 
 
 --
@@ -1405,6 +1457,14 @@ ALTER TABLE ONLY performers
 
 
 --
+-- Name: fk_rails_d2d0be52f0; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY testimonials
+    ADD CONSTRAINT fk_rails_d2d0be52f0 FOREIGN KEY (performer_id) REFERENCES performers(id);
+
+
+--
 -- Name: fk_rails_d93e51e875; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1549,4 +1609,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160810234449');
 INSERT INTO schema_migrations (version) VALUES ('20160812162815');
 
 INSERT INTO schema_migrations (version) VALUES ('20160812232300');
+
+INSERT INTO schema_migrations (version) VALUES ('20160817202446');
 

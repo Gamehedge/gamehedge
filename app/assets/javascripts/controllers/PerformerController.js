@@ -7,9 +7,19 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
                 console.log("Performer");
             	console.log(response);
                 $scope.performer  = response;
+                $scope.getTestimonials();
                 $scope.getEvents();
         });
 	};
+
+    $scope.getTestimonials = function(){
+        apiService.getData('/api/v1/testimonials/?performer_id='+String($scope.performer.id))
+            .then(function(response){
+                console.log("Testimonials");
+                $scope.testimonials = response;
+                console.log($scope.testimonials);
+        });
+    }
 
     $scope.getEvents = function(){
         var now = new Date();
@@ -78,6 +88,7 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
     $scope.page = 1;
     $scope.load_more = false;
     $scope.events = []
+    $scope.testimonials = []
 	$scope.getPerformerInfo();
     $scope.compareDate =  "2015-09-05T00:00:00.000Z"
     $window.scrollTo(0, 0);

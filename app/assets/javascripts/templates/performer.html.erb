@@ -47,9 +47,9 @@
             <div class="col-xs-7 section2">
               <h2>ENJOY GAME</h2>
               <p>
-                If the home team loses by below amount, you get 50% of ticket price back.
+                If the home team loses by {{performer.sport.ggg}}, you get 50% of ticket price back.
               </p>
-              <div class="col-xs-6 block">
+              <!-- <div class="col-xs-6 block">
                 <img class="icon-img" src="<%= image_url "football icon.png" %>">
                 17 PTS
               </div>
@@ -64,7 +64,7 @@
               <div class="col-xs-6 block">
                 <img class="icon-img" src="<%= image_url "hockey icon.png" %>">
                 4 GOALS
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="col-md-4 division">
@@ -118,19 +118,27 @@
           </div>
           <button ng-click="loadMore()" ng-if="load_more" class="load-more-btn">Load more</button>
         </div>
-        <div class="col-md-3 hidden-xs hidden-sm text-center ggg-container">
-          <h4>How Does the Good Game Guarantee Work?</h4>
-          <div class="text-center">
-            <img src="<%= image_url "icon-tickets.png" %>">
-            <p>Find your game and purchase your tickets. Every ticket comes with our Good Game Guarantee at no additional cots!</p>
+        <div class="col-md-3 ggg-container">
+          <div class="title">
+            <h2>STAY UP TO DATE</h2>
+            <p>Sign up for savings, info and more!</p>
+            <div class="form">
+              <input type="text" name="email" placeholder="example@example.com">
+              <button>SEND</button>
+            </div>
           </div>
-          <div class="text-center">
-            <img src="<%= image_url "icon-stadium.png" %>">
-            <p>If the home team looses by {{league.ggg}} you get 50% of the ticket price back.</p>
-          </div>
-          <div class="text-center">
-            <img src="<%= image_url "icon-handshake.png" %>">
-            <p>Just come back to GameHedge to claim your refund!</p>
+          <div class="body" ng-show="testimonials.length != 0">
+            <h2>TESTIMONIALS</h2>
+            <p>Why {{performer.name}} fans love GameHedge!</p>
+            <div ng-repeat="t in testimonials" class="testimonial">
+              <p>
+                {{t.description}}<br><br>
+                <span class="author">-{{t.author}}</span>
+              </p>
+              <div class="img-container">
+                <img src="{{t.image_url_thumb}}">
+              </div>
+            </div>
           </div>
         </div>
       </div>
