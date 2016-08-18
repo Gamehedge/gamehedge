@@ -6,8 +6,9 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
             .then(function(response){
                 console.log('/api/v1/venues/'+$routeParams.venueId)
                 console.log("Venue");
-            	console.log(response);
-                $scope.venue  = response;
+            	$scope.venue  = response;
+                //$scope.venue.address = angular.fromJson($scope.venue.address)
+                console.log($scope.venue);
                 //$scope.getTestimonials();
                 $scope.getEvents();
         });

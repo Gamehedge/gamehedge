@@ -16,6 +16,8 @@ class HomeController < ApplicationController
    #                      #               responses. Any 'Logger' instance object
    #                      #               is valid. EX: Logger.new('log/te_api.log')
    #    })
+
+  	
   	# @performers = @connection.performers.list({:category_id => 21, :per_page => 100000})
   	
 

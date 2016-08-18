@@ -13,10 +13,10 @@ class Api::V1::EventsController < ApplicationApiController
 
   def index
     if params == nil
-      @events = Event.all
+      @events = Event.all.order("occurs_at")
     else
       if params[:selected_team] == nil
-        @events = Event.where(data_params).where("occurs_at >=?", params[:today_date])
+        @events = Event.where(data_params).where("occurs_at >=?", params[:today_date]).order("occurs_at")
       else
         @events = Event.where( 
           Event.arel_table[:home_performer_id].eq(params[:selected_team]).or(
