@@ -163,6 +163,9 @@ class TicketEvolutionService
         end
       end
       return @events
+    when 'tickets'
+      @ticket_group = @connection.ticket_groups.list({:event_id => @id, :lightweight => true})
+      return @ticket_group
     else
       puts "Invalid type parameter, please check and try again"
     end

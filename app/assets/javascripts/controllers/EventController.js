@@ -1,6 +1,6 @@
 controllers = angular.module('gamehedge')
 
-controllers.controller('EventController', function($scope,$routeParams,dataService,apiService,$window,$filter){
+controllers.controller('EventController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http){
 
 	$scope.getEventInfo = function(){
 		return apiService.getData('/api/v1/events/'+$routeParams.eventId)
@@ -8,9 +8,51 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                 console.log("Event");
             	console.log(response);
                 $scope.event  = response;
-                $scope.loadMap();
+                $scope.getTicketList();
         });
 	};
+
+	$scope.updateFilter = function($event){
+		if($($event.currentTarget).hasClass("active") == true){
+			$($event.currentTarget).removeClass("active");
+		}
+		else{
+			$($event.currentTarget).addClass("active");
+		}
+	}
+
+	$scope.updateSort = function(sort){
+		if(sort == $scope.ordering.replace("-","")){
+			if($scope.ordering.indexOf("-") == -1){
+				$scope.ordering = "-"+sort
+			}
+			else{
+				$scope.ordering = sort
+			}
+		}
+		else{
+			$scope.ordering = sort
+		}
+	}
+
+	$scope.updateEtickets = function(){
+		$scope.etickets = !$scope.etickets;
+	}
+
+	$scope.getTicketList = function(){
+		$http({
+            method: 'GET',
+            url: '/tickets/list/?id='+String($scope.event.te_uid),
+        }).then(function successCallback(response) {
+        	$scope.tickets = response;
+        	console.log($scope.tickets);
+            $scope.loadMap();
+        }, function errorCallback(response) {
+            console.log(response);
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
+	}
 
 	$scope.loadMap = function(){
 		var date = $filter('date')($scope.event.occurs_at, 'yyyy-MM-ddTHH:mm');
@@ -50,5 +92,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	    });
 	};
 	$scope.getEventInfo();
+	$scope.ordering = 'retail_price'
+	$scope.etickets = false
 	$window.scrollTo(0, 0);
 });

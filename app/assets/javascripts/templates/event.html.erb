@@ -39,7 +39,69 @@
   <script type="text/ng-template" id="typeahead/bind-node.html">
     <a href="/#{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
   </script>
-  <div id="MapContainer">
-    
-  </div>
+  <section id="tickets-map">
+    <div class="row">
+      <div class="col-md-8">
+        <div id="MapContainer">
+      
+        </div>
+      </div>
+      <div class="col-md-4 tickets">
+        <div class="filters">
+          <div class="col-xs-12 filter-row vertical-center">
+            Quantity
+            <button class="active" ng-click="updateFilter($event)">Any</button>
+            <button ng-click="updateFilter($event)">1</button>
+            <button ng-click="updateFilter($event)">2</button>
+            <button ng-click="updateFilter($event)">3</button>
+            <button ng-click="updateFilter($event)">4</button>
+            <button ng-click="updateFilter($event)">5+</button>
+          </div>
+          <div class="col-xs-12 filter-row vertical-center">
+            Show
+            <button ng-click="updateEtickets()" ng-class="{'active': etickets}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ETickets Only</button>
+           <!--  <button ng-click="updateFilter($event,1)"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Parking Only</button> -->
+          </div>
+          <div class="col-xs-12 filter-header">
+            <div class="row">
+              <div class="col-xs-3 vertical-center sorting" ng-click="updateSort('section')">
+                Section
+              </div>
+              <div class="col-xs-2 vertical-center sorting" ng-click="updateSort('row')">
+                Row
+              </div>
+              <div class="col-xs-3 vertical-center">
+                Quantity
+              </div>
+              <div class="col-xs-4 vertical-center sorting" ng-click="updateSort('retail_price')">
+                Price
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 tickets-data">
+            <div class="row" ng-repeat="ticket in tickets.data | orderBy:ordering | filter: (etickets || '') && {eticket: true}">
+              <div class="col-xs-3 vertical-center">
+                {{ticket.section}}
+              </div>
+              <div class="col-xs-2 vertical-center">
+                {{ticket.row}}
+              </div>
+              <div class="col-xs-3 vertical-center">
+                <select>
+                  <option ng-repeat="o in ticket.splits" value="{{o}}">{{o}}</option>
+                </select>
+              </div>
+              <div class="col-xs-4 vertical-center">
+                <span>
+                  <button>${{ticket.retail_price}}/ea</button>
+                  <p class="format">{{ticket.format}}</p>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
 </span>

@@ -1132,6 +1132,7 @@ body {
 
 #game_info {
     background-color: white;
+    box-shadow: 0 4px 0 0 rgba(224, 224, 224, 0.5);
 }
 
 #game_info p{
@@ -1188,12 +1189,88 @@ body {
     font-size: 20px;
     color: #999999;
     text-align: center;
-        justify-content: center;
+    justify-content: center;
 }
 
 #game_info .ggg-logo img{
     height: 60px;
     margin-right: 21px;
+}
+
+#tickets-map {
+    background-color: white;
+    margin-top: 4px;
+    font-size: 18px;
+    color: #000000;
+}
+
+#tickets-map .filter-row{
+    height: 80px;
+    border: solid 1px #eeeeee;
+    border-top: none;
+}
+
+#tickets-map .filter-header{
+    height: 50px;
+    background-color: #373d3f;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+#tickets-map .filter-header div, #tickets-map .tickets-data div{
+    height: 100%;
+    justify-content: center;
+}
+
+#tickets-map .filter-header .sorting{
+    cursor: pointer;
+}
+
+#tickets-map .tickets-data{
+    max-height: 500px;
+    overflow: scroll;
+}
+
+#tickets-map .tickets-data .row{
+    height: 80px;
+    background-color: #ffffff;
+    border: solid 1px #eeeeee;
+    border-top: none;
+}
+
+#tickets-map .tickets-data .row .format{
+    font-size: 10px;
+    text-align: center;
+    color: #999999;
+    margin:0;
+}
+#tickets-map button {
+    border-radius: 3px;
+    background-color: #f0f0f0;
+    color: white;
+    border: none;
+    margin: 0 6px;
+    padding: 5px 11px;
+    min-width: 40px;
+
+}
+
+#tickets-map button.active{
+    border-radius: 3px;
+    background-color: #93aa52;
+    color: white;
+    border: none;
+}
+
+#tickets-map .tickets-data .row button{
+    width: 130px;
+    height: 38px;
+    margin-top: 17px;
+    background-color: #91c33f;
+}
+
+#tickets-map button:focus{
+    outline: none;
 }
 
 @media(max-width: 992px) {
