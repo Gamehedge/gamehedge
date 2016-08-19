@@ -8,7 +8,7 @@ class Api::V1::EventsController < ApplicationApiController
   before_filter :fetch_user, :except => [:index, :create]
 
   def fetch_user
-    @event = Event.find_by_id(params[:id])
+    @event = Event.where(te_uid: params[:id]).first
   end
 
   def index

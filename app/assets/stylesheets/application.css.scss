@@ -1130,6 +1130,72 @@ body {
     vertical-align: middle;
 }
 
+#game_info {
+    background-color: white;
+}
+
+#game_info p{
+    margin:0;
+}
+
+#game_info .date-holder{
+    padding: 0;
+}
+
+#game_info .event-info{
+    height: 100px;
+    display: flex;
+    align-items: center;
+    color: #525252;
+}
+
+#game_info .event-info .second-line{
+    font-size: 14px;
+}
+
+#game_info .date1{
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: #91c33f;
+    margin-top: 5px;
+}
+
+#game_info .date2{
+    font-size: 48px;
+    text-align: center;
+    color: #000000;
+    margin-top: -16px;
+    margin-bottom: -12px;
+}
+
+#game_info .date3{
+    font-size: 18px;
+    text-align: center;
+    color: #d6d6d6;
+    margin-bottom: 5px;
+}
+
+#game_info .moto{
+    font-size: 12px;
+    color: #999999;
+    height:100px;
+    text-align: justify;
+}
+
+#game_info .ggg-logo{
+    height: 100px;
+    font-size: 20px;
+    color: #999999;
+    text-align: center;
+        justify-content: center;
+}
+
+#game_info .ggg-logo img{
+    height: 60px;
+    margin-right: 21px;
+}
+
 @media(max-width: 992px) {
     .row{
         margin-right:0;
@@ -1236,6 +1302,11 @@ no-padding{
     padding:0;
 }
 
+
+.vertical-center {
+    display: flex;
+    align-items: center;
+}
 
 
 

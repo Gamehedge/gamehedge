@@ -5,6 +5,7 @@ class HomeController < ApplicationController
   	require 'date'
 	@year = Date.today.strftime("%Y")
 
+	
   	
   	# @connection = TicketEvolution::Connection.new({
    #        :token => '5bfd4b6110681d224a8c1fa6333f375f',       # => (required) The API token, used to identify you
@@ -17,7 +18,7 @@ class HomeController < ApplicationController
    #                      #               is valid. EX: Logger.new('log/te_api.log')
    #    })
 
-  	
+
   	# @performers = @connection.performers.list({:category_id => 21, :per_page => 100000})
   	
 

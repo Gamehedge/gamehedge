@@ -5,7 +5,7 @@ class Event < ActiveRecord::Base
 	belongs_to :venue
 	belongs_to :sport
   	def update_url
-	     self.update_attributes(:url => '/events/' + String(self.id))
+	     self.update_attributes(:url => '/events/' + String(self.te_uid))
   	end
 
 	def display_name
