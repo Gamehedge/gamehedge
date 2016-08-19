@@ -1,6 +1,6 @@
 controllers = angular.module('gamehedge')
 
-controllers.controller('EventController', function($scope,$routeParams,dataService,apiService,$window){
+controllers.controller('EventController', function($scope,$routeParams,dataService,apiService,$window,$filter){
 
 	$scope.getEventInfo = function(){
 		return apiService.getData('/api/v1/events/'+$routeParams.eventId)
@@ -13,11 +13,13 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	};
 
 	$scope.loadMap = function(){
+		var date = $filter('date')($scope.event.occurs_at, 'yyyy-MM-ddTHH:mm');
+		console.log(date)
 		$("#MapContainer").tuMap({
 	        EventInfo: {
 	            Venue: $scope.event.venue.name,
 	            EventName: $scope.event.name,
-	            EventDate: $scope.event.occurs_at
+	            EventDate: date
 	        }
 	        , MapType: "Interactive"
 	        , ControlsPosition:"Outside"
@@ -31,6 +33,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	        , OnError: function (e, Error) {
 	            //alert(JSON.stringify(e));
 	            //alert(JSON.stringify(Error));
+	            console.log(Error);
 	            if (Error.Code == 0) {
 	                var Message = "<div style=\"padding:10px;\">";
 	                Message += "<span style=\"color:red;font-weight:bold;\">This Sample is Configured to run under host 'localhost'</span>";
