@@ -1280,6 +1280,11 @@ body {
 }
 
 @media(max-width: 992px) {
+
+    #tickets-map #MapContainer {
+        height: inherit;
+        width: 100%;
+    }
     .row{
         margin-right:0;
         margin-left:0;   
