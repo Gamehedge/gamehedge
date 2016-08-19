@@ -15,7 +15,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	$scope.loadMap = function(){
 		$("#MapContainer").tuMap({
 	        EventInfo: {
-	            Venue: 'Barclays Cente',//$scope.event.venue.name,
+	            Venue: $scope.event.venue.name,
 	            EventName: $scope.event.name,
 	            EventDate: $scope.event.occurs_at
 	        }
