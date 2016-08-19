@@ -1244,6 +1244,11 @@ body {
     color: #999999;
     margin:0;
 }
+
+#tickets-map #MapContainer {
+    height: 610px;
+}
+
 #tickets-map button {
     border-radius: 3px;
     background-color: #f0f0f0;
