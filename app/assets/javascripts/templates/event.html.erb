@@ -64,6 +64,9 @@
             <button ng-click="updateEtickets()" ng-class="{'active': etickets}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ETickets Only</button>
            <!--  <button ng-click="updateFilter($event,1)"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Parking Only</button> -->
           </div>
+          <div class="col-xs-12 section-image" ng-if="sectionUrl != ''">
+            <img src="{{sectionUrl}}">
+          </div>
           <div class="col-xs-12 filter-header">
             <div class="row">
               <div class="col-xs-3 vertical-center sorting" ng-click="updateSort('section')">
@@ -81,7 +84,7 @@
             </div>
           </div>
           <div class="col-xs-12 tickets-data">
-            <div class="row" ng-repeat="ticket in tickets.data | orderBy:ordering | filter: (etickets || '') && {eticket: true}">
+            <div class="row" ng-repeat="ticket in tickets.data | orderBy:ordering | filter: (etickets || '') && {eticket: true} | filter: (filterBySection || '') && {section: section}">
               <div class="col-xs-3 vertical-center">
                 {{ticket.section}}
               </div>

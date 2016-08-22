@@ -89,9 +89,56 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	                $("#static_seating_chart").show();
 	            }
 	        }
+	        , OnClick:function(e,Section){
+	            if(Section.Active && Section.Selected){
+	            	$scope.filterBySection = true;
+	                $scope.sectionUrl = Section.Name;
+	                if(Section.SectionViewAvailable){
+	                    $scope.sectionUrl =  Section.SectionViewUrl;
+	                }
+	                else{
+	                    $scope.sectionUrl = "";
+	                }    
+	            }
+	            else if(Section.Active == true && Section.Selected == false){
+	                var _index = $.inArray(Section.Mappings[0], selectedSections);
+	                selectedSections.splice(_index, 1);
+	                filterAction(1);
+	            }
+	        }
+	        , OnReset: function () {
+	            selectedSections = [];
+	            selectedSectionsBack = [];
+	            $('#quantity_select').val("");
+	            $('#quantity_select_modal').val("");
+	            $('#delivery_select').val("");
+	            $('#delivery_select_modal').val("");
+	            $('#section_select').val("");
+	            $('#section_select_modal').val("");
+	            
+	            $("#map_hover_element").html("");
+	            
+	            var slider = document.getElementById('slider_desktop');
+	            slider.noUiSlider.set([min_value, max_value]);
+	            filterAction();        
+	        }
+	        , OnMouseover:function(e,Section){
+	            if(Section.Active) {
+	                
+	                
+	            }
+	        }
+	        , TooltipFormatter:function(Data){
+	            var Code = "";
+	            Code += "Section " + Data.LongName
+	            return Code;
+	        }
 	    });
 	};
 	$scope.getEventInfo();
+	$scope.filterBySection = false;
+	$scope.section = "";
+	$scope.sectionUrl = "";
 	$scope.ordering = 'retail_price'
 	$scope.etickets = false
 	$window.scrollTo(0, 0);
