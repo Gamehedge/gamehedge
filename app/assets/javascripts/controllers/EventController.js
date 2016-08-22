@@ -12,8 +12,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         });
 	};
 
-	$scope.updateFilter = function($event){
-		console.log("Section url "+$scope.sectionUrl);
+	$scope.updateFilter = function($event){ 
 		if($($event.currentTarget).hasClass("active") == true){
 			$($event.currentTarget).removeClass("active");
 		}
@@ -137,8 +136,12 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	$scope.getEventInfo();
 	$scope.filterBySection = false;
 	$scope.section = "";
-	$scope.sectionUrl = "https://static.ticketutils.com/Charts/SectionViews/TicketUtils/73b00f00-5324-4c39-9aa1-66d0557f6a48/500X/121_d830997a-d85c-4219-9db9-ac758e57f5a9.jpg";
+	$scope.sectionUrl = "";
 	$scope.ordering = 'retail_price'
 	$scope.etickets = false
 	$window.scrollTo(0, 0);
+
+	$scope.$watch('sectionUrl', function() {
+        alert('hey, sectionUrl has changed!');
+    });
 });
