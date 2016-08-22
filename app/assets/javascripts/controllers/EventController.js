@@ -90,19 +90,15 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	            }
 	        }
 	        , OnClick:function(e,Section){
-	        	console.log("Section url "+$scope.sectionUrl);
 	        	if(Section.Active && Section.Selected){
 	            	$scope.filterBySection = true;
 	                $scope.section = Section.Name;
 	                if(Section.SectionViewAvailable){
-	                    $scope.sectionUrl =  Section.SectionViewUrl;
-	                    console.log("CORRECT");
+	                    $scope.updateSectionUrl(Section.SectionViewUrl);
 	                }
 	                else{
-	                    $scope.sectionUrl = "";
-	                    console.log("INCORRECT");
-	                }    
-	            }
+	                    $scope.updateSectionUrl("");
+	                }
 	        }
 	        , OnReset: function () {
 	            selectedSections = [];
@@ -133,6 +129,12 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	        }
 	    });
 	};
+
+	$scope.updateSectionUrl = function(url){
+		$scope.sectionUrl = url;
+		console.log($scope.sectionUrl);
+	};
+
 	$scope.getEventInfo();
 	$scope.filterBySection = false;
 	$scope.section = "";
@@ -140,8 +142,4 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	$scope.ordering = 'retail_price'
 	$scope.etickets = false
 	$window.scrollTo(0, 0);
-
-	$scope.$watch('sectionUrl', function() {
-        alert('hey, sectionUrl has changed!');
-    });
 });
