@@ -13,7 +13,6 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	};
 
 	$scope.updateFilter = function($event){
-		console.log($scope.sectionUrl);
 		if($($event.currentTarget).hasClass("active") == true){
 			$($event.currentTarget).removeClass("active");
 		}
@@ -133,20 +132,20 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	};
 
 	$scope.updateSectionUrl = function(url){
-		$scope.sectionUrl = url;
+		$scope.myModel.sectionUrl = url;
 		console.log("Update Function")
-		console.log($scope.sectionUrl);
+		console.log($scope.myModel.sectionUrl);
 	};
 
 	$scope.getEventInfo();
 	$scope.filterBySection = false;
 	$scope.section = "";
-	$scope.sectionUrl = "";
+	$scope.myModel = {sectionUrl:""};
 	$scope.ordering = 'retail_price'
 	$scope.etickets = false
 	$window.scrollTo(0, 0);
 
-	$scope.$watch("sectionUrl", function(newValue, oldValue){
+	$scope.$watch("myModel.sectionUrl", function(newValue, oldValue){
 		console.log("Watch")
     	console.log(newValue)
 	},true);
