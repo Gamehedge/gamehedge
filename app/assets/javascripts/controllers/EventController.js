@@ -1,6 +1,35 @@
 controllers = angular.module('gamehedge')
 
-controllers.controller('EventController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http,$timeout){
+controllers.filter('numberOfSeats', function() {
+  return function(input,numSeats) {
+    input = input || '';
+    var out = [];
+    if(numSeats == 0){
+    	out = input;
+    }
+    else if(numSeats == 5){
+    	angular.forEach(input, function(value, key) {
+    		console.log("Section "+value.section+" Row "+value.row);
+    		var keepGoing = true;
+    		angular.forEach(value.splits, function(value2, key2) {
+    			if(value2 >= 5 && keepGoing == true){
+    				out.push(value);
+    				keepGoing = false;
+    			}
+    		});
+    	});
+    }
+    else{
+    	angular.forEach(input, function(value, key) {
+    		if(value.splits.indexOf(numSeats) != -1){
+                out.push(value);
+            }	
+    	});
+    }
+    return out;
+  };
+})
+.controller('EventController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http,$timeout){
 
 	$scope.getEventInfo = function(){
 		return apiService.getData('/api/v1/events/'+$routeParams.eventId)
@@ -12,13 +41,9 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         });
 	};
 
-	$scope.updateFilter = function($event){
-		if($($event.currentTarget).hasClass("active") == true){
-			$($event.currentTarget).removeClass("active");
-		}
-		else{
-			$($event.currentTarget).addClass("active");
-		}
+	$scope.updateFilter = function(index){
+		$scope.index = index;
+		console.log($scope.index);
 	}
 
 	$scope.updateSort = function(sort){
@@ -129,11 +154,11 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	            Code += "Section " + Data.LongName
 	            return Code;
 	        }
-	        // , OnControlClick:function(e,Data){
-	        //     $("MapContainer").tuMap("ToggleSelection","Parking");
-	        //     $scope.onlyParking = !$scope.onlyParking
-	        //     $scope.applyChanges(); 
-	        // }
+	        , OnControlClick:function(e,Data){
+	            $("MapContainer").tuMap("ToggleSelection","Parking");
+	            $scope.onlyParking = !$scope.onlyParking
+	            $scope.applyChanges(); 
+	        }
 	    });
 	    $timeout(function () {
 	        $("#MapContainer").tuMap("RemoveMapControl","Unmapped");
@@ -150,7 +175,9 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	$scope.section = "";
 	$scope.sectionUrl = "";
 	$scope.onlyParking = false;
+	$scope.index = 0;
 	$scope.ordering = 'retail_price'
 	$scope.etickets = false
 	$window.scrollTo(0, 0);
 });
+

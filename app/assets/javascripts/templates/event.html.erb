@@ -52,12 +52,12 @@
         <div class="filters">
           <div class="col-xs-12 filter-row vertical-center">
             Quantity
-            <button class="active" ng-click="updateFilter($event)">Any</button>
-            <button ng-click="updateFilter($event)">1</button>
-            <button ng-click="updateFilter($event)">2</button>
-            <button ng-click="updateFilter($event)">3</button>
-            <button ng-click="updateFilter($event)">4</button>
-            <button ng-click="updateFilter($event)">5+</button>
+            <button ng-class="{'active': index == 0}" ng-click="updateFilter(0)">Any</button>
+            <button ng-class="{'active': index == 1}" ng-click="updateFilter(1)">1</button>
+            <button ng-class="{'active': index == 2}" ng-click="updateFilter(2)">2</button>
+            <button ng-class="{'active': index == 3}" ng-click="updateFilter(3)">3</button>
+            <button ng-class="{'active': index == 4}" ng-click="updateFilter(4)">4</button>
+            <button ng-class="{'active': index == 5}" ng-click="updateFilter(5)">5+</button>
           </div>
           <div class="col-xs-12 filter-row vertical-center">
             Show
@@ -84,7 +84,7 @@
             </div>
           </div>
           <div class="col-xs-12 tickets-data">
-            <div class="row" ng-repeat="ticket in tickets.data | orderBy:ordering | filter: (etickets || '') && {eticket: true} | filter: (filterBySection || '') && {section: section} | filter: (onlyParking || '') && {type: 'parking'}">
+            <div class="row" ng-repeat="ticket in tickets.data | orderBy:ordering | filter: (etickets || '') && {eticket: true} | filter: (filterBySection || '') && {section: section} | filter: (onlyParking || '') && {type: 'parking'} | numberOfSeats:index">
               <div class="col-xs-3 vertical-center">
                 {{ticket.section}}
               </div>

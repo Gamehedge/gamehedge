@@ -1240,6 +1240,7 @@ body {
 #tickets-map .tickets-data{
     max-height: 500px;
     overflow: scroll;
+    font-size:15px;
 }
 
 #tickets-map .tickets-data .row{
@@ -1277,10 +1278,7 @@ body {
 }
 
 #tickets-map button.active{
-    border-radius: 3px;
     background-color: #93aa52;
-    color: white;
-    border: none;
 }
 
 #tickets-map .tickets-data .row button{
@@ -1323,6 +1321,24 @@ body {
 }
 
 @media(max-width: 992px) {
+
+    #tickets-map button {
+        padding: 5px 8px;
+        min-width: inherit;
+    }
+
+    #tickets-map .tickets-data {
+        padding: 0;
+    }
+
+    #tickets-map .tickets-data .row button {
+        width: 100%;
+        margin: 0;
+    }
+
+    #tickets-map .tickets-data .row span {
+        width: 100%;
+    }
 
     #tickets-map #MapContainer {
         height: inherit;
