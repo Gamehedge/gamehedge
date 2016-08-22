@@ -79,7 +79,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	        , EnableTooltipSectionView:false
 	        , SingleSectionSelection:true
 	        , AdaptiveThreshold: 0.8
-	        //, Tickets: Data
+	        , Tickets: $scope.Data
 	        , ColorScheme: 1
 	        , ServiceUrl: "https://imap.ticketutils.net"
 	        , FailoverMapUrl: "https://static.ticketutils.com/Charts/No-Seating-Chart.jpg"
