@@ -130,13 +130,13 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	            Code += "Section " + Data.LongName
 	            return Code;
 	        }
-	        , OnControlClick:function(e,Data){
-	            $("MapContainer").tuMap("ToggleSelection","Parking");
-	            $scope.onlyParking = !$scope.onlyParking
-	            $scope.applyChanges(); 
-	        }
+	        // , OnControlClick:function(e,Data){
+	        //     $("MapContainer").tuMap("ToggleSelection","Parking");
+	        //     $scope.onlyParking = !$scope.onlyParking
+	        //     $scope.applyChanges(); 
+	        // }
 	    });
-	    $("#MapContainer").tuMap("RemoveMapControl","Unmapped"); 
+	    $("#MapContainer").tuMap("RemoveMapControl","Parking"); 
 	};
 
 	$scope.applyChanges = function(){
