@@ -46,7 +46,18 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         }).then(function successCallback(response) {
         	$scope.tickets = response;
         	console.log($scope.tickets);
+        	var sections = [];
+        	angular.forEach($scope.tickets.data, function(value, key) {
+        		if(sections.indexOf(value.section) == -1){
+	                sections.push(value.section);
+	            }	
+        	});
+        	$.each(sections, function(value, key) {
+	            $scope.Data.push({"section":key,"price":0,"quantity":1});
+	        });
+	        console.log($scope.Data)
             $scope.loadMap();
+
         }, function errorCallback(response) {
             console.log(response);
             // called asynchronously if an error occurs
@@ -137,6 +148,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	};
 
 	$scope.getEventInfo();
+	$scope.Data = [];
 	$scope.filterBySection = false;
 	$scope.section = "";
 	$scope.sectionUrl = "";
