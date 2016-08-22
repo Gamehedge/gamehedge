@@ -114,20 +114,10 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	            }
 	        }
 	        , OnReset: function () {
-	            selectedSections = [];
-	            selectedSectionsBack = [];
-	            $('#quantity_select').val("");
-	            $('#quantity_select_modal').val("");
-	            $('#delivery_select').val("");
-	            $('#delivery_select_modal').val("");
-	            $('#section_select').val("");
-	            $('#section_select_modal').val("");
-	            
-	            $("#map_hover_element").html("");
-	            
-	            var slider = document.getElementById('slider_desktop');
-	            slider.noUiSlider.set([min_value, max_value]);
-	            filterAction();        
+	            $scope.filterBySection = false;
+				$scope.section = "";
+				$scope.sectionUrl = "";
+				$scope.applyChanges();      
 	        }
 	        , OnMouseover:function(e,Section){
 	            if(Section.Active) {
