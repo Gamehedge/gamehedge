@@ -92,12 +92,14 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	        , OnClick:function(e,Section){
 	        	if(Section.Active && Section.Selected){
 	            	$scope.filterBySection = true;
-	                $scope.sectionUrl = Section.Name;
+	                $scope.section = Section.Name;
 	                if(Section.SectionViewAvailable){
 	                    $scope.sectionUrl =  Section.SectionViewUrl;
+	                    console.log("CORRECT");
 	                }
 	                else{
 	                    $scope.sectionUrl = "";
+	                    console.log("INCORRECT");
 	                }    
 	            }
 	            console.log("Section url "+$scope.sectionUrl);
