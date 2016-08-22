@@ -136,7 +136,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	        //     $scope.applyChanges(); 
 	        // }
 	    });
-	    $("#MapContainer").tuMap("RemoveMapControl","Parking"); 
+	    $("#MapContainer").tuMap("RemoveMapControl","Unmapped").tuMap("Refresh");; 
 	};
 
 	$scope.applyChanges = function(){
