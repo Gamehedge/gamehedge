@@ -84,7 +84,7 @@
             </div>
           </div>
           <div class="col-xs-12 tickets-data">
-            <div class="row" ng-repeat="ticket in tickets.data | orderBy:ordering | filter: (etickets || '') && {eticket: true} | filter: (filterBySection || '') && {section: section}">
+            <div class="row" ng-repeat="ticket in tickets.data | orderBy:ordering | filter: (etickets || '') && {eticket: true} | filter: (filterBySection || '') && {section: section} | filter: (onlyParking || '') && {type: 'parking'}">
               <div class="col-xs-3 vertical-center">
                 {{ticket.section}}
               </div>

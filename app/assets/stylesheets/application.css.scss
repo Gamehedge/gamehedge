@@ -1304,6 +1304,24 @@ body {
     color: #7a7a7a;
 }
 
+.tuMapControl {
+    color: #FFFFFF;
+    text-shadow: -1px -1px 0 rgba(0,0,0,0.2);
+    background-color: #FF3000;
+    border: 1px solid #8e0202;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF3000', endColorstr='#8e0202');
+    background: -webkit-gradient(linear, left top, left bottom, from(#FF3000), to(#8e0202));
+    background: -moz-linear-gradient(top, #FF3000, #8e0202);
+    cursor: pointer;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 12px;
+    margin: 2px;
+    min-width: 60px;
+    text-align: center;
+    display: inline-block;
+}
+
 @media(max-width: 992px) {
 
     #tickets-map #MapContainer {

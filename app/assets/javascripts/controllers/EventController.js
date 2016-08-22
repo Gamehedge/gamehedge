@@ -130,7 +130,13 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	            Code += "Section " + Data.LongName
 	            return Code;
 	        }
+	        , OnControlClick:function(e,Data){
+	            $("MapContainer").tuMap("ToggleSelection","Parking");
+	            $scope.onlyParking = !$scope.onlyParking
+	            $scope.applyChanges(); 
+	        }
 	    });
+	    $("#MapContainer").tuMap("RemoveMapControl","Unmapped"); 
 	};
 
 	$scope.applyChanges = function(){
@@ -142,6 +148,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	$scope.filterBySection = false;
 	$scope.section = "";
 	$scope.sectionUrl = "";
+	$scope.onlyParking = false;
 	$scope.ordering = 'retail_price'
 	$scope.etickets = false
 	$window.scrollTo(0, 0);
