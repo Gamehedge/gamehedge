@@ -149,5 +149,5 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	$scope.$watch("sectionUrl", function(newValue, oldValue){
 		console.log("Watch")
     	console.log(newValue)
-	});
+	},true);
 });
