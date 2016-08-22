@@ -135,6 +135,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 		$scope.myModel.sectionUrl = url;
 		console.log("Update Function")
 		console.log($scope.myModel.sectionUrl);
+		$scope.$apply()
 	};
 
 	$scope.getEventInfo();
