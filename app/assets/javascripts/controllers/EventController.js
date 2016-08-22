@@ -94,11 +94,12 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	            	$scope.filterBySection = true;
 	                $scope.section = Section.Name;
 	                if(Section.SectionViewAvailable){
-	                    $scope.updateSectionUrl(Section.SectionViewUrl);
+	                   	$scope.sectionUrl = Section.SectionViewUrl;
 	                }
 	                else{
-	                    $scope.updateSectionUrl("");
+	                    $scope.sectionUrl ="";
 	                }
+	                $scope.applyChanges();
 	            }
 	        }
 	        , OnReset: function () {
@@ -131,23 +132,15 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	    });
 	};
 
-	$scope.updateSectionUrl = function(url){
-		$scope.myModel.sectionUrl = url;
-		console.log("Update Function")
-		console.log($scope.myModel.sectionUrl);
+	$scope.applyChanges = function(){
 		$scope.$apply()
 	};
 
 	$scope.getEventInfo();
 	$scope.filterBySection = false;
 	$scope.section = "";
-	$scope.myModel = {sectionUrl:""};
+	$scope.sectionUrl = "";
 	$scope.ordering = 'retail_price'
 	$scope.etickets = false
 	$window.scrollTo(0, 0);
-
-	$scope.$watch("myModel.sectionUrl", function(newValue, oldValue){
-		console.log("Watch")
-    	console.log(newValue)
-	},true);
 });

@@ -1220,7 +1220,13 @@ body {
 #tickets-map .section-image{
     height: 150px;
     width: 100%;
+    padding: 0;
 }
+
+#tickets-map .section-image img{
+    width: 100%;
+    height: 100%;
+}   
 
 #tickets-map .filter-header div, #tickets-map .tickets-data div{
     height: 100%;
