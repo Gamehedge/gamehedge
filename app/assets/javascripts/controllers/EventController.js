@@ -12,7 +12,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         });
 	};
 
-	$scope.updateFilter = function($event){ 
+	$scope.updateFilter = function($event){
+		console.log($scope.sectionUrl);
 		if($($event.currentTarget).hasClass("active") == true){
 			$($event.currentTarget).removeClass("active");
 		}
@@ -145,8 +146,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	$scope.etickets = false
 	$window.scrollTo(0, 0);
 
-	$watch("sectionUrl", function(newValue, oldValue){
+	$scope.$watch("sectionUrl", function(newValue, oldValue){
 		console.log("Watch")
     	console.log(newValue)
-});
+	});
 });
