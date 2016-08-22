@@ -90,8 +90,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	            }
 	        }
 	        , OnClick:function(e,Section){
-	        	console.log(Section.SectionViewUrl);
-	            if(Section.Active && Section.Selected){
+	        	if(Section.Active && Section.Selected){
 	            	$scope.filterBySection = true;
 	                $scope.sectionUrl = Section.Name;
 	                if(Section.SectionViewAvailable){
@@ -101,11 +100,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	                    $scope.sectionUrl = "";
 	                }    
 	            }
-	            else if(Section.Active == true && Section.Selected == false){
-	                var _index = $.inArray(Section.Mappings[0], selectedSections);
-	                selectedSections.splice(_index, 1);
-	                filterAction(1);
-	            }
+	            console.log("Section url "+$scope.sectionUrl);
 	        }
 	        , OnReset: function () {
 	            selectedSections = [];
