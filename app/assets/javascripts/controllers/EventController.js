@@ -1,6 +1,6 @@
 controllers = angular.module('gamehedge')
 
-controllers.controller('EventController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http){
+controllers.controller('EventController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http,$timeout){
 
 	$scope.getEventInfo = function(){
 		return apiService.getData('/api/v1/events/'+$routeParams.eventId)
@@ -13,8 +13,6 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	};
 
 	$scope.updateFilter = function($event){
-		$("#MapContainer").tuMap("RemoveMapControl","Unmapped");
-	    $("#MapContainer").tuMap("RemoveMapControl","Parking");
 		if($($event.currentTarget).hasClass("active") == true){
 			$($event.currentTarget).removeClass("active");
 		}
@@ -137,7 +135,9 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	        //     $scope.applyChanges(); 
 	        // }
 	    });
-	    
+	    $timeout(function () {
+	        $("#MapContainer").tuMap("RemoveMapControl","Unmapped");
+	    }, 2000);
 	};
 
 	$scope.applyChanges = function(){
