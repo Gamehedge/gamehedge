@@ -133,6 +133,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 
 	$scope.updateSectionUrl = function(url){
 		$scope.sectionUrl = url;
+		console.log("Update Function")
 		console.log($scope.sectionUrl);
 	};
 
@@ -143,4 +144,9 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	$scope.ordering = 'retail_price'
 	$scope.etickets = false
 	$window.scrollTo(0, 0);
+
+	$watch("sectionUrl", function(newValue, oldValue){
+		console.log("Watch")
+    	console.log(newValue)
+});
 });
