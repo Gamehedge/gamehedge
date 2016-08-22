@@ -101,8 +101,8 @@
                   <option ng-repeat="o in ticket.splits | orderBy:'-'" value="{{o}}">{{o}}</option>
                 </select>
               </div>
-              <div class="col-xs-4 vertical-center">
-                <span>
+              <div class="col-xs-4 vertical-center buy-btn">
+                <span class="buy-btn-span">
                   <button>${{ticket.retail_price}}/ea</button>
                   <p class="format">{{ticket.format}}</p>
                 </span>

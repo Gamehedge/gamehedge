@@ -51,7 +51,8 @@ body {
 }
 
 #home-loading-data{
-    margin-top: 50px;    
+    margin-top: 50px;
+    margin-bottom: 50px; 
 }
 
 #home-loading-data img{
@@ -1342,6 +1343,13 @@ body {
 
 @media(max-width: 992px) {
 
+    #tickets-map {
+        font-size: 13px;
+    }
+    .tooltip{
+        width: 100%;
+    }
+
     #tickets-map button {
         padding: 5px 8px;
         min-width: inherit;
@@ -1356,13 +1364,19 @@ body {
         margin: 0;
     }
 
-    #tickets-map .tickets-data .row span {
+    #tickets-map .tickets-data .buy-btn-span {
         width: 100%;
     }
 
     #tickets-map #MapContainer {
         height: inherit;
         width: 100%;
+    }
+    #tickets-map .tickets{
+        padding:0;
+    }
+    #tickets-map .tickets-data .buy-btn{
+        padding-right: 15px;
     }
     .row{
         margin-right:0;
