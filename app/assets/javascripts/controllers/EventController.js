@@ -90,6 +90,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	            }
 	        }
 	        , OnClick:function(e,Section){
+	        	console.log(Section.SectionViewUrl);
 	            if(Section.Active && Section.Selected){
 	            	$scope.filterBySection = true;
 	                $scope.sectionUrl = Section.Name;
