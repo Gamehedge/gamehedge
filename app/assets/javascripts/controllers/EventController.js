@@ -99,6 +99,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	                else{
 	                    $scope.updateSectionUrl("");
 	                }
+	            }
 	        }
 	        , OnReset: function () {
 	            selectedSections = [];
