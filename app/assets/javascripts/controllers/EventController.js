@@ -29,6 +29,13 @@ controllers.filter('numberOfSeats', function() {
     return out;
   };
 })
+.directive('emitLastRepeaterElement', function() {
+	return function(scope) {
+		if (scope.$last){
+			scope.$emit('LastRepeaterElement');
+		}
+	};
+})
 .controller('EventController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http,$timeout){
 
 	$scope.getEventInfo = function(){
@@ -64,12 +71,17 @@ controllers.filter('numberOfSeats', function() {
 		$scope.etickets = !$scope.etickets;
 	}
 
+	$scope.updateParking = function(){
+		$scope.onlyParking = !$scope.onlyParking;
+	}
+
 	$scope.getTicketList = function(){
 		$http({
             method: 'GET',
             url: '/tickets/list/?id='+String($scope.event.te_uid),
         }).then(function successCallback(response) {
         	$scope.tickets = response;
+        	$scope.loading = false;
         	console.log($scope.tickets);
         	var sections = [];
         	angular.forEach($scope.tickets.data, function(value, key) {
@@ -81,7 +93,6 @@ controllers.filter('numberOfSeats', function() {
 	            $scope.Data.push({"section":key,"price":0,"quantity":1});
 	        });
 	        $scope.loadMap();
-
         }, function errorCallback(response) {
             console.log(response);
             // called asynchronously if an error occurs
@@ -154,25 +165,29 @@ controllers.filter('numberOfSeats', function() {
 	            Code += "Section " + Data.LongName
 	            return Code;
 	        }
-	        , OnControlClick:function(e,Data){
-	            $("MapContainer").tuMap("ToggleSelection","Parking");
-	            $scope.onlyParking = !$scope.onlyParking
-	            $scope.applyChanges(); 
-	        }
 	    });
 	    $timeout(function () {
 	        $("#MapContainer").tuMap("RemoveMapControl","Unmapped");
-	    }, 2000);
+	        $("#MapContainer").tuMap("RemoveMapControl","Parking");
+	    }, 1000);
 	};
 
 	$scope.applyChanges = function(){
 		$scope.$apply()
 	};
 
+	$scope.$on('LastRepeaterElement', function(){
+		console.log('good to go');
+		$timeout(function () {
+	        $('[data-toggle="tooltip"]').tooltip();
+	    }, 1000);
+	});
+
 	$scope.getEventInfo();
 	$scope.Data = [];
 	$scope.filterBySection = false;
 	$scope.section = "";
+	$scope.loading = true;
 	$scope.sectionUrl = "";
 	$scope.onlyParking = false;
 	$scope.index = 0;
