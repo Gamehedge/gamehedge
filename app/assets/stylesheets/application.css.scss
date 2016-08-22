@@ -1320,6 +1320,12 @@ body {
     display: inline-block;
 }
 
+.tuMapControlSelected, .tuMapControlSelected:hover {
+    background: #FFFFFF;
+    border-color: #D93800;
+    color: #000000;
+}
+
 @media(max-width: 992px) {
 
     #tickets-map button {
