@@ -55,8 +55,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         	$.each(sections, function(value, key) {
 	            $scope.Data.push({"section":key,"price":0,"quantity":1});
 	        });
-	        console.log($scope.Data)
-            $scope.loadMap();
+	        $scope.loadMap();
 
         }, function errorCallback(response) {
             console.log(response);
@@ -136,7 +135,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	        //     $scope.applyChanges(); 
 	        // }
 	    });
-	    $("#MapContainer").tuMap("RemoveMapControl","Unmapped").tuMap("Refresh");; 
+	    $("#MapContainer").tuMap("RemoveMapControl","Unmapped");
+	    $("#MapContainer").tuMap("Refresh");
 	};
 
 	$scope.applyChanges = function(){
