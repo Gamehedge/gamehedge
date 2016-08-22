@@ -13,6 +13,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	};
 
 	$scope.updateFilter = function($event){
+		console.log("Section url "+$scope.sectionUrl);
 		if($($event.currentTarget).hasClass("active") == true){
 			$($event.currentTarget).removeClass("active");
 		}
@@ -90,6 +91,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	            }
 	        }
 	        , OnClick:function(e,Section){
+	        	console.log("Section url "+$scope.sectionUrl);
 	        	if(Section.Active && Section.Selected){
 	            	$scope.filterBySection = true;
 	                $scope.section = Section.Name;
@@ -102,7 +104,6 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	                    console.log("INCORRECT");
 	                }    
 	            }
-	            console.log("Section url "+$scope.sectionUrl);
 	        }
 	        , OnReset: function () {
 	            selectedSections = [];
