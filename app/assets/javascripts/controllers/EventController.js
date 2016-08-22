@@ -13,6 +13,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	};
 
 	$scope.updateFilter = function($event){
+		$("#MapContainer").tuMap("RemoveMapControl","Unmapped");
+	    $("#MapContainer").tuMap("RemoveMapControl","Parking");
 		if($($event.currentTarget).hasClass("active") == true){
 			$($event.currentTarget).removeClass("active");
 		}
@@ -135,8 +137,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	        //     $scope.applyChanges(); 
 	        // }
 	    });
-	    $("#MapContainer").tuMap("RemoveMapControl","Unmapped");
-	    $("#MapContainer").tuMap("Refresh");
+	    
 	};
 
 	$scope.applyChanges = function(){
