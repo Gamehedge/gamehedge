@@ -6,7 +6,46 @@ class HomeController < ApplicationController
 	@year = Date.today.strftime("%Y")
 
 	
-  	
+  	Event.all.each do |e|
+  		if e.slug.index('-tickets') == nil
+	  		e.slug = e.slug + '-tickets'
+	  		e.save
+	  	end
+	  	if e.url.index('-tickets') == nil
+	  		e.url = e.url + '-tickets'
+	  		e.save
+	  	end
+  	end
+
+  	Sport.all.each do |e|
+  		if e.slug.index('-tickets') == nil
+	  		e.slug = e.slug + '-tickets'
+	  		e.save
+	  	end
+  	end
+
+  	Performer.all.each do |e|
+  		if e.slug.index('-tickets') == nil
+	  		e.slug = e.slug + '-tickets'
+	  		e.save
+	  	end
+  	end
+
+  	Venue.all.each do |e|
+  		if e.slug.index('-tickets') == nil
+	  		e.slug = e.slug + '-tickets'
+	  		e.save
+	  	end
+  	end
+
+  	Tile.all.each do |e|
+  		if e.url.index('-tickets') == nil
+	  		e.url = e.url + '-tickets'
+	  		e.save
+	  	end
+  	end
+
+  	render json: "s"
   	# @connection = TicketEvolution::Connection.new({
    #        :token => '5bfd4b6110681d224a8c1fa6333f375f',       # => (required) The API token, used to identify you
    #        :secret => 'g3iR2RLeuzQA9vhDGfw5hRtGMnMDsimyOfQAJ4bi',      # => (required) The API secret, used to sign requests

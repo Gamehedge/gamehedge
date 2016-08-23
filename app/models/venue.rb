@@ -7,7 +7,7 @@ class Venue < ActiveRecord::Base
 	after_update  :update_url
 
   	def update_url
-	     self.update_column(:url => '/venues/' + String(self.id) + '/' + self.slug)
+	     self.update_column(:url, '/venues/' + String(self.id) + '/' + self.slug)
   	end
 
   	def image_url

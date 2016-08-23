@@ -9,7 +9,7 @@ class Sport < ActiveRecord::Base
   	after_update :update_url
 
   	def update_url
-	     self.update_column(:url => '/leagues/' + String(self.id) + '/' + self.slug)
+	     self.update_column(:url, '/leagues/' + String(self.id) + '/' + self.slug)
   	end
 
   	def image_url

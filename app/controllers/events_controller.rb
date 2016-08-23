@@ -16,16 +16,20 @@ class EventsController < ApplicationController
 		render json: @events
 	end
 	def next
-		if request.GET["geolocated"] == "true" && request.GET["latitude"] != nil && request.GET["longitude"] != nil
-			if request.remote_ip == "127.0.0.1"
-				info = Geocoder.search("150.210.231.30").first
-				latitude = info.data["latitude"]
-				longitude = info.data["longitude"]
+		if request.GET["geolocated"] == "true"
+			if request.GET["latitude"] != nil || request.GET["longitude"] != nil
+				@events = []
 			else
-				latitude = request.GET["latitude"]
-				longitude = request.GET["longitude"]
+				if request.remote_ip == "127.0.0.1"
+					info = Geocoder.search("150.210.231.30").first
+					latitude = info.data["latitude"]
+					longitude = info.data["longitude"]
+				else
+					latitude = request.GET["latitude"]
+					longitude = request.GET["longitude"]
+				end
+				@events = TicketEvolutionService.new({:type => request.GET["type"], :within => 25, :id => request.GET["id"], :geolocated => "true", :latitude => latitude, :longitude => longitude, :page => request.GET["page"], :source => request.GET["source"], :perpage => request.GET["perpage"]}).list
 			end
-			@events = TicketEvolutionService.new({:type => request.GET["type"], :within => 25, :id => request.GET["id"], :geolocated => "true", :latitude => latitude, :longitude => longitude, :page => request.GET["page"], :source => request.GET["source"], :perpage => request.GET["perpage"]}).list
 		else
 			@events = TicketEvolutionService.new({:type => request.GET["type"], :id => request.GET["id"], :geolocated => "false", :page => request.GET["page"], :source => request.GET["source"], :perpage => request.GET["perpage"]}).list
 		end
