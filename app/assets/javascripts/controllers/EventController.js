@@ -176,6 +176,14 @@ controllers.filter('numberOfSeats', function() {
 		$scope.$apply()
 	};
 
+	$scope.zoomIn = function(){
+		var Result=$("Selector").tuMap("ZoomIn");
+	}
+
+	$scope.zoomOut = function(){
+		var Result=$("Selector").tuMap("ZoomOut");
+	}
+
 	$scope.$on('LastRepeaterElement', function(){
 		console.log('good to go');
 		$timeout(function () {
