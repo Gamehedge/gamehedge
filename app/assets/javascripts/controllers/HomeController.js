@@ -47,11 +47,11 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 				source = "venue";
 			}
 		}
-		if($scope.tiles[index].has_geolocation == true){
+		if($scope.tiles[index].has_geolocation == true && angular.isDefined($scope.position)){
 			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true&longitude='+$scope.position.longitude+'&latitude='+$scope.position.latitude;
 		}
 		else{
-			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10';
+			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true';
 		}
 		$http({
 		  	method: 'GET',
@@ -127,6 +127,11 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
                 $scope.getTiles();
                 console.log("Location")
                 console.log($scope.position);
+            },
+            function(error) {
+                $scope.getTiles();
+                console.log("Location")
+                console.log("No location");
             }
         );
     }
