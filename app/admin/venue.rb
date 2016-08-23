@@ -7,6 +7,8 @@ index :download_links => false do
     column ("TEVO Id")  { |venue| venue.te_uid }
     column :name
     column :location
+    column :slug
+    column :url
     actions
 end
 
@@ -16,6 +18,8 @@ form multipart: true do |f|
       	f.input :address
       	f.input :te_uid
         f.input :location
+        f.input :slug
+        f.input :url
       	f.input :image, :as => :file, required: false
     end
     f.actions

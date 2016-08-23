@@ -1,50 +1,19 @@
 controllers = angular.module('gamehedge')
 
-controllers.filter('numberOfSeats', function() {
-  return function(input,numSeats) {
-    input = input || '';
-    var out = [];
-    if(numSeats == 0){
-    	out = input;
-    }
-    else if(numSeats == 5){
-    	angular.forEach(input, function(value, key) {
-    		console.log("Section "+value.section+" Row "+value.row);
-    		var keepGoing = true;
-    		angular.forEach(value.splits, function(value2, key2) {
-    			if(value2 >= 5 && keepGoing == true){
-    				out.push(value);
-    				keepGoing = false;
-    			}
-    		});
-    	});
-    }
-    else{
-    	angular.forEach(input, function(value, key) {
-    		if(value.splits.indexOf(numSeats) != -1){
-                out.push(value);
-            }	
-    	});
-    }
-    return out;
-  };
-})
-.directive('emitLastRepeaterElement', function() {
-	return function(scope) {
-		if (scope.$last){
-			scope.$emit('LastRepeaterElement');
-		}
-	};
-})
-.controller('EventController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http,$timeout){
+controllers.controller('EventController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http,$timeout,$location){
 
 	$scope.getEventInfo = function(){
 		return apiService.getData('/api/v1/events/'+$routeParams.eventId)
             .then(function(response){
-                console.log("Event");
+            	console.log("Event");
             	console.log(response);
                 $scope.event  = response;
-                $scope.getTicketList();
+                if($routeParams.slug == $scope.event.slug){
+                	$scope.getTicketList();
+                }
+                else{
+                	$location.path("/");
+                }
         });
 	};
 
@@ -202,5 +171,40 @@ controllers.filter('numberOfSeats', function() {
 	$scope.ordering = 'retail_price'
 	$scope.etickets = false
 	$window.scrollTo(0, 0);
+})
+.filter('numberOfSeats', function() {
+  return function(input,numSeats) {
+    input = input || '';
+    var out = [];
+    if(numSeats == 0){
+    	out = input;
+    }
+    else if(numSeats == 5){
+    	angular.forEach(input, function(value, key) {
+    		console.log("Section "+value.section+" Row "+value.row);
+    		var keepGoing = true;
+    		angular.forEach(value.splits, function(value2, key2) {
+    			if(value2 >= 5 && keepGoing == true){
+    				out.push(value);
+    				keepGoing = false;
+    			}
+    		});
+    	});
+    }
+    else{
+    	angular.forEach(input, function(value, key) {
+    		if(value.splits.indexOf(numSeats) != -1){
+                out.push(value);
+            }	
+    	});
+    }
+    return out;
+  };
+})
+.directive('emitLastRepeaterElement', function() {
+	return function(scope) {
+		if (scope.$last){
+			scope.$emit('LastRepeaterElement');
+		}
+	};
 });
-

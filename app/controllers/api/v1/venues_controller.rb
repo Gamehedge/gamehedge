@@ -18,16 +18,16 @@ class Api::V1::VenuesController < ApplicationApiController
       @venues = Venue.where(data_params)
     end
     respond_to do |format|
-      format.json { render json: @venues.to_json(:only => [:id, :name, :address, :te_uid, :location, :url], :include => :performers)}
+      format.json { render json: @venues.to_json(:only => [:id, :name, :address, :te_uid, :location, :url, :slug], :include => :performers)}
 
-      format.xml { render xml: @venues.to_json(:only => [:id, :name, :address, :te_uid, :location, :url])}
+      format.xml { render xml: @venues.to_json(:only => [:id, :name, :address, :te_uid, :location, :url, :slug], :include => :performers)}
     end
   end
 
   def show
     respond_to do |format|
-      format.json { render json: @venue.to_json(:only => [:id, :name, :address, :te_uid, :location, :url], :include => :performers)}
-      format.xml { render xml: @venue.to_json(:only => [:id, :name, :address, :te_uid, :location, :url])}
+      format.json { render json: @venue.to_json(:only => [:id, :name, :address, :te_uid, :location, :url, :slug], :include => :performers)}
+      format.xml { render xml: @venue.to_json(:only => [:id, :name, :address, :te_uid, :location, :url, :slug], :include => :performers)}
     end
   end
 

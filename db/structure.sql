@@ -28,6 +28,20 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
 --
+-- Name: amcheck; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS amcheck WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION amcheck; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION amcheck IS 'verify the logical consistency of indexes';
+
+
+--
 -- Name: pg_stat_statements; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -391,7 +405,8 @@ CREATE TABLE events (
     occurs_at timestamp without time zone,
     location character varying,
     te_venue_id integer,
-    sport_id integer
+    sport_id integer,
+    slug character varying
 );
 
 
@@ -439,7 +454,8 @@ CREATE TABLE performers (
     url character varying,
     wins integer,
     losses integer,
-    description text
+    description text,
+    slug character varying
 );
 
 
@@ -475,7 +491,8 @@ CREATE TABLE venues (
     image_content_type character varying,
     image_file_size integer,
     image_updated_at timestamp without time zone,
-    description text
+    description text,
+    slug character varying
 );
 
 
@@ -725,7 +742,8 @@ CREATE TABLE sports (
     image_file_size integer,
     image_updated_at timestamp without time zone,
     url character varying,
-    ggg character varying
+    ggg character varying,
+    slug character varying
 );
 
 
@@ -1614,4 +1632,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160812232300');
 INSERT INTO schema_migrations (version) VALUES ('20160817202446');
 
 INSERT INTO schema_migrations (version) VALUES ('20160818181226');
+
+INSERT INTO schema_migrations (version) VALUES ('20160823155443');
 

@@ -14,6 +14,8 @@ index :download_links => false do
     column :home_performer
     column :away_performer
     column :venue
+    column :slug
+    column :url
     actions
 end
 
@@ -26,6 +28,8 @@ form do |f|
         	f.input :te_venue_id
         	f.input :location
         	f.input :occurs_at
+            f.input :slug
+            f.input :url
         	f.input :sport_id, :as => :select, :collection => Sport.all.order(:name)
         	f.input :venue_id, :as => :select, :collection => Venue.all.order(:name)
         	f.input :home_performer_id, :as => :select, :collection => Performer.all.order(:name)

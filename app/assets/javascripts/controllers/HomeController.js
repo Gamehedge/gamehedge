@@ -68,6 +68,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 			$scope.tiles[index].ready = true;
 			index += 1;
 			if(index >= $scope.tiles.length){
+				console.log("Tiles");
 				console.log($scope.tiles);
 			}
 		}, function errorCallback(response2) {
@@ -122,4 +123,9 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 	$scope.getTiles();
 	$window.scrollTo(0, 0);
     $scope.compareDate =  "2015-09-05T00:00:00.000Z"
+})
+.filter('spaceless', function () {
+  return function (input) {
+      return input.replace(/ /g, '-');
+  };
 });

@@ -21,19 +21,19 @@ app.config([ '$routeProvider','$locationProvider','AuthProvider',
             templateUrl: "login.html",
             controller: 'LoginController',
         })
-        .when('/leagues/:leagueId', {
+        .when('/leagues/:leagueId/:slug', {
             templateUrl: "league.html",
             controller: 'LeagueController',
         })
-        .when('/performers/:performerId', {
+        .when('/performers/:performerId/:slug', {
             templateUrl: "performer.html",
             controller: 'PerformerController',
         })
-        .when('/venues/:venueId', {
+        .when('/venues/:venueId/:slug', {
             templateUrl: "venue.html",
             controller: 'VenueController',
         })
-        .when('/events/:eventId', {
+        .when('/events/:eventId/:slug', {
             templateUrl: "event.html",
             controller: 'EventController',
         })

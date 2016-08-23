@@ -147,7 +147,7 @@
             </div>
         </div>
         <div class="navbar-leagues col-md-4 hidden-sm hidden-xs">
-            <a class="" href="/#/leagues/{{league.id}}" ng-repeat="league in leagueList | orderBy:'name' track by $index">{{league.name | uppercase}}</a>
+            <a class="" href="{{league.url}}" ng-repeat="league in leagueList | orderBy:'name' track by $index">{{league.name | uppercase}}</a>
         </div>
 
         <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs" >

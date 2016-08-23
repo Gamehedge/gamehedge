@@ -6,10 +6,10 @@ class Sport < ActiveRecord::Base
 	has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100#" }
   	validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
-  	after_create :update_url
+  	after_update :update_url
 
   	def update_url
-	     self.update_attributes(:url => '/leagues/' + String(self.id))
+	     self.update_column(:url => '/leagues/' + String(self.id) + '/' + self.slug)
   	end
 
   	def image_url

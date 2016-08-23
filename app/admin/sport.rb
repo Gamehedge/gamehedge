@@ -7,8 +7,11 @@ permit_params :id, :name, :description, :te_uid, :image, :ggg
 
 index :download_links => false do
     selectable_column
+    column :id
     column ("TEVO Id")  { |sport| sport.te_uid }
     column :name
+    column :slug
+    column :url
     actions
 end
 
@@ -18,6 +21,8 @@ form multipart: true do |f|
       	f.input :description
       	f.input :te_uid
         f.input :ggg
+        f.input :slug
+        f.input :url
       	f.input :image, :as => :file, required: false
     end
     f.actions

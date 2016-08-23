@@ -1,14 +1,19 @@
 app = angular.module('gamehedge')
 
-app.controller('PerformerController', function($scope,$rootScope,$routeParams,dataService, apiService,$window){
+app.controller('PerformerController', function($scope,$rootScope,$routeParams,dataService, apiService,$window,$location){
 	$scope.getPerformerInfo = function(){
 		apiService.getData('/api/v1/performers/'+$routeParams.performerId)
             .then(function(response){
                 console.log("Performer");
             	console.log(response);
                 $scope.performer  = response;
-                $scope.getTestimonials();
-                $scope.getEvents();
+                if($routeParams.slug == $scope.performer.slug){
+                    $scope.getTestimonials();
+                    $scope.getEvents();
+                }
+                else{
+                    $location.path("/");
+                }
         });
 	};
 

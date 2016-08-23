@@ -10,11 +10,11 @@ class Tile < ActiveRecord::Base
 
     def update_url
         if self.tile_type_id == 1
-            self.update_column(:url, '/leagues/' + String(self.sport.id))
+            self.update_column(:url, '/leagues/' + String(self.sport.id) + '/' + self.sport.slug)
         elsif self.tile_type_id == 2
-            self.update_column(:url, '/performers/' + String(self.performer.te_uid))
+            self.update_column(:url, '/performers/' + String(self.performer.te_uid) + '/' + self.performer.slug)
         elsif self.tile_type_id == 3
-            self.update_column(:url, '/venues/' + String(self.venue.te_uid))
+            self.update_column(:url, '/venues/' + String(self.venue.te_uid) + '/' + self.venue.slug)
         end
     end
 

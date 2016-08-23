@@ -10,9 +10,11 @@ index :download_links => false do
     selectable_column
     column ("TEVO Id")  { |performer| performer.te_uid }
     column :name
-    column ("Slug")  { |performer| performer.te_slug }
+    column :slug
     column :division
     column :sport
+    column :slug
+    column :url
     actions
 end
 
@@ -21,10 +23,11 @@ form multipart: true do |f|
       	f.input :te_name
         f.input :te_uid
         f.input :name
-      	f.input :te_slug
-        f.input :wins
+      	f.input :wins
         f.input :losses
         f.input :description
+        f.input :slug
+        f.input :url
         f.input :division, :as => :select, :collection => Division.all
       	f.input :sport, :as => :select, :collection => Sport.all.order(:name)
         f.input :venue, :as => :select, :collection => Venue.all.order(:name)

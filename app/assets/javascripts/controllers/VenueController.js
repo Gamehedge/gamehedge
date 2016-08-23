@@ -1,16 +1,18 @@
 app = angular.module('gamehedge')
 
-app.controller('VenueController', function($scope,$rootScope,$routeParams,dataService, apiService,$window){
+app.controller('VenueController', function($scope,$rootScope,$routeParams,dataService, apiService,$window,$location){
 	$scope.getVenueInfo = function(){
 		apiService.getData('/api/v1/venues/'+$routeParams.venueId)
             .then(function(response){
-                console.log('/api/v1/venues/'+$routeParams.venueId)
                 console.log("Venue");
-            	$scope.venue  = response;
-                //$scope.venue.address = angular.fromJson($scope.venue.address)
-                console.log($scope.venue);
-                //$scope.getTestimonials();
-                $scope.getEvents();
+            	console.log($scope.venue);
+                $scope.venue  = response;
+                if($routeParams.slug == $scope.venue.slug){
+                    $scope.getEvents();
+                }
+                else{
+                    $location.path("/");
+                }
         });
 	};
 

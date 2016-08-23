@@ -13,10 +13,10 @@ class Performer < ActiveRecord::Base
 	def display_name
 		return self.name
 	end
-	after_create :update_url
+	after_update :update_url
 
   	def update_url
-	     self.update_attributes(:url => '/performers/' + String(self.te_uid))
+	     self.update_column(:url => '/performers/' + String(self.te_uid) + '/' + self.slug)
   	end
 
   	def image_url

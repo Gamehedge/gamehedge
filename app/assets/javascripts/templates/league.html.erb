@@ -86,7 +86,7 @@
     <div class="container">
       <div class="title">UPCOMING GAMES NEAR YOU</div>
       <div ng-repeat="event in next_events | limitTo:4" class="col-md-3">
-        <a href="{{event.url}}">
+        <a href="{{(event.url + '/' + event.name) | spaceless | lowercase}}">
           <div class="back">
             <div class="front">
               <div class="date-holder">

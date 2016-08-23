@@ -1,14 +1,19 @@
 app = angular.module('gamehedge')
 
-app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataService,apiService,$window,$http){
+app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataService,apiService,$window,$http,$location){
 	$scope.getLeagueInfo = function(){
 		return apiService.getData('/api/v1/sports/'+$routeParams.leagueId)
             .then(function(response){
                 console.log("League");
             	console.log(response);
                 $scope.league  = response;
-                $scope.getDivisions();
-                $scope.getNextEvents();
+                if($routeParams.slug == $scope.league.slug){
+                    $scope.getDivisions();
+                    $scope.getNextEvents();
+                }
+                else{
+                    $location.path("/");
+                }
         });
 	};
 
