@@ -16,6 +16,11 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
                                 $scope.getNextEvents();
                                 console.log("Location")
                                 console.log($scope.position);
+                            },
+                            function(error) {
+                                $scope.getNextEvents();
+                                console.log("Location")
+                                console.log("No location");
                             }
                         );
                     }
@@ -62,7 +67,12 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
 	$scope.getNextEvents = function(){
         id = $scope.league.te_uid;
         source = "league";
-        url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true&longitude='+$scope.position.longitude+'&latitude='+$scope.position.latitude;
+        if(angular.isDefined($scope.position)){
+            url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true&longitude='+$scope.position.longitude+'&latitude='+$scope.position.latitude;
+        }
+        else{
+            url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true';  
+        }
         $http({
             method: 'GET',
             url: url,

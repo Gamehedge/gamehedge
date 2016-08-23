@@ -47,11 +47,16 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 				source = "venue";
 			}
 		}
-		if($scope.tiles[index].has_geolocation == true && angular.isDefined($scope.position)){
-			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true&longitude='+$scope.position.longitude+'&latitude='+$scope.position.latitude;
+		if($scope.tiles[index].has_geolocation == true){
+			if(angular.isDefined($scope.position)){
+				url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true&longitude='+$scope.position.longitude+'&latitude='+$scope.position.latitude;
+			}
+			else{
+				url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true';	
+			}
 		}
 		else{
-			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true';
+			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10';
 		}
 		$http({
 		  	method: 'GET',
