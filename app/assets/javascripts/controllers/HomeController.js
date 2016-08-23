@@ -48,7 +48,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 			}
 		}
 		if($scope.tiles[index].has_geolocation == true){
-			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true';
+			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true&longitude='+$scope.position.longitude+'&latitude='+$scope.position.latitude;
 		}
 		else{
 			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10';
@@ -120,9 +120,18 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 	// 	}
 	// }
 	//Initializers
-	$scope.getTiles();
+	if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                $scope.position = position.coords;
+                $scope.getTiles();
+                console.log("Location")
+                console.log($scope.position);
+            }
+        );
+    }
 	$window.scrollTo(0, 0);
-    $scope.compareDate =  "2015-09-05T00:00:00.000Z"
+    $scope.compareDate =  "2015-09-05T00:00:00.000Z";
 })
 .filter('spaceless', function () {
   return function (input) {

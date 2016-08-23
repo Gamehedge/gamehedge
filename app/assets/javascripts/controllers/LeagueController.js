@@ -9,7 +9,16 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
                 $scope.league  = response;
                 if($routeParams.slug == $scope.league.slug){
                     $scope.getDivisions();
-                    $scope.getNextEvents();
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(
+                            function(position) {
+                                $scope.position = position.coords;
+                                $scope.getNextEvents();
+                                console.log("Location")
+                                console.log($scope.position);
+                            }
+                        );
+                    }
                 }
                 else{
                     $location.path("/");
@@ -53,7 +62,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
 	$scope.getNextEvents = function(){
         id = $scope.league.te_uid;
         source = "league";
-        url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true';
+        url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true&longitude='+$scope.position.longitude+'&latitude='+$scope.position.latitude;
         $http({
             method: 'GET',
             url: url,
@@ -74,6 +83,13 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
             // called asynchronously if an error occurs
             // or server returns response with an error status.
         });
+        function getLocation() {
+            
+        }
+        function showPosition(position) {
+            x.innerHTML = "Latitude: " + position.coords.latitude + 
+            "<br>Longitude: " + position.coords.longitude; 
+        }
     }
 
 	//Initializers

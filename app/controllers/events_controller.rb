@@ -25,7 +25,7 @@ class EventsController < ApplicationController
 				latitude = request.GET["latitude"]
 				longitude = request.GET["longitude"]
 			end
-			@events = TicketEvolutionService.new({:type => request.GET["type"], :id => request.GET["id"], :geolocated => "true", :latitude => latitude, :longitude => longitude, :page => request.GET["page"], :source => request.GET["source"], :perpage => request.GET["perpage"]}).list
+			@events = TicketEvolutionService.new({:type => request.GET["type"], :within => 25, :id => request.GET["id"], :geolocated => "true", :latitude => latitude, :longitude => longitude, :page => request.GET["page"], :source => request.GET["source"], :perpage => request.GET["perpage"]}).list
 		else
 			@events = TicketEvolutionService.new({:type => request.GET["type"], :id => request.GET["id"], :geolocated => "false", :page => request.GET["page"], :source => request.GET["source"], :perpage => request.GET["perpage"]}).list
 		end
