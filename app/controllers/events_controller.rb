@@ -17,7 +17,7 @@ class EventsController < ApplicationController
 	end
 	def next
 		if request.GET["geolocated"] == "true"
-			if request.GET["latitude"] != nil || request.GET["longitude"] != nil
+			if request.GET["latitude"] == nil || request.GET["longitude"] == nil
 				@events = []
 			else
 				if request.remote_ip == "127.0.0.1"

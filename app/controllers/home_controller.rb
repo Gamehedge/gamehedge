@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   	require 'date'
 	@year = Date.today.strftime("%Y")
 
-	
+		
   	# @connection = TicketEvolution::Connection.new({
    #        :token => '5bfd4b6110681d224a8c1fa6333f375f',       # => (required) The API token, used to identify you
    #        :secret => 'g3iR2RLeuzQA9vhDGfw5hRtGMnMDsimyOfQAJ4bi',      # => (required) The API secret, used to sign requests
