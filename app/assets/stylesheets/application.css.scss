@@ -1275,6 +1275,22 @@ body {
     text-align: -webkit-center;
 }
 
+#tickets-map .map-container .glyphicon-zoom-in {
+    position: absolute;
+    right: 0;
+    top: 20px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+#tickets-map .map-container .glyphicon-zoom-out {
+    position: absolute;
+    right: 0;
+    top: 60px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
 #tickets-map button {
     border-radius: 3px;
     background-color: #f0f0f0;
