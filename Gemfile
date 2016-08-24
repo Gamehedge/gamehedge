@@ -96,7 +96,7 @@ gem 'angular-ui-bootstrap-rails'
 
 # Get IP address and location
 
-gem 'geocoder'
+gem 'pointpin', '~> 1.0.0'
 
 # for the reports
 

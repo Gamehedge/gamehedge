@@ -48,12 +48,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 			}
 		}
 		if($scope.tiles[index].has_geolocation == true){
-			if(angular.isDefined($scope.position)){
-				url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true&longitude='+$scope.position.longitude+'&latitude='+$scope.position.latitude;
-			}
-			else{
-				url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true';	
-			}
+			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true';
 		}
 		else{
 			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10';
@@ -110,36 +105,8 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
                 return response;
         });
     };	
-
- //    $scope.getLocation = function(){
- //  	    if (navigator.geolocation) {
-	//         navigator.geolocation.getCurrentPosition(showPosition);
-	//     } else {
-	//         console.log = "No geolocation enabled";
-	//         $scope.getTiles();
-	//     }
-	// 	function showPosition(position) {
-	// 		$scope.location = position.coords;
-	// 		console.log($scope.location);
-	// 		$scope.getTiles();
-	// 	}
-	// }
 	//Initializers
-	if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            function(position) {
-                $scope.position = position.coords;
-                $scope.getTiles();
-                console.log("Location")
-                console.log($scope.position);
-            },
-            function(error) {
-                $scope.getTiles();
-                console.log("Location")
-                console.log("No location");
-            }
-        );
-    }
+	$scope.getTiles();
 	$window.scrollTo(0, 0);
     $scope.compareDate =  "2015-09-05T00:00:00.000Z";
 })

@@ -16,20 +16,23 @@ class EventsController < ApplicationController
 		render json: @events
 	end
 	def next
+		require 'json'
 		if request.GET["geolocated"] == "true"
-			if request.GET["latitude"] == nil || request.GET["longitude"] == nil
-				@events = []
+			if cookies[:location_]
+				info = ActiveSupport::JSON.decode(cookies[:location_])
+				latitude = info['latitude']
+				longitude = info['longitude']
 			else
 				if request.remote_ip == "127.0.0.1"
-					info = Geocoder.search("150.210.231.30").first
-					latitude = info.data["latitude"]
-					longitude = info.data["longitude"]
+					info = Pointpin.locate("150.210.231.30")
 				else
-					latitude = request.GET["latitude"]
-					longitude = request.GET["longitude"]
+					info = Pointpin.locate(request.remote_ip)
 				end
-				@events = TicketEvolutionService.new({:type => request.GET["type"], :within => 25, :id => request.GET["id"], :geolocated => "true", :latitude => latitude, :longitude => longitude, :page => request.GET["page"], :source => request.GET["source"], :perpage => request.GET["perpage"]}).list
+				cookies[:location_] = {value: info.to_json, expires: 12.hour.from_now}
+				latitude = info.latitude
+				longitude = info.longitude
 			end
+			@events = TicketEvolutionService.new({:type => request.GET["type"], :within => 25, :id => request.GET["id"], :geolocated => "true", :latitude => latitude, :longitude => longitude, :page => request.GET["page"], :source => request.GET["source"], :perpage => request.GET["perpage"]}).list
 		else
 			@events = TicketEvolutionService.new({:type => request.GET["type"], :id => request.GET["id"], :geolocated => "false", :page => request.GET["page"], :source => request.GET["source"], :perpage => request.GET["perpage"]}).list
 		end
