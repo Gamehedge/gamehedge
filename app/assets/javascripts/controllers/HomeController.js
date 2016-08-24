@@ -53,6 +53,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 		else{
 			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10';
 		}
+		console.log(url)
 		$http({
 		  	method: 'GET',
 		  	url: url,

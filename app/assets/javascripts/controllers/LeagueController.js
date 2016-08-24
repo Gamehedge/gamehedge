@@ -9,21 +9,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
                 $scope.league  = response;
                 if($routeParams.slug == $scope.league.slug){
                     $scope.getDivisions();
-                    if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(
-                            function(position) {
-                                $scope.position = position.coords;
-                                $scope.getNextEvents();
-                                console.log("Location")
-                                console.log($scope.position);
-                            },
-                            function(error) {
-                                $scope.getNextEvents();
-                                console.log("Location")
-                                console.log("No location");
-                            }
-                        );
-                    }
+                    $scope.getNextEvents();
                 }
                 else{
                     $location.path("/");
@@ -67,12 +53,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
 	$scope.getNextEvents = function(){
         id = $scope.league.te_uid;
         source = "league";
-        if(angular.isDefined($scope.position)){
-            url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true&longitude='+$scope.position.longitude+'&latitude='+$scope.position.latitude;
-        }
-        else{
-            url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true';  
-        }
+        url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true';  
         $http({
             method: 'GET',
             url: url,
@@ -93,13 +74,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
             // called asynchronously if an error occurs
             // or server returns response with an error status.
         });
-        function getLocation() {
-            
-        }
-        function showPosition(position) {
-            x.innerHTML = "Latitude: " + position.coords.latitude + 
-            "<br>Longitude: " + position.coords.longitude; 
-        }
+        
     }
 
 	//Initializers

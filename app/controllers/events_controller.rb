@@ -36,6 +36,6 @@ class EventsController < ApplicationController
 		else
 			@events = TicketEvolutionService.new({:type => request.GET["type"], :id => request.GET["id"], :geolocated => "false", :page => request.GET["page"], :source => request.GET["source"], :perpage => request.GET["perpage"]}).list
 		end
-		render json: @events
+		render json: cookies[:location_]
 	end
 end
