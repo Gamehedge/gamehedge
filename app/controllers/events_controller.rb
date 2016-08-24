@@ -37,6 +37,6 @@ class EventsController < ApplicationController
 			@events = TicketEvolutionService.new({:type => request.GET["type"], :id => request.GET["id"], :geolocated => "false", :page => request.GET["page"], :source => request.GET["source"], :perpage => request.GET["perpage"]}).list
 		end
 		
-		render json: [request.remote_ip,request.ip]
+		render json: Pointpin.locate(request.remote_ip).to_json
 	end
 end
