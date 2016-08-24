@@ -105,7 +105,7 @@ class TicketEvolutionService
                       end
                     end
                     if Event.where(te_uid: e.id).first == nil
-                      Event.create(te_uid: te_uid, te_performer_visit_id: te_performer_visit_id, te_performer_home_id: te_performer_home_id, name: name, home_performer_id: home_performer_id, away_performer_id: away_performer_id, venue_id: venue_id, te_venue_id: te_venue_id, occurs_at: occurs_at, location: location)
+                      Event.create(slug: ((name.downcase.gsub ' ', '-') + "-tickets"),te_uid: te_uid, te_performer_visit_id: te_performer_visit_id, te_performer_home_id: te_performer_home_id, name: name, home_performer_id: home_performer_id, away_performer_id: away_performer_id, venue_id: venue_id, te_venue_id: te_venue_id, occurs_at: occurs_at, location: location)
                       puts "Doesn't exist. Event Created " + String(e.name)
                     else
                       @event = Event.where(te_uid: e.id).first
@@ -119,6 +119,7 @@ class TicketEvolutionService
                       @event.te_venue_id = te_venue_id
                       @event.occurs_at = occurs_at
                       @event.location = location
+                      @event.slug = (name.downcase.gsub ' ', '-') + "-tickets"
                       @event.save
                       puts "Exists. Event Updated " + String(e.name)
                     end

@@ -91,8 +91,9 @@
           </div>
           <div class="col-xs-12 tickets-data" ng-if="!loading">
             <div class="row" ng-repeat="ticket in tickets.data | orderBy:ordering | filter: (etickets || '') && {eticket: true} | filter: (filterBySection || '') && {section: section} | filter: (onlyParking || '') && {type: 'parking'} | numberOfSeats:index" emit-last-repeater-element>
+              <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ticket.public_notes}}" ng-if="ticket.public_notes"></span>
               <div class="col-xs-3 vertical-center section">
-                <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ticket.public_notes}}" ng-if="ticket.public_notes"></span>
+                
                 {{ticket.section}}
               </div>
               <div class="col-xs-2 vertical-center">

@@ -1231,6 +1231,7 @@ body {
     height: 100%;
     justify-content: center;
     padding:0;
+    position: relative;
 }
 
 #tickets-map .tickets-data .section {
@@ -1306,6 +1307,7 @@ body {
     position: absolute;
     left: 11px;
     top: 34px;
+    z-index: 9999;
 }
 
 #tickets-map button.active{
@@ -1360,9 +1362,9 @@ body {
 @media(max-width: 992px) {
 
     #tickets-map {
-        font-size: 13px;
+        font-size: 11px;
     }
-    .tooltip{
+    #tickets-map .tooltip{
         width: 100%;
     }
 
@@ -1371,8 +1373,32 @@ body {
         min-width: inherit;
     }
 
+    #tickets-map .tickets-data .section {
+        padding-left: 20px;
+    }
+
+    #tickets-map .glyphicon-info-sign {
+        left: 3px;
+    }
+
+    #tickets-map .filter-header{
+        font-size: 11px;
+    }
+
+    #tickets-map .map-container .glyphicon-zoom-in{
+        right: 6px;
+        font-size: 20px;
+    }
+
+    #tickets-map .map-container .glyphicon-zoom-out {
+        right: 6px;
+        top: 50px;
+        font-size: 20px;
+    }
+
     #tickets-map .tickets-data {
         padding: 0;
+        font-size: 11px;
     }
 
     #tickets-map .tickets-data .row button {
