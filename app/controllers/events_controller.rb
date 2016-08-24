@@ -36,6 +36,8 @@ class EventsController < ApplicationController
 		else
 			@events = TicketEvolutionService.new({:type => request.GET["type"], :id => request.GET["id"], :geolocated => "false", :page => request.GET["page"], :source => request.GET["source"], :perpage => request.GET["perpage"]}).list
 		end
-		render json: [request.remote_ip,request.ip]
+		require 'open-uri'
+		remote_ip = open('http://whatismyip.akamai.com').read
+		render json: remote_ip
 	end
 end
