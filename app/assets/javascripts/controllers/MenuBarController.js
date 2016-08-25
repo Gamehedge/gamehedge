@@ -14,6 +14,7 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
         // unauthenticated error
         $rootScope.isLoggedin = false;
     });
+
     $scope.logout = function(){
         $scope.hideMenus();
         var config = {

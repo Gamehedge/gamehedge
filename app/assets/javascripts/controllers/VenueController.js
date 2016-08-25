@@ -87,6 +87,7 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
 	  
 
 	//Initializers
+    $rootScope.isOrder = false;
     $scope.disable_toogle = false;
     $scope.loading = true;
     $scope.all_games = true;

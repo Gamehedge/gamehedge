@@ -106,7 +106,7 @@
               </div>
               <div class="col-xs-4 vertical-center buy-btn">
                 <span class="buy-btn-span">
-                  <button>${{ticket.retail_price}}/ea</button>
+                  <button ng-click="redirect($event, ticket.id)">${{ticket.retail_price}}/ea</button>
                   <p class="format">{{ticket.format}}</p>
                 </span>
               </div>

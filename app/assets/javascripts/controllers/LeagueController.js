@@ -78,6 +78,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
     }
 
 	//Initializers
+    $rootScope.isOrder = false;
     $scope.loading = true;
     $scope.next_events = [];
 	$scope.getLeagueInfo();

@@ -1359,6 +1359,29 @@ body {
     color: #000000;
 }
 
+.navbar-header{
+    height: 100%;
+}
+
+.help-image {
+    height: 70%;
+}
+.navbar-header.help {
+    color: white;
+    font-size: 12px;
+    justify-content: flex-end;
+    padding-right: 100px;
+}
+
+.navbar-header.help p{
+    margin: 0;
+}
+
+.navbar-header.help span{
+    font-size: 18px;
+}
+
+
 @media(max-width: 992px) {
 
     #tickets-map {
@@ -1571,7 +1594,7 @@ a {
 	width: 100%;
 	max-width: 300px;
 	height: auto;
-	padding-top: 20px;
+	
 }
 
 @media (max-width: 991px) {
@@ -1591,12 +1614,12 @@ a {
 
 .navbar-gamehedge {
     margin-bottom: 0px;
-    background-color: #333;
+    background-color: #373d3f;
     border-radius: 0px;
-    background: none;
     border: none;
     z-index: 10;
     height: 0;
+    min-height: 64px;
 }
 
 @media (max-width: 991px) {

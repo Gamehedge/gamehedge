@@ -153,6 +153,13 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 		var Result=$("Selector").tuMap("ZoomOut");
 	}
 
+	$scope.redirect = function($event,id) {
+		var amount = $($event.currentTarget).parent().parent().parent().find("select").val();
+		var url = '/order/'+id+'?amount='+String(amount);
+		console.log(url);
+	  	$location.path(url);
+	};
+
 	$scope.$on('LastRepeaterElement', function(){
 		console.log('good to go');
 		$timeout(function () {
@@ -168,8 +175,9 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	$scope.sectionUrl = "";
 	$scope.onlyParking = false;
 	$scope.index = 0;
-	$scope.ordering = 'retail_price'
-	$scope.etickets = false
+	$scope.ordering = 'retail_price';
+	$scope.etickets = false;
+	$rootScope.isOrder = false;
 	$window.scrollTo(0, 0);
 })
 .filter('numberOfSeats', function() {

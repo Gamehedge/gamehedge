@@ -37,6 +37,10 @@ app.config([ '$routeProvider','$locationProvider','AuthProvider',
             templateUrl: "event.html",
             controller: 'EventController',
         })
+        .when('/order/:ticektId', {
+            templateUrl: "order.html",
+            controller: 'OrderController',
+        })
         .otherwise({
             redirectTo: '/'
         });

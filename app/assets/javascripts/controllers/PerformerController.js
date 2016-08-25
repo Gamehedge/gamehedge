@@ -87,6 +87,7 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
 	  
 
 	//Initializers
+    $rootScope.isOrder = false;
     $scope.disable_toogle = false;
     $scope.loading = true;
     $scope.all_games = true;
