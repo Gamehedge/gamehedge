@@ -28,20 +28,6 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
 --
--- Name: amcheck; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS amcheck WITH SCHEMA public;
-
-
---
--- Name: EXTENSION amcheck; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION amcheck IS 'verify the logical consistency of indexes';
-
-
---
 -- Name: pg_stat_statements; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -671,6 +657,43 @@ ALTER SEQUENCE players_id_seq OWNED BY players.id;
 
 
 --
+-- Name: promo_codes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE promo_codes (
+    id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    value double precision,
+    is_percentage boolean,
+    name character varying,
+    code character varying,
+    start_date date,
+    end_date date,
+    active boolean
+);
+
+
+--
+-- Name: promo_codes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE promo_codes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: promo_codes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE promo_codes_id_seq OWNED BY promo_codes.id;
+
+
+--
 -- Name: refund_statuses; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -708,6 +731,39 @@ ALTER SEQUENCE refund_statuses_id_seq OWNED BY refund_statuses.id;
 CREATE TABLE schema_migrations (
     version character varying NOT NULL
 );
+
+
+--
+-- Name: service_fees; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE service_fees (
+    id integer NOT NULL,
+    minimum_amount numeric(8,2),
+    fee_amount double precision,
+    description character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: service_fees_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE service_fees_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: service_fees_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE service_fees_id_seq OWNED BY service_fees.id;
 
 
 SET default_with_oids = true;
@@ -946,7 +1002,21 @@ ALTER TABLE ONLY players ALTER COLUMN id SET DEFAULT nextval('players_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY promo_codes ALTER COLUMN id SET DEFAULT nextval('promo_codes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY refund_statuses ALTER COLUMN id SET DEFAULT nextval('refund_statuses_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY service_fees ALTER COLUMN id SET DEFAULT nextval('service_fees_id_seq'::regclass);
 
 
 --
@@ -1089,11 +1159,27 @@ ALTER TABLE ONLY players
 
 
 --
+-- Name: promo_codes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY promo_codes
+    ADD CONSTRAINT promo_codes_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: refund_statuses_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY refund_statuses
     ADD CONSTRAINT refund_statuses_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: service_fees_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY service_fees
+    ADD CONSTRAINT service_fees_pkey PRIMARY KEY (id);
 
 
 --
@@ -1634,4 +1720,12 @@ INSERT INTO schema_migrations (version) VALUES ('20160817202446');
 INSERT INTO schema_migrations (version) VALUES ('20160818181226');
 
 INSERT INTO schema_migrations (version) VALUES ('20160823155443');
+
+INSERT INTO schema_migrations (version) VALUES ('20160826163118');
+
+INSERT INTO schema_migrations (version) VALUES ('20160826164454');
+
+INSERT INTO schema_migrations (version) VALUES ('20160826165038');
+
+INSERT INTO schema_migrations (version) VALUES ('20160826165853');
 
