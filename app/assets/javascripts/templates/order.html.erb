@@ -8,4 +8,265 @@
       </div>
     </div>
   </section>
+  <section id="payments">
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-md-8">
+  				<div class="card-title">
+  					Deliver tickets to
+  				</div>
+  				<div class="card">
+  					<div class="card-in deliver">
+  						<span ng-show="ticket.format == 'Eticket'">
+  							<div class="inputs">
+	  							<div class="email">
+								    <label for="email">Email</label>
+								    <input type="email" class="form-control" id="email" placeholder="example@example.com">
+								</div>
+							</div>
+						    <div class="email">
+	  							<div class="address">
+								    <label for="email-confirm">Confirm Email</label>
+								    <input type="email" class="form-control" id="email-confirm" placeholder="example@example.com">
+								</div>
+							</div>
+						</span>
+						<span ng-show="ticket.format == 'Physical'">
+						    <div class="inputs">
+	  							<div class="first-name">
+		  							<label for="first-name">First Name</label>
+								    <input type="text" class="form-control" id="first-name">
+							    </div>
+							    <div class="last-name">
+								    <label for="last-name">Last Name</label>
+								    <input type="text" class="form-control" id="last-name">	
+							    </div>
+	  						</div>
+	  						<hr>
+	  						<div class="inputs">
+	  							<div class="address">
+		  							<label for="address">Address</label>
+								    <input type="text" class="form-control" id="address">
+							    </div>
+	  						</div>
+	  						<div class="inputs">
+	  							<div class="zipcode">
+		  							<label for="zipcode">ZIP Code</label>
+								    <input type="text" class="form-control" id="zipcode">
+							    </div>
+							    <div class="city">
+								    <label for="city">City</label>
+								    <input type="text" class="form-control" id="city">	
+							    </div>
+							    <div class="state">
+								    <label for="state">State or Province</label>
+								    <select id="state_id" data-value="shortcode"></select>
+							    </div>
+	  						</div>
+	  						<div class="inputs">
+								<div class="country">
+		  							<label for="country2">Country</label>
+								    <select class="crs-country" data-region-id="state_id" data-default-value="US" data-value="shortcode" id="country2"></select>
+								</div>
+							</div>
+							<hr>
+							<div class="inputs">
+	  							<div class="first-name">
+		  							<label for="phone">Phone Number</label>
+								    <input type="text" class="form-control numeric" id="phone">
+							    </div>
+							    <div class="last-name">
+								    <label for="mobile">Mobile Number</label>
+								    <input type="text" class="form-control numeric" id="mobile">	
+							    </div>
+	  						</div>
+	  					</span>
+  					</div>
+  				</div>
+  				<div class="card-title">
+  					Pay With
+  				</div>
+  				<div class="card credit-card">
+  					<div class="card-in credit-card">
+  						<div class="inputs">
+  							<div class="cc">
+	  							<label for="cc">Credit Card Number</label>
+							    <input type="text" class="form-control" id="cc" placeholder="1111 2222 3333 4444">
+						    </div>
+						    <div class="cvv">
+							    <label for="cvv">CVV</label>
+							    <input type="text" class="form-control" id="cvv" placeholder="123">	
+						    </div>
+  						</div>
+  						<div class="inputs">
+  							<div class="exp-month">
+	  							<label for="exp-month">Expiration Month</label>
+							    <select class="form-control" id="exp-month">
+							    	<option value="01">JAN</option>
+							    	<option value="02">FEB</option>
+							    	<option value="03">MAR</option>
+							    	<option value="04">APR</option>
+							    	<option value="05">MAY</option>
+							    	<option value="06">JUN</option>
+							    	<option value="07">JUL</option>
+							    	<option value="08">AUG</option>
+							    	<option value="09">SEP</option>
+							    	<option value="10">OCT</option>
+							    	<option value="11">NOV</option>
+							    	<option value="12">DEC</option>
+							    </select>
+						    </div>
+						    <div class="exp-year">
+							    <label for="exp-year">Expiration Year</label>
+							    <select class="form-control" id="exp-year">
+							    	<option value="2016">2016</option>
+							    	<option value="2017">2017</option>
+							    	<option value="2018">2018</option>
+							    	<option value="2019">2019</option>
+							    	<option value="2020">2020</option>
+							    	<option value="2021">2021</option>
+							    	<option value="2022">2022</option>
+							    	<option value="2023">2023</option>
+							    	<option value="2024">2024</option>
+							    	<option value="2025">2025</option>
+							    	<option value="2026">2026</option>
+							    	<option value="2027">2027</option>
+							    	<option value="2028">2028</option>
+							    	<option value="2029">2029</option>
+							    	<option value="2030">2030</option>
+							    	<option value="2031">2031</option>
+							    	<option value="2032">2032</option>
+							    	<option value="2033">2033</option>
+							    	<option value="2034">2034</option>
+							    	<option value="2035">2035</option>
+							    	<option value="2036">2036</option>
+							    	<option value="2037">2037</option>
+							    	<option value="2038">2038</option>
+							    	<option value="2039">2039</option>
+							    </select>
+						    </div>
+  						</div>
+  						<div class="inputs">
+							<div class="country">
+	  							<label for="country">Country</label>
+							    <select class="crs-country" data-region-id="no-region" data-default-value="US" data-value="shortcode" id="country"></select>
+							</div>
+						</div>
+						<div class="seals">
+							<script src="https://cdn.ywxi.net/js/inline.js?w=96"></script>
+							<span id="siteseal">
+	                            <script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script>
+	                        </span>	
+						</div>
+  					</div>
+  				</div>
+  				<div class="card-title">
+  					Billing Address
+  				</div>
+  				<div class="card">
+  					<div class="card-in billing">
+					    <div class="inputs">
+  							<div class="first-name">
+	  							<label for="first-name">First Name</label>
+							    <input type="text" class="form-control" id="first-name">
+						    </div>
+						    <div class="last-name">
+							    <label for="last-name">Last Name</label>
+							    <input type="text" class="form-control" id="last-name">	
+						    </div>
+  						</div>
+  						<hr>
+  						<div class="inputs">
+  							<div class="address">
+	  							<label for="address">Address</label>
+							    <input type="text" class="form-control" id="address">
+						    </div>
+  						</div>
+  						<div class="inputs">
+  							<div class="zipcode">
+	  							<label for="zipcode">ZIP Code</label>
+							    <input type="text" class="form-control" id="zipcode">
+						    </div>
+						    <div class="city">
+							    <label for="city">City</label>
+							    <input type="text" class="form-control" id="city">	
+						    </div>
+						    <div class="state">
+							    <label for="state">State or Province</label>
+							    <select id="state_id" data-value="shortcode"></select>
+						    </div>
+  						</div>
+  						<div class="inputs">
+							<div class="country">
+	  							<label for="country2">Country</label>
+							    <select class="crs-country" data-region-id="state_id" data-default-value="US" data-value="shortcode" id="country2"></select>
+							</div>
+						</div>
+						<hr>
+						<div class="inputs">
+  							<div class="first-name">
+	  							<label for="phone">Phone Number</label>
+							    <input type="text" class="form-control numeric" id="phone">
+						    </div>
+						    <div class="last-name">
+							    <label for="mobile">Mobile Number</label>
+							    <input type="text" class="form-control numeric" id="mobile">	
+						    </div>
+  						</div>
+  					</div>
+  				</div>
+  			</div>
+  			<div class="col-md-4">
+  				<div class="card-title">
+  					Order Summary
+  				</div>
+  				<div class="card">
+  					<div class="card-in summary">
+					    <div class="title">{{ticket.event.name}}</div>
+					    <div class="info">
+					    	{{event.occurs_at | date: "EEE,	MMM dd, yyyy hh:mm a"}}<br>
+					    	{{event.venue.name}}, {{event.venue.location}}<br>
+					    	Section {{ticket.section}}, Row {{ticket.row}}
+					    </div>
+					    <hr>
+					    <div class="description-line">
+					    	<div class="description">Ticekt Price</div>
+					    	<div class="value">$ {{ticket.retail_price}} ea.</div>
+					    </div>
+					    <div class="description-line">
+					    	<div class="description">Quantity</div>
+					    	<div class="value" >
+						    	<select id="amount" ng-model="amount" ng-change="calculateSubtotal()" >
+						    		<option ng-repeat="o in ticket.splits | orderBy:'-'" value="{{o}}">{{o}}</option>
+						    	</select>
+					    	</div>
+					    </div>
+					    <div class="description-line">
+					    	<div class="description">Subtotal</div>
+					    	<div class="value">$ {{subtotal}} ea.</div>
+					    </div>
+					    <br><br>
+					    <div class="description-line" ng-show="ticket.format == 'Physical'">
+					    	<div class="description short">Shipping Fee</div>
+					    	<div class="value short">Pending</div>
+					    </div>
+					    <div class="description-line">
+					    	<div class="description short">Service Fee</div>
+					    	<div class="value short">Pending</div>
+					    </div>
+					    <div class="description-line">
+					    	<div class="description short">Shipping</div>
+					    	<div class="value short">{{ticket.format}}</div>
+					    </div>
+					    <div class="description-line">
+					    	<div class="description short">Good Game Guarantee</div>
+					    	<div class="value short">FREE</div>
+					    </div>
+  					</div>
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+  	
+  </section>
 </span>

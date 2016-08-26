@@ -136,7 +136,17 @@ class TicketEvolutionService
         puts "Invalid type parameter, please check and try again"
     end
   end
- 
+  
+  def show
+    case @type
+    when 'tickets'
+      @ticket = @connection.ticket_groups.show(@id)
+      return @ticket
+    else
+      puts "Invalid type parameter, please check and try again"
+    end
+  end
+    
   def list
     case @type
     when 'events'

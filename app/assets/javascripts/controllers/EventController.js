@@ -157,7 +157,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 		var amount = $($event.currentTarget).parent().parent().parent().find("select").val();
 		var url = '/order/'+id+'?amount='+String(amount);
 		console.log(url);
-	  	$location.path(url);
+	  	$location.url(url);
 	};
 
 	$scope.$on('LastRepeaterElement', function(){

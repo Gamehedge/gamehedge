@@ -1381,6 +1381,182 @@ body {
     font-size: 18px;
 }
 
+#payments .card{
+    background-color: #d8d8d8;
+    padding-top: 15px;
+    padding-bottom: 4px;
+}
+
+#payments .card-in{
+    background-color: #ffffff;
+    padding: 0px 5% 50px 5%;
+}
+
+#payments .card.credit-card{
+    background-color: #bed893;
+}
+
+#payments .container{
+    margin-top:22px;
+    margin-bottom:126px;
+}
+
+#payments .card-title{
+    font-size: 24px;
+    color: #000000;
+    margin-bottom: 15px;
+    margin-top: 54px;
+}
+
+#payments label{
+    font-size: 13px;
+    color: #525252;
+    font-weight: lighter;
+    margin-top: 30px;
+    margin-left: 5px;
+}
+
+#payments input, #payments select{
+    height: 60px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    border: solid 2px #d3d3d3;
+    font-size: 20px;
+    color: #999999;
+}
+
+#payments .inputs{
+    display: flex;
+}
+
+#payments .card-in .email{
+    width: 80%;
+}
+
+#payments .card-in .cc{
+    margin-right: 28px;
+    width: 380px;
+}
+
+#payments .card-in .cvv{
+    width: 100px;
+}
+
+#payments .card-in .cvv input{
+    text-align: center;
+}
+
+#payments .card-in .exp-month{
+    margin-right: 28px;
+    width: 176px;
+}
+
+#payments .card-in .exp-year{
+    width: 176px;
+}
+
+#payments .card-in .country{
+    width: 380px;
+}
+
+#payments .card-in .country select{
+    width:100%;
+}
+
+#payments .card-in .first-name{
+    width: 50%;
+    margin-right: 14px;
+}
+
+#payments .card-in .last-name{
+    width: 50%;
+    margin-left: 14px;
+}
+
+#payments .card-in .address{
+    width: 100%;
+}
+
+#payments .card-in .zipcode{
+    width: 30%;
+    margin-right: 14px;
+}
+
+#payments .card-in .city{
+    width: 40%;
+    margin-right: 14px;
+    margin-left: 14px;
+}
+
+#payments .card-in .state{
+    width: 30%;
+    margin-left: 14px;
+}
+
+#payments .card-in .state select{
+    width: 100%;
+}
+
+#payments .seals{
+    margin-top: 30px;
+}
+
+#payments .seals .siteseal{
+    margin-right: 30px;
+}
+
+#payments .summary{
+    padding-top: 22px;
+}
+
+#payments .summary .title{
+    font-size: 24px;
+    color: #525252;
+}
+
+#payments .summary .info{
+    font-size: 14px;
+    color: #525252;
+}
+
+#payments .summary .description-line{
+    display: flex;    
+}
+
+#payments .summary .description{
+    font-size: 16px;
+    line-height: 3;
+    color: #999999;
+    width: 60%;
+}
+
+#payments .summary .value{
+    font-size: 16px;
+    line-height: 3;
+    text-align: right;
+    color: #525252;
+    width: 40%;
+}
+
+#payments .summary .short{
+    line-height: normal;
+}
+
+#payments .summary select {
+    color: #525252;
+    font-size: 16px;
+    width: 90px;
+    height: 45px;
+}
+
+#payments hr {
+    margin-top: 43px;
+    margin-bottom: 0;
+    margin-left: -6%;
+    margin-right: -6%;
+    border: 0;
+    border-top: 1px solid #eeeeee;
+}
 
 @media(max-width: 992px) {
 

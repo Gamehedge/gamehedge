@@ -122,7 +122,7 @@
     </div>
 </div>
 
-<div ng-class="{'home-header': $root.locat == '/'}">
+<div ng-class="{'home-header': !$root.isOrder}">
     <nav class="navbar navbar-default navbar-gamehedge">
 
         <div class="col-xs-2 hidden-md hidden-lg" ng-show="!$root.isOrder">

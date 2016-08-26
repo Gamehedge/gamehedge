@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'events/near'
   get 'events/next'
   get 'tickets/list'
+  get 'tickets/show'
   resources :search
   devise_for :admin_users, ActiveAdmin::Devise.config
   
