@@ -3,7 +3,13 @@ Rails.application.routes.draw do
 
   devise_for :clients
   
-  resources :search, :tickets, :events, :home, :signature
+    get 'home/index'
+  get 'events/near'
+  get 'events/next'
+  get 'tickets/list'
+  get 'tickets/show'
+  resources :search, :signature
+  
   devise_for :admin_users, ActiveAdmin::Devise.config
   
   ActiveAdmin.routes(self)
