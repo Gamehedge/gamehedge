@@ -2,7 +2,7 @@ app = angular.module('gamehedge')
 
 app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataService,apiService,$window,$http,$location){
 	$scope.getLeagueInfo = function(){
-		return apiService.getData('/api/v1/sports/'+$routeParams.leagueId)
+		apiService.getData('/api/v1/sports/'+$routeParams.leagueId)
             .then(function(response){
                 console.log("League");
             	console.log(response);
@@ -18,7 +18,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
 	};
 
 	$scope.getDivisions = function(){
-		return apiService.getData('/api/v1/divisions/?sport_id='+$scope.league.id)
+		apiService.getData('/api/v1/divisions/?sport_id='+$scope.league.id)
             .then(function(response){
                 console.log("Divisions");
             	console.log(response);
@@ -32,7 +32,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
 	};
 
 	$scope.getPerformers = function(){
-		return apiService.getData('/api/v1/performers/?sport_id='+$scope.league.id)
+		apiService.getData('/api/v1/performers/?sport_id='+$scope.league.id)
             .then(function(response){
                 console.log("Performers");
             	console.log(response);

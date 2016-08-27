@@ -17,70 +17,84 @@
   				</div>
   				<div class="card">
   					<div class="card-in deliver">
-  						<span ng-show="ticket.format == 'Eticket' || ticket.format == 'Flash_seats'">
-  							<div class="inputs">
-	  							<div class="email">
-								    <label for="email">Email</label>
-								    <input type="email" class="form-control" id="email" placeholder="example@example.com">
+  						<div ng-if="edit_deliver">
+	  						<span ng-show="ticket.format == 'Eticket' || ticket.format == 'Flash_seats'">
+	  							<div class="inputs">
+		  							<div class="email">
+									    <label for="email">Email</label>
+									    <input type="email" class="form-control" id="email" placeholder="example@example.com" ng-model="$parent.email">
+									</div>
 								</div>
-							</div>
-						    <div class="email">
-	  							<div class="address">
-								    <label for="email-confirm">Confirm Email</label>
-								    <input type="email" class="form-control" id="email-confirm" placeholder="example@example.com">
+							    <div class="email">
+		  							<div class="address">
+									    <label for="email-confirm">Confirm Email</label>
+									    <input type="email" class="form-control" id="email-confirm" placeholder="example@example.com"  ng-model="$parent.confirm_email">
+									</div>
 								</div>
-							</div>
-						</span>
-						<span ng-show="ticket.format == 'Physical'">
-						    <div class="inputs">
-	  							<div class="first-name">
-		  							<label for="first-name">First Name</label>
-								    <input type="text" class="form-control" id="first-name">
-							    </div>
-							    <div class="last-name">
-								    <label for="last-name">Last Name</label>
-								    <input type="text" class="form-control" id="last-name">	
-							    </div>
-	  						</div>
-	  						<hr>
-	  						<div class="inputs">
-	  							<div class="address">
-		  							<label for="address">Address</label>
-								    <input type="text" class="form-control" id="address">
-							    </div>
-	  						</div>
-	  						<div class="inputs">
-	  							<div class="zipcode">
-		  							<label for="zipcode">ZIP Code</label>
-								    <input type="text" class="form-control" id="zipcode">
-							    </div>
-							    <div class="city">
-								    <label for="city">City</label>
-								    <input type="text" class="form-control" id="city">	
-							    </div>
-							    <div class="state">
-								    <label for="state">State or Province</label>
-								    <select id="state_id" data-value="shortcode"></select>
-							    </div>
-	  						</div>
-	  						<div class="inputs">
-								<div class="country">
-		  							<label for="country2">Country</label>
-								    <select class="crs-country" data-region-id="state_id" data-default-value="US" data-value="shortcode" id="country2"></select>
+							</span>
+							<span ng-show="ticket.format == 'Physical'">
+							    <div class="inputs">
+		  							<div class="first-name">
+			  							<label for="first-name-shipping">First Name</label>
+									    <input type="text" class="form-control" id="first-name-shipping" ng-model="$parent.first_name_shipping">
+								    </div>
+								    <div class="last-name">
+									    <label for="last-name-shipping">Last Name</label>
+									    <input type="text" class="form-control" id="last-name-shipping" ng-model="$parent.last_name_shipping">	
+								    </div>
+		  						</div>
+		  						<hr>
+		  						<div class="inputs">
+		  							<div class="address">
+			  							<label for="address-shipping">Address</label>
+									    <input type="text" class="form-control" id="address-shipping" ng-model="$parent.address_shipping">
+								    </div>
+		  						</div>
+		  						<div class="inputs">
+		  							<div class="zipcode-shipping">
+			  							<label for="zipcode">ZIP Code</label>
+									    <input type="text" class="form-control numeric" id="zipcode-shipping" ng-model="$parent.zipcode_shipping">
+								    </div>
+								    <div class="city">
+									    <label for="city-shipping">City</label>
+									    <input type="text" class="form-control" id="city-shipping" ng-model="$parent.city_shipping">	
+								    </div>
+								    <div class="state">
+									    <label for="state_id-shipping">State or Province</label>
+									    <select id="state_id-shipping" data-value="shortcode" ng-model="$parent.state_shipping"></select>
+								    </div>
+		  						</div>
+		  						<div class="inputs">
+									<div class="country">
+			  							<label for="country-shipping">Country</label>
+									    <select class="crs-country" data-region-id="state_id-shipping" data-default-value="US" data-value="shortcode" id="country-shipping" ng-model="$parent.country_shipping"></select>
+									</div>
 								</div>
-							</div>
-							<hr>
-							<div class="inputs">
-	  							<div class="first-name">
-		  							<label for="phone">Phone Number</label>
-								    <input type="text" class="form-control numeric" id="phone">
-							    </div>
-							    <div class="last-name">
-								    <label for="mobile">Mobile Number</label>
-								    <input type="text" class="form-control numeric" id="mobile">	
-							    </div>
-	  						</div>
-	  					</span>
+								<hr>
+								<div class="inputs">
+		  							<div class="first-name">
+			  							<label for="phone-shipping">Phone Number</label>
+									    <input type="text" class="form-control numeric" id="phone-shipping" ng-model="$parent.phone_shipping">
+								    </div>
+								    <div class="last-name">
+									    <label for="mobile-shipping">Mobile Number</label>
+									    <input type="text" class="form-control numeric" id="mobile-shipping" ng-model="$parent.mobile_shipping">	
+								    </div>
+		  						</div>
+		  					</span>
+	  					</div>
+	  					<div class="review" ng-if="!edit_deliver">
+	  						<span ng-show="ticket.format == 'Physical'">
+		  						<div class="title">{{first_name_shipping}}</div>
+		  						<div>{{address_shipping}}<br>
+		  						{{city_shipping}}, {{state_shipping}} {{zipcode_shipping}}<br>
+		  						{{country_shipping}}</div>
+		  					</span>
+		  					<span ng-show="ticket.format == 'Eticket' || ticket.format == 'Flash_seats'">
+		  						<div>{{email}}</div>
+		  					</span>
+		  					<button ng-click="toogleReview('deliver')">EDIT</button>
+	  					</div>
   					</div>
   				</div>
   				<div class="card-title">
@@ -88,76 +102,102 @@
   				</div>
   				<div class="card credit-card">
   					<div class="card-in credit-card">
-  						<div class="inputs">
-  							<div class="cc">
-	  							<label for="cc">Credit Card Number</label>
-							    <input type="text" class="form-control" id="cc" placeholder="1111 2222 3333 4444">
-						    </div>
-						    <div class="cvv">
-							    <label for="cvv">CVV</label>
-							    <input type="text" class="form-control" id="cvv" placeholder="123">	
-						    </div>
-  						</div>
-  						<div class="inputs">
-  							<div class="exp-month">
-	  							<label for="exp-month">Expiration Month</label>
-							    <select class="form-control" id="exp-month">
-							    	<option value="01">JAN</option>
-							    	<option value="02">FEB</option>
-							    	<option value="03">MAR</option>
-							    	<option value="04">APR</option>
-							    	<option value="05">MAY</option>
-							    	<option value="06">JUN</option>
-							    	<option value="07">JUL</option>
-							    	<option value="08">AUG</option>
-							    	<option value="09">SEP</option>
-							    	<option value="10">OCT</option>
-							    	<option value="11">NOV</option>
-							    	<option value="12">DEC</option>
-							    </select>
-						    </div>
-						    <div class="exp-year">
-							    <label for="exp-year">Expiration Year</label>
-							    <select class="form-control" id="exp-year">
-							    	<option value="2016">2016</option>
-							    	<option value="2017">2017</option>
-							    	<option value="2018">2018</option>
-							    	<option value="2019">2019</option>
-							    	<option value="2020">2020</option>
-							    	<option value="2021">2021</option>
-							    	<option value="2022">2022</option>
-							    	<option value="2023">2023</option>
-							    	<option value="2024">2024</option>
-							    	<option value="2025">2025</option>
-							    	<option value="2026">2026</option>
-							    	<option value="2027">2027</option>
-							    	<option value="2028">2028</option>
-							    	<option value="2029">2029</option>
-							    	<option value="2030">2030</option>
-							    	<option value="2031">2031</option>
-							    	<option value="2032">2032</option>
-							    	<option value="2033">2033</option>
-							    	<option value="2034">2034</option>
-							    	<option value="2035">2035</option>
-							    	<option value="2036">2036</option>
-							    	<option value="2037">2037</option>
-							    	<option value="2038">2038</option>
-							    	<option value="2039">2039</option>
-							    </select>
-						    </div>
-  						</div>
-  						<div class="inputs">
-							<div class="country">
-	  							<label for="country">Country</label>
-							    <select class="crs-country" data-region-id="no-region" data-default-value="US" data-value="shortcode" id="country"></select>
+  						<div ng-if="edit_credit_card">
+	  						<div class="inputs">
+	  							<div class="cc">
+		  							<label for="cc">Credit Card Number</label>
+								    <input type="text"  ng-model="$parent.cc" class="form-control" id="cc" placeholder="1111 2222 3333 4444" ng-change="checkCardNumber()">
+								    <div class="img-holder">
+								    	<img src="<%= image_url "visa.png" %>" ng-if="card_type == 'visa'">
+								    	<img src="<%= image_url "mastercard.png" %>" ng-if="card_type == 'mastercard'">
+								    	<img src="<%= image_url "amex.png" %>" ng-if="card_type == 'amex'">
+								    	<img src="<%= image_url "discover.png" %>" ng-if="card_type == 'discover'">
+								    </div>
+							    </div>
+							    <div class="cvv">
+								    <label for="cvv">CVV</label>
+								    <input type="text" class="form-control" id="cvv" placeholder="123" ng-model="$parent.cvv">	
+							    </div>
+	  						</div>
+	  						<div class="inputs">
+	  							<div class="exp-month">
+		  							<label for="exp-month">Expiration Month</label>
+								    <select class="form-control" id="exp-month" ng-model="$parent.exp_month">
+								    	<option value="01">JAN</option>
+								    	<option value="02">FEB</option>
+								    	<option value="03">MAR</option>
+								    	<option value="04">APR</option>
+								    	<option value="05">MAY</option>
+								    	<option value="06">JUN</option>
+								    	<option value="07">JUL</option>
+								    	<option value="08">AUG</option>
+								    	<option value="09">SEP</option>
+								    	<option value="10">OCT</option>
+								    	<option value="11">NOV</option>
+								    	<option value="12">DEC</option>
+								    </select>
+							    </div>
+							    <div class="exp-year">
+								    <label for="exp-year">Expiration Year</label>
+								    <select class="form-control" id="exp-year" ng-model="$parent.exp_year">
+								    	<option value="2016">2016</option>
+								    	<option value="2017">2017</option>
+								    	<option value="2018">2018</option>
+								    	<option value="2019">2019</option>
+								    	<option value="2020">2020</option>
+								    	<option value="2021">2021</option>
+								    	<option value="2022">2022</option>
+								    	<option value="2023">2023</option>
+								    	<option value="2024">2024</option>
+								    	<option value="2025">2025</option>
+								    	<option value="2026">2026</option>
+								    	<option value="2027">2027</option>
+								    	<option value="2028">2028</option>
+								    	<option value="2029">2029</option>
+								    	<option value="2030">2030</option>
+								    	<option value="2031">2031</option>
+								    	<option value="2032">2032</option>
+								    	<option value="2033">2033</option>
+								    	<option value="2034">2034</option>
+								    	<option value="2035">2035</option>
+								    	<option value="2036">2036</option>
+								    	<option value="2037">2037</option>
+								    	<option value="2038">2038</option>
+								    	<option value="2039">2039</option>
+								    </select>
+							    </div>
+	  						</div>
+	  						<div class="inputs">
+								<div class="country">
+		  							<label for="country-cc">Country</label>
+								    <select class="crs-country" data-region-id="no-region" data-default-value="US" data-value="shortcode" id="country-cc" ng-model="$parent.country_cc"></select>
+								</div>
+							</div>
+							<div class="seals">
+								<script src="https://cdn.ywxi.net/js/inline.js?w=96"></script>
+								<span id="siteseal">
+		                            <script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script>
+		                        </span>	
 							</div>
 						</div>
-						<div class="seals">
-							<script src="https://cdn.ywxi.net/js/inline.js?w=96"></script>
-							<span id="siteseal">
-	                            <script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script>
-	                        </span>	
-						</div>
+						<div class="review" ng-if="!edit_credit_card">
+	  						<span ng-show="ticket.format == 'Physical'">
+		  						<div class="title">Credit Card</div>
+		  						<div class="ccard vertical-center">
+			  						<div class="img-holder">
+								    	<img src="<%= image_url "visa.png" %>" ng-if="card_type == 'visa'">
+								    	<img src="<%= image_url "mastercard.png" %>" ng-if="card_type == 'mastercard'">
+								    	<img src="<%= image_url "amex.png" %>" ng-if="card_type == 'amex'">
+								    	<img src="<%= image_url "discover.png" %>" ng-if="card_type == 'discover'">
+								    </div>
+		  							ending in {{cc | limitTo:-4}}
+		  						</div>
+		  					</span>
+		  					<span ng-show="ticket.format == 'Eticket' || ticket.format == 'Flash_seats'">
+		  						<div>{{email}}</div>
+		  					</span>
+		  					<button ng-click="toogleReview('card')">EDIT</button>
+	  					</div>
   					</div>
   				</div>
   				<div class="card-title">
@@ -165,54 +205,63 @@
   				</div>
   				<div class="card">
   					<div class="card-in billing">
-					    <div class="inputs">
-  							<div class="first-name">
-	  							<label for="first-name">First Name</label>
-							    <input type="text" class="form-control" id="first-name">
-						    </div>
-						    <div class="last-name">
-							    <label for="last-name">Last Name</label>
-							    <input type="text" class="form-control" id="last-name">	
-						    </div>
-  						</div>
-  						<hr>
-  						<div class="inputs">
-  							<div class="address">
-	  							<label for="address">Address</label>
-							    <input type="text" class="form-control" id="address">
-						    </div>
-  						</div>
-  						<div class="inputs">
-  							<div class="zipcode">
-	  							<label for="zipcode">ZIP Code</label>
-							    <input type="text" class="form-control" id="zipcode">
-						    </div>
-						    <div class="city">
-							    <label for="city">City</label>
-							    <input type="text" class="form-control" id="city">	
-						    </div>
-						    <div class="state">
-							    <label for="state">State or Province</label>
-							    <select id="state_id" data-value="shortcode"></select>
-						    </div>
-  						</div>
-  						<div class="inputs">
-							<div class="country">
-	  							<label for="country2">Country</label>
-							    <select class="crs-country" data-region-id="state_id" data-default-value="US" data-value="shortcode" id="country2"></select>
+  						<div ng-if="edit_billing">
+						    <div class="inputs">
+	  							<div class="first-name">
+		  							<label for="first-name-billing">First Name</label>
+								    <input type="text" class="form-control" id="first-name-billing" ng-model="$parent.first_name_billing">
+							    </div>
+							    <div class="last-name">
+								    <label for="last-name-billing">Last Name</label>
+								    <input type="text" class="form-control" id="last-name-billing" ng-model="$parent.last_name_billing">	
+							    </div>
+	  						</div>
+	  						<hr>
+	  						<div class="inputs">
+	  							<div class="address">
+		  							<label for="address-billing">Address</label>
+								    <input type="text" class="form-control" id="address-billing" ng-model="$parent.address_billing">
+							    </div>
+	  						</div>
+	  						<div class="inputs">
+	  							<div class="zipcode">
+		  							<label for="zipcode-billing">ZIP Code</label>
+								    <input type="text" class="form-control numeric" id="zipcode-billing" ng-model="$parent.zipcode_billing">
+							    </div>
+							    <div class="city">
+								    <label for="city-billing">City</label>
+								    <input type="text" class="form-control" id="city-billing" ng-model="$parent.city_billing">	
+							    </div>
+							    <div class="state">
+								    <label for="state_id-billing">State or Province</label>
+								    <select id="state_id-billing" data-value="shortcode" ng-model="$parent.state_billing"></select>
+							    </div>
+	  						</div>
+	  						<div class="inputs">
+								<div class="country">
+		  							<label for="country-billing">Country</label>
+								    <select class="crs-country" data-region-id="state_id-billing" data-default-value="US" data-value="shortcode" id="country-billing" ng-model="$parent.country_billing"></select>
+								</div>
 							</div>
-						</div>
-						<hr>
-						<div class="inputs">
-  							<div class="first-name">
-	  							<label for="phone">Phone Number</label>
-							    <input type="text" class="form-control numeric" id="phone">
-						    </div>
-						    <div class="last-name">
-							    <label for="mobile">Mobile Number</label>
-							    <input type="text" class="form-control numeric" id="mobile">	
-						    </div>
-  						</div>
+							<hr>
+							<div class="inputs">
+	  							<div class="first-name">
+		  							<label for="phone-billing">Phone Number</label>
+								    <input type="text" class="form-control numeric" id="phone-billing" ng-model="$parent.phone_billing">
+							    </div>
+							    <div class="last-name">
+								    <label for="mobile-billing">Mobile Number</label>
+								    <input type="text" class="form-control numeric" id="mobile-billing" ng-model="$parent.mobile_billing">	
+							    </div>
+	  						</div>
+	  					</div>
+	  					<div class="review" ng-if="!edit_billing">
+	  						<div class="title">{{first_name_billing}}</div>
+	  						<div>{{address_billing}}<br>
+	  						{{city_billing}}, {{state_billing}} {{zipcode_billing}}<br>
+	  						{{country_billing}}</div>
+		  					<button ng-click="toogleReview('billing')">EDIT</button>
+	  					</div>
   					</div>
   				</div>
   			</div>
@@ -236,8 +285,16 @@
 					    <div class="description-line">
 					    	<div class="description">Quantity</div>
 					    	<div class="value" >
-						    	<select id="amount" ng-model="amount" ng-change="calculateSubtotal()" >
+						    	<select id="amount" ng-model="amount" ng-change="calculateValues()" >
 						    		<option ng-repeat="o in ticket.splits | orderBy:'-'" value="{{o}}">{{o}}</option>
+						    	</select>
+					    	</div>
+					    </div>
+					    <div class="description-line" ng-show="ticket.format == 'Physical'">
+					    	<div class="description">Shipping</div>
+					    	<div class="value" >
+						    	<select id="shipping" ng-model="shipping_fee" ng-change="calculateValues()" >
+						    		<option ng-repeat="o in shipping_list | limitTo:2" value="{{o.price}}">{{o.name}}</option>
 						    	</select>
 					    	</div>
 					    </div>
@@ -248,11 +305,11 @@
 					    <br><br>
 					    <div class="description-line" ng-show="ticket.format == 'Physical'">
 					    	<div class="description short">Shipping Fee</div>
-					    	<div class="value short">Pending</div>
+					    	<div class="value short">$ {{shipping_fee}}</div>
 					    </div>
 					    <div class="description-line">
 					    	<div class="description short">Service Fee</div>
-					    	<div class="value short">Pending</div>
+					    	<div class="value short">$ {{service_fee}}</div>
 					    </div>
 					    <div class="description-line">
 					    	<div class="description short">Shipping</div>
@@ -262,7 +319,45 @@
 					    	<div class="description short">Good Game Guarantee</div>
 					    	<div class="value short">FREE</div>
 					    </div>
+					    <hr>
+					    <div class="description-line total">
+					    	<div class="description">TOTAL</div>
+					    	<div class="value">$ {{total}}</div>
+					    </div>
+					    <button ng-click="confirmPay()">Confirm and Pay</button>
+					    <div class="terms">By clicking Confirm and Pay, you agree to GameHedge <a href="terms">Terms and Privacy Policy.</a></div>
   					</div>
+  				</div>
+  				<div class="ggg-badge-pledge">
+  					<div class="img-container">
+  						<img src="<%= image_url "badge-gamehedge.png" %>" class="ggg-img">
+  					</div>
+  					<div>
+	  					<div class="title">
+	  						Your tickets come with the<br>GOOD GAME GUARANTEE!
+	  					</div>
+	  					<div class="cont">
+	  						If the home team loses by {{event.sport.ggg}} or more, GameHedge will refund 50% of your ticket price at no additional cost to you.
+	  					</div>
+	  				</div>
+  				</div>
+  				<div class="ggg-badge-pledge">
+  					<div class="img-container">
+  						<img src="<%= image_url "pledge.png" %>" class="pledge-img">
+  					</div>
+  					<div>
+	  					<div class="title">
+	  						GAMEHEDE PLEDGE
+	  					</div>
+	  					<div class="cont">
+	  						Tickets will always be…
+	  						<ul>
+	  							<li>in time for the event</li>
+	  							<li>refunded if the event is canceled and not resecheduled</li>
+	  							<li>authentic</li>
+	  						</ul>
+	  					</div>
+	  				</div>
   				</div>
   			</div>
   		</div>

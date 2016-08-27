@@ -107,3 +107,13 @@ gem 'php-serial'
 
 gem 'textacular'
 
+#HHTP request 
+
+gem 'rest-client'
+
+gem 'mime-types'
+
+gem 'netrc'
+
+gem 'http-cookie'
+

@@ -68,7 +68,6 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
         }).then(function successCallback(response) {
 
             $scope.leagueList = response.data;
-            console.log($scope.leagueList)
             // this callback will be called asynchronously
             // when the response is available
         }, function errorCallback(response) {

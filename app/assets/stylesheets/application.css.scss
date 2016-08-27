@@ -1436,6 +1436,28 @@ body {
 #payments .card-in .cc{
     margin-right: 28px;
     width: 380px;
+    position: relative;
+}
+
+#payments .card-in .cc .img-holder{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 60px;
+    padding: 10px;
+}
+
+#payments .card-in .cc .img-holder img{
+    height: 100%;
+}
+
+#payments .card-in .ccard .img-holder{
+    height: 60px;
+    padding: 10px;
+}
+
+#payments .card-in .ccard .img-holder img{
+    height: 100%;
 }
 
 #payments .card-in .cvv{
@@ -1538,6 +1560,29 @@ body {
     width: 40%;
 }
 
+#payments .summary .total .description,#payments .summary .total .value{
+    font-size: 28px;
+    color: #525252;
+}
+
+#payments .summary .terms{
+    font-size: 14px;
+    text-align: center;
+    color: #525252;   
+}
+
+#payments .summary button{
+    width: 100%;
+    height: 70px;
+    margin-bottom: 15px;
+    border-radius: 3px;
+    background-color: #91c33f;
+    border: none;
+    font-size: 24px;
+    text-align: center;
+    color: #ffffff;
+}
+
 #payments .summary .short{
     line-height: normal;
 }
@@ -1547,6 +1592,55 @@ body {
     font-size: 16px;
     width: 90px;
     height: 45px;
+}
+
+#payments .ggg-badge-pledge{
+    display: flex;
+    color: #999999;
+    margin-top: 15px;
+}
+
+#payments .ggg-badge-pledge .img-container{
+    margin: 0 15px;
+}
+
+#payments .ggg-badge-pledge .ggg-img{
+    width: 100px;
+    height: 100px;
+}
+
+#payments .ggg-badge-pledge .pledge-img{
+    width: 100px;
+    height: 121px;
+}
+
+#payments .ggg-badge-pledge .title{
+    font-size: 16px;
+}
+
+#payments .ggg-badge-pledge .cont{
+    font-size: 10px;
+}
+
+#payments .review{
+    font-size: 18px;
+    color: #525252;
+}
+
+#payments .review .title{
+    font-size: 24px;
+}
+
+#payments .review button{
+    width: 80px;
+    height: 45px;
+    border-radius: 3px;
+    background-color: #93aa52;
+    border: solid 2px #93aa52;
+    font-size: 18px;
+    text-align: center;
+    color: #ffffff;
+    margin-top: 30px;
 }
 
 #payments hr {

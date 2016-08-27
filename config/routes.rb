@@ -2,12 +2,8 @@ Rails.application.routes.draw do
   get 'events/near'
 
   devise_for :clients
-  get 'home/index'
-  get 'events/near'
-  get 'events/next'
-  get 'tickets/list'
-  get 'tickets/show'
-  resources :search
+  
+  resources :search, :tickets, :events, :home, :signature
   devise_for :admin_users, ActiveAdmin::Devise.config
   
   ActiveAdmin.routes(self)
@@ -33,6 +29,8 @@ Rails.application.routes.draw do
       resources :tiles, :defaults => { :format => 'json' }
       resources :venues, :defaults => { :format => 'json' }
       resources :testimonials, :defaults => { :format => 'json' }
+      resources :promo_codes, :defaults => { :format => 'json' }
+      resources :service_fees, :defaults => { :format => 'json' }
     end
   end
   
