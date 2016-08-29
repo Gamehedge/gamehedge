@@ -8,7 +8,7 @@
 	<div id="wrapper">
 		<div id="content">
 			<div class="container">
-				<p>Every Ticket Comes With Our Good Game Guarantee!</p>
+				<p>Every Ticket Comes With Our Good Game Guarantee!</p> 
 				<div id="hero-search">
 					<form id="form-home-search" name="formSearch" method="POST" action="/search">
 						<input type="hidden" name="type" value="full" />
