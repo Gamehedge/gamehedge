@@ -1389,7 +1389,7 @@ body {
 
 #payments .card-in{
     background-color: #ffffff;
-    padding: 0px 5% 50px 5%;
+    padding: 0px 5% 15px 5%;
 }
 
 #payments .card.credit-card{
@@ -1398,30 +1398,29 @@ body {
 
 #payments .container{
     margin-top:22px;
-    margin-bottom:126px;
+    margin-bottom:20px;
 }
 
 #payments .card-title{
     font-size: 24px;
     color: #000000;
-    margin-bottom: 15px;
-    margin-top: 54px;
+    
 }
 
 #payments label{
-    font-size: 13px;
+    font-size: 8px;
     color: #525252;
     font-weight: lighter;
-    margin-top: 30px;
+    margin-top: 10px;
     margin-left: 5px;
 }
 
 #payments input, #payments select{
-    height: 60px;
+    height: 30px;
     border-radius: 5px;
     background-color: #ffffff;
     border: solid 2px #d3d3d3;
-    font-size: 20px;
+    font-size: 12px;
     color: #999999;
 }
 
@@ -1430,12 +1429,18 @@ body {
 }
 
 #payments .card-in .email{
-    width: 80%;
+    width: 50%;
+}
+
+#payments .card-in .email.left{
+    margin-right: 14px;
+}
+
+#payments .card-in .email.right{
+    margin-left: 14px;
 }
 
 #payments .card-in .cc{
-    margin-right: 28px;
-    width: 380px;
     position: relative;
 }
 
@@ -1443,7 +1448,7 @@ body {
     position: absolute;
     bottom: 0;
     right: 0;
-    height: 60px;
+    height: 40px;
     padding: 10px;
 }
 
@@ -1460,29 +1465,9 @@ body {
     height: 100%;
 }
 
-#payments .card-in .cvv{
-    width: 100px;
-}
 
 #payments .card-in .cvv input{
     text-align: center;
-}
-
-#payments .card-in .exp-month{
-    margin-right: 28px;
-    width: 176px;
-}
-
-#payments .card-in .exp-year{
-    width: 176px;
-}
-
-#payments .card-in .country{
-    width: 380px;
-}
-
-#payments .card-in .country select{
-    width:100%;
 }
 
 #payments .card-in .first-name{
@@ -1496,7 +1481,13 @@ body {
 }
 
 #payments .card-in .address{
-    width: 100%;
+    width: 60%;
+    margin-right: 14px;
+}
+
+#payments .card-in .phone{
+    width: 40%;
+    margin-left: 14px;
 }
 
 #payments .card-in .zipcode{
@@ -1520,24 +1511,31 @@ body {
 }
 
 #payments .seals{
-    margin-top: 30px;
+    position: absolute;
+    right: 0;
+    top: -18px;
+    height: 26px;
+}
+
+#payments .edit_credit_card{
+    position: relative;
+}
+
+#payments .seals img{
+    height: 90px;
 }
 
 #payments .seals .siteseal{
     margin-right: 30px;
 }
 
-#payments .summary{
-    padding-top: 22px;
-}
-
 #payments .summary .title{
-    font-size: 24px;
+    font-size: 18px;
     color: #525252;
 }
 
 #payments .summary .info{
-    font-size: 14px;
+    font-size: 10px;
     color: #525252;
 }
 
@@ -1546,39 +1544,41 @@ body {
 }
 
 #payments .summary .description{
-    font-size: 16px;
-    line-height: 3;
+    font-size: 12px;
+    line-height: 2;
     color: #999999;
-    width: 60%;
+    width: 50%;
 }
 
 #payments .summary .value{
-    font-size: 16px;
-    line-height: 3;
+    font-size: 12px;
+    line-height: 2;
     text-align: right;
     color: #525252;
-    width: 40%;
+    width: 50%;
 }
 
-#payments .summary .total .description,#payments .summary .total .value{
-    font-size: 28px;
+#payments .summary .total .description, #payments .summary .total .value{
+    font-size: 20px;
     color: #525252;
 }
 
 #payments .summary .terms{
-    font-size: 14px;
+    font-size: 10px;
     text-align: center;
     color: #525252;   
 }
 
 #payments .summary button{
-    width: 100%;
-    height: 70px;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    height: 55px;
     margin-bottom: 15px;
     border-radius: 3px;
     background-color: #91c33f;
     border: none;
-    font-size: 24px;
+    font-size: 20px;
     text-align: center;
     color: #ffffff;
 }
@@ -1589,9 +1589,13 @@ body {
 
 #payments .summary select {
     color: #525252;
-    font-size: 16px;
-    width: 90px;
-    height: 45px;
+    font-size: 10px;
+    width: 136px;
+    height: 20px;
+}
+
+#payments .summary select.amount {
+    width: 60px;
 }
 
 #payments .ggg-badge-pledge{
@@ -1644,7 +1648,7 @@ body {
 }
 
 #payments hr {
-    margin-top: 43px;
+    margin-top: 10px;
     margin-bottom: 0;
     margin-left: -6%;
     margin-right: -6%;
@@ -1652,7 +1656,23 @@ body {
     border-top: 1px solid #eeeeee;
 }
 
+#home section#hero.short{
+    background: #373d3f;
+    max-height:100px
+}
+
 @media(max-width: 992px) {
+    
+    #home section#hero.short{
+        max-height:80px
+    }
+    #payments .summary .total .description, #payments .summary .total .value{
+        font-size: 16px;
+    }
+
+    #payments .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{
+        padding: 0;
+    }
 
     #tickets-map {
         font-size: 11px;

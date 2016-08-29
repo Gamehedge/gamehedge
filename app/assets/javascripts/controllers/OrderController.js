@@ -2,16 +2,6 @@ controllers = angular.module('gamehedge')
 
 controllers.controller('OrderController', function($scope,$rootScope,$http,$location,$routeParams,$timeout,apiService,$filter){
 
-	$scope.updateStates = function(){
-		$timeout(function(){
-			$('#state_id').find('option').each(function(index){
-				if($(this).html() != "Select region"){
-					$(this).html($(this).val());
-				}
-			});
-		},10);
-	}
-
 	$scope.getTicket = function(){
 		$http({
             method: 'GET',
@@ -58,7 +48,6 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,$loca
 	}
 
 	$scope.checkCardNumber = function(){
-		console.log($scope.cc)
 		$scope.card_type = $.payment.cardType($scope.cc);
 	}
 
@@ -101,6 +90,11 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,$loca
 		else if(toogle == "deliver"){
 			$scope.edit_deliver = true;
 		}
+		$timeout(function(){
+			$('input#cc').payment('formatCardNumber');
+			$('input#cvv').payment('formatCardCVC');
+			$('input.numeric').payment('restrictNumeric');
+		},10);
 	}
 
 	$scope.confirmPay = function(){
@@ -119,7 +113,6 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,$loca
         console.log(response);
     });
 	// Initializers
-	$scope.updateStates();
 	$scope.country_shipping = "US";
 	$scope.getTicket();
 	$scope.getPromoCodes();
@@ -128,9 +121,11 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,$loca
 	$('input#cc').payment('formatCardNumber');
 	$('input#cvv').payment('formatCardCVC');
 	$('input.numeric').payment('restrictNumeric');
-	$('#country2').change(function(){
-		$scope.updateStates();
-	});
+	$timeout(function(){
+		$('input#cc').payment('formatCardNumber');
+		$('input#cvv').payment('formatCardCVC');
+		$('input.numeric').payment('restrictNumeric');
+	},1000);
 	$scope.edit_deliver = true;
 	$scope.edit_credit_card = true;
 	$scope.edit_billing = true;
