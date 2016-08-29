@@ -224,12 +224,10 @@ body {
 
 .navbar-leagues{
 	text-align: center;
-    padding-top: 24px;
 }
 
 .navbar-leagues a{
 	font-family: Montserrat;
-	font-size: 18px;
 	text-align: center;
 	color: #ffffff;
 	margin-left: 15px;
@@ -256,8 +254,6 @@ body {
 	padding-right: 0px;
     padding-top: 9px;
     padding-bottom: 9px;
-    margin-left: auto;
-
 }
 
 .navbar-myaccount .login{
@@ -298,7 +294,6 @@ body {
 
 .navbar-myaccount .myaccount-btn{
 	font-family: Montserrat;
-	font-size: 18px;
 	text-align: center;
 	color: #ffffff;
 	background: none;
@@ -307,7 +302,6 @@ body {
 .navbar-myaccount .user-icon{
 	height: 32px;
     margin-top: -7px;
-	margin-right: 10px;
 }
 
 .navbar-myaccount .dropdown-icon{
@@ -1166,18 +1160,19 @@ body {
 }
 
 #game_info .event-info{
-    height: 100px;
     display: flex;
     align-items: center;
     color: #525252;
+    height: 100%
 }
 
-#game_info .event-info .second-line{
-    font-size: 14px;
+
+#game_info .row{
+    height: 80px;
 }
 
 #game_info .date1{
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
     text-align: center;
     color: #91c33f;
@@ -1185,7 +1180,7 @@ body {
 }
 
 #game_info .date2{
-    font-size: 48px;
+    font-size: 40px;
     text-align: center;
     color: #000000;
     margin-top: -16px;
@@ -1193,7 +1188,7 @@ body {
 }
 
 #game_info .date3{
-    font-size: 18px;
+    font-size: 15px;
     text-align: center;
     color: #d6d6d6;
     margin-bottom: 5px;
@@ -1202,13 +1197,13 @@ body {
 #game_info .moto{
     font-size: 12px;
     color: #999999;
-    height:100px;
+    height:100%;
     text-align: justify;
 }
 
 #game_info .ggg-logo{
-    height: 100px;
-    font-size: 20px;
+    height: 100%;
+    font-size: 15px;
     color: #999999;
     text-align: center;
     justify-content: center;
@@ -1227,15 +1222,17 @@ body {
 }
 
 #tickets-map .filter-row{
-    height: 80px;
+    height: 50px;
     border: solid 1px #eeeeee;
     border-top: none;
+    font-size: 11px;
+    justify-content: center;
 }
 
 #tickets-map .filter-header{
-    height: 50px;
+    height: 40px;
     background-color: #373d3f;
-    font-size: 14px;
+    font-size: 12px;
     color: #ffffff;
 }
 
@@ -1258,7 +1255,7 @@ body {
 }
 
 #tickets-map .tickets-data .section {
-    padding-left: 50px;
+    padding-left: 30px;
 }
 
 #tickets-map .filter-header .sorting{
@@ -1271,27 +1268,29 @@ body {
 }
 
 #tickets-map .tickets-data{
-    max-height: 500px;
-    overflow: scroll;
+    max-height: 360px;
+    overflow-y: scroll;
+    overflow-x: hidden;
     font-size:15px;
 }
 
 #tickets-map .tickets-data .row{
-    height: 80px;
+    height: 60px;
     background-color: #ffffff;
     border: solid 1px #eeeeee;
     border-top: none;
+    font-size: 10px;
 }
 
 #tickets-map .tickets-data .row .format{
-    font-size: 10px;
+    font-size: 8px;
     text-align: center;
     color: #999999;
     margin:0;
 }
 
 #tickets-map #MapContainer {
-    height: 710px;
+    height: 500px;
     width: 710px;
 }
 
@@ -1329,7 +1328,7 @@ body {
 #tickets-map .glyphicon-info-sign {
     position: absolute;
     left: 11px;
-    top: 34px;
+    top: 26px;
     z-index: 9999;
 }
 
@@ -1338,10 +1337,23 @@ body {
 }
 
 #tickets-map .tickets-data .row button{
-    width: 130px;
-    height: 38px;
-    margin-top: 17px;
+    width: 100px;
+    height: 30px;
+    margin-top: 6px;
     background-color: #91c33f;
+}
+
+#tickets-map .tickets-data .row select {
+    height: 25px;
+    width: 35px;
+    border: none;
+    background-color: #FFFFFF;
+    font-size: 12px;
+    color: black;
+}
+
+#tickets-map .tickets-data .row select:focus {
+    outline:none;
 }
 
 #tickets-map button:focus{
@@ -1412,7 +1424,8 @@ body {
 
 #payments .card-in{
     background-color: #ffffff;
-    padding: 0px 5% 50px 5%;
+    padding: 5px 5% 15px 5%;
+    font-size: 17px;
 }
 
 #payments .card.credit-card{
@@ -1421,30 +1434,29 @@ body {
 
 #payments .container{
     margin-top:22px;
-    margin-bottom:126px;
+    margin-bottom:20px;
 }
 
 #payments .card-title{
     font-size: 24px;
     color: #000000;
-    margin-bottom: 15px;
-    margin-top: 54px;
+    
 }
 
 #payments label{
-    font-size: 13px;
+    font-size: 8px;
     color: #525252;
     font-weight: lighter;
-    margin-top: 30px;
+    margin-top: 10px;
     margin-left: 5px;
 }
 
 #payments input, #payments select{
-    height: 60px;
+    height: 30px;
     border-radius: 5px;
     background-color: #ffffff;
     border: solid 2px #d3d3d3;
-    font-size: 20px;
+    font-size: 12px;
     color: #999999;
 }
 
@@ -1453,21 +1465,27 @@ body {
 }
 
 #payments .card-in .email{
-    width: 80%;
+    width: 50%;
+}
+
+#payments .card-in .email.left{
+    margin-right: 14px;
+}
+
+#payments .card-in .email.right{
+    margin-left: 14px;
 }
 
 #payments .card-in .cc{
-    margin-right: 28px;
-    width: 380px;
     position: relative;
 }
 
 #payments .card-in .cc .img-holder{
     position: absolute;
-    bottom: 0;
-    right: 0;
-    height: 60px;
-    padding: 10px;
+    bottom: 3px;
+    right: 15px;
+    height: 29px;
+    padding: 5px;
 }
 
 #payments .card-in .cc .img-holder img{
@@ -1475,37 +1493,17 @@ body {
 }
 
 #payments .card-in .ccard .img-holder{
-    height: 60px;
-    padding: 10px;
+    height: 30px;
+    padding: 5px;
 }
 
 #payments .card-in .ccard .img-holder img{
     height: 100%;
 }
 
-#payments .card-in .cvv{
-    width: 100px;
-}
 
 #payments .card-in .cvv input{
     text-align: center;
-}
-
-#payments .card-in .exp-month{
-    margin-right: 28px;
-    width: 176px;
-}
-
-#payments .card-in .exp-year{
-    width: 176px;
-}
-
-#payments .card-in .country{
-    width: 380px;
-}
-
-#payments .card-in .country select{
-    width:100%;
 }
 
 #payments .card-in .first-name{
@@ -1519,7 +1517,13 @@ body {
 }
 
 #payments .card-in .address{
-    width: 100%;
+    width: 60%;
+    margin-right: 14px;
+}
+
+#payments .card-in .phone{
+    width: 40%;
+    margin-left: 14px;
 }
 
 #payments .card-in .zipcode{
@@ -1543,24 +1547,32 @@ body {
 }
 
 #payments .seals{
-    margin-top: 30px;
+    position: absolute;
+    right: 0;
+    top: -18px;
+    height: 26px;
+}
+
+#payments .edit_credit_card{
+    position: relative;
+}
+
+#payments .seals img{
+    width: 80px;
+    cursor: pointer !important;
 }
 
 #payments .seals .siteseal{
     margin-right: 30px;
 }
 
-#payments .summary{
-    padding-top: 22px;
-}
-
 #payments .summary .title{
-    font-size: 24px;
+    font-size: 18px;
     color: #525252;
 }
 
 #payments .summary .info{
-    font-size: 14px;
+    font-size: 10px;
     color: #525252;
 }
 
@@ -1569,39 +1581,41 @@ body {
 }
 
 #payments .summary .description{
-    font-size: 16px;
-    line-height: 3;
+    font-size: 12px;
+    line-height: 2;
     color: #999999;
-    width: 60%;
+    width: 50%;
 }
 
 #payments .summary .value{
-    font-size: 16px;
-    line-height: 3;
+    font-size: 12px;
+    line-height: 2;
     text-align: right;
     color: #525252;
-    width: 40%;
+    width: 50%;
 }
 
-#payments .summary .total .description,#payments .summary .total .value{
-    font-size: 28px;
+#payments .summary .total .description, #payments .summary .total .value{
+    font-size: 20px;
     color: #525252;
 }
 
 #payments .summary .terms{
-    font-size: 14px;
+    font-size: 10px;
     text-align: center;
     color: #525252;   
 }
 
 #payments .summary button{
-    width: 100%;
-    height: 70px;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    height: 55px;
     margin-bottom: 15px;
     border-radius: 3px;
     background-color: #91c33f;
     border: none;
-    font-size: 24px;
+    font-size: 20px;
     text-align: center;
     color: #ffffff;
 }
@@ -1612,9 +1626,13 @@ body {
 
 #payments .summary select {
     color: #525252;
-    font-size: 16px;
-    width: 90px;
-    height: 45px;
+    font-size: 10px;
+    width: 136px;
+    height: 20px;
+}
+
+#payments .summary select.amount {
+    width: 60px;
 }
 
 #payments .ggg-badge-pledge{
@@ -1627,47 +1645,46 @@ body {
     margin: 0 15px;
 }
 
-#payments .ggg-badge-pledge .ggg-img{
-    width: 100px;
-    height: 100px;
+#payments .ggg-badge-pledge img{
+    height: 70px;
 }
 
-#payments .ggg-badge-pledge .pledge-img{
-    width: 100px;
-    height: 121px;
+#payments .ggg-badge-pledge ul{
+    padding-right: 20px;
 }
 
 #payments .ggg-badge-pledge .title{
-    font-size: 16px;
+    font-size: 11px;
 }
 
 #payments .ggg-badge-pledge .cont{
-    font-size: 10px;
+    font-size: 8px;
 }
 
 #payments .review{
-    font-size: 18px;
+    font-size: 12px;
     color: #525252;
+    margin-left: 5px;
 }
 
 #payments .review .title{
-    font-size: 24px;
+    font-size: 18px;
 }
 
 #payments .review button{
-    width: 80px;
-    height: 45px;
+    width: 45px;
+    height: 25px;
     border-radius: 3px;
     background-color: #93aa52;
     border: solid 2px #93aa52;
-    font-size: 18px;
+    font-size: 11px;
     text-align: center;
     color: #ffffff;
-    margin-top: 30px;
+    margin-top: 5px;
 }
 
 #payments hr {
-    margin-top: 43px;
+    margin-top: 10px;
     margin-bottom: 0;
     margin-left: -6%;
     margin-right: -6%;
@@ -1675,7 +1692,76 @@ body {
     border-top: 1px solid #eeeeee;
 }
 
+#home section#hero.short{
+    background: #373d3f;
+    max-height:100px
+}
+
 @media(max-width: 992px) {
+    
+    #payments label{
+        margin-left: 0;
+    }
+
+    #payments .card-in .email.left{
+        margin-right: 7px;
+    }
+
+    #payments .card-in .email.right{
+        margin-left: 7px;
+    }
+    #payments .card-in .first-name{
+        margin-right: 7px;
+    }
+
+    #payments .card-in .last-name{
+        margin-left: 7px;
+    }
+
+    #payments .card-in .address{
+        margin-right: 7px;
+    }
+
+    #payments .card-in .phone{
+        margin-left: 7px;
+    }
+
+    #payments .card-in .zipcode{
+        margin-right: 7px;
+    }
+
+    #payments .card-in .city{
+        margin-right: 7px;
+        margin-left: 7px;
+    }
+
+    #payments .card-in .state{
+        margin-left: 7px;
+    }
+
+    #payments .card-in .cvv{
+        padding-right: 7px;
+    }
+
+    #payments .card-in .exp-month{
+        padding-right: 7px;
+        padding-left: 7px;
+    }
+
+    #payments .card-in .exp-year{
+        padding-left: 7px;
+    }
+
+    #home section#hero.short{
+        max-height:80px
+    }
+    #payments .summary .total .description, #payments .summary .total .value{
+        font-size: 16px;
+    }
+
+    #payments .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{
+        padding: 0;
+    }
 
     #tickets-map {
         font-size: 11px;
@@ -1980,6 +2066,22 @@ body {
         margin-bottom:20px !important;
     }
     
+    #game_info {
+        font-size: 12px;
+        height: 220px;
+    }
+
+    #game_info .moto{
+        height: auto;
+        margin: 0 15px;
+        width: inherit;
+        font-size: 10px;
+    }
+
+    .dark-header .navbar-gamehedge, .navbar-gamehedge{
+        display: inherit !important;
+    }
+
 }
 
 no-padding{
@@ -2049,7 +2151,7 @@ a {
 
 .navbar-gamehedge {
     margin-bottom: 0px;
-    background-color: #373d3f;
+    background: none;
     border-radius: 0px;
     border: none;
     z-index: 10;
@@ -2057,14 +2159,8 @@ a {
     min-height: 64px;
 }
 
-@media (max-width: 991px) {
-    .navbar-gamehedge {
-        padding-bottom: 10px;
-    }
-}
-
-.home-header .navbar-gamehedge{
-    background: none;
+.dark-header .navbar-gamehedge{
+    background-color: #373d3f;
 }
 
 .navbar-gamehedge .navbar-nav > .open > a, .navbar-gamehedge .navbar-nav > .open > a:focus,
