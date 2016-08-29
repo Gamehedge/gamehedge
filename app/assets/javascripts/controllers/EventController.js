@@ -178,6 +178,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	$scope.ordering = 'retail_price';
 	$scope.etickets = false;
 	$rootScope.isOrder = false;
+	$rootScope.darkHeader = true;
+	$rootScope.noFooter = true;
 	$window.scrollTo(0, 0);
 })
 .filter('numberOfSeats', function() {

@@ -122,8 +122,8 @@
     </div>
 </div>
 
-<div ng-class="{'home-header': !$root.isOrder}">
-    <nav class="navbar navbar-default navbar-gamehedge">
+<div ng-class="{'dark-header': $root.darkHeader}">
+    <nav class="navbar navbar-default navbar-gamehedge vertical-center">
 
         <div class="col-xs-2 hidden-md hidden-lg" ng-show="!$root.isOrder">
             <div class="navbar navbar-default navbar-fixed-top">
@@ -185,7 +185,7 @@
 </div>
 <footer>
     <div class="container">
-        <div class="row" id="data_footer" ng-show="!$root.isOrder">
+        <div class="row" id="data_footer" ng-show="!$root.noFooter">
             <div class="col-md-3 hidden-xs hidden-sm">
                 <div class="footer-nav">
                     <h2>What to Know</h2>

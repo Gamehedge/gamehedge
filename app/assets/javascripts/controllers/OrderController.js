@@ -118,6 +118,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,$loca
 	$scope.getPromoCodes();
 	$scope.getServiceFees();
 	$rootScope.isOrder = true;
+	$rootScope.darkHeader = true;
+	$rootScope.noFooter = true;
 	$('input#cc').payment('formatCardNumber');
 	$('input#cvv').payment('formatCardCVC');
 	$('input.numeric').payment('restrictNumeric');
@@ -125,9 +127,15 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,$loca
 		$('input#cc').payment('formatCardNumber');
 		$('input#cvv').payment('formatCardCVC');
 		$('input.numeric').payment('restrictNumeric');
+		for(i=$('.seals').find('img').length;i>1;){
+			$('.seals').find('img').first().remove();
+			i = $('.seals').find('img').length;
+		}
+		$('.seals').removeClass('hidden');
 	},1000);
 	$scope.edit_deliver = true;
 	$scope.edit_credit_card = true;
 	$scope.edit_billing = true;
+	$window.scrollTo(0, 0);
 
 });

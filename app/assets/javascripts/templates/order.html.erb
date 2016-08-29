@@ -104,7 +104,7 @@
 									</div>
 							    </div>
 	  						</div>
-	  						<div class="seals">
+	  						<div class="seals hidden">
 								<script src="https://cdn.ywxi.net/js/inline.js?w=96"></script>
 								<span id="siteseal">
 		                            <script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script>
@@ -230,12 +230,46 @@
 	  						</div>
 	  					</div>
 	  					<div class="review" ng-if="!edit_billing">
-	  						<div class="title">{{first_name_billing}}</div>
+	  						<div class="title">{{first_name_billing}} {{last_name_billing}}</div>
 	  						<div>{{address_billing}}<br>
 	  						{{city_billing}}, {{state_billing}} {{zipcode_billing}}<br>
 	  						{{country_billing}}</div>
 		  					<button ng-click="toogleReview('billing')">EDIT</button>
 	  					</div>
+	  					<hr>
+	  					<div class="row">
+		  					<div class="ggg-badge-pledge col-md-6">
+			  					<div class="img-container">
+			  						<img src="<%= image_url "badge-gamehedge.png" %>" class="ggg-img">
+			  					</div>
+			  					<div>
+				  					<div class="title">
+				  						Your tickets come with the<br>GOOD GAME GUARANTEE!
+				  					</div>
+				  					<div class="cont">
+				  						If the home team loses by {{event.sport.ggg}} or more, GameHedge will refund 50% of your ticket price at no additional cost to you.
+				  					</div>
+				  				</div>
+			  				</div>
+			  				<div class="ggg-badge-pledge col-md-6">
+			  					<div class="img-container">
+			  						<img src="<%= image_url "pledge.png" %>" class="pledge-img">
+			  					</div>
+			  					<div>
+				  					<div class="title">
+				  						GAMEHEDE PLEDGE
+				  					</div>
+				  					<div class="cont">
+				  						Tickets will always be…
+				  						<ul>
+				  							<li>in time for the event</li>
+				  							<li>refunded if the event is canceled and not resecheduled</li>
+				  							<li>authentic</li>
+				  						</ul>
+				  					</div>
+				  				</div>
+			  				</div>
+			  			</div>
   					</div>
   				</div>
   			</div>
@@ -297,37 +331,6 @@
 					    <button ng-click="confirmPay()">Confirm and Pay</button>
 					    <div class="terms">By clicking Confirm and Pay, you agree to GameHedge <a href="terms">Terms and Privacy Policy.</a></div>
   					</div>
-  				</div>
-  				<div class="ggg-badge-pledge">
-  					<div class="img-container">
-  						<img src="<%= image_url "badge-gamehedge.png" %>" class="ggg-img">
-  					</div>
-  					<div>
-	  					<div class="title">
-	  						Your tickets come with the<br>GOOD GAME GUARANTEE!
-	  					</div>
-	  					<div class="cont">
-	  						If the home team loses by {{event.sport.ggg}} or more, GameHedge will refund 50% of your ticket price at no additional cost to you.
-	  					</div>
-	  				</div>
-  				</div>
-  				<div class="ggg-badge-pledge">
-  					<div class="img-container">
-  						<img src="<%= image_url "pledge.png" %>" class="pledge-img">
-  					</div>
-  					<div>
-	  					<div class="title">
-	  						GAMEHEDE PLEDGE
-	  					</div>
-	  					<div class="cont">
-	  						Tickets will always be…
-	  						<ul>
-	  							<li>in time for the event</li>
-	  							<li>refunded if the event is canceled and not resecheduled</li>
-	  							<li>authentic</li>
-	  						</ul>
-	  					</div>
-	  				</div>
   				</div>
   			</div>
   		</div>

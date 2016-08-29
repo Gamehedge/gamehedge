@@ -223,12 +223,10 @@ body {
 
 .navbar-leagues{
 	text-align: center;
-    padding-top: 24px;
 }
 
 .navbar-leagues a{
 	font-family: Montserrat;
-	font-size: 18px;
 	text-align: center;
 	color: #ffffff;
 	margin-left: 15px;
@@ -255,8 +253,6 @@ body {
 	padding-right: 0px;
     padding-top: 9px;
     padding-bottom: 9px;
-    margin-left: auto;
-
 }
 
 .navbar-myaccount .login{
@@ -297,7 +293,6 @@ body {
 
 .navbar-myaccount .myaccount-btn{
 	font-family: Montserrat;
-	font-size: 18px;
 	text-align: center;
 	color: #ffffff;
 	background: none;
@@ -306,7 +301,6 @@ body {
 .navbar-myaccount .user-icon{
 	height: 32px;
     margin-top: -7px;
-	margin-right: 10px;
 }
 
 .navbar-myaccount .dropdown-icon{
@@ -1143,18 +1137,19 @@ body {
 }
 
 #game_info .event-info{
-    height: 100px;
     display: flex;
     align-items: center;
     color: #525252;
+    height: 100%
 }
 
-#game_info .event-info .second-line{
-    font-size: 14px;
+
+#game_info .row{
+    height: 80px;
 }
 
 #game_info .date1{
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
     text-align: center;
     color: #91c33f;
@@ -1162,7 +1157,7 @@ body {
 }
 
 #game_info .date2{
-    font-size: 48px;
+    font-size: 40px;
     text-align: center;
     color: #000000;
     margin-top: -16px;
@@ -1170,7 +1165,7 @@ body {
 }
 
 #game_info .date3{
-    font-size: 18px;
+    font-size: 15px;
     text-align: center;
     color: #d6d6d6;
     margin-bottom: 5px;
@@ -1179,13 +1174,13 @@ body {
 #game_info .moto{
     font-size: 12px;
     color: #999999;
-    height:100px;
+    height:100%;
     text-align: justify;
 }
 
 #game_info .ggg-logo{
-    height: 100px;
-    font-size: 20px;
+    height: 100%;
+    font-size: 15px;
     color: #999999;
     text-align: center;
     justify-content: center;
@@ -1204,15 +1199,17 @@ body {
 }
 
 #tickets-map .filter-row{
-    height: 80px;
+    height: 50px;
     border: solid 1px #eeeeee;
     border-top: none;
+    font-size: 11px;
+    justify-content: center;
 }
 
 #tickets-map .filter-header{
-    height: 50px;
+    height: 40px;
     background-color: #373d3f;
-    font-size: 14px;
+    font-size: 12px;
     color: #ffffff;
 }
 
@@ -1235,7 +1232,7 @@ body {
 }
 
 #tickets-map .tickets-data .section {
-    padding-left: 50px;
+    padding-left: 30px;
 }
 
 #tickets-map .filter-header .sorting{
@@ -1248,27 +1245,29 @@ body {
 }
 
 #tickets-map .tickets-data{
-    max-height: 500px;
-    overflow: scroll;
+    max-height: 360px;
+    overflow-y: scroll;
+    overflow-x: hidden;
     font-size:15px;
 }
 
 #tickets-map .tickets-data .row{
-    height: 80px;
+    height: 60px;
     background-color: #ffffff;
     border: solid 1px #eeeeee;
     border-top: none;
+    font-size: 10px;
 }
 
 #tickets-map .tickets-data .row .format{
-    font-size: 10px;
+    font-size: 8px;
     text-align: center;
     color: #999999;
     margin:0;
 }
 
 #tickets-map #MapContainer {
-    height: 710px;
+    height: 500px;
     width: 710px;
 }
 
@@ -1306,7 +1305,7 @@ body {
 #tickets-map .glyphicon-info-sign {
     position: absolute;
     left: 11px;
-    top: 34px;
+    top: 26px;
     z-index: 9999;
 }
 
@@ -1315,10 +1314,23 @@ body {
 }
 
 #tickets-map .tickets-data .row button{
-    width: 130px;
-    height: 38px;
-    margin-top: 17px;
+    width: 100px;
+    height: 30px;
+    margin-top: 6px;
     background-color: #91c33f;
+}
+
+#tickets-map .tickets-data .row select {
+    height: 25px;
+    width: 35px;
+    border: none;
+    background-color: #FFFFFF;
+    font-size: 12px;
+    color: black;
+}
+
+#tickets-map .tickets-data .row select:focus {
+    outline:none;
 }
 
 #tickets-map button:focus{
@@ -1389,7 +1401,8 @@ body {
 
 #payments .card-in{
     background-color: #ffffff;
-    padding: 0px 5% 15px 5%;
+    padding: 5px 5% 15px 5%;
+    font-size: 17px;
 }
 
 #payments .card.credit-card{
@@ -1446,10 +1459,10 @@ body {
 
 #payments .card-in .cc .img-holder{
     position: absolute;
-    bottom: 0;
-    right: 0;
-    height: 40px;
-    padding: 10px;
+    bottom: 3px;
+    right: 15px;
+    height: 29px;
+    padding: 5px;
 }
 
 #payments .card-in .cc .img-holder img{
@@ -1457,8 +1470,8 @@ body {
 }
 
 #payments .card-in .ccard .img-holder{
-    height: 60px;
-    padding: 10px;
+    height: 30px;
+    padding: 5px;
 }
 
 #payments .card-in .ccard .img-holder img{
@@ -1522,7 +1535,8 @@ body {
 }
 
 #payments .seals img{
-    height: 90px;
+    width: 80px;
+    cursor: pointer !important;
 }
 
 #payments .seals .siteseal{
@@ -1608,43 +1622,42 @@ body {
     margin: 0 15px;
 }
 
-#payments .ggg-badge-pledge .ggg-img{
-    width: 100px;
-    height: 100px;
+#payments .ggg-badge-pledge img{
+    height: 70px;
 }
 
-#payments .ggg-badge-pledge .pledge-img{
-    width: 100px;
-    height: 121px;
+#payments .ggg-badge-pledge ul{
+    padding-right: 20px;
 }
 
 #payments .ggg-badge-pledge .title{
-    font-size: 16px;
+    font-size: 11px;
 }
 
 #payments .ggg-badge-pledge .cont{
-    font-size: 10px;
+    font-size: 8px;
 }
 
 #payments .review{
-    font-size: 18px;
+    font-size: 12px;
     color: #525252;
+    margin-left: 5px;
 }
 
 #payments .review .title{
-    font-size: 24px;
+    font-size: 18px;
 }
 
 #payments .review button{
-    width: 80px;
-    height: 45px;
+    width: 45px;
+    height: 25px;
     border-radius: 3px;
     background-color: #93aa52;
     border: solid 2px #93aa52;
-    font-size: 18px;
+    font-size: 11px;
     text-align: center;
     color: #ffffff;
-    margin-top: 30px;
+    margin-top: 5px;
 }
 
 #payments hr {
@@ -1663,6 +1676,59 @@ body {
 
 @media(max-width: 992px) {
     
+    #payments label{
+        margin-left: 0;
+    }
+
+    #payments .card-in .email.left{
+        margin-right: 7px;
+    }
+
+    #payments .card-in .email.right{
+        margin-left: 7px;
+    }
+    #payments .card-in .first-name{
+        margin-right: 7px;
+    }
+
+    #payments .card-in .last-name{
+        margin-left: 7px;
+    }
+
+    #payments .card-in .address{
+        margin-right: 7px;
+    }
+
+    #payments .card-in .phone{
+        margin-left: 7px;
+    }
+
+    #payments .card-in .zipcode{
+        margin-right: 7px;
+    }
+
+    #payments .card-in .city{
+        margin-right: 7px;
+        margin-left: 7px;
+    }
+
+    #payments .card-in .state{
+        margin-left: 7px;
+    }
+
+    #payments .card-in .cvv{
+        padding-right: 7px;
+    }
+
+    #payments .card-in .exp-month{
+        padding-right: 7px;
+        padding-left: 7px;
+    }
+
+    #payments .card-in .exp-year{
+        padding-left: 7px;
+    }
+
     #home section#hero.short{
         max-height:80px
     }
@@ -1835,6 +1901,22 @@ body {
         margin: 20px;
         height: auto;
     }
+
+    #game_info {
+        font-size: 12px;
+        height: 220px;
+    }
+
+    #game_info .moto{
+        height: auto;
+        margin: 0 15px;
+        width: inherit;
+        font-size: 10px;
+    }
+
+    .dark-header .navbar-gamehedge, .navbar-gamehedge{
+        display: inherit !important;
+    }
 }
 
 no-padding{
@@ -1904,7 +1986,7 @@ a {
 
 .navbar-gamehedge {
     margin-bottom: 0px;
-    background-color: #373d3f;
+    background: none;
     border-radius: 0px;
     border: none;
     z-index: 10;
@@ -1912,14 +1994,8 @@ a {
     min-height: 64px;
 }
 
-@media (max-width: 991px) {
-    .navbar-gamehedge {
-        padding-bottom: 10px;
-    }
-}
-
-.home-header .navbar-gamehedge{
-    background: none;
+.dark-header .navbar-gamehedge{
+    background-color: #373d3f;
 }
 
 .navbar-gamehedge .navbar-nav > .open > a, .navbar-gamehedge .navbar-nav > .open > a:focus,
