@@ -21,3 +21,6 @@
 //= require bootstrap
 //= require_tree .
 //= require_tree ./templates
+
+//= require slick.min
+//= require angular-slick.min

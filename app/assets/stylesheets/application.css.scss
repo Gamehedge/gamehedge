@@ -15,7 +15,8 @@
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
-
+ @import "slick";
+ @import "slick-theme";
 
 * { box-sizing: border-box; }
 
@@ -41,9 +42,9 @@ body {
     width:  100%;
     margin-top: 40px;
     position: relative;
-    background-color: #bababa;
-    padding-top: 15px;
-    padding-bottom: 4px;
+    background-color: #fff;
+    box-shadow: 0 4px 0 0 rgba(224, 224, 224, 0.5), 0 -15px 0 0 rgba(181, 181, 181, 0.5);
+    margin-bottom: 4px;
 }
 
 #tiles .grid-item img{
@@ -398,7 +399,12 @@ body {
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
     box-shadow: none;
-    width: 700px;
+}
+
+@media(min-width: 992px) {
+    #form-home-search [uib-typeahead-popup].dropdown-menu{
+        width: 700px !important;
+    }
 }
 
 #form-home-search .dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus{
@@ -416,6 +422,23 @@ body {
 	padding-top: 10px;
     padding-bottom: 10px;
     font-size: 24px;
+}
+
+
+@media(max-width: 992px) {
+    #form-home-search [uib-typeahead-popup].dropdown-menu {
+        overflow-x: hidden;
+    }
+    
+    #form-home-search .dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus{
+        padding-left: 10px;
+        font-size: 12px;
+    }
+    
+    .dropdown-menu > li > a{
+        padding-left: 10px;
+        font-size: 12px;
+    }
 }
 
 .mobile-menu .img-header{
@@ -1740,6 +1763,16 @@ body {
         padding: 0;
         margin: 0 7px;
     }
+    
+    .content-background-mobile {
+        background-color: white;
+        box-shadow: 0 4px 0 0 rgba(224, 224, 224, 0.5), 0 -15px 0 0 rgba(181, 181, 181, 0.5);
+    }
+    
+    .content-mobile img {
+        width: 90%;
+        float: right;
+    }
 
     #good-game-guarantee .content img {
         width: 70px;
@@ -1753,6 +1786,116 @@ body {
         padding: 10px 0;
         line-height: 1;
         font-size: 15px;
+        width: 100%;
+        position: relative;
+        left: 0%;
+    }
+    
+    #good-game-guarantee .section-mobile {
+        display:flex;
+        align-items:center;
+    }
+    
+    #good-game-guarantee .section2-mobile {
+        
+    }
+    
+    #good-game-guarantee .table-element {
+        display: table;
+        padding-top: 18px;
+    }
+    
+    #good-game-guarantee .first-ele {
+        width: 40%;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    #good-game-guarantee .second-ele {
+        width: 60%;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    #good-game-guarantee .table-ele-cell {
+        display: table-cell;
+        vertical-align: middle;
+    }
+    
+    #good-game-guarantee .section2-mobile h2 {
+        text-align: left;
+        color: #9aca3c;
+        font-size: 14px;
+        margin: 0px;
+        margin-bottom: 2px;
+        font-weight: bolder;
+    }
+    
+    #good-game-guarantee .section2-mobile p {
+        color: #5c5b5d;
+        font-size: 10px;
+    }
+    
+    #good-game-guarantee .fifty-perc {
+        width: 50%;
+        float: left;
+        font-size: 10px;
+        font-weight: bolder;
+    }
+    
+    #good-game-guarantee .fifty-perc img {
+        width: 30%;
+        float: left;
+    }
+    
+    #good-game-guarantee .fifty-perc div {
+        margin-top: 10%;
+    }
+    
+    #tiles .grid-item {
+        margin-top: 28px;
+    }
+    
+    .slick-slider {
+        margin-bottom: 0px;
+    }
+    
+    .slick-dots {
+        bottom: 0px !important;
+        position: relative;
+        background-color: #ffffff;
+        height: 35px;
+    }
+    
+    .slick-dots li.slick-active button:before {
+        font-size: 12px;
+        color: #bbbbbb;
+        content: '';
+        background-color: #bbb;
+        opacity: 1;
+    }
+    
+    .slick-dots li {
+        width: 10px;
+        height: 10px;
+        margin: 0 3px;
+    }
+    
+    .slick-dots li button {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .slick-dots li button:before {
+        font-size: 12px;
+        color: #bbbbbb;
+        content: '';
+        border: 1px solid;
+        border-radius: 10px;
+        background-color: #fff;
+        width: 10px;
+        height: 10px;
+        opacity: 1;
     }
 
 	.leagues #divisions .divisions-container .performer-detail{
@@ -1815,6 +1958,28 @@ body {
         margin: 20px;
         height: auto;
     }
+    
+    #how-video .page-title {
+        font-size: 20px;
+        margin-bottom: 19px !important;
+        margin-top: 60px;
+    }
+    
+    #how-video .container {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    
+    .how-video-mobile {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    
+    .footer-signature {
+        margin-top: 10px !important;
+        margin-bottom:20px !important;
+    }
+    
 }
 
 no-padding{

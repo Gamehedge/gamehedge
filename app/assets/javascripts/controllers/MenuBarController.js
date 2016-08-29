@@ -53,7 +53,7 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
     $scope.getSearchHints = function(val) {
         return dataService.getData("/search/?search=" + val + "&limit=10")
             .then(function(response){
-                console.log(response)
+                //console.log(response)
                 $scope.searchResults = response;
         });
     };
@@ -79,4 +79,5 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
     // Initializers
 
     $scope.getLeagues();
+    
 });
