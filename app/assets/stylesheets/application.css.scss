@@ -683,13 +683,15 @@ body {
     color: #005e9b;  
 }
 #near-events .front button {
-    width: 106px;
+    /*width: 106px;*/
     height: 30px;
     border-radius: 3px;
     background-color: #91c33f;
     border: none;
     font-size: 14px;
     color: #ffffff;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 #near-events .front button:focus {
