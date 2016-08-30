@@ -79,12 +79,12 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	            EventDate: date
 	        }
 	        , MapType: "Interactive"
-	        , ControlsPosition:"Outside"
 	        , EnableTooltipSectionView:false
 	        , SingleSectionSelection:true
 	        , AdaptiveThreshold: 0.8
 	        , Tickets: $scope.Data
 	        , ColorScheme: 1
+	        , ControlsPosition:"Inside"
 	        , ServiceUrl: "https://imap.ticketutils.net"
 	        , FailoverMapUrl: "https://static.ticketutils.com/Charts/No-Seating-Chart.jpg"
 	        , OnError: function (e, Error) {
@@ -121,7 +121,10 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	            $scope.filterBySection = false;
 				$scope.section = "";
 				$scope.sectionUrl = "";
-				$scope.applyChanges();      
+				$scope.applyChanges();
+				$("#MapContainer").tuMap("RemoveMapControl","Unmapped");
+	        $("#MapContainer").tuMap("RemoveMapControl","Parking");
+	        $("#MapContainer").tuMap("RemoveMapControl","Tailgate");     
 	        }
 	        , OnMouseover:function(e,Section){
 	            if(Section.Active) {
@@ -135,10 +138,12 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	            return Code;
 	        }
 	    });
+
 	    $timeout(function () {
 	        $("#MapContainer").tuMap("RemoveMapControl","Unmapped");
 	        $("#MapContainer").tuMap("RemoveMapControl","Parking");
-	    }, 1000);
+	        $("#MapContainer").tuMap("RemoveMapControl","Tailgate");
+	    },1000);
 	};
 
 	$scope.applyChanges = function(){
@@ -181,6 +186,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	$rootScope.darkHeader = true;
 	$rootScope.noFooter = true;
 	$window.scrollTo(0, 0);
+	
 })
 .filter('numberOfSeats', function() {
   return function(input,numSeats) {
