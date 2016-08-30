@@ -181,6 +181,11 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	$rootScope.darkHeader = true;
 	$rootScope.noFooter = true;
 	$window.scrollTo(0, 0);
+	$( window ).resize(function() {
+	  	$("#MapContainer").tuMap("Refresh");
+	  	console.log("resize");
+	});
+	
 })
 .filter('numberOfSeats', function() {
   return function(input,numSeats) {

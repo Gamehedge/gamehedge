@@ -179,9 +179,13 @@
 <div class="view-container">
     <div ng-view class="view-frame animate-view"></div>
 </div>
-<footer>
+
+
+
+
+<footer ng-show="!$root.noFooter">
     <div class="container">
-        <div class="row hidden-xs hidden-sm" id="data_footer" ng-show="!$root.isOrder">
+        <div class="row hidden-xs hidden-sm" id="data_footer">
             <div class="col-md-3 hidden-xs hidden-sm">
                 <div class="footer-nav">
                     <h2>What to Know</h2>
