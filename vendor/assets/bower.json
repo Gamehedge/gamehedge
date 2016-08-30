@@ -4,6 +4,9 @@
     "angular": "latest",
     "angular-route": "latest",
     "angular-devise": "latest",
-    "angular-animate": "latest"
+    "angular-animate": "latest",
+    "angular-slick": "latest"
+  },
+  "resolutions": {
   }
 }

@@ -5,6 +5,7 @@ app = angular.module('gamehedge',[
   'templates',
   'ngAnimate',
   'ui.bootstrap',
+  'slickCarousel'
 ])
 
 app.config([ '$routeProvider','$locationProvider','AuthProvider',

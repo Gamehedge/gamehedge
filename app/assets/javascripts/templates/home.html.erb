@@ -4,16 +4,17 @@
     <div id="wrapper">
       <div id="content">
         <div class="container">
-          <div id="hero-search" class="hidden-sm hidden-xs">
+          <p class="hidden-md hidden-lg hidden-xl">Every Ticket Comes With Our Good Game Guarantee!</p>
+          <div id="hero-search">
             <form id="form-home-search" name="formSearch" method="POST" action="/search/">
               <input type="hidden" name="type" value="full" />
               <div class="form-group">
-                <img src="<%= image_url "search icon.png" %>">
-                <input type="text" class="form-control" placeholder="Search by team, league, game, stadium or player..." ng-model="searchTerm" uib-typeahead="hint.name for hint in getSearchHints($viewValue)" typeahead-template-url="typeahead/bind-node.html">
+                <img src="<%= image_url 'search icon.png' %>">
+                <input id="search_element" type="text" class="form-control" placeholder="Search by team, league, game, stadium or player..." ng-model="searchTerm" uib-typeahead="hint.name for hint in getSearchHints($viewValue)" typeahead-template-url="typeahead/bind-node.html" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
               </div>
             </form>
           </div>
-          <p>Every Ticket Comes With Our Good Game Guarantee!</p>
+          <p class="hidden-xs hidden-sm">Every Ticket Comes With Our Good Game Guarantee!</p>
         </div>
         <div class="press-images hidden-xs hidden-sm">
           <div class="container">
@@ -34,7 +35,7 @@
   </script>
 
   <main>
-    <section id="good-game-guarantee">
+    <section id="good-game-guarantee" class="hidden-xs hidden-sm">
       <div class="container">
         <div class="title">HOW THE GOOD GAME GUARANTEE WORKS</div>
 
@@ -98,6 +99,80 @@
         </div>
       </div>
     </section>
+      
+    <section id="good-game-guarantee" class="hidden-md hidden-lg hidden-xl">
+      <div class="container">
+        <div class="title">HOW THE GOOD GAME GUARANTEE WORKS</div>
+
+        <div class="content-background-mobile">
+          <div class="content-mobile">
+             <slick settings="slickConfig">
+                
+                <div class="row table-element">
+                  <div class="section-mobile table-ele-cell first-ele">
+                    <img src="<%= image_url 'icon ticket.png' %>">
+                  </div>
+                  <div class="section2-mobile table-ele-cell second-ele">
+                    <h2>BUY TICKETS</h2>
+                    <p>
+                      Find your game and purchase your tickets.<br>
+                      Good Game Guarantee included at no additional cost with every ticket.
+                    </p>
+                  </div>
+                </div>
+                <div class="row table-element">
+                  <div class="section-mobile table-ele-cell first-ele">
+                    <img src="<%= image_url 'icon stadium.png' %>">
+                  </div>
+                  <div class="section2-mobile table-ele-cell second-ele">
+                    <h2>ENJOY GAME</h2>
+                    <p>
+                      If the home team loses by below amount or more, you get 50% of ticket price back.
+                    </p>
+                    <div class="row">
+                      <div class="fifty-perc block">
+                        <img class="icon-img" src="<%= image_url 'football icon.png' %>">
+                        <div>17 PTS</div>
+                      </div>
+                      <div class="fifty-perc block">
+                        <img class="icon-img" src="<%= image_url 'basketball icon.png' %>">
+                        <div>19 PTS</div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="fifty-perc block">
+                        <img class="icon-img" src="<%= image_url 'baseball icon.png' %>">
+                        <div>5 RUNS</div>
+                      </div>
+                      <div class="fifty-perc block">
+                        <img class="icon-img" src="<%= image_url 'hockey icon.png' %>">
+                        <div>4 GOALS</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row table-element">
+                  <div class="section-mobile table-ele-cell first-ele">
+                    <img src="<%= image_url 'icon coin.png' %>">
+                  </div>
+                  <div class="section2-mobile table-ele-cell second-ele">
+                    <h2>CLAIM MONEY</h2>
+                    <p>
+                      Simply come back to GameHedge.com to claim your refund.
+                    </p>
+                  </div>
+                </div> 
+                
+            </slick>
+  
+              
+              
+              
+          </div>
+        </div>
+      </div>
+    </section>
+      
     <section id="tiles">
       <div class="container">
         <div id="home-loading-data" class="row text-center" ng-if="loading">
@@ -119,7 +194,7 @@
                   <div ng-if="tile.tile_type.id == 3" class="tile-title">{{tile.venue.name}}</div>
                   <div class="tile-description">{{tile.description}}</div>
                 </div>
-                <div ng-repeat="event in tile.events | limitTo:3" class="tile-event">
+                <div ng-repeat="event in tile.events | limitTo:3" class="tile-event hidden-xs hidden-sm">
                   <a href="{{(event.url + '/' + event.name + '-tickets') | spaceless | lowercase}}">
                     <div class="row">
                       <div class="col-xs-4 date-holder">
@@ -158,7 +233,7 @@
       <div class="page-title">HOW DOES THE GOOD GAME GUARANTEE WORK</div>
       <div class="container">
         <div class="row">
-          <div class="col-xs-12">
+          <div class="col-xs-12 how-video-mobile">
             <div class="videoWrapper">
               <iframe src="https://player.vimeo.com/video/153604637" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><p><a href="https://vimeo.com/153604637">GameHedge Video</a> from <a href="https://vimeo.com/user41979068">Warren Friss</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
             </div>
@@ -166,7 +241,7 @@
         </div>
       </div>
     </section>
-    <section id="home-why">
+    <section id="home-why" class="hidden-xs hidden-sm">
       <div class="page-title">WE ARE FANS LIKE YOU</div>
         <div class="container">
           <div class="row">

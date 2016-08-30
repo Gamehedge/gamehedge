@@ -4,12 +4,12 @@
         <div class="row">
             <div class="col-xs-2">
                 <div ng-click="hideMenus()">
-                    <img src="<%= image_url "close-menu.png" %>" class="img-header">
+                    <img src="<%= image_url 'close-menu.png' %>" class="img-header">
                 </div>
             </div>
             <div class="navbar-header col-xs-8">
                 <a href="/#/" ng-click="hideMenus()">
-                    <img class="logo-image menu" alt="GameHedge" src="<%= image_url "logo.png" %>">
+                    <img class="logo-image menu" alt="GameHedge" src="<%= image_url 'logo.png' %>">
                 </a>
             </div>
             <div class="col-xs-2"></div>
@@ -89,12 +89,12 @@
 <div class="mobile-menu search-menu-transition" ng-if="showSearchMenu" ng-show="!$root.isOrder">
     <div class="mobile-menu-header">
             <div class="navbar-header search-header col-xs-10">
-                <img src="<%= image_url "search icon.png" %>">
+                <img src="<%= image_url 'search icon.png' %>">
                 <input type="text" placeholder="search tickets" ng-model="searchTerm" ng-change="getSearchHints(searchTerm)">
             </div>
             <div class="col-xs-2">
                 <div ng-click="hideMenus()">
-                    <img src="<%= image_url "close-menu.png" %>" class="img-header">
+                    <img src="<%= image_url 'close-menu.png' %>" class="img-header">
                 </div>
             </div>
         
@@ -134,14 +134,10 @@
                 </button>
             </div>
         </div>
-        <div class="col-xs-2 hidden-md hidden-lg" ng-show="$root.isOrder">
-        </div>
-        <div class="navbar-header col-md-4 col-xs-8 vertical-center">
+        <div class="navbar-header col-md-4 col-xs-8">
             <a href="/#/">
-                <img class="logo-image" alt="GameHedge" src="<%= image_url "logo.png" %>">
+                <img class="logo-image" alt="GameHedge" src="<%= image_url 'logo.png' %>">
             </a>
-        </div>
-        <div class="col-xs-2 hidden-md hidden-lg" ng-show="$root.isOrder">
         </div>
         <div class="navbar-header col-md-8 hidden-xs hidden-xm vertical-center help" ng-show="$root.isOrder">
                   
@@ -149,10 +145,10 @@
                 <img class="help-image" alt="Call Us" src="<%= image_url "help.png" %>">
             
         </div>
-        <div class="col-xs-2 hidden-md hidden-lg" ng-show="!$root.isOrder">
+        <div class="col-xs-2 hidden">
             <div class="navbar navbar-default navbar-fixed-top right">
                 <button type="button" class="navbar-toggle search-button" style="padding-top:0;" data-toggle="offcanvas" data-target="#searchMenu" data-canvas="body" ng-click="showSlideSearch()">
-                    <img src="<%= image_url "search icon.png" %>">
+                    <img src="<%= image_url 'search icon.png' %>">
                 </button>
             </div>
         </div>
@@ -185,7 +181,7 @@
 </div>
 <footer>
     <div class="container">
-        <div class="row" id="data_footer" ng-show="!$root.noFooter">
+        <div class="row hidden-xs hidden-sm" id="data_footer" ng-show="!$root.isOrder">
             <div class="col-md-3 hidden-xs hidden-sm">
                 <div class="footer-nav">
                     <h2>What to Know</h2>

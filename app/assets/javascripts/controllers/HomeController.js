@@ -4,6 +4,10 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 	$scope.TilesIndex = 0;
 	$scope.loading = true;
 	$rootScope.locat = $location.url();
+    
+    $scope.car_interval = 0;
+    $scope.car_noWrapSlides = false;
+    $scope.car_active = 0;
 	
 	$scope.getTiles = function(){
 		$http({
@@ -102,10 +106,30 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 	$scope.getSearchHints = function(val) {
         return dataService.getData("/search/?search=" + val + "&limit=10")
             .then(function(response){
-            	console.log(response)
+            	//console.log(response)
+                var width = $("#search_element").width() + 50;
+                console.log("width: " + width);
+                $('#form-home-search [uib-typeahead-popup].dropdown-menu').width(width);
+                
                 return response;
         });
     };	
+    
+    $scope.slickConfig = {
+        enabled: true,
+        autoplay: false,
+        draggable: true,
+        arrows: false,  
+        infinite: false,
+        dots: true,
+        method: {},
+        event: {
+            beforeChange: function (event, slick, currentSlide, nextSlide) {
+            },
+            afterChange: function (event, slick, currentSlide, nextSlide) {
+            }
+        }
+    };
 	//Initializers
 	$rootScope.isOrder = false;
 	$rootScope.darkHeader = false;
