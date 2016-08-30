@@ -194,7 +194,7 @@
                   <div ng-if="tile.tile_type.id == 3" class="tile-title">{{tile.venue.name}}</div>
                   <div class="tile-description">{{tile.description}}</div>
                 </div>
-                <div ng-repeat="event in tile.events | limitTo:3" class="tile-event">
+                <div ng-repeat="event in tile.events | limitTo:3" class="tile-event hidden-xs hidden-sm">
                   <a href="{{(event.url + '/' + event.name + '-tickets') | spaceless | lowercase}}">
                     <div class="row">
                       <div class="col-xs-4 date-holder">
