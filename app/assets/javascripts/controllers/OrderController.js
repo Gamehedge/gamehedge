@@ -1,6 +1,6 @@
 controllers = angular.module('gamehedge')
 
-controllers.controller('OrderController', function($scope,$rootScope,$http,$location,$routeParams,$timeout,apiService,$filter){
+controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,$location,$routeParams,$timeout,apiService,$filter,$window){
 
 	$scope.getTicket = function(){
 		$http({
@@ -81,6 +81,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,$loca
 	}
 
 	$scope.toogleReview = function(toogle){
+		$scope.secondConfirm = false;
 		if(toogle == "card"){
 			$scope.edit_credit_card = true;
 		}
@@ -89,6 +90,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,$loca
 		}
 		else if(toogle == "deliver"){
 			$scope.edit_deliver = true;
+			$scope.edit_billing = true;
 		}
 		$timeout(function(){
 			$('input#cc').payment('formatCardNumber');
@@ -98,9 +100,101 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,$loca
 	}
 
 	$scope.confirmPay = function(){
-		$scope.edit_deliver = false;
-		$scope.edit_credit_card = false;
-		$scope.edit_billing = false;
+		var error = "";
+		if($scope.email == ""){
+			console.log("Email " + $scope.email)
+			error = "All fields are required"
+		}
+		else if($scope.confirm_email == ""){
+			console.log("Confirm Email " + $scope.confirm_email)
+			error = "All fields are required"
+		}
+		else if($scope.cc == ""){
+			console.log("CC " + $scope.cc)
+			error = "All fields are required"
+		}
+		else if($scope.cvv == ""){
+			console.log("cvv " + $scope.cvv)
+			error = "All fields are required"
+		}
+		else if($scope.exp_month == ""){
+			console.log("month " + $scope.exp_month)
+			error = "All fields are required"
+		}
+		else if($scope.exp_year == ""){
+			console.log("exp_year " + $scope.exp_year)
+			error = "All fields are required"
+		}
+		else if($scope.first_name_billing == ""){
+			console.log("first_name " + $scope.first_name_billing)
+			error = "All fields are required"
+		}
+		else if($scope.last_name_billing == ""){
+			console.log("last_name " + $scope.last_name_billing)
+			error = "All fields are required"
+		}
+		else if($scope.address_billing == ""){
+			console.log("address " + $scope.address_billing)
+			error = "All fields are required"
+		}
+		else if($scope.phone_billing == ""){
+			console.log("phone_number " + $scope.phone_billing)
+			error = "All fields are required"
+		}
+		else if($scope.zipcode_billing == ""){
+			console.log("zipcode " + $scope.zipcode_billing)
+			error = "All fields are required"
+		}
+		else if($scope.city_billing == ""){
+			console.log("city " + $scope.city_billing)
+			error = "All fields are required"
+		}
+		else if($scope.state_billing == ""){
+			console.log("state " + $scope.state_billing)
+			error = "All fields are required"
+		}
+
+		else if($scope.email != $scope.confirm_email){
+			error = "Email and confirmation email fields must be the same."
+		}
+		else if($.payment.validateCardNumber($scope.cc) == false){
+			error = "Invalid card number"
+		}
+		else if($.payment.validateCardExpiry($scope.exp_month,$scope.exp_year) == false){
+			error = "Invalid expiration date"
+		}
+		if(error == ""){
+			if($scope.secondConfirm){
+				alert("paying now");
+			}
+			else{
+				$scope.secondConfirm = true
+				$scope.edit_deliver = false;
+				$scope.edit_credit_card = false;
+				$scope.edit_billing = false;
+			}
+		}
+		else{
+			alert(error);
+		}
+	}
+
+	$scope.getClient = function(){
+		Auth.currentUser().then(function(user) {
+	        $http({
+		        method: 'GET',
+		        url: '/clients/show?id='+user.te_uid,
+		    }).then(function successCallback(response) {
+		    	$scope.client = response.data;
+		    	console.log("Client");
+		    	console.log($scope.client);
+		    	
+		    }, function errorCallback(response) {
+		        console.log(response);
+		    });
+	    }, function(error) {
+	        console.log(error);
+	    });
 	}
 
 	$http({
@@ -114,9 +208,23 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,$loca
     });
 	// Initializers
 	$scope.country_shipping = "US";
+	$scope.email = "";
+	$scope.confirm_email = "";
+	$scope.cc = "";
+	$scope.cvv = "";
+	$scope.exp_month = "";
+	$scope.exp_year = "";
+	$scope.first_name_billing = "";
+	$scope.last_name_billing = "";
+	$scope.address_billing = "";
+	$scope.phone_billing = "";
+	$scope.zipcode_billing = "";
+	$scope.city_billing = "";
+	$scope.state_billing = "";
 	$scope.getTicket();
 	$scope.getPromoCodes();
 	$scope.getServiceFees();
+	$scope.getClient();
 	$rootScope.isOrder = true;
 	$rootScope.darkHeader = true;
 	$rootScope.noFooter = true;
@@ -132,10 +240,10 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,$loca
 			i = $('.seals').find('img').length;
 		}
 		$('.seals').removeClass('hidden');
-	},1000);
+	},500);
 	$scope.edit_deliver = true;
 	$scope.edit_credit_card = true;
 	$scope.edit_billing = true;
+	$scope.secondConfirm = false;
 	$window.scrollTo(0, 0);
-
 });

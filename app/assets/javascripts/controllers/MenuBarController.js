@@ -12,6 +12,7 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
         $rootScope.isLoggedin = true;
     }, function(error) {
         // unauthenticated error
+        $rootScope.user = undefined;
         $rootScope.isLoggedin = false;
     });
 
@@ -32,6 +33,7 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
         $scope.$on('devise:logout', function(event, oldCurrentUser) {
             // ...
              $rootScope.isLoggedin = false;
+             $rootScope.user = undefined;
         });
     }
 

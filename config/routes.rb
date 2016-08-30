@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'events/next'
   get 'tickets/list'
   get 'tickets/show'
+  get 'clients/show'
   resources :search, :signature
   
   devise_for :admin_users, ActiveAdmin::Devise.config

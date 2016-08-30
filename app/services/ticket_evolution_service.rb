@@ -142,6 +142,9 @@ class TicketEvolutionService
     when 'tickets'
       @ticket = @connection.ticket_groups.show(@id)
       return @ticket
+    when 'clients'
+      @client = @connection.clients.show(@id)
+      return @client
     else
       puts "Invalid type parameter, please check and try again"
     end
@@ -177,6 +180,22 @@ class TicketEvolutionService
     when 'tickets'
       @ticket_group = @connection.ticket_groups.list({:event_id => @id, :lightweight => true})
       return @ticket_group
+    when 'addresses'
+      @client = @connection.clients.show(@id)
+      @addresses = @client.addresses.list({:client_id => @id})
+      return @addresses
+    when 'cards'
+      @client = @connection.clients.show(@id)
+      @cards = @client.credit_cards.list({:client_id => @id})
+      return @cards
+    when 'emails'
+      @client = @connection.clients.show(@id)
+      @emails = @client.email_addresses.list({:client_id => @id})
+      return @emails
+    when 'phones'
+      @client = @connection.clients.show(@id)
+      @phones = @client.phone_numbers.list({:client_id => @id})
+      return @phones
     else
       puts "Invalid type parameter, please check and try again"
     end

@@ -30,9 +30,13 @@
 							</span>
 	  					</div>
 	  					<div class="review" ng-if="!edit_deliver">
+	  						<div class="title">{{first_name_billing}} {{last_name_billing}}</div>
 	  						<span>
 		  						<div>{{email}}</div>
 		  					</span>
+	  						<div>{{address_billing}}<br>
+	  						{{city_billing}}, {{state_billing}} {{zipcode_billing}}<br>
+	  						{{country_billing}}</div>
 		  					<button ng-click="toogleReview('deliver')">EDIT</button>
 	  					</div>
   					<hr>
