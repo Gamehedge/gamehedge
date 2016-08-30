@@ -1,6 +1,6 @@
 app = angular.module('gamehedge')
 
-app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataService,apiService,$window,$http,$location){
+app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataService,apiService,$window,$http,$location, $timeout){
 	$scope.getLeagueInfo = function(){
 		apiService.getData('/api/v1/sports/'+$routeParams.leagueId)
             .then(function(response){
@@ -46,7 +46,12 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
 	$scope.getSearchHints = function(val) {
         return dataService.getData("/search/?search=" + val + "&limit=10")
             .then(function(response){
-            	console.log(response);
+            	//console.log(response);
+            
+                var width = $("#search_element").width() + 50;
+                console.log("width: " + width);
+                $('#form-home-search [uib-typeahead-popup].dropdown-menu').width(width);
+                
                 return response;
         });
     };	
@@ -77,6 +82,34 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
         
     }
 
+    $scope.slickConfig = {
+        enabled: true,
+        autoplay: false,
+        draggable: true,
+        arrows: false,  
+        infinite: false,
+        dots: true,
+        method: {},
+        event: {
+            beforeChange: function (event, slick, currentSlide, nextSlide) {
+            },
+            afterChange: function (event, slick, currentSlide, nextSlide) {
+            }
+        }
+    };
+    
+    $timeout(function () {
+        $scope.slickConfig.method.slickSetOption(null, null, true);
+    }, 100);
+    
+    $timeout(function () {
+        $scope.slickConfig.method.slickSetOption(null, null, true);
+    }, 200);
+    
+    $timeout(function () {
+        $scope.slickConfig.method.slickSetOption(null, null, true);
+    }, 500);
+    
 	//Initializers
     $rootScope.isOrder = false;
     $rootScope.darkHeader = false;

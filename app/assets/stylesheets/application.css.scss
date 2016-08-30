@@ -2611,8 +2611,8 @@ footer .footer-signature img{
     
     #home section#hero {
         /*height: 100px;*/
-        background: none;
-        background-color: #373d3f;
+        background: none !important;
+        background-color: #373d3f !important;
     }
     
     #home section#hero p {
@@ -2631,6 +2631,118 @@ footer .footer-signature img{
 	    bottom: -206px;
         text-align: center;
     }
+    
+    .mobile-near-events {
+        margin-bottom: 10px;
+    }
+    
+    #near-events .container {
+        margin-top: 20px;
+    }
+    
+    #near-events .container .title {
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+    
+    .main-division {
+        padding-top: 20px !important;
+        padding-bottom: 0px !important;
+        font-size: 24px !important;
+        margin-bottom: -20px;
+    }
+    
+    .small-division {
+        margin-top: 25px !important;
+        font-size: 16px !important;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+    
+    .leagues #divisions .divisions-container .performer-detail {
+        padding-bottom: 25px;
+        padding-top: 25px;
+    }
+    
+    .leagues #divisions .img-container {
+        position: relative;
+    }
+    
+    .leagues #divisions .img-container .mobile-upper {
+        vertical-align: top;
+    }
+    
+    .leagues #divisions .divisions-container .image img {
+        padding-right: 13px;
+        margin-top: 3px;
+    }
+    
+    .leagues #divisions .divisions-container .image {
+        display: block;
+    }
+    
+    .league-detail-table {
+        display: table;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .league-detail-image {
+        display: table-cell;
+        width: 30%;
+        vertical-align: top;
+        padding-right: 7px;
+    }
+    
+    .league-detail-image img {
+        width: 100%;
+        margin-top: 4px;
+    }
+    
+    .league-detail-text {
+        display: table-cell;
+        width: 70%;
+        vertical-align: top;
+        padding-left: 7px;
+    }
+    
+    .league-detail-text .detail-title {
+        color: #000000;
+        font-size: 18px;
+        line-height: 1.0;
+    }
+    
+    .league-detail-text .detail-text {
+        color: #525252;
+        font-size: 13px;
+        margin-bottom: 5px;
+    }
+    
+    .league-detail-text .detail-text a{
+        color: #005e9b;
+    }
+    
+    .league-detail-text a:hover {
+        text-decoration: none;
+    }
+    
+    .league-detail-text table {
+        margin-top: 0px !important;
+    }
+    
+    .right-cell {
+        border-right: 1px solid #ffffff;
+    }
+    
+    .left-cell {
+        border-left: 1px solid #ffffff;
+    }
+    
+    .leagues #about .page-title {
+        margin-top: 40px;
+        margin-bottom: 10px;
+    }
+    
     
 }
 
