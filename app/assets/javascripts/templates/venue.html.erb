@@ -4,16 +4,17 @@
     <div id="wrapper">
       <div id="content">
         <div class="container">
-          <div id="hero-search" class="hidden-sm hidden-xs">
+            <p class="hidden-md hidden-lg hidden-xl">{{venue.name}} Tickets</p>
+            <div id="hero-search" class="">
             <form id="form-home-search" name="formSearch" method="POST" action="/search/">
               <input type="hidden" name="type" value="full" />
               <div class="form-group">
-                <img src="<%= image_url "search icon.png" %>">
-                <input type="text" class="form-control" placeholder="Search by team, league, game, stadium or player..." ng-model="searchTerm" uib-typeahead="hint.name for hint in getSearchHints($viewValue)" typeahead-template-url="typeahead/bind-node.html">
+                <img src="<%= image_url 'search icon.png' %>">
+                <input id="search_element" type="text" class="form-control" placeholder="Search by team, league, game, stadium or player..." ng-model="searchTerm" uib-typeahead="hint.name for hint in getSearchHints($viewValue)" typeahead-template-url="typeahead/bind-node.html" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
               </div>
             </form>
           </div>
-          <p>{{venue.name}} Tickets</p>
+          <p class="hidden-xs hidden-sm">{{venue.name}} Tickets</p>
         </div>
       </div>
     </div>
@@ -22,7 +23,7 @@
   <script type="text/ng-template" id="typeahead/bind-node.html">
     <a href="/#{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
   </script>
-  <section id="good-game-guarantee">
+  <section id="good-game-guarantee" class="hidden-xs hidden-sm">
     <div class="container">
       <div class="title">HOW THE GOOD GAME GUARANTEE WORKS</div>
 
@@ -86,34 +87,106 @@
       </div>
     </div>
   </section>
+    
+  <section id="good-game-guarantee" class="hidden-md hidden-lg hidden-xl">
+      <div class="container">
+        <div class="title">HOW THE GOOD GAME GUARANTEE WORKS</div>
+
+        <div class="content-background-mobile">
+          <div class="content-mobile">
+             <slick settings="slickConfig">
+
+                <div class="row table-element">
+                  <div class="section-mobile table-ele-cell first-ele">
+                    <img src="<%= image_url 'icon ticket.png' %>">
+                  </div>
+                  <div class="section2-mobile table-ele-cell second-ele">
+                    <h2>BUY TICKETS</h2>
+                    <p>
+                      Find your game and purchase your tickets.<br>
+                      Good Game Guarantee included at no additional cost with every ticket.
+                    </p>
+                  </div>
+                </div>
+                <div class="row table-element">
+                  <div class="section-mobile table-ele-cell first-ele">
+                    <img src="<%= image_url 'icon stadium.png' %>">
+                  </div>
+                  <div class="section2-mobile table-ele-cell second-ele">
+                    <h2>ENJOY GAME</h2>
+                    <p>
+                      If the home team loses by below amount or more, you get 50% of ticket price back.
+                    </p>
+                    <div class="row">
+                      <div class="fifty-perc block">
+                        <img class="icon-img" src="<%= image_url 'football icon.png' %>">
+                        <div>17 PTS</div>
+                      </div>
+                      <div class="fifty-perc block">
+                        <img class="icon-img" src="<%= image_url 'basketball icon.png' %>">
+                        <div>20 PTS</div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="fifty-perc block">
+                        <img class="icon-img" src="<%= image_url 'baseball icon.png' %>">
+                        <div>5 RUNS</div>
+                      </div>
+                      <div class="fifty-perc block">
+                        <img class="icon-img" src="<%= image_url 'hockey icon.png' %>">
+                        <div>4 GOALS</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row table-element">
+                  <div class="section-mobile table-ele-cell first-ele">
+                    <img src="<%= image_url 'icon coin.png' %>">
+                  </div>
+                  <div class="section2-mobile table-ele-cell second-ele">
+                    <h2>CLAIM MONEY</h2>
+                    <p>
+                      Simply come back to GameHedge.com to claim your refund.
+                    </p>
+                  </div>
+                </div> 
+            </slick>
+          </div>
+        </div>
+      </div>
+  </section>
+    
+    
   <section id="performer">
     <div class="container" >
       <div class="row">
         <div class="col-md-9 text-center event-main-holder">
-          <div class="btns-container" ng-show="venue.performers.length > 1">
-            <button ng-click="toogleHome('0')" ng-class="{'active': performer_id == '0'}">
+          <div class="btns-container venue-btns-container" ng-show="venue.performers.length > 1">
+            <button ng-click="toogleHome('0')" ng-class="{'active': performer_id == '0'}" class="venue-btns">
               All games
             </button>
-            <button ng-click="toogleHome(p.id)" ng-class="{'active': performer_id == p.id}" ng-repeat="p in venue.performers">
+            <button ng-click="toogleHome(p.id)" ng-class="{'active': performer_id == p.id}" ng-repeat="p in venue.performers" class="venue-btns">
               {{p.name}} Games only
             </button>
           </div>
           <div class="row event-holder-back" ng-repeat="event in events track by $index">
             <div class="event-holder">
-              <div class="col-xs-2 date-holder">
+              <div class="col-md-2 col-xs-3 date-holder">
                 <p class="date1">{{event.occurs_at | date:'MMM': 'UTC' | uppercase}}</p>
                 <p class="date2">{{event.occurs_at | date:'dd' : 'UTC'| uppercase}}</p>
                 <p class="date3">{{event.occurs_at | date:'EEE': 'UTC' | uppercase}}</p>  
               </div>
-              <div class="col-xs-7 col-md-8 event-info">
-                <span>
-                  <p class="first-line"><a href="{{event.url}}">{{event.away_performer.name}} <span class="at">at</span> {{event.home_performer.name}}</a></p>
-                  <p class="second-line" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'hh:mm a' : 'UTC'| uppercase}} at <a href="{{event.venue.url}}">{{event.venue.name}}</a> - {{event.location}}</p>
-                  <p class="second-line" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD at <a href="{{event.venue.url}}">{{event.venue.name}}</a> - {{event.location}}</p>
-                </span>
-              </div>
-              <div class="col-xs-3 col-md-2">
-                <button><a class="a-btn" href="{{event.url}}">Buy tickets</a></button>
+              <div class="col-md-10 col-xs-9 event-info-container">
+                  <div class="col-xs-12 col-md-9 event-info">
+                    <span>
+                      <p class="first-line"><a href="{{event.url}}">{{event.away_performer.name}} <span class="at">at</span> {{event.home_performer.name}}</a></p>
+                      <p class="second-line" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'hh:mm a' : 'UTC'| uppercase}} at <a href="{{event.venue.url}}">{{event.venue.name}}</a> - {{event.location}}</p>
+                      <p class="second-line" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD at <a href="{{event.venue.url}}">{{event.venue.name}}</a> - {{event.location}}</p>
+                    </span>
+                  </div>
+                  <div class="col-xs-12 col-md-3">
+                    <a class="a-btn vertical-center" href="{{event.url}}">Buy tickets</a>
+                  </div>
               </div>
             </div>
           </div>
@@ -153,7 +226,7 @@
   <section id="about">
     <div class="container">
       <div class="container">
-        <div class="page-title">About {{venue.name}}</div>
+        <div class="page-title venue-about-title">About {{venue.name}}</div>
         <div class="row">
           <div class="col-xs-12 description" bind-unsafe-html="venue.description">
             
