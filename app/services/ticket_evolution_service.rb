@@ -200,4 +200,17 @@ class TicketEvolutionService
       puts "Invalid type parameter, please check and try again"
     end
   end
+
+  def add(params)
+    case @type
+    when 'address'
+      @client = @connection.clients.show(@id)
+      @address = @client.addresses.create({:client_id => @id, :name => params[:name], :street_address => params[:street_address], :locality => params[:locality], :region => params[:region], :postal_code => params[:postal_code], :country_code => params[:country_code]})
+      return @address
+    when 'card'
+      @client = @connection.clients.show(@id)
+      @card = @client.credit_cards.create({:address_id => params[:address_id], :number => params[:number], :expiration_month => params[:expiration_month], :expiration_year => params[:expiration_year], :verification_code => params[:verification_code], :name => params[:name]})
+      return @card
+    end
+  end
 end

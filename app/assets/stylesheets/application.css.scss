@@ -1248,10 +1248,13 @@ body {
 }   
 
 #tickets-map .filter-header div, #tickets-map .tickets-data .vertical-center, #tickets-map .tickets-data .row{
-    height: 100%;
     justify-content: center;
     padding:0;
     position: relative;
+}
+
+#tickets-map .tickets-data .right-content{
+    justify-content: flex-start;
 }
 
 #tickets-map .tickets-data .section {
@@ -1277,11 +1280,11 @@ body {
 }
 
 #tickets-map .tickets-data .row{
-    height: 60px;
+    min-height: 60px;
     background-color: #ffffff;
     border: solid 1px #eeeeee;
     border-top: none;
-    font-size: 10px;
+    font-size: 12px;
 }
 
 #tickets-map .tickets-data .row .format{
@@ -1340,6 +1343,10 @@ body {
 
 #tickets-map button.active{
     background-color: #93aa52;
+}
+
+#tickets-map .tuMapControlsContainer{
+    display:none;
 }
 
 #tickets-map .tickets-data .row button{
@@ -1464,6 +1471,13 @@ body {
     border: solid 2px #d3d3d3;
     font-size: 12px;
     color: #999999;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#payments input[type="radio"]{
+    margin-right: 10px;
+    width: inherit;
 }
 
 #payments .inputs{
@@ -1512,13 +1526,13 @@ body {
     text-align: center;
 }
 
-#payments .card-in .first-name{
-    width: 50%;
+#payments .card-in .full-name{
+    width: 70%;
     margin-right: 14px;
 }
 
-#payments .card-in .last-name{
-    width: 50%;
+#payments .card-in .phone{
+    width: 30%;
     margin-left: 14px;
 }
 
@@ -1527,7 +1541,7 @@ body {
     margin-right: 14px;
 }
 
-#payments .card-in .phone{
+#payments .card-in .country{
     width: 40%;
     margin-left: 14px;
 }
@@ -1677,8 +1691,7 @@ body {
     font-size: 18px;
 }
 
-#payments .review button{
-    width: 45px;
+#payments button{
     height: 25px;
     border-radius: 3px;
     background-color: #93aa52;
@@ -1686,7 +1699,13 @@ body {
     font-size: 11px;
     text-align: center;
     color: #ffffff;
+    margin: 0 4px;
     margin-top: 5px;
+}
+
+#payments button[disabled]{
+    background-color: #a2a797;
+    border: solid 2px #a2a797;
 }
 
 #payments hr {

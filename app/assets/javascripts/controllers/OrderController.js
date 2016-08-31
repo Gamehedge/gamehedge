@@ -48,7 +48,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	}
 
 	$scope.checkCardNumber = function(){
-		$scope.card_type = $.payment.cardType($scope.cc);
+		$scope.card.card_company = $.payment.cardType($scope.card.last_digits);
 	}
 
 	$scope.calculateValues = function(){
@@ -80,103 +80,240 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		}
 	}
 
+	$scope.selectAddress = function(type){
+		if(type == "shipping"){
+			$scope.shipping_address = $scope.addresses[$scope.shipping_address_index];
+			$scope.changed_shipping_address = true;
+			$scope.edit_deliver = 1;
+		}
+		else if(type == "billing"){
+			$scope.billing_address = $scope.addresses[$scope.billing_address_index];
+			$scope.changed_billing_address = true;
+			$scope.edit_billing = 1;
+		}
+		if(type == "card"){
+			$scope.card = $scope.cards[$scope.credit_card_index];
+			$scope.changed_credit_card = true;
+			$scope.edit_credit_card = 1;
+		}
+	}
+
 	$scope.toogleReview = function(toogle){
 		$scope.secondConfirm = false;
 		if(toogle == "card"){
-			$scope.edit_credit_card = true;
+			if($rootScope.isLoggedIn == false){
+				$scope.edit_credit_card = 3;
+			}
+			else{
+				$scope.edit_credit_card = 2;
+			}
 		}
 		else if(toogle == "billing"){
-			$scope.edit_billing = true;
+			if($rootScope.isLoggedIn == false){
+				$scope.edit_billing = 3;
+			}
+			else{
+				$scope.edit_billing = 2;
+			}
 		}
 		else if(toogle == "deliver"){
-			$scope.edit_deliver = true;
-			$scope.edit_billing = true;
+			if($rootScope.isLoggedIn == false){
+				$scope.edit_deliver = 4;
+			}
+			else{
+				$scope.edit_deliver = 2;
+			}
 		}
+		$scope.creditCardFieldEnable();
+	}
+	$scope.creditCardFieldEnable = function(){
 		$timeout(function(){
 			$('input#cc').payment('formatCardNumber');
 			$('input#cvv').payment('formatCardCVC');
 			$('input.numeric').payment('restrictNumeric');
-		},10);
+		},100);
+	}
+
+	$scope.addField = function(type){
+		if(type == "shipping"){
+			$scope.edit_deliver = 3;
+			$scope.shipping_address = {};
+			$scope.shipping_address.country_code = "";
+			$scope.shipping_address.id = "";
+			$scope.shipping_address.locality = "";
+			$scope.shipping_address.name = "";
+			$scope.shipping_address.postal_code = "";
+			$scope.shipping_address.region = "";
+			$scope.shipping_address.street_address = "";
+		}
+		else if(type == "card"){
+			$scope.edit_credit_card = 3;
+			$scope.card.cvv = ""
+			$scope.card.expiration_month = ""
+			$scope.card.expiration_year = ""
+			$scope.card.last_digits = ""
+			$scope.card.card_company = ""
+			$scope.creditCardFieldEnable();
+		}
+		else if(type == "billing"){
+			$scope.edit_billing = 3;
+			$scope.billing_address = {};
+			$scope.billing_address.country_code = "";
+			$scope.billing_address.id = "";
+			$scope.billing_address.locality = "";
+			$scope.billing_address.name = "";
+			$scope.billing_address.postal_code = "";
+			$scope.billing_address.region = "";
+			$scope.billing_address.street_address = "";
+		}
+	}
+
+	$scope.cancelAdd = function(type){
+		if(type == "shipping"){
+			$scope.edit_deliver = 1;
+			if($scope.changed_shipping_address == true){
+				$scope.shipping_address = $scope.addresses[$scope.shipping_address_index];
+			}
+			else{
+				$scope.shipping_address = $scope.client.primary_shipping_address;
+			}
+		}
+		else if(type == "card"){
+			$scope.edit_credit_card = 1;
+			if($scope.changed_credit_card == true){
+				$scope.card = $scope.cards[$scope.credit_card_index];
+			}
+			else{
+				$scope.card = $scope.client.primary_credit_card;
+			}
+		}
+		else if(type == "billing"){
+			$scope.edit_billing = 1;
+			if($scope.changed_billing_address == true){
+				$scope.billing_address = $scope.addresses[$scope.billing_address_index];
+			}
+			else{
+				$scope.billing_address = $scope.client.primary_billing_address;
+			}
+		}
+	}
+
+	$scope.confirmSave = function(type){
+		$scope.processing = true;
+		if(type == "shipping"){
+			if($scope.shipping_address.name != "" && $scope.shipping_address.street_address != "" && $scope.shipping_address.locality != "" && $scope.shipping_address.region != "" && $scope.shipping_address.postal_code != "" && $scope.shipping_address.country_code != ""){
+				$http({
+			        method: 'POST',
+			        url: '/clients/add_address',
+			        data: { 
+			        	id: $scope.client.id,
+			        	name: $scope.shipping_address.name,
+			        	street_address: $scope.shipping_address.street_address,
+			        	locality: $scope.shipping_address.locality,
+			        	region: $scope.shipping_address.region,
+			        	postal_code: $scope.shipping_address.postal_code,
+			        	country_code: $scope.shipping_address.country_code,
+			        },
+			    }).then(function successCallback(response) {
+			    	$scope.shipping_address = response.data;
+			    	$scope.addresses.push($scope.shipping_address);
+			    	$scope.shipping_address_index = $scope.addresses.length - 1;
+			    	console.log($scope.shipping_address);
+			    	$scope.edit_deliver = 1;
+			    	$scope.processing = false;
+			    }, function errorCallback(response) {
+			    	console.log(response);
+			    	$scope.processing = false;
+			    });
+			}
+			else{
+				alert("All fields are required");
+			}
+		}
+		else if(type == "card"){
+			if($scope.card.cvv != "" && $scope.card.expiration_month != "" && $scope.card.expiration_year != "" && $scope.card.last_digits != "" && $.payment.validateCardNumber($scope.card.last_digits) == true && $.payment.validateCardExpiry($scope.card.expiration_month,$scope.card.expiration_year) == true){
+				$http({
+			        method: 'POST',
+			        url: '/clients/add_credit_card',
+			        data: { 
+			        	id: $scope.client.id,
+			        	address_id: $scope.billing_address.id,
+			        	number: $scope.card.last_digits,
+			        	expiration_month: $scope.card.expiration_month,
+			        	expiration_year: $scope.card.expiration_year,
+			        	verification_code: $scope.card.cvv,
+			        	name: $scope.client.name,
+			        },
+			    }).then(function successCallback(response) {
+			    	if(response.data.error != undefined){
+			    		alert(response.data.error);
+			    		if($scope.changed_credit_card == true){
+							$scope.card = $scope.cards[$scope.credit_card_index];
+						}
+						else{
+							$scope.card = $scope.client.primary_credit_card;
+						}
+			    	}
+			    	else{
+				    	$scope.card = response.data;
+				    	$scope.cards.push($scope.card);
+				    	$scope.credit_card_index = $scope.cards.length - 1;
+				    	console.log($scope.card);
+				    }
+				    $scope.processing = false;
+				    $scope.edit_credit_card = 1;
+			    }, function errorCallback(response) {
+			    	console.log(response);
+			    	$scope.processing = false;
+			    });
+			}
+			else if($.payment.validateCardExpiry($scope.card.expiration_month,$scope.card.expiration_year) == false){
+				alert("Expiration date not valid!");
+				$scope.processing = false;
+			}
+			else if($.payment.validateCardNumber($scope.card.last_digits) == false){
+				alert("Card number not valid!");
+				$scope.processing = false;
+			}
+			else{
+				alert("All fields are required");
+				$scope.processing = false;
+			}
+		}
+		else if(type == "billing"){
+			if($scope.billing_address.name != "" && $scope.billing_address.street_address != "" && $scope.billing_address.locality != "" && $scope.billing_address.region != "" && $scope.billing_address.postal_code != "" && $scope.billing_address.country_code != ""){
+				$http({
+			        method: 'POST',
+			        url: '/clients/add_address',
+			        data: { 
+			        	id: $scope.client.id,
+			        	name: $scope.billing_address.name,
+			        	street_address: $scope.billing_address.street_address,
+			        	locality: $scope.billing_address.locality,
+			        	region: $scope.billing_address.region,
+			        	postal_code: $scope.billing_address.postal_code,
+			        	country_code: $scope.billing_address.country_code,
+			        },
+			    }).then(function successCallback(response) {
+			    	$scope.billing_address = response.data;
+			    	$scope.addresses.push($scope.billing_address);
+			    	$scope.billing_address_index = $scope.addresses.length - 1;
+			    	console.log($scope.billing_address);
+			    	$scope.edit_billing = 1;
+			    	$scope.processing = false;
+			    }, function errorCallback(response) {
+			    	console.log(response);
+			    	$scope.processing = false;
+			    });
+			}
+			else{
+				alert("All fields are required");
+			}
+		}
 	}
 
 	$scope.confirmPay = function(){
-		var error = "";
-		if($scope.email == ""){
-			console.log("Email " + $scope.email)
-			error = "All fields are required"
-		}
-		else if($scope.confirm_email == ""){
-			console.log("Confirm Email " + $scope.confirm_email)
-			error = "All fields are required"
-		}
-		else if($scope.cc == ""){
-			console.log("CC " + $scope.cc)
-			error = "All fields are required"
-		}
-		else if($scope.cvv == ""){
-			console.log("cvv " + $scope.cvv)
-			error = "All fields are required"
-		}
-		else if($scope.exp_month == ""){
-			console.log("month " + $scope.exp_month)
-			error = "All fields are required"
-		}
-		else if($scope.exp_year == ""){
-			console.log("exp_year " + $scope.exp_year)
-			error = "All fields are required"
-		}
-		else if($scope.first_name_billing == ""){
-			console.log("first_name " + $scope.first_name_billing)
-			error = "All fields are required"
-		}
-		else if($scope.last_name_billing == ""){
-			console.log("last_name " + $scope.last_name_billing)
-			error = "All fields are required"
-		}
-		else if($scope.address_billing == ""){
-			console.log("address " + $scope.address_billing)
-			error = "All fields are required"
-		}
-		else if($scope.phone_billing == ""){
-			console.log("phone_number " + $scope.phone_billing)
-			error = "All fields are required"
-		}
-		else if($scope.zipcode_billing == ""){
-			console.log("zipcode " + $scope.zipcode_billing)
-			error = "All fields are required"
-		}
-		else if($scope.city_billing == ""){
-			console.log("city " + $scope.city_billing)
-			error = "All fields are required"
-		}
-		else if($scope.state_billing == ""){
-			console.log("state " + $scope.state_billing)
-			error = "All fields are required"
-		}
-
-		else if($scope.email != $scope.confirm_email){
-			error = "Email and confirmation email fields must be the same."
-		}
-		else if($.payment.validateCardNumber($scope.cc) == false){
-			error = "Invalid card number"
-		}
-		else if($.payment.validateCardExpiry($scope.exp_month,$scope.exp_year) == false){
-			error = "Invalid expiration date"
-		}
-		if(error == ""){
-			if($scope.secondConfirm){
-				alert("paying now");
-			}
-			else{
-				$scope.secondConfirm = true
-				$scope.edit_deliver = false;
-				$scope.edit_credit_card = false;
-				$scope.edit_billing = false;
-			}
-		}
-		else{
-			alert(error);
-		}
+		
 	}
 
 	$scope.getClient = function(){
@@ -185,11 +322,29 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		        method: 'GET',
 		        url: '/clients/show?id='+user.te_uid,
 		    }).then(function successCallback(response) {
-		    	$scope.client = response.data;
+		    	$scope.client = response.data.client;
+		    	$scope.cards = response.data.cards;
+		    	$scope.addresses = response.data.client.addresses;
 		    	console.log("Client");
 		    	console.log($scope.client);
-		    	
+		    	console.log("Cards");
+		    	console.log($scope.cards);
+		    	console.log("Addresses");
+		    	console.log($scope.addresses);
+		    	$scope.edit_deliver = 1;
+				$scope.edit_credit_card = 1;
+				$scope.edit_billing = 1;
+				$scope.secondConfirm = true;
+				$scope.shipping_address = $scope.client.primary_shipping_address;
+				$scope.billing_address = $scope.client.primary_billing_address;
+				$scope.card = $scope.client.primary_credit_card;
+				console.log($scope.shipping_address);
+
 		    }, function errorCallback(response) {
+		    	$scope.edit_deliver = true;
+				$scope.edit_credit_card = true;
+				$scope.edit_billing = true;
+				$scope.secondConfirm = false;
 		        console.log(response);
 		    });
 	    }, function(error) {
@@ -207,20 +362,49 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
         console.log(response);
     });
 	// Initializers
-	$scope.country_shipping = "US";
-	$scope.email = "";
-	$scope.confirm_email = "";
-	$scope.cc = "";
-	$scope.cvv = "";
-	$scope.exp_month = "";
-	$scope.exp_year = "";
-	$scope.first_name_billing = "";
-	$scope.last_name_billing = "";
-	$scope.address_billing = "";
-	$scope.phone_billing = "";
-	$scope.zipcode_billing = "";
-	$scope.city_billing = "";
-	$scope.state_billing = "";
+	$scope.client = {}
+	$scope.client.email = "";
+	$scope.client.confirm_email = "";
+	
+	$scope.card = {};
+	$scope.card.card_company = ""
+	$scope.card.cvv = ""
+	$scope.card.expiration_month = ""
+	$scope.card.expiration_year = ""
+	$scope.card.last_digits = ""
+	$scope.card.name = ""
+	$scope.card.phone_number = {};
+	$scope.card.phone_number.phone_number = {};
+	$scope.card.phone_number.phone_number.number = ""
+	$scope.changed_credit_card = false;
+
+
+	$scope.shipping_address = {};
+	$scope.shipping_address.country_code = "";
+	$scope.shipping_address.id = "";
+	$scope.shipping_address.locality = "";
+	$scope.shipping_address.name = "";
+	$scope.shipping_address.postal_code = "";
+	$scope.shipping_address.region = "";
+	$scope.shipping_address.street_address = "";
+	$scope.changed_shipping_address = false;
+
+
+	$scope.billing_address = {};
+	$scope.billing_address.country_code = "";
+	$scope.billing_address.id = "";
+	$scope.billing_address.locality = "";
+	$scope.billing_address.name = "";
+	$scope.billing_address.postal_code = "";
+	$scope.billing_address.region = "";
+	$scope.billing_address.street_address = "";
+	$scope.changed_billing_address = false;
+
+
+	$scope.processing = false;
+	$scope.shipping_address_index = 0;
+	$scope.billing_address_index = 0;
+	$scope.credit_card_index = 0;
 	$scope.getTicket();
 	$scope.getPromoCodes();
 	$scope.getServiceFees();
@@ -241,9 +425,5 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		}
 		$('.seals').removeClass('hidden');
 	},500);
-	$scope.edit_deliver = true;
-	$scope.edit_credit_card = true;
-	$scope.edit_billing = true;
-	$scope.secondConfirm = false;
 	$window.scrollTo(0, 0);
 });
