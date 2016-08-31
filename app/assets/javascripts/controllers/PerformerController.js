@@ -1,6 +1,6 @@
 app = angular.module('gamehedge')
 
-app.controller('PerformerController', function($scope,$rootScope,$routeParams,dataService, apiService,$window,$location){
+app.controller('PerformerController', function($scope,$rootScope,$routeParams,dataService, apiService,$window,$location, $timeout){
 	$scope.getPerformerInfo = function(){
 		apiService.getData('/api/v1/performers/'+$routeParams.performerId)
             .then(function(response){
@@ -73,7 +73,11 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
 	$scope.getSearchHints = function(val) {
         return dataService.getData("/search/?search=" + val + "&limit=10")
             .then(function(response){
-            	console.log(response);
+            	//console.log(response);
+                var width = $("#search_element").width() + 50;
+                console.log("width: " + width);
+                $('#form-home-search [uib-typeahead-popup].dropdown-menu').width(width);
+            
                 return response;
         });
     };	
@@ -84,8 +88,34 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
         $scope.page += 1;
         $scope.getEvents();
     }
-	  
-
+    
+    $scope.slickConfig = {
+        enabled: true,
+        autoplay: false,
+        draggable: true,
+        arrows: false,  
+        infinite: false,
+        dots: true,
+        method: {},
+        event: {
+            beforeChange: function (event, slick, currentSlide, nextSlide) {
+            },
+            afterChange: function (event, slick, currentSlide, nextSlide) {
+            }
+        }
+    };
+	$timeout(function () {
+        $scope.slickConfig.method.slickSetOption(null, null, true);
+    }, 100);
+    
+    $timeout(function () {
+        $scope.slickConfig.method.slickSetOption(null, null, true);
+    }, 200);
+    
+    $timeout(function () {
+        $scope.slickConfig.method.slickSetOption(null, null, true);
+    }, 500);  
+    
 	//Initializers
     $rootScope.isOrder = false;
     $rootScope.darkHeader = false;
