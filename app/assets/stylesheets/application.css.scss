@@ -2751,6 +2751,28 @@ footer .footer-signature img{
         margin-bottom: 10px;
     }
     
+    .date-inner {
+        padding-top: 0px !important;
+        background-color: #595758 !important;
+    }
+    
+    .date-inner .date1 {
+        background-color: #9aca3c;
+        font-size: 16px !important;
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
+    
+    .date-inner .date2 {
+        color: #ffffff !important;
+        font-weight: bold;
+        margin-top: -3px !important;
+    }
+    
+    .date-inner .date3 {
+        color: #ffffff !important;
+    }
+    
     
 }
 
