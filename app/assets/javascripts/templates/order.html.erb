@@ -37,16 +37,24 @@
 			  						{{a.country_code}}</div>
 				  				</div>
   							</div>
+  							<span ng-if="!addresses.length">
+		  						<div class="title">No addresses</div>
+		  					</span>
   							<button ng-disabled="$parent.processing" ng-click="selectAddress('shipping')">DONE</button><button ng-disabled="$parent.processing" ng-click="addField('shipping')">ADD</button>
 	  					</div>
 	  					<div class="review" ng-if="edit_deliver == 1">
-	  						<div class="title">{{shipping_address.name}}</div>
-	  						<span>
-		  						<div>{{client.email}}</div>
+	  						<span ng-if="addresses.length">
+		  						<div class="title">{{shipping_address.name}}</div>
+		  						<span>
+			  						<div>{{client.email}}</div>
+			  					</span>
+		  						<div>{{shipping_address.street_address}}<br>
+		  						{{shipping_address.locality}}, {{shipping_address.region}} {{shipping_address.postal_code}}<br>
+		  						{{shipping_address.country_code}}</div>
 		  					</span>
-	  						<div>{{shipping_address.street_address}}<br>
-	  						{{shipping_address.locality}}, {{shipping_address.region}} {{shipping_address.postal_code}}<br>
-	  						{{shipping_address.country_code}}</div>
+		  					<span ng-if="!addresses.length">
+		  						<div class="title">No addresses</div>
+		  					</span>
 		  					<button ng-disabled="$parent.processing" ng-click="toogleReview('deliver')">EDIT</button>
 	  					</div>
 	  					<div ng-if="edit_deliver == 3">
@@ -469,7 +477,7 @@
 							</div>
 						</div>
 						<div class="review" ng-if="edit_credit_card == 1">
-	  						<span>
+	  						<span ng-if="cards.length">
 		  						<div class="title">Credit Card</div>
 		  						<div class="ccard vertical-center">
 			  						<div class="img-holder">
@@ -480,6 +488,9 @@
 								    </div>
 		  							ending in {{$parent.card.last_digits | limitTo:-4}}
 		  						</div>
+		  					</span>
+		  					<span ng-if="!cards.length">
+		  						<div class="title">No Credit Cards</div>
 		  					</span>
 		  					<button ng-disabled="$parent.processing" ng-click="toogleReview('card')">EDIT</button>
 	  					</div>
@@ -495,6 +506,9 @@
 								    </div>
 		  							ending in {{c.last_digits | limitTo:-4}}
 		  						</div>
+		  						<span ng-if="!cards.length">
+			  						<div class="title">No Credit Cards</div>
+			  					</span>
 		  					</span>
 		  					<button ng-disabled="$parent.processing" ng-click="selectAddress('card')">DONE</button><button ng-disabled="$parent.processing" ng-click="addField('card')">ADD</button>
 	  					</div>
@@ -519,16 +533,24 @@
 			  						{{a.country_code}}</div>
 				  				</div>
   							</div>
+  							<span ng-if="!addresses.length">
+		  						<div class="title">No addresses</div>
+		  					</span>
   							<button ng-disabled="$parent.processing" ng-click="selectAddress('billing')">DONE</button><button ng-disabled="$parent.processing" ng-click="addField('billing')">ADD</button>
 	  					</div>
 	  					<div class="review" ng-if="edit_billing == 1">
-	  						<div class="title">{{billing_address.name}}</div>
-	  						<span>
-		  						<div>{{client.email}}</div>
+	  						<span ng-if="addresses.length">
+		  						<div class="title">{{billing_address.name}}</div>
+		  						<span>
+			  						<div>{{client.email}}</div>
+			  					</span>
+		  						<div>{{billing_address.street_address}}<br>
+		  						{{billing_address.locality}}, {{billing_address.region}} {{billing_address.postal_code}}<br>
+		  						{{billing_address.country_code}}</div>
 		  					</span>
-	  						<div>{{billing_address.street_address}}<br>
-	  						{{billing_address.locality}}, {{billing_address.region}} {{billing_address.postal_code}}<br>
-	  						{{billing_address.country_code}}</div>
+	  						<span ng-if="!addresses.length">
+		  						<div class="title">No addresses</div>
+		  					</span>
 		  					<button ng-disabled="$parent.processing" ng-click="toogleReview('billing')">EDIT</button>
 	  					</div>
 	  					<div ng-if="edit_billing == 3">
