@@ -23,4 +23,4 @@
 //= require_tree ./templates
 
 //= require slick.min
-//= require angular-slick.min
+//= require angular-slick

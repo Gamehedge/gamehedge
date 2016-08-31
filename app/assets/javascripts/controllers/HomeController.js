@@ -1,6 +1,6 @@
 controllers = angular.module('gamehedge')
 
-controllers.controller('HomeController', function($scope,$rootScope,$http,$location,$timeout,dataService,$window){
+controllers.controller('HomeController', function($scope,$rootScope,$http,$location,$timeout,dataService,$window, $timeout){
 	$scope.TilesIndex = 0;
 	$scope.loading = true;
 	$rootScope.locat = $location.url();
@@ -130,6 +130,19 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
             }
         }
     };
+    
+    $timeout(function () {
+        $scope.slickConfig.method.slickSetOption(null, null, true);  
+    }, 100);
+    
+    $timeout(function () {
+        $scope.slickConfig.method.slickSetOption(null, null, true);  
+    }, 200);
+    
+    $timeout(function () {
+        $scope.slickConfig.method.slickSetOption(null, null, true);  
+    }, 500);
+    
 	//Initializers
 	$rootScope.isOrder = false;
 	$rootScope.darkHeader = false;

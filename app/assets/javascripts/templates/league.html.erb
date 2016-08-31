@@ -4,16 +4,17 @@
     <div id="wrapper">
       <div id="content">
         <div class="container">
-          <div id="hero-search" class="hidden-sm hidden-xs">
+          <p class="hidden-md hidden-lg hidden-xl">{{league.name | uppercase}} Tickets with Good Game Guarantee!</p>
+          <div id="hero-search" class="">
             <form id="form-home-search" name="formSearch" method="POST" action="/search/">
               <input type="hidden" name="type" value="full" />
               <div class="form-group">
                 <img src="<%= image_url "search icon.png" %>">
-                <input type="text" class="form-control" placeholder="Search by team, league, game, stadium or player..." ng-model="searchTerm" uib-typeahead="hint.name for hint in getSearchHints($viewValue)" typeahead-template-url="typeahead/bind-node.html">
+                <input id="search_element" type="text" class="form-control" placeholder="Search by team, league, game, stadium or player..." ng-model="searchTerm" uib-typeahead="hint.name for hint in getSearchHints($viewValue)" typeahead-template-url="typeahead/bind-node.html" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
               </div>
             </form>
           </div>
-          <p>{{league.name | uppercase}} Tickets with Good Game Guarantee!</p>
+          <p class="hidden-xs hidden-sm">{{league.name | uppercase}} Tickets with Good Game Guarantee!</p>
         </div>
       </div>
     </div>
@@ -22,7 +23,7 @@
   <script type="text/ng-template" id="typeahead/bind-node.html">
     <a href="/#{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
   </script>
-  <section id="good-game-guarantee">
+  <section id="good-game-guarantee" class="hidden-xs hidden-sm">
     <div class="container">
       <div class="title">HOW THE GOOD GAME GUARANTEE WORKS</div>
 
@@ -82,10 +83,85 @@
       </div>
     </div>
   </section>
+  
+  <section id="good-game-guarantee" class="hidden-md hidden-lg hidden-xl">
+      <div class="container">
+        <div class="title">HOW THE GOOD GAME GUARANTEE WORKS</div>
+
+        <div class="content-background-mobile">
+          <div class="content-mobile">
+             <slick settings="slickConfig">
+                
+                <div class="row table-element">
+                  <div class="section-mobile table-ele-cell first-ele">
+                    <img src="<%= image_url 'icon ticket.png' %>">
+                  </div>
+                  <div class="section2-mobile table-ele-cell second-ele">
+                    <h2>BUY TICKETS</h2>
+                    <p>
+                      Find your game and purchase your tickets.<br>
+                      Good Game Guarantee included at no additional cost with every ticket.
+                    </p>
+                  </div>
+                </div>
+                <div class="row table-element">
+                  <div class="section-mobile table-ele-cell first-ele">
+                    <img src="<%= image_url 'icon stadium.png' %>">
+                  </div>
+                  <div class="section2-mobile table-ele-cell second-ele">
+                    <h2>ENJOY GAME</h2>
+                    <p>
+                      If the home team loses by {{league.ggg}} or more, you get 50% of ticket price back.
+                    </p>
+                    <!--div class="row">
+                      <div class="fifty-perc block">
+                        <img class="icon-img" src="<%= image_url 'football icon.png' %>">
+                        <div>17 PTS</div>
+                      </div>
+                      <div class="fifty-perc block">
+                        <img class="icon-img" src="<%= image_url 'basketball icon.png' %>">
+                        <div>19 PTS</div>
+                      </div>
+                    </div-->
+                    <!--div class="row">
+                      <div class="fifty-perc block">
+                        <img class="icon-img" src="<%= image_url 'baseball icon.png' %>">
+                        <div>5 RUNS</div>
+                      </div>
+                      <div class="fifty-perc block">
+                        <img class="icon-img" src="<%= image_url 'hockey icon.png' %>">
+                        <div>4 GOALS</div>
+                      </div>
+                    </div-->
+                  </div>
+                </div>
+                <div class="row table-element">
+                  <div class="section-mobile table-ele-cell first-ele">
+                    <img src="<%= image_url 'icon coin.png' %>">
+                  </div>
+                  <div class="section2-mobile table-ele-cell second-ele">
+                    <h2>CLAIM MONEY</h2>
+                    <p>
+                      Simply come back to GameHedge.com to claim your refund.
+                    </p>
+                  </div>
+                </div> 
+                
+            </slick>
+  
+              
+              
+              
+          </div>
+        </div>
+      </div>
+  </section>
+  
+  
   <section id="near-events" ng-show="next_events.length != 0">
     <div class="container">
       <div class="title">UPCOMING GAMES NEAR YOU</div>
-      <div ng-repeat="event in next_events | limitTo:4" class="col-md-3">
+      <div ng-repeat="event in next_events | limitTo:4" class="col-md-3 mobile-near-events">
         <a href="{{(event.url + '/' + event.name + '-tickets') | spaceless | lowercase}}">
           <div class="back">
             <div class="front">
@@ -125,18 +201,53 @@
             <div class="small-division-back row">
               <div class="small-division-front">
                 <div class="row performer-detail" ng-repeat="performer in performers | filter:{'division_id' : division.id} | orderBy: ['-wins','name']">
-                  <div class="col-xs-3 image">
+                  
+                  <div class="league-detail-table hidden-md hidden-lg hidden-xl">
+                    <div class="league-detail-image">
+                      <a href="{{performer.url}}"><img src="{{performer.image_url_medium}}"></a>
+                    </div>
+                    <div class="league-detail-text">
+                        <a class="detail-title" href="{{performer.url}}">{{performer.name}}</a>
+                        <p class="detail-text">Stadium <a href="{{performer.venue.url}}">{{performer.venue.name}}</a></p>
+                        <div>
+                            <table>
+                              <thead>
+                                <tr>
+                                  <th class="right-cell">
+                                    W
+                                  </th>
+                                  <th class="left-cell">
+                                    L
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td class="right-cell">
+                                    {{performer.wins}}<span ng-show="performer.wins == '' || performer.wins == null">-</span>
+                                  </td>
+                                  <td class="left-cell">
+                                    {{performer.losses}}<span ng-show="performer.losses == '' || performer.wins == null">-</span>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                    </div>
+                  </div>
+                    
+                  <div class="col-xs-4 col-md-3 image hidden-xs hidden-sm">
                     <div class="dummy"></div>
                     <div class="img-container">
-                      <div class="centerer"></div>
+                      <div class="centerer mobile-upper"></div>
                       <a href="{{performer.url}}"><img src="{{performer.image_url_medium}}"></a>
                     </div>
                   </div>
-                  <div class="col-xs-6 col-md-7 name">
+                  <div class="col-xs-8 col-md-7 name hidden-xs hidden-sm">
                     <a href="{{performer.url}}">{{performer.name}}</a>
                     <p>Stadium <a href="{{performer.venue.url}}">{{performer.venue.name}}</a></p>
                   </div>
-                  <div class="col-xs-3 col-md-2 score">
+                  <div class="col-xs-3 col-md-2 score hidden-xs hidden-sm">
                     <table>
                       <thead>
                         <tr>
@@ -160,6 +271,8 @@
                       </tbody>
                     </table>
                   </div>
+                    
+                    
                 </div>
               </div>
             </div>
