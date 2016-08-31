@@ -2801,18 +2801,20 @@ footer .footer-signature img{
         text-decoration: none;
     }
     
+    .first-line {
+        font-size: 18px !important;
+        line-height: 18px;
+    }
+    
     .event-holder-back .event-holder {
         padding-left: 15px;
         padding-right: 15px;
     }
     
-    .at {
-        color: #525252 !important;
-    }
-    
     .second-line {
         color: #525252;
-        font-size: 13px;
+        font-size: 12px !important;
+        margin-top: 5px !important;
     }
     
     .event-info {
@@ -2837,8 +2839,8 @@ footer .footer-signature img{
     
     .btns-container .btn_filter{
         width: 50% !important;
-        padding-top: 5px !important;
-        padding-bottom: 5px !important;
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
     }
 }
 

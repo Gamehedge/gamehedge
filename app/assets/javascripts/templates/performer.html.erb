@@ -173,12 +173,12 @@
           </div>
           <div class="row event-holder-back" ng-repeat="event in events track by $index">
             <div class="event-holder">
-              <div class="col-xs-2 date-holder">
+              <div class="col-md-2 col-xs-3 date-holder">
                 <p class="date1">{{event.occurs_at | date:'MMM': 'UTC' | uppercase}}</p>
                 <p class="date2">{{event.occurs_at | date:'dd' : 'UTC'| uppercase}}</p>
                 <p class="date3">{{event.occurs_at | date:'EEE': 'UTC' | uppercase}}</p>  
               </div>
-              <div class="col-xs-10 event-info-container">
+              <div class="col-md-10 col-xs-9 event-info-container">
                  <div class="col-xs-12 col-md-9 event-info">
                     <span>
                       <p class="first-line"><a href="{{event.url}}">{{event.away_performer.name}} <span class="at">at</span> {{event.home_performer.name}}</a></p>
