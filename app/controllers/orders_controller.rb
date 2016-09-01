@@ -25,6 +25,7 @@ class OrdersController < ApplicationController
 		@ticket_type = request.POST["ticket_type"]
 		@service_fee = request.POST["service_fee"]
 		@ticket_format = request.POST["ticket_format"]
+		@discount = request.POST["discount"]
 		
         
         @order = TicketEvolutionService.new({id: @user_id}).createShipment({ address_id: @ship_address_id, 
@@ -50,6 +51,7 @@ class OrdersController < ApplicationController
         	created_by_ip_address: request.remote_ip, 
         	selectedPhone: @selectedPhone,
         	service_fee: @service_fee,
+        	discount: @discount,
         })
         if @order["error"]
         	puts "error"
