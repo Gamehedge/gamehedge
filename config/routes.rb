@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   post 'clients/add_credit_card'
   post 'clients/get_session'
   get 'clients/info'
+  post 'clients/create'
+  post 'clients/update_password'
   post 'orders/create'
   resources :search, :signature
   

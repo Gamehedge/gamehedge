@@ -50,17 +50,25 @@
 			  					<button ng-disabled="$parent.processing" ng-click="toogleReview('deliver')">EDIT</button>
 		  					</div>
 		  					<div ng-if="edit_deliver == 3">
-							    <div class="inputs">
-		  							<div class="full-name">
-			  							<input type="text" class="form-control" id="first-name-billing" ng-model="$parent.shipping_address.name" placeholder="Full Name">
+		  						<div class="inputs" ng-if="!$parent.isLoggedIn">
+		  							<div class="email">
+			  							<input type="text" class="form-control" id="email-shipping" ng-model="$parent.$parent.client.email" placeholder="Email">
+								    </div>
+								    <div class="confirm-email">
+			  							<input type="text" class="form-control" id="confirm-email-shipping" ng-model="$parent.$parent.client.confirm_email" placeholder="Confirm Email">
 								    </div>
 		  						</div>
-		  						<div class="inputs">
+							    <div class="inputs" ng-if="$parent.isLoggedIn">
+		  							<div class="full-name">
+			  							<input type="text" class="form-control" id="first-name-billing" ng-model="$parent.$parent.shipping_address.name" placeholder="Full Name">
+								    </div>
+		  						</div>
+		  						<div class="inputs" ng-if="$parent.isLoggedIn">
 		  							<div class="address">
-			  							<input type="text" class="form-control" id="address-billing" ng-model="$parent.shipping_address.street_address" placeholder="Address">
+			  							<input type="text" class="form-control" id="address-billing" ng-model="$parent.$parent.shipping_address.street_address" placeholder="Address">
 								    </div>
 								    <div class="country">
-									    <select id="country-billing" ng-model="$parent.shipping_address.country_code">
+									    <select id="country-billing" ng-model="$parent.$parent.shipping_address.country_code">
 											<option value="">Select Country</option>
 											<option value="us">United States</option>
 											<option value="af">Afghanistan</option>
@@ -311,15 +319,15 @@
 							  			</select>
 								    </div>
 		  						</div>
-		  						<div class="inputs">
+		  						<div class="inputs" ng-if="$parent.isLoggedIn">
 		  							<div class="zipcode">
-			  							<input type="text" class="form-control numeric" id="zipcode-billing" ng-model="$parent.shipping_address.postal_code" placeholder="Zipcode">
+			  							<input type="text" class="form-control numeric" id="zipcode-billing" ng-model="$parent.$parent.shipping_address.postal_code" placeholder="Zipcode">
 								    </div>
 								    <div class="city">
-									    <input type="text" class="form-control" id="city-billing" ng-model="$parent.shipping_address.locality" placeholder="City">	
+									    <input type="text" class="form-control" id="city-billing" ng-model="$parent.$parent.shipping_address.locality" placeholder="City">	
 								    </div>
 								    <div class="state">
-									    <select id="state_id-billing" data-value="shortcode" ng-model="$parent.shipping_address.region">
+									    <select id="state_id-billing" data-value="shortcode" ng-model="$parent.$parent.shipping_address.region">
 									    	<option value="">State</option>
 											<option value="AK">AK</option>
 							  				<option value="AL">AL</option>
@@ -383,7 +391,10 @@
 							  			</select>
 								    </div>
 		  						</div>
-		  						<button ladda="$parent.addShippingProcess" ng-disabled="$parent.processing" ng-click="confirmSave('shipping')">SAVE</button><button ng-disabled="$parent.processing" ng-click="cancelAdd('shipping')">CANCEL</button>
+		  						<div ng-if="$parent.isLoggedIn">
+		  							<button ladda="$parent.$parent.addShippingProcess" ng-disabled="$parent.processing" ng-click="confirmSave('shipping')">SAVE</button>
+		  							<button ng-disabled="$parent.$parent.processing" ng-click="cancelAdd('shipping')">CANCEL</button>
+		  						</div>
 		  					</div>
 		  					<hr>
 
@@ -395,115 +406,121 @@
 
 
 		  					Pay With
-	  						<div ng-if="edit_credit_card == 3" class="edit_credit_card">
-		  						<div class="row">
-		  							<div class="cc col-md-5">
-			  							<input type="text"  ng-model="$parent.card.last_digits" class="form-control" id="cc" placeholder="Credit Card Number" ng-change="checkCardNumber()">
-									    <div class="img-holder">
-									    	<img src="<%= image_url "visa.png" %>" ng-if="($parent.card.card_company | lowercase) == 'visa'">
-									    	<img src="<%= image_url "mastercard.png" %>" ng-if="($parent.card.card_company | lowercase) == 'mastercard'">
-									    	<img src="<%= image_url "amex.png" %>" ng-if="($parent.card.card_company | lowercase) == 'amex'">
-									    	<img src="<%= image_url "discover.png" %>" ng-if="($parent.card.card_company | lowercase) == 'discover'">
+		  					<div style="position:relative;">
+		  						<div ng-if="edit_credit_card == 3" class="edit_credit_card">
+			  						<div class="row">
+			  							<div class="cc col-md-5">
+				  							<input type="text"  ng-model="$parent.card.last_digits" class="form-control" id="cc" placeholder="Credit Card Number" ng-change="checkCardNumber()">
+										    <div class="img-holder">
+										    	<img src="<%= image_url "visa.png" %>" ng-if="($parent.card.card_company | lowercase) == 'visa'">
+										    	<img src="<%= image_url "mastercard.png" %>" ng-if="($parent.card.card_company | lowercase) == 'mastercard'">
+										    	<img src="<%= image_url "amex.png" %>" ng-if="($parent.card.card_company | lowercase) == 'amex'">
+										    	<img src="<%= image_url "discover.png" %>" ng-if="($parent.card.card_company | lowercase) == 'discover'">
+										    </div>
 									    </div>
-								    </div>
-								    <div class="col-md-7">
-								    	<div class="row">
-										    <div class="cvv col-xs-4">
-											    <input type="text" class="form-control" id="cvv" placeholder="CVV" ng-model="$parent.card.cvv">	
+									    <div class="col-md-7">
+									    	<div class="row">
+											    <div class="cvv col-xs-4">
+												    <input type="text" class="form-control" id="cvv" placeholder="CVV" ng-model="$parent.card.cvv">	
+											    </div>
+					  							<div class="exp-month col-xs-4">
+						  							<select class="form-control" id="exp-month" ng-model="$parent.card.expiration_month">
+												    	<option value="">Exp Month</option>
+												    	<option value="01">JAN</option>
+												    	<option value="02">FEB</option>
+												    	<option value="03">MAR</option>
+												    	<option value="04">APR</option>
+												    	<option value="05">MAY</option>
+												    	<option value="06">JUN</option>
+												    	<option value="07">JUL</option>
+												    	<option value="08">AUG</option>
+												    	<option value="09">SEP</option>
+												    	<option value="10">OCT</option>
+												    	<option value="11">NOV</option>
+												    	<option value="12">DEC</option>
+												    </select>
+											    </div>
+											    <div class="exp-year col-xs-4">
+												    <select class="form-control" id="exp-year" ng-model="$parent.card.expiration_year">
+												    	<option value="">Exp Year</option>
+												    	<option value="2016">2016</option>
+												    	<option value="2017">2017</option>
+												    	<option value="2018">2018</option>
+												    	<option value="2019">2019</option>
+												    	<option value="2020">2020</option>
+												    	<option value="2021">2021</option>
+												    	<option value="2022">2022</option>
+												    	<option value="2023">2023</option>
+												    	<option value="2024">2024</option>
+												    	<option value="2025">2025</option>
+												    	<option value="2026">2026</option>
+												    	<option value="2027">2027</option>
+												    	<option value="2028">2028</option>
+												    	<option value="2029">2029</option>
+												    	<option value="2030">2030</option>
+												    	<option value="2031">2031</option>
+												    	<option value="2032">2032</option>
+												    	<option value="2033">2033</option>
+												    	<option value="2034">2034</option>
+												    	<option value="2035">2035</option>
+												    	<option value="2036">2036</option>
+												    	<option value="2037">2037</option>
+												    	<option value="2038">2038</option>
+												    	<option value="2039">2039</option>
+												    </select>
+											    </div>
+											</div>
+									    </div>
+			  						</div>
+			  						<div ng-if="$parent.isLoggedIn">
+				  						<button ladda="$parent.addCardProcess" ng-disabled="$parent.$parent.processing" ng-click="confirmSave('card')">SAVE</button>
+				  						<button ng-disabled="$parent.$parent.processing" ng-click="cancelAdd('card')">CANCEL</button>
+				  					</div>
+								</div>
+								<div class="review" ng-if="edit_credit_card == 1">
+			  						<span ng-if="cards.length">
+				  						<div class="title">Credit Card</div>
+				  						<div class="ccard vertical-center">
+					  						<div class="img-holder">
+										    	<img src="<%= image_url "visa.png" %>" ng-if="($parent.card.card_company | lowercase) == 'visa'">
+										    	<img src="<%= image_url "mastercard.png" %>" ng-if="($parent.card.card_company | lowercase) == 'mastercard'">
+										    	<img src="<%= image_url "amex.png" %>" ng-if="($parent.card.card_company | lowercase) == 'amex'">
+										    	<img src="<%= image_url "discover.png" %>" ng-if="($parent.card.card_company | lowercase) == 'discover'">
 										    </div>
-				  							<div class="exp-month col-xs-4">
-					  							<select class="form-control" id="exp-month" ng-model="$parent.card.expiration_month">
-											    	<option value="">Exp Month</option>
-											    	<option value="01">JAN</option>
-											    	<option value="02">FEB</option>
-											    	<option value="03">MAR</option>
-											    	<option value="04">APR</option>
-											    	<option value="05">MAY</option>
-											    	<option value="06">JUN</option>
-											    	<option value="07">JUL</option>
-											    	<option value="08">AUG</option>
-											    	<option value="09">SEP</option>
-											    	<option value="10">OCT</option>
-											    	<option value="11">NOV</option>
-											    	<option value="12">DEC</option>
-											    </select>
+				  							ending in {{$parent.card.last_digits | limitTo:-4}}
+				  						</div>
+				  					</span>
+				  					<span ng-if="!cards.length">
+				  						<div class="title">No Credit Cards</div>
+				  					</span>
+				  					<button ng-disabled="$parent.processing" ng-click="toogleReview('card')">EDIT</button>
+			  					</div>
+			  					<div class="review" ng-if="edit_credit_card == 2">
+			  						<span>
+				  						<div class="ccard vertical-center" ng-repeat="c in cards">
+				  							<input type="radio" ng-model="$parent.$parent.credit_card_index" value="{{$index}}">
+					  						<div class="img-holder">
+										    	<img src="<%= image_url "visa.png" %>" ng-if="(c.card_company | lowercase) == 'visa'">
+										    	<img src="<%= image_url "mastercard.png" %>" ng-if="(c.card_company | lowercase) == 'mastercard'">
+										    	<img src="<%= image_url "amex.png" %>" ng-if="(c.card_company | lowercase) == 'amex'">
+										    	<img src="<%= image_url "discover.png" %>" ng-if="(c.card_company | lowercase) == 'discover'">
 										    </div>
-										    <div class="exp-year col-xs-4">
-											    <select class="form-control" id="exp-year" ng-model="$parent.card.expiration_year">
-											    	<option value="">Exp Year</option>
-											    	<option value="2016">2016</option>
-											    	<option value="2017">2017</option>
-											    	<option value="2018">2018</option>
-											    	<option value="2019">2019</option>
-											    	<option value="2020">2020</option>
-											    	<option value="2021">2021</option>
-											    	<option value="2022">2022</option>
-											    	<option value="2023">2023</option>
-											    	<option value="2024">2024</option>
-											    	<option value="2025">2025</option>
-											    	<option value="2026">2026</option>
-											    	<option value="2027">2027</option>
-											    	<option value="2028">2028</option>
-											    	<option value="2029">2029</option>
-											    	<option value="2030">2030</option>
-											    	<option value="2031">2031</option>
-											    	<option value="2032">2032</option>
-											    	<option value="2033">2033</option>
-											    	<option value="2034">2034</option>
-											    	<option value="2035">2035</option>
-											    	<option value="2036">2036</option>
-											    	<option value="2037">2037</option>
-											    	<option value="2038">2038</option>
-											    	<option value="2039">2039</option>
-											    </select>
-										    </div>
-										</div>
-								    </div>
-		  						</div>
-		  						<button ladda="$parent.addCardProcess" ng-disabled="$parent.processing" ng-click="confirmSave('card')">SAVE</button><button ng-disabled="$parent.processing" ng-click="cancelAdd('card')">CANCEL</button>
-		  						<div class="seals">
+				  							ending in {{c.last_digits | limitTo:-4}}
+				  						</div>
+				  						<span ng-if="!cards.length">
+					  						<div class="title">No Credit Cards</div>
+					  					</span>
+				  					</span>
+				  					<button ng-disabled="$parent.processing" ng-click="selectAddress('card')">DONE</button><button ng-disabled="$parent.processing" ng-click="addField('card')">ADD</button>
+			  					</div>
+			  					<div class="seals">
 									<script src="https://cdn.ywxi.net/js/inline.js?w=96"></script>
 									<span id="siteseal">
 			                            <script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script>
 			                        </span>	
 								</div>
 							</div>
-							<div class="review" ng-if="edit_credit_card == 1">
-		  						<span ng-if="cards.length">
-			  						<div class="title">Credit Card</div>
-			  						<div class="ccard vertical-center">
-				  						<div class="img-holder">
-									    	<img src="<%= image_url "visa.png" %>" ng-if="($parent.card.card_company | lowercase) == 'visa'">
-									    	<img src="<%= image_url "mastercard.png" %>" ng-if="($parent.card.card_company | lowercase) == 'mastercard'">
-									    	<img src="<%= image_url "amex.png" %>" ng-if="($parent.card.card_company | lowercase) == 'amex'">
-									    	<img src="<%= image_url "discover.png" %>" ng-if="($parent.card.card_company | lowercase) == 'discover'">
-									    </div>
-			  							ending in {{$parent.card.last_digits | limitTo:-4}}
-			  						</div>
-			  					</span>
-			  					<span ng-if="!cards.length">
-			  						<div class="title">No Credit Cards</div>
-			  					</span>
-			  					<button ng-disabled="$parent.processing" ng-click="toogleReview('card')">EDIT</button>
-		  					</div>
-		  					<div class="review" ng-if="edit_credit_card == 2">
-		  						<span>
-			  						<div class="ccard vertical-center" ng-repeat="c in cards">
-			  							<input type="radio" ng-model="$parent.$parent.credit_card_index" value="{{$index}}">
-				  						<div class="img-holder">
-									    	<img src="<%= image_url "visa.png" %>" ng-if="(c.card_company | lowercase) == 'visa'">
-									    	<img src="<%= image_url "mastercard.png" %>" ng-if="(c.card_company | lowercase) == 'mastercard'">
-									    	<img src="<%= image_url "amex.png" %>" ng-if="(c.card_company | lowercase) == 'amex'">
-									    	<img src="<%= image_url "discover.png" %>" ng-if="(c.card_company | lowercase) == 'discover'">
-									    </div>
-			  							ending in {{c.last_digits | limitTo:-4}}
-			  						</div>
-			  						<span ng-if="!cards.length">
-				  						<div class="title">No Credit Cards</div>
-				  					</span>
-			  					</span>
-			  					<button ng-disabled="$parent.processing" ng-click="selectAddress('card')">DONE</button><button ng-disabled="$parent.processing" ng-click="addField('card')">ADD</button>
-		  					</div>
+
 		  					<hr>
 
 
@@ -549,6 +566,9 @@
 							    <div class="inputs">
 		  							<div class="full-name">
 			  							<input type="text" class="form-control" id="first-name-billing" ng-model="$parent.billing_address.name" placeholder="Full Name">
+								    </div>
+								    <div class="phone">
+			  							<input type="text" class="form-control numeric" id="phone-billing" ng-model="$parent.card.phone_number.phone_number.number" placeholder="Phone Number">
 								    </div>
 		  						</div>
 		  						<div class="inputs">
@@ -879,7 +899,10 @@
 							  			</select>
 								    </div>
 		  						</div>
-		  						<button ladda="$parent.addBillingProcess" ng-disabled="$parent.processing" ng-click="confirmSave('billing')">SAVE</button><button ng-disabled="$parent.processing" ng-click="cancelAdd('billing')">CANCEL</button>
+		  						<div ng-if="$parent.isLoggedIn">
+		  							<button ladda="$parent.$parent.addBillingProcess" ng-disabled="$parent.processing" ng-click="confirmSave('billing')">SAVE</button>
+		  							<button ng-disabled="$parent.$parent.processing" ng-click="cancelAdd('billing')">CANCEL</button>
+		  						</div>
 		  					</div>
 		  					<hr>
 		  					<div class="row">
@@ -930,7 +953,7 @@
 						    </div>
 						    <hr>
 						    <div class="description-line">
-						    	<div class="description">Ticekt Price</div>
+						    	<div class="description">Ticket Price</div>
 						    	<div class="value">{{ticket.retail_price | currency}} ea.</div>
 						    </div>
 						    <div class="description-line">
@@ -1037,6 +1060,17 @@
 								<div class="col-xs-6">
 									<div class="label-confirm">Public Note</div>
 									<div class="info">{{ticket.public_notes}}</div>
+								</div>
+							</div>
+							<div class="row update-password" ng-show="$parent.first_time">
+								<div class="col-md-6">
+									<input type="password" name="password" placeholder="password" ng-model="$parent.$parent.password">
+								</div>
+								<div class="col-md-6">
+									<input type="password" name="confirm-password" placeholder="confirm-password" ng-model="$parent.$parent.confirm_password">
+								</div>
+								<div class="col-xs-12">
+									<button ng-click="updatePassword()">Create Password</button>
 								</div>
 							</div>
 						</div>

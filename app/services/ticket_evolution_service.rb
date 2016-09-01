@@ -212,6 +212,12 @@ class TicketEvolutionService
       @client = @connection.clients.show(@id)
       @card = @client.credit_cards.create({:address_id => params[:address_id], :number => params[:number], :expiration_month => params[:expiration_month], :expiration_year => params[:expiration_year], :verification_code => params[:verification_code], :name => params[:name]})
       return @card
+    when 'client'
+      @email_addresses = [{:address => params[:email] }]
+      @phone_numbers = [{:number => params[:phone_number]}]
+      @addresses = [{:region => params[:region], :postal_code => params[:postal_code], :locality => params[:locality], :country_code => params[:country_code], :street_address => params[:street_address]}]
+      @client = @connection.clients.create({:name => params[:name], :email_addresses => @email_addresses, :addresses => @addresses, :phone_numbers => @phone_numbers, :office_id => @office_id})
+      return @client
     end
   end
 
