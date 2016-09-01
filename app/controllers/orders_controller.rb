@@ -21,6 +21,7 @@ class OrdersController < ApplicationController
 		@event_id = request.POST["event_id"]
 		@section = request.POST["section"]
 		@row = request.POST["row"]
+		@cost = request.POST["cost"]
 		@ticket_type = request.POST["ticket_type"]
 		@service_fee = request.POST["service_fee"]
 		@ticket_format = request.POST["ticket_format"]
@@ -61,6 +62,7 @@ class OrdersController < ApplicationController
 	         	event_date: @event.occurs_at,
 	         	event_location: @event.location,
 	         	ticket_section: @section,
+	         	cost: @cost,
 	         	ticket_row: @row,
 	         	ticket_seats: @quantity,
 	         	ticket_format: @ticket_format,

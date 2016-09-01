@@ -388,6 +388,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			        	ticket_type: $scope.ticket.format,
 			        	service_fee: $scope.service_fee,
 			        	ticket_format: $scope.ticket.format,
+			        	cost: $scope.ticket.wholesale_price,
 			        },
 			    }).then(function successCallback(response) {
 			    	if(response.data.error == undefined){
