@@ -63,17 +63,18 @@
             <img ng-src="{{sectionUrl}}">
           </div>
           <div class="col-xs-12 filter-header">
-            <div class="row">
-              <div class="col-xs-3 vertical-center sorting" ng-click="updateSort('section')">
+            <div class="row full-height">
+              <div class="col-xs-1 hidden-md hidden-lg hidden-xl text-center vertical-center full-height flex-mode"><img width="20px" src="<%= image_url 'filter_icon.png' %>"></div>
+              <div class="col-xs-3 vertical-center sorting full-height" ng-click="updateSort('section')">
                 Section <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
               </div>
-              <div class="col-xs-2 vertical-center sorting" ng-click="updateSort('row')">
+              <div class="col-xs-2 vertical-center sorting full-height" ng-click="updateSort('row')">
                 Row <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
               </div>
-              <div class="col-xs-3 vertical-center">
+              <div class="col-xs-2 col-md-3 vertical-center full-height">
                 Quantity
               </div>
-              <div class="col-xs-4 vertical-center sorting" ng-click="updateSort('retail_price')">
+              <div class="col-xs-4 vertical-center sorting full-height" ng-click="updateSort('retail_price')">
                 Price <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
               </div>
             </div>
@@ -83,20 +84,22 @@
           </div>
           <div class="col-xs-12 tickets-data" ng-if="!loading">
             <div class="row" ng-repeat="ticket in tickets.data | orderBy:ordering | filter: (etickets || '') && {eticket: true} | filter: (filterBySection || '') && {section: section} | filter: (onlyParking || '') && {type: 'parking'} | numberOfSeats:index" emit-last-repeater-element>
-              <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ticket.public_notes}}" ng-if="ticket.public_notes"></span>
-              <div class="col-xs-4 vertical-center section right-content">
-                
+              <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ticket.public_notes}}" ng-if="ticket.public_notes"></span>
+              <div class="col-xs-1 hidden-md hidden-lg hidden-xl info-ico">
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ticket.public_notes}}" ng-if="ticket.public_notes"></span>
+              </div>
+              <div class="col-xs-3 vertical-center section right-content full-height">
                 {{ticket.section}}
               </div>
-              <div class="col-xs-2 vertical-center right-content">
+              <div class="col-xs-2 vertical-center right-content full-height">
                 {{ticket.row}}
               </div>
-              <div class="col-xs-2 vertical-center right-content">
+              <div class="col-xs-2 col-md-3 vertical-center right-content full-height custom-select">
                 <select>
                   <option ng-repeat="o in ticket.splits | orderBy:'-'" value="{{o}}">{{o}}</option>
                 </select>
               </div>
-              <div class="col-xs-4 vertical-center buy-btn">
+              <div class="col-xs-4 vertical-center buy-btn full-height">
                 <span class="buy-btn-span">
                   <button ng-click="redirect($event, ticket.id)">${{ticket.retail_price}}/ea</button>
                   <p class="format">{{ticket.format}}</p>
