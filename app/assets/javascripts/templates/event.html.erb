@@ -2,24 +2,24 @@
   
   <section id="game_info">
     <div class="row">
-      <div class="col-md-4 col-xs-12" style="height: 100%;">
-        <div class="col-xs-2 date-holder">
+      <div class="col-md-4 col-xs-12 mobile-event-container" style="height: 100%;">
+        <div class="col-md-2 date-holder hidden-xs hidden-sm">
           <p class="date1">{{event.occurs_at | date:'MMM': 'UTC' | uppercase}}</p>
           <p class="date2">{{event.occurs_at | date:'dd' : 'UTC'| uppercase}}</p>
           <p class="date3">{{event.occurs_at | date:'EEE': 'UTC' | uppercase}}</p>  
         </div>
-        <div class="col-xs-10 event-info vertical-center">
-          <span>
+        <div class="col-md-10 col-xs-12 event-info vertical-center mobile-event-info">
+          <span class="mobile-event-span">
             <p class="first-line"><a href="{{event.away_performer.url}}">{{event.away_performer.name}} </a><span class="at">at</span> <a href="{event.home_performer.url">{{event.home_performer.name}}</a></p>
             <p class="second-line" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'hh:mm a' : 'UTC'| uppercase}} at <a href="{{event.venue.url}}">{{event.venue.name}}</a> - {{event.location}}</p>
             <p class="second-line" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD at <a href="{{event.venue.url}}">{{event.venue.name}}</a> - {{event.location}}</p>
           </span>
         </div>
       </div>
-      <div class="col-md-4 col-xs-12 moto vertical-center">
+      <div class="col-md-4 col-xs-12 moto vertical-center hidden-xs hidden-sm">
         All GameHedge tickets come with our exclusive Good Game Guarantee at no additional cost to you. So, if the home team loses by 5 runs or more, we will refund 50% of the price of your ticket. No gimmicks. No catches.
       </div>
-      <div class="col-md-4 col-xs-12 ggg-logo vertical-center">
+      <div class="col-md-4 col-xs-12 ggg-logo vertical-center hidden-xs hidden-sm">
         
           <img src="<%= image_url "badge-gamehedge.png" %>" alt="GameHedge" />
           Your tickets come with the<br>
@@ -35,8 +35,8 @@
     <div class="row">
       <div class="col-md-8">
         <div class="map-container">
-          <span class="glyphicon glyphicon-zoom-in" aria-hidden="true" ng-click="zoomIn()"></span>
-          <span class="glyphicon glyphicon-zoom-out" aria-hidden="true" ng-click="zoomOut()"></span>
+          <span class="glyphicon glyphicon-zoom-in hidden-xs hidden-sm" aria-hidden="true" ng-click="zoomIn()"></span>
+          <span class="glyphicon glyphicon-zoom-out hidden-xs hidden-sm" aria-hidden="true" ng-click="zoomOut()"></span>
           <div id="MapContainer">
            
           </div>
@@ -44,7 +44,7 @@
       </div>
       <div class="col-md-4 tickets">
         <div class="filters">
-          <div class="col-xs-12 filter-row vertical-center">
+          <div class="col-xs-12 filter-row vertical-center hidden-xs hidden-sm">
             Quantity
             <button ng-class="{'active': index == 0}" ng-click="updateFilter(0)">Any</button>
             <button ng-class="{'active': index == 1}" ng-click="updateFilter(1)">1</button>
@@ -53,13 +53,13 @@
             <button ng-class="{'active': index == 4}" ng-click="updateFilter(4)">4</button>
             <button ng-class="{'active': index == 5}" ng-click="updateFilter(5)">5+</button>
           </div>
-          <div class="col-xs-12 filter-row vertical-center">
+          <div class="col-xs-12 filter-row vertical-center hidden-xs hidden-sm">
             Show
             <button ng-click="updateEtickets()" ng-class="{'active': etickets}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ETickets Only</button>
             <button ng-click="updateParking()" ng-class="{'active': onlyParking}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Parking Only</button>
            <!--  <button ng-click="updateFilter($event,1)"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Parking Only</button> -->
           </div>
-          <div class="col-xs-12 section-image" ng-if="sectionUrl != ''">
+          <div class="col-xs-12 section-image hidden-xs hidden-sm" ng-if="sectionUrl != ''">
             <img ng-src="{{sectionUrl}}">
           </div>
           <div class="col-xs-12 filter-header">
