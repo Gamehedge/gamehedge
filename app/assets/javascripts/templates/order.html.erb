@@ -953,6 +953,10 @@
 						    	<div class="description">Subtotal</div>
 						    	<div class="value">{{subtotal | currency}}</div>
 						    </div>
+						    <div class="description-line" ng-show="discount != 0">
+						    	<div class="description">Discount</div>
+						    	<div class="value">-{{discount | currency}}</div>
+						    </div>
 						    <div class="description-line" ng-show="ticket.format == 'Physical'">
 						    	<div class="description short">Shipping Fee</div>
 						    	<div class="value short">{{shipping_fee | currency}}</div>
@@ -970,12 +974,18 @@
 						    	<div class="description short">Good Game Guarantee</div>
 						    	<div class="value short">FREE</div>
 						    </div>
+						    <div class="description-line" ng-if="active_promos">
+						    	<div class="description">Promo Code</div>
+						    	<div class="value" >
+							    	<input id="promo" ng-model="$parent.promo_code" ng-change="calculatePromos()"/>
+						    	</div>
+						    </div>
 						    <hr>
 						    <div class="description-line total">
 						    	<div class="description">TOTAL</div>
 						    	<div class="value">{{total | currency}}</div>
 						    </div>
-						    <button ladda="$parent.payProcess" ng-disabled="processing || editing" ng-click="confirmPay()">Confirm and Pay</button>
+						    <button class="hidden" ladda="$parent.payProcess" ng-disabled="processing || editing" ng-click="confirmPay()">Confirm and Pay</button>
 						    <div class="terms">By clicking Confirm and Pay, you agree to GameHedge <a href="terms">Terms and Privacy Policy.</a></div>
 						    <div id="session_iframe" ng-bind-html="session_iframe"></div>
 	  					</div>

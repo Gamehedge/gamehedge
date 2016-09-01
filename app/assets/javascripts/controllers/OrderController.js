@@ -35,6 +35,21 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
                 console.log("Promo Codes");
             	console.log(response);
                 $scope.promo_codes = response;
+                var today = new Date()
+                today.setHours(today.getHours()-(today.getTimezoneOffset()/60));
+                today = today.toISOString();
+                today = today.split('T')[0] + "T00:00:00.000Z";
+                for(i=0;i<$scope.promo_codes.length;i++){
+                	var date_1 = new Date($scope.promo_codes[i].start_date).toISOString();
+                	var date_2 = new Date($scope.promo_codes[i].end_date).toISOString();
+                	today = new Date(today);
+                	date_1 = new Date(date_1);
+                	date_2 = new Date(date_2);
+                	if($scope.promo_codes[i].active == true && today >= date_1 && today <= date_2){
+                		$scope.active_promos = true;
+                		break;
+                	}
+                }
                 $scope.calculateValues();
         });
 	}
@@ -59,7 +74,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 
 	$scope.calculateValues = function(){
 		if($scope.ticket && $scope.amount){
-			$scope.subtotal = Number($scope.ticket.retail_price) * Number($scope.amount);
+			$scope.subtotal = (Number($scope.ticket.retail_price) * Number($scope.amount) - $scope.discount);
 		}
 		if(typeof $scope.service_fees != "undefined" && $scope.service_fees.length != 0){
 			for(i=0;i<$scope.service_fees.length;i++){
@@ -82,6 +97,27 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			}
 			else{
 				$scope.total = Number($scope.subtotal) + Number($scope.service_fee);
+			}
+		}
+	}
+
+	$scope.calculatePromos = function(){
+		for(i=0;i<$scope.promo_codes.length;i++){
+			console.log($scope.promo_codes[i].code);
+			console.log($scope.promo_code);
+			if($scope.promo_code == $scope.promo_codes[i].code){
+				if($scope.promo_codes[i].is_percentage == true){
+					$scope.discount = $scope.subtotal*Number($scope.promo_codes[i].value)/100;
+				}
+				else{
+					$scope.discount = Number($scope.promo_codes[i].value);
+				}
+				$scope.calculateValues();
+				break;
+			}
+			else{
+				$scope.discount = 0;
+				$scope.calculateValues();
 			}
 		}
 	}
@@ -507,7 +543,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	$scope.billing_address.region = "";
 	$scope.billing_address.street_address = "";
 	$scope.changed_billing_address = false;
-
+	$scope.discount = 0;
+	$scope.active_promos = false;
 
 	$scope.processing = false;
 	$scope.shipping_address_index = 0;
