@@ -2903,6 +2903,46 @@ footer .footer-signature img{
         font-size: 20px !important;
         margin-top: 10px !important;
     }
+    
+    .navbar-gamehedge {
+        min-height: 55px !important;
+    }
+    
+    .mobile-event-container {
+        height: auto !important;
+    }
+    
+    .mobile-event-info {
+        background-color: #dddddd;
+        margin-top: 0px;
+        text-align: center;
+        padding-top: 7px;
+        padding-bottom: 10px;
+    }
+    
+    .mobile-event-info .first-line {
+        font-size: 14px !important;
+    }
+    
+    .mobile-event-info .second-line {
+        font-size: 12px !important;
+    }
+    
+    .mobile-event-span {
+        width: 100%;
+    }
+    
+    #game_info .row {
+        height: auto !important;
+    }
+    
+    #game_info {
+        height: auto !important;
+    }
+    
+    #tickets-map #MapContainer {
+        height: 45vw;
+    }
 }
 
 #home section#hero #wrapper #content h1 {
