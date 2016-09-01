@@ -32,7 +32,6 @@ class Api::V1::PromoCodesController < ApplicationApiController
 
   def create
     @promo_code = PromoCode.new(data_params)
-    @promo_code.password = Devise.friendly_token
     respond_to do |format|
       if @promo_code.save
         format.json { render json: @promo_code, status: :created }

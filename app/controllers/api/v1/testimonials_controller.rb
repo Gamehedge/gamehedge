@@ -33,7 +33,6 @@ class Api::V1::TestimonialsController < ApplicationApiController
 
   def create
     @testimonial = Testimonial.new(data_params)
-    @testimonial.password = Devise.friendly_token
     respond_to do |format|
       if @testimonial.save
         format.json { render json: @testimonial, status: :created }

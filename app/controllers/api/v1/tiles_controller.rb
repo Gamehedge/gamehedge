@@ -32,7 +32,6 @@ class Api::V1::TilesController < ApplicationApiController
 
   def create
     @tile = Tile.new(data_params)
-    @tile.password = Devise.friendly_token
     respond_to do |format|
       if @tile.save
         format.json { render json: @tile, status: :created }

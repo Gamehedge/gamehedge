@@ -32,7 +32,6 @@ class Api::V1::OrdersController < ApplicationApiController
 
   def create
     @order = Order.new(data_params)
-    @order.password = Devise.friendly_token
     respond_to do |format|
       if @order.save
         format.json { render json: @order, status: :created }

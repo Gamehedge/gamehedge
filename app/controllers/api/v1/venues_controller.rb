@@ -33,7 +33,6 @@ class Api::V1::VenuesController < ApplicationApiController
 
   def create
     @venue = Venue.new(data_params)
-    @venue.password = Devise.friendly_token
     respond_to do |format|
       if @venue.save
         format.json { render json: @venue, status: :created }

@@ -17,6 +17,7 @@
  @import "bootstrap";
  @import "slick";
  @import "slick-theme";
+ @import "ladda/dist/ladda-themeless.min";
 
 * { box-sizing: border-box; }
 
@@ -1717,6 +1718,47 @@ body {
     margin-right: -6%;
     border: 0;
     border-top: 1px solid #eeeeee;
+}
+
+#confirmation h1{
+    font-size: 36px;
+    text-align: center;
+    color: #000000;
+}
+
+#confirmation h4{
+    font-size: 24px;
+    color: #525252;
+    text-align: center;
+}
+
+#confirmation .outter{
+    background-color: #d8d8d8;
+    padding-top: 12px;
+    padding-bottom: 4px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+#confirmation .inner{
+    background-color: white;
+    padding: 30px;
+}
+
+#confirmation .inner .row{
+    margin: 20px 0;
+}
+
+#confirmation .label-confirm{
+    font-size: 14px;
+    color: #525252;
+    font-weight: lighter;
+}
+
+#confirmation .info{
+    font-size: 19px;
+    font-weight: bold;
+    color: #525252;
 }
 
 #home section#hero.short{

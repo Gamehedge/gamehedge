@@ -53,7 +53,6 @@ class Api::V1::EventsController < ApplicationApiController
 
   def create
     @event = Event.new(data_params)
-    @event.password = Devise.friendly_token
     respond_to do |format|
       if @event.save
         format.json { render json: @event, status: :created }

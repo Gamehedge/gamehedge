@@ -17,6 +17,7 @@ class TicketEvolutionService
       @latitude = params[:latitude]
       @longitude = params[:longitude]
       @geolocated = params[:geolocated]
+      @office_id = 3100;
       
       @connection = TicketEvolution::Connection.new({
           :token => '5bfd4b6110681d224a8c1fa6333f375f',       # => (required) The API token, used to identify you
@@ -213,4 +214,43 @@ class TicketEvolutionService
       return @card
     end
   end
+
+  def createShipment(params)
+        
+        billing_address_id = params[:billing_address_id]
+        address_id = params[:address_id]
+        credit_card_id = params[:credit_card_id]
+        quantity = params[:quantity]
+        ticket_group_id = params[:ticket_group_id]
+        price = params[:price]
+        ticket_group_signature = params[:ticket_group_signature]
+        type = params[:type]
+        service_type = params[:service_type]
+        ship_to_name = params[:ship_to_name]
+        amount = params[:amount]
+        pay_type = params[:pay_type]
+        shipment_price = params[:shipment_price]
+        email_address_id = params[:email_address_id]
+        session_id = params[:session_id]
+        user_agent = params[:user_agent]
+        created_by_ip_address = params[:created_by_ip_address]
+        service_fee = params[:service_fee]
+        
+        phone_number_id = params[:selectedPhone] 
+        
+        items = [{:ticket_group_id  => ticket_group_id, :price => price, :quantity => quantity, :ticket_group_signature => ticket_group_signature }]
+        
+        if type == "FedEx"
+          shipped_items = [{:phone_number_id => phone_number_id, :address_id => address_id, :type => type, :service_type => service_type, :ship_to_name => ship_to_name, :items => items}]
+        else
+          shipped_items = [{:email_address_id => email_address_id, :phone_number_id => phone_number_id, :type => type, :items => items}]
+        end
+        
+        payments = [{:amount => amount, :type => pay_type, :credit_card_id => credit_card_id}]
+            
+        @order = @connection.orders.create_client_order({:client_id => @id, :seller_id => @office_id, :shipped_items => shipped_items, :billing_address_id => billing_address_id, :payments => payments, :shipping => shipment_price, :session_id => session_id, :user_agent => user_agent, :created_by_ip_address => created_by_ip_address, :service_fee => service_fee})
+        
+        
+        return @order
+    end
 end

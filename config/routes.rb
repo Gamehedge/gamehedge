@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   get 'clients/show'
   post 'clients/add_address'
   post 'clients/add_credit_card'
+  post 'clients/get_session'
+  get 'clients/info'
+  post 'orders/create'
   resources :search, :signature
   
   devise_for :admin_users, ActiveAdmin::Devise.config

@@ -32,7 +32,6 @@ class Api::V1::ServiceFeesController < ApplicationApiController
 
   def create
     @service_fee = ServiceFee.new(data_params)
-    @service_fee.password = Devise.friendly_token
     respond_to do |format|
       if @service_fee.save
         format.json { render json: @service_fee, status: :created }

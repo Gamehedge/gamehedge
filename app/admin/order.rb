@@ -13,9 +13,8 @@ ActiveAdmin.register Order do
     column :order_date
     column ("Customer Name")  { |order| order.client_name }
     column :event_name
-    column :event_date_new
+    column :event_date
     column :refund_status
-    column :order_status
     actions
     # ...
   end

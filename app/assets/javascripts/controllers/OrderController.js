@@ -18,6 +18,12 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	                $scope.amount = $location.search()['amount'];
 	                $scope.calculateValues();
 	        });
+	        if($scope.ticket.format == "Physical"){
+	    		$scope.shipping_fee = "25.0";
+	    	}
+	    	else{
+	    		$scope.shipping_fee = 0;
+	    	}
         }, function errorCallback(response) {
             console.log(response);
         });
@@ -96,10 +102,12 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			$scope.changed_credit_card = true;
 			$scope.edit_credit_card = 1;
 		}
+		$scope.editing = false;
 	}
 
 	$scope.toogleReview = function(toogle){
 		$scope.secondConfirm = false;
+		$scope.editing = true;
 		if(toogle == "card"){
 			if($rootScope.isLoggedIn == false){
 				$scope.edit_credit_card = 3;
@@ -196,11 +204,14 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				$scope.billing_address = $scope.client.primary_billing_address;
 			}
 		}
+		$scope.editing = false;
 	}
 
 	$scope.confirmSave = function(type){
 		$scope.processing = true;
+		$scope.editing = false;
 		if(type == "shipping"){
+			$scope.addShippingProcess = true;
 			if($scope.shipping_address.name != "" && $scope.shipping_address.street_address != "" && $scope.shipping_address.locality != "" && $scope.shipping_address.region != "" && $scope.shipping_address.postal_code != "" && $scope.shipping_address.country_code != ""){
 				$http({
 			        method: 'POST',
@@ -221,16 +232,21 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    	console.log($scope.shipping_address);
 			    	$scope.edit_deliver = 1;
 			    	$scope.processing = false;
+			    	$scope.addShippingProcess = false;
 			    }, function errorCallback(response) {
 			    	console.log(response);
 			    	$scope.processing = false;
+			    	$scope.addShippingProcess = false;
 			    });
 			}
 			else{
 				alert("All fields are required");
+				$scope.addShippingProcess = false;
+				$scope.processing = false;
 			}
 		}
 		else if(type == "card"){
+			$scope.addCardProcess = true;
 			if($scope.card.cvv != "" && $scope.card.expiration_month != "" && $scope.card.expiration_year != "" && $scope.card.last_digits != "" && $.payment.validateCardNumber($scope.card.last_digits) == true && $.payment.validateCardExpiry($scope.card.expiration_month,$scope.card.expiration_year) == true){
 				$http({
 			        method: 'POST',
@@ -261,26 +277,32 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				    	console.log($scope.card);
 				    }
 				    $scope.processing = false;
+				    $scope.addCardProcess = false;
 				    $scope.edit_credit_card = 1;
 			    }, function errorCallback(response) {
 			    	console.log(response);
 			    	$scope.processing = false;
+			    	$scope.addCardProcess = false;
 			    });
 			}
 			else if($.payment.validateCardExpiry($scope.card.expiration_month,$scope.card.expiration_year) == false){
 				alert("Expiration date not valid!");
 				$scope.processing = false;
+				$scope.addCardProcess = false;
 			}
 			else if($.payment.validateCardNumber($scope.card.last_digits) == false){
 				alert("Card number not valid!");
 				$scope.processing = false;
+				$scope.addCardProcess = false;
 			}
 			else{
 				alert("All fields are required");
 				$scope.processing = false;
+				$scope.addCardProcess = false;
 			}
 		}
 		else if(type == "billing"){
+			$scope.addBillingProcess = true;
 			if($scope.billing_address.name != "" && $scope.billing_address.street_address != "" && $scope.billing_address.locality != "" && $scope.billing_address.region != "" && $scope.billing_address.postal_code != "" && $scope.billing_address.country_code != ""){
 				$http({
 			        method: 'POST',
@@ -301,19 +323,93 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    	console.log($scope.billing_address);
 			    	$scope.edit_billing = 1;
 			    	$scope.processing = false;
+			    	$scope.addBillingProcess = false;
 			    }, function errorCallback(response) {
 			    	console.log(response);
 			    	$scope.processing = false;
+			    	$scope.addBillingProcess = false;
 			    });
 			}
 			else{
 				alert("All fields are required");
+				$scope.processing = false;
+			    $scope.addBillingProcess = false;
 			}
 		}
 	}
 
 	$scope.confirmPay = function(){
-		
+		$scope.processing = true;
+		$scope.payProcess = true;
+		if($scope.isLoggedIn == true){
+			if($scope.last_digits == ""){
+				alert("No credit card selected");
+				$scope.processing = false;
+				$scope.payProcess = false;
+			}
+			else{
+				var service_type = "LEAST_EXPENSIVE"
+				if($("#shipping option:selected").text() == "Priority Overnight"){
+					service_type = "PRIORITY_OVERNIGHT";
+				}
+				else if($("#shipping option:selected").text() == "FedEx 2 Day"){
+					service_type = "FEDEX_2_DAY";
+				}
+				var type = $scope.ticket.format;
+				if($scope.ticket.format == "Physical"){
+					type = "FedEx";
+				}
+				console.log("processing");
+				$http({
+			        method: 'POST',
+			        url: '/orders/create',
+			        data: { 
+			        	user_id: $rootScope.user.te_uid,
+			        	billing_address_id: $scope.billing_address.id,
+			        	ship_address_id: $scope.shipping_address.id,
+			        	credit_card_id: $scope.card.id,
+			        	quantity: $scope.amount,
+			        	ticket_group_id: $scope.ticket.id,
+			        	price: $scope.ticket.retail_price,
+			        	ticket_group_signature: $scope.ticket.signature,
+			        	type: type,
+			        	service_type: service_type,
+			        	ship_to_name: $scope.shipping_address.name,
+			        	amount: $scope.total,
+			        	email_address_id: $scope.client.primary_email_address.id,
+			        	pay_type: "credit_card",
+			        	shipment_price: Number($scope.shipping_fee),
+			        	session_id: $scope.session_id,
+			        	user_agent: navigator.userAgent,
+			        	selectedPhone: $scope.card.phone_number.phone_number.id,
+			        	event_id: $scope.event.id,
+			        	section: $scope.ticket.section,
+			        	row: $scope.ticket.row,
+			        	ticket_type: $scope.ticket.format,
+			        	service_fee: $scope.service_fee,
+			        	ticket_format: $scope.ticket.format,
+			        },
+			    }).then(function successCallback(response) {
+			    	if(response.data.error == undefined){
+			    		$scope.order = response.data;
+			    		$scope.order_success = true;
+			    		console.log("Order");
+			    		console.log($scope.order);
+			    	}
+			    	else{
+			    		alert(response.data.error);
+			    		console.log("Error");
+			    		console.log(response);
+			    	}
+			    	$scope.processing = false;
+			    	$scope.payProcess = false;
+			    }, function errorCallback(response) {
+			    	console.log(response);
+			    	$scope.processing = false;
+			    	$scope.payProcess = false;
+			    });
+			}
+		}
 	}
 
 	$scope.getClient = function(){
@@ -338,9 +434,11 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				$scope.shipping_address = $scope.client.primary_shipping_address;
 				$scope.billing_address = $scope.client.primary_billing_address;
 				$scope.card = $scope.client.primary_credit_card;
+				$scope.isLoggedIn = true;
 				console.log($scope.shipping_address);
 
 		    }, function errorCallback(response) {
+		    	$scope.isLoggedIn = false;
 		    	$scope.edit_deliver = true;
 				$scope.edit_credit_card = true;
 				$scope.edit_billing = true;
@@ -357,7 +455,16 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
         url: '/signature?url=settings/shipping?',
     }).then(function successCallback(response) {
     	$scope.shipping_list = response.data.settings;
-    	$scope.shipping_fee = "25.0";
+    }, function errorCallback(response) {
+        console.log(response);
+    });
+    $http({
+        method: 'POST',
+        url: '/clients/get_session',
+        data: {},
+    }).then(function successCallback(response) {
+    	$scope.session_id = response.data;
+    	$("#session_iframe").html('<iframe frameborder="0" height="1" scrolling="no" src="/clients/info?session=' + $scope.session_id + '" width="1"></iframe>');
     }, function errorCallback(response) {
         console.log(response);
     });
@@ -412,6 +519,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	$rootScope.isOrder = true;
 	$rootScope.darkHeader = true;
 	$rootScope.noFooter = true;
+	$scope.order_success = false;
+	$scope.editing = false;
 	$('input#cc').payment('formatCardNumber');
 	$('input#cvv').payment('formatCardCVC');
 	$('input.numeric').payment('restrictNumeric');

@@ -32,7 +32,6 @@ class Api::V1::SportsController < ApplicationApiController
 
   def create
     @sport = Sport.new(data_params)
-    @sport.password = Devise.friendly_token
     respond_to do |format|
       if @sport.save
         format.json { render json: @sport, status: :created }

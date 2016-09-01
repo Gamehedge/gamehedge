@@ -32,7 +32,6 @@ class Api::V1::DivisionsController < ApplicationApiController
 
   def create
     @division = Division.new(data_params)
-    @division.password = Devise.friendly_token
     respond_to do |format|
       if @division.save
         format.json { render json: @division, status: :created }

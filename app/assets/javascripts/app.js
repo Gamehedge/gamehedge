@@ -5,7 +5,8 @@ app = angular.module('gamehedge',[
   'templates',
   'ngAnimate',
   'ui.bootstrap',
-  'slickCarousel'
+  'slickCarousel',
+  'angular-ladda'
 ])
 
 app.config([ '$routeProvider','$locationProvider','AuthProvider',

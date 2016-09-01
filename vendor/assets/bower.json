@@ -5,8 +5,6 @@
     "angular-route": "latest",
     "angular-devise": "latest",
     "angular-animate": "latest",
-    "angular-slick": "latest"
-  },
-  "resolutions": {
+    "angular-ladda": "latest"
   }
 }

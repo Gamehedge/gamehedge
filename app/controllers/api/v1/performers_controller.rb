@@ -33,7 +33,6 @@ class Api::V1::PerformersController < ApplicationApiController
 
   def create
     @performer = Performer.new(data_params)
-    @performer.password = Devise.friendly_token
     respond_to do |format|
       if @performer.save
         format.json { render json: @performer, status: :created }

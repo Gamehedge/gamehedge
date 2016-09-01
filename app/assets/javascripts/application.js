@@ -18,6 +18,9 @@
 //= require angular-rails-templates
 //= require angular-devise
 //= require angular-animate
+//= require ladda/dist/spin.min
+//= require ladda/dist/ladda.min
+//= require angular-ladda/dist/angular-ladda.min
 //= require bootstrap
 //= require_tree .
 //= require_tree ./templates

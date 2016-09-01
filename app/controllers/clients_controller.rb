@@ -17,4 +17,15 @@ class ClientsController < ActionController::Base
 	  	render json: @cc
 	end
   end
+  def get_session
+  	@datetime = Time.now.strftime("%Y%m%d%H%M%S")
+    @random = SecureRandom.hex(4)
+    @session_id = "#{@random}#{@datetime}"
+    render text: @session_id
+  end
+  def info
+      @mid = 132228 
+      @session = params[:session]
+      redirect_to "https://ssl.kaptcha.com/logo.htm?m=#{@mid.to_s}&s=#{@session.to_s}"
+  end
 end
