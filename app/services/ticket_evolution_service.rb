@@ -235,6 +235,8 @@ class TicketEvolutionService
         user_agent = params[:user_agent]
         created_by_ip_address = params[:created_by_ip_address]
         service_fee = params[:service_fee]
+        discount = params[:discount]
+        
         
         phone_number_id = params[:selectedPhone] 
         
@@ -248,7 +250,7 @@ class TicketEvolutionService
         
         payments = [{:amount => amount, :type => pay_type, :credit_card_id => credit_card_id}]
             
-        @order = @connection.orders.create_client_order({:client_id => @id, :seller_id => @office_id, :shipped_items => shipped_items, :billing_address_id => billing_address_id, :payments => payments, :shipping => shipment_price, :session_id => session_id, :user_agent => user_agent, :created_by_ip_address => created_by_ip_address, :service_fee => service_fee})
+        @order = @connection.orders.create_client_order({:client_id => @id, :seller_id => @office_id, :shipped_items => shipped_items, :billing_address_id => billing_address_id, :payments => payments, :shipping => shipment_price, :session_id => session_id, :user_agent => user_agent, :created_by_ip_address => created_by_ip_address, :service_fee => service_fee, :discount => discount})
         
         
         return @order

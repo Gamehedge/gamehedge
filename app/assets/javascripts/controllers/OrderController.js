@@ -425,6 +425,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			        	service_fee: $scope.service_fee,
 			        	ticket_format: $scope.ticket.format,
 			        	cost: $scope.ticket.wholesale_price,
+			        	discount: $scope.discount,
 			        },
 			    }).then(function successCallback(response) {
 			    	if(response.data.error == undefined){
