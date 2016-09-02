@@ -65,9 +65,24 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                     $scope.physicals = false;
                     break;
         }
-        console.log($scope.mob_delivery);
-        console.log($scope.etickets);
+        //console.log($scope.mob_delivery);
+        //console.log($scope.etickets);
         $scope.filter_active = false;
+    }
+    
+    $scope.displayDetail = false;
+    
+    $scope.selectedTicket = null;
+    
+    $scope.showDetail = function(_event, _ticket){
+        $scope.displayDetail = true;
+        $scope.selectedTicket = _ticket;
+        
+        $("#MapContainer").tuMap("HighlightSection", _ticket.section);
+    }
+    
+    $scope.closeDetail = function(){
+        $scope.displayDetail = false;
     }
 	
     $scope.updateSort = function(sort){
@@ -99,7 +114,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         }).then(function successCallback(response) {
         	$scope.tickets = response;
         	$scope.loading = false;
-        	console.log($scope.tickets);
+        	//console.log($scope.tickets);
         	var sections = [];
         	angular.forEach($scope.tickets.data, function(value, key) {
         		if(sections.indexOf(value.section) == -1){
@@ -138,7 +153,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	        , OnError: function (e, Error) {
 	            //alert(JSON.stringify(e));
 	            //alert(JSON.stringify(Error));
-	            console.log(Error);
+	            //console.log(Error);
 	            if (Error.Code == 0) {
 	                var Message = "<div style=\"padding:10px;\">";
 	                Message += "<span style=\"color:red;font-weight:bold;\">This Sample is Configured to run under host 'localhost'</span>";
@@ -171,15 +186,18 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 				$scope.sectionUrl = "";
 				$scope.applyChanges();
 				$("#MapContainer").tuMap("RemoveMapControl","Unmapped");
-	        $("#MapContainer").tuMap("RemoveMapControl","Parking");
-	        $("#MapContainer").tuMap("RemoveMapControl","Tailgate");     
+	            $("#MapContainer").tuMap("RemoveMapControl","Parking");
+	            $("#MapContainer").tuMap("RemoveMapControl","Tailgate");     
 	        }
 	        , OnMouseover:function(e,Section){
-	            if(Section.Active) {
-	                
+	            if(Section.Active) {    
 	                
 	            }
 	        }
+            , OnInit:function(e,Data){
+                console.log(e);
+                console.log(Data);
+            }
 	        , TooltipFormatter:function(Data){
 	            var Code = "";
 	            Code += "Section " + Data.LongName

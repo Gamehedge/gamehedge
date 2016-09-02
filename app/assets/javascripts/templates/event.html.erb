@@ -68,6 +68,59 @@
     
   </div>
     
+  <div id="detail_mobile" ng-if="displayDetail" class="zipper">
+    <div class="close_mobile_x" ng-click="closeDetail()">
+        <img width="15px" src="<%= image_url 'close-menu-black.png' %>">
+    </div>
+      
+    <div class="detail_title">ORDER DETAILS</div>
+    <div ng-if="sectionUrl != ''">
+        <img width="100%" ng-src="{{sectionUrl}}">
+    </div>
+    <div class="row detail-content first-detail">
+        <div class="col-xs-7">
+            <p class="subtitle">Section</p>
+            <p class="content">{{selectedTicket.section}}</p>
+        </div>
+        <div class="col-xs-5">
+            <p class="subtitle">Row</p>
+            <p class="content">{{selectedTicket.row}}</p>
+        </div>
+    </div>
+    <div class="col-xs-12 filter-divisor">
+        <hr>
+    </div>
+    <div class="row detail-content">
+        <div class="col-xs-12 subtitle">
+            <strong>DELIVERY {{selectedTicket.format}}</strong>
+        </div>
+        <div class="col-xs-12 msg" ng-if="selectedTicket.format == 'Eticket'">
+            Email Delivery
+        </div>
+        <div class="col-xs-12 msg" ng-if="selectedTicket.format == 'Physical'">
+            Physical Delivery
+        </div>
+    </div>
+    <div class="col-xs-12 filter-divisor">
+        <hr>
+    </div>
+    <div class="row detail-content">
+        <div class="col-xs-7">
+            <p class="subtitle">Ticket Price</p>
+            <p class="content price">{{selectedTicket.retail_price | currency : '$' : 2 }}</p>
+            <p class="msg">each</p>
+        </div>
+        <div class="col-xs-5">
+            <p class="subtitle">Number of tickets</p>
+            <p class="content">{{selectedTicket.amount}} tickets</p>
+        </div>
+    </div>
+    
+    <div class="show-button" ng-click="goToCheckout()">
+        GO TO CHECKOUT
+    </div>
+  </div>
+    
   <script type="text/ng-template" id="typeahead/bind-node.html">
     <a href="/#{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
   </script>
@@ -120,7 +173,7 @@
             </div>
           </div>
           <div id="home-loading-data" class="col-xs-12 text-center" ng-if="loading">
-            <img src="<%= image_url "loadinfo.gif" %>">
+            <img src="<%= image_url 'loadinfo.gif' %>">
           </div>
           <div class="col-xs-12 tickets-data" ng-if="!loading">
             <div class="row" ng-repeat="ticket in tickets.data | orderBy:ordering | filter: (etickets || '') && {eticket: true} | filter: (physicals || '') && {eticket: false} | filter: (filterBySection || '') && {section: section} | filter: (onlyParking || '') && {type: 'parking'} | numberOfSeats:index" emit-last-repeater-element>
@@ -135,13 +188,14 @@
                 {{ticket.row}}
               </div>
               <div class="col-xs-2 col-md-3 vertical-center right-content full-height custom-select">
-                <select>
-                  <option ng-repeat="o in ticket.splits | orderBy:'-'" value="{{o}}">{{o}}</option>
+                <select ng-model="ticket.amount" ng-value="ticket.amount" ng-options="option for option in ticket.splits">
+                  <!--option ng-repeat="o in ticket.splits | orderBy:'-'" value="{{o}}">{{o}}</option-->
                 </select>
               </div>
               <div class="col-xs-4 vertical-center buy-btn full-height">
                 <span class="buy-btn-span">
-                  <button ng-click="redirect($event, ticket.id)">${{ticket.retail_price}}/ea</button>
+                  <button class="hidden-xs hidden-sm" ng-click="redirect($event, ticket.id)">${{ticket.retail_price}}/ea</button>
+                  <button class="hidden-md hidden-lg hidden-xl" ng-click="showDetail($event, ticket)">${{ticket.retail_price}}/ea</button>
                   <p class="format">{{ticket.format}}</p>
                 </span>
               </div>
