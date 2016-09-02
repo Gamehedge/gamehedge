@@ -1346,7 +1346,7 @@ body {
     z-index: 9999;
 }
 
-#tickets-map button.active{
+#tickets-map button.active, .filter-row button.active {
     background-color: #93aa52;
 }
 
@@ -1374,7 +1374,7 @@ body {
     outline:none;
 }
 
-#tickets-map button:focus{
+#tickets-map button:focus, .filter-row button:focus {
     outline: none;
 }
 
@@ -3006,6 +3006,73 @@ footer .footer-signature img{
     
     #tickets-map .tooltip {
         min-width: 100px;
+    }
+    
+    #filters_mobile {
+        position: absolute;
+        width: 100vw;
+        background-color: #ffffff;
+        height: 100vh;
+        z-index: 10000;
+    }
+    
+    .close_mobile_x {
+        float: right;
+        padding: 10px;
+    }
+    
+    .filter-title {
+        color: #525252;
+        font-size: 12px;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+    
+    .filter-buttons {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    .filter-row button {
+        border-radius: 3px;
+        background-color: #f0f0f0;
+        color: white;
+        border: none;
+        margin: 0 3px;
+        padding: 5px 11px;
+        min-width: 35px;
+        font-size: 12px;
+    }
+    
+    .filter-divisor hr {
+        margin-top: 25px;
+    }
+    
+    .show-button {
+        position: fixed;
+        text-align: center;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        color: #ffffff;
+        background-color: #91c33f;
+        bottom: 0px;
+        width: 100%;
+    }
+    
+    .zipper.ng-animate {
+      transition:0.3s linear all;
+    }
+    .zipper.ng-enter {
+      opacity:0;
+    }
+    .zipper.ng-enter.ng-enter-active {
+      opacity:1;
+    }
+    .zipper.ng-leave {
+      opacity:1;
+    }
+    .zipper.ng-leave.ng-leave-active {
+      opacity:0;
     }
     
 }

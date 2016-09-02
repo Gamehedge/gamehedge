@@ -28,6 +28,46 @@
       </div>
     </div>
   </section>
+    
+  <div id="filters_mobile" ng-if="filter_active" class="zipper">
+    <div class="close_mobile_x" ng-click="closeFilter()">
+        <img width="15px" src="<%= image_url 'close-menu-black.png' %>">
+    </div>
+    
+    <div class="filters-mobile">
+        <div class="col-xs-12 text-center filter-title">
+            HOW MANY TICKETS?
+        </div>
+        <div class="col-xs-12 filter-row filter-buttons text-center">  
+            <button ng-class="{'active': mob_index == 0}" ng-click="updateMobFilter(0)">Any</button>
+            <button ng-class="{'active': mob_index == 1}" ng-click="updateMobFilter(1)">1</button>
+            <button ng-class="{'active': mob_index == 2}" ng-click="updateMobFilter(2)">2</button>
+            <button ng-class="{'active': mob_index == 3}" ng-click="updateMobFilter(3)">3</button>
+            <button ng-class="{'active': mob_index == 4}" ng-click="updateMobFilter(4)">4</button>
+            <button ng-class="{'active': mob_index == 5}" ng-click="updateMobFilter(5)">5+</button>
+        </div>
+        <div class="col-xs-12 filter-divisor">
+            <hr>
+        </div>
+        
+        <div class="col-xs-12 text-center filter-title">
+            DELIVERY TYPE
+        </div>
+        
+        <div class="col-xs-12 filter-row text-center">
+            <button ng-class="{'active': mob_delivery == 0}" ng-click="updateMobDelivery(0)">All</button>
+            <button ng-class="{'active': mob_delivery == 1}" ng-click="updateMobDelivery(1)">Physical Delivery</button>
+            <button ng-class="{'active': mob_delivery == 2}" ng-click="updateMobDelivery(2)">Email Delivery</button>
+        </div>
+        
+        <div class="show-button" ng-click="showMobFilters()">
+            SHOW RESULTS
+        </div>
+
+    </div>
+    
+  </div>
+    
   <script type="text/ng-template" id="typeahead/bind-node.html">
     <a href="/#{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
   </script>
@@ -64,7 +104,7 @@
           </div>
           <div class="col-xs-12 filter-header">
             <div class="row full-height">
-              <div class="col-xs-1 hidden-md hidden-lg hidden-xl text-center vertical-center full-height flex-mode"><img width="20px" src="<%= image_url 'filter_icon.png' %>"></div>
+              <div class="col-xs-1 hidden-md hidden-lg hidden-xl text-center vertical-center full-height flex-mode" ng-click="openFilter()"><img width="20px" src="<%= image_url 'filter_icon.png' %>"></div>
               <div class="col-xs-3 vertical-center sorting full-height" ng-click="updateSort('section')">
                 Section <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
               </div>
@@ -83,7 +123,7 @@
             <img src="<%= image_url "loadinfo.gif" %>">
           </div>
           <div class="col-xs-12 tickets-data" ng-if="!loading">
-            <div class="row" ng-repeat="ticket in tickets.data | orderBy:ordering | filter: (etickets || '') && {eticket: true} | filter: (filterBySection || '') && {section: section} | filter: (onlyParking || '') && {type: 'parking'} | numberOfSeats:index" emit-last-repeater-element>
+            <div class="row" ng-repeat="ticket in tickets.data | orderBy:ordering | filter: (etickets || '') && {eticket: true} | filter: (physicals || '') && {eticket: false} | filter: (filterBySection || '') && {section: section} | filter: (onlyParking || '') && {type: 'parking'} | numberOfSeats:index" emit-last-repeater-element>
               <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ticket.public_notes}}" ng-if="ticket.public_notes"></span>
               <div class="col-xs-1 hidden-md hidden-lg hidden-xl info-ico">
                 <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ticket.public_notes}}" ng-if="ticket.public_notes"></span>

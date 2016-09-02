@@ -16,13 +16,61 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                 }
         });
 	};
+    
+    $scope.filter_active = false;
+    
+    $scope.openFilter = function() {
+        $scope.filter_active = true;
+    }
+    
+    $scope.closeFilter = function() {
+        $scope.filter_active = false;
+        $scope.mob_index = $scope.index;
+        
+        if($scope.etickets == false && $scope.physicals == false ){
+            $scope.mob_delivery = 0;
+        }
+        if($scope.etickets == false && $scope.physicals == true ){
+            $scope.mob_delivery = 1;
+        }
+        if($scope.etickets == true && $scope.physicals == false ){
+            $scope.mob_delivery = 2;
+        }
+        
+    }
 
 	$scope.updateFilter = function(index){
 		$scope.index = index;
-		console.log($scope.index);
 	}
-
-	$scope.updateSort = function(sort){
+    
+    $scope.updateMobFilter = function(index){
+		$scope.mob_index = index;
+	}
+    
+    $scope.updateMobDelivery = function(index) {
+        $scope.mob_delivery = index;
+    }
+    
+    $scope.showMobFilters = function() {
+        $scope.index = $scope.mob_index;
+        
+        switch($scope.mob_delivery){
+            case 0: $scope.etickets = false;
+                    $scope.physicals = false;
+                    break;
+            case 1: $scope.etickets = false;
+                    $scope.physicals = true;
+                    break;
+            case 2: $scope.etickets = true;
+                    $scope.physicals = false;
+                    break;
+        }
+        console.log($scope.mob_delivery);
+        console.log($scope.etickets);
+        $scope.filter_active = false;
+    }
+	
+    $scope.updateSort = function(sort){
 		if(sort == $scope.ordering.replace("-","")){
 			if($scope.ordering.indexOf("-") == -1){
 				$scope.ordering = "-"+sort
@@ -180,8 +228,11 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	$scope.sectionUrl = "";
 	$scope.onlyParking = false;
 	$scope.index = 0;
+    $scope.mob_index = 0;
+    $scope.mob_delivery = 0;
 	$scope.ordering = 'retail_price';
 	$scope.etickets = false;
+    $scope.physicals = false;
 	$rootScope.isOrder = false;
 	$rootScope.darkHeader = true;
 	$rootScope.noFooter = true;
