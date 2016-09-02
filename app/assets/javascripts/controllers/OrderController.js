@@ -144,7 +144,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	$scope.toogleReview = function(toogle){
 		$scope.editing = true;
 		if(toogle == "card"){
-			if($rootScope.isLoggedIn == false){
+			if($rootScope.isLoggedin == false){
 				$scope.edit_credit_card = 3;
 			}
 			else{
@@ -152,7 +152,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			}
 		}
 		else if(toogle == "billing"){
-			if($rootScope.isLoggedIn == false){
+			if($rootScope.isLoggedin == false){
 				$scope.edit_billing = 3;
 			}
 			else{
@@ -160,7 +160,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			}
 		}
 		else if(toogle == "deliver"){
-			if($rootScope.isLoggedIn == false){
+			if($rootScope.isLoggedin == false){
 				$scope.edit_deliver = 4;
 			}
 			else{
@@ -257,9 +257,12 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	        },
 	    }).then(function successCallback(response) {
 	    	if(response.data.error != undefined){
-	    		alert(response.data.error);
 	    		$scope.processing = false;
 	    		$scope.payProcess = false;
+	    		$scope.edit_deliver = 1;
+				$scope.edit_billing = 1;
+				$scope.edit_credit_card = 3;
+				alert(response.data.error);
 	    	}
 	    	else{
 		    	$scope.card = response.data;
@@ -268,9 +271,6 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		    	console.log($scope.card);
 		    	$scope.confirmPay();
 		    }
-		    $scope.edit_credit_card = 3;
-		    $scope.edit_billing = 1;
-		    $scope.edit_deliver = 1;
 	    }, function errorCallback(response) {
 	    	console.log(response);
 	    	scope.processing = false;
@@ -314,9 +314,9 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    });
 			}
 			else{
-				alert("All fields are required");
 				$scope.addShippingProcess = false;
 				$scope.processing = false;
+				alert("All fields are required");
 			}
 		}
 		else if(type == "card"){
@@ -336,13 +336,13 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			        },
 			    }).then(function successCallback(response) {
 			    	if(response.data.error != undefined){
-			    		alert(response.data.error);
 			    		if($scope.changed_credit_card == true){
 							$scope.card = $scope.cards[$scope.credit_card_index];
 						}
 						else{
 							$scope.card = $scope.client.primary_credit_card;
 						}
+						alert(response.data.error);
 			    	}
 			    	else{
 				    	$scope.card = response.data;
@@ -360,19 +360,19 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    });
 			}
 			else if($.payment.validateCardExpiry($scope.card.expiration_month,$scope.card.expiration_year) == false){
-				alert("Expiration date not valid!");
 				$scope.processing = false;
 				$scope.addCardProcess = false;
+				alert("Expiration date not valid!");
 			}
 			else if($.payment.validateCardNumber($scope.card.last_digits) == false){
-				alert("Card number not valid!");
 				$scope.processing = false;
 				$scope.addCardProcess = false;
+				alert("Card number not valid!");
 			}
 			else{
-				alert("All fields are required");
 				$scope.processing = false;
 				$scope.addCardProcess = false;
+				alert("All fields are required");
 			}
 		}
 		else if(type == "billing"){
@@ -405,9 +405,9 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    });
 			}
 			else{
-				alert("All fields are required");
 				$scope.processing = false;
 			    $scope.addBillingProcess = false;
+			    alert("All fields are required");
 			}
 		}
 	}
@@ -415,11 +415,14 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	$scope.confirmPay = function(){
 		$scope.processing = true;
 		$scope.payProcess = true;
-		if($scope.isLoggedIn == true){
+		$scope.edit_deliver = 1;
+		$scope.edit_billing = 1;
+		$scope.edit_credit_card = 1;
+		if($scope.isLoggedin == true){
 			if($scope.last_digits == ""){
-				alert("No credit card selected");
 				$scope.processing = false;
 				$scope.payProcess = false;
+				alert("No credit card selected");
 			}
 			else{
 				var service_type = "LEAST_EXPENSIVE"
@@ -466,6 +469,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			        	discount: $scope.discount,
 			        },
 			    }).then(function successCallback(response) {
+			    	$scope.processing = false;
+			    	$scope.payProcess = false;
 			    	if(response.data.error == undefined){
 			    		$scope.order = response.data;
 			    		$scope.order_success = true;
@@ -473,12 +478,10 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    		console.log($scope.order);
 			    	}
 			    	else{
-			    		alert(response.data.error);
 			    		console.log("Error");
 			    		console.log(response);
+			    		alert(response.data.error);
 			    	}
-			    	$scope.processing = false;
-			    	$scope.payProcess = false;
 			    }, function errorCallback(response) {
 			    	console.log(response);
 			    	$scope.processing = false;
@@ -488,24 +491,36 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		}
 		else{
 			if($scope.client.email == "" || $scope.client.confirm_email == "" || $scope.card.last_digits == "" || $scope.card.expiration_month == "" || $scope.card.expiration_year == "" || $scope.card.cvv == "" || $scope.billing_address.name == "" || $scope.billing_address.street_address == "" || $scope.billing_address.country_code == "" || $scope.billing_address.postal_code == "" || $scope.billing_address.region == "" || $scope.billing_address.locality == "" || $scope.client.primary_phone_number.number == ""){
-				alert("All fields are requierd");
 				$scope.processing = false;
 				$scope.payProcess = false;
+				$scope.edit_deliver = 4;
+				$scope.edit_billing = 3;
+				$scope.edit_credit_card = 3;
+				alert("All fields are requierd");
 			}
 			else if($.payment.validateCardExpiry($scope.card.expiration_month,$scope.card.expiration_year) == false){
-				alert("Expiration date not valid!");
 				$scope.processing = false;
 				$scope.payProcess = false;
+				$scope.edit_deliver = 4;
+				$scope.edit_billing = 3;
+				$scope.edit_credit_card = 3;
+				alert("Expiration date not valid!");
 			}
 			else if($.payment.validateCardNumber($scope.card.last_digits) == false){
-				alert("Card number not valid!");
 				$scope.processing = false;
 				$scope.payProcess = false;
+				$scope.edit_deliver = 4;
+				$scope.edit_billing = 3;
+				$scope.edit_credit_card = 3;
+				alert("Card number not valid!");
 			}
 			else if($scope.client.email != $scope.client.confirm_email){
-				alert("Email and confirm email fields shpuld be equal");
 				$scope.processing = false;
 				$scope.payProcess = false;
+				$scope.edit_deliver = 4;
+				$scope.edit_billing = 3;
+				$scope.edit_credit_card = 3;
+				alert("Email and confirm email fields shpuld be equal");
 			}
 			else{
 				$http({
@@ -526,25 +541,32 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    		console.log("Client created");
 			    		console.log(response);
 			    		$scope.client = response.data.client;
-			    		$scope.isLoggedIn = true;
-			    		$rootScope.isLoggedIn = true;
+			    		$scope.isLoggedin = true;
+			    		$rootScope.isLoggedin = true;
 			    		$rootScope.user = response.data.user;
 			    		$scope.addresses = $scope.client.addresses;
 			    		$scope.billing_address = $scope.client.primary_billing_address;
 			    		$scope.shipping_address = $scope.client.primary_shipping_address;
+			    		$scope.checkLogin();
 			    		$scope.createCard()
 			    	}
 			    	else{
-			    		alert(response.data.error);
 			    		console.log("Error");
 			    		console.log(response);
 			    		$scope.processing = false;
 						$scope.payProcess = false;
+						$scope.edit_deliver = 4;
+						$scope.edit_billing = 3;
+						$scope.edit_credit_card = 3;
+						alert(response.data.error);
 			    	}
 			    }, function errorCallback(response) {
 			    	console.log(response);
 			    	$scope.processing = false;
 					$scope.payProcess = false;
+					$scope.edit_deliver = 4;
+					$scope.edit_billing = 3;
+					$scope.edit_credit_card = 3;
 			    });
 			}
 			
@@ -574,6 +596,21 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		}
 	}
 
+	$scope.checkLogin = function(){
+		Auth.currentUser().then(function(user) {
+	        // User was logged in, or Devise returned
+	        // previously authenticated session.
+	        console.log(user); // => {id: 1, ect: '...'}
+	        $rootScope.user = user;
+	        $rootScope.isLoggedin = true;
+	    }, function(error) {
+	        // unauthenticated error
+	        console.log("error login");
+	        $rootScope.user = undefined;
+	        $rootScope.isLoggedin = false;
+	    });
+	}
+
 	$scope.getClient = function(){
 		Auth.currentUser().then(function(user) {
 	        $http({
@@ -595,12 +632,12 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				$scope.shipping_address = $scope.client.primary_shipping_address;
 				$scope.billing_address = $scope.client.primary_billing_address;
 				$scope.card = $scope.client.primary_credit_card;
-				$scope.isLoggedIn = true;
+				$scope.isLoggedin = true;
 				$scope.first_time = false;
 				console.log($scope.shipping_address);
 
 		    }, function errorCallback(response) {
-		    	$scope.isLoggedIn = false;
+		    	$scope.isLoggedin = false;
 		    	$scope.edit_deliver = 3;
 				$scope.edit_credit_card = 3;
 				$scope.edit_billing = 3;
@@ -609,7 +646,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		        console.log(response);
 		    });
 	    }, function(error) {
-	    	$scope.isLoggedIn = false;
+	    	$scope.isLoggedin = false;
 	    	$scope.edit_deliver = 3;
 			$scope.edit_credit_card = 3;
 			$scope.edit_billing = 3;
@@ -705,18 +742,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			i = $('.seals').find('img').length;
 		}
 		$('.seals').removeClass('hidden');
-	},500);
+	},1000);
 	$window.scrollTo(0, 0);
-	Auth.currentUser().then(function(user) {
-        // User was logged in, or Devise returned
-        // previously authenticated session.
-        console.log(user); // => {id: 1, ect: '...'}
-        $rootScope.user = user;
-        $rootScope.isLoggedin = true;
-    }, function(error) {
-        // unauthenticated error
-        console.log("error login");
-        $rootScope.user = undefined;
-        $rootScope.isLoggedin = false;
-    });
+	
 });

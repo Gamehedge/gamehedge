@@ -50,7 +50,7 @@
 			  					<button ng-disabled="$parent.processing" ng-click="toogleReview('deliver')">EDIT</button>
 		  					</div>
 		  					<div ng-if="edit_deliver == 3">
-		  						<div class="inputs" ng-if="!$parent.isLoggedIn">
+		  						<div class="inputs" ng-if="!$parent.isLoggedin">
 		  							<div class="email">
 			  							<input type="text" class="form-control" id="email-shipping" ng-model="$parent.$parent.client.email" placeholder="Email" name="email">
 								    </div>
@@ -58,12 +58,12 @@
 			  							<input type="text" class="form-control" id="confirm-email-shipping" ng-model="$parent.$parent.client.confirm_email" placeholder="Confirm Email" name="confirm_email">
 								    </div>
 		  						</div>
-							    <div class="inputs" ng-if="$parent.isLoggedIn">
+							    <div class="inputs" ng-if="$parent.isLoggedin">
 		  							<div class="full-name">
 			  							<input type="text" class="form-control" id="first-name-billing" ng-model="$parent.$parent.shipping_address.name" placeholder="Full Name" name="name">
 								    </div>
 		  						</div>
-		  						<div class="inputs" ng-if="$parent.isLoggedIn">
+		  						<div class="inputs" ng-if="$parent.isLoggedin">
 		  							<div class="address">
 			  							<input type="text" class="form-control" id="address-billing" ng-model="$parent.$parent.shipping_address.street_address" placeholder="Address" name="address">
 								    </div>
@@ -319,7 +319,7 @@
 							  			</select>
 								    </div>
 		  						</div>
-		  						<div class="inputs" ng-if="$parent.isLoggedIn">
+		  						<div class="inputs" ng-if="$parent.isLoggedin">
 		  							<div class="zipcode">
 			  							<input type="text" class="form-control numeric" id="zipcode-billing" ng-model="$parent.$parent.shipping_address.postal_code" placeholder="Zipcode" name="zipcode">
 								    </div>
@@ -391,7 +391,7 @@
 							  			</select>
 								    </div>
 		  						</div>
-		  						<div ng-if="$parent.isLoggedIn">
+		  						<div ng-if="$parent.isLoggedin">
 		  							<button ladda="$parent.$parent.addShippingProcess" ng-disabled="$parent.processing" ng-click="confirmSave('shipping')">SAVE</button>
 		  							<button ng-disabled="$parent.$parent.processing" ng-click="cancelAdd('shipping')">CANCEL</button>
 		  						</div>
@@ -472,7 +472,7 @@
 											</div>
 									    </div>
 			  						</div>
-			  						<div ng-if="$parent.isLoggedIn">
+			  						<div ng-if="$parent.isLoggedin">
 				  						<button ladda="$parent.addCardProcess" ng-disabled="$parent.$parent.processing" ng-click="confirmSave('card')">SAVE</button>
 				  						<button ng-disabled="$parent.$parent.processing" ng-click="cancelAdd('card')">CANCEL</button>
 				  					</div>
@@ -899,7 +899,7 @@
 							  			</select>
 								    </div>
 		  						</div>
-		  						<div ng-if="$parent.isLoggedIn">
+		  						<div ng-if="$parent.isLoggedin">
 		  							<button ladda="$parent.$parent.addBillingProcess" ng-disabled="$parent.processing" ng-click="confirmSave('billing')">SAVE</button>
 		  							<button ng-disabled="$parent.$parent.processing" ng-click="cancelAdd('billing')">CANCEL</button>
 		  						</div>
@@ -1008,7 +1008,7 @@
 						    	<div class="description">TOTAL</div>
 						    	<div class="value">{{total | currency}}</div>
 						    </div>
-						    <button ladda="$parent.payProcess" ng-disabled="processing || editing" ng-click="confirmPay()">Confirm and Pay</button>
+						    <button ladda="payProcess" ng-disabled="processing || editing" ng-click="confirmPay()">Confirm and Pay</button>
 						    <div class="terms">By clicking Confirm and Pay, you agree to GameHedge <a href="terms">Terms and Privacy Policy.</a></div>
 						    <div id="session_iframe" ng-bind-html="session_iframe"></div>
 	  					</div>
