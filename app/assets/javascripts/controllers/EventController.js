@@ -74,11 +74,15 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
     
     $scope.selectedTicket = null;
     
-    $scope.showDetail = function(_event, _ticket){
+    $scope.showDetail = function(_amount, _ticket){
         $scope.displayDetail = true;
         $scope.selectedTicket = _ticket;
         
         $("#MapContainer").tuMap("HighlightSection", _ticket.section);
+    }
+    
+    $scope.goToCheckout = function(){
+        $scope.redirect($scope.selectedTicket.amount, $scope.selectedTicket.id);
     }
     
     $scope.closeDetail = function(){
@@ -224,8 +228,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 		var Result=$("Selector").tuMap("ZoomOut");
 	}
 
-	$scope.redirect = function($event,id) {
-		var amount = $($event.currentTarget).parent().parent().parent().find("select").val();
+	$scope.redirect = function(amount,id) {
+		//var amount = $($event.currentTarget).parent().parent().parent().find("select").val();
 		var url = '/order/'+id+'?amount='+String(amount);
 		console.log(url);
 	  	$location.url(url);
