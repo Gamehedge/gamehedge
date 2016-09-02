@@ -195,8 +195,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	            }
 	        }
             , OnInit:function(e,Data){
-                console.log(e);
-                console.log(Data);
+                //console.log(e);
+                //console.log(Data);
             }
 	        , TooltipFormatter:function(Data){
 	            var Code = "";
