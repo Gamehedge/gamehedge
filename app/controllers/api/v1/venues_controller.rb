@@ -72,7 +72,7 @@ class Api::V1::VenuesController < ApplicationApiController
   end
 
   def data_params
-    params.permit(:id, :name, :address, :te_uid, :location, :url)
+    params.permit(:id, :name, :address, :te_uid, :location, :url, :slug)
   end
 
   private

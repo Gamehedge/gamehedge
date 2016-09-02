@@ -12,6 +12,7 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
         $rootScope.isLoggedin = true;
     }, function(error) {
         // unauthenticated error
+        console.log("error login");
         $rootScope.user = undefined;
         $rootScope.isLoggedin = false;
     });
@@ -26,6 +27,8 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
     	Auth.logout(config).then(function(oldUser) {
             // alert(oldUser.name + "you're signed out now.");
             console.log("logged out");
+            $rootScope.isLoggedin = false;
+            $rootScope.user = undefined;
         }, function(error) {
             // An error occurred logging out.
             console.log("An error occurred logging out.");

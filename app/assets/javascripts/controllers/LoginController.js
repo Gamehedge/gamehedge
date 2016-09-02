@@ -1,11 +1,12 @@
 controllers = angular.module('gamehedge')
 
-controllers.controller('LoginController', function($scope,$rootScope,Auth,$location,$window){
+controllers.controller('LoginController', function($scope,$rootScope,Auth,$location,$window,$http){
     $rootScope.locat = $location.url();
     Auth.currentUser().then(function(user) {
         // User was logged in, or Devise returned
         // previously authenticated session.
         //console.log(user); // => {id: 1, ect: '...'}
+        console.log()
         $location.path('/');
     }, function(error) {
         // unauthenticated error
@@ -27,7 +28,9 @@ controllers.controller('LoginController', function($scope,$rootScope,Auth,$locat
         }, function(error) {
             // Authentication failed...
             console.log("failed");
+            $rootScope.user = undefined;
             $rootScope.isLoggedin = false;
+            alert("Email or password incorrect");
         });
 
         $scope.$on('devise:login', function(event, currentUser) {
@@ -42,5 +45,13 @@ controllers.controller('LoginController', function($scope,$rootScope,Auth,$locat
             // user logged in by Auth.login({...})
         });
 	}
+
+    $scope.forgotPass = function(value){
+        $scope.forgot_password = value;
+    }
+
+    $rootScope.isOrder = false;
+    $rootScope.darkHeader = true;
+    $scope.forgot_password = false;
     $window.scrollTo(0, 0);
 });

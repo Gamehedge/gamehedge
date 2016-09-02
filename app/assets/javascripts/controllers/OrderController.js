@@ -142,7 +142,6 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	}
 
 	$scope.toogleReview = function(toogle){
-		$scope.secondConfirm = false;
 		$scope.editing = true;
 		if(toogle == "card"){
 			if($rootScope.isLoggedIn == false){
@@ -241,6 +240,45 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			}
 		}
 		$scope.editing = false;
+	}
+
+	$scope.createCard = function(){
+		$http({
+	        method: 'POST',
+	        url: '/clients/add_credit_card',
+	        data: { 
+	        	id: $scope.client.id,
+	        	address_id: $scope.billing_address.id,
+	        	number: $scope.card.last_digits,
+	        	expiration_month: $scope.card.expiration_month,
+	        	expiration_year: $scope.card.expiration_year,
+	        	verification_code: $scope.card.cvv,
+	        	name: $scope.client.name,
+	        },
+	    }).then(function successCallback(response) {
+	    	if(response.data.error != undefined){
+	    		alert(response.data.error);
+	    		$scope.processing = false;
+	    		$scope.payProcess = false;
+	    	}
+	    	else{
+		    	$scope.card = response.data;
+		    	$scope.cards.push($scope.card);
+		    	$scope.credit_card_index = 0;
+		    	console.log($scope.card);
+		    	$scope.confirmPay();
+		    }
+		    $scope.edit_credit_card = 3;
+		    $scope.edit_billing = 1;
+		    $scope.edit_deliver = 1;
+	    }, function errorCallback(response) {
+	    	console.log(response);
+	    	scope.processing = false;
+			$scope.payProcess = false;
+		    $scope.edit_credit_card = 3;
+		    $scope.edit_billing = 1;
+		    $scope.edit_deliver = 1;
+	    });
 	}
 
 	$scope.confirmSave = function(type){
@@ -448,6 +486,92 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    });
 			}
 		}
+		else{
+			if($scope.client.email == "" || $scope.client.confirm_email == "" || $scope.card.last_digits == "" || $scope.card.expiration_month == "" || $scope.card.expiration_year == "" || $scope.card.cvv == "" || $scope.billing_address.name == "" || $scope.billing_address.street_address == "" || $scope.billing_address.country_code == "" || $scope.billing_address.postal_code == "" || $scope.billing_address.region == "" || $scope.billing_address.locality == "" || $scope.card.phone_number.phone_number.number == ""){
+				alert("All fields are requierd");
+				$scope.processing = false;
+				$scope.payProcess = false;
+			}
+			else if($.payment.validateCardExpiry($scope.card.expiration_month,$scope.card.expiration_year) == false){
+				alert("Expiration date not valid!");
+				$scope.processing = false;
+				$scope.payProcess = false;
+			}
+			else if($.payment.validateCardNumber($scope.card.last_digits) == false){
+				alert("Card number not valid!");
+				$scope.processing = false;
+				$scope.payProcess = false;
+			}
+			else if($scope.client.email != $scope.client.confirm_email){
+				alert("Email and confirm email fields shpuld be equal");
+				$scope.processing = false;
+				$scope.payProcess = false;
+			}
+			else{
+				$http({
+			        method: 'POST',
+			        url: '/clients/create',
+			        data: { 
+			        	name: $scope.billing_address.name,
+			        	email: $scope.client.email,
+			        	region: $scope.billing_address.region,
+			        	country_code: $scope.billing_address.country_code,
+			        	postal_code: $scope.billing_address.postal_code,
+			        	street_address: $scope.billing_address.street_address,
+			        	locality: $scope.billing_address.locality,
+			        	phone_number: $scope.card.phone_number.phone_number.number,
+			        },
+			    }).then(function successCallback(response) {
+			    	if(response.data.error == undefined){
+			    		console.log("Client created");
+			    		console.log(response);
+			    		$scope.client = response.data.client;
+			    		$scope.isLoggedIn = true;
+			    		$rootScope.isLoggedIn = true;
+			    		$rootScope.user = response.data.user;
+			    		$scope.addresses = $scope.client.addresses;
+			    		$scope.billing_address = $scope.client.primary_billing_address;
+			    		$scope.shipping_address = $scope.client.primary_shipping_address;
+			    		$scope.createCard()
+			    	}
+			    	else{
+			    		alert(response.data.error);
+			    		console.log("Error");
+			    		console.log(response);
+			    		$scope.processing = false;
+						$scope.payProcess = false;
+			    	}
+			    }, function errorCallback(response) {
+			    	console.log(response);
+			    	$scope.processing = false;
+					$scope.payProcess = false;
+			    });
+			}
+			
+		}
+	}
+
+	$scope.updatePassword = function(){
+		if($scope.password == $scope.confirm_password && $scope.password != ""){
+			$http({
+		        method: 'POST',
+		        url: '/clients/update_password',
+		        data: {password: $scope.password,
+		        	confirm_password: $scope.confirm_password,
+		        	email: $rootScope.user.email,
+		        },
+		    }).then(function successCallback(response) {
+		    	alert("An message has been sent to your email with instructions to reset your password");
+		    }, function errorCallback(response) {
+		    	console.log(response);
+		    });
+		}
+		else if($scope.password == ""){
+			alert("Password cannot be empty");
+		}
+		else{
+			alert("Both password fields must be the same");
+		}
 	}
 
 	$scope.getClient = function(){
@@ -468,22 +592,29 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		    	$scope.edit_deliver = 1;
 				$scope.edit_credit_card = 1;
 				$scope.edit_billing = 1;
-				$scope.secondConfirm = true;
 				$scope.shipping_address = $scope.client.primary_shipping_address;
 				$scope.billing_address = $scope.client.primary_billing_address;
 				$scope.card = $scope.client.primary_credit_card;
 				$scope.isLoggedIn = true;
+				$scope.first_time = false;
 				console.log($scope.shipping_address);
 
 		    }, function errorCallback(response) {
 		    	$scope.isLoggedIn = false;
-		    	$scope.edit_deliver = true;
-				$scope.edit_credit_card = true;
-				$scope.edit_billing = true;
-				$scope.secondConfirm = false;
+		    	$scope.edit_deliver = 3;
+				$scope.edit_credit_card = 3;
+				$scope.edit_billing = 3;
+				$scope.first_time = true;
+				console.log("Not logged in");
 		        console.log(response);
 		    });
 	    }, function(error) {
+	    	$scope.isLoggedIn = false;
+	    	$scope.edit_deliver = 3;
+			$scope.edit_credit_card = 3;
+			$scope.edit_billing = 3;
+			$scope.first_time = true;
+			console.log("Not logged in");
 	        console.log(error);
 	    });
 	}
@@ -511,6 +642,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	$scope.client.email = "";
 	$scope.client.confirm_email = "";
 	
+	$scope.cards = [];
 	$scope.card = {};
 	$scope.card.card_company = ""
 	$scope.card.cvv = ""
@@ -521,9 +653,10 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	$scope.card.phone_number = {};
 	$scope.card.phone_number.phone_number = {};
 	$scope.card.phone_number.phone_number.number = ""
+	$scope.card.phone_number.phone_number.id = ""
 	$scope.changed_credit_card = false;
 
-
+	$scope.addresses = [];
 	$scope.shipping_address = {};
 	$scope.shipping_address.country_code = "";
 	$scope.shipping_address.id = "";
@@ -560,6 +693,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	$rootScope.noFooter = true;
 	$scope.order_success = false;
 	$scope.editing = false;
+	$scope.password = "";
 	$('input#cc').payment('formatCardNumber');
 	$('input#cvv').payment('formatCardCVC');
 	$('input.numeric').payment('restrictNumeric');

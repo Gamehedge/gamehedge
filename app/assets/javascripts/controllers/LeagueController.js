@@ -8,8 +8,13 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
             	console.log(response);
                 $scope.league  = response;
                 if($routeParams.slug == $scope.league.slug){
-                    $scope.getDivisions();
-                    $scope.getNextEvents();
+                    if($scope.league.active == true){
+                        $scope.getDivisions();
+                        $scope.getNextEvents();    
+                    }
+                    else{
+                        $location.path("/");
+                    }
                 }
                 else{
                     $location.path("/");
