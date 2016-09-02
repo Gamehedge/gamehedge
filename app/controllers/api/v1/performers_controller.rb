@@ -72,7 +72,7 @@ class Api::V1::PerformersController < ApplicationApiController
   end
 
   def data_params
-    params.permit(:id, :name, :wins, :losses, :te_slug, :division_id, :url, :description, :slug)
+    params.permit(:id, :name, :wins, :losses, :te_slug, :division_id, :url, :description, :slug, :sport_id)
   end
 
   private
