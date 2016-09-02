@@ -49,7 +49,7 @@ class ClientsController < ActionController::Base
             @user.te_uid = @client.id
             @user.save
           end
-          render json: {:client => @client,:user => @user}
+          render json: {:client => @client,:user => @user, :temp_password => @temp_password}
         else
           render json: {:error => "There was an error, please try again"}
         end

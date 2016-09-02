@@ -460,6 +460,9 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			        	user_agent: navigator.userAgent,
 			        	selectedPhone: $scope.client.primary_phone_number.id,
 			        	event_id: $scope.event.id,
+			        	event_name: $scope.event.name,
+			        	event_occurs_at: $scope.event.occurs_at,
+			        	event_location: $scope.event.location,
 			        	section: $scope.ticket.section,
 			        	row: $scope.ticket.row,
 			        	ticket_type: $scope.ticket.format,
@@ -539,16 +542,19 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    }).then(function successCallback(response) {
 			    	if(response.data.error == undefined){
 			    		console.log("Client created");
-			    		console.log(response);
+			    		console.log("Client");
+			    		console.log(response.data.client);
+			    		console.log("User");
+			    		console.log(response.data.user);
 			    		$scope.client = response.data.client;
+			    		$scope.temp_password = response.data.temp_password;
 			    		$scope.isLoggedin = true;
 			    		$rootScope.isLoggedin = true;
 			    		$rootScope.user = response.data.user;
 			    		$scope.addresses = $scope.client.addresses;
 			    		$scope.billing_address = $scope.client.primary_billing_address;
 			    		$scope.shipping_address = $scope.client.primary_shipping_address;
-			    		$scope.checkLogin();
-			    		$scope.createCard()
+			    		$scope.login();
 			    	}
 			    	else{
 			    		console.log("Error");
@@ -594,6 +600,40 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		else{
 			alert("Both password fields must be the same");
 		}
+	}
+
+	$scope.login = function(){
+		var credentials = {
+            email: $scope.client.email,
+            password: $scope.temp_password,
+        };
+        var config = {
+            headers: {
+                'X-HTTP-Method-Override': 'POST'
+            }
+        };
+        console.log(credentials);
+        Auth.login(credentials, config).then(function(user) {
+            console.log(user); // => {id: 1, ect: '...'}
+        }, function(error) {
+            // Authentication failed...
+            console.log("failed");
+            $rootScope.user = undefined;
+            $rootScope.isLoggedin = false;
+            console.log("Email or password incorrect");
+        });
+
+        $scope.$on('devise:login', function(event, currentUser) {
+            // after a login, a hard refresh, a new tab
+            console.log(currentUser);
+            $rootScope.user = currentUser;
+            $rootScope.isLoggedin = true;
+            $scope.createCard();
+        });
+
+        $scope.$on('devise:new-session', function(event, currentUser) {
+            // user logged in by Auth.login({...})
+        });
 	}
 
 	$scope.checkLogin = function(){

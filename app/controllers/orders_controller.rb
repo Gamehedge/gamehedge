@@ -19,6 +19,9 @@ class OrdersController < ApplicationController
 		@user_agent = request.POST["user_agent"]
 		@selectedPhone = request.POST["selectedPhone"]
 		@event_id = request.POST["event_id"]
+		@event_occurs_at = request.POST["event_occurs_at"]
+		@event_name = request.POST["event_name"]
+		@event_location = request.POST["event_location"]
 		@section = request.POST["section"]
 		@row = request.POST["row"]
 		@cost = request.POST["cost"]
@@ -56,13 +59,12 @@ class OrdersController < ApplicationController
         if @order["error"]
         	puts "error"
         else
-        	@event = Event.where(te_uid: @event_id)
-	        Order.create(client_id: @user_id,
+        	Order.create(client_id: @user_id,
 	         	client_name: @ship_to_name,
 	         	te_order_id: @order["id"],
-	         	event_name: @event.name,
-	         	event_date: @event.occurs_at,
-	         	event_location: @event.location,
+	         	event_name: @event_name,
+	         	event_date: @event_occurs_at,
+	         	event_location: @event_location,
 	         	ticket_section: @section,
 	         	cost: @cost,
 	         	ticket_row: @row,
