@@ -570,7 +570,7 @@ CREATE TABLE orders (
     event_name character varying(255),
     event_home_team character varying(100),
     event_away_team character varying(100),
-    event_date character varying(20),
+    event_date character varying(100),
     event_location character varying(765),
     ticket_section character varying(100),
     ticket_row character varying(50),
@@ -1731,4 +1731,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160826165038');
 INSERT INTO schema_migrations (version) VALUES ('20160826165853');
 
 INSERT INTO schema_migrations (version) VALUES ('20160902001252');
+
+INSERT INTO schema_migrations (version) VALUES ('20160902195622');
 

@@ -418,7 +418,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		$scope.edit_deliver = 1;
 		$scope.edit_billing = 1;
 		$scope.edit_credit_card = 1;
-		if($scope.isLoggedin == true){
+		if($rootScope.isLoggedin == true){
 			if($scope.last_digits == ""){
 				$scope.processing = false;
 				$scope.payProcess = false;
@@ -548,7 +548,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    		console.log(response.data.user);
 			    		$scope.client = response.data.client;
 			    		$scope.temp_password = response.data.temp_password;
-			    		$scope.isLoggedin = true;
+			    		$rootScope.isLoggedin = true;
 			    		$rootScope.isLoggedin = true;
 			    		$rootScope.user = response.data.user;
 			    		$scope.addresses = $scope.client.addresses;
@@ -586,10 +586,11 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		        url: '/clients/update_password',
 		        data: {password: $scope.password,
 		        	confirm_password: $scope.confirm_password,
-		        	email: $rootScope.user.email,
+		        	email: $scope.client.primary_email_address.address,
 		        },
 		    }).then(function successCallback(response) {
-		    	alert("An message has been sent to your email with instructions to reset your password");
+		    	alert("Your password has been updated");
+		    	$scope.login2();
 		    }, function errorCallback(response) {
 		    	console.log(response);
 		    });
@@ -636,6 +637,40 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
         });
 	}
 
+	$scope.login2 = function(){
+		var credentials = {
+            email: $scope.client.primary_email_address.address,
+            password: $scope.password,
+        };
+        var config = {
+            headers: {
+                'X-HTTP-Method-Override': 'POST'
+            }
+        };
+        console.log(credentials);
+        Auth.login(credentials, config).then(function(user) {
+            console.log(user); // => {id: 1, ect: '...'}
+        }, function(error) {
+            // Authentication failed...
+            console.log("failed");
+            $rootScope.user = undefined;
+            $rootScope.isLoggedin = false;
+            console.log("Email or password incorrect");
+        });
+
+        $scope.$on('devise:login', function(event, currentUser) {
+            // after a login, a hard refresh, a new tab
+            console.log(currentUser);
+            $rootScope.user = currentUser;
+            $rootScope.isLoggedin = true;
+            $scope.first_time = false;
+        });
+
+        $scope.$on('devise:new-session', function(event, currentUser) {
+            // user logged in by Auth.login({...})
+        });
+	}
+
 	$scope.checkLogin = function(){
 		Auth.currentUser().then(function(user) {
 	        // User was logged in, or Devise returned
@@ -672,25 +707,27 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				$scope.shipping_address = $scope.client.primary_shipping_address;
 				$scope.billing_address = $scope.client.primary_billing_address;
 				$scope.card = $scope.client.primary_credit_card;
-				$scope.isLoggedin = true;
+				$rootScope.isLoggedin = true;
 				$scope.first_time = false;
 				console.log($scope.shipping_address);
 
 		    }, function errorCallback(response) {
-		    	$scope.isLoggedin = false;
+		    	$rootScope.isLoggedin = false;
 		    	$scope.edit_deliver = 3;
 				$scope.edit_credit_card = 3;
 				$scope.edit_billing = 3;
 				$scope.first_time = true;
+				$scope.creditCardFieldEnable();
 				console.log("Not logged in");
 		        console.log(response);
 		    });
 	    }, function(error) {
-	    	$scope.isLoggedin = false;
+	    	$rootScope.isLoggedin = false;
 	    	$scope.edit_deliver = 3;
 			$scope.edit_credit_card = 3;
 			$scope.edit_billing = 3;
 			$scope.first_time = true;
+			$scope.creditCardFieldEnable();
 			console.log("Not logged in");
 	        console.log(error);
 	    });
@@ -770,19 +807,6 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	$scope.order_success = false;
 	$scope.editing = false;
 	$scope.password = "";
-	$('input#cc').payment('formatCardNumber');
-	$('input#cvv').payment('formatCardCVC');
-	$('input.numeric').payment('restrictNumeric');
-	$timeout(function(){
-		$('input#cc').payment('formatCardNumber');
-		$('input#cvv').payment('formatCardCVC');
-		$('input.numeric').payment('restrictNumeric');
-		for(i=$('.seals').find('img').length;i>1;){
-			$('.seals').find('img').first().remove();
-			i = $('.seals').find('img').length;
-		}
-		$('.seals').removeClass('hidden');
-	},1000);
 	$window.scrollTo(0, 0);
 	
 });

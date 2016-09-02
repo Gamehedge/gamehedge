@@ -50,20 +50,20 @@
 			  					<button ng-disabled="$parent.processing" ng-click="toogleReview('deliver')">EDIT</button>
 		  					</div>
 		  					<div ng-if="edit_deliver == 3">
-		  						<div class="inputs" ng-if="!$parent.isLoggedin">
+		  						<div class="inputs" ng-if="!$root.isLoggedin">
 		  							<div class="email">
-			  							<input type="text" class="form-control" id="email-shipping" ng-model="$parent.$parent.client.email" placeholder="Email" name="email">
+			  							<input type="email" class="form-control" id="email-shipping" ng-model="$parent.$parent.client.email" placeholder="Email" name="email">
 								    </div>
 								    <div class="confirm-email">
-			  							<input type="text" class="form-control" id="confirm-email-shipping" ng-model="$parent.$parent.client.confirm_email" placeholder="Confirm Email" name="confirm_email">
+			  							<input type="email" class="form-control" id="confirm-email-shipping" ng-model="$parent.$parent.client.confirm_email" placeholder="Confirm Email" name="confirm_email">
 								    </div>
 		  						</div>
-							    <div class="inputs" ng-if="$parent.isLoggedin">
+							    <div class="inputs" ng-if="$root.isLoggedin">
 		  							<div class="full-name">
 			  							<input type="text" class="form-control" id="first-name-billing" ng-model="$parent.$parent.shipping_address.name" placeholder="Full Name" name="name">
 								    </div>
 		  						</div>
-		  						<div class="inputs" ng-if="$parent.isLoggedin">
+		  						<div class="inputs" ng-if="$root.isLoggedin">
 		  							<div class="address">
 			  							<input type="text" class="form-control" id="address-billing" ng-model="$parent.$parent.shipping_address.street_address" placeholder="Address" name="address">
 								    </div>
@@ -319,9 +319,9 @@
 							  			</select>
 								    </div>
 		  						</div>
-		  						<div class="inputs" ng-if="$parent.isLoggedin">
+		  						<div class="inputs" ng-if="$root.isLoggedin">
 		  							<div class="zipcode">
-			  							<input type="text" class="form-control numeric" id="zipcode-billing" ng-model="$parent.$parent.shipping_address.postal_code" placeholder="Zipcode" name="zipcode">
+			  							<input type="tel" class="form-control numeric" id="zipcode-billing" ng-model="$parent.$parent.shipping_address.postal_code" placeholder="Zipcode" name="zipcode">
 								    </div>
 								    <div class="city">
 									    <input type="text" class="form-control" id="city-billing" ng-model="$parent.$parent.shipping_address.locality" placeholder="City" name="city">	
@@ -391,7 +391,7 @@
 							  			</select>
 								    </div>
 		  						</div>
-		  						<div ng-if="$parent.isLoggedin">
+		  						<div ng-if="$root.isLoggedin">
 		  							<button ladda="$parent.$parent.addShippingProcess" ng-disabled="$parent.processing" ng-click="confirmSave('shipping')">SAVE</button>
 		  							<button ng-disabled="$parent.$parent.processing" ng-click="cancelAdd('shipping')">CANCEL</button>
 		  						</div>
@@ -410,7 +410,7 @@
 		  						<div ng-if="edit_credit_card == 3" class="edit_credit_card">
 			  						<div class="row">
 			  							<div class="cc col-md-5">
-				  							<input type="text"  ng-model="$parent.card.last_digits" class="form-control" id="cc" placeholder="Credit Card Number" ng-change="checkCardNumber()" name="credit_card">
+				  							<input type="tel"  ng-model="$parent.card.last_digits" class="form-control" id="cc" placeholder="Credit Card Number" ng-change="checkCardNumber()" name="credit_card">
 										    <div class="img-holder">
 										    	<img src="<%= image_url "visa.png" %>" ng-if="($parent.card.card_company | lowercase) == 'visa'">
 										    	<img src="<%= image_url "mastercard.png" %>" ng-if="($parent.card.card_company | lowercase) == 'mastercard'">
@@ -421,7 +421,7 @@
 									    <div class="col-md-7">
 									    	<div class="row">
 											    <div class="cvv col-xs-4">
-												    <input type="text" class="form-control" id="cvv" placeholder="CVV" ng-model="$parent.card.cvv" name="cvv">	
+												    <input type="tel" class="form-control" id="cvv" placeholder="CVV" ng-model="$parent.card.cvv" name="cvv">	
 											    </div>
 					  							<div class="exp-month col-xs-4">
 						  							<select class="form-control" id="exp-month" ng-model="$parent.card.expiration_month" name="month">
@@ -472,7 +472,7 @@
 											</div>
 									    </div>
 			  						</div>
-			  						<div ng-if="$parent.isLoggedin">
+			  						<div ng-if="$root.isLoggedin">
 				  						<button ladda="$parent.addCardProcess" ng-disabled="$parent.$parent.processing" ng-click="confirmSave('card')">SAVE</button>
 				  						<button ng-disabled="$parent.$parent.processing" ng-click="cancelAdd('card')">CANCEL</button>
 				  					</div>
@@ -568,7 +568,7 @@
 			  							<input type="text" class="form-control" id="first-name-billing" ng-model="$parent.billing_address.name" placeholder="Full Name" name="name">
 								    </div>
 								    <div class="phone">
-			  							<input type="text" class="form-control numeric" id="phone-billing" ng-model="$parent.client.primary_phone_number.number" placeholder="Phone Number" name="phone_number">
+			  							<input type="tel" class="form-control numeric" id="phone-billing" ng-model="$parent.client.primary_phone_number.number" placeholder="Phone Number" name="phone_number">
 								    </div>
 		  						</div>
 		  						<div class="inputs">
@@ -829,7 +829,7 @@
 		  						</div>
 		  						<div class="inputs">
 		  							<div class="zipcode">
-			  							<input type="text" class="form-control numeric" id="zipcode-billing" ng-model="$parent.billing_address.postal_code" placeholder="Zipcode" name="zipcode">
+			  							<input type="tel" class="form-control numeric" id="zipcode-billing" ng-model="$parent.billing_address.postal_code" placeholder="Zipcode" name="zipcode">
 								    </div>
 								    <div class="city">
 									    <input type="text" class="form-control" id="city-billing" ng-model="$parent.billing_address.locality" placeholder="City" name="city">	
@@ -899,7 +899,7 @@
 							  			</select>
 								    </div>
 		  						</div>
-		  						<div ng-if="$parent.isLoggedin">
+		  						<div ng-if="$root.isLoggedin">
 		  							<button ladda="$parent.$parent.addBillingProcess" ng-disabled="$parent.processing" ng-click="confirmSave('billing')">SAVE</button>
 		  							<button ng-disabled="$parent.$parent.processing" ng-click="cancelAdd('billing')">CANCEL</button>
 		  						</div>
@@ -1062,12 +1062,12 @@
 									<div class="info">{{ticket.public_notes}}</div>
 								</div>
 							</div>
-							<div class="row update-password" ng-show="$parent.first_time">
+							<div class="row update-password" ng-if="first_time">
 								<div class="col-md-6">
-									<input type="password" name="password" placeholder="password" ng-model="$parent.$parent.password" name="password">
+									<input type="password" name="password" placeholder="password" ng-model="$parent.password" name="password">
 								</div>
 								<div class="col-md-6">
-									<input type="password" name="confirm-password" placeholder="confirm-password" ng-model="$parent.$parent.confirm_password" name="confirm_password">
+									<input type="password" name="confirm-password" placeholder="confirm-password" ng-model="$parent.confirm_password" name="confirm_password">
 								</div>
 								<div class="col-xs-12">
 									<button ng-click="updatePassword()">Create Password</button>
