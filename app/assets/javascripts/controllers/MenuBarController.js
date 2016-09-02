@@ -3,21 +3,7 @@ app = angular.module('gamehedge')
 app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,dataService,$http){
 
 
-	//The global variable locat gets the current location.path
-	Auth.currentUser().then(function(user) {
-        // User was logged in, or Devise returned
-        // previously authenticated session.
-        console.log(user); // => {id: 1, ect: '...'}
-        $rootScope.user = user;
-        $rootScope.isLoggedin = true;
-    }, function(error) {
-        // unauthenticated error
-        console.log("error login");
-        $rootScope.user = undefined;
-        $rootScope.isLoggedin = false;
-    });
-
-    $scope.logout = function(){
+	$scope.logout = function(){
         $scope.hideMenus();
         var config = {
             headers: {

@@ -259,7 +259,19 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	$rootScope.darkHeader = true;
 	$rootScope.noFooter = true;
 	$window.scrollTo(0, 0);
-	
+	//The global variable locat gets the current location.path
+	Auth.currentUser().then(function(user) {
+        // User was logged in, or Devise returned
+        // previously authenticated session.
+        console.log(user); // => {id: 1, ect: '...'}
+        $rootScope.user = user;
+        $rootScope.isLoggedin = true;
+    }, function(error) {
+        // unauthenticated error
+        console.log("error login");
+        $rootScope.user = undefined;
+        $rootScope.isLoggedin = false;
+    });
 })
 .filter('numberOfSeats', function() {
   return function(input,numSeats) {

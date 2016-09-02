@@ -455,7 +455,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			        	shipment_price: Number($scope.shipping_fee),
 			        	session_id: $scope.session_id,
 			        	user_agent: navigator.userAgent,
-			        	selectedPhone: $scope.card.phone_number.phone_number.id,
+			        	selectedPhone: $scope.client.primary_phone_number.id,
 			        	event_id: $scope.event.id,
 			        	section: $scope.ticket.section,
 			        	row: $scope.ticket.row,
@@ -487,7 +487,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			}
 		}
 		else{
-			if($scope.client.email == "" || $scope.client.confirm_email == "" || $scope.card.last_digits == "" || $scope.card.expiration_month == "" || $scope.card.expiration_year == "" || $scope.card.cvv == "" || $scope.billing_address.name == "" || $scope.billing_address.street_address == "" || $scope.billing_address.country_code == "" || $scope.billing_address.postal_code == "" || $scope.billing_address.region == "" || $scope.billing_address.locality == "" || $scope.card.phone_number.phone_number.number == ""){
+			if($scope.client.email == "" || $scope.client.confirm_email == "" || $scope.card.last_digits == "" || $scope.card.expiration_month == "" || $scope.card.expiration_year == "" || $scope.card.cvv == "" || $scope.billing_address.name == "" || $scope.billing_address.street_address == "" || $scope.billing_address.country_code == "" || $scope.billing_address.postal_code == "" || $scope.billing_address.region == "" || $scope.billing_address.locality == "" || $scope.client.primary_phone_number.number == ""){
 				alert("All fields are requierd");
 				$scope.processing = false;
 				$scope.payProcess = false;
@@ -519,7 +519,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			        	postal_code: $scope.billing_address.postal_code,
 			        	street_address: $scope.billing_address.street_address,
 			        	locality: $scope.billing_address.locality,
-			        	phone_number: $scope.card.phone_number.phone_number.number,
+			        	phone_number: $scope.client.primary_phone_number.number,
 			        },
 			    }).then(function successCallback(response) {
 			    	if(response.data.error == undefined){
@@ -650,10 +650,9 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	$scope.card.expiration_year = ""
 	$scope.card.last_digits = ""
 	$scope.card.name = ""
-	$scope.card.phone_number = {};
-	$scope.card.phone_number.phone_number = {};
-	$scope.card.phone_number.phone_number.number = ""
-	$scope.card.phone_number.phone_number.id = ""
+	$scope.client.primary_phone_number = {};
+	$scope.client.primary_phone_number.number = ""
+	$scope.client.primary_phone_number.id = ""
 	$scope.changed_credit_card = false;
 
 	$scope.addresses = [];
@@ -708,4 +707,16 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		$('.seals').removeClass('hidden');
 	},500);
 	$window.scrollTo(0, 0);
+	Auth.currentUser().then(function(user) {
+        // User was logged in, or Devise returned
+        // previously authenticated session.
+        console.log(user); // => {id: 1, ect: '...'}
+        $rootScope.user = user;
+        $rootScope.isLoggedin = true;
+    }, function(error) {
+        // unauthenticated error
+        console.log("error login");
+        $rootScope.user = undefined;
+        $rootScope.isLoggedin = false;
+    });
 });

@@ -130,4 +130,16 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
 	$scope.getPerformerInfo();
     $scope.compareDate =  "2015-09-05T00:00:00.000Z"
     $window.scrollTo(0, 0);
+    Auth.currentUser().then(function(user) {
+        // User was logged in, or Devise returned
+        // previously authenticated session.
+        console.log(user); // => {id: 1, ect: '...'}
+        $rootScope.user = user;
+        $rootScope.isLoggedin = true;
+    }, function(error) {
+        // unauthenticated error
+        console.log("error login");
+        $rootScope.user = undefined;
+        $rootScope.isLoggedin = false;
+    });
 });
