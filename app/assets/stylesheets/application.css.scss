@@ -3067,12 +3067,16 @@ footer .footer-signature img{
     .filter-row button {
         border-radius: 3px;
         background-color: #f0f0f0;
-        color: white;
+        color: #525252;
         border: none;
         margin: 0 3px;
         padding: 5px 11px;
         min-width: 35px;
         font-size: 12px;
+    }
+    
+    .filter-row button.active {
+        color: white;
     }
     
     .filter-divisor hr {
@@ -3105,6 +3109,8 @@ footer .footer-signature img{
     .zipper.ng-leave.ng-leave-active {
       opacity:0;
     }
+    
+    
     
 }
 
