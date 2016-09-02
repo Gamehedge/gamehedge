@@ -11,10 +11,10 @@
 		  						<span>
 		  							<div class="inputs">
 			  							<div class="email left">
-										    <input type="email" class="form-control" id="email" placeholder="Email" ng-model="$parent.client.email">
+										    <input type="email" class="form-control" id="email" placeholder="Email" ng-model="$parent.client.email" name="email">
 										</div>
 										<div class="email right">
-										    <input type="email" class="form-control" id="email-confirm" placeholder="Confirm Email"  ng-model="$parent.client.confirm_email">
+										    <input type="email" class="form-control" id="email-confirm" placeholder="Confirm Email"  ng-model="$parent.client.confirm_email" name="confirm_email">
 										</div>
 									</div>
 								</span>
@@ -52,23 +52,23 @@
 		  					<div ng-if="edit_deliver == 3">
 		  						<div class="inputs" ng-if="!$parent.isLoggedIn">
 		  							<div class="email">
-			  							<input type="text" class="form-control" id="email-shipping" ng-model="$parent.$parent.client.email" placeholder="Email">
+			  							<input type="text" class="form-control" id="email-shipping" ng-model="$parent.$parent.client.email" placeholder="Email" name="email">
 								    </div>
 								    <div class="confirm-email">
-			  							<input type="text" class="form-control" id="confirm-email-shipping" ng-model="$parent.$parent.client.confirm_email" placeholder="Confirm Email">
+			  							<input type="text" class="form-control" id="confirm-email-shipping" ng-model="$parent.$parent.client.confirm_email" placeholder="Confirm Email" name="confirm_email">
 								    </div>
 		  						</div>
 							    <div class="inputs" ng-if="$parent.isLoggedIn">
 		  							<div class="full-name">
-			  							<input type="text" class="form-control" id="first-name-billing" ng-model="$parent.$parent.shipping_address.name" placeholder="Full Name">
+			  							<input type="text" class="form-control" id="first-name-billing" ng-model="$parent.$parent.shipping_address.name" placeholder="Full Name" name="name">
 								    </div>
 		  						</div>
 		  						<div class="inputs" ng-if="$parent.isLoggedIn">
 		  							<div class="address">
-			  							<input type="text" class="form-control" id="address-billing" ng-model="$parent.$parent.shipping_address.street_address" placeholder="Address">
+			  							<input type="text" class="form-control" id="address-billing" ng-model="$parent.$parent.shipping_address.street_address" placeholder="Address" name="address">
 								    </div>
 								    <div class="country">
-									    <select id="country-billing" ng-model="$parent.$parent.shipping_address.country_code">
+									    <select id="country-billing" ng-model="$parent.$parent.shipping_address.country_code" name="country">
 											<option value="">Select Country</option>
 											<option value="us">United States</option>
 											<option value="af">Afghanistan</option>
@@ -321,13 +321,13 @@
 		  						</div>
 		  						<div class="inputs" ng-if="$parent.isLoggedIn">
 		  							<div class="zipcode">
-			  							<input type="text" class="form-control numeric" id="zipcode-billing" ng-model="$parent.$parent.shipping_address.postal_code" placeholder="Zipcode">
+			  							<input type="text" class="form-control numeric" id="zipcode-billing" ng-model="$parent.$parent.shipping_address.postal_code" placeholder="Zipcode" name="zipcode">
 								    </div>
 								    <div class="city">
-									    <input type="text" class="form-control" id="city-billing" ng-model="$parent.$parent.shipping_address.locality" placeholder="City">	
+									    <input type="text" class="form-control" id="city-billing" ng-model="$parent.$parent.shipping_address.locality" placeholder="City" name="city">	
 								    </div>
 								    <div class="state">
-									    <select id="state_id-billing" data-value="shortcode" ng-model="$parent.$parent.shipping_address.region">
+									    <select id="state_id-billing" data-value="shortcode" ng-model="$parent.$parent.shipping_address.region" name="state">
 									    	<option value="">State</option>
 											<option value="AK">AK</option>
 							  				<option value="AL">AL</option>
@@ -410,7 +410,7 @@
 		  						<div ng-if="edit_credit_card == 3" class="edit_credit_card">
 			  						<div class="row">
 			  							<div class="cc col-md-5">
-				  							<input type="text"  ng-model="$parent.card.last_digits" class="form-control" id="cc" placeholder="Credit Card Number" ng-change="checkCardNumber()">
+				  							<input type="text"  ng-model="$parent.card.last_digits" class="form-control" id="cc" placeholder="Credit Card Number" ng-change="checkCardNumber()" name="credit_card">
 										    <div class="img-holder">
 										    	<img src="<%= image_url "visa.png" %>" ng-if="($parent.card.card_company | lowercase) == 'visa'">
 										    	<img src="<%= image_url "mastercard.png" %>" ng-if="($parent.card.card_company | lowercase) == 'mastercard'">
@@ -421,10 +421,10 @@
 									    <div class="col-md-7">
 									    	<div class="row">
 											    <div class="cvv col-xs-4">
-												    <input type="text" class="form-control" id="cvv" placeholder="CVV" ng-model="$parent.card.cvv">	
+												    <input type="text" class="form-control" id="cvv" placeholder="CVV" ng-model="$parent.card.cvv" name="cvv">	
 											    </div>
 					  							<div class="exp-month col-xs-4">
-						  							<select class="form-control" id="exp-month" ng-model="$parent.card.expiration_month">
+						  							<select class="form-control" id="exp-month" ng-model="$parent.card.expiration_month" name="month">
 												    	<option value="">Exp Month</option>
 												    	<option value="01">JAN</option>
 												    	<option value="02">FEB</option>
@@ -441,7 +441,7 @@
 												    </select>
 											    </div>
 											    <div class="exp-year col-xs-4">
-												    <select class="form-control" id="exp-year" ng-model="$parent.card.expiration_year">
+												    <select class="form-control" id="exp-year" ng-model="$parent.card.expiration_year" name="year">
 												    	<option value="">Exp Year</option>
 												    	<option value="2016">2016</option>
 												    	<option value="2017">2017</option>
@@ -565,15 +565,15 @@
 		  					<div ng-if="edit_billing == 3">
 							    <div class="inputs">
 		  							<div class="full-name">
-			  							<input type="text" class="form-control" id="first-name-billing" ng-model="$parent.billing_address.name" placeholder="Full Name">
+			  							<input type="text" class="form-control" id="first-name-billing" ng-model="$parent.billing_address.name" placeholder="Full Name" name="name">
 								    </div>
 								    <div class="phone">
-			  							<input type="text" class="form-control numeric" id="phone-billing" ng-model="$parent.card.phone_number.phone_number.number" placeholder="Phone Number">
+			  							<input type="text" class="form-control numeric" id="phone-billing" ng-model="$parent.card.phone_number.phone_number.number" placeholder="Phone Number" name="phone_number">
 								    </div>
 		  						</div>
 		  						<div class="inputs">
 		  							<div class="address">
-			  							<input type="text" class="form-control" id="address-billing" ng-model="$parent.billing_address.street_address" placeholder="Address">
+			  							<input type="text" class="form-control" id="address-billing" ng-model="$parent.billing_address.street_address" placeholder="Address" name="address">
 								    </div>
 								    <div class="country">
 									    <select id="country-billing" ng-model="$parent.billing_address.country_code">
@@ -829,13 +829,13 @@
 		  						</div>
 		  						<div class="inputs">
 		  							<div class="zipcode">
-			  							<input type="text" class="form-control numeric" id="zipcode-billing" ng-model="$parent.billing_address.postal_code" placeholder="Zipcode">
+			  							<input type="text" class="form-control numeric" id="zipcode-billing" ng-model="$parent.billing_address.postal_code" placeholder="Zipcode" name="zipcode">
 								    </div>
 								    <div class="city">
-									    <input type="text" class="form-control" id="city-billing" ng-model="$parent.billing_address.locality" placeholder="City">	
+									    <input type="text" class="form-control" id="city-billing" ng-model="$parent.billing_address.locality" placeholder="City" name="city">	
 								    </div>
 								    <div class="state">
-									    <select id="state_id-billing" data-value="shortcode" ng-model="$parent.billing_address.region">
+									    <select id="state_id-billing" data-value="shortcode" ng-model="$parent.billing_address.region" name="state">
 									    	<option value="">State</option>
 											<option value="AK">AK</option>
 							  				<option value="AL">AL</option>
@@ -1000,7 +1000,7 @@
 						    <div class="description-line" ng-if="active_promos">
 						    	<div class="description">Promo Code</div>
 						    	<div class="value" >
-							    	<input id="promo" ng-model="$parent.promo_code" ng-change="calculatePromos()"/>
+							    	<input id="promo" ng-model="$parent.promo_code" ng-change="calculatePromos()" name="promo_code">
 						    	</div>
 						    </div>
 						    <hr>
@@ -1064,10 +1064,10 @@
 							</div>
 							<div class="row update-password" ng-show="$parent.first_time">
 								<div class="col-md-6">
-									<input type="password" name="password" placeholder="password" ng-model="$parent.$parent.password">
+									<input type="password" name="password" placeholder="password" ng-model="$parent.$parent.password" name="password">
 								</div>
 								<div class="col-md-6">
-									<input type="password" name="confirm-password" placeholder="confirm-password" ng-model="$parent.$parent.confirm_password">
+									<input type="password" name="confirm-password" placeholder="confirm-password" ng-model="$parent.$parent.confirm_password" name="confirm_password">
 								</div>
 								<div class="col-xs-12">
 									<button ng-click="updatePassword()">Create Password</button>

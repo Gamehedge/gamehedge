@@ -1,6 +1,6 @@
 ActiveAdmin.register Venue do
 
-permit_params :id, :name, :address, :te_uid, :image, :location, :url
+permit_params :id, :name, :address, :te_uid, :image, :location, :url, :slug
 
 index :download_links => false do
     selectable_column

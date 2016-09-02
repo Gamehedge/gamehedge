@@ -561,7 +561,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		        	email: $rootScope.user.email,
 		        },
 		    }).then(function successCallback(response) {
-		    	alert("Password updated");
+		    	alert("An message has been sent to your email with instructions to reset your password");
 		    }, function errorCallback(response) {
 		    	console.log(response);
 		    });

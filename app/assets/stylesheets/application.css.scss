@@ -1756,6 +1756,12 @@ body {
     margin-top: 20px;
 }
 
+#confirmation .update-password .forgot{
+    color: #005e9b;
+    font-size: 11px;
+    cursor: pointer;
+}
+
 #confirmation h4{
     font-size: 24px;
     color: #525252;
@@ -2184,6 +2190,11 @@ no-padding{
 .vertical-center {
     display: flex;
     align-items: center;
+}
+
+.horizontal-center {
+    display: flex;
+    justify-content: center;
 }
 
 @font-face {

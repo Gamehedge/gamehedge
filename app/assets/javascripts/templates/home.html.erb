@@ -180,7 +180,7 @@
         </div>
         <div id="results" ng-if="!loading">
           <div class="grid row">
-            <div class="grid-item" ng-repeat="tile in tiles track by $index" >
+            <div class="grid-item" ng-repeat="tile in tiles track by $index" ng-hide="tile.sport.active == false">
               <div id="home-loading-data" class="row text-center" ng-if="!tile.ready">
                 <img src="<%= image_url "loadinfo.gif" %>">
               </div>

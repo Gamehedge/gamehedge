@@ -5,7 +5,7 @@ ActiveAdmin.register Performer do
 #
 #config.per_page = 1000
 
-permit_params :te_name, :name, :te_slug, :image, :division_id, :sport_id, :venue_id, :wins, :losses, :description, :te_uid
+permit_params :te_name, :name, :te_slug, :image, :division_id, :sport_id, :venue_id, :wins, :losses, :description, :te_uid, :slug
 index :download_links => false do
     selectable_column
     column ("TEVO Id")  { |performer| performer.te_uid }

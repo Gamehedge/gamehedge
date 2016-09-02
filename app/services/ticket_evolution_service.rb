@@ -49,7 +49,7 @@ class TicketEvolutionService
         puts "Updating events began"
         Sport.all.each do |s|
           puts String(s.name)
-          @events = @connection.events.list({:category_id => s.te_uid, :per_page => 10000, 'updated_at.gte' => Time.now.strftime("%m/%d/%Y")})
+          @events = @connection.events.list({:category_id => s.te_uid, :per_page => 1000000, 'updated_at.gte' => Time.now.strftime("%m/%d/%Y")})
           @events.each do |e|
             if e.performances.count < 2
               puts "Not added. Event with one performer."

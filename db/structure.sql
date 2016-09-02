@@ -799,7 +799,8 @@ CREATE TABLE sports (
     image_updated_at timestamp without time zone,
     url character varying,
     ggg character varying,
-    slug character varying
+    slug character varying,
+    active boolean
 );
 
 
@@ -1728,4 +1729,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160826164454');
 INSERT INTO schema_migrations (version) VALUES ('20160826165038');
 
 INSERT INTO schema_migrations (version) VALUES ('20160826165853');
+
+INSERT INTO schema_migrations (version) VALUES ('20160902001252');
 

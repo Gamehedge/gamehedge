@@ -63,4 +63,12 @@ class ClientsController < ActionController::Base
     @user.save
     render text: "Success"
   end
+
+  def forgot_password
+    @user = Client.where(email: params[:email]).first
+    @user.password = params[:password]
+    @user.password_confirmation = params[:password]
+    @user.save
+    render text: "Success"
+  end
 end
