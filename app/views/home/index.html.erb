@@ -38,12 +38,12 @@
         </div>
 
         <div class="row menu-row separator" ng-repeat-start="league in leagueList" ng-if="$first">
-            <div class="col-xs-3"></div>
-            <div class="col-xs-9"><a href="{{league.url}}" ng-click="hideMenus()">{{league.name | uppercase}}</a></div>
+            <div class="col-xs-3" ng-if="league.active == true"></div>
+            <div class="col-xs-9" ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()">{{league.name | uppercase}}</a></div>
         </div>
         <div class="row menu-row" ng-repeat-end ng-if="!$first">
-            <div class="col-xs-3"></div>
-            <div class="col-xs-9"><a href="{{league.url}}" ng-click="hideMenus()">{{league.name | uppercase}}</a></div>
+            <div class="col-xs-3" ng-if="league.active == true"></div>
+            <div class="col-xs-9" ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()">{{league.name | uppercase}}</a></div>
         </div>
 
 
@@ -158,7 +158,7 @@
 
         <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs" ng-show="!$root.isOrder">
             <div class="press" ng-show="$root.locat == '/'">
-                <a ><img class="user-icon" src="<%= image_url "press-icon.png" %>">PRESS</a>
+                <a href="/#/press"><img class="user-icon" src="<%= image_url 'press-icon.png' %>">PRESS</a>
             </div>
             </div>
         <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs" ng-show="!$root.isOrder">

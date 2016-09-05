@@ -1349,6 +1349,7 @@ body {
 
 #tickets-map button.active, .filter-row button.active {
     background-color: #93aa52;
+    color: white !important;
 }
 
 #tickets-map .tuMapControlsContainer{
@@ -1364,7 +1365,7 @@ body {
 
 #tickets-map .tickets-data .row select {
     height: 25px;
-    width: 35px;
+    /*width: 35px;*/
     border: none;
     background-color: #FFFFFF;
     font-size: 12px;
@@ -1479,6 +1480,7 @@ body {
     color: #999999;
     width: 100%;
     margin-top: 10px;
+    padding-left: 12px;
 }
 
 #payments input[type="radio"]{
@@ -1531,23 +1533,23 @@ body {
 }
 
 #payments .card-in .full-name{
-    width: 70%;
-    margin-right: 14px;
+    width: 100%;
+    margin-right: 0px;
 }
 
 #payments .card-in .phone{
-    width: 30%;
-    margin-left: 14px;
+    width: 50%;
+    margin-left: 7px;
 }
 
 #payments .card-in .address{
-    width: 60%;
-    margin-right: 14px;
+    width: 100%;
+    margin-right: 0px;
 }
 
 #payments .card-in .country{
-    width: 40%;
-    margin-left: 14px;
+    width: 50%;
+    margin-right: 7px;
 }
 
 #payments .card-in .zipcode{
@@ -1651,8 +1653,8 @@ body {
 #payments .summary select, #payments .summary input {
     color: #525252;
     font-size: 10px;
-    width: 136px;
-    height: 20px;
+    /*width: 136px;*/
+    height: 22px;
     margin-top: 0;
 }
 
@@ -1676,6 +1678,7 @@ body {
 
 #payments .ggg-badge-pledge ul{
     padding-right: 20px;
+    padding-left: 20px;
 }
 
 #payments .ggg-badge-pledge .title{
@@ -1823,11 +1826,11 @@ body {
     }
 
     #payments .card-in .address{
-        margin-right: 7px;
+        /*margin-right: 7px;*/
     }
 
     #payments .card-in .phone{
-        margin-left: 7px;
+        /*margin-left: 7px;*/
     }
 
     #payments .card-in .zipcode{
@@ -3204,6 +3207,70 @@ footer .footer-signature img{
         margin-top: 20px;
     }
     
+    #payments input, #payments select {
+        border: solid 1px #d3d3d3 !important;
+    }
+    
+    .mobile-email {
+        display: block !important;
+    }
+    
+    .mobile-email .email {
+        width: 100% !important;
+        margin-right: 0px !important;
+    }
+    
+    .mobile-email .confirm-email {
+        width: 100% !important;
+        margin-left: 0px !important;
+    }
+    
+    .pay_with_title {
+        margin-top: 5px;
+    }
+    
+    .billing_title {
+        margin-top: 5px;
+    }
+    
+    .mobile-separator {
+        margin-top: 10px;
+    }
+    
+    .confirm_pay {
+        font-size: 18px !important;
+        font-weight: bold;
+        margin-right: 0px !important;
+        margin-left: 0px !important;
+        width: 100% !important;
+        margin-top: 20px !important;
+    }
+    
+    #confirmation .update-password input {
+        width: 100%;
+    }
+    
+    #confirmation .update-password button {
+        margin: 0px;
+        width: 100%;
+        margin-top: 20px;
+    }
+    
+    .how-works-mobile {
+        padding-right: 15px;
+    }
+}
+
+.filter-row button {
+    color: #525252 !important;
+}
+
+.card select {
+    background: #fff image-url("arrowdown.gif") no-repeat 95% 50%;
+    -moz-appearance: none; 
+    -webkit-appearance: none; 
+    appearance: none;
+    padding-right: 20px;
 }
 
 .full-height {
@@ -5012,4 +5079,42 @@ main#admin #order-stats .stat-item span {
 @media(min-width: 992px) {
 }
 @media(min-width: 1200px) {
+}
+
+#press_container {
+    background-color: #ffffff;
+}
+
+#terms_container {
+    background-color: #ffffff;
+    text-align: justify;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+#faq_container {
+    background-color: #ffffff;
+    text-align: justify;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+#how_works_container {
+    background-color: #eaeaea;
+    text-align: justify;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+#how-works-bottom {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-top: 1px solid #fff;
+}
+
+#privacy_container {
+    background-color: #ffffff;
+    text-align: justify;
+    padding-top: 20px;
+    padding-bottom: 40px;
 }

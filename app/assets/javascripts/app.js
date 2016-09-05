@@ -49,6 +49,30 @@ app.config([ '$routeProvider','$locationProvider','AuthProvider',
             templateUrl: "order_history.html",
             controller: 'OrderHistoryController',
         })
+        .when('/press', {
+            templateUrl: "press.html",
+            controller: 'PressController',
+        })
+        .when('/our-terms', {
+            templateUrl: "our-terms.html",
+            controller: 'ourTermsController',
+        })
+        .when('/faq', {
+            templateUrl: "faq.html",
+            controller: 'faqController',
+        })
+        .when('/contact', {
+            templateUrl: "contact.html",
+            controller: 'contactController',
+        })
+        .when('/how-it-works', {
+            templateUrl: "how-it-works.html",
+            controller: 'howWorksController',
+        })
+        .when('/privacy-policy', {
+            templateUrl: "privacy-policy.html",
+            controller: 'privacyPolicyController',
+        })
         .otherwise({
             redirectTo: '/'
         });

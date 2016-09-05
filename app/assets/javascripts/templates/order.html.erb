@@ -50,7 +50,7 @@
 			  					<button ng-disabled="$parent.processing" ng-click="toogleReview('deliver')">EDIT</button>
 		  					</div>
 		  					<div ng-if="edit_deliver == 3">
-		  						<div class="inputs" ng-if="!$root.isLoggedin">
+		  						<div class="inputs mobile-email" ng-if="!$root.isLoggedin">
 		  							<div class="email">
 			  							<input type="email" class="form-control" id="email-shipping" ng-model="$parent.$parent.client.email" placeholder="Email" name="email">
 								    </div>
@@ -398,14 +398,7 @@
 		  					</div>
 		  					<hr>
 
-
-
-
-
-
-
-
-		  					Pay With
+		  					<div class="pay_with_title">Pay With</div>
 		  					<div style="position:relative;">
 		  						<div ng-if="edit_credit_card == 3" class="edit_credit_card">
 			  						<div class="row">
@@ -420,12 +413,9 @@
 									    </div>
 									    <div class="col-md-7">
 									    	<div class="row">
-											    <div class="cvv col-xs-4">
-												    <input type="tel" class="form-control" id="cvv" placeholder="CVV" ng-model="$parent.card.cvv" name="cvv">	
-											    </div>
-					  							<div class="exp-month col-xs-4">
+					  							<div class="cvv col-xs-4">
 						  							<select class="form-control" id="exp-month" ng-model="$parent.card.expiration_month" name="month">
-												    	<option value="">Exp Month</option>
+												    	<option value="">Month exp.</option>
 												    	<option value="01">JAN</option>
 												    	<option value="02">FEB</option>
 												    	<option value="03">MAR</option>
@@ -440,9 +430,9 @@
 												    	<option value="12">DEC</option>
 												    </select>
 											    </div>
-											    <div class="exp-year col-xs-4">
+											    <div class="exp-month col-xs-4">
 												    <select class="form-control" id="exp-year" ng-model="$parent.card.expiration_year" name="year">
-												    	<option value="">Exp Year</option>
+												    	<option value="">Year exp.</option>
 												    	<option value="2016">2016</option>
 												    	<option value="2017">2017</option>
 												    	<option value="2018">2018</option>
@@ -468,6 +458,9 @@
 												    	<option value="2038">2038</option>
 												    	<option value="2039">2039</option>
 												    </select>
+											    </div>
+                                                <div class="col-xs-4 exp-year">
+												    <input type="tel" class="form-control" id="cvv" placeholder="CVV" ng-model="$parent.card.cvv" name="cvv">	
 											    </div>
 											</div>
 									    </div>
@@ -523,14 +516,7 @@
 
 		  					<hr>
 
-
-
-
-
-
-
-
-		  					Billing Address
+		  					<div class="billing_title">Billing Address</div>
 	  				
 	  						<div class="review" ng-if="edit_billing == 2">
 	  							<div ng-repeat="a in addresses" style="display:flex;">
@@ -567,15 +553,87 @@
 		  							<div class="full-name">
 			  							<input type="text" class="form-control" id="first-name-billing" ng-model="$parent.billing_address.name" placeholder="Full Name" name="name">
 								    </div>
-								    <div class="phone">
-			  							<input type="tel" class="form-control numeric" id="phone-billing" ng-model="$parent.client.primary_phone_number.number" placeholder="Phone Number" name="phone_number">
-								    </div>
 		  						</div>
 		  						<div class="inputs">
 		  							<div class="address">
 			  							<input type="text" class="form-control" id="address-billing" ng-model="$parent.billing_address.street_address" placeholder="Address" name="address">
 								    </div>
-								    <div class="country">
+		  						</div>
+                                
+		  						<div class="inputs">
+								    <div class="zipcode">
+									    <input type="text" class="form-control" id="city-billing" ng-model="$parent.billing_address.locality" placeholder="City" name="city">	
+								    </div>
+								    <div class="city">
+									    <select id="state_id-billing" data-value="shortcode" ng-model="$parent.billing_address.region" name="state">
+									    	<option value="">State</option>
+											<option value="AK">AK</option>
+							  				<option value="AL">AL</option>
+							  				<option value="AS">AS</option>
+							  				<option value="AZ">AZ</option>
+							  				<option value="AR">AR</option>
+							  				<option value="CA">CA</option>
+							  				<option value="CO">CO</option>
+							  				<option value="CT">CT</option>
+							  				<option value="DE">DE</option>
+							  				<option value="DC">DC</option>
+							  				<option value="FM">FM</option>
+							  				<option value="FL">FL</option>
+							  				<option value="GA">GA</option>
+							  				<option value="GU">GU</option>
+							  				<option value="HI">HI</option>
+							  				<option value="ID">ID</option>
+							  				<option value="IL">IL</option>
+							  				<option value="IN">IN</option>
+							  				<option value="IA">IA</option>
+							  				<option value="KS">KS</option>
+							  				<option value="KY">KY</option>
+							  				<option value="LA">LA</option>
+							  				<option value="ME">ME</option>
+							  				<option value="MH">MH</option>
+							  				<option value="MD">MD</option>
+							  				<option value="MA">MA</option>
+							  				<option value="MI">MI</option>
+							  				<option value="MN">MN</option>
+							  				<option value="MS">MS</option>
+							  				<option value="MO">MO</option>
+							  				<option value="MT">MT</option>
+							  				<option value="NE">NE</option>
+							  				<option value="NV">NV</option>
+							  				<option value="NH">NH</option>
+							  				<option value="NJ">NJ</option>
+							  				<option value="NM">NM</option>
+							  				<option value="NY">NY</option>
+							  				<option value="NC">NC</option>
+							  				<option value="ND">ND</option>
+							  				<option value="MP">MP</option>
+							  				<option value="OH">OH</option>
+							  				<option value="OK">OK</option>
+							  				<option value="OR">OR</option>
+							  				<option value="PW">PW</option>
+							  				<option value="PA">PA</option>
+							  				<option value="PR">PR</option>
+							  				<option value="RI">RI</option>
+							  				<option value="SC">SC</option>
+							  				<option value="SD">SD</option>
+							  				<option value="TN">TN</option>
+							  				<option value="TX">TX</option>
+							  				<option value="UT">UT</option>
+							  				<option value="VT">VT</option>
+							  				<option value="VI">VI</option>
+							  				<option value="VA">VA</option>
+							  				<option value="WA">WA</option>
+							  				<option value="WV">WV</option>
+							  				<option value="WI">WI</option>
+							  				<option value="WY">WY</option>
+							  			</select>
+								    </div>
+                                    <div class="state">
+			  							<input type="tel" class="form-control numeric" id="zipcode-billing" ng-model="$parent.billing_address.postal_code" placeholder="Zipcode" name="zipcode">
+								    </div>
+		  						</div>
+                                <div class="inputs">
+                                    <div class="country">
 									    <select id="country-billing" ng-model="$parent.billing_address.country_code">
 											<option value="">Select Country</option>
 											<option value="us">United States</option>
@@ -826,79 +884,12 @@
 											<option value="ax">Åland Islands</option>
 							  			</select>
 								    </div>
-		  						</div>
-		  						<div class="inputs">
-		  							<div class="zipcode">
-			  							<input type="tel" class="form-control numeric" id="zipcode-billing" ng-model="$parent.billing_address.postal_code" placeholder="Zipcode" name="zipcode">
+                                    <div class="phone">
+			  							<input type="tel" class="form-control numeric" id="phone-billing" ng-model="$parent.client.primary_phone_number.number" placeholder="Phone Number" name="phone_number">
 								    </div>
-								    <div class="city">
-									    <input type="text" class="form-control" id="city-billing" ng-model="$parent.billing_address.locality" placeholder="City" name="city">	
-								    </div>
-								    <div class="state">
-									    <select id="state_id-billing" data-value="shortcode" ng-model="$parent.billing_address.region" name="state">
-									    	<option value="">State</option>
-											<option value="AK">AK</option>
-							  				<option value="AL">AL</option>
-							  				<option value="AS">AS</option>
-							  				<option value="AZ">AZ</option>
-							  				<option value="AR">AR</option>
-							  				<option value="CA">CA</option>
-							  				<option value="CO">CO</option>
-							  				<option value="CT">CT</option>
-							  				<option value="DE">DE</option>
-							  				<option value="DC">DC</option>
-							  				<option value="FM">FM</option>
-							  				<option value="FL">FL</option>
-							  				<option value="GA">GA</option>
-							  				<option value="GU">GU</option>
-							  				<option value="HI">HI</option>
-							  				<option value="ID">ID</option>
-							  				<option value="IL">IL</option>
-							  				<option value="IN">IN</option>
-							  				<option value="IA">IA</option>
-							  				<option value="KS">KS</option>
-							  				<option value="KY">KY</option>
-							  				<option value="LA">LA</option>
-							  				<option value="ME">ME</option>
-							  				<option value="MH">MH</option>
-							  				<option value="MD">MD</option>
-							  				<option value="MA">MA</option>
-							  				<option value="MI">MI</option>
-							  				<option value="MN">MN</option>
-							  				<option value="MS">MS</option>
-							  				<option value="MO">MO</option>
-							  				<option value="MT">MT</option>
-							  				<option value="NE">NE</option>
-							  				<option value="NV">NV</option>
-							  				<option value="NH">NH</option>
-							  				<option value="NJ">NJ</option>
-							  				<option value="NM">NM</option>
-							  				<option value="NY">NY</option>
-							  				<option value="NC">NC</option>
-							  				<option value="ND">ND</option>
-							  				<option value="MP">MP</option>
-							  				<option value="OH">OH</option>
-							  				<option value="OK">OK</option>
-							  				<option value="OR">OR</option>
-							  				<option value="PW">PW</option>
-							  				<option value="PA">PA</option>
-							  				<option value="PR">PR</option>
-							  				<option value="RI">RI</option>
-							  				<option value="SC">SC</option>
-							  				<option value="SD">SD</option>
-							  				<option value="TN">TN</option>
-							  				<option value="TX">TX</option>
-							  				<option value="UT">UT</option>
-							  				<option value="VT">VT</option>
-							  				<option value="VI">VI</option>
-							  				<option value="VA">VA</option>
-							  				<option value="WA">WA</option>
-							  				<option value="WV">WV</option>
-							  				<option value="WI">WI</option>
-							  				<option value="WY">WY</option>
-							  			</select>
-								    </div>
-		  						</div>
+                                </div>
+                                
+                                
 		  						<div ng-if="$root.isLoggedin">
 		  							<button ladda="$parent.$parent.addBillingProcess" ng-disabled="$parent.processing" ng-click="confirmSave('billing')">SAVE</button>
 		  							<button ng-disabled="$parent.$parent.processing" ng-click="cancelAdd('billing')">CANCEL</button>
@@ -907,10 +898,10 @@
 		  					<hr>
 		  					<div class="row">
 			  					<div class="ggg-badge-pledge col-md-6">
-				  					<div class="img-container">
+				  					<div class="img-container col-xs-3">
 				  						<img src="<%= image_url "badge-gamehedge.png" %>" class="ggg-img">
 				  					</div>
-				  					<div>
+				  					<div class="col-xs-9">
 					  					<div class="title">
 					  						Your tickets come with the<br>GOOD GAME GUARANTEE!
 					  					</div>
@@ -920,10 +911,10 @@
 					  				</div>
 				  				</div>
 				  				<div class="ggg-badge-pledge col-md-6">
-				  					<div class="img-container">
+				  					<div class="img-container col-xs-3">
 				  						<img src="<%= image_url "pledge.png" %>" class="pledge-img">
 				  					</div>
-				  					<div>
+				  					<div class="col-xs-9">
 					  					<div class="title">
 					  						GAMEHEDE PLEDGE
 					  					</div>
@@ -942,7 +933,7 @@
 
 	  				</div>
 	  			</div>
-	  			<div class="col-md-5">
+	  			<div class="col-md-5 mobile-separator">
 	  				<div class="card">
 	  					<div class="card-in summary">
 						    <div class="title">{{ticket.event.name}}</div>
@@ -1008,7 +999,7 @@
 						    	<div class="description">TOTAL</div>
 						    	<div class="value">{{total | currency}}</div>
 						    </div>
-						    <button ladda="payProcess" ng-disabled="processing || editing" ng-click="confirmPay()">Confirm and Pay</button>
+						    <button class="confirm_pay" ladda="payProcess" ng-disabled="processing || editing" ng-click="confirmPay()">Confirm and Pay</button>
 						    <div class="terms">By clicking Confirm and Pay, you agree to GameHedge <a href="terms">Terms and Privacy Policy.</a></div>
 						    <div id="session_iframe" ng-bind-html="session_iframe"></div>
 	  					</div>
