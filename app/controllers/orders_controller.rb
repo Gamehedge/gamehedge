@@ -76,6 +76,17 @@ class OrdersController < ApplicationController
 	        )
 	    end
         render json: @order
-        
-    end	
+    end
+
+    def list
+    	@orders = TicketEvolutionService.new({:type => "orders", :id => request.GET["id"]}).list
+  		render json: @orders
+    end
+
+    def request_refund
+    	@order =  Order.where(te_order_id: request.POST["id"]).first
+    	@order.refund_status_id = 3
+    	@order.save
+    	render text: "success"
+    end
 end

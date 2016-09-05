@@ -31,7 +31,7 @@
   </section>
 
   <script type="text/ng-template" id="typeahead/bind-node.html">
-    <a href="/#{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
+    <a href="{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
   </script>
 
   <main>

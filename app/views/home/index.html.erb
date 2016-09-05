@@ -8,7 +8,7 @@
                 </div>
             </div>
             <div class="navbar-header col-xs-8">
-                <a href="/#/" ng-click="hideMenus()">
+                <a href="/" ng-click="hideMenus()">
                     <img class="logo-image menu" alt="GameHedge" src="<%= image_url 'logo.png' %>">
                 </a>
             </div>
@@ -18,7 +18,7 @@
     <div class="menu-container">
         <div class="row menu-row" ng-show="!$root.isLoggedin">
             <div class="col-xs-3"><img class="user-icon" src="<%= image_url "profile icon.png" %>"></div>
-            <div class="col-xs-9"><a href="/#/login" ng-click="hideMenus()">Login</a></div>
+            <div class="col-xs-9"><a href="/login" ng-click="hideMenus()">Login</a></div>
         </div>
         <div class="row menu-row" ng-show="$root.isLoggedin">
             <div class="col-xs-3"><img class="user-icon" src="<%= image_url "profile icon.png" %>"></div>
@@ -26,11 +26,11 @@
         </div>
         <div class="row menu-row" ng-show="$root.isLoggedin">
             <div class="col-xs-3"></div>
-            <div class="col-xs-9"><a href="/#/member" ng-click="hideMenus()">Your profile</a></div>
+            <div class="col-xs-9"><a href="/member" ng-click="hideMenus()">Your profile</a></div>
         </div>
         <div class="row menu-row" ng-show="$root.isLoggedin">
             <div class="col-xs-3"></div>
-            <div class="col-xs-9"><a  href="/#/order-history" ng-click="hideMenus()">Order history</a></div>
+            <div class="col-xs-9"><a  href="/order_history" ng-click="hideMenus()">Order history</a></div>
         </div>
         <div class="row menu-row" ng-show="$root.isLoggedin">
             <div class="col-xs-3"></div>
@@ -49,7 +49,7 @@
 
         <div class="row menu-row separator">
             <div class="col-xs-3"></div>
-            <div class="col-xs-9"><a href="/#/press/" ng-click="hideMenus()">Press</a></div>
+            <div class="col-xs-9"><a href="/press/" ng-click="hideMenus()">Press</a></div>
         </div>
         <div class="row menu-row">
             <div class="col-xs-3"></div>
@@ -57,11 +57,11 @@
         </div>
         <div class="row menu-row">
             <div class="col-xs-3"></div>
-            <div class="col-xs-9"><a href="/#/faq/" ng-click="hideMenus()">FAQ</a></div>
+            <div class="col-xs-9"><a href="/faq/" ng-click="hideMenus()">FAQ</a></div>
         </div>
         <div class="row menu-row">
             <div class="col-xs-3"></div>
-            <div class="col-xs-9"><a href="/#/contact/" ng-click="hideMenus()">Contact Us</a></div>
+            <div class="col-xs-9"><a href="/contact/" ng-click="hideMenus()">Contact Us</a></div>
         </div>
     </div>
     <div class="mobile-menu-footer">
@@ -84,7 +84,7 @@
     </div>
 </div>
 <script type="text/ng-template" id="typeahead/bind-node.html">
-    <a href="/#{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
+    <a href="{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
 </script>
 <div class="mobile-menu search-menu-transition" ng-if="showSearchMenu" ng-show="!$root.isOrder">
     <div class="mobile-menu-header">
@@ -135,7 +135,7 @@
             </div>
         </div>
         <div class="navbar-header col-md-4 col-xs-8">
-            <a href="/#/">
+            <a href="/">
                 <img class="logo-image" alt="GameHedge" src="<%= image_url 'logo.png' %>">
             </a>
         </div>
@@ -165,13 +165,13 @@
             <div class="dropdown" ng-show="$root.isLoggedin">
                 <button class="dropdown-toggle myaccount-btn" type="button" data-toggle="dropdown"><img class="user-icon" src="<%= image_url "profile icon.png" %>">{{$root.user.name | uppercase}}<img class="dropdown-icon" src="<%= image_url "dropdown.png" %>"></button>
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href="/#/member">Your Profile</a></li>
-                    <li><a href="/#/order_history">Order History</a></li>
+                    <li><a href="/member">Your Profile</a></li>
+                    <li><a href="/order_history">Order History</a></li>
                     <li><a ng-click="logout()" ng-show="$root.isLoggedin">Logout</a></li>
                 </ul>
             </div>
             <div class="dropdown login" ng-show="!$root.isLoggedin">
-                <a href="/#/login"><img class="user-icon" src="<%= image_url "profile icon.png" %>">LOGIN</a>
+                <a href="/login"><img class="user-icon" src="<%= image_url "profile icon.png" %>">LOGIN</a>
             </div>
         </div>
     </nav>
@@ -191,10 +191,10 @@
                     <h2>What to Know</h2>
                     <nav role="navigation">
                         <ul>
-                            <li><a href="/#/our-terms">Terms</a></li>
-                            <li><a href="/#/faq">Privacy</a></li>
-                            <li><a href="/#/faq">FAQ</a></li>
-                            <li><a href="/#/contact">Contact Us</a></li>
+                            <li><a href="/our-terms">Terms</a></li>
+                            <li><a href="/faq">Privacy</a></li>
+                            <li><a href="/faq">FAQ</a></li>
+                            <li><a href="/contact">Contact Us</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -204,9 +204,9 @@
                     <h2>Important Links</h2>
                     <nav role="navigation">
                         <ul>
-                            <li><a href="/#/how-it-works">How it Works</a></li>
-                            <li><a href="/#/member">My Account</a></li>
-                            <li><a href="/#/press">Press</a></li>
+                            <li><a href="/how-it-works">How it Works</a></li>
+                            <li><a href="/member">My Account</a></li>
+                            <li><a href="/press">Press</a></li>
                             <li><a href="/blog">Blog</a></li>
                         </ul>
                     </nav>

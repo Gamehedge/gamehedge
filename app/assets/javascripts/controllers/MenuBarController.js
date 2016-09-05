@@ -15,6 +15,7 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
             console.log("logged out");
             $rootScope.isLoggedin = false;
             $rootScope.user = undefined;
+            $location.path('/');
         }, function(error) {
             // An error occurred logging out.
             console.log("An error occurred logging out.");

@@ -5,6 +5,7 @@
     "angular-route": "latest",
     "angular-devise": "latest",
     "angular-animate": "latest",
-    "angular-ladda": "latest"
+    "angular-ladda": "latest",
+    "sweetalert": "latest"
   }
 }

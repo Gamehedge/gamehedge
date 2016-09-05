@@ -18,15 +18,15 @@ class Api::V1::OrdersController < ApplicationApiController
       @orders = Order.where(data_params)
     end
     respond_to do |format|
-      format.json { render json: @orders }
-      format.xml { render xml: @orders }
+      format.json { render json: @orders.to_json(:only => [:id, :client_id, :client_name, :total, :te_order_id, :event_name, :event_home_team, :event_away_team, :event_date, :event_location, :refund_status_id, :real_event_date], :include => {:refund_status => {:only =>[:id, :name]}})}
+      format.xml { render xml: @orders.to_json(:only => [:id, :client_id, :client_name, :total, :te_order_id, :event_name, :event_home_team, :event_away_team, :event_date, :event_location, :refund_status_id, :real_event_date], :include => {:refund_status => {:only =>[:id, :name]}})}
     end
   end
 
   def show
     respond_to do |format|
-      format.json { render json: @order }
-      format.xml { render xml: @order }
+      format.json { render json: @order.to_json(:only => [:id, :client_id, :client_name, :total, :te_order_id, :event_name, :event_home_team, :event_away_team, :event_date, :event_location, :refund_status_id, :real_event_date], :include => {:refund_status => {:only =>[:id, :name]}})}
+      format.xml { render xml: @order.to_json(:only => [:id, :client_id, :client_name, :total, :te_order_id, :event_name, :event_home_team, :event_away_team, :event_date, :event_location, :refund_status_id, :real_event_date], :include => {:refund_status => {:only =>[:id, :name]}})}
     end
   end
 
@@ -71,7 +71,7 @@ class Api::V1::OrdersController < ApplicationApiController
   end
 
   def data_params
-    params.permit(:id, :client_id, :client_name, :te_order_id, :event_name, :event_home_team, :event_away_team, :event_date, :event_location, :refund_status_id, :real_event_date)
+    params.permit(:id, :client_id, :client_name, :te_order_id, :event_name, :event_home_team, :event_away_team, :event_date, :event_location, :refund_status_id, :real_event_date, :total)
   end
 
   private

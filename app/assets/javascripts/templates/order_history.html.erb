@@ -1,0 +1,40 @@
+<div class="loading-button-holder">
+	<button class="history-button" ladda="loading" data-spinner-color="#000000" ng-show="loading"></button>
+</div>
+<div class="container">
+	<section id="order-history" ng-show="!loading">
+		<h2>Previous Orders</h2>
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th>Order ID</th>
+					<th>Order Date</th>
+					<th>Event</th>
+					<th>Total</th>
+					<th>Order Status</th>
+					<th>Refund Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="o in orders">
+					<td>{{o.id}}</td>
+					<td>{{o.created_at|date:"MM/dd/yyyy"}}</td>
+					<td>
+						{{o.items[0].ticket_group.event.name}}<br />
+						{{o.items[0].ticket_group.event.venue.name}}, {{o.items[0].ticket_group.event.venue.address.locality}}, {{o.items[0].ticket_group.event.venue.address.region}}<br />
+						{{o.items[0].ticket_group.event.occurs_at|date:"MM/dd/yyyy mm:hh a"}}<br />
+						Section {{o.items[0].ticket_group.section}}, Row {{o.items[0].ticket_group.row}}, Seats {{o.items[0].ticket_group.quantity}}
+					</td>
+					<td>{{o.total | currency}}</td>
+					<td>{{o.state}}</td>
+					<td ng-if="o.refund_status">
+						<span ng-if="o.refund_status.name != 'Refund Available'">{{o.refund_status.name}}</span>
+						<div class="refund_available" ng-if="o.refund_status.name == 'Refund Available'" ng-click="requestRefund(o.id,$index)">{{o.refund_status.name}}</div>
+					</td>
+					<td ng-if="!o.refund_status">Not available</td>
+				</tr>
+				<tr ng-if="!orders"><td colspan="11">No previous Order History</td></tr>
+			</tbody>
+		</table>
+	</section>
+</div>

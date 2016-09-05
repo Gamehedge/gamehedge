@@ -12,6 +12,7 @@ ActiveAdmin.register Order do
     column ("Order Id")  { |order| order.te_order_id }
     column :order_date
     column ("Customer Name")  { |order| order.client_name }
+    column ("Customer ID")  { |order| order.client_id }
     column :event_name
     column :event_date
     column :refund_status

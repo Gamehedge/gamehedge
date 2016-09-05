@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   post 'clients/create'
   post 'clients/update_password'
   post 'orders/create'
+  get 'orders/list'
+  post 'orders/request_refund'
+
   resources :search, :signature
   
   devise_for :admin_users, ActiveAdmin::Devise.config

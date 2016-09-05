@@ -18,6 +18,7 @@
  @import "slick";
  @import "slick-theme";
  @import "ladda/dist/ladda-themeless.min";
+ @import "sweetalert/dist/sweetalert";
 
 * { box-sizing: border-box; }
 
@@ -25,7 +26,7 @@ body {
 	font-family: sans-serif;
 	background-color: #eaeaea;
 }
-*, *:before, *:after {box-sizing:  border-box !important;}
+
 
 #tiles .row.grid {
     -moz-column-width: 20em;
@@ -1802,6 +1803,11 @@ body {
     max-height:100px
 }
 
+#order-history .refund_available{
+    cursor: pointer;
+    color: #005e9b;
+}
+
 @media(max-width: 992px) {
     
     #payments label{
@@ -2671,6 +2677,37 @@ footer .footer-signature img{
 	font-size: 30px;
 	text-align: center;
 	margin-bottom: 25px;
+}
+
+#account .credicard-img{
+    height: 20px;
+    margin-bottom: 3px;
+}
+
+#account h2{
+    font-size: 24px;
+}
+
+.loading-button-holder button{
+    width: 100px;
+    height: 41px;
+    border: none;
+    background: none;
+    cursor: inherit;
+}
+
+.loading-button-holder{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.loading-button-holder button .history-button{
+    margin: 50px 0;
+}
+
+#account button:focus{
+    outline: none;
 }
 
 @media(max-width: 992px) {

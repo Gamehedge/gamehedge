@@ -197,6 +197,9 @@ class TicketEvolutionService
       @client = @connection.clients.show(@id)
       @phones = @client.phone_numbers.list({:client_id => @id})
       return @phones
+    when 'orders'
+      @orders = @connection.orders.list({:buyer_id => @id})
+      return @orders
     else
       puts "Invalid type parameter, please check and try again"
     end
