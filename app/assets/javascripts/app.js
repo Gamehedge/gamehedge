@@ -43,6 +43,10 @@ app.config([ '$routeProvider','$locationProvider','AuthProvider',
             templateUrl: "order.html",
             controller: 'OrderController',
         })
+        .when('/press', {
+            templateUrl: "press.html",
+            controller: 'PressController',
+        })
         .otherwise({
             redirectTo: '/'
         });
