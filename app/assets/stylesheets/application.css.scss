@@ -3218,6 +3218,10 @@ footer .footer-signature img{
         width: 100%;
         margin-top: 20px;
     }
+    
+    .how-works-mobile {
+        padding-right: 15px;
+    }
 }
 
 .filter-row button {
@@ -5044,3 +5048,36 @@ main#admin #order-stats .stat-item span {
     background-color: #ffffff;
 }
 
+#terms_container {
+    background-color: #ffffff;
+    text-align: justify;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+#faq_container {
+    background-color: #ffffff;
+    text-align: justify;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+#how_works_container {
+    background-color: #eaeaea;
+    text-align: justify;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+#how-works-bottom {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-top: 1px solid #fff;
+}
+
+#privacy_container {
+    background-color: #ffffff;
+    text-align: justify;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
