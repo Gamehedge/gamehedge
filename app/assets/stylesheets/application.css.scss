@@ -3208,6 +3208,16 @@ footer .footer-signature img{
         width: 100% !important;
         margin-top: 20px !important;
     }
+    
+    #confirmation .update-password input {
+        width: 100%;
+    }
+    
+    #confirmation .update-password button {
+        margin: 0px;
+        width: 100%;
+        margin-top: 20px;
+    }
 }
 
 .filter-row button {
