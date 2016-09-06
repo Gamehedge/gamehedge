@@ -2,6 +2,14 @@
   
   <section id="game_info">
     <div class="row">
+      <div class="col-md-4 col-xs-12 ggg-logo vertical-center hidden-xs hidden-sm">
+          <img src="<%= image_url "badge-gamehedge.png" %>" alt="GameHedge" />
+          Your tickets come with the<br>
+          GOOD GAME GUARANTEE!
+      </div>
+      <div class="col-md-4 col-xs-12 moto vertical-center hidden-xs hidden-sm">
+        All GameHedge tickets come with our exclusive Good Game Guarantee at no additional cost to you. So, if the home team loses by 5 runs or more, we will refund 50% of the price of your ticket. No gimmicks. No catches.
+      </div>
       <div class="col-md-4 col-xs-12 mobile-event-container" style="height: 100%;">
         <div class="col-md-2 date-holder hidden-xs hidden-sm">
           <p class="date1">{{event.occurs_at | date:'MMM': 'UTC' | uppercase}}</p>
@@ -15,16 +23,6 @@
             <p class="second-line" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD at <a href="{{event.venue.url}}">{{event.venue.name}}</a> - {{event.location}}</p>
           </span>
         </div>
-      </div>
-      <div class="col-md-4 col-xs-12 moto vertical-center hidden-xs hidden-sm">
-        All GameHedge tickets come with our exclusive Good Game Guarantee at no additional cost to you. So, if the home team loses by 5 runs or more, we will refund 50% of the price of your ticket. No gimmicks. No catches.
-      </div>
-      <div class="col-md-4 col-xs-12 ggg-logo vertical-center hidden-xs hidden-sm">
-        
-          <img src="<%= image_url "badge-gamehedge.png" %>" alt="GameHedge" />
-          Your tickets come with the<br>
-          GOOD GAME GUARANTEE!
-        
       </div>
     </div>
   </section>

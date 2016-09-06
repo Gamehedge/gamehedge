@@ -136,9 +136,18 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         });
 	}
 
+	$scope.higlightSection = function(section,highlight){
+		if(highlight == true){
+			$("#MapContainer").tuMap("HighlightSection",section);
+		}
+		else{
+			$("#MapContainer").tuMap("ResetSection",section);
+		}
+	}
+
 	$scope.loadMap = function(){
 		var date = $filter('date')($scope.event.occurs_at, 'yyyy-MM-ddTHH:mm');
-		console.log(date)
+		console.log(date);
 		$("#MapContainer").tuMap({
 	        EventInfo: {
 	            Venue: $scope.event.venue.name,

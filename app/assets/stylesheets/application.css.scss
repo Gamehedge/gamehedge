@@ -677,32 +677,30 @@ body {
 #near-events .front .date-inner{
     width: 100px;
     height: 100%;
-    background-color: #bebebe;
+    background-color: #373d3f;
     margin: auto;
-    padding-top: 10px;
+    color: #ffffff;
 }
 
 #near-events .front .date-inner .date1{
     font-size: 14px;
     font-weight: bold;
     text-align: center;
-    color: #ffffff;
+    background-color: #91c33f;
     margin: 0;
 }
 
 #near-events .front .date-inner .date2{
     font-size: 36px;
     text-align: center;
-    color: #000000;
     margin: 0;
-    margin-top: -13px;
     margin-bottom: -10px;
 }
 
 #near-events .front .date-inner .date3{
     font-size: 14px;
     text-align: center;
-    color: #333333;
+    
     margin: 0;
 }
 
