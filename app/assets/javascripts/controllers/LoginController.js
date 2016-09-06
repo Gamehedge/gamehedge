@@ -13,6 +13,7 @@ controllers.controller('LoginController', function($scope,$rootScope,Auth,$locat
         
     });
 	$scope.login = function(){
+        $scope.logging_in = true;
 		var credentials = {
             email: $scope.email,
             password: $scope.password,
@@ -30,6 +31,7 @@ controllers.controller('LoginController', function($scope,$rootScope,Auth,$locat
             console.log("failed");
             $rootScope.user = undefined;
             $rootScope.isLoggedin = false;
+            $scope.logging_in = false;
             alert("Email or password incorrect");
         });
 
@@ -50,8 +52,27 @@ controllers.controller('LoginController', function($scope,$rootScope,Auth,$locat
         $scope.forgot_password = value;
     }
 
+    $scope.updatePassword = function(){
+        $scope.sending_password = true;
+        var parameters = {
+            email: $scope.email
+        };
+        
+        Auth.sendResetPasswordInstructions(parameters).then(function() {
+            $scope.sending_password = false;
+            swal("Request sended succesfully", "You will be receiving an email with the recovery password instructions shortly.", "success");
+            
+        },function(error){
+            if(error.data.errors){
+                $scope.sending_password = false;
+                swal("Request failed", "E-mail not found. Please check your e-mail address.", "error");
+            }
+        });
+    }
+    $scope.logging_in = false;
+    $scope.sending_password = false;
     $rootScope.isOrder = false;
     $rootScope.darkHeader = true;
     $scope.forgot_password = false;
     $window.scrollTo(0, 0);
-});
+})

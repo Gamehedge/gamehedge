@@ -1,25 +1,51 @@
-<h2>Change your password</h2>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
+<div class="dark-header">
+    <nav class="navbar navbar-default navbar-gamehedge vertical-center">
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
+        <div class="navbar-header col-md-4 col-xs-8">
+            <a href="/">
+                <img class="logo-image" alt="GameHedge" src="<%= image_url 'logo.png' %>">
+            </a>
+        </div>
+        <div class="navbar-header col-md-8 hidden-xs hidden-xm vertical-center help">
+               
+            
+        </div>
+    </nav>
+</div>
+<section id="confirmation">
+  <div class="container" style="justify-content: center;display: flex;">
+    <div class="row" style="max-width:500px">
+      <div class="col-xs-12">
+        <h1>Change your password</h1>
+        <div class="outter">
+          <div class="inner">
+            <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+              <%= devise_error_messages! %>
+              <%= f.hidden_field :reset_password_token %>
+
+              <div class="field">
+                <%= f.label :password, "New password" %><br />
+                <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+                <% end %>
+                <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
+              </div>
+
+              <div class="field">
+                <%= f.label :password_confirmation, "Confirm new password" %><br />
+                <%= f.password_field :password_confirmation, autocomplete: "off" %>
+              </div>
+
+              <div class="actions">
+                <%= f.submit "Change my password" %>
+              </div>
+            <% end %>
+
+            <a href="/login/">Login</a>
+        </div>
+      </div>
+    </div>
   </div>
+</section>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>

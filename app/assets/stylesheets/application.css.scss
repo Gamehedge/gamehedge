@@ -1731,10 +1731,10 @@ body {
     color: #000000;
 }
 
-#confirmation .update-password{
+#confirmation .update-password, #confirmation .actions, #confirmation .field{
     text-align: center;
 }
-#confirmation .update-password input{
+#confirmation input{
     height: 30px;
     border-radius: 5px;
     background-color: #ffffff;
@@ -1745,7 +1745,7 @@ body {
     margin-top: 10px;
 }
 
-#confirmation .update-password button{
+#confirmation .update-password button, #confirmation input[type="submit"]{
     width: 200px;
     margin-left: 15%;
     margin-right: 15%;
@@ -1759,6 +1759,7 @@ body {
     color: #ffffff;
     margin-top: 20px;
 }
+
 
 #confirmation .update-password .forgot{
     color: #005e9b;
@@ -1783,6 +1784,7 @@ body {
 #confirmation .inner{
     background-color: white;
     padding: 30px;
+    text-align: center;
 }
 
 #confirmation .inner .row{
@@ -2697,16 +2699,13 @@ footer .footer-signature img{
     border: none;
     background: none;
     cursor: inherit;
+    margin: 50px 0;
 }
 
 .loading-button-holder{
     width: 100%;
     display: flex;
     justify-content: center;
-}
-
-.loading-button-holder button .history-button{
-    margin: 50px 0;
 }
 
 #account button:focus{
@@ -3246,11 +3245,11 @@ footer .footer-signature img{
         margin-top: 20px !important;
     }
     
-    #confirmation .update-password input {
+    #confirmation input {
         width: 100%;
     }
     
-    #confirmation .update-password button {
+    #confirmation .update-password button, #confirmation input[type="submit"] {
         margin: 0px;
         width: 100%;
         margin-top: 20px;

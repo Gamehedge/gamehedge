@@ -9,11 +9,14 @@ app = angular.module('gamehedge',[
   'angular-ladda'
 ])
 
+app
+
 app.config([ '$routeProvider','$locationProvider','AuthProvider',
     function($routeProvider,$locationProvider,AuthProvider){
       AuthProvider.resourceName('client');
       AuthProvider.loginPath('/clients/sign_in.json');
       AuthProvider.logoutPath('/clients/sign_out.json');
+      AuthProvider.sendResetPasswordInstructionsPath('/clients/password.json');
       $routeProvider
         .when('/', {
             templateUrl: "home.html",
@@ -42,10 +45,12 @@ app.config([ '$routeProvider','$locationProvider','AuthProvider',
         .when('/order/:ticektId', {
             templateUrl: "order.html",
             controller: 'OrderController',
-        }).when('/member', {
+        })
+        .when('/member', {
             templateUrl: "member.html",
             controller: 'MemberController',
-        }).when('/order_history', {
+        })
+        .when('/order_history', {
             templateUrl: "order_history.html",
             controller: 'OrderHistoryController',
         })

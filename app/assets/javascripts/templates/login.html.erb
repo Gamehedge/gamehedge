@@ -13,16 +13,16 @@
 								<input type="password" name="password" placeholder="password" ng-model="$parent.password">
 							</div>
 							<div class="col-xs-12">
-								<button ng-click="login()">Login</button>
+								<button ng-click="login()" ladda="logging_in">Login</button>
 							</div>
-							<!-- <div class="forgot" ng-click="forgotPass(true)">Forgot password?</div> -->
+							<div class="forgot" ng-click="forgotPass(true)">Forgot password?</div>
 						</div>
 						<div class="row update-password" ng-if="forgot_password">
 							<div class="col-xs-12">
 								<input type="email" name="email" placeholder="Email" ng-model="$parent.email">
 							</div>
 							<div class="col-xs-12">
-								<button ng-click="updatePassword()">Retreive Password</button>
+								<button ng-click="updatePassword()" ladda="sending_password">Send Password</button>
 							</div>
 							<div class="forgot" ng-click="forgotPass(false)">Login</div>
 						</div>
