@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "fabian@toro-labs.com"
+  default from: "Gamehedge - Contact System <support@gamehedge.com>"
   layout 'mailer'
 end

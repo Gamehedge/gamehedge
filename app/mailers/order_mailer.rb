@@ -1,5 +1,5 @@
 class OrderMailer < ApplicationMailer
-	default from: "Gamehedge - Contact System <edgar@toro-labs.com>"
+	default from: "Gamehedge - Contact System <support@gamehedge.com>"
  
     def refund_available(_id)
         @order = Order.where(:id => _id).first
