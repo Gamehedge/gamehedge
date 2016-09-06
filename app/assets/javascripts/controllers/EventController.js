@@ -107,8 +107,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 		$scope.etickets = !$scope.etickets;
 	}
 
-	$scope.updateParking = function(){
-		$scope.onlyParking = !$scope.onlyParking;
+	$scope.updateParking = function(ids){
+		$scope.onlyParking = ids;
 	}
 
 	$scope.getTicketList = function(){
@@ -129,6 +129,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	            $scope.Data.push({"section":key,"price":0,"quantity":1});
 	        });
 	        $scope.loadMap();
+	        console.log(response.data);
         }, function errorCallback(response) {
             console.log(response);
             // called asynchronously if an error occurs
