@@ -177,7 +177,7 @@
             <img src="<%= image_url 'loadinfo.gif' %>">
           </div>
           <div class="col-xs-12 tickets-data" ng-if="!loading">
-            <div class="row" ng-repeat="ticket in tickets.data | orderBy:ordering | filter: (etickets || '') && {eticket: true} | filter: (physicals || '') && {eticket: false} | filter: (filterBySection || '') && {section: section} | filter: (onlyParking || '') && {type: 'parking'} | numberOfSeats:index" emit-last-repeater-element>
+            <div class="row" ng-repeat="ticket in tickets.data | orderBy:ordering | filter: (etickets || '') && {eticket: true} | filter: (physicals || '') && {eticket: false} | filter: (filterBySection || '') && {section: section} | filter: (onlyParking || '') && {type: 'parking'} | numberOfSeats:index" emit-last-repeater-element ng-mouseover="higlightSection(ticket.section, true)" ng-mouseleave="higlightSection(ticket.section, false)">
               <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ticket.public_notes}}" ng-if="ticket.public_notes"></span>
               <div class="col-xs-1 hidden-md hidden-lg hidden-xl info-ico">
                 <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ticket.public_notes}}" ng-if="ticket.public_notes"></span>
