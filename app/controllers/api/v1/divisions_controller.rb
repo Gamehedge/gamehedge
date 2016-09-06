@@ -18,8 +18,13 @@ class Api::V1::DivisionsController < ApplicationApiController
       @divisions = Division.where(data_params)
     end
     respond_to do |format|
-      format.json { render json: @divisions }
-      format.xml { render xml: @divisions }
+      if params[:light]
+        format.json { render json: @divisions.to_json(:only => [:id, :name, :sport_id, :division_id, :is_main_division, :url])}
+        format.xml { render json: @divisions.to_json(:only => [:id, :name, :sport_id, :division_id, :is_main_division, :url])}
+      else
+        format.json { render json: @divisions }
+        format.xml { render xml: @divisions }
+      end
     end
   end
 
@@ -71,7 +76,7 @@ class Api::V1::DivisionsController < ApplicationApiController
   end
 
   def data_params
-    params.permit(:id, :name, :description, :te_uid, :sport_id, :division_id, :image, :is_main_division)
+    params.permit(:id, :name, :description, :te_uid, :sport_id, :division_id, :image, :is_main_division, :url)
   end
 
   private

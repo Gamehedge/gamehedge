@@ -123,7 +123,7 @@
 </div>
 
 <div ng-class="{'dark-header': $root.darkHeader}">
-    <nav class="navbar navbar-default navbar-gamehedge vertical-center">
+    <nav class="navbar navbar-default navbar-gamehedge vertical-center" role="navigation">
 
         <div class="col-xs-2 hidden-md hidden-lg" ng-show="!$root.isOrder">
             <div class="navbar navbar-default navbar-fixed-top">
@@ -152,10 +152,45 @@
                 </button>
             </div>
         </div>
-        <div class="navbar-leagues col-md-4 hidden-sm hidden-xs vertical-center horizontal-center" ng-show="!$root.isOrder">
-            <a class="" href="{{league.url}}" ng-repeat="league in leagueList | orderBy:'name' track by $index" ng-if="league.active == true">{{league.name | uppercase}}</a>
+        <div class="col-md-4 hidden-sm hidden-xs horizontal-center main-menu">
+            <ul class="nav navbar-nav navbar-leagues vertical-center horizontal-center" ng-show="!$root.isOrder" ng-repeat="league in leagueList | orderBy:'name' track by $index" ng-if="league.active == true">
+               <li class="dropdown yamm-fw">
+                     <a class="dropdown-toggle" href="#" data-toggle="dropdown">{{league.name | uppercase}}</a>
+                     <ul class="dropdown-menu">
+                        <li>
+                            <div class="yamm-content" ng-if="league.id != 5" >
+                                <div class="text-center" ng-repeat="main_division in divisions | filter:{is_main_division:true,sport_id:league.id} | orderBy:'name'">
+                                    <div class="col-xs-12 title vertical-center horizontal-center">{{main_division.name}}</div>
+                                    <div ng-class="{'col-xs-4':league.name == 'MLB' || league.name == 'NBA','col-xs-3':league.name == 'NFL','col-xs-6':league.name == 'NHL'}" ng-repeat="division in divisions | filter:{division_id:main_division.id} | orderBy:'name'">
+                                        <div class="subtitle">{{division.name | uppercase}}</div>
+                                        <div class="performer-holder">
+                                            <div ng-repeat="performer in performers | filter:{division_id:division.id}:true">
+                                                <a href="{{performer.url}}">{{performer.name}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="yamm-content" ng-if="league.id == 5" >
+                                <div class="text-center">
+                                    <div ng-repeat="division in divisions | filter:{sport_id:league.id} | orderBy:'name'">
+                                        <div class="clearfix" ng-if="$index % 3 == 0"></div>
+                                        <div class="col-xs-4">
+                                            <div class="subtitle">{{division.name | uppercase}}</div>
+                                            <div class="performer-holder">
+                                                <div ng-repeat="performer in performers | filter:{division_id:division.id}:true">
+                                                    <a href="{{performer.url}}">{{performer.name}}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-
         <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs" ng-show="!$root.isOrder">
             <div class="press" ng-show="$root.locat == '/'">
                 <a href="/#/press"><img class="user-icon" src="<%= image_url 'press-icon.png' %>">PRESS</a>
