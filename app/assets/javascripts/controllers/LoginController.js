@@ -60,7 +60,7 @@ controllers.controller('LoginController', function($scope,$rootScope,Auth,$locat
         
         Auth.sendResetPasswordInstructions(parameters).then(function() {
             $scope.sending_password = false;
-            swal("Request sended succesfully", "You will be receiving an email with the recovery password instructions shortly.", "success");
+            swal("Request submitted", "You will be receiving an email with the recovery password instructions shortly.", "success");
             
         },function(error){
             if(error.data.errors){
