@@ -48,10 +48,11 @@
 
 .main-menu .dropdown-menu { 
     width: 70vw !important;
-    left: -35vw !important;
+    left: -32vw !important;
     background-color: #333333;
     color: white;
     padding: 0;
+    border: none;
 }
 
 .main-menu .dropdown-menu .title{ 
@@ -2326,7 +2327,7 @@ a {
 .navbar-gamehedge .navbar-nav > .open > a, .navbar-gamehedge .navbar-nav > .open > a:focus,
 .navbar-gamehedge .navbar-nav > .open > a:hover {
     color: #fff;
-    background: none;
+    background-color: #373d3f;
 }
 
 .nav-gamehedge > li {
