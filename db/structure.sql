@@ -588,7 +588,14 @@ CREATE TABLE orders (
     modified_date timestamp without time zone,
     refund_status_id integer,
     real_event_date timestamp without time zone,
-    order_status character varying
+    order_status character varying,
+    customer_email character varying,
+    number_of_tickets integer,
+    sale_price_per_ticket double precision,
+    ticket_total double precision,
+    broker_name character varying,
+    service_fee double precision,
+    shipping_fee double precision
 );
 
 
@@ -1733,4 +1740,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160826165853');
 INSERT INTO schema_migrations (version) VALUES ('20160902001252');
 
 INSERT INTO schema_migrations (version) VALUES ('20160902195622');
+
+INSERT INTO schema_migrations (version) VALUES ('20160907162254');
 
