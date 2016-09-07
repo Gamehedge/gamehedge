@@ -470,6 +470,10 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			        	ticket_format: $scope.ticket.format,
 			        	cost: $scope.ticket.wholesale_price,
 			        	discount: $scope.discount,
+			        	subtotal: $scope.subtotal,
+			        	email: $scope.client.primary_email_address.address,
+			        	subtotal: $scope.subtotal,
+			        	broker_name: $scope.ticket.office.name,
 			        },
 			    }).then(function successCallback(response) {
 			    	$scope.processing = false;

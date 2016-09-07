@@ -29,6 +29,9 @@ class OrdersController < ApplicationController
 		@service_fee = request.POST["service_fee"]
 		@ticket_format = request.POST["ticket_format"]
 		@discount = request.POST["discount"]
+		@subtotal = request.POST["subtotal"]
+		@email = request.POST["email"]
+		@broker_name = request.POST["broker_name"]
 		
         
         @order = TicketEvolutionService.new({id: @user_id}).createShipment({ address_id: @ship_address_id, 
@@ -59,6 +62,7 @@ class OrdersController < ApplicationController
         if @order["error"]
         	puts "error"
         else
+        	@real_event_date = Time.parse @event_occurs_at
         	Order.create(client_id: @user_id,
 	         	client_name: @ship_to_name,
 	         	te_order_id: @order["id"],
@@ -71,10 +75,17 @@ class OrdersController < ApplicationController
 	         	ticket_seats: @quantity,
 	         	ticket_format: @ticket_format,
 	         	total: @amount,
-	         	cost: @ship_to_name,
-	         	order_data: @order.to_s,
-	        )
-	    end
+	         	customer_email: @email,
+				number_of_tickets: @quantity,
+				sale_price_per_ticket: @price,
+				ticket_total: @subtotal,
+				broker_name: @broker_name,
+				service_fee: @service_fee,
+				shipping_fee: @shipment_price,
+				real_event_date:  @real_event_date,
+				order_data: @order.to_s,
+			)
+		end
         render json: @order
     end
 

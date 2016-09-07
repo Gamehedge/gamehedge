@@ -15,7 +15,7 @@ index :download_links => [:csv] do
     column :event_name
     column ("Home Team")  { |order| order.event_home_team }
     column ("Away Team")  { |order| order.event_away_team }
-    column :event_date
+    column ("Event Date")  { |order| order.real_event_date }
     column ("Venue")  { |order| order.event_location }
     column ("Section")  { |order| order.ticket_section }
     column ("Row")  { |order| order.ticket_row }
@@ -26,7 +26,7 @@ index :download_links => [:csv] do
     column :ticket_total
     column :service_fee
     column :shipping_fee
-    column :order_total
+    column ("Order Total")  { |order| order.total }
     column :order_status
 end
 
@@ -58,7 +58,7 @@ csv do
     column :ticket_total
     column :service_fee
     column :shipping_fee
-    column :order_total
+    column ("Order Total")  { |order| order.total }
     column :order_status
 end
 
