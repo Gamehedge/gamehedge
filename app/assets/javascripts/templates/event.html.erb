@@ -49,13 +49,13 @@
         </div>
         
         <div class="col-xs-12 text-center filter-title">
-            DELIVERY TYPE
+            SHOW
         </div>
         
         <div class="col-xs-12 filter-row text-center">
-            <button ng-class="{'active': mob_delivery == 0}" ng-click="updateMobDelivery(0)">All</button>
-            <button ng-class="{'active': mob_delivery == 1}" ng-click="updateMobDelivery(1)">Physical Delivery</button>
-            <button ng-class="{'active': mob_delivery == 2}" ng-click="updateMobDelivery(2)">Email Delivery</button>
+            <button ng-class="{'active': mob_eticket == true}" ng-click="updateMobEticket()">Etickets Only</button>
+            <button ng-class="{'active': mob_delivery == 0}" ng-click="updateMobDelivery(0)">Tickets Only</button>
+            <button ng-class="{'active': mob_delivery == 1}" ng-click="updateMobDelivery(1)">Parking Only</button>
         </div>
         
         <div class="show-button" ng-click="showMobFilters()">

@@ -25,18 +25,16 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
     
     $scope.closeFilter = function() {
         $scope.filter_active = false;
-        $scope.mob_index = $scope.index;
         
-        if($scope.etickets == false && $scope.physicals == false ){
+        $scope.mob_index = $scope.index;
+        $scope.mob_eticket = $scope.etickets;
+        
+        if($scope.onlyParking == false){
             $scope.mob_delivery = 0;
         }
-        if($scope.etickets == false && $scope.physicals == true ){
+        else {
             $scope.mob_delivery = 1;
         }
-        if($scope.etickets == true && $scope.physicals == false ){
-            $scope.mob_delivery = 2;
-        }
-        
     }
 
 	$scope.updateFilter = function(index){
@@ -51,18 +49,19 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         $scope.mob_delivery = index;
     }
     
+    $scope.updateMobEticket = function(index) {
+        $scope.mob_eticket = !$scope.mob_eticket;
+    }
+    
     $scope.showMobFilters = function() {
         $scope.index = $scope.mob_index;
         
+        $scope.etickets = $scope.mob_eticket;
+        
         switch($scope.mob_delivery){
-            case 0: $scope.etickets = false;
-                    $scope.physicals = false;
+            case 0: $scope.onlyParking = false;
                     break;
-            case 1: $scope.etickets = false;
-                    $scope.physicals = true;
-                    break;
-            case 2: $scope.etickets = true;
-                    $scope.physicals = false;
+            case 1: $scope.onlyParking = true;
                     break;
         }
         //console.log($scope.mob_delivery);
@@ -262,6 +261,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	$scope.index = 0;
     $scope.mob_index = 0;
     $scope.mob_delivery = 0;
+    $scope.mob_eticket = false;
 	$scope.ordering = 'retail_price';
 	$scope.etickets = false;
     $scope.physicals = false;
