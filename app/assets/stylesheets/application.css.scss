@@ -50,7 +50,7 @@
   right: 0;
 }
 
-.dropdown:hover .dropdown-menu {
+.dropdown.main-dropdown:hover .dropdown-menu {
     display: block;
     margin-top: 0; // remove the gap so it doesn't close
  }
@@ -1823,6 +1823,17 @@ body {
     margin-right: -6%;
     border: 0;
     border-top: 1px solid #eeeeee;
+}
+
+.modal-content {
+    border-radius: 5px !important;
+}
+
+.modal-header {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: #6d6d6d !important;
+    color: white;
 }
 
 #confirmation h1{

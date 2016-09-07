@@ -7,7 +7,7 @@ controllers.controller('LoginController', function($scope,$rootScope,Auth,$locat
         // User was logged in, or Devise returned
         // previously authenticated session.
         //console.log(user); // => {id: 1, ect: '...'}
-        console.log()
+        //console.log()
         $location.path('/');
     }, function(error) {
         // unauthenticated error
@@ -24,12 +24,12 @@ controllers.controller('LoginController', function($scope,$rootScope,Auth,$locat
                 'X-HTTP-Method-Override': 'POST'
             }
         };
-        console.log(credentials);
+        //console.log(credentials);
         Auth.login(credentials, config).then(function(user) {
-            console.log(user); // => {id: 1, ect: '...'}
+            //console.log(user); // => {id: 1, ect: '...'}
         }, function(error) {
             // Authentication failed...
-            console.log("failed");
+            //console.log("failed");
             $rootScope.user = undefined;
             $rootScope.isLoggedin = false;
             $scope.logging_in = false;
@@ -38,7 +38,7 @@ controllers.controller('LoginController', function($scope,$rootScope,Auth,$locat
 
         $scope.$on('devise:login', function(event, currentUser) {
             // after a login, a hard refresh, a new tab
-            console.log(currentUser);
+            //console.log(currentUser);
             $rootScope.user = currentUser;
             $rootScope.isLoggedin = true;
             $location.path('/');

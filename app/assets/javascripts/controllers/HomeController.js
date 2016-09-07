@@ -28,7 +28,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 				$scope.getNextEvents(i);	
 			}
 		}, function errorCallback(response) {
-			console.log(response);
+			//console.log(response);
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		});
@@ -58,7 +58,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 		else{
 			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10';
 		}
-		console.log(url)
+		//console.log(url)
 		$http({
 		  	method: 'GET',
 		  	url: url,
@@ -74,11 +74,11 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 			$scope.tiles[index].ready = true;
 			index += 1;
 			if(index >= $scope.tiles.length){
-				console.log("Tiles");
-				console.log($scope.tiles);
+				//console.log("Tiles");
+				//console.log($scope.tiles);
 			}
 		}, function errorCallback(response2) {
-			console.log(response2);
+			//console.log(response2);
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		});
@@ -89,7 +89,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 		  	method: 'GET',
 		  	url: '/events/near/?id='+id,
 		}).then(function successCallback(response) {
-			console.log(response.data);
+			//console.log(response.data);
 			$scope.sports[i].near_events = response.data;
 			$scope.loading += 1;
 			// this callback will be called asynchronously
@@ -109,7 +109,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
             .then(function(response){
             	//console.log(response)
                 var width = $("#search_element").width() + 50;
-                console.log("width: " + width);
+                //console.log("width: " + width);
                 $('#form-home-search [uib-typeahead-popup].dropdown-menu').width(width);
                 
                 return response;
@@ -155,12 +155,12 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 	Auth.currentUser().then(function(user) {
         // User was logged in, or Devise returned
         // previously authenticated session.
-        console.log(user); // => {id: 1, ect: '...'}
+        //console.log(user); // => {id: 1, ect: '...'}
         $rootScope.user = user;
         $rootScope.isLoggedin = true;
     }, function(error) {
         // unauthenticated error
-        console.log("error login");
+        //console.log("error login");
         $rootScope.user = undefined;
         $rootScope.isLoggedin = false;
     });

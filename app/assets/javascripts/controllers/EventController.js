@@ -8,8 +8,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	$scope.getEventInfo = function(){
 		return apiService.getData('/api/v1/events/'+$routeParams.eventId)
             .then(function(response){
-            	console.log("Event");
-            	console.log(response);
+            	//console.log("Event");
+            	//console.log(response);
                 $scope.event  = response;
                 if($routeParams.slug == $scope.event.slug){
                 	$scope.getTicketList();
@@ -131,9 +131,9 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	            $scope.Data.push({"section":key,"price":0,"quantity":1});
 	        });
 	        $scope.loadMap();
-	        console.log(response.data);
+	        //console.log(response.data);
         }, function errorCallback(response) {
-            console.log(response);
+            //console.log(response);
             // called asynchronously if an error occurs
             // or server returns response with an error status.
         });
@@ -150,7 +150,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 
 	$scope.loadMap = function(){
 		var date = $filter('date')($scope.event.occurs_at, 'yyyy-MM-ddTHH:mm');
-		console.log(date);
+		//console.log(date);
 		$("#MapContainer").tuMap({
 	        EventInfo: {
 	            Venue: $scope.event.venue.name,
@@ -243,12 +243,12 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	$scope.redirect = function(amount,id) {
 		//var amount = $($event.currentTarget).parent().parent().parent().find("select").val();
 		var url = '/order/'+id+'?amount='+String(amount);
-		console.log(url);
+		//console.log(url);
 	  	$location.url(url);
 	};
 
 	$scope.$on('LastRepeaterElement', function(){
-		console.log('good to go');
+		//console.log('good to go');
 		$timeout(function () {
 	        $('[data-toggle="tooltip"]').tooltip();
 	    }, 1000);
@@ -276,12 +276,12 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	Auth.currentUser().then(function(user) {
         // User was logged in, or Devise returned
         // previously authenticated session.
-        console.log(user); // => {id: 1, ect: '...'}
+        //console.log(user); // => {id: 1, ect: '...'}
         $rootScope.user = user;
         $rootScope.isLoggedin = true;
     }, function(error) {
         // unauthenticated error
-        console.log("error login");
+        //console.log("error login");
         $rootScope.user = undefined;
         $rootScope.isLoggedin = false;
     });
@@ -295,7 +295,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
     }
     else if(numSeats == 5){
     	angular.forEach(input, function(value, key) {
-    		console.log("Section "+value.section+" Row "+value.row);
+    		//console.log("Section "+value.section+" Row "+value.row);
     		var keepGoing = true;
     		angular.forEach(value.splits, function(value2, key2) {
     			if(value2 >= 5 && keepGoing == true){

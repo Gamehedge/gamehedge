@@ -154,7 +154,7 @@
         </div>
         <div class="col-md-4 hidden-sm hidden-xs horizontal-center main-menu">
             <ul class="nav navbar-nav navbar-leagues vertical-center horizontal-center" ng-show="!$root.isOrder" ng-repeat="league in leagueList | orderBy:'name' track by $index" ng-if="league.active == true">
-               <li class="dropdown yamm-fw">
+               <li class="dropdown main-dropdown yamm-fw">
                      <a class="dropdown-toggle" href="{{league.url}}">{{league.name | uppercase}}</a>
                      <ul class="dropdown-menu" ng-class="{'size1':league.name == 'MLB' || league.name == 'NBA','size2':league.name == 'NFL','size3':league.name == 'NHL','size4':league.name == 'NCAAFB'}">
                         <li>

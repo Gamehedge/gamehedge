@@ -577,8 +577,8 @@ CREATE TABLE orders (
     ticket_row character varying(50),
     ticket_seats character varying(50),
     ticket_format character varying(24),
-    total integer,
-    cost integer,
+    total double precision,
+    cost double precision,
     order_data text,
     ticket_data text,
     event_data text,
@@ -1750,4 +1750,8 @@ INSERT INTO schema_migrations (version) VALUES ('20160907162254');
 INSERT INTO schema_migrations (version) VALUES ('20160907200003');
 
 INSERT INTO schema_migrations (version) VALUES ('20160907202253');
+
+INSERT INTO schema_migrations (version) VALUES ('20160907225754');
+
+INSERT INTO schema_migrations (version) VALUES ('20160907230150');
 

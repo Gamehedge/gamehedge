@@ -9,11 +9,11 @@ controllers.controller('MemberController', function($scope,$rootScope,$http,$loc
 	        url: '/clients/show?id='+$rootScope.user.te_uid,
 	    }).then(function successCallback(response) {
 	    	$scope.client = response.data.client;
-	    	console.log("Client");
-	    	console.log($scope.client);
+	    	//console.log("Client");
+	    	//console.log($scope.client);
 	    	$scope.loading = false;
 	    }, function errorCallback(response) {
-	        console.log(response);
+	        //console.log(response);
 	    });
 	}
 
@@ -22,13 +22,13 @@ controllers.controller('MemberController', function($scope,$rootScope,$http,$loc
 	Auth.currentUser().then(function(user) {
         // User was logged in, or Devise returned
         // previously authenticated session.
-        console.log(user); // => {id: 1, ect: '...'}
+        //console.log(user); // => {id: 1, ect: '...'}
         $rootScope.user = user;
         $rootScope.isLoggedin = true;
         $scope.getClient();
     }, function(error) {
         // unauthenticated error
-        console.log("error login");
+        //console.log("error login");
         $rootScope.user = undefined;
         $rootScope.isLoggedin = false;
         $location.path('/');

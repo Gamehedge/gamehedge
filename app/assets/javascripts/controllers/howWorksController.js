@@ -9,7 +9,7 @@ controllers.controller('howWorksController', function($scope,$rootScope,$locatio
             .then(function(response){
             	//console.log(response)
                 var width = $("#search_element").width() + 50;
-                console.log("width: " + width);
+                //console.log("width: " + width);
                 $('#form-home-search [uib-typeahead-popup].dropdown-menu').width(width);
                 
                 return response;

@@ -71,4 +71,13 @@ class ClientsController < ActionController::Base
     @user.save
     render text: "Success"
   end
+
+  def exists
+    if Client.where(email: request.POST["email"]).exists?
+      @exists = true
+    else
+      @exists = false
+    end
+    render text: @exists
+  end
 end

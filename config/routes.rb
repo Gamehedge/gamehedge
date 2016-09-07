@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   post 'clients/get_session'
   get 'clients/info'
   post 'clients/create'
+  post 'clients/exists'
   post 'clients/update_password'
   post 'orders/create'
   get 'orders/list'

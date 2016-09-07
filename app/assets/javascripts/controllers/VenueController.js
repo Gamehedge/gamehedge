@@ -5,8 +5,8 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
 	$scope.getVenueInfo = function(){
 		apiService.getData('/api/v1/venues/'+$routeParams.venueId)
             .then(function(response){
-                console.log("Venue");
-            	console.log($scope.venue);
+                //console.log("Venue");
+            	//console.log($scope.venue);
                 $scope.venue  = response;
                 if($routeParams.slug == $scope.venue.slug){
                     $scope.getEvents();
@@ -20,9 +20,9 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
     $scope.getTestimonials = function(){
         apiService.getData('/api/v1/testimonials/?performer_id='+String($scope.performer.id))
             .then(function(response){
-                console.log("Testimonials");
+                //console.log("Testimonials");
                 $scope.testimonials = response;
-                console.log($scope.testimonials);
+                //console.log($scope.testimonials);
         });
     }
 
@@ -40,10 +40,10 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
         else{
             url = '/api/v1/events/?venue_id='+$scope.venue.id+'&today_date='+today_date+'&page='+$scope.page+'&per_page=10&selected_team='+$scope.performer_id;
         }
-        console.log(url)
+        //console.log(url)
         apiService.getData(url)
             .then(function(response){
-                console.log("Events");
+                //console.log("Events");
                 $scope.events = $scope.events.concat(response.data);
                 if($scope.events.length < Number(response.total)){
                     $scope.load_more = true;
@@ -52,7 +52,7 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
                     $scope.load_more = false;   
                 }
                 $scope.disable_toogle = false;
-                console.log($scope.events);
+                //console.log($scope.events);
                 $scope.loading = false;
         });
     };
@@ -76,7 +76,7 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
             .then(function(response){
             	//console.log(response);
                 var width = $("#search_element").width() + 50;
-                console.log("width: " + width);
+                //console.log("width: " + width);
                 $('#form-home-search [uib-typeahead-popup].dropdown-menu').width(width);
                 
                 return response;
@@ -136,12 +136,12 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
     Auth.currentUser().then(function(user) {
         // User was logged in, or Devise returned
         // previously authenticated session.
-        console.log(user); // => {id: 1, ect: '...'}
+        //console.log(user); // => {id: 1, ect: '...'}
         $rootScope.user = user;
         $rootScope.isLoggedin = true;
     }, function(error) {
         // unauthenticated error
-        console.log("error login");
+        //console.log("error login");
         $rootScope.user = undefined;
         $rootScope.isLoggedin = false;
     });

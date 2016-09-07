@@ -5,8 +5,8 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
 	$scope.getPerformerInfo = function(){
 		apiService.getData('/api/v1/performers/'+$routeParams.performerId)
             .then(function(response){
-                console.log("Performer");
-            	console.log(response);
+                //console.log("Performer");
+            	//console.log(response);
                 $scope.performer  = response;
                 if($routeParams.slug == $scope.performer.slug){
                     $scope.getTestimonials();
@@ -21,9 +21,9 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
     $scope.getTestimonials = function(){
         apiService.getData('/api/v1/testimonials/?performer_id='+String($scope.performer.id))
             .then(function(response){
-                console.log("Testimonials");
+                //console.log("Testimonials");
                 $scope.testimonials = response;
-                console.log($scope.testimonials);
+                //console.log($scope.testimonials);
         });
     }
 
@@ -43,7 +43,7 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
         }
         apiService.getData(url)
             .then(function(response){
-                console.log("Events");
+                //console.log("Events");
                 $scope.events = $scope.events.concat(response.data);
                 if($scope.events.length < Number(response.total)){
                     $scope.load_more = true;
@@ -52,7 +52,7 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
                     $scope.load_more = false;   
                 }
                 $scope.disable_toogle = false;
-                console.log($scope.events);
+                //console.log($scope.events);
                 $scope.loading = false;
         });
     };
@@ -76,7 +76,7 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
             .then(function(response){
             	//console.log(response);
                 var width = $("#search_element").width() + 50;
-                console.log("width: " + width);
+                //console.log("width: " + width);
                 $('#form-home-search [uib-typeahead-popup].dropdown-menu').width(width);
             
                 return response;
@@ -134,12 +134,12 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
     Auth.currentUser().then(function(user) {
         // User was logged in, or Devise returned
         // previously authenticated session.
-        console.log(user); // => {id: 1, ect: '...'}
+        //console.log(user); // => {id: 1, ect: '...'}
         $rootScope.user = user;
         $rootScope.isLoggedin = true;
     }, function(error) {
         // unauthenticated error
-        console.log("error login");
+        //console.log("error login");
         $rootScope.user = undefined;
         $rootScope.isLoggedin = false;
     });

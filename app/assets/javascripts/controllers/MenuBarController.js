@@ -11,13 +11,13 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
         };
     	Auth.logout(config).then(function(oldUser) {
             // alert(oldUser.name + "you're signed out now.");
-            console.log("logged out");
+            //console.log("logged out");
             $rootScope.isLoggedin = false;
             $rootScope.user = undefined;
             $location.path('/');
         }, function(error) {
             // An error occurred logging out.
-            console.log("An error occurred logging out.");
+            //console.log("An error occurred logging out.");
         });
         $scope.$on('devise:logout', function(event, oldCurrentUser) {
             // ...
@@ -59,8 +59,8 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
         }).then(function successCallback(response) {
 
             $scope.leagueList = response.data;
-            console.log("Leagues");
-            console.log($scope.leagueList);
+            //console.log("Leagues");
+            //console.log($scope.leagueList);
             // this callback will be called asynchronously
             // when the response is available
         }, function errorCallback(response) {
@@ -80,8 +80,8 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
         }).then(function successCallback(response) {
 
             $scope.divisions = response.data;
-            console.log("Divisions");
-            console.log($scope.divisions);
+            //console.log("Divisions");
+            //console.log($scope.divisions);
             // this callback will be called asynchronously
             // when the response is available
         }, function errorCallback(response) {
@@ -101,8 +101,8 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
         }).then(function successCallback(response) {
 
             $scope.performers = response.data;
-            console.log("Performers");
-            console.log($scope.performers);
+            //console.log("Performers");
+            //console.log($scope.performers);
             // this callback will be called asynchronously
             // when the response is available
         }, function errorCallback(response) {

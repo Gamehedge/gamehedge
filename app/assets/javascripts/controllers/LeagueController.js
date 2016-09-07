@@ -5,8 +5,8 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
     $scope.getLeagueInfo = function(){
 		apiService.getData('/api/v1/sports/'+$routeParams.leagueId)
             .then(function(response){
-                console.log("League");
-            	console.log(response);
+                //console.log("League");
+            	//console.log(response);
                 $scope.league  = response;
                 if($routeParams.slug == $scope.league.slug){
                     if($scope.league.active == true){
@@ -26,8 +26,8 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
 	$scope.getDivisions = function(){
 		apiService.getData('/api/v1/divisions/?sport_id='+$scope.league.id)
             .then(function(response){
-                console.log("Divisions");
-            	console.log(response);
+                //console.log("Divisions");
+            	//console.log(response);
                 $scope.divisions = response;
                 var len = $scope.divisions.length;
                 var mid = len / 2;
@@ -40,8 +40,8 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
 	$scope.getPerformers = function(){
 		apiService.getData('/api/v1/performers/?sport_id='+$scope.league.id)
             .then(function(response){
-                console.log("Performers");
-            	console.log(response);
+                //console.log("Performers");
+            	//console.log(response);
                 $scope.performers = response;
                 $scope.loading = false;
         });
@@ -55,7 +55,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
             	//console.log(response);
             
                 var width = $("#search_element").width() + 50;
-                console.log("width: " + width);
+                //console.log("width: " + width);
                 $('#form-home-search [uib-typeahead-popup].dropdown-menu').width(width);
                 
                 return response;
@@ -78,10 +78,10 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
                 }
             }
             $scope.ready = true;
-            console.log("Next events");
-            console.log($scope.next_events);
+            //console.log("Next events");
+            //console.log($scope.next_events);
         }, function errorCallback(response2) {
-            console.log(response2);
+            //console.log(response2);
             // called asynchronously if an error occurs
             // or server returns response with an error status.
         });
@@ -127,12 +127,12 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
     Auth.currentUser().then(function(user) {
         // User was logged in, or Devise returned
         // previously authenticated session.
-        console.log(user); // => {id: 1, ect: '...'}
+        //console.log(user); // => {id: 1, ect: '...'}
         $rootScope.user = user;
         $rootScope.isLoggedin = true;
     }, function(error) {
         // unauthenticated error
-        console.log("error login");
+        //console.log("error login");
         $rootScope.user = undefined;
         $rootScope.isLoggedin = false;
     });

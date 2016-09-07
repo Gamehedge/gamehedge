@@ -6,14 +6,14 @@ controllers.controller('OrderHistoryController', function($scope,$rootScope,$htt
 		apiService.getData('/api/v1/orders/?client_id='+$rootScope.user.te_uid)
             .then(function(response){
                 $scope.local_orders  = response;
-                console.log("Local Orders");
-            	console.log($scope.local_orders);
+                //console.log("Local Orders");
+            	//console.log($scope.local_orders);
                 $scope.getOrders();
         });
 	}
 
 	$scope.getOrders = function(){
-		console.log($rootScope.user.te_uid);
+		//console.log($rootScope.user.te_uid);
         $http({
             method: 'GET',
             url: '/orders/list/?id='+$rootScope.user.te_uid,
@@ -25,11 +25,11 @@ controllers.controller('OrderHistoryController', function($scope,$rootScope,$htt
             		$scope.orders[i].refund_status = result[0].refund_status;
             	}
             }
-            console.log("Orders");
-            console.log($scope.orders);
+            //console.log("Orders");
+            //console.log($scope.orders);
             $scope.loading = false;
         }, function errorCallback(response) {
-            console.log(response);
+            //console.log(response);
             // called asynchronously if an error occurs
             // or server returns response with an error status.
         });
@@ -51,7 +51,7 @@ controllers.controller('OrderHistoryController', function($scope,$rootScope,$htt
 	            url: '/orders/request_refund/',
 	            data: {id: oid},
 	        }).then(function successCallback(response) {
-	        	console.log(response);
+	        	//console.log(response);
 	        	if(response.data == "success"){
 	        		$scope.orders[index].refund_status.name = "Refund Requested";
 	        		$scope.orders[index].refund_status.id = 3;
@@ -71,7 +71,7 @@ controllers.controller('OrderHistoryController', function($scope,$rootScope,$htt
 					});
 	        	}
 	        }, function errorCallback(response) {
-	            console.log(response);
+	            //console.log(response);
 	            swal({
 					title: "Refund not Requested",
 					text: "There was an error processing your request.",
@@ -89,13 +89,13 @@ controllers.controller('OrderHistoryController', function($scope,$rootScope,$htt
 	Auth.currentUser().then(function(user) {
         // User was logged in, or Devise returned
         // previously authenticated session.
-        console.log(user); // => {id: 1, ect: '...'}
+        //console.log(user); // => {id: 1, ect: '...'}
         $rootScope.user = user;
         $rootScope.isLoggedin = true;
         $scope.getLocalOrders();
     }, function(error) {
         // unauthenticated error
-        console.log("error login");
+        //console.log("error login");
         $rootScope.user = undefined;
         $rootScope.isLoggedin = false;
         $location.path('/');
