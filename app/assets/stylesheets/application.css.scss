@@ -2398,6 +2398,12 @@ a {
         max-width: 270px;
         margin-top: 25px;
     }
+    
+    #tickets-map .tickets-data{
+        height: -webkit-calc(100vh - 288px);
+        height:    -moz-calc(100vh - 288px);
+        height:         calc(100vh - 288px);
+    }
 }
 
 @media(max-width: 992px) {
