@@ -1356,9 +1356,7 @@ body {
 }
 
 #tickets-map .tickets-data{
-    height: -webkit-calc(100vh - 288px);
-    height:    -moz-calc(100vh - 288px);
-    height:         calc(100vh - 288px);
+    height: 180px;
     overflow-y: scroll;
     overflow-x: hidden;
     font-size:15px;
@@ -3098,7 +3096,9 @@ footer .footer-signature img{
     }
     
     #tickets-map #MapContainer {
-        height: 45vw;
+        height: -webkit-calc(100vh - 265px);
+        height:    -moz-calc(100vh - 265px);
+        height:         calc(100vh - 265px);
         /*width: 45vw;*/
     }
     
