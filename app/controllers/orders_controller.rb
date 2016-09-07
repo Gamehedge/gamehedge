@@ -62,7 +62,7 @@ class OrdersController < ApplicationController
         if @order["error"]
         	puts "error"
         else
-        	@real_event_date = Date.parse @event_occurs_at
+        	@real_event_date = Time.parse @event_occurs_at
         	Order.create(client_id: @user_id,
 	         	client_name: @ship_to_name,
 	         	te_order_id: @order["id"],
