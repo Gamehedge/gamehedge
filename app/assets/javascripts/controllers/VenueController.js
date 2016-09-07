@@ -1,6 +1,7 @@
 app = angular.module('gamehedge')
 
 app.controller('VenueController', function($scope,$rootScope,$routeParams,dataService, apiService,$window,$location, $timeout,Auth){
+    $rootScope.showHeader = true;
 	$scope.getVenueInfo = function(){
 		apiService.getData('/api/v1/venues/'+$routeParams.venueId)
             .then(function(response){

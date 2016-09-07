@@ -1356,9 +1356,7 @@ body {
 }
 
 #tickets-map .tickets-data{
-    height: -webkit-calc(100vh - 288px);
-    height:    -moz-calc(100vh - 288px);
-    height:         calc(100vh - 288px);
+    height: 180px;
     overflow-y: scroll;
     overflow-x: hidden;
     font-size:15px;
@@ -2400,6 +2398,12 @@ a {
         max-width: 270px;
         margin-top: 25px;
     }
+    
+    #tickets-map .tickets-data{
+        height: -webkit-calc(100vh - 288px);
+        height:    -moz-calc(100vh - 288px);
+        height:         calc(100vh - 288px);
+    }
 }
 
 @media(max-width: 992px) {
@@ -3074,11 +3078,15 @@ footer .footer-signature img{
     }
     
     .mobile-event-info .first-line {
-        font-size: 14px !important;
+        font-size: 12px !important;
     }
     
     .mobile-event-info .second-line {
-        font-size: 12px !important;
+        font-size: 10px !important;
+    }
+    
+    .capitalize {
+        text-transform: capitalize;
     }
     
     .mobile-event-span {
@@ -3094,7 +3102,9 @@ footer .footer-signature img{
     }
     
     #tickets-map #MapContainer {
-        height: 45vw;
+        height: -webkit-calc(100vh - 265px);
+        height:    -moz-calc(100vh - 265px);
+        height:         calc(100vh - 265px);
         /*width: 45vw;*/
     }
     
@@ -3350,6 +3360,17 @@ footer .footer-signature img{
     .how-works-mobile {
         padding-right: 15px;
     }
+    
+    .contact-mobile a {
+        font-size: 18px;
+    }
+    
+    #payments .ggg-badge-pledge img{
+        width: 100%;
+        height: auto;
+        max-width: 90px;
+    }
+    
 }
 
 .filter-row button {
@@ -5210,3 +5231,18 @@ main#admin #order-stats .stat-item span {
     padding-bottom: 40px;
 }
 
+#contact_container {
+    background-color: #ffffff;
+    text-align: justify;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+.contact-form {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.contact-form .form-horizontal .control-label {
+    padding-right: 10px;
+}

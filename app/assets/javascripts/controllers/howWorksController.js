@@ -2,6 +2,7 @@ controllers = angular.module('gamehedge')
 
 controllers.controller('howWorksController', function($scope,$rootScope,$location,$window, dataService, $timeout){
     $window.scrollTo(0, 0);
+    $rootScope.showHeader = true;
     
     $scope.getSearchHints = function(val) {
         return dataService.getData("/search/?search=" + val + "&limit=10")

@@ -2,7 +2,6 @@ app = angular.module('gamehedge')
 
 app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,dataService,$http){
 
-
 	$scope.logout = function(){
         $scope.hideMenus();
         var config = {

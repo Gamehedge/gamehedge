@@ -1,7 +1,7 @@
 controllers = angular.module('gamehedge')
 
 controllers.controller('OrderHistoryController', function($scope,$rootScope,$http,$location,Auth,apiService){
-
+    $rootScope.showHeader = true;
 	$scope.getLocalOrders = function(){
 		apiService.getData('/api/v1/orders/?client_id='+$rootScope.user.te_uid)
             .then(function(response){
