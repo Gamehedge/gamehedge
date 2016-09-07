@@ -2,8 +2,8 @@
 	
 	<section id="payments" ng-show="!order_success">
 	  	<div class="container">
-	  		<div class="row">
-	  			<div class="col-md-7">
+	  		<div class="row row-eq-height payment-container">
+	  			<div class="col-md-7 card-element">
 	  				<div class="card">
 	  					<div class="card-in deliver">
 	  						Deliver tickets to
@@ -933,7 +933,7 @@
 
 	  				</div>
 	  			</div>
-	  			<div class="col-md-5 mobile-separator">
+	  			<div class="col-md-5 mobile-separator card-element second-card">
 	  				<div class="card">
 	  					<div class="card-in summary">
 						    <div class="title">{{ticket.event.name}}</div>
@@ -955,29 +955,30 @@
 							    	</select>
 						    	</div>
 						    </div>
-						    <div class="description-line" ng-show="ticket.format == 'Physical'">
-						    	<div class="description">Shipping</div>
+						    <div class="description-line">
+						    	<div class="description">Subtotal</div>
+						    	<div class="value">{{subtotal | currency}}</div>
+						    </div>
+                            <hr>
+                            <div class="description-line">
+						    	<div class="description short">Service Fee</div>
+						    	<div class="value short">{{service_fee | currency}}</div>
+						    </div>
+                            <div class="description-line" ng-show="discount != 0">
+						    	<div class="description">Discount</div>
+						    	<div class="value">-{{discount | currency}}</div>
+						    </div>
+                            <div class="description-line" ng-show="ticket.format == 'Physical'">
+						    	<div class="description">Delivery Option</div>
 						    	<div class="value" >
 							    	<select id="shipping" ng-model="shipping_fee" ng-change="calculateValues()" >
 							    		<option ng-repeat="o in shipping_list | limitTo:2" value="{{o.price}}">{{o.name}}</option>
 							    	</select>
 						    	</div>
 						    </div>
-						    <div class="description-line">
-						    	<div class="description">Subtotal</div>
-						    	<div class="value">{{subtotal | currency}}</div>
-						    </div>
-						    <div class="description-line" ng-show="discount != 0">
-						    	<div class="description">Discount</div>
-						    	<div class="value">-{{discount | currency}}</div>
-						    </div>
 						    <div class="description-line" ng-show="ticket.format == 'Physical'">
 						    	<div class="description short">Shipping Fee</div>
 						    	<div class="value short">{{shipping_fee | currency}}</div>
-						    </div>
-						    <div class="description-line">
-						    	<div class="description short">Service Fee</div>
-						    	<div class="value short">{{service_fee | currency}}</div>
 						    </div>
 						    <div class="description-line">
 						    	<div class="description short">Shipping</div>
