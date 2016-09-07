@@ -2,6 +2,7 @@ controllers = angular.module('gamehedge')
 
 controllers.controller('contactController', function($scope,$rootScope,$location,$window, dataService, apiService){
     $window.scrollTo(0, 0);
+    $rootScope.showHeader = true;
     
     $scope.value_1 = Math.floor((Math.random() * 10) + 1);;
     $scope.value_2 = Math.floor((Math.random() * 10) + 1);;

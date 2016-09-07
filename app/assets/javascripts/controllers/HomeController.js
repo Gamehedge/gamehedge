@@ -1,6 +1,7 @@
 controllers = angular.module('gamehedge')
 
 controllers.controller('HomeController', function($scope,$rootScope,$http,$location,dataService,$window, $timeout,Auth){
+    $rootScope.showHeader = true;
 	$scope.TilesIndex = 0;
 	$scope.loading = true;
 	$rootScope.locat = $location.url();

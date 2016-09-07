@@ -2,11 +2,13 @@ controllers = angular.module('gamehedge')
 
 controllers.controller('EventController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http,$timeout,$location,$rootScope,Auth){
 
+    $rootScope.showHeader = false;
+    
 	$scope.getEventInfo = function(){
 		return apiService.getData('/api/v1/events/'+$routeParams.eventId)
             .then(function(response){
-            	console.log("Event");
-            	console.log(response);
+            	//console.log("Event");
+            	//console.log(response);
                 $scope.event  = response;
                 if($routeParams.slug == $scope.event.slug){
                 	$scope.getTicketList();

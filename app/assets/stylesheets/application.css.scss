@@ -3074,11 +3074,15 @@ footer .footer-signature img{
     }
     
     .mobile-event-info .first-line {
-        font-size: 14px !important;
+        font-size: 12px !important;
     }
     
     .mobile-event-info .second-line {
-        font-size: 12px !important;
+        font-size: 10px !important;
+    }
+    
+    .capitalize {
+        text-transform: capitalize;
     }
     
     .mobile-event-span {

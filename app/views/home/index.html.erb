@@ -123,7 +123,7 @@
 </div>
 
 <div ng-class="{'dark-header': $root.darkHeader}">
-    <nav class="navbar navbar-default navbar-gamehedge vertical-center" role="navigation">
+    <nav ng-if="showHeader == true" class="navbar navbar-default navbar-gamehedge vertical-center" role="navigation">
 
         <div class="col-xs-2 hidden-md hidden-lg" ng-show="!$root.isOrder">
             <div class="navbar navbar-default navbar-fixed-top">
