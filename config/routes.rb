@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   post 'orders/create'
   get 'orders/list'
   post 'orders/request_refund'
+  
+  get 'contact/send_message'
 
   resources :search, :signature
   
