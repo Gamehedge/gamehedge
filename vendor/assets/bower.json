@@ -6,6 +6,7 @@
     "angular-devise": "latest",
     "angular-animate": "latest",
     "angular-ladda": "latest",
-    "sweetalert": "latest"
+    "sweetalert": "latest",
+    "bootstrap-hover-dropdown": "latest"
   }
 }

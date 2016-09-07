@@ -46,14 +46,37 @@
   right: 0;
 }
 
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; // remove the gap so it doesn't close
+ }
+
 .main-menu .dropdown-menu { 
-    width: 70vw !important;
-    left: -32vw !important;
     background-color: #333333;
     color: white;
     padding: 0;
     border: none;
 }
+
+.main-menu .dropdown-menu.size1 {
+    width: 600px;
+    left: -270px;
+} 
+
+.main-menu .dropdown-menu.size2 {
+    width: 730px;
+    left: -335px;
+}
+
+.main-menu .dropdown-menu.size3 {
+    width: 400px;
+    left: -170px;
+} 
+
+.main-menu .dropdown-menu.size4 {
+    width: 750px;
+    left: -327px;
+} 
 
 .main-menu .dropdown-menu .title{ 
     font-size: 18px;
@@ -291,7 +314,7 @@ body {
 	font-family: Montserrat;
 	text-align: center;
 	color: #ffffff !important;
-	
+    font-size: 17px;
 }
 
 .navbar-leagues a:hover{
@@ -305,7 +328,7 @@ body {
 
 .navbar-myaccount a{
 	font-family: Montserrat;
-	font-size: 18px;
+	font-size: 15px;
 	text-align: center;
 	color: #ffffff;
 }
@@ -360,8 +383,13 @@ body {
     border-width: 0;
 }
 .navbar-myaccount .user-icon{
-	height: 32px;
+    height: 32px;
     margin-top: -7px;
+}
+.navbar-myaccount .press-icon{
+    height: 32px;
+    margin-top: -7px;
+    margin-right: 10px;
 }
 
 .navbar-myaccount .dropdown-icon{
@@ -651,7 +679,7 @@ body {
 }
 
 #near-events .back{
-    height: 250px;
+    height: 265px;
     width: 100%;
     background-color: #d8d8d8;
     padding-top: 15px;
@@ -677,7 +705,7 @@ body {
 #near-events .front .date-inner{
     width: 100px;
     height: 100%;
-    background-color: #373d3f;
+    background-color: #4b5254;
     margin: auto;
     color: #ffffff;
 }
@@ -2328,6 +2356,8 @@ a {
     color: #fff;
     background-color: #373d3f;
 }
+
+
 
 .nav-gamehedge > li {
     margin: 0 15px;
