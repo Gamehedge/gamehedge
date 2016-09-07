@@ -938,7 +938,7 @@
 	  					<div class="card-in summary">
 						    <div class="title">{{ticket.event.name}}</div>
 						    <div class="info">
-						    	{{event.occurs_at | date: "EEE,	MMM dd, yyyy hh:mm a"}}<br>
+						    	{{event.occurs_at | date: "EEE,	MMM dd, yyyy hh:mm a" : 'UTC'}}<br>
 						    	{{event.venue.name}}, {{event.venue.location}}<br>
 						    	Section {{ticket.section}}, Row {{ticket.row}}
 						    </div>
