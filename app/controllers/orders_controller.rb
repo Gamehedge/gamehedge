@@ -75,13 +75,13 @@ class OrdersController < ApplicationController
 	         	ticket_seats: @quantity,
 	         	ticket_format: @ticket_format,
 	         	total: @amount,
-	         	customer_email: @email
-				number_of_tickets: @quantity
-				sale_price_per_ticket: @price
-				ticket_total: @subtotal
-				broker_name: @broker_name
-				service_fee: @service_fee
-				shipping_fee: @shipment_price
+	         	customer_email: @email,
+				number_of_tickets: @quantity,
+				sale_price_per_ticket: @price,
+				ticket_total: @subtotal,
+				broker_name: @broker_name,
+				service_fee: @service_fee,
+				shipping_fee: @shipment_price,
 				real_event_date:  @real_event_date,
 				order_data: @order.to_s,
 			)
