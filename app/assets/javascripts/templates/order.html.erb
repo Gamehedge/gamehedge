@@ -415,7 +415,7 @@
 									    	<div class="row">
 					  							<div class="cvv col-xs-4">
 						  							<select class="form-control" id="exp-month" ng-model="$parent.card.expiration_month" name="month">
-												    	<option value="">Month exp.</option>
+												    	<option value="">Month</option>
 												    	<option value="01">JAN</option>
 												    	<option value="02">FEB</option>
 												    	<option value="03">MAR</option>
@@ -432,7 +432,7 @@
 											    </div>
 											    <div class="exp-month col-xs-4">
 												    <select class="form-control" id="exp-year" ng-model="$parent.card.expiration_year" name="year">
-												    	<option value="">Year exp.</option>
+												    	<option value="">Year</option>
 												    	<option value="2016">2016</option>
 												    	<option value="2017">2017</option>
 												    	<option value="2018">2018</option>
@@ -940,7 +940,7 @@
 						    <div class="info">
 						    	{{event.occurs_at | date: "EEE,	MMM dd, yyyy hh:mm a" : 'UTC'}}<br>
 						    	{{event.venue.name}}, {{event.venue.location}}<br>
-						    	Section {{ticket.section}}, Row {{ticket.row}}
+						    	<strong>Section {{ticket.section}}, Row {{ticket.row}}</strong>
 						    </div>
 						    <hr>
 						    <div class="description-line">
