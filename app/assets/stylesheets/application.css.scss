@@ -1762,8 +1762,7 @@ body {
 }
 
 #payments .ggg-badge-pledge img{
-    width: 100%;
-    max-width: 150px;
+    height: 70px;
 }
 
 #payments .ggg-badge-pledge ul{
@@ -3354,6 +3353,12 @@ footer .footer-signature img{
     
     .contact-mobile a {
         font-size: 18px;
+    }
+    
+    #payments .ggg-badge-pledge img{
+        width: 100%;
+        height: auto;
+        max-width: 90px;
     }
     
 }
