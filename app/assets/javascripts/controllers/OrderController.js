@@ -262,7 +262,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	    		$scope.edit_deliver = 1;
 				$scope.edit_billing = 1;
 				$scope.edit_credit_card = 3;
-				alert(response.data.error);
+				swal("Error", response.data.error, "error");
 	    	}
 	    	else{
 		    	$scope.card = response.data;
@@ -316,7 +316,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			else{
 				$scope.addShippingProcess = false;
 				$scope.processing = false;
-				alert("All fields are required");
+				swal("Error", "All fields are required", "warning");
 			}
 		}
 		else if(type == "card"){
@@ -342,7 +342,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 						else{
 							$scope.card = $scope.client.primary_credit_card;
 						}
-						alert(response.data.error);
+						swal("Error", response.data.error, "error");
 			    	}
 			    	else{
 				    	$scope.card = response.data;
@@ -362,17 +362,17 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			else if($.payment.validateCardExpiry($scope.card.expiration_month,$scope.card.expiration_year) == false){
 				$scope.processing = false;
 				$scope.addCardProcess = false;
-				alert("Expiration date not valid!");
+				swal("Error", "Expiration date not valid!", "warning");
 			}
 			else if($.payment.validateCardNumber($scope.card.last_digits) == false){
 				$scope.processing = false;
 				$scope.addCardProcess = false;
-				alert("Card number not valid!");
+				swal("Error", "Card number not valid!", "warning");
 			}
 			else{
 				$scope.processing = false;
 				$scope.addCardProcess = false;
-				alert("All fields are required");
+				swal("Error", "All fields are required", "warning");
 			}
 		}
 		else if(type == "billing"){
@@ -407,7 +407,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			else{
 				$scope.processing = false;
 			    $scope.addBillingProcess = false;
-			    alert("All fields are required");
+			    swal("Error", "All fields are required", "warning");
 			}
 		}
 	}
@@ -422,7 +422,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			if($scope.last_digits == ""){
 				$scope.processing = false;
 				$scope.payProcess = false;
-				alert("No credit card selected");
+				swal("Error", "No credit card selected", "warning");
 			}
 			else{
 				var service_type = "LEAST_EXPENSIVE"
@@ -474,6 +474,9 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			        	email: $scope.client.primary_email_address.address,
 			        	subtotal: $scope.subtotal,
 			        	broker_name: $scope.ticket.office.name,
+			        	last_digits: $scope.card.last_digits,
+			        	address: $scope.shipping_address.street_address,
+			        	phone: $scope.client.primary_phone_number.number,
 			        },
 			    }).then(function successCallback(response) {
 			    	$scope.processing = false;
@@ -487,7 +490,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    	else{
 			    		console.log("Error");
 			    		console.log(response);
-			    		alert(response.data.error);
+			    		swal("Error", response.data.error, "error");
 			    	}
 			    }, function errorCallback(response) {
 			    	console.log(response);
@@ -503,7 +506,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				$scope.edit_deliver = 4;
 				$scope.edit_billing = 3;
 				$scope.edit_credit_card = 3;
-				alert("All fields are requierd");
+				swal("Error", "All fields are requierd", "warning");
 			}
 			else if($.payment.validateCardExpiry($scope.card.expiration_month,$scope.card.expiration_year) == false){
 				$scope.processing = false;
@@ -511,7 +514,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				$scope.edit_deliver = 4;
 				$scope.edit_billing = 3;
 				$scope.edit_credit_card = 3;
-				alert("Expiration date not valid!");
+				swal("Error", "Expiration date not valid!", "warning");
 			}
 			else if($.payment.validateCardNumber($scope.card.last_digits) == false){
 				$scope.processing = false;
@@ -519,7 +522,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				$scope.edit_deliver = 4;
 				$scope.edit_billing = 3;
 				$scope.edit_credit_card = 3;
-				alert("Card number not valid!");
+				swal("Error", "Card number not valid.", "warning");
 			}
 			else if($scope.client.email != $scope.client.confirm_email){
 				$scope.processing = false;
@@ -527,7 +530,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				$scope.edit_deliver = 4;
 				$scope.edit_billing = 3;
 				$scope.edit_credit_card = 3;
-				alert("Email and confirm email fields shpuld be equal");
+				swal("Error", "Email and confirm email fields shpuld be equal", "warning");
 			}
 			else{
 				$http({
@@ -568,7 +571,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 						$scope.edit_deliver = 4;
 						$scope.edit_billing = 3;
 						$scope.edit_credit_card = 3;
-						alert(response.data.error);
+						swal("Error", response.data.error, "error");
 			    	}
 			    }, function errorCallback(response) {
 			    	console.log(response);
@@ -593,17 +596,17 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		        	email: $scope.client.primary_email_address.address,
 		        },
 		    }).then(function successCallback(response) {
-		    	alert("Your password has been updated");
+		    	swal("Success", "Your password has been updated", "success");
 		    	$scope.login2();
 		    }, function errorCallback(response) {
 		    	console.log(response);
 		    });
 		}
 		else if($scope.password == ""){
-			alert("Password cannot be empty");
+			swal("Error", "Password cannot be empty", "warning");
 		}
 		else{
-			alert("Both password fields must be the same");
+			swal("Error", "Both password fields must be the same", "warning");
 		}
 	}
 

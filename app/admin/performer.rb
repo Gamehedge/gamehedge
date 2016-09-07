@@ -5,7 +5,7 @@ ActiveAdmin.register Performer do
 #
 #config.per_page = 1000
 
-permit_params :te_name, :name, :te_slug, :image, :division_id, :sport_id, :venue_id, :wins, :losses, :description, :te_uid, :slug
+permit_params :te_name, :name, :te_slug, :image, :division_id, :sport_id, :venue_description, :venue_id, :wins, :losses, :description, :te_uid, :slug
 index :download_links => false do
     selectable_column
     column ("TEVO Id")  { |performer| performer.te_uid }
@@ -26,6 +26,7 @@ form multipart: true do |f|
       	f.input :wins
         f.input :losses
         f.input :description
+        f.input :venue_description
         f.input :slug
         f.input :url
         f.input :division, :as => :select, :collection => Division.all

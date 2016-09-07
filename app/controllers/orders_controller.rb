@@ -32,6 +32,9 @@ class OrdersController < ApplicationController
 		@subtotal = request.POST["subtotal"]
 		@email = request.POST["email"]
 		@broker_name = request.POST["broker_name"]
+		@cc_last_digits = request.POST["cc_last_digits"]
+		@address = request.POST["address"]
+		@phone_number = request.POST["phone_number"]
 		
         
         @order = TicketEvolutionService.new({id: @user_id}).createShipment({ address_id: @ship_address_id, 
@@ -63,7 +66,8 @@ class OrdersController < ApplicationController
         	puts "error"
         else
         	@real_event_date = Time.parse @event_occurs_at
-        	Order.create(client_id: @user_id,
+        	Order.create(
+        		client_id: @user_id,
 	         	client_name: @ship_to_name,
 	         	te_order_id: @order["id"],
 	         	event_name: @event_name,
@@ -83,6 +87,9 @@ class OrdersController < ApplicationController
 				service_fee: @service_fee,
 				shipping_fee: @shipment_price,
 				real_event_date:  @real_event_date,
+				cc_last_digits:  @cc_last_digits,
+				address: @address,
+				phone_number: @phone_number,
 				order_data: @order.to_s,
 			)
 		end

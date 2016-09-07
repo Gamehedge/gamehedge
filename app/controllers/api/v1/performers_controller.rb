@@ -22,16 +22,16 @@ class Api::V1::PerformersController < ApplicationApiController
         format.json { render json: @performers.to_json(:only => [:id, :name, :division_id, :url])}
         format.xml { render json: @performers.to_json(:only => [:id, :name, :division_id, :url])}
       else
-        format.json { render json: @performers.to_json(:only => [:id, :name, :wins, :losses, :te_slug, :division_id, :url, :description, :slug], :include => {:sport => {:only =>[:id, :te_uid, :name, :description, :ggg]},:division => {:only =>[:id, :te_name]},:venue => {:only =>[:id, :te_uid, :name, :description, :url]}}, :methods => [:image_url, :image_url_medium, :image_url_thumb, :image_cover])}
-        format.xml { render xml: @performers.to_json(:only => [:id, :name, :wins, :losses, :te_slug, :division_id, :url, :description, :slug], :include => {:sport => {:only =>[:id, :te_uid, :name, :description, :ggg]},:division => {:only =>[:id, :te_name]},:venue => {:only =>[:id, :te_uid, :name, :description]}}, :methods => [:image_url, :image_url_medium, :image_url_thumb, :image_cover])}
+        format.json { render json: @performers.to_json(:only => [:id, :name, :wins, :losses, :venue_description, :te_slug, :division_id, :url, :description, :slug], :include => {:sport => {:only =>[:id, :te_uid, :name, :description, :ggg]},:division => {:only =>[:id, :te_name]},:venue => {:only =>[:id, :te_uid, :name, :description, :url]}}, :methods => [:image_url, :image_url_medium, :image_url_thumb, :image_cover])}
+        format.xml { render xml: @performers.to_json(:only => [:id, :name, :wins, :losses, :venue_description, :te_slug, :division_id, :url, :description, :slug], :include => {:sport => {:only =>[:id, :te_uid, :name, :description, :ggg]},:division => {:only =>[:id, :te_name]},:venue => {:only =>[:id, :te_uid, :name, :description]}}, :methods => [:image_url, :image_url_medium, :image_url_thumb, :image_cover])}
       end
     end
   end
 
   def show
     respond_to do |format|
-      format.json { render json: @performer.to_json(:only => [:id, :name, :wins, :losses, :te_slug, :division_id, :url, :description, :slug], :include => {:sport => {:only =>[:id, :te_uid, :name, :description, :ggg]},:division => {:only =>[:id, :te_name]},:venue => {:only =>[:id, :te_uid, :name, :description, :url]}}, :methods => [:image_url, :image_url_medium, :image_url_thumb, :image_cover])}
-      format.xml { render xml: @performer.to_json(:only => [:id, :name, :wins, :losses, :te_slug, :division_id, :url, :description, :slug], :include => {:sport => {:only =>[:id, :te_uid, :name, :description, :ggg]},:division => {:only =>[:id, :te_name]},:venue => {:only =>[:id, :te_uid, :name, :description, :url]}}, :methods => [:image_url, :image_url_medium, :image_url_thumb, :image_cover])}
+      format.json { render json: @performer.to_json(:only => [:id, :name, :wins, :losses, :venue_description, :te_slug, :division_id, :url, :description, :slug], :include => {:sport => {:only =>[:id, :te_uid, :name, :description, :ggg]},:division => {:only =>[:id, :te_name]},:venue => {:only =>[:id, :te_uid, :name, :description, :url]}}, :methods => [:image_url, :image_url_medium, :image_url_thumb, :image_cover])}
+      format.xml { render xml: @performer.to_json(:only => [:id, :name, :wins, :losses, :venue_description, :te_slug, :division_id, :url, :description, :slug], :include => {:sport => {:only =>[:id, :te_uid, :name, :description, :ggg]},:division => {:only =>[:id, :te_name]},:venue => {:only =>[:id, :te_uid, :name, :description, :url]}}, :methods => [:image_url, :image_url_medium, :image_url_thumb, :image_cover])}
     end
   end
 
@@ -76,7 +76,7 @@ class Api::V1::PerformersController < ApplicationApiController
   end
 
   def data_params
-    params.permit(:id, :name, :wins, :losses, :te_slug, :division_id, :url, :description, :slug, :sport_id)
+    params.permit(:id, :name, :wins, :losses, :te_slug, :division_id, :url, :description, :slug, :sport_id, :venue_description)
   end
 
   private

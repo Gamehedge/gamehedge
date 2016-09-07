@@ -33,7 +33,7 @@ controllers.controller('LoginController', function($scope,$rootScope,Auth,$locat
             $rootScope.user = undefined;
             $rootScope.isLoggedin = false;
             $scope.logging_in = false;
-            alert("Email or password incorrect");
+            swal("Error", "Email or password incorrect. Please check amd try again.", "error");
         });
 
         $scope.$on('devise:login', function(event, currentUser) {

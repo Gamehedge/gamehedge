@@ -441,7 +441,8 @@ CREATE TABLE performers (
     wins integer,
     losses integer,
     description text,
-    slug character varying
+    slug character varying,
+    venue_description text
 );
 
 
@@ -595,7 +596,10 @@ CREATE TABLE orders (
     ticket_total double precision,
     broker_name character varying,
     service_fee double precision,
-    shipping_fee double precision
+    shipping_fee double precision,
+    cc_last_digits integer,
+    address character varying,
+    phone_number character varying
 );
 
 
@@ -1742,4 +1746,8 @@ INSERT INTO schema_migrations (version) VALUES ('20160902001252');
 INSERT INTO schema_migrations (version) VALUES ('20160902195622');
 
 INSERT INTO schema_migrations (version) VALUES ('20160907162254');
+
+INSERT INTO schema_migrations (version) VALUES ('20160907200003');
+
+INSERT INTO schema_migrations (version) VALUES ('20160907202253');
 

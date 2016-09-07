@@ -2,7 +2,7 @@
   
   <section id="game_info">
     <div class="row">
-      <div class="col-md-4 col-xs-12 ggg-logo vertical-center hidden-xs hidden-sm">
+      <div class="col-md-3 col-xs-12 ggg-logo vertical-center hidden-xs hidden-sm">
           <img src="<%= image_url "badge-gamehedge.png" %>" alt="GameHedge" />
           Your tickets come with the<br>
           GOOD GAME GUARANTEE!
@@ -10,7 +10,7 @@
       <div class="col-md-4 col-xs-12 moto vertical-center hidden-xs hidden-sm">
         All GameHedge tickets come with our exclusive Good Game Guarantee at no additional cost to you. So, if the home team loses by 5 runs or more, we will refund 50% of the price of your ticket. No gimmicks. No catches.
       </div>
-      <div class="col-md-4 col-xs-12 mobile-event-container" style="height: 100%;">
+      <div class="col-md-5 col-xs-12 mobile-event-container" style="height: 100%;">
         <div class="col-md-2 date-holder hidden-xs hidden-sm">
           <p class="date1">{{event.occurs_at | date:'MMM': 'UTC' | uppercase}}</p>
           <p class="date2">{{event.occurs_at | date:'dd' : 'UTC'| uppercase}}</p>
@@ -191,8 +191,8 @@
 
 
 
-          <div id="home-loading-data" class="col-xs-12 text-center" ng-if="loading">
-            <img src="<%= image_url 'loadinfo.gif' %>">
+          <div id="home-loading-data" class="col-xs-12 horizontal-center" ng-if="loading">
+            <div class='uil-default-css' style='transform:scale(0.32);'><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(0deg) translate(0,-60px);transform:rotate(0deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(30deg) translate(0,-60px);transform:rotate(30deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(60deg) translate(0,-60px);transform:rotate(60deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(90deg) translate(0,-60px);transform:rotate(90deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(120deg) translate(0,-60px);transform:rotate(120deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(150deg) translate(0,-60px);transform:rotate(150deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(180deg) translate(0,-60px);transform:rotate(180deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(210deg) translate(0,-60px);transform:rotate(210deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(240deg) translate(0,-60px);transform:rotate(240deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(270deg) translate(0,-60px);transform:rotate(270deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(300deg) translate(0,-60px);transform:rotate(300deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(330deg) translate(0,-60px);transform:rotate(330deg) translate(0,-60px);border-radius:10px;position:absolute;'></div></div>
           </div>
 
 
