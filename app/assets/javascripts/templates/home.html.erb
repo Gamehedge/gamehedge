@@ -185,7 +185,7 @@
                 <div class="performer-name" ng-if="tile.tile_type.id == 1 && tile.image_url != '/images/original/missing.png'">{{tile.sport.name | uppercase}}</div>
                 <div class="performer-name" ng-if="tile.tile_type.id == 2 && tile.image_url != '/images/original/missing.png'">{{tile.performer.name | uppercase}}</div>
                 <div class="performer-name" ng-if="tile.tile_type.id == 3 && tile.image_url != '/images/original/missing.png'">{{tile.venue.name | uppercase}}</div>
-                <img src="{{tile.image_url}}" ng-if="tile.image_url != '/images/original/missing.png'">
+                <img src="{{tile.image_url}}" ng-if="tile.image_url != '/images/original/missing.png'" imageonload>
                 <div class="info-container" ng-if="tile.tile_type.id == 1 || tile.tile_type.id == 3">
                   <div ng-if="tile.tile_type.id == 1" class="tile-title">{{tile.sport.name}} Games</div>
                   <div ng-if="tile.tile_type.id == 3" class="tile-title">{{tile.venue.name}}</div>

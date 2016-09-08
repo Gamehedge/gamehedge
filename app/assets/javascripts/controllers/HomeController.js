@@ -96,7 +96,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 					percentPosition: true,
 					gutter: 23,
 				});
-			},1000)
+			},500)
 			
 		}, function errorCallback(response2) {
 			//console.log(response2);
@@ -190,4 +190,27 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
   return function (input) {
       return input.replace(/ /g, '-');
   };
+})
+.directive('imageonload', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            element.bind('load', function() {
+                $('.grid').masonry({
+					itemSelector: '.grid-item',
+					columnWidth: '.grid-sizer',
+					percentPosition: true,
+					gutter: 23,
+				});
+            });
+            element.bind('error', function(){
+                $('.grid').masonry({
+					itemSelector: '.grid-item',
+					columnWidth: '.grid-sizer',
+					percentPosition: true,
+					gutter: 23,
+				});
+            });
+        }
+    };
 });
