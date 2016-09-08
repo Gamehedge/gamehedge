@@ -11,6 +11,6 @@ class ApplicationMailer < ActionMailer::Base
     
   def contact_email_message(_email)
         @email = _email
-        mail(to: 'edgar@toro-labs.com', subject: "New request for receive updates and deals of www.gamehedge.com from " + @email)
+        mail(to: 'support@gamehedge.com', subject: "New request for receive updates and deals of www.gamehedge.com from " + @email)
   end
 end
