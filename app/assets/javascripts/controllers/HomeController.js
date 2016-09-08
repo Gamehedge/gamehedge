@@ -89,7 +89,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 				//console.log("Tiles");
 				//console.log($scope.tiles);
 			}
-			console.log(tile.venue.name);
+			console.log($scope.tiles[index].venue.name);
 			$timeout(function(){
 				$('.grid').masonry({
 					itemSelector: '.grid-item',
