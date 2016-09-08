@@ -48,7 +48,12 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 				source = "team";
 			}
 			else if($scope.tiles[index].tile_type.id == '3'){
-				id = $scope.tiles[index].venue.te_uid;
+				if($scope.tiles[index].has_geolocation == false){
+					id = $scope.tiles[index].venue.te_uid;
+				}
+				else{
+					id = 0;
+				}
 				source = "venue";
 			}
 		}
@@ -63,7 +68,14 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 		  	method: 'GET',
 		  	url: url,
 		}).then(function successCallback(response2) {
-			$scope.tiles[index].events = response2.data;
+			if($scope.tiles[index].tile_type.id == '3' && $scope.tiles[index].has_geolocation == true){
+				$scope.tiles[index].events = response2.data.events;
+				$scope.tiles[index].venue = response2.data.venue;
+				$scope.tiles[index].url = response2.data.venue.url;
+			}
+			else{
+				$scope.tiles[index].events = response2.data;
+			}
 			if($scope.tiles[index].events != null){
 				for(j=$scope.tiles[index].events.length - 1;j>=0;j--){
 					if($scope.tiles[index].events[j].performances.length != 2){
