@@ -89,6 +89,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 				//console.log("Tiles");
 				//console.log($scope.tiles);
 			}
+			console.log(tile.venue.name);
 			$timeout(function(){
 				$('.grid').masonry({
 					itemSelector: '.grid-item',
@@ -96,7 +97,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 					percentPosition: true,
 					gutter: 23,
 				});
-			},100)
+			},500)
 			
 		}, function errorCallback(response2) {
 			//console.log(response2);
