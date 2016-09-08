@@ -1,4 +1,0 @@
-<?php
-/* Wordfence temporary file security header */
-echo "Nothing to see here!\n"; exit(0);
-?>a:16:{s:9:"cacheType";s:0:"";s:9:"howGetIPs";s:0:"";s:11:"whitelisted";s:0:"";s:6:"apiKey";s:160:"1106a921c12d0267fdde7efa61545ec408603ea58c23460d1eb22c322054fc652a576bd5717b27ef5d59ac94ea0004ceec3e75bd2c0eed64f9d47fa2af3e23a08bc0d80062ac9e8fc320aff9747fa79a";s:20:"loginSec_lockoutMins";s:1:"5";s:19:"other_hideWPVersion";s:1:"1";s:15:"firewallEnabled";s:1:"1";s:18:"liveTrafficEnabled";s:1:"0";s:10:"tourClosed";s:1:"1";s:10:"autoUpdate";s:1:"1";s:11:"alertEmails";s:22:"x4designcorp@gmail.com";s:17:"actUpdateInterval";s:0:"";s:7:"debugOn";s:1:"0";s:13:"welcomeClosed";s:1:"1";s:38:"email_summary_dashboard_widget_enabled";s:1:"1";s:22:"email_summary_interval";s:8:"biweekly";}
