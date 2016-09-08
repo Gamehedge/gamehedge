@@ -202,10 +202,13 @@
           <div class="title">
             <h2>STAY UP TO DATE</h2>
             <p>Sign up for savings, info and more!</p>
-            <div class="form">
-              <input type="text" name="email" placeholder="example@example.com">
-              <button>SEND</button>
-            </div>
+            <form name="up_date_form" ng-submit="sendPerformerEmailRequest()" novalidate>
+                <div class="form">
+                  <input type="email" name="email" ng-model="up_date_email"placeholder="example@example.com" required autocomplete="off">
+                  <button ladda="up_date_email_proccessing" ng-disabled="up_date_form.$invalid" >SEND</button>
+                </div>
+                <p ng-show="up_date_form.email.$invalid && !up_date_form.email.$pristine" class="help-block footer-form-msg">Enter a valid email.</p>
+            </form>
           </div>
           <div class="body" ng-show="testimonials.length != 0">
             <h2>TESTIMONIALS</h2>
