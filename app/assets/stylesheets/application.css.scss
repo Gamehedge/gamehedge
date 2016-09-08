@@ -114,20 +114,18 @@ body {
 }
 
 
-#tiles .row.grid {
-    -moz-column-width: 20em;
-    -webkit-column-width: 20em;
-    -moz-column-gap: 3em;
-    -webkit-column-gap:3em; 
-}
+
 
 #tiles .grid {
     margin: 0;
 }
+.grid-sizer,
+.grid-item {
+  width: 32%;
+}
 
-#tiles .grid-item  {
-    display: inline-block;
-    width:  100%;
+#tiles .grid-item {
+   
     margin-top: 40px;
     position: relative;
     background-color: #fff;
@@ -2302,6 +2300,12 @@ body {
     .dark-header .navbar-gamehedge, .navbar-gamehedge{
         display: inherit !important;
     }
+
+    .grid-sizer,
+    .grid-item {
+        width: 100%;
+    }
+
 
 }
 

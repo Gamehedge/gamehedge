@@ -89,13 +89,22 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 				//console.log("Tiles");
 				//console.log($scope.tiles);
 			}
+			$timeout(function(){
+				$('.grid').masonry({
+					itemSelector: '.grid-item',
+					columnWidth: '.grid-sizer',
+					percentPosition: true,
+					gutter: 23,
+				});
+			},100)
+			
 		}, function errorCallback(response2) {
 			//console.log(response2);
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		});
 	}
-
+	
 	$scope.getNear = function(id,i){
 		$http({
 		  	method: 'GET',
