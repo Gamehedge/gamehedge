@@ -36,6 +36,11 @@ module Gamehedge
     config.assets.paths << Rails.root.join("vendor","assets","bower_components","bootstrap-sass-official","assets","fonts")
 
     config.assets.precompile << %r(.*.(?:eot|svg|ttf|woff|woff2)$)
+    
+    #HTTPS Settings
+    
+    config.force_ssl = true
+
     config.to_prepare do
       DeviseController.respond_to :html, :json
     end
