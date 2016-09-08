@@ -39,8 +39,6 @@ module Gamehedge
     
     #HTTPS Settings
     
-    config.force_ssl = true
-
     config.to_prepare do
       DeviseController.respond_to :html, :json
     end
