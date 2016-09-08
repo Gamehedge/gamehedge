@@ -159,6 +159,7 @@ class TicketEvolutionService
         when 'venue'
           @venues = @connection.venues.list({:page => 1, :within => 25, :per_page => 10000, :lat => @latitude, :lon => @longitude})
           @venue = {}
+          @events2 = []
           @venues.each do |v|
             if Venue.where(te_uid: v['id']).exists?
               @id = v.id
