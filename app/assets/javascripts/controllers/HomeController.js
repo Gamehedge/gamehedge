@@ -58,10 +58,10 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 			}
 		}
 		if($scope.tiles[index].has_geolocation == true){
-			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true';
+			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=50&geolocated=true';
 		}
 		else{
-			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10';
+			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=50';
 		}
 		//console.log(url)
 		$http({
@@ -96,7 +96,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 					percentPosition: true,
 					gutter: 23,
 				});
-			},500)
+			},1000)
 			
 		}, function errorCallback(response2) {
 			//console.log(response2);
