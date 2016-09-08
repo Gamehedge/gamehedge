@@ -15,22 +15,22 @@ ActiveAdmin.register_page "Dashboard" do
       
       column do
         panel "TODAY" do
-          para Order.where(:create_date => (Date.today).beginning_of_day..Date.today.end_of_day).count
+          para Order.where(:created_at => (Date.today).beginning_of_day..Date.today.end_of_day).count
         end
       end
       column do
         panel "THIS WEEK" do
-          para Order.where(:create_date => (Date.today).beginning_of_week..Date.today.end_of_day).count
+          para Order.where(:created_at => (Date.today).beginning_of_week..Date.today.end_of_day).count
         end
       end
       column do
         panel "THIS MONTH" do
-          para Order.where(:create_date => (Date.today).beginning_of_month..Date.today.end_of_day).count
+          para Order.where(:created_at => (Date.today).beginning_of_month..Date.today.end_of_day).count
         end
       end
       column do
         panel "THIS YEAR" do
-          para Order.where(:create_date => (Date.today).beginning_of_year..Date.today.end_of_day).count
+          para Order.where(:created_at => (Date.today).beginning_of_year..Date.today.end_of_day).count
         end
       end
     end
