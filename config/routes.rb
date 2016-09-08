@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   post 'orders/request_refund'
   
   get 'contact/send_message'
+  get 'contact/send_email_message'
 
   resources :search, :signature
   
