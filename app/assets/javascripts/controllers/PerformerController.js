@@ -117,6 +117,26 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
         $scope.slickConfig.method.slickSetOption(null, null, true);
     }, 500);  
     
+    $scope.up_date_email_proccessing = false;
+    $scope.up_date_email = "";
+    
+    $scope.sendPerformerEmailRequest = function(){
+        if ($scope.up_date_form.$valid) {
+            $scope.up_date_email_proccessing = true;
+            
+            dataService.getData("/contact/send_email_message?email=" + $scope.up_date_email)
+            .then(function(response){
+                $scope.up_date_email_proccessing = false;
+                $scope.up_date_email = "";
+                swal({   
+                    title: "Thanks!",   
+                    text: "Our team will send you updates and deals.",   
+                    type: "success"
+                });
+            });
+        }
+    }
+    
 	//Initializers
     $rootScope.isOrder = false;
     $rootScope.darkHeader = false;

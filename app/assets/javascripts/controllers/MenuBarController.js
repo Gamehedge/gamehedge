@@ -111,6 +111,25 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
             // or server returns response with an error status.
         });
     }
+    
+    $scope.footer_email = "";
+    $scope.footer_proccessing = false;
+    $scope.sendEmailRequest = function(){
+        if ($scope.footer_form.$valid) {
+            $scope.footer_proccessing = true;
+            
+            dataService.getData("/contact/send_email_message?email=" + $scope.footer_email)
+            .then(function(response){
+                $scope.footer_proccessing = false;
+                $scope.footer_email = "";
+                swal({   
+                    title: "Thanks!",   
+                    text: "Our team will send you updates and deals.",   
+                    type: "success"
+                });
+            });
+        }
+    }
     // Initializers
 
     $scope.getLeagues();
