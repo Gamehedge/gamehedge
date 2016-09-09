@@ -65,7 +65,13 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
             $scope.page = 1;
             $scope.events = []
             $scope.all_games = home;
-            $scope.getEvents()    
+            $scope.getEvents();
+            if(home == true){
+                $location.path($scope.performer.url);
+            }
+            else{
+                $location.path($scope.performer.url+"/home");
+            }
         }   
     }
 
@@ -143,7 +149,11 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
     $scope.disable_toogle = false;
     $rootScope.noFooter = false;
     $scope.loading = true;
-    $scope.all_games = true;
+    if($location.path().indexOf("home") == -1){
+        $scope.all_games = true;
+    }else{
+        $scope.all_games = false;
+    }
     $scope.page = 1;
     $scope.load_more = false;
     $scope.events = []

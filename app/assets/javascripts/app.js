@@ -34,6 +34,10 @@ app.config([ '$routeProvider','$locationProvider','AuthProvider',
             templateUrl: "performer.html",
             controller: 'PerformerController',
         })
+        .when('/performer/:performerId/:slug/home', {
+            templateUrl: "performer.html",
+            controller: 'PerformerController',
+        })
         .when('/venues/:venueId/:slug', {
             templateUrl: "venue.html",
             controller: 'VenueController',
