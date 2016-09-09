@@ -12,8 +12,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
         	//console.log($scope.ticket);
         	apiService.getData('/api/v1/events/'+$scope.ticket.event.id)
 	            .then(function(response){
-	            	console.log("Event");
-	            	console.log(response);
+	            	// console.log("Event");
+	            	// console.log(response);
 	                $scope.event  = response;
 	                $scope.amount = $location.search()['amount'];
 	                $scope.calculateValues();
@@ -92,7 +92,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 
 	$scope.calculateValues = function(){
 		if($scope.ticket && $scope.amount){
-			$scope.subtotal = (Number($scope.ticket.retail_price) * Number($scope.amount) - $scope.discount);
+			$scope.subtotal = (Number($scope.ticket.retail_price) * Number($scope.amount));
 		}
 		if(typeof $scope.service_fees != "undefined" && $scope.service_fees.length != 0){
 			for(i=0;i<$scope.service_fees.length;i++){
@@ -109,33 +109,28 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		else{
 			$scope.service_fee = 0;
 		}
-		if(typeof $scope.service_fees != "undefined"){
-			if($scope.ticket.format == "Physical"){
-				$scope.total = $scope.subtotal + $scope.service_fee + Number($scope.shipping_fee);
-			}
-			else{
-				$scope.total = Number($scope.subtotal) + Number($scope.service_fee);
-			}
-		}
-	}
-
-	$scope.calculatePromos = function(){
 		for(i=0;i<$scope.promo_codes.length;i++){
 			//console.log($scope.promo_codes[i].code);
 			//console.log($scope.promo_code);
 			if($scope.promo_code == $scope.promo_codes[i].code){
 				if($scope.promo_codes[i].is_percentage == true){
-					$scope.discount = $scope.subtotal*Number($scope.promo_codes[i].value)/100;
+					$scope.discount = ($scope.subtotal + $scope.service_fee)*Number($scope.promo_codes[i].value)/100;
 				}
 				else{
 					$scope.discount = Number($scope.promo_codes[i].value);
 				}
-				$scope.calculateValues();
 				break;
 			}
 			else{
 				$scope.discount = 0;
-				$scope.calculateValues();
+			}
+		}
+		if(typeof $scope.service_fees != "undefined"){
+			if($scope.ticket.format == "Physical"){
+				$scope.total = $scope.subtotal + $scope.service_fee + Number($scope.shipping_fee) - $scope.discount;
+			}
+			else{
+				$scope.total = Number($scope.subtotal) + Number($scope.service_fee) - $scope.discount;
 			}
 		}
 	}
@@ -906,8 +901,14 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
             }
         });
     }
+
+    $scope.showPromoField = function(){
+    	$scope.show_promo_field = !$scope.show_promo_field;
+    }
+
     $scope.logging_in = false;
     $scope.sending_password = false;
     $scope.forgot_password = false;
+    $scope.show_promo_field = false;
 	
 });
