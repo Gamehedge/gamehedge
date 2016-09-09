@@ -259,7 +259,7 @@
 
 
                       <div class="col-xs-8 event-holder"">
-                        <p><span class="event2">{{tile.event2.away_performer.name}}</span> <span class="at">at</span></p>
+                        <p><span class="event1">{{tile.event2.away_performer.name}}</span> <span class="at">at</span></p>
                         <p><span class="event2">{{tile.event2.home_performer.name}}</span></p>
                         <p class="event3"><span class="at" ng-if="(tile.event2.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD</span><span class="at" ng-if="(tile.event2.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{tile.event2.occurs_at | date:'h:mm a' : 'UTC' | uppercase}} at</span> <span>{{tile.event2.venue.name}}</span></p>
                       </div>
@@ -279,7 +279,7 @@
 
 
                       <div class="col-xs-8 event-holder"">
-                        <p><span class="event3">{{tile.event3.away_performer.name}}</span> <span class="at">at</span></p>
+                        <p><span class="event1">{{tile.event3.away_performer.name}}</span> <span class="at">at</span></p>
                         <p><span class="event2">{{tile.event3.home_performer.name}}</span></p>
                         <p class="event3"><span class="at" ng-if="(tile.event3.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD</span><span class="at" ng-if="(tile.event3.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{tile.event3.occurs_at | date:'h:mm a' : 'UTC' | uppercase}} at</span> <span>{{tile.event3.venue.name}}</span></p>
                       </div>
