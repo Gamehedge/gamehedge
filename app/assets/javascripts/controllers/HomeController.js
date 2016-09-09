@@ -25,7 +25,13 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 			$scope.loading = false;
 			$scope.TilesIndex = 0;
 			for(i=0;i<$scope.tiles.length;i++){
-				$scope.getNextEvents(i);	
+				if($scope.tiles[i].tile_type.id != "4"){
+					$scope.getNextEvents(i);	
+				}
+				else{
+					console.log($scope.tiles[i]);
+					$scope.tiles[i].ready = true;
+				}
 			}
 		}, function errorCallback(response) {
 			//console.log(response);

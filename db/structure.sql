@@ -930,7 +930,10 @@ CREATE TABLE tiles (
     good_game_guarantee character varying,
     "position" integer,
     description character varying,
-    url character varying
+    url character varying,
+    event_id integer,
+    event_id2 integer,
+    event_id3 integer
 );
 
 
@@ -1429,6 +1432,13 @@ CREATE INDEX index_players_on_performer_id ON players USING btree (performer_id)
 
 
 --
+-- Name: index_tiles_on_event_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_tiles_on_event_id ON tiles USING btree (event_id);
+
+
+--
 -- Name: index_tiles_on_performer_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1575,6 +1585,14 @@ ALTER TABLE ONLY performers
 
 ALTER TABLE ONLY performers
     ADD CONSTRAINT fk_rails_aca11aede1 FOREIGN KEY (venue_id) REFERENCES venues(id);
+
+
+--
+-- Name: fk_rails_cfcf1d01b1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY tiles
+    ADD CONSTRAINT fk_rails_cfcf1d01b1 FOREIGN KEY (event_id) REFERENCES events(id);
 
 
 --
@@ -1762,4 +1780,8 @@ INSERT INTO schema_migrations (version) VALUES ('20160907230150');
 INSERT INTO schema_migrations (version) VALUES ('20160908164632');
 
 INSERT INTO schema_migrations (version) VALUES ('20160908165414');
+
+INSERT INTO schema_migrations (version) VALUES ('20160909132958');
+
+INSERT INTO schema_migrations (version) VALUES ('20160909150628');
 
