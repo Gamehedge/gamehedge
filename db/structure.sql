@@ -603,7 +603,8 @@ CREATE TABLE orders (
     shipping_fee double precision,
     cc_last_digits integer,
     address character varying,
-    phone_number character varying
+    phone_number character varying,
+    discount double precision
 );
 
 
@@ -1784,4 +1785,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160908165414');
 INSERT INTO schema_migrations (version) VALUES ('20160909132958');
 
 INSERT INTO schema_migrations (version) VALUES ('20160909150628');
+
+INSERT INTO schema_migrations (version) VALUES ('20160909194337');
 

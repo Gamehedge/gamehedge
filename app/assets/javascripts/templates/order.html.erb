@@ -964,10 +964,6 @@
 						    	<div class="description short">Service Fee</div>
 						    	<div class="value short">{{service_fee | currency}}</div>
 						    </div>
-                            <div class="description-line" ng-show="discount != 0">
-						    	<div class="description">Discount</div>
-						    	<div class="value">-{{discount | currency}}</div>
-						    </div>
                             <div class="description-line" ng-show="ticket.format == 'Physical'">
 						    	<div class="description">Delivery Option</div>
 						    	<div class="value" >
@@ -990,10 +986,14 @@
 						    	<div class="value short">FREE</div>
 						    </div>
 						    <div class="description-line" ng-if="active_promos">
-						    	<div class="description">Promo Code</div>
-						    	<div class="value" >
-							    	<input id="promo" ng-model="$parent.promo_code" ng-change="calculatePromos()" name="promo_code">
+						    	<div class="description promo-btn" ng-click="showPromoField()">Promo Code</div>
+						    	<div class="value">
+							    	<input ng-show="show_promo_field" id="promo" ng-model="$parent.promo_code" ng-change="calculateValues()" name="promo_code">
 						    	</div>
+						    </div>
+						    <div class="description-line" ng-show="discount != 0">
+						    	<div class="description">Discount</div>
+						    	<div class="value">-{{discount | currency}}</div>
 						    </div>
 						    <hr>
 						    <div class="description-line total">

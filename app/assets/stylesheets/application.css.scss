@@ -1711,6 +1711,11 @@ body {
     width: 50%;
 }
 
+#payments .summary .description.promo-btn{
+    cursor: pointer;
+    color: #005e9b;
+}
+
 #payments .summary .value{
     font-size: 12px;
     line-height: 2;
