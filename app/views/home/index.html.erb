@@ -53,7 +53,7 @@
         </div>
         <div class="row menu-row">
             <div class="col-xs-3"></div>
-            <div class="col-xs-9"><a href="/blog/" ng-click="hideMenus()">Blog</a></div>
+            <div class="col-xs-9"><a href="http://blog.gamehedge.com" ng-click="hideMenus()">Blog</a></div>
         </div>
         <div class="row menu-row">
             <div class="col-xs-3"></div>
@@ -242,7 +242,7 @@
                             <li><a href="/how-it-works">How it Works</a></li>
                             <li><a href="/member">My Account</a></li>
                             <li><a href="/press">Press</a></li>
-                            <li><a href="/blog">Blog</a></li>
+                            <li><a href="http://blog.gamehedge.com">Blog</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -269,10 +269,15 @@
                         </div>
                     </nav>
                     <h3>Enter email to receive updates and deals</h3>
-                    <div class="footer-email-container">
-                        <input type="text" name="email" class="form-control footer-input">
-                        <button class="btn footer-btn">SEND</button>
-                    </div>
+                    
+                    <form name="footer_form" ng-submit="sendEmailRequest()" novalidate>
+                        <div class="footer-email-container">
+                            <input type="email" name="email" ng-model="footer_email" class="form-control footer-input" required autocomplete="off">
+                            <button ladda="footer_proccessing" ng-disabled="footer_form.$invalid" class="btn footer-btn">SEND</button>
+                        </div>
+                        <p ng-show="footer_form.email.$invalid && !footer_form.email.$pristine" class="help-block footer-form-msg">Enter a valid email.</p>
+                    </form>
+                    
                 </div>
             </div>
             <div class="col-md-2">

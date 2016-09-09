@@ -290,8 +290,8 @@ CREATE TABLE clients (
     optin smallint DEFAULT 0,
     last_login_ip bigint,
     last_login_date timestamp without time zone,
-    create_date timestamp without time zone,
-    modified_date timestamp without time zone,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
     encrypted_password character varying DEFAULT ''::character varying NOT NULL,
     reset_password_token character varying,
     reset_password_sent_at timestamp without time zone,
@@ -392,7 +392,9 @@ CREATE TABLE events (
     location character varying,
     te_venue_id integer,
     sport_id integer,
-    slug character varying
+    slug character varying,
+    updated_at timestamp without time zone,
+    created_at timestamp without time zone
 );
 
 
@@ -442,7 +444,9 @@ CREATE TABLE performers (
     losses integer,
     description text,
     slug character varying,
-    venue_description text
+    venue_description text,
+    updated_at timestamp without time zone,
+    created_at timestamp without time zone
 );
 
 
@@ -585,8 +589,8 @@ CREATE TABLE orders (
     home_team_data text,
     away_team_data text,
     refund_status character varying(20) DEFAULT 'none'::character varying,
-    create_date timestamp without time zone,
-    modified_date timestamp without time zone,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
     refund_status_id integer,
     real_event_date timestamp without time zone,
     order_status character varying,
@@ -926,7 +930,10 @@ CREATE TABLE tiles (
     good_game_guarantee character varying,
     "position" integer,
     description character varying,
-    url character varying
+    url character varying,
+    event_id integer,
+    event_id2 integer,
+    event_id3 integer
 );
 
 
@@ -1425,6 +1432,13 @@ CREATE INDEX index_players_on_performer_id ON players USING btree (performer_id)
 
 
 --
+-- Name: index_tiles_on_event_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_tiles_on_event_id ON tiles USING btree (event_id);
+
+
+--
 -- Name: index_tiles_on_performer_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1571,6 +1585,14 @@ ALTER TABLE ONLY performers
 
 ALTER TABLE ONLY performers
     ADD CONSTRAINT fk_rails_aca11aede1 FOREIGN KEY (venue_id) REFERENCES venues(id);
+
+
+--
+-- Name: fk_rails_cfcf1d01b1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY tiles
+    ADD CONSTRAINT fk_rails_cfcf1d01b1 FOREIGN KEY (event_id) REFERENCES events(id);
 
 
 --
@@ -1754,4 +1776,12 @@ INSERT INTO schema_migrations (version) VALUES ('20160907202253');
 INSERT INTO schema_migrations (version) VALUES ('20160907225754');
 
 INSERT INTO schema_migrations (version) VALUES ('20160907230150');
+
+INSERT INTO schema_migrations (version) VALUES ('20160908164632');
+
+INSERT INTO schema_migrations (version) VALUES ('20160908165414');
+
+INSERT INTO schema_migrations (version) VALUES ('20160909132958');
+
+INSERT INTO schema_migrations (version) VALUES ('20160909150628');
 

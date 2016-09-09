@@ -25,7 +25,13 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 			$scope.loading = false;
 			$scope.TilesIndex = 0;
 			for(i=0;i<$scope.tiles.length;i++){
-				$scope.getNextEvents(i);	
+				if($scope.tiles[i].tile_type.id != "4"){
+					$scope.getNextEvents(i);	
+				}
+				else{
+					console.log($scope.tiles[i]);
+					$scope.tiles[i].ready = true;
+				}
 			}
 		}, function errorCallback(response) {
 			//console.log(response);
@@ -48,22 +54,34 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 				source = "team";
 			}
 			else if($scope.tiles[index].tile_type.id == '3'){
-				id = $scope.tiles[index].venue.te_uid;
+				if($scope.tiles[index].has_geolocation == false){
+					id = $scope.tiles[index].venue.te_uid;
+				}
+				else{
+					id = 0;
+				}
 				source = "venue";
 			}
 		}
 		if($scope.tiles[index].has_geolocation == true){
-			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true';
+			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=50&geolocated=true';
 		}
 		else{
-			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10';
+			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=50';
 		}
 		//console.log(url)
 		$http({
 		  	method: 'GET',
 		  	url: url,
 		}).then(function successCallback(response2) {
-			$scope.tiles[index].events = response2.data;
+			if($scope.tiles[index].tile_type.id == '3' && $scope.tiles[index].has_geolocation == true){
+				$scope.tiles[index].events = response2.data.events;
+				$scope.tiles[index].venue = response2.data.venue;
+				$scope.tiles[index].url = response2.data.venue.url;
+			}
+			else{
+				$scope.tiles[index].events = response2.data;
+			}
 			if($scope.tiles[index].events != null){
 				for(j=$scope.tiles[index].events.length - 1;j>=0;j--){
 					if($scope.tiles[index].events[j].performances.length != 2){
@@ -77,13 +95,22 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 				//console.log("Tiles");
 				//console.log($scope.tiles);
 			}
+			$timeout(function(){
+				$('.grid').masonry({
+					itemSelector: '.grid-item',
+					columnWidth: '.grid-sizer',
+					percentPosition: true,
+					gutter: 23,
+				});
+			},500)
+			
 		}, function errorCallback(response2) {
 			//console.log(response2);
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		});
 	}
-
+	
 	$scope.getNear = function(id,i){
 		$http({
 		  	method: 'GET',
@@ -169,4 +196,27 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
   return function (input) {
       return input.replace(/ /g, '-');
   };
+})
+.directive('imageonload', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            element.bind('load', function() {
+                $('.grid').masonry({
+					itemSelector: '.grid-item',
+					columnWidth: '.grid-sizer',
+					percentPosition: true,
+					gutter: 23,
+				});
+            });
+            element.bind('error', function(){
+                $('.grid').masonry({
+					itemSelector: '.grid-item',
+					columnWidth: '.grid-sizer',
+					percentPosition: true,
+					gutter: 23,
+				});
+            });
+        }
+    };
 });

@@ -8,7 +8,7 @@ class Api::V1::VenuesController < ApplicationApiController
   before_filter :fetch_user, :except => [:index, :create]
 
   def fetch_user
-    @venue = Venue.find_by_id(params[:id])
+    @venue = Venue.where(te_uid: params[:id]).first
   end
 
   def index

@@ -36,12 +36,6 @@ class EventsController < ApplicationController
 		else
 			@events = TicketEvolutionService.new({:type => request.GET["type"], :id => request.GET["id"], :geolocated => "false", :page => request.GET["page"], :source => request.GET["source"], :perpage => request.GET["perpage"]}).list
 		end
-		@events2 = []
-		@events.each do |e|
-			if Event.where(te_uid: e.id).exists?
-				@events2.push(e)
-			end
-		end
-		render json: @events2
+		render json: @events
 	end
 end

@@ -5,8 +5,8 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
 	$scope.getVenueInfo = function(){
 		apiService.getData('/api/v1/venues/'+$routeParams.venueId)
             .then(function(response){
-                //console.log("Venue");
-            	//console.log($scope.venue);
+                console.log("Venue");
+            	console.log($scope.venue);
                 $scope.venue  = response;
                 if($routeParams.slug == $scope.venue.slug){
                     $scope.getEvents();

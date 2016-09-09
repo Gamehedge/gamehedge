@@ -114,20 +114,18 @@ body {
 }
 
 
-#tiles .row.grid {
-    -moz-column-width: 20em;
-    -webkit-column-width: 20em;
-    -moz-column-gap: 3em;
-    -webkit-column-gap:3em; 
-}
+
 
 #tiles .grid {
     margin: 0;
 }
+.grid-sizer,
+.grid-item {
+  width: 32%;
+}
 
-#tiles .grid-item  {
-    display: inline-block;
-    width:  100%;
+#tiles .grid-item {
+   
     margin-top: 40px;
     position: relative;
     background-color: #fff;
@@ -2303,6 +2301,12 @@ body {
         display: inherit !important;
     }
 
+    .grid-sizer,
+    .grid-item {
+        width: 100%;
+    }
+
+
 }
 
 no-padding{
@@ -2727,6 +2731,11 @@ footer .footer-input{
     border-radius: 3px;
     border: solid 1px #6d6d6d;
     padding-right: 100px;
+    color: #bababa;
+}
+
+footer .footer-form-msg{
+    color: #bababa;
 }
 
 footer .footer-btn, footer .footer-btn:hover{

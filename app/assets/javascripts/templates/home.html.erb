@@ -167,7 +167,6 @@
         </div>
       </div>
     </section>
-      
     <section id="tiles">
       <div class="container">
         <div id="home-loading-data" class="row horizontal-center" ng-if="loading">
@@ -175,22 +174,26 @@
           </div>
         <div id="results" ng-if="!loading">
           <div class="grid row">
-            <div class="grid-item" ng-repeat="tile in tiles track by $index" ng-hide="tile.sport.active == false">
+            <div class="grid-sizer"></div>
+            <div class="grid-item" ng-repeat="tile in tiles track by $index" ng-hide="tile.sport.active == false" ng-if="(tile.tile_type.id == 1 && tile.sport.name != undefined) || (tile.tile_type.id == 2 && tile.performer.name != undefined) || (tile.tile_type.id == 3 && tile.venue.name != undefined) || tile.tile_type.id == 4">
               <div id="home-loading-data" class="row horizontal-center" ng-if="!tile.ready">
 
                 <div class='uil-default-css' style='transform:scale(0.32);'><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(0deg) translate(0,-60px);transform:rotate(0deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(30deg) translate(0,-60px);transform:rotate(30deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(60deg) translate(0,-60px);transform:rotate(60deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(90deg) translate(0,-60px);transform:rotate(90deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(120deg) translate(0,-60px);transform:rotate(120deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(150deg) translate(0,-60px);transform:rotate(150deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(180deg) translate(0,-60px);transform:rotate(180deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(210deg) translate(0,-60px);transform:rotate(210deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(240deg) translate(0,-60px);transform:rotate(240deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(270deg) translate(0,-60px);transform:rotate(270deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(300deg) translate(0,-60px);transform:rotate(300deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(330deg) translate(0,-60px);transform:rotate(330deg) translate(0,-60px);border-radius:10px;position:absolute;'></div></div>
             </div>
               <div ng-if="tile.ready">
-                <div class="performer-name" ng-if="tile.tile_type.id == 1">{{tile.sport.name | uppercase}}</div>
-                <div class="performer-name" ng-if="tile.tile_type.id == 2">{{tile.performer.name | uppercase}}</div>
-                <div class="performer-name" ng-if="tile.tile_type.id == 3">{{tile.venue.name | uppercase}}</div>
-                <a href="{{tile.url}}"><img src="{{tile.image_url}}"></a>
-                <div class="info-container" ng-if="tile.tile_type.id == 1 || tile.tile_type.id == 3">
+              <a href="{{tile.url}}">
+                <div class="performer-name" ng-if="tile.tile_type.id == 1 && tile.image_url != '/images/original/missing.png' && tile.image_url">{{tile.sport.name | uppercase}}</div>
+                <div class="performer-name" ng-if="tile.tile_type.id == 2 && tile.image_url != '/images/original/missing.png' && tile.image_url">{{tile.performer.name | uppercase}}</div>
+                <div class="performer-name" ng-if="tile.tile_type.id == 3 && tile.image_url != '/images/original/missing.png' && tile.image_url">{{tile.venue.name | uppercase}}</div>
+                <img src="{{tile.image_url}}" ng-if="tile.image_url != '/images/original/missing.png' && tile.image_url" imageonload>
+                <div class="info-container" ng-if="tile.tile_type.id == 1 || tile.tile_type.id == 3 || tile.tile_type.id == 4">
                   <div ng-if="tile.tile_type.id == 1" class="tile-title">{{tile.sport.name}} Games</div>
                   <div ng-if="tile.tile_type.id == 3" class="tile-title">{{tile.venue.name}}</div>
+                  <div ng-if="tile.tile_type.id == 4" class="tile-title">{{tile.name}}</div>
                   <div class="tile-description">{{tile.description}}</div>
                 </div>
-                <div ng-repeat="event in tile.events | limitTo:3" class="tile-event hidden-xs hidden-sm">
+                </a>
+                <div ng-repeat="event in tile.events | limitTo:3" class="tile-event hidden-xs hidden-sm" ng-if="tile.tile_type.id != 4">
                   <a href="{{(event.url + '/' + event.name + '-tickets') | spaceless | lowercase}}">
                     <div class="row">
                       <div class="col-xs-4 date-holder">
@@ -219,6 +222,79 @@
                     </div>
                   </a>
                 </div>
+
+
+
+
+
+
+                <div class="tile-event hidden-xs hidden-sm" ng-if="tile.tile_type.id == 4">
+                  <a href="{{tile.event1.url}}">
+                    <div class="row">
+                      <div class="col-xs-4 date-holder">
+                        <p class="date1">{{tile.event1.occurs_at | date:'MMM' : 'UTC' | uppercase}}</p>
+                        <p class="date2">{{tile.event1.occurs_at | date:'dd' : 'UTC' | uppercase}}</p>
+                        <p class="date3">{{tile.event1.occurs_at | date:'EEE' : 'UTC' | uppercase}}</p>  
+                      </div>
+
+
+                      <div class="col-xs-8 event-holder"">
+                        <p><span class="event1">{{tile.event1.away_performer.name}}</span> <span class="at">at</span></p>
+                        <p><span class="event2">{{tile.event1.home_performer.name}}</span></p>
+                        <p class="event3"><span class="at" ng-if="(tile.event1.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD</span><span class="at" ng-if="(tile.event1.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{tile.event1.occurs_at | date:'h:mm a' : 'UTC' | uppercase}} at</span> <span>{{tile.event1.venue.name}}</span></p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+
+                <div class="tile-event hidden-xs hidden-sm" ng-if="tile.tile_type.id == 4">
+                  <a href="{{tile.event2.url}}">
+                    <div class="row">
+                      <div class="col-xs-4 date-holder">
+                        <p class="date1">{{tile.event2.occurs_at | date:'MMM' : 'UTC' | uppercase}}</p>
+                        <p class="date2">{{tile.event2.occurs_at | date:'dd' : 'UTC' | uppercase}}</p>
+                        <p class="date3">{{tile.event2.occurs_at | date:'EEE' : 'UTC' | uppercase}}</p>  
+                      </div>
+
+
+                      <div class="col-xs-8 event-holder"">
+                        <p><span class="event2">{{tile.event2.away_performer.name}}</span> <span class="at">at</span></p>
+                        <p><span class="event2">{{tile.event2.home_performer.name}}</span></p>
+                        <p class="event3"><span class="at" ng-if="(tile.event2.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD</span><span class="at" ng-if="(tile.event2.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{tile.event2.occurs_at | date:'h:mm a' : 'UTC' | uppercase}} at</span> <span>{{tile.event2.venue.name}}</span></p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+
+                <div class="tile-event hidden-xs hidden-sm" ng-if="tile.tile_type.id == 4">
+                  <a href="{{tile.event3.url}}">
+                    <div class="row">
+                      <div class="col-xs-4 date-holder">
+                        <p class="date1">{{tile.event3.occurs_at | date:'MMM' : 'UTC' | uppercase}}</p>
+                        <p class="date2">{{tile.event3.occurs_at | date:'dd' : 'UTC' | uppercase}}</p>
+                        <p class="date3">{{tile.event3.occurs_at | date:'EEE' : 'UTC' | uppercase}}</p>  
+                      </div>
+
+
+                      <div class="col-xs-8 event-holder"">
+                        <p><span class="event3">{{tile.event3.away_performer.name}}</span> <span class="at">at</span></p>
+                        <p><span class="event2">{{tile.event3.home_performer.name}}</span></p>
+                        <p class="event3"><span class="at" ng-if="(tile.event3.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD</span><span class="at" ng-if="(tile.event3.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{tile.event3.occurs_at | date:'h:mm a' : 'UTC' | uppercase}} at</span> <span>{{tile.event3.venue.name}}</span></p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+
+
+
+
+
+
+
+
               </div>
             </div>
           </div>

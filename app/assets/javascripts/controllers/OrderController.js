@@ -12,8 +12,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
         	//console.log($scope.ticket);
         	apiService.getData('/api/v1/events/'+$scope.ticket.event.id)
 	            .then(function(response){
-	            	//console.log("Event");
-	            	//console.log(response);
+	            	console.log("Event");
+	            	console.log(response);
 	                $scope.event  = response;
 	                $scope.amount = $location.search()['amount'];
 	                $scope.calculateValues();
@@ -495,6 +495,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			        	last_digits: $scope.card.last_digits,
 			        	address: $scope.shipping_address.street_address,
 			        	phone: $scope.client.primary_phone_number.number,
+			        	event_home_team: $scope.event.home_performer.name,
+			        	event_away_team: $scope.event.away_performer.name,
 			        },
 			    }).then(function successCallback(response) {
 			    	$scope.processing = false;

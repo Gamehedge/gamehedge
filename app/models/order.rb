@@ -6,7 +6,7 @@ class Order < ActiveRecord::Base
 	end
 	def order_date
 	    Time.zone = 'Eastern Time (US & Canada)'
-	    return self.create_date
+	    return self.created_at
 	end
 	def r_event_date
 	    Time.zone = 'UTC'
@@ -16,7 +16,7 @@ class Order < ActiveRecord::Base
 	ransacker :order_date, type: :datetime,
 	  	formatter: -> (date) { Time.zone = 'Eastern Time (US & Canada)'
 	  		date.beginning_of_day } do |parent|
-	  	parent.table[:create_date]
+	  	parent.table[:created_at]
 	end
 
 	after_update :send_refund_mail

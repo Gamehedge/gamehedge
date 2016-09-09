@@ -157,11 +157,51 @@ class TicketEvolutionService
       if @geolocated == "true"
         case @source
         when 'venue'
-          @events = @connection.events.list({:venue_id => @id, :page => @page, :per_page => @perpage, :order_by => 'events.occurs_at ASC, events.popularity_score DESC'})
+          @venues = @connection.venues.list({:page => 1, :within => 25, :per_page => 10000, :lat => @latitude, :lon => @longitude})
+          @venue = {}
+          @events2 = []
+          @venues.each do |v|
+            if Venue.where(te_uid: v['id']).exists?
+              @id = v.id
+              @venue = Venue.where(te_uid: v['id']).first
+              @events2 = @connection.events.list({:venue_id => @id, :page => @page, :per_page => @perpage, :order_by => 'events.occurs_at ASC, events.popularity_score DESC'})
+              @events3 = []
+              @events2.each do |e|
+                if @e != {}
+                  if Event.where(te_uid: e.id).exists?
+                    @events3.push(e)
+                  end
+                end
+              end
+              @events2 = @events3
+              if @events2 != []
+                break
+              end
+            end
+          end
+          @events = {:venue => @venue, :events => @events2}
         when 'team'
           @events = @connection.events.list({:performer_id => @id, :page => @page, :per_page => @perpage, :order_by => 'events.occurs_at ASC, events.popularity_score DESC'})
+          @events2 = []
+          @events.each do |e|
+            if @e != {}
+              if Event.where(te_uid: e.id).exists?
+                @events2.push(e)
+              end
+            end
+          end
+          @events = @events2
         when 'league'
-          @events = @connection.events.list({:category_id => @id, :page => @page, :per_page => @perpage, :lat => @latitude, :lon => @longitude, :order_by => 'events.occurs_at ASC, events.popularity_score DESC'})
+          @events = @connection.events.list({:category_id => @id, :page => @page, :within => 25, :per_page => @perpage, :lat => @latitude, :lon => @longitude, :order_by => 'events.occurs_at ASC, events.popularity_score DESC'})
+          @events2 = []
+          @events.each do |e|
+            if @e != {}
+              if Event.where(te_uid: e.id).exists?
+                @events2.push(e)
+              end
+            end
+          end
+          @events = @events2
         else
           puts "Invalid type parameter, please check and try again"
         end
@@ -169,10 +209,37 @@ class TicketEvolutionService
         case @source
         when 'venue'
           @events = @connection.events.list({:venue_id => @id, :page => @page, :per_page => @perpage, :order_by => 'events.occurs_at ASC, events.popularity_score DESC'})
+          @events2 = []
+          @events.each do |e|
+            if @e != {}
+              if Event.where(te_uid: e.id).exists?
+                @events2.push(e)
+              end
+            end
+          end
+          @events = @events2
         when 'team'
           @events = @connection.events.list({:performer_id => @id, :page => @page, :per_page => @perpage, :order_by => 'events.occurs_at ASC, events.popularity_score DESC'})
+          @events2 = []
+          @events.each do |e|
+            if @e != {}
+              if Event.where(te_uid: e.id).exists?
+                @events2.push(e)
+              end
+            end
+          end
+          @events = @events2
         when 'league'
           @events = @connection.events.list({:category_id => @id, :page => @page, :per_page => @perpage, :order_by => 'events.occurs_at ASC, events.popularity_score DESC'})
+          @events2 = []
+          @events.each do |e|
+            if @e != {}
+              if Event.where(te_uid: e.id).exists?
+                @events2.push(e)
+              end
+            end
+          end
+          @events = @events2
         else
           puts "Invalid type parameter, please check and try again"
         end

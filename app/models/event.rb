@@ -4,11 +4,12 @@ class Event < ActiveRecord::Base
 	belongs_to :away_performer, class_name: "Performer", foreign_key: "away_performer_id"
 	belongs_to :venue
 	belongs_to :sport
+	has_many :tiles
   	def update_url
 	     self.update_column(:url, '/events/' + String(self.te_uid) + '/' + self.slug)
   	end
 
 	def display_name
-		return self.id
+		return self.name
 	end
 end

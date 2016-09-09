@@ -1036,7 +1036,7 @@
 							<div class="row">
 								<div class="col-xs-6">
 									<div class="label-confirm">Date & Time</div>
-									<div class="info">{{event.occurs_at | date: "EEE, MMM dd, yyyy - hh:mm a"}}</div>
+									<div class="info">{{event.occurs_at | date: "EEE, MMM dd, yyyy - hh:mm a" : 'UTC'}}</div>
 								</div>
 								<div class="col-xs-6">
 									<div class="label-confirm">Location</div>
