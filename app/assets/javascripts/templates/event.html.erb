@@ -63,7 +63,7 @@
         </div>
         
         <div class="col-xs-12 filter-row text-center">
-            <button ng-class="{'active': mob_eticket == true}" ng-click="updateMobEticket()">Etickets Only</button>
+            <button ng-class="{'active': mob_eticket == true}" ng-click="updateMobEticket()">EDelivery</button>
             <button ng-class="{'active': mob_delivery == 0}" ng-click="updateMobDelivery(0)">Tickets Only</button>
             <button ng-class="{'active': mob_delivery == 1}" ng-click="updateMobDelivery(1)">Parking Only</button>
         </div>
@@ -159,9 +159,9 @@
           </div>
           <div class="col-xs-12 filter-row vertical-center hidden-xs hidden-sm">
             Show
-            <button ng-click="updateEtickets()" ng-class="{'active': etickets}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ETickets Only</button>
             <button ng-click="updateParking(false)" ng-class="{'active': !onlyParking}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Tickets Only</button>
             <button ng-click="updateParking(true)" ng-class="{'active': onlyParking}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Parking Only</button>
+            <button ng-click="updateEtickets()" ng-class="{'active': etickets}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> EDelivery</button>
            <!--  <button ng-click="updateFilter($event,1)"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Parking Only</button> -->
           </div>
           <div class="col-xs-12 section-image hidden-xs hidden-sm" ng-if="sectionUrl != ''">
