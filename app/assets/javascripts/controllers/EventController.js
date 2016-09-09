@@ -123,6 +123,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         	//console.log($scope.tickets);
         	var sections = [];
         	angular.forEach($scope.tickets.data, function(value, key) {
+                value.amount = value.splits[value.splits.length-1];
         		if(sections.indexOf(value.section) == -1){
 	                sections.push(value.section);
 	            }	
