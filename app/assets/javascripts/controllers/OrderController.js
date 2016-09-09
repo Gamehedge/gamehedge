@@ -68,7 +68,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
                 		break;
                 	}
                 }
-                $scope.calculateValues();
+                $scope.getServiceFees();
         });
 	}
 
@@ -82,7 +82,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
             	$scope.service_fees = $filter('orderBy')($scope.service_fees,'minimum_amount');
             	//console.log("Service Fees");
             	//console.log($scope.service_fees);
-                $scope.calculateValues();
+            	$scope.getTicket();
         });
 	}
 
@@ -110,8 +110,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			$scope.service_fee = 0;
 		}
 		for(i=0;i<$scope.promo_codes.length;i++){
-			//console.log($scope.promo_codes[i].code);
-			//console.log($scope.promo_code);
+			console.log($scope.promo_codes[i].code);
+			console.log($scope.promo_code);
 			if($scope.promo_code == $scope.promo_codes[i].code){
 				if($scope.promo_codes[i].is_percentage == true){
 					$scope.discount = ($scope.subtotal + $scope.service_fee)*Number($scope.promo_codes[i].value)/100;
@@ -823,10 +823,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	$scope.shipping_address_index = 0;
 	$scope.billing_address_index = 0;
 	$scope.credit_card_index = 0;
-	$scope.getTicket();
 	$scope.getPromoCodes();
-	$scope.getServiceFees();
-	$scope.getClient();
 	$rootScope.isOrder = true;
 	$rootScope.darkHeader = true;
 	$rootScope.noFooter = true;
