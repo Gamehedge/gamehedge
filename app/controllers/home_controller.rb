@@ -6,12 +6,13 @@ class HomeController < ApplicationController
 	@year = Date.today.strftime("%Y")
 	
 
-	# Performer.each do |p|
-	# 	p.url = p.url.sub! 'performers', 'performer'
+	# Performer.all.each do |p|
+	# 	a = p.url.sub! 'performers', 'performer'
+	# 	p.url = a
 	# 	p.save
 	# end
-
-	# render json: "s"
+		
+	# render json: "a"
 
 
 

@@ -30,7 +30,7 @@ app.config([ '$routeProvider','$locationProvider','AuthProvider',
             templateUrl: "league.html",
             controller: 'LeagueController',
         })
-        .when('/performers/:performerId/:slug', {
+        .when('/performer/:performerId/:slug', {
             templateUrl: "performer.html",
             controller: 'PerformerController',
         })
