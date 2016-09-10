@@ -605,6 +605,10 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	}
 
 	$scope.updatePassword = function(){
+        
+        console.log("pass_client");
+        
+        
 		if($scope.password == $scope.confirm_password && $scope.password != ""){
 			$http({
 		        method: 'POST',
@@ -887,7 +891,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
         $scope.forgot_password = value;
     }
 
-    $scope.updatePassword = function(){
+    $scope.updatePasswordAuth = function(){
         $scope.sending_password = true;
         var parameters = {
             email: $scope.client.email
