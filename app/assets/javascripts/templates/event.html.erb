@@ -8,7 +8,7 @@
           GOOD GAME GUARANTEE!
       </div>
       <div class="col-md-4 col-xs-12 moto vertical-center hidden-xs hidden-sm">
-        All GameHedge tickets come with our exclusive Good Game Guarantee at no additional cost to you. So, if the home team loses by 5 runs or more, we will refund 50% of the price of your ticket. No gimmicks. No catches.
+        All GameHedge tickets come with our exclusive Good Game Guarantee at no additional cost to you. So, if the home team loses by the designated amount or more, we will refund 50% of the price of your ticket. No gimmicks. No catches.
       </div>
       <div class="col-md-5 col-xs-12 mobile-event-container" style="height: 100%;">
         <div class="col-md-2 date-holder hidden-xs hidden-sm">
@@ -63,9 +63,9 @@
         </div>
         
         <div class="col-xs-12 filter-row text-center">
-            <button ng-class="{'active': mob_eticket == true}" ng-click="updateMobEticket()">Etickets Only</button>
             <button ng-class="{'active': mob_delivery == 0}" ng-click="updateMobDelivery(0)">Tickets Only</button>
             <button ng-class="{'active': mob_delivery == 1}" ng-click="updateMobDelivery(1)">Parking Only</button>
+            <button ng-class="{'active': mob_eticket == true}" ng-click="updateMobEticket()">EDelivery</button>
         </div>
         
         <div class="show-button" ng-click="showMobFilters()">
@@ -159,9 +159,9 @@
           </div>
           <div class="col-xs-12 filter-row vertical-center hidden-xs hidden-sm">
             Show
-            <button ng-click="updateEtickets()" ng-class="{'active': etickets}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ETickets Only</button>
             <button ng-click="updateParking(false)" ng-class="{'active': !onlyParking}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Tickets Only</button>
             <button ng-click="updateParking(true)" ng-class="{'active': onlyParking}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Parking Only</button>
+            <button ng-click="updateEtickets()" ng-class="{'active': etickets}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> EDelivery</button>
            <!--  <button ng-click="updateFilter($event,1)"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Parking Only</button> -->
           </div>
           <div class="col-xs-12 section-image hidden-xs hidden-sm" ng-if="sectionUrl != ''">

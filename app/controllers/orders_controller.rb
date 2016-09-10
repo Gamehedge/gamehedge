@@ -37,6 +37,7 @@ class OrdersController < ApplicationController
 		@phone_number = request.POST["phone_number"]
 		@event_home_team = request.POST["event_home_team"]
 		@event_away_team = request.POST["event_away_team"]
+
         
         @order = TicketEvolutionService.new({id: @user_id}).createShipment({ address_id: @ship_address_id, 
         	billing_address_id: @billing_address_id, 
@@ -93,6 +94,7 @@ class OrdersController < ApplicationController
 				phone_number: @phone_number,
 				event_home_team: @event_home_team,
 				event_away_team: @event_away_team,
+				discount: @discount,
 				order_data: @order.to_s,
 			)
 		end
