@@ -660,7 +660,9 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
             //console.log(currentUser);
             $rootScope.user = currentUser;
             $rootScope.isLoggedin = true;
-            $scope.createCard();
+            if($scope.order_success == false){
+                $scope.createCard();
+            }
         });
 
         $scope.$on('devise:new-session', function(event, currentUser) {
