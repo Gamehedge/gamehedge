@@ -40,6 +40,7 @@ module Gamehedge
 
     config.cache_store = :dalli_store
     
+    config.middleware.use Rack::Deflater
     #HTTPS Settings
     
     config.to_prepare do
