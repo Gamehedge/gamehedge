@@ -128,3 +128,5 @@ gem 'kgio'
 gem "memcachier"
 
 gem 'image_optim'
+gem 'image_optim_pack'
+gem 'image_optim_rails'
