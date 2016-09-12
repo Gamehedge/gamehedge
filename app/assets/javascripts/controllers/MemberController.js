@@ -1,6 +1,6 @@
 controllers = angular.module('gamehedge')
 
-controllers.controller('MemberController', function($scope,$rootScope,$http,$location,Auth,apiService){
+controllers.controller('MemberController', function($scope,$rootScope,$http,$location,Auth){
     $rootScope.showHeader = true;
     
 	$scope.getClient = function(){

@@ -3454,6 +3454,7 @@ footer .footer-signature img{
 }
 #home section#hero #wrapper #content #hero-search .form-group {
 	margin: 0;
+    position: relative;
 }
 #home section#hero #wrapper #content #hero-search .form-control {
 	height: 60px;
@@ -3461,6 +3462,21 @@ footer .footer-signature img{
 	padding-left: 78px;
 	font-size: 24px;
 	color: #6d6d6d;
+}
+
+#home section#hero #wrapper #content #hero-search .no-results{
+    background-color: white;
+    position: absolute;
+    width: 100%;
+    margin-top: -5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 1px solid #ccc;
+    border-top: none;
+    padding: 8px 25px;
+    padding-left: 80px;
+    color: #999999;
+    font-size: 24px;
 }
 
 #home section#hero #wrapper #content #hero-search .form-control:focus{

@@ -114,6 +114,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	}
 
 	$scope.getTicketList = function(){
+
+		
 		$http({
             method: 'GET',
             url: '/tickets/list/?id='+String($scope.event.te_uid),

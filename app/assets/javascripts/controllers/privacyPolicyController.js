@@ -12,7 +12,7 @@ controllers.controller('privacyPolicyController', function($scope,$rootScope,$lo
                 //console.log("width: " + width);
                 $('#form-home-search [uib-typeahead-popup].dropdown-menu').width(width);
                 
-                return response;
+                return response.data;
         });
     };
 });
