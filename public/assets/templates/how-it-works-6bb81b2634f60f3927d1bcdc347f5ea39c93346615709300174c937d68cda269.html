@@ -1,0 +1,187 @@
+<section id="home">
+    <section id="hero">
+        <div id="shader"></div>
+        <div id="wrapper">
+          <div id="content">
+            <div class="container">
+              <p class="hidden-md hidden-lg hidden-xl">Every Ticket Comes With Our Good Game Guarantee!</p>
+              <div id="hero-search">
+                <form id="form-home-search" name="formSearch" method="POST" action="/search/">
+                  <input type="hidden" name="type" value="full" />
+                  <div class="form-group">
+                    <img src="/assets/search icon-9b89f111fdfca6e05a4dd8ab3af1c70710cfad4a3d3507f20522d36d158f0b0d.png">
+                    <input id="search_element" type="text" class="form-control" placeholder="Search by team, league, game, stadium or player..." ng-model="searchTerm" uib-typeahead="hint.name for hint in getSearchHints($viewValue)" typeahead-template-url="typeahead/bind-node.html" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+                  </div>
+                </form>
+              </div>
+              <p class="hidden-xs hidden-sm">Every Ticket Comes With Our Good Game Guarantee!</p>
+            </div>
+            <div class="press-images hidden-xs hidden-sm">
+              <div class="container">
+                <div class="spacing-div">AS FEATURED IN</div>
+                <div class="spacing-div"><img src="/assets/press2/CNBC copy-c30d7d847807d7a59b369d14e91dcdc46ee469e47b4577e459c54227477ffa9a.png"></div>
+                <div class="spacing-div"><img src="/assets/press2/USA Today copy-640825454ea57ea498a582a59600664e0e7b47c49b4dd6c1ed275bd9e622979e.png"></div>
+                <div class="spacing-div"><img src="/assets/press2/Sports Illustrated Red-17e0a5c765b08d21fe6c978563c4109e865252e56c719c656bbee4d5d3965d6f.png"></div>
+                <div class="spacing-div"><img src="/assets/press2/Yahoo Finance-e1a54e5f17c402c93f9a808573be1e5ffe508f17979f26d779702960ccc1251b.png"></div>
+                <div class="spacing-div"><img src="/assets/press2/ESPN Radio copy-3837662bfdc2851f6aa9912f55d69e189db1795bf75a98a9eacc437875b73b21.png"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+    
+    <main id="how_works_container">
+        <section id="good-game-guarantee" class="hidden-xs hidden-sm">
+          <div class="container">
+            <div class="title">HOW THE GOOD GAME GUARANTEE WORKS</div>
+
+            <div class="content-background">
+              <div class="content">
+                <div class="col-md-4 division">
+                  <div class="col-xs-5 section">
+                    <img src="/assets/icon ticket-59839a843b66a33dc82676dc184cadf44db42822136e606295090e8c52d0f783.png">
+                  </div>
+                  <div class="col-xs-7 section2">
+                    <h2>BUY TICKETS</h2>
+                    <p>
+                      Find your game and purchase your tickets.<br>
+                      Good Game Guarantee included at no additional cost with every ticket.
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-4 division center-div">
+                  <div class="col-xs-5 section">
+                    <img src="/assets/icon stadium-faa4d1bc1a1cc44dac059e13b0370552ea05e9684bdf46ddc39b289319e86e9c.png">
+                  </div>
+                  <div class="col-xs-7 section2">
+                    <h2>ENJOY GAME</h2>
+                    <p>
+                      If the home team loses by below amount or more, you get 50% of ticket price back.
+                    </p>
+                    <div class="row">
+                      <div class="col-xs-6 block">
+                        <img class="icon-img" src="/assets/football icon-a805da5c5a0130221d3593d78c63101f3951d4be745536a0d237006170143da0.png">
+                        17 PTS
+                      </div>
+                      <div class="col-xs-6 block">
+                        <img class="icon-img" src="/assets/basketball icon-01b972cee7b47beeb96ece5b3a83ea0d21ce38e3cc85200408ac27300818bb65.png">
+                        20 PTS
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-6 block">
+                        <img class="icon-img" src="/assets/baseball icon-1b49bbd143e1e10975b53b57ed799c124f6896f5232b589938a509707028c6b4.png">
+                        5 RUNS
+                      </div>
+                      <div class="col-xs-6 block">
+                        <img class="icon-img" src="/assets/hockey icon-ccdcb2e895dbdd8918ce1052b5d6d3135a58c9e4e1984900734510ed5bf9e6a3.png">
+                        4 GOALS
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 division">
+                  <div class="col-xs-5 section">
+                    <img src="/assets/icon coin-5fb3c63911c5ca057cbc83eeeab2a2a42d96cd1d0c2a40639aee1603232124e8.png">
+                  </div>
+                  <div class="col-xs-7 section2">
+                    <h2>CLAIM MONEY</h2>
+                    <p>
+                      Simply come back to GameHedge.com to claim your refund.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="good-game-guarantee" class="hidden-md hidden-lg hidden-xl">
+          <div class="container">
+            <div class="title">HOW THE GOOD GAME GUARANTEE WORKS</div>
+
+            <div class="content-background-mobile">
+              <div class="content-mobile">
+                 <slick settings="slickConfig">
+
+                    <div class="row table-element">
+                      <div class="section-mobile table-ele-cell first-ele">
+                        <img src="/assets/icon ticket-59839a843b66a33dc82676dc184cadf44db42822136e606295090e8c52d0f783.png">
+                      </div>
+                      <div class="section2-mobile table-ele-cell second-ele">
+                        <h2>BUY TICKETS</h2>
+                        <p>
+                          Find your game and purchase your tickets.<br>
+                          Good Game Guarantee included at no additional cost with every ticket.
+                        </p>
+                      </div>
+                    </div>
+                    <div class="row table-element">
+                      <div class="section-mobile table-ele-cell first-ele">
+                        <img src="/assets/icon stadium-faa4d1bc1a1cc44dac059e13b0370552ea05e9684bdf46ddc39b289319e86e9c.png">
+                      </div>
+                      <div class="section2-mobile table-ele-cell second-ele">
+                        <h2>ENJOY GAME</h2>
+                        <p>
+                          If the home team loses by below amount or more, you get 50% of ticket price back.
+                        </p>
+                        <div class="row">
+                          <div class="fifty-perc block">
+                            <img class="icon-img" src="/assets/football icon-a805da5c5a0130221d3593d78c63101f3951d4be745536a0d237006170143da0.png">
+                            <div>17 PTS</div>
+                          </div>
+                          <div class="fifty-perc block">
+                            <img class="icon-img" src="/assets/basketball icon-01b972cee7b47beeb96ece5b3a83ea0d21ce38e3cc85200408ac27300818bb65.png">
+                            <div>20 PTS</div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="fifty-perc block">
+                            <img class="icon-img" src="/assets/baseball icon-1b49bbd143e1e10975b53b57ed799c124f6896f5232b589938a509707028c6b4.png">
+                            <div>5 RUNS</div>
+                          </div>
+                          <div class="fifty-perc block">
+                            <img class="icon-img" src="/assets/hockey icon-ccdcb2e895dbdd8918ce1052b5d6d3135a58c9e4e1984900734510ed5bf9e6a3.png">
+                            <div>4 GOALS</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row table-element">
+                      <div class="section-mobile table-ele-cell first-ele">
+                        <img src="/assets/icon coin-5fb3c63911c5ca057cbc83eeeab2a2a42d96cd1d0c2a40639aee1603232124e8.png">
+                      </div>
+                      <div class="section2-mobile table-ele-cell second-ele">
+                        <h2>CLAIM MONEY</h2>
+                        <p>
+                          Simply come back to GameHedge.com to claim your refund.
+                        </p>
+                      </div>
+                    </div> 
+
+                </slick>
+
+
+
+
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        
+        <div id="how-works-bottom" class="container">
+            
+            <hr>
+            
+            <div class="guarantee row">
+                <div class="col-sm-2 col-xs-3 how-works-mobile"><img width="100%" src="/assets/badge-gamehedge-b868754d098ac14c1e3018f5b434638bcf678b3d7b0583499ca0d5a862891c89.png" /></div>
+                <div class="col-sm-10 col-xs-9">
+                    <h2>Good Game Guarantee&trade;</h2>
+                    <p>All GameHedge tickets come with our exclusive Good Game Guarantee at no additional cost to you. So, if the home team loses by 5 runs or more, we will refund 50% of the ticket price. No gimmicks. No catches.</p>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+</section>

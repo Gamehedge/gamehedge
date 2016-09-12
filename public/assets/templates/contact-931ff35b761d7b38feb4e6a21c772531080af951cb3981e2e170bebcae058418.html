@@ -1,0 +1,108 @@
+<section id="home">
+    <section id="hero">
+        <div id="shader"></div>
+        <div id="wrapper">
+          <div id="content">
+            <div class="container">
+              <p class="hidden-md hidden-lg hidden-xl">Every Ticket Comes With Our Good Game Guarantee!</p>
+              <div id="hero-search">
+                <form id="form-home-search" name="formSearch" method="POST" action="/search/">
+                  <input type="hidden" name="type" value="full" />
+                  <div class="form-group">
+                    <img src="/assets/search icon-9b89f111fdfca6e05a4dd8ab3af1c70710cfad4a3d3507f20522d36d158f0b0d.png">
+                    <input id="search_element" type="text" class="form-control" placeholder="Search by team, league, game, stadium or player..." ng-model="searchTerm" uib-typeahead="hint.name for hint in getSearchHints($viewValue)" typeahead-template-url="typeahead/bind-node.html" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+                  </div>
+                </form>
+              </div>
+              <p class="hidden-xs hidden-sm">Every Ticket Comes With Our Good Game Guarantee!</p>
+            </div>
+            <div class="press-images hidden-xs hidden-sm">
+              <div class="container">
+                <div class="spacing-div">AS FEATURED IN</div>
+                <div class="spacing-div"><img src="/assets/press2/CNBC copy-c30d7d847807d7a59b369d14e91dcdc46ee469e47b4577e459c54227477ffa9a.png"></div>
+                <div class="spacing-div"><img src="/assets/press2/USA Today copy-640825454ea57ea498a582a59600664e0e7b47c49b4dd6c1ed275bd9e622979e.png"></div>
+                <div class="spacing-div"><img src="/assets/press2/Sports Illustrated Red-17e0a5c765b08d21fe6c978563c4109e865252e56c719c656bbee4d5d3965d6f.png"></div>
+                <div class="spacing-div"><img src="/assets/press2/Yahoo Finance-e1a54e5f17c402c93f9a808573be1e5ffe508f17979f26d779702960ccc1251b.png"></div>
+                <div class="spacing-div"><img src="/assets/press2/ESPN Radio copy-3837662bfdc2851f6aa9912f55d69e189db1795bf75a98a9eacc437875b73b21.png"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <main id="contact_container">
+        <div class="container">
+            <h1 class="text-center">CONTACT US</h1>
+            <section id="contact-us">
+                <div class="row">
+                    <div class="col-md-12 text-center" style="font-size:18px; margin-bottom:10px;">
+                        <img width="40px" src="/assets/icon_home-f93e5add81cd58f10790297a2ac20283cd8701431b2fb6349da835ff8cd91507.png"><div style="display:inline; margin-left:10px;">GameHedge 1460 Broadway New York, NY 10036</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-12 text-center">
+                            <img width="100" src="/assets/phone_icon_grey-2717ec97cf3d80633ca245f4db762c54fd88518920faba51da91f0fcce5c243c.png">
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <h3>908-312-FANS (3267)</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-12 text-center">
+                            <img width="100" src="/assets/email_icon_grey-651a64c44c7d4710233d995eb9618a4777ae3ff29f792160e95831dff29ba3b6.png">
+                        </div>
+                        <div class="col-md-12 text-center contact-mobile">
+                            <h3><a href="mailto:support@gamehedge.com">support@gamehedge.com</a></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12"><h2 class="text-center">- OR -</h2></div>
+                </div>
+                <div class="row contact-form">
+                   
+                        <form name="contactForm" class="form-horizontal" ng-submit="submitForm()" novalidate>
+                            <div class="form-group" ng-class="{ 'has-error' : contactForm.name.$invalid && !contactForm.name.$pristine }">
+                                <label for="name" class="col-sm-2 control-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" ng-model="contact.name" name="name" placeholder="First & Last Name" required>
+                                    <p ng-show="contactForm.name.$invalid && !contactForm.name.$pristine" class="help-block">You name is required.</p>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error' : contactForm.email.$invalid && !contactForm.email.$pristine }">
+                                <label for="email" class="col-sm-2 control-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" ng-model="contact.email" name="email" placeholder="example@domain.com" required>
+                                    <p ng-show="contactForm.email.$invalid && !contactForm.email.$pristine" class="help-block">Enter a valid email.</p>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error' : contactForm.message.$invalid && !contactForm.message.$pristine }">
+                                <label for="message" class="col-sm-2 control-label">Message</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" rows="4" ng-model="contact.message" name="message" required></textarea>
+                                    <p ng-show="contactForm.message.$invalid && !contactForm.message.$pristine" class="help-block">Enter a message.</p>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error' : contactForm.human.$invalid && !contactForm.human.$pristine }">
+                                <label for="human" class="col-sm-2 control-label">{{value_1}} + {{value_2}} = ?</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control myCustomRule" name="human" ng-model="contact.human" placeholder="Your Answer" required autocomplete='off'>
+                                    <p ng-show="contactForm.human.$invalid && !contactForm.human.$pristine" class="help-block">The answer is required.</p>
+                                    <input type="hidden" name="human_1" id="human_1" value="{{value_1}}">
+                                    <input type="hidden" name="human_2" id="human_2" value="{{value_2}}">
+                                    <input type="hidden" name="human_answer" id="human_answer" value="{{answer}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-10 col-sm-offset-2">
+                                    <button ladda="proccessing" type="submit" class="btn btn-primary" ng-disabled="contactForm.$invalid">Send</button>
+                                </div>
+                            </div>
+                        </form>
+                    
+                </div>
+            </section>
+        </div>
+    </main>
+</section>
