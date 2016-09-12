@@ -522,6 +522,12 @@ body {
         padding-left: 10px;
         font-size: 12px;
     }
+
+    #home section#hero #wrapper #content #hero-search .no-results{
+        padding-left: 10px !important;
+        font-size: 12px !important;
+        text-align: left !important;
+    }
 }
 
 .mobile-menu .img-header{
@@ -3534,11 +3540,7 @@ footer .footer-signature img{
     .headerNew2 {
 		font-size: 22px !important;
 	}
-    #home section#hero #wrapper #content #hero-search .no-results{
-        padding-left: 10px;
-        font-size: 12px;
-        text-align: left;
-    }
+    
 }
 #home .guarantee-item, section#how-it-works {
 	text-align: center;
