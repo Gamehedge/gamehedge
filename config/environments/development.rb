@@ -33,6 +33,8 @@ Rails.application.configure do
     
   config.assets.js_compressor = Uglifier.new(mangle: false)
   config.assets.css_compressor = :sass
+    
+  config.serve_static_files = true
 
   # Adds additional error checking when serving assets at runtime.
   # Checks for improperly declared sprockets dependencies.

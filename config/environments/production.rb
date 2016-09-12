@@ -102,7 +102,7 @@ Rails.application.configure do
   }
   config.static_cache_control = "public, max-age=2592000"
 
-  config.serve_static_assets = true
+  config.serve_static_files = true
 
   config.paperclip_defaults = {
       :storage => :s3,
