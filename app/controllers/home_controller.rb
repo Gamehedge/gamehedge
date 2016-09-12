@@ -4,6 +4,6 @@ class HomeController < ApplicationController
   	
   	require 'date'
 	@year = Date.today.strftime("%Y")
-	
+
   end
 end
