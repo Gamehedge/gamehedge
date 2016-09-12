@@ -125,3 +125,5 @@ gem 'dalli'
 
 gem 'kgio'
 
+gem "memcachier"
+
