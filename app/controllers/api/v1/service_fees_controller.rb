@@ -1,12 +1,16 @@
 class Api::V1::ServiceFeesController < ApplicationApiController
   include ActionController::HttpAuthentication::Token::ControllerMethods
   include ActionController::MimeResponds
+  
   TOKEN = "TokenHere"
   before_action :authenticate
 
   skip_before_filter :authenticate_user! # we do not need devise authentication here
   before_filter :fetch_user, :except => [:index, :create]
 
+
+  
+  
   def fetch_user
     @service_fee = ServiceFee.find_by_id(params[:id])
   end

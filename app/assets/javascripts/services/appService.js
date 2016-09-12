@@ -1,9 +1,5 @@
 app.service('dataService', function($http) {
     
-    this.getPackageData = function( id ) {
-        return this.getData("/packages/get_package?id=" + id )
-    }
-    
     this.getData = function( url ) {
         var request = $http({
             method: "get",
@@ -41,7 +37,7 @@ app.service('dataService', function($http) {
     // I transform the successful response, unwrapping the application data
     // from the API response payload.
     function handleSuccess( response ) {
-        return( response.data );
+        return( response );
     }
     
 });
