@@ -6,7 +6,7 @@
             <div class="container">
               <p class="hidden-md hidden-lg hidden-xl">Every Ticket Comes With Our Good Game Guarantee!</p>
               <div id="hero-search">
-                <form id="form-home-search" name="formSearch" method="POST" action="/search/">
+                <form id="form-home-search" name="formSearch" onsubmit="function(){return false;};">
                   <input type="hidden" name="type" value="full" />
                   <div class="form-group">
                     <img src="<%= image_url 'search icon.png' %>">
