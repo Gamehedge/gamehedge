@@ -1,6 +1,7 @@
 class Api::V1::DivisionsController < ApplicationApiController
   include ActionController::HttpAuthentication::Token::ControllerMethods
   include ActionController::MimeResponds
+  require 'actionpack/action_caching'
   TOKEN = "TokenHere"
   before_action :authenticate
 
@@ -14,7 +15,7 @@ class Api::V1::DivisionsController < ApplicationApiController
   xpire_action :action => :index
   caches_action :fetch_user
   xpire_action :action => :fetch_user
-  
+
   def fetch_user
     @division = Division.find_by_id(params[:id])
   end

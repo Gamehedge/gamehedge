@@ -121,4 +121,5 @@ gem 'http-cookie'
 
 gem 'dalli'
 gem 'memcachier'
+gem 'actionpack-action_caching'
 
