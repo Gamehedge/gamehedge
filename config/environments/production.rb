@@ -79,6 +79,16 @@ Rails.application.configure do
 
   #config.action_mailer.default_url_options = { host: 'here goes the actual host', port: 3000 }
 
+  config.cache_store = :dalli_store,
+                    (ENV["MEMCACHIER_SERVERS"] || "").split(","),
+                    {:username => ENV["MEMCACHIER_USERNAME"],
+                     :password => ENV["MEMCACHIER_PASSWORD"],
+                     :failover => true,
+                     :socket_timeout => 1.5,
+                     :socket_failure_delay => 0.2,
+                     :down_retry_delay => 60
+                    }
+
   config.paperclip_defaults = {
       :storage => :s3,
       :s3_credentials => {

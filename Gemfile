@@ -117,4 +117,11 @@ gem 'netrc'
 
 gem 'http-cookie'
 
+#cache gems
+
+gem 'rack-cache'
+
+gem 'dalli'
+
+gem 'kgio'
 
