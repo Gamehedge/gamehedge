@@ -42,7 +42,7 @@ module Gamehedge
     
     config.middleware.use Rack::Deflater
     #HTTPS Settings
-    
+      
     config.to_prepare do
       DeviseController.respond_to :html, :json
     end
