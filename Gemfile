@@ -117,4 +117,8 @@ gem 'netrc'
 
 gem 'http-cookie'
 
+# Cache gems
+
+gem 'dalli'
+gem 'memcachier'
 

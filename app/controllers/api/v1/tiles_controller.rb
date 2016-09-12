@@ -4,6 +4,14 @@ class Api::V1::TilesController < ApplicationApiController
   TOKEN = "TokenHere"
   before_action :authenticate
 
+
+  # Cache 
+
+  caches_action :index
+  xpire_action :action => :index
+  caches_action :fetch_user
+  xpire_action :action => :fetch_user
+  
   skip_before_filter :authenticate_user! # we do not need devise authentication here
   before_filter :fetch_user, :except => [:index, :create]
 

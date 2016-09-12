@@ -8,9 +8,9 @@ class MainSearch < ActiveRecord::Base
   def results
     if @query.present?
     	if @limit.present?
-      		self.class.search(@query).order('searchable_type DESC').limit(@limit).preload(:searchable).map(&:searchable).uniq
+      		self.class.fuzzy_search(@query).order('searchable_type DESC').limit(@limit).preload(:searchable).map(&:searchable).uniq
       	else
-      		self.class.search(@query).order('searchable_type DESC').preload(:searchable).map(&:searchable).uniq
+      		self.class.fuzzy_search(@query).order('searchable_type DESC').preload(:searchable).map(&:searchable).uniq
       	end
     else
       Search.none

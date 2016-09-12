@@ -1,6 +1,6 @@
 controllers = angular.module('gamehedge')
 
-controllers.controller('HomeController', function($scope,$rootScope,$http,$location,dataService,$window, $timeout,Auth){
+controllers.controller('HomeController', function($scope,$rootScope,$http,$location,dataService,$window, $timeout,Auth,apiService){
     $rootScope.showHeader = true;
 	$scope.TilesIndex = 0;
 	$scope.loading = true;
@@ -11,33 +11,24 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
     $scope.car_active = 0;
 	
 	$scope.getTiles = function(){
-		$http({
-		  	method: 'GET',
-		  	url: '/api/v1/tiles/',
-		  	headers: {
-			   'Authorization': "Token token=TokenHere",
-			},
-		}).then(function successCallback(response) {
-			$scope.tiles = response.data;
-			for(i=0;i<$scope.tiles.length;i++){
-				$scope.tiles[i].ready = false;
-			}
-			$scope.loading = false;
-			$scope.TilesIndex = 0;
-			for(i=0;i<$scope.tiles.length;i++){
-				if($scope.tiles[i].tile_type.id != "4"){
-					$scope.getNextEvents(i);	
+		apiService.getData('/api/v1/tiles/')
+            .then(function(response){
+            	$scope.tiles = response;
+				for(i=0;i<$scope.tiles.length;i++){
+					$scope.tiles[i].ready = false;
 				}
-				else{
-					console.log($scope.tiles[i]);
-					$scope.tiles[i].ready = true;
+				$scope.loading = false;
+				$scope.TilesIndex = 0;
+				for(i=0;i<$scope.tiles.length;i++){
+					if($scope.tiles[i].tile_type.id != "4"){
+						$scope.getNextEvents(i);	
+					}
+					else{
+						console.log($scope.tiles[i]);
+						$scope.tiles[i].ready = true;
+					}
 				}
-			}
-		}, function errorCallback(response) {
-			//console.log(response);
-		    // called asynchronously if an error occurs
-		    // or server returns response with an error status.
-		});
+        });
 	}
 
 	$scope.getNextEvents = function(index){
@@ -139,7 +130,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
                 //console.log("width: " + width);
                 $('#form-home-search [uib-typeahead-popup].dropdown-menu').width(width);
                 
-                return response;
+                return response.data;
         });
     };	
     
@@ -175,6 +166,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 	$rootScope.isOrder = false;
 	$rootScope.darkHeader = false;
 	$rootScope.noFooter = false;
+	$rootScope.searchTerm = "";
 	$scope.getTiles();
 	$window.scrollTo(0, 0);
     $scope.compareDate =  "2015-09-05T00:00:00.000Z";

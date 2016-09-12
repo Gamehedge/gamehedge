@@ -44,7 +44,7 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
         apiService.getData(url)
             .then(function(response){
                 //console.log("Events");
-                $scope.events = $scope.events.concat(response.data);
+                $scope.events = $scope.events.concat(response);
                 if($scope.events.length < Number(response.total)){
                     $scope.load_more = true;
                 }
@@ -65,7 +65,7 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
             $scope.page = 1;
             $scope.events = []
             $scope.performer_id = id;
-            $scope.getEvents()    
+            $scope.getEvents();
         }   
     }
 
@@ -79,7 +79,7 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
                 //console.log("width: " + width);
                 $('#form-home-search [uib-typeahead-popup].dropdown-menu').width(width);
                 
-                return response;
+                return response.data;
         });
     };	
 

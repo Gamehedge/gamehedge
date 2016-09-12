@@ -1,6 +1,6 @@
 app = angular.module('gamehedge')
 
-app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,dataService,$http){
+app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,dataService,$http,apiService){
 
 	$scope.logout = function(){
         $scope.hideMenus();
@@ -45,70 +45,29 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
         return dataService.getData("/search/?search=" + val + "&limit=10")
             .then(function(response){
                 //console.log(response)
-                $scope.searchResults = response;
+                $scope.searchResults = response.data;
         });
     };
 
     $scope.getLeagues = function(){
-        $http({
-            method: 'GET',
-            url: '/api/v1/sports',
-            headers: {
-               'Authorization': 'Token token="TokenHere"'
-            },
-        }).then(function successCallback(response) {
-
-            $scope.leagueList = response.data;
-            //console.log("Leagues");
-            //console.log($scope.leagueList);
-            // this callback will be called asynchronously
-            // when the response is available
-        }, function errorCallback(response) {
-            console.log(response);
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+        apiService.getData('/api/v1/sports/')
+            .then(function(response){
+                $scope.leagueList = response;
         });
     }
 
     $scope.getDivisions = function(){
-        $http({
-            method: 'GET',
-            url: '/api/v1/divisions?light=true',
-            headers: {
-               'Authorization': 'Token token="TokenHere"'
-            },
-        }).then(function successCallback(response) {
-
-            $scope.divisions = response.data;
-            //console.log("Divisions");
-            //console.log($scope.divisions);
-            // this callback will be called asynchronously
-            // when the response is available
-        }, function errorCallback(response) {
-            console.log(response);
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+        apiService.getData('/api/v1/divisions?light=true')
+            .then(function(response){
+                $scope.divisions = response;
         });
     }
 
     $scope.getPerformers = function(){
-        $http({
-            method: 'GET',
-            url: '/api/v1/performers?light=true',
-            headers: {
-               'Authorization': 'Token token="TokenHere"'
-            },
-        }).then(function successCallback(response) {
 
-            $scope.performers = response.data;
-            //console.log("Performers");
-            //console.log($scope.performers);
-            // this callback will be called asynchronously
-            // when the response is available
-        }, function errorCallback(response) {
-            console.log(response);
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+        apiService.getData('/api/v1/performers?light=true')
+            .then(function(response){
+                $scope.performers = response;
         });
     }
     

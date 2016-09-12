@@ -85,7 +85,7 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
                 //console.log("width: " + width);
                 $('#form-home-search [uib-typeahead-popup].dropdown-menu').width(width);
             
-                return response;
+                return response.data;
         });
     };	
 
