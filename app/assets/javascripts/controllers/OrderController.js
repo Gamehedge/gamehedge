@@ -464,7 +464,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			        	ticket_group_signature: $scope.ticket.signature,
 			        	type: type,
 			        	service_type: service_type,
-			        	ship_to_name: $scope.shipping_address.name,
+			        	ship_to_name: $rootScope.user.name,
 			        	amount: $scope.total,
 			        	email_address_id: $scope.client.primary_email_address.id,
 			        	pay_type: "credit_card",
@@ -563,20 +563,23 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			        },
 			    }).then(function successCallback(response) {
 			    	if(response.data.error == undefined){
-			    		//console.log("Client created");
-			    		//console.log("Client");
-			    		//console.log(response.data.client);
-			    		//console.log("User");
-			    		//console.log(response.data.user);
+			    		console.log("Client created");
+			    		console.log("Client");
+			    		console.log(response.data.client);
+			    		console.log("User");
+                        console.log(response.data.temp_password);
+			    		console.log(response.data.user);
 			    		$scope.client = response.data.client;
 			    		$scope.temp_password = response.data.temp_password;
 			    		$rootScope.isLoggedin = true;
 			    		$rootScope.isLoggedin = true;
+                        console.log("pre login...");
 			    		$rootScope.user = response.data.user;
 			    		$scope.addresses = $scope.client.addresses;
 			    		$scope.billing_address = $scope.client.primary_billing_address;
 			    		$scope.shipping_address = $scope.client.primary_shipping_address;
-			    		$scope.login();
+                        console.log("GO TO LOGIN");
+			    		$scope.loginFcn();
 			    	}
 			    	else{
 			    		//console.log("Error");
@@ -602,6 +605,10 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	}
 
 	$scope.updatePassword = function(){
+        
+        console.log("pass_client");
+        
+        
 		if($scope.password == $scope.confirm_password && $scope.password != ""){
 			$http({
 		        method: 'POST',
@@ -625,7 +632,9 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		}
 	}
 
-	$scope.login = function(){
+	$scope.loginFcn = function(){
+        console.log("login ENTER");
+        console.log(credentials);
 		var credentials = {
             email: $scope.client.email,
             password: $scope.temp_password,
@@ -651,7 +660,9 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
             //console.log(currentUser);
             $rootScope.user = currentUser;
             $rootScope.isLoggedin = true;
-            $scope.createCard();
+            if($scope.order_success == false){
+                $scope.createCard();
+            }
         });
 
         $scope.$on('devise:new-session', function(event, currentUser) {
@@ -882,7 +893,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
         $scope.forgot_password = value;
     }
 
-    $scope.updatePassword = function(){
+    $scope.updatePasswordAuth = function(){
         $scope.sending_password = true;
         var parameters = {
             email: $scope.client.email

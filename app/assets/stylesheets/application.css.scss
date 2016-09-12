@@ -3276,7 +3276,7 @@ footer .footer-signature img{
         padding-bottom: 15px;
         color: #ffffff;
         background-color: #91c33f;
-        bottom: 0px;
+        bottom: 30px;
         width: 100%;
     }
     
@@ -3534,6 +3534,11 @@ footer .footer-signature img{
     .headerNew2 {
 		font-size: 22px !important;
 	}
+    #home section#hero #wrapper #content #hero-search .no-results{
+        padding-left: 10px;
+        font-size: 12px;
+        text-align: left;
+    }
 }
 #home .guarantee-item, section#how-it-works {
 	text-align: center;
