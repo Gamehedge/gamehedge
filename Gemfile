@@ -127,3 +127,4 @@ gem 'kgio'
 
 gem "memcachier"
 
+gem 'image_optim'
