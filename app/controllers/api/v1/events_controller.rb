@@ -1,7 +1,7 @@
 class Api::V1::EventsController < ApplicationApiController
   include ActionController::HttpAuthentication::Token::ControllerMethods
   include ActionController::MimeResponds
-  require 'actionpack/action_caching'
+  
   TOKEN = "TokenHere"
   before_action :authenticate
 
