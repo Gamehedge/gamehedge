@@ -239,6 +239,20 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	    },1000);
 	};
 
+	$scope.compareDates = function(event_date,format){
+		if(format == "Physical"){
+			if(moment().add(72,'h').isAfter(event_date.replace("Z",""))){
+	            return false;
+	        }
+	        else{
+	            return true;
+	        }
+		}
+		else{
+			return true;
+		}
+    }
+
 	$scope.applyChanges = function(){
 		$scope.$apply()
 	};
