@@ -159,7 +159,7 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
     $scope.events = []
     $scope.testimonials = []
 	$scope.getPerformerInfo();
-    $rootScope.searchTerm = "";
+    $scope.searchTerm = "";
     $scope.compareDate =  "2015-09-05T00:00:00.000Z"
     $window.scrollTo(0, 0);
     Auth.currentUser().then(function(user) {

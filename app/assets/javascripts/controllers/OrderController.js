@@ -843,7 +843,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	$scope.editing = false;
 	$scope.password = "";
 
-	$rootScope.searchTerm = "";
+	$scope.searchTerm = "";
 	$window.scrollTo(0, 0);
 
 

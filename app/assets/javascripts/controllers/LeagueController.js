@@ -121,7 +121,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
     $rootScope.darkHeader = false;
     $rootScope.noFooter = false;
     $scope.loading = true;
-    $rootScope.searchTerm = "";
+    $scope.searchTerm = "";
     $scope.next_events = [];
 	$scope.getLeagueInfo();
     $window.scrollTo(0, 0);

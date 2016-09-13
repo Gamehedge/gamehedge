@@ -130,7 +130,7 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
     $scope.events = []
     $scope.testimonials = []
 	$scope.getVenueInfo();
-    $rootScope.searchTerm = "";
+    $scope.searchTerm = "";
     $scope.performer_id = 0;
     $scope.compareDate =  "2015-09-05T00:00:00.000Z"
     $window.scrollTo(0, 0);

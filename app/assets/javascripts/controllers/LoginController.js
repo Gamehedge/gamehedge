@@ -71,7 +71,7 @@ controllers.controller('LoginController', function($scope,$rootScope,Auth,$locat
         });
     }
     $scope.logging_in = false;
-    $rootScope.searchTerm = "";
+    $scope.searchTerm = "";
     $scope.sending_password = false;
     $rootScope.isOrder = false;
     $rootScope.darkHeader = true;
