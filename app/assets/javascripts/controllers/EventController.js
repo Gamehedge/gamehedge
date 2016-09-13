@@ -274,6 +274,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	$rootScope.isOrder = false;
 	$rootScope.darkHeader = true;
 	$rootScope.noFooter = true;
+	$rootScope.searchTerm = "";
 	$window.scrollTo(0, 0);
 	//The global variable locat gets the current location.path
 	Auth.currentUser().then(function(user) {

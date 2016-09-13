@@ -842,6 +842,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	$scope.order_success = false;
 	$scope.editing = false;
 	$scope.password = "";
+
+	$rootScope.searchTerm = "";
 	$window.scrollTo(0, 0);
 
 

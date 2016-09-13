@@ -3,7 +3,7 @@ controllers = angular.module('gamehedge')
 controllers.controller('ourTermsController', function($scope,$rootScope,$location,$window, dataService){
     $window.scrollTo(0, 0);
     $rootScope.showHeader = true;
-    
+    $rootScope.searchTerm = "";
     $scope.getSearchHints = function(val) {
         return dataService.getData("/search/?search=" + val + "&limit=10")
             .then(function(response){

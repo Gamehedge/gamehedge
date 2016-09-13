@@ -18,6 +18,7 @@ controllers.controller('MemberController', function($scope,$rootScope,$http,$loc
 	}
 
 	$rootScope.darkHeader = true;
+	$rootScope.searchTerm = "";
 	$scope.loading = true;
 	Auth.currentUser().then(function(user) {
         // User was logged in, or Devise returned

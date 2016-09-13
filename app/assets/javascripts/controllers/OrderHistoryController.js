@@ -86,6 +86,7 @@ controllers.controller('OrderHistoryController', function($scope,$rootScope,$htt
 
 	$rootScope.darkHeader = true;
 	$scope.loading = true;
+	$rootScope.searchTerm = "";
 	Auth.currentUser().then(function(user) {
         // User was logged in, or Devise returned
         // previously authenticated session.

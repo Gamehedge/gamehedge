@@ -90,7 +90,7 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
         }
     }
     // Initializers
-
+    $rootScope.searchTerm = "";
     $scope.getLeagues();
     $scope.getDivisions();
     $scope.getPerformers()
