@@ -461,7 +461,8 @@ CREATE TABLE players (
     name character varying,
     performer_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    url character varying
 );
 
 
@@ -1787,4 +1788,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160909132958');
 INSERT INTO schema_migrations (version) VALUES ('20160909150628');
 
 INSERT INTO schema_migrations (version) VALUES ('20160909194337');
+
+INSERT INTO schema_migrations (version) VALUES ('20160913214106');
 
