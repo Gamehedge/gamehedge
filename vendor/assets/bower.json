@@ -7,6 +7,8 @@
     "angular-animate": "latest",
     "angular-ladda": "latest",
     "sweetalert": "latest",
-    "bootstrap-hover-dropdown": "latest"
+    "angular-moment": "latest"
+  },
+  "resolutions": {
   }
 }
