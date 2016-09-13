@@ -40,7 +40,10 @@ module Gamehedge
 
     config.cache_store = :dalli_store
     
+    # To compress json files
+
     config.middleware.use Rack::Deflater
+    
     #HTTPS Settings
       
     config.to_prepare do
