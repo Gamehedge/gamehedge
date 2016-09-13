@@ -9,14 +9,11 @@
             <form id="form-home-search" name="formSearch" onsubmit="function(){return false;};">
               <input type="hidden" name="type" value="full" />
               <div class="form-group">
-                <img src="<%= image_url 'search icon.png' %>">
-                <input id="search_element" type="text" class="form-control" placeholder="Search by team, league, game, stadium or player..." ng-model="searchTerm" uib-typeahead="hint.name for hint in getSearchHints($viewValue)" typeahead-template-url="typeahead/bind-node.html" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-                <div class="no-results" ng-show="searchTerm != ''">
+                <img src="<%= image_url "search icon.png" %>" ng-click="goToSearch()">
+                <input id="search_element" type="text" class="form-control" placeholder="Search by team, league, game, stadium or player..." ng-model="searchTerm" uib-typeahead="hint as hint.name for hint in getSearchHints($viewValue)" typeahead-template-url="typeahead/bind-node.html" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" typeahead-on-select="onSelect($item, $model, $label)" typeahead-no-results="noResults">
+                 <div class="no-results" ng-show="noResults && searchTerm != ''">
                   No results. Please try again
                 </div>
-              </div>
-
-
             </form>
           </div>
           <p class="hidden-xs hidden-sm">Every Ticket Comes With Our Good Game Guarantee!</p>

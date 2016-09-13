@@ -16,10 +16,21 @@ controllers.controller('contactController', function($scope,$rootScope,$location
                 var width = $("#search_element").width() + 50;
                 //console.log("width: " + width);
                 $('#form-home-search [uib-typeahead-popup].dropdown-menu').width(width);
-                
+                $scope.searchBarResults = response.data;
                 return response;
         });
     };
+    $scope.onSelect = function ($item, $model, $label) {
+        $location.path($scope.searchTerm.url);
+    };
+
+    $scope.goToSearch = function(){
+        if($scope.searchBarResults != undefined){
+            if($scope.searchBarResults.length > 0){
+                $location.path($scope.searchBarResults[0].url);
+            }
+        }
+    }
     
     $scope.redirect = function() {
         

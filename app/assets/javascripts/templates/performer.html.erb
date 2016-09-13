@@ -9,9 +9,9 @@
             <form id="form-home-search" name="formSearch" onsubmit="function(){return false;};">
               <input type="hidden" name="type" value="full" />
               <div class="form-group">
-                <img src="<%= image_url "search icon.png" %>">
-                <input id="search_element" type="text" class="form-control" placeholder="Search by team, league, game, stadium or player..." ng-model="searchTerm" uib-typeahead="hint.name for hint in getSearchHints($viewValue)" typeahead-template-url="typeahead/bind-node.html" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-                 <div class="no-results" ng-hide="searchTerm == ''">
+                <img src="<%= image_url "search icon.png" %>" ng-click="goToSearch()">
+                <input id="search_element" type="text" class="form-control" placeholder="Search by team, league, game, stadium or player..." ng-model="searchTerm" uib-typeahead="hint as hint.name for hint in getSearchHints($viewValue)" typeahead-template-url="typeahead/bind-node.html" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" typeahead-on-select="onSelect($item, $model, $label)" typeahead-no-results="noResults">
+                 <div class="no-results" ng-show="noResults && searchTerm != ''">
                   No results. Please try again
                 </div>
               </div>
@@ -24,7 +24,7 @@
   </section>
 
   <script type="text/ng-template" id="typeahead/bind-node.html">
-    <a href="/#{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
+    <a href="#" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
   </script>
   <section id="good-game-guarantee" class="hidden-xs hidden-sm">
     <div class="container">

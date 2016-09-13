@@ -57,10 +57,21 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
                 var width = $("#search_element").width() + 50;
                 //console.log("width: " + width);
                 $('#form-home-search [uib-typeahead-popup].dropdown-menu').width(width);
-                
+                $scope.searchBarResults = response.data;
                 return response.data;
         });
     };	
+    $scope.onSelect = function ($item, $model, $label) {
+        $location.path($scope.searchTerm.url);
+    };
+
+    $scope.goToSearch = function(){
+        if($scope.searchBarResults != undefined){
+            if($scope.searchBarResults.length > 0){
+                $location.path($scope.searchBarResults[0].url);
+            }
+        }
+    }
 	$scope.getNextEvents = function(){
         id = $scope.league.te_uid;
         source = "league";

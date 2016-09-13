@@ -5,9 +5,9 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
 	$scope.getVenueInfo = function(){
 		apiService.getData('/api/v1/venues/'+$routeParams.venueId)
             .then(function(response){
-                console.log("Venue");
-            	console.log($scope.venue);
                 $scope.venue  = response;
+             //    console.log("Venue");
+            	// console.log($scope.venue);
                 if($routeParams.slug == $scope.venue.slug){
                     $scope.getEvents();
                 }
@@ -44,7 +44,7 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
         apiService.getData(url)
             .then(function(response){
                 //console.log("Events");
-                $scope.events = $scope.events.concat(response);
+                $scope.events = $scope.events.concat(response.data);
                 if($scope.events.length < Number(response.total)){
                     $scope.load_more = true;
                 }
@@ -52,7 +52,8 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
                     $scope.load_more = false;   
                 }
                 $scope.disable_toogle = false;
-                //console.log($scope.events);
+                console.log("Events");
+                console.log($scope.events);
                 $scope.loading = false;
         });
     };
@@ -78,10 +79,21 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
                 var width = $("#search_element").width() + 50;
                 //console.log("width: " + width);
                 $('#form-home-search [uib-typeahead-popup].dropdown-menu').width(width);
-                
+                $scope.searchBarResults = response.data;
                 return response.data;
         });
     };	
+    $scope.onSelect = function ($item, $model, $label) {
+        $location.path($scope.searchTerm.url);
+    };
+
+    $scope.goToSearch = function(){
+        if($scope.searchBarResults != undefined){
+            if($scope.searchBarResults.length > 0){
+                $location.path($scope.searchBarResults[0].url);
+            }
+        }
+    }
 
     $scope.loadMore = function(){
         $scope.loading = true;
