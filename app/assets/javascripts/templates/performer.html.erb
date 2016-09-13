@@ -11,7 +11,7 @@
               <div class="form-group">
                 <img src="<%= image_url "search icon.png" %>">
                 <input id="search_element" type="text" class="form-control" placeholder="Search by team, league, game, stadium or player..." ng-model="searchTerm" uib-typeahead="hint.name for hint in getSearchHints($viewValue)" typeahead-template-url="typeahead/bind-node.html" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-                 <div class="no-results" ng-show="searchTerm != ''">
+                 <div class="no-results" ng-hide="searchTerm == ''">
                   No results. Please try again
                 </div>
               </div>
