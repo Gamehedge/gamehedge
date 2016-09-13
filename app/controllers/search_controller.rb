@@ -2,10 +2,16 @@ class SearchController < ActionController::Base
   def index
 
   	if params[:search].present?
-  		@books = MainSearch.new(query: params[:search], limit: params[:limit]).results
+
+  		# @results = MainSearch.new(query: params[:search], limit: params[:limit]).results
+  		search_text = params[:search]
+  		@p = Performer.where("te_uid is not null").where("name ILIKE ?", "%#{search_text}%").order(:name).limit(params[:limit]).select('id, name, url')
+  		@v = Venue.where("te_uid is not null").where("name ILIKE ?", "%#{search_text}%").order(:name).limit(params[:limit]).select('id, name, url')
+  		@e = Event.where("te_uid is not null").where("occurs_at >=?", params[:today_date]).where("name ILIKE ?", "%#{search_text}%").order(:occurs_at).limit(params[:limit]).select('id, name, url')
+  		@results = [*@p,*@v,*@e]
   	else
-  		@books = []
+  		@results = []
   	end
-  	render json: @books
+  	render json: @results
   end
 end

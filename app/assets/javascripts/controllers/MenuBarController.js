@@ -42,7 +42,13 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
     }
 
     $scope.getSearchHints = function(val) {
-        return dataService.getData("/search/?search=" + val + "&limit=10")
+        var now = new Date();
+        var today_date = [[AddZero(now.getFullYear()), AddZero(now.getMonth() + 1), now.getDate()].join("-"), [AddZero(now.getHours()), AddZero(now.getMinutes())].join(":")].join(" ");
+        //Pad given value to the left with "0"
+        function AddZero(num) {
+            return (num >= 0 && num < 10) ? "0" + num : num + "";
+        }
+        return dataService.getData("/search/?search=" + val + "&limit=4&today_date="+today_date)
             .then(function(response){
                 //console.log(response)
                 $scope.searchResults = response.data;
