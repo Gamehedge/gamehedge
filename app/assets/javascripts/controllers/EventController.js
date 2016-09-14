@@ -2,6 +2,8 @@ controllers = angular.module('gamehedge')
 
 controllers.controller('EventController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http,$timeout,$location,$rootScope,Auth){
 
+	$scope.prev_filter = true;
+
     $rootScope.showHeader = false;
     $rootScope.windoWidth = window.innerWidth;
     
@@ -42,6 +44,12 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 
 	$scope.updateFilter = function(index){
 		$scope.index = index;
+		$scope.prev_filter = false;
+		$scope.mob_index = index;
+	}
+
+	$scope.closePrevFilter = function() {
+		$scope.prev_filter = false;
 	}
     
     $scope.updateMobFilter = function(index){
