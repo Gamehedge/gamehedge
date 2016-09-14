@@ -6,13 +6,19 @@ app = angular.module('gamehedge',[
   'ngAnimate',
   'ui.bootstrap',
   'slickCarousel',
-  'angular-ladda'
+  'angular-ladda',
+  'angular-google-analytics'
 ])
 
 app
 
-app.config([ '$routeProvider','$locationProvider','AuthProvider',
-    function($routeProvider,$locationProvider,AuthProvider){
+app.config([ '$routeProvider','$locationProvider','AuthProvider', 'AnalyticsProvider',
+    function($routeProvider,$locationProvider,AuthProvider, AnalyticsProvider){
+      
+      AnalyticsProvider.setAccount('UA-76054076-1');
+      AnalyticsProvider.useAnalytics(true);
+      AnalyticsProvider.trackUrlParams(true);
+
       AuthProvider.resourceName('client');
       AuthProvider.loginPath('/clients/sign_in.json');
       AuthProvider.logoutPath('/clients/sign_out.json');
@@ -104,6 +110,8 @@ app.run(function ($rootScope) {
         $rootScope.locat = next.split('#')[next.split('#').length - 1];
     });
 });
+
+app.run(function(Analytics) {});
 
 app.directive('bindUnsafeHtml', ['$compile', function ($compile) {
       return function(scope, element, attrs) {
