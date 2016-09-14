@@ -843,7 +843,9 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	$scope.editing = false;
 	$scope.password = "";
 
-	$scope.script = '<script ng-src="https://cdn.ywxi.net/js/inline.js?w=96"></script>';
+	// $scope.script = '<script ng-src="https://cdn.ywxi.net/js/inline.js?w=96"></script>';
+	$scope.script = $("#mcafee-seal").html()
+	
 	$scope.searchTerm = "";
 	$window.scrollTo(0, 0);
 

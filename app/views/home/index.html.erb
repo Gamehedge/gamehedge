@@ -1,5 +1,5 @@
 <div ng-controller="MenuBarController">
-<div class="mobile-menu main-menu-transition" ng-if="showMainMenu" ng-show="!$root.isOrder">
+<div class="mobile-menu main-menu-transition ng-hide" ng-show="showMainMenu" ng-if="!$root.isOrder">
     <div class="mobile-menu-header">
         <div class="row">
             <div class="col-xs-2">
@@ -86,7 +86,7 @@
 <script type="text/ng-template" id="typeahead/bind-node.html">
     <a href="{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
 </script>
-<div class="mobile-menu search-menu-transition" ng-if="showSearchMenu" ng-show="!$root.isOrder">
+<div class="mobile-menu search-menu-transition ng-hide" ng-show="showSearchMenu" ng-if="!$root.isOrder">
     <div class="mobile-menu-header">
             <div class="navbar-header search-header col-xs-10">
                 <img src="<%= image_url 'search icon.png' %>">

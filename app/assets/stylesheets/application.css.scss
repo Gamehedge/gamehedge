@@ -617,7 +617,7 @@ body {
     bottom: 0;
     position: absolute;
     margin: 60px 0 120px 0;
-    overflow: scroll;
+    overflow-y: scroll;
     width: 100%;
 }
 .mobile-menu .results-container{
@@ -1669,8 +1669,9 @@ body {
 #payments .seals{
     position: absolute;
     right: 0;
-    top: -18px;
+    top: -27px;
     height: 26px;
+    display: flex;
 }
 
 #payments .edit_credit_card{
@@ -1678,12 +1679,15 @@ body {
 }
 
 #payments .seals img{
-    width: 80px;
     cursor: pointer !important;
 }
 
-#payments .seals .siteseal{
-    margin-right: 30px;
+#payments .seals #siteseal img{
+    width: 80px;
+}
+
+#payments .seals #mcafeeseal img{
+    height: 100%;
 }
 
 #payments .summary .title{
@@ -2343,6 +2347,18 @@ html, body {
 }
 a {
 	cursor: pointer;
+}
+
+.pay_with_title {
+    display: flex;
+}
+
+.pay_with_title .img-holder{
+    display: flex;
+}
+
+.pay_with_title .img-holder img{
+    height: 24px;
 }
 
 
@@ -3409,7 +3425,7 @@ footer .footer-signature img{
     .pay_with_title {
         margin-top: 5px;
     }
-    
+
     .billing_title {
         margin-top: 5px;
     }

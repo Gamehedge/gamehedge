@@ -101,5 +101,4 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
     $scope.getLeagues();
     $scope.getDivisions();
     $scope.getPerformers()
-    
 });
