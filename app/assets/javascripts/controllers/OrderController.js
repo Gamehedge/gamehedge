@@ -453,6 +453,18 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				if($scope.ticket.format == "Physical"){
 					type = "FedEx";
 				}
+				else if($scope.ticket.format == "Eticket"){
+					type = "Eticket";
+				}
+				else if($scope.ticket.format == "flash_seats"){
+					type = "FlashSeats";
+				}
+				else if($scope.ticket.format == "tm_mobile"){
+					type = "TMMobile";
+				}
+				else if($scope.ticket.format == "TMMobile"){
+					type = "TMMobile";
+				}
 				//console.log("processing");
 				$http({
 			        method: 'POST',
