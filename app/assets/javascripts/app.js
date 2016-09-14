@@ -6,7 +6,8 @@ app = angular.module('gamehedge',[
   'ngAnimate',
   'ui.bootstrap',
   'slickCarousel',
-  'angular-ladda'
+  'angular-ladda',
+  'ngLocationUpdate'
 ])
 
 app
@@ -47,6 +48,10 @@ app.config([ '$routeProvider','$locationProvider','AuthProvider',
             controller: 'EventController',
         })
         .when('/order/:ticektId', {
+            templateUrl: "order.html",
+            controller: 'OrderController',
+        })
+        .when('/order/:ticektId/confirm', {
             templateUrl: "order.html",
             controller: 'OrderController',
         })

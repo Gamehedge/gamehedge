@@ -7,8 +7,6 @@
     "angular-animate": "latest",
     "angular-ladda": "latest",
     "sweetalert": "latest",
-    "angular-moment": "latest"
-  },
-  "resolutions": {
+    "angular-location-update": "latest"
   }
 }
