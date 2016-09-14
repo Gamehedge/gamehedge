@@ -38,27 +38,21 @@
   </section>
     
   <div id="filters_prev_mobile" ng-if="prev_filter" class="zipper hidden-md hidden-lg hidden-xl">
-
-    <div class="prev_loading text-center" ng-if="loading">
-      <div class='uil-default-css prev_loading_element' style='transform:scale(0.32);'><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(0deg) translate(0,-60px);transform:rotate(0deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(30deg) translate(0,-60px);transform:rotate(30deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(60deg) translate(0,-60px);transform:rotate(60deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(90deg) translate(0,-60px);transform:rotate(90deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(120deg) translate(0,-60px);transform:rotate(120deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(150deg) translate(0,-60px);transform:rotate(150deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(180deg) translate(0,-60px);transform:rotate(180deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(210deg) translate(0,-60px);transform:rotate(210deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(240deg) translate(0,-60px);transform:rotate(240deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(270deg) translate(0,-60px);transform:rotate(270deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(300deg) translate(0,-60px);transform:rotate(300deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(330deg) translate(0,-60px);transform:rotate(330deg) translate(0,-60px);border-radius:10px;position:absolute;'></div></div>
-    </div>
     
-    <div ng-if="!loading" class="close_mobile_x" ng-click="closePrevFilter()">
+    <div class="close_mobile_x" ng-click="closePrevFilter()">
         <img width="15px" src="<%= image_url 'close-menu-black.png' %>">
     </div>
-    <div ng-if="!loading" class="how_prev_filter">HOW MANY TICKETS?</div>
-    <div ng-if="!loading" class="row text-center">
+    <div class="how_prev_filter">HOW MANY TICKETS?</div>
+    <div class="row text-center">
       <div class="filter_prev_number" ng-click="updateFilter(1)">1</div>
       <div class="filter_prev_number" ng-click="updateFilter(2)">2</div>
       <div class="filter_prev_number" ng-click="updateFilter(3)">3</div>
     </div>
-    <div ng-if="!loading" class="row text-center">
+    <div class="row text-center">
       <div class="filter_prev_number" ng-click="updateFilter(4)">4</div>
       <div class="filter_prev_number" ng-click="updateFilter(5)">5+</div>
     </div>
-    
   </div>
-  
 
   <div id="filters_mobile" ng-if="filter_active" class="zipper">
     <div class="close_mobile_x" ng-click="closeFilter()">
