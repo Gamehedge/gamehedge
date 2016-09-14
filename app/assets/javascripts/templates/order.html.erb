@@ -507,7 +507,8 @@
 				  					<button ng-disabled="$parent.processing" ng-click="selectAddress('card')">DONE</button><button ng-disabled="$parent.processing" ng-click="addField('card')">ADD</button>
 			  					</div>
 			  					<div class="seals">
-									<script src="https://cdn.ywxi.net/js/inline.js?w=96"></script>
+			  						<div bind-unsafe-html='script'></div>
+									
 									<span id="siteseal">
 			                            <script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script>
 			                        </span>	
