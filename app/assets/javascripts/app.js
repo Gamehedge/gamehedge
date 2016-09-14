@@ -105,13 +105,15 @@ app.config([ '$routeProvider','$locationProvider','AuthProvider', 'AnalyticsProv
     }
 ]);
 
+app.run(function(Analytics) {
+    Analytics.log;
+});
+
 app.run(function ($rootScope) {
     $rootScope.$on('$locationChangeSuccess', function (event, next, nextParams) {
         $rootScope.locat = next.split('#')[next.split('#').length - 1];
     });
 });
-
-app.run(function(Analytics) {});
 
 app.directive('bindUnsafeHtml', ['$compile', function ($compile) {
       return function(scope, element, attrs) {
