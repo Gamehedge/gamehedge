@@ -1,6 +1,6 @@
 controllers = angular.module('gamehedge')
 
-controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,$location,$routeParams,$timeout,apiService,$filter,$window){
+controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,$location,$routeParams,$timeout,apiService,$filter,$window,Analytics){
     $rootScope.showHeader = true;
 	$scope.getTicket = function(){
 		$http({
