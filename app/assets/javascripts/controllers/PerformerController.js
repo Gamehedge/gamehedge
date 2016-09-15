@@ -1,6 +1,6 @@
 app = angular.module('gamehedge')
 
-app.controller('PerformerController', function($scope,$rootScope,$routeParams,dataService, apiService,$window,$location, $timeout,Auth){
+app.controller('PerformerController', function($scope,$rootScope,$routeParams,dataService, apiService,$window,$location, $timeout,Auth,Analytics){
     $rootScope.showHeader = true;
 	$scope.getPerformerInfo = function(){
 		apiService.getData('/api/v1/performers/'+$routeParams.performerId)
@@ -67,10 +67,12 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
             $scope.all_games = home;
             $scope.getEvents();
             if(home == true){
-                $location.path($scope.performer.url);
+                $location.update_path($scope.performer.url);
+                Analytics.trackPage($scope.performer.url);
             }
             else{
-                $location.path($scope.performer.url+"/home");
+                $location.update_path($scope.performer.url+"/home");
+                Analytics.trackPage($scope.performer.url+"/home");
             }
         }   
     }

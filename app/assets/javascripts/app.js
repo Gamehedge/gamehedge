@@ -7,13 +7,17 @@ app = angular.module('gamehedge',[
   'ui.bootstrap',
   'slickCarousel',
   'angular-ladda',
+  'angular-google-analytics',   
   'ngLocationUpdate'
 ])
 
-app
+app.config([ '$routeProvider','$locationProvider','AuthProvider', 'AnalyticsProvider',
+    function($routeProvider,$locationProvider,AuthProvider, AnalyticsProvider){
+      
+      AnalyticsProvider.setAccount('UA-76054076-1');
+      AnalyticsProvider.useAnalytics(true);
+      AnalyticsProvider.trackUrlParams(true);
 
-app.config([ '$routeProvider','$locationProvider','AuthProvider',
-    function($routeProvider,$locationProvider,AuthProvider){
       AuthProvider.resourceName('client');
       AuthProvider.loginPath('/clients/sign_in.json');
       AuthProvider.logoutPath('/clients/sign_out.json');
@@ -103,6 +107,10 @@ app.config([ '$routeProvider','$locationProvider','AuthProvider',
       }
     }
 ]);
+
+app.run(function(Analytics) {
+    Analytics.log;
+});
 
 app.run(function ($rootScope) {
     $rootScope.$on('$locationChangeSuccess', function (event, next, nextParams) {

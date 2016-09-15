@@ -1,6 +1,6 @@
 controllers = angular.module('gamehedge')
 
-controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,$location,$routeParams,$timeout,apiService,$filter,$window){
+controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,$location,$routeParams,$timeout,apiService,$filter,$window,Analytics){
     $rootScope.showHeader = true;
 	$scope.getTicket = function(){
 		$http({
@@ -174,7 +174,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		}
 		else if(toogle == "deliver"){
 			if($rootScope.isLoggedin == false){
-				$scope.edit_deliver = 4;
+				$scope.edit_deliver = 3;
 			}
 			else{
 				$scope.edit_deliver = 2;
@@ -296,6 +296,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 
 	$scope.goToConfirm = function(){
 		$location.update_path('/order/'+String($scope.ticket.id)+'/confirm', true);
+		Analytics.trackPage('/order/'+String($scope.ticket.id)+'/confirm');
 	}
 
 	$scope.confirmSave = function(type){
@@ -456,16 +457,12 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				else if($scope.ticket.format == "Eticket"){
 					type = "Eticket";
 				}
-				else if($scope.ticket.format == "flash_seats"){
+				else if($scope.ticket.format == "Flash_seats"){
 					type = "FlashSeats";
 				}
-				else if($scope.ticket.format == "tm_mobile"){
+				else if($scope.ticket.format == "TM_mobile"){
 					type = "TMMobile";
 				}
-				else if($scope.ticket.format == "TMMobile"){
-					type = "TMMobile";
-				}
-				//console.log("processing");
 				$http({
 			        method: 'POST',
 			        url: '/orders/create',
@@ -520,8 +517,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    		//console.log($scope.order);
 			    	}
 			    	else{
-			    		//console.log("Error");
-			    		//console.log(response);
+			    		console.log("Error");
+			    		console.log(response);
 			    		swal("Error", response.data.error, "error");
 			    	}
 			    }, function errorCallback(response) {
@@ -535,7 +532,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			if($scope.client.email == "" || $scope.client.confirm_email == "" || $scope.card.last_digits == "" || $scope.card.expiration_month == "" || $scope.card.expiration_year == "" || $scope.card.cvv == "" || $scope.billing_address.name == "" || $scope.billing_address.street_address == "" || $scope.billing_address.country_code == "" || $scope.billing_address.postal_code == "" || $scope.billing_address.region == "" || $scope.billing_address.locality == "" || $scope.client.primary_phone_number.number == ""){
 				$scope.processing = false;
 				$scope.payProcess = false;
-				$scope.edit_deliver = 4;
+				$scope.edit_deliver = 3;
 				$scope.edit_billing = 3;
 				$scope.edit_credit_card = 3;
 				swal("Error", "All fields are requierd", "warning");
@@ -543,7 +540,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			else if($.payment.validateCardExpiry($scope.card.expiration_month,$scope.card.expiration_year) == false){
 				$scope.processing = false;
 				$scope.payProcess = false;
-				$scope.edit_deliver = 4;
+				$scope.edit_deliver = 3;
 				$scope.edit_billing = 3;
 				$scope.edit_credit_card = 3;
 				swal("Error", "Expiration date not valid!", "warning");
@@ -551,7 +548,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			else if($.payment.validateCardNumber($scope.card.last_digits) == false){
 				$scope.processing = false;
 				$scope.payProcess = false;
-				$scope.edit_deliver = 4;
+				$scope.edit_deliver = 3;
 				$scope.edit_billing = 3;
 				$scope.edit_credit_card = 3;
 				swal("Error", "Card number not valid.", "warning");
@@ -559,7 +556,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			else if($scope.client.email != $scope.client.confirm_email){
 				$scope.processing = false;
 				$scope.payProcess = false;
-				$scope.edit_deliver = 4;
+				$scope.edit_deliver = 3;
 				$scope.edit_billing = 3;
 				$scope.edit_credit_card = 3;
 				swal("Error", "Email and confirm email fields shpuld be equal", "warning");
@@ -603,7 +600,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    		//console.log(response);
 			    		$scope.processing = false;
 						$scope.payProcess = false;
-						$scope.edit_deliver = 4;
+						$scope.edit_deliver = 3;
 						$scope.edit_billing = 3;
 						$scope.edit_credit_card = 3;
 						swal("Error", response.data.error, "error");
@@ -612,7 +609,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    	//console.log(response);
 			    	$scope.processing = false;
 					$scope.payProcess = false;
-					$scope.edit_deliver = 4;
+					$scope.edit_deliver = 3;
 					$scope.edit_billing = 3;
 					$scope.edit_credit_card = 3;
 			    });
@@ -738,7 +735,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 
 	$scope.getClient = function(){
 		Auth.currentUser().then(function(user) {
-	        $http({
+			$http({
 		        method: 'GET',
 		        url: '/clients/show?id='+user.te_uid,
 		    }).then(function successCallback(response) {
@@ -758,12 +755,14 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				$scope.billing_address = $scope.client.primary_billing_address;
 				$scope.card = $scope.client.primary_credit_card;
 				$rootScope.isLoggedin = true;
+				$rootScope.user = user;
 				$scope.first_time = false;
 				$('#myModal').modal('hide');
 				$scope.logging_in = false;
 				//console.log($scope.shipping_address);
 
 		    }, function errorCallback(response) {
+		    	$rootScope.user = undefined;
 		    	$rootScope.isLoggedin = false;
 		    	$scope.edit_deliver = 3;
 				$scope.edit_credit_card = 3;
@@ -776,7 +775,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		        //console.log(response);
 		    });
 	    }, function(error) {
-	    	$rootScope.isLoggedin = false;
+	    	$rootScope.user = undefined;
+	        $rootScope.isLoggedin = false;
 	    	$scope.edit_deliver = 3;
 			$scope.edit_credit_card = 3;
 			$scope.edit_billing = 3;
@@ -942,4 +942,13 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
     $scope.forgot_password = false;
     $scope.show_promo_field = false;
 	
+})
+.filter('replaceText', function () {
+    return function (text) {
+        if (!text) {
+            return text;
+        }
+
+        return text.replace(/\_/g, ' '); // Replaces all occurences
+    };
 });

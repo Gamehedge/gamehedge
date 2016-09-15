@@ -4,6 +4,18 @@
 	  		<div class="row row-eq-height payment-container">
 	  			<div class="col-md-7 card-element">
 	  				<div class="card">
+	  					<div class="card-in summary hidden-md hidden-lg hidden-xl" style="padding-bottom:0;">
+						    <div class="title">{{ticket.event.name}}</div>
+						    <div class="info">
+						    	{{event.occurs_at | date: "EEE,	MMM dd, yyyy hh:mm a" : 'UTC'}}<br>
+						    	{{event.venue.name}}, {{event.venue.location}}<br>
+						    	<strong>Section {{ticket.section}}, Row {{ticket.row}}</strong>
+						    </div>
+						    <div class="description-line">
+						    	<div class="description">Ticket Price</div>
+						    	<div class="value">{{ticket.retail_price | currency}} ea.</div>
+						    </div>
+	  					</div>
 	  					<div class="card-in deliver">
 	  						Deliver tickets to
 	  						<div ng-if="edit_deliver == 4">
@@ -936,18 +948,20 @@
 				  				</div>
 				  			</div>
 	  					</div>
-
 	  				</div>
 	  			</div>
 	  			<div class="col-md-5 mobile-separator card-element second-card">
 	  				<div class="card">
 	  					<div class="card-in summary">
-						    <div class="title">{{ticket.event.name}}</div>
-						    <div class="info">
-						    	{{event.occurs_at | date: "EEE,	MMM dd, yyyy hh:mm a" : 'UTC'}}<br>
-						    	{{event.venue.name}}, {{event.venue.location}}<br>
-						    	<strong>Section {{ticket.section}}, Row {{ticket.row}}</strong>
-						    </div>
+	  						<div class="title hidden-md hidden-lg hidden-xl">Order Summary</div>
+	  						<span class="hidden-xs hidden-sm">
+							    <div class="title">{{ticket.event.name}}</div>
+							    <div class="info">
+							    	{{event.occurs_at | date: "EEE,	MMM dd, yyyy hh:mm a" : 'UTC'}}<br>
+							    	{{event.venue.name}}, {{event.venue.location}}<br>
+							    	<strong>Section {{ticket.section}}, Row {{ticket.row}}</strong>
+							    </div>
+							</span>
 						    <hr>
 						    <div class="description-line">
 						    	<div class="description">Ticket Price</div>
@@ -985,7 +999,8 @@
 						    <div class="description-line">
 						    	<div class="description short">Shipping</div>
 						    	<div class="value short" ng-if="ticket.format == 'Physical'">Physical Delivery</div>
-						    	<div class="value short" ng-if="ticket.format != 'Physical'">Email Delivery</div>
+					    		<div class="value short" ng-if="ticket.format == 'Eticket'">Email Delivery</div>
+					    		<div class="value short" ng-if="ticket.format != 'Eticket' && ticket.format != 'Physical'">{{ticket.format | replaceText}}</div>
 						    </div>
 						    <div class="description-line">
 						    	<div class="description short">Good Game Guarantee</div>
@@ -1053,7 +1068,8 @@
 								<div class="col-xs-6">
 									<div class="label-confirm">Shipping</div>
 									<div class="info" ng-if="ticket.format == 'Physical'">Physical Delivery</div>
-						    		<div class="info" ng-if="ticket.format != 'Physical'">Email Delivery</div>
+						    		<div class="info" ng-if="ticket.format == 'Eticket'">Email Delivery</div>
+						    		<div class="info" ng-if="ticket.format != 'Eticket' && ticket.format != 'Physical'">{{ticket.format | replaceText}}</div>
 								</div>
 								<div class="col-xs-6">
 									<div class="label-confirm">Tickets Notes</div>

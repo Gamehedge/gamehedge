@@ -322,7 +322,7 @@ class TicketEvolutionService
         if type == "FedEx"
           shipped_items = [{:phone_number_id => phone_number_id, :address_id => address_id, :type => type, :service_type => service_type, :ship_to_name => ship_to_name, :items => items}]
         else
-          shipped_items = [{:email_address_id => email_address_id, :phone_number_id => phone_number_id, :type => type, :items => items, :type => type}]
+          shipped_items = [{:email_address_id => email_address_id, :phone_number_id => phone_number_id, :type => type, :items => items}]
         end
         
         payments = [{:amount => amount, :type => pay_type, :credit_card_id => credit_card_id}]

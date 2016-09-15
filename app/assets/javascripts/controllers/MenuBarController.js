@@ -14,15 +14,26 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
             //console.log("logged out");
             $rootScope.isLoggedin = false;
             $rootScope.user = undefined;
-            $location.path('/');
+            if($location.path() == '/'){
+                location.reload();
+            }
+            else{
+                $location.path('/');    
+            }
         }, function(error) {
             // An error occurred logging out.
             //console.log("An error occurred logging out.");
         });
         $scope.$on('devise:logout', function(event, oldCurrentUser) {
             // ...
-             $rootScope.isLoggedin = false;
-             $rootScope.user = undefined;
+            $rootScope.isLoggedin = false;
+            $rootScope.user = undefined;
+            if($location.path() == '/'){
+                location.reload();
+            }
+            else{
+                $location.path('/');    
+            }
         });
     }
 
