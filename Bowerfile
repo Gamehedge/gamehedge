@@ -4,5 +4,6 @@ asset 'angular-devise'
 asset 'angular-animate'
 asset 'angular-ladda'
 asset 'sweetalert'
+asset 'angular-google-analytics'
 asset 'angular-location-update'
 # vim: ft=ruby

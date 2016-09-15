@@ -29,3 +29,4 @@
 
 //= require slick.min
 //= require angular-slick
+//= require angular-google-analytics/dist/angular-google-analytics.min

@@ -1,6 +1,6 @@
 controllers = angular.module('gamehedge')
 
-controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,$location,$routeParams,$timeout,apiService,$filter,$window){
+controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,$location,$routeParams,$timeout,apiService,$filter,$window,Analytics){
     $rootScope.showHeader = true;
 	$scope.getTicket = function(){
 		$http({
@@ -174,7 +174,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		}
 		else if(toogle == "deliver"){
 			if($rootScope.isLoggedin == false){
-				$scope.edit_deliver = 4;
+				$scope.edit_deliver = 3;
 			}
 			else{
 				$scope.edit_deliver = 2;
@@ -296,6 +296,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 
 	$scope.goToConfirm = function(){
 		$location.update_path('/order/'+String($scope.ticket.id)+'/confirm', true);
+		Analytics.trackPage('/order/'+String($scope.ticket.id)+'/confirm');
 	}
 
 	$scope.confirmSave = function(type){
@@ -537,7 +538,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			if($scope.client.email == "" || $scope.client.confirm_email == "" || $scope.card.last_digits == "" || $scope.card.expiration_month == "" || $scope.card.expiration_year == "" || $scope.card.cvv == "" || $scope.billing_address.name == "" || $scope.billing_address.street_address == "" || $scope.billing_address.country_code == "" || $scope.billing_address.postal_code == "" || $scope.billing_address.region == "" || $scope.billing_address.locality == "" || $scope.client.primary_phone_number.number == ""){
 				$scope.processing = false;
 				$scope.payProcess = false;
-				$scope.edit_deliver = 4;
+				$scope.edit_deliver = 3;
 				$scope.edit_billing = 3;
 				$scope.edit_credit_card = 3;
 				swal("Error", "All fields are requierd", "warning");
@@ -545,7 +546,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			else if($.payment.validateCardExpiry($scope.card.expiration_month,$scope.card.expiration_year) == false){
 				$scope.processing = false;
 				$scope.payProcess = false;
-				$scope.edit_deliver = 4;
+				$scope.edit_deliver = 3;
 				$scope.edit_billing = 3;
 				$scope.edit_credit_card = 3;
 				swal("Error", "Expiration date not valid!", "warning");
@@ -553,7 +554,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			else if($.payment.validateCardNumber($scope.card.last_digits) == false){
 				$scope.processing = false;
 				$scope.payProcess = false;
-				$scope.edit_deliver = 4;
+				$scope.edit_deliver = 3;
 				$scope.edit_billing = 3;
 				$scope.edit_credit_card = 3;
 				swal("Error", "Card number not valid.", "warning");
@@ -561,7 +562,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			else if($scope.client.email != $scope.client.confirm_email){
 				$scope.processing = false;
 				$scope.payProcess = false;
-				$scope.edit_deliver = 4;
+				$scope.edit_deliver = 3;
 				$scope.edit_billing = 3;
 				$scope.edit_credit_card = 3;
 				swal("Error", "Email and confirm email fields shpuld be equal", "warning");
@@ -605,7 +606,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    		//console.log(response);
 			    		$scope.processing = false;
 						$scope.payProcess = false;
-						$scope.edit_deliver = 4;
+						$scope.edit_deliver = 3;
 						$scope.edit_billing = 3;
 						$scope.edit_credit_card = 3;
 						swal("Error", response.data.error, "error");
@@ -614,7 +615,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    	//console.log(response);
 			    	$scope.processing = false;
 					$scope.payProcess = false;
-					$scope.edit_deliver = 4;
+					$scope.edit_deliver = 3;
 					$scope.edit_billing = 3;
 					$scope.edit_credit_card = 3;
 			    });
