@@ -24,6 +24,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	    	else{
 	    		$scope.shipping_fee = 0;
 	    	}
+	    	$scope.ticketsLoaded = true;
         }, function errorCallback(response) {
             //console.log(response);
         });
@@ -620,9 +621,6 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 
 	$scope.updatePassword = function(){
         
-        console.log("pass_client");
-        
-        
 		if($scope.password == $scope.confirm_password && $scope.password != ""){
 			$http({
 		        method: 'POST',
@@ -759,6 +757,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				$scope.first_time = false;
 				$('#myModal').modal('hide');
 				$scope.logging_in = false;
+				$scope.clientLoaded = true;
 				//console.log($scope.shipping_address);
 
 		    }, function errorCallback(response) {
@@ -771,6 +770,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				$scope.creditCardFieldEnable();
 				$('#myModal').modal('hide');
 				$scope.logging_in = false;
+				$scope.clientLoaded = true;
 				//console.log("Not logged in");
 		        //console.log(response);
 		    });
@@ -781,6 +781,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			$scope.edit_credit_card = 3;
 			$scope.edit_billing = 3;
 			$scope.first_time = true;
+			$scope.clientLoaded = true;
 			$scope.creditCardFieldEnable();
 			//console.log("Not logged in");
 	        //console.log(error);
@@ -938,6 +939,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
     }
 
     $scope.logging_in = false;
+    $scope.clientLoaded = false;
+    $scope.ticketsLoaded = false;
     $scope.sending_password = false;
     $scope.forgot_password = false;
     $scope.show_promo_field = false;

@@ -71,10 +71,10 @@ app.service('apiService', function($http) {
             ! angular.isObject( response.data ) ||
             ! response.data.message
             ) {
-            return( $q.reject( "An unknown error occurred." ) );
+            return("An unknown error occurred.");
         }
         // Otherwise, use expected error message.
-        return( $q.reject( response.data.message ) );
+        return(response.data.message);
     }
     // I transform the successful response, unwrapping the application data
     // from the API response payload.
