@@ -67,10 +67,10 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
             $scope.all_games = home;
             $scope.getEvents();
             if(home == true){
-                $location.path($scope.performer.url);
+                $location.update_path($scope.performer.url);
             }
             else{
-                $location.path($scope.performer.url+"/home");
+                $location.update_path($scope.performer.url+"/home");
             }
         }   
     }
