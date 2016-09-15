@@ -3,11 +3,30 @@ controllers = angular.module('gamehedge')
 controllers.controller('EventController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http,$timeout,$location,$rootScope,Auth){
 
 	$scope.prev_filter = true;
+    $scope.mob_price = 0;
+    $scope.mob_real_price = 0;
+    $scope.price_filter = false;
+    $scope.price_filter_down_limit = 0;
+    $scope.price_filter_up_limit = 0;
 
     $rootScope.showHeader = false;
     $rootScope.windoWidth = window.innerWidth;
     
-	$scope.getEventInfo = function(){
+    $scope.filterPriceFn = function(_ele) {
+        if($scope.price_filter == true){
+            if( _ele.retail_price > $scope.price_filter_down_limit && _ele.retail_price <= $scope.price_filter_up_limit ) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return true;
+        }
+    }
+	
+    $scope.getEventInfo = function(){
 		return apiService.getData('/api/v1/events/'+$routeParams.eventId)
             .then(function(response){
             	//console.log("Event");
@@ -40,6 +59,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         else {
             $scope.mob_delivery = 1;
         }
+        
+        $scope.mob_price = $scope.mob_real_price;
     }
 
 	$scope.updateFilter = function(index){
@@ -64,6 +85,10 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         $scope.mob_eticket = !$scope.mob_eticket;
     }
     
+    $scope.mob_price_update = function(_val) {
+        $scope.mob_price = _val;
+    }
+    
     $scope.showMobFilters = function() {
         $scope.index = $scope.mob_index;
         
@@ -78,6 +103,30 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         //console.log($scope.mob_delivery);
         //console.log($scope.etickets);
         $scope.filter_active = false;
+        $scope.mob_real_price = $scope.mob_price;
+        //console.log($scope.mob_price);
+        switch($scope.mob_price) {
+            case 0: $scope.price_filter = false;
+                    $scope.price_filter_down_limit = 0;
+                    $scope.price_filter_up_limit = 0;
+                    break;
+            case 1: $scope.price_filter = true;
+                    $scope.price_filter_down_limit = 0;
+                    $scope.price_filter_up_limit = 50;
+                    break;
+            case 2: $scope.price_filter = true;
+                    $scope.price_filter_down_limit = 50;
+                    $scope.price_filter_up_limit = 100;
+                    break;
+            case 3: $scope.price_filter = true;
+                    $scope.price_filter_down_limit = 100;
+                    $scope.price_filter_up_limit = 200;
+                    break;
+            case 4: $scope.price_filter = true;
+                    $scope.price_filter_down_limit = 200;
+                    $scope.price_filter_up_limit = 9999999999999999999999999999;
+                    break;
+        }
     }
     
     $scope.displayDetail = false;
