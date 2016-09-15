@@ -985,7 +985,8 @@
 						    <div class="description-line">
 						    	<div class="description short">Shipping</div>
 						    	<div class="value short" ng-if="ticket.format == 'Physical'">Physical Delivery</div>
-						    	<div class="value short" ng-if="ticket.format != 'Physical'">Email Delivery</div>
+					    		<div class="value short" ng-if="ticket.format == 'Eticket'">Email Delivery</div>
+					    		<div class="value short" ng-if="ticket.format != 'Eticket' && ticket.format != 'Physical'">{{ticket.format | replaceText}}</div>
 						    </div>
 						    <div class="description-line">
 						    	<div class="description short">Good Game Guarantee</div>
@@ -1053,7 +1054,8 @@
 								<div class="col-xs-6">
 									<div class="label-confirm">Shipping</div>
 									<div class="info" ng-if="ticket.format == 'Physical'">Physical Delivery</div>
-						    		<div class="info" ng-if="ticket.format != 'Physical'">Email Delivery</div>
+						    		<div class="info" ng-if="ticket.format == 'Eticket'">Email Delivery</div>
+						    		<div class="info" ng-if="ticket.format != 'Eticket' && ticket.format != 'Physical'">{{ticket.format | replaceText}}</div>
 								</div>
 								<div class="col-xs-6">
 									<div class="label-confirm">Tickets Notes</div>

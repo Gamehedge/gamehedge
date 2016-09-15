@@ -453,19 +453,21 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				if($scope.ticket.format == "Physical"){
 					type = "FedEx";
 				}
-				else if($scope.ticket.format == "Eticket"){
-					type = "Eticket";
-				}
-				else if($scope.ticket.format == "flash_seats"){
-					type = "FlashSeats";
-				}
-				else if($scope.ticket.format == "tm_mobile"){
-					type = "TMMobile";
-				}
-				else if($scope.ticket.format == "TMMobile"){
-					type = "TMMobile";
-				}
+				
+				// else if($scope.ticket.format == "Eticket"){
+				// 	type = "Eticket";
+				// }
+				// else if($scope.ticket.format == "flash_seats"){
+				// 	type = "FlashSeats";
+				// }
+				// else if($scope.ticket.format == "tm_mobile"){
+				// 	type = "TMMobile";
+				// }
+				// else if($scope.ticket.format == "TMMobile"){
+				// 	type = "TMMobile";
+				// }
 				//console.log("processing");
+				console.log(type);
 				$http({
 			        method: 'POST',
 			        url: '/orders/create',
@@ -520,8 +522,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    		//console.log($scope.order);
 			    	}
 			    	else{
-			    		//console.log("Error");
-			    		//console.log(response);
+			    		console.log("Error");
+			    		console.log(response);
 			    		swal("Error", response.data.error, "error");
 			    	}
 			    }, function errorCallback(response) {
@@ -738,7 +740,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 
 	$scope.getClient = function(){
 		Auth.currentUser().then(function(user) {
-	        $http({
+			$http({
 		        method: 'GET',
 		        url: '/clients/show?id='+user.te_uid,
 		    }).then(function successCallback(response) {
@@ -758,12 +760,14 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				$scope.billing_address = $scope.client.primary_billing_address;
 				$scope.card = $scope.client.primary_credit_card;
 				$rootScope.isLoggedin = true;
+				$rootScope.user = user;
 				$scope.first_time = false;
 				$('#myModal').modal('hide');
 				$scope.logging_in = false;
 				//console.log($scope.shipping_address);
 
 		    }, function errorCallback(response) {
+		    	$rootScope.user = undefined;
 		    	$rootScope.isLoggedin = false;
 		    	$scope.edit_deliver = 3;
 				$scope.edit_credit_card = 3;
@@ -776,7 +780,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		        //console.log(response);
 		    });
 	    }, function(error) {
-	    	$rootScope.isLoggedin = false;
+	    	$rootScope.user = undefined;
+	        $rootScope.isLoggedin = false;
 	    	$scope.edit_deliver = 3;
 			$scope.edit_credit_card = 3;
 			$scope.edit_billing = 3;
@@ -942,4 +947,13 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
     $scope.forgot_password = false;
     $scope.show_promo_field = false;
 	
+})
+.filter('replaceText', function () {
+    return function (text) {
+        if (!text) {
+            return text;
+        }
+
+        return text.replace(/\_/g, ' '); // Replaces all occurences
+    };
 });
