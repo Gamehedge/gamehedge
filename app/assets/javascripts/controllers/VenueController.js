@@ -74,6 +74,7 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
 
 	$scope.getSearchHints = function(val) {
         var now = new Date();
+        now.setHours(now.getHours() + 1);
         var today_date = [[AddZero(now.getFullYear()), AddZero(now.getMonth() + 1), now.getDate()].join("-"), [AddZero(now.getHours()), AddZero(now.getMinutes())].join(":")].join(" ");
         //Pad given value to the left with "0"
         function AddZero(num) {
@@ -98,6 +99,15 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
             if($scope.searchBarResults.length > 0){
                 $location.path($scope.searchBarResults[0].url);
             }
+        }
+    }
+
+    $scope.compareDates = function(event_date){
+        if(moment().add(1,'h').isAfter(event_date.replace("Z",""))){
+            return false;
+        }
+        else{
+            return true;
         }
     }
 

@@ -37,6 +37,23 @@
     </div>
   </section>
     
+  <div id="filters_prev_mobile" ng-if="prev_filter" class="zipper hidden-md hidden-lg hidden-xl">
+    
+    <div class="close_mobile_x" ng-click="closePrevFilter()">
+        <img width="15px" src="<%= image_url 'close-menu-black.png' %>">
+    </div>
+    <div class="how_prev_filter">HOW MANY TICKETS?</div>
+    <div class="row text-center">
+      <div class="filter_prev_number" ng-click="updateFilter(1)">1</div>
+      <div class="filter_prev_number" ng-click="updateFilter(2)">2</div>
+      <div class="filter_prev_number" ng-click="updateFilter(3)">3</div>
+    </div>
+    <div class="row text-center">
+      <div class="filter_prev_number" ng-click="updateFilter(4)">4</div>
+      <div class="filter_prev_number" ng-click="updateFilter(5)">5+</div>
+    </div>
+  </div>
+
   <div id="filters_mobile" ng-if="filter_active" class="zipper">
     <div class="close_mobile_x" ng-click="closeFilter()">
         <img width="15px" src="<%= image_url 'close-menu-black.png' %>">
@@ -199,7 +216,7 @@
 
 
           <div class="col-xs-12 tickets-data" ng-if="!loading">
-            <div class="row" ng-repeat="ticket in tickets.data | orderBy:ordering | filter: (etickets || '') && {eticket: true} | filter: (physicals || '') && {eticket: false} | filter: (filterBySection || '') && {section: section} | filter: (onlyParking || '') && {type: 'parking'} | filter: (!onlyParking || '') && {type: 'event'} | numberOfSeats:index" emit-last-repeater-element ng-mouseover="higlightSection(ticket.section, true)" ng-mouseleave="higlightSection(ticket.section, false)">
+            <div class="row" ng-repeat="ticket in tickets.data | orderBy:ordering | filter: (etickets || '') && {eticket: true} | filter: (physicals || '') && {eticket: false} | filter: (filterBySection || '') && {section: section} | filter: (onlyParking || '') && {type: 'parking'} | filter: (!onlyParking || '') && {type: 'event'} | numberOfSeats:index" emit-last-repeater-element ng-mouseover="higlightSection(ticket.section, true)" ng-mouseleave="higlightSection(ticket.section, false)" ng-if="compareDates(event.occurs_at,ticket.format)">
               <!-- <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ticket.public_notes}}" ng-if="ticket.public_notes"></span> -->
               <div class="hidden-xs hidden-sm col-xs-1 info-ico">
                 <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ticket.public_notes}}" ng-if="ticket.public_notes"></span>

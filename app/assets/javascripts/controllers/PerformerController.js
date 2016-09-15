@@ -79,6 +79,7 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
 
 	$scope.getSearchHints = function(val) {
         var now = new Date();
+        now.setHours(now.getHours() + 1);
         var today_date = [[AddZero(now.getFullYear()), AddZero(now.getMonth() + 1), now.getDate()].join("-"), [AddZero(now.getHours()), AddZero(now.getMinutes())].join(":")].join(" ");
         //Pad given value to the left with "0"
         function AddZero(num) {
@@ -156,6 +157,15 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
                     type: "success"
                 });
             });
+        }
+    }
+
+    $scope.compareDates = function(event_date){
+        if(moment().add(1,'h').isAfter(event_date.replace("Z",""))){
+            return false;
+        }
+        else{
+            return true;
         }
     }
     

@@ -7,6 +7,7 @@
     "angular-animate": "latest",
     "angular-ladda": "latest",
     "sweetalert": "latest",
-    "angular-google-analytics": "latest"
+    "angular-google-analytics": "latest",
+    "angular-location-update": "latest"
   }
 }

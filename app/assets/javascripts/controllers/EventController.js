@@ -2,6 +2,8 @@ controllers = angular.module('gamehedge')
 
 controllers.controller('EventController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http,$timeout,$location,$rootScope,Auth){
 
+	$scope.prev_filter = true;
+
     $rootScope.showHeader = false;
     $rootScope.windoWidth = window.innerWidth;
     
@@ -42,6 +44,12 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 
 	$scope.updateFilter = function(index){
 		$scope.index = index;
+		$scope.prev_filter = false;
+		$scope.mob_index = index;
+	}
+
+	$scope.closePrevFilter = function() {
+		$scope.prev_filter = false;
 	}
     
     $scope.updateMobFilter = function(index){
@@ -230,6 +238,20 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	        $("#MapContainer").tuMap("RemoveMapControl","Tailgate");
 	    },1000);
 	};
+
+	$scope.compareDates = function(event_date,format){
+		if(format == "Physical"){
+			if(moment().add(72,'h').isAfter(event_date.replace("Z",""))){
+	            return false;
+	        }
+	        else{
+	            return true;
+	        }
+		}
+		else{
+			return true;
+		}
+    }
 
 	$scope.applyChanges = function(){
 		$scope.$apply()

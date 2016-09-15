@@ -294,6 +294,10 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	    });
 	}
 
+	$scope.goToConfirm = function(){
+		$location.update_path('/order/'+String($scope.ticket.id)+'/confirm', true);
+	}
+
 	$scope.confirmSave = function(type){
 		$scope.processing = true;
 		$scope.editing = false;
@@ -499,6 +503,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    	if(response.data.error == undefined){
 			    		$scope.order = response.data;
 			    		$scope.order_success = true;
+			    		$scope.goToConfirm();
 			    		//console.log("Order");
 			    		//console.log($scope.order);
 			    	}
@@ -843,6 +848,9 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	$scope.editing = false;
 	$scope.password = "";
 
+	// $scope.script = '<script ng-src="https://cdn.ywxi.net/js/inline.js?w=96"></script>';
+	$scope.script = $("#mcafee-seal").html()
+	
 	$scope.searchTerm = "";
 	$window.scrollTo(0, 0);
 

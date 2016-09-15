@@ -23,6 +23,7 @@
 //= require angular-ladda/dist/angular-ladda.min
 //= require bootstrap
 //= require sweetalert/dist/sweetalert.min
+//= require angular-location-update/angular-location-update.min
 //= require_tree .
 //= require_tree ./templates
 

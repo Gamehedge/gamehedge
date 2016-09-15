@@ -6,6 +6,7 @@ controllers.controller('PressController', function($scope,$rootScope,$location,$
     $scope.searchTerm = "";
     $scope.getSearchHints = function(val) {
         var now = new Date();
+        now.setHours(now.getHours() + 1);
         var today_date = [[AddZero(now.getFullYear()), AddZero(now.getMonth() + 1), now.getDate()].join("-"), [AddZero(now.getHours()), AddZero(now.getMinutes())].join(":")].join(" ");
         //Pad given value to the left with "0"
         function AddZero(num) {

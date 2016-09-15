@@ -1,0 +1,334 @@
+<span id="home">
+  <section id="hero">
+    <div id="shader"></div>
+    <div id="wrapper">
+      <div id="content">
+        <div class="container">
+          <p class="hidden-md hidden-lg hidden-xl">Every Ticket Comes With Our Good Game Guarantee!</p>
+          <div id="hero-search">
+            <form id="form-home-search" name="formSearch" onsubmit="function(){return false;};">
+              <input type="hidden" name="type" value="full" />
+              <div class="form-group">
+                <img src="/assets/search icon-ddc57ae24d1e0b6ebb55f1742da8cca2a6b75cfc1339e507c71d46c821390c82.png" ng-click="goToSearch()">
+                <input id="search_element" type="text" class="form-control" placeholder="Search by team, league, game, stadium or player..." ng-model="searchTerm" uib-typeahead="hint as hint.name for hint in getSearchHints($viewValue)" typeahead-template-url="typeahead/bind-node.html" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" typeahead-on-select="onSelect($item, $model, $label)" typeahead-no-results="noResults">
+                 <div class="no-results" ng-show="noResults && searchTerm != ''">
+                  No results. Please try again
+                </div>
+            </form>
+          </div>
+          
+        </div>
+        <div class="press-images hidden-xs hidden-sm">
+          <div class="container">
+            <div class="spacing-div">AS FEATURED IN</div>
+            <div class="spacing-div"><img src="/assets/press2/CNBC copy-fdb267aa4588c98a366e9d0afdef0302f0a98668135fac84e3ef06d35299dc88.png"></div>
+            <div class="spacing-div"><img src="/assets/press2/USA Today copy-474cc69f1ed05583320007bcafaf7008ee68c472237462fc4717e0e7bc5b5ed6.png"></div>
+            <div class="spacing-div"><img src="/assets/press2/Sports Illustrated Red-edc91d6b8d994df6ccb1e356910ff05576abe1eefc7f4abc8d72d179d7ac14b1.png"></div>
+            <div class="spacing-div"><img src="/assets/press2/Yahoo Finance-d458f43938d57599491d23cf4bf31ae36cc034756bad2f485b2b08825292fc59.png"></div>
+            <div class="spacing-div"><img src="/assets/press2/ESPN Radio copy-0a5f89dc91d4e272652ec987df0ecab5b0db6a93e2bbf88fb36076a7d9efbd4d.png"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script type="text/ng-template" id="typeahead/bind-node.html">
+    <a href="{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
+  </script>
+
+  <main>
+    <section id="good-game-guarantee" class="hidden-xs hidden-sm">
+      <div class="container">
+        <div class="title">Every Ticket Comes With Our Good Game Guarantee!</div>
+
+        <div class="content-background">
+          <div class="content">
+            <div class="col-md-4 division">
+              <div class="col-xs-5 section">
+                <img src="/assets/icon ticket-a818a977ec378f09ad896d10d6851700a12d2ee1b11bf927ddfe311881571132.png">
+              </div>
+              <div class="col-xs-7 section2">
+                <h2>BUY TICKETS</h2>
+                <p>
+                  Find your game and purchase your tickets.<br>
+                  Good Game Guarantee is included at no additional cost with every ticket.
+                </p>
+              </div>
+            </div>
+            <div class="col-md-4 division center-div">
+              <div class="col-xs-5 section">
+                <img src="/assets/icon stadium-d84160b6bb6cf8d4dc832969dd15a71aed27c61e59c52252ec1c96a6549dc437.png">
+              </div>
+              <div class="col-xs-7 section2">
+                <h2>ENJOY GAME</h2>
+                <p>
+                  If the home team loses by the amount below or more, you get 50% of your ticket price back.
+                </p>
+                <div class="row">
+                  <div class="col-xs-6 block">
+                    <img class="icon-img" src="/assets/football icon-9a7d20380f240bd4ab7c5f211260dfe2de8ad1fa737653dc6ea44b6e55c6b7d2.png">
+                    17 points
+                  </div>
+                  <div class="col-xs-6 block">
+                    <img class="icon-img" src="/assets/basketball icon-cdaf5028d46f84e9e9159e1eeb0b151eb7d2ec8e13fb8c00456084fb4e4e71f4.png">
+                    20 points
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-6 block">
+                    <img class="icon-img" src="/assets/baseball icon-836e64be846b054a8d6890a6af14ae0d63654eb2ed3b45723e9ae2241f802c12.png">
+                    5 runs
+                  </div>
+                  <div class="col-xs-6 block">
+                    <img class="icon-img" src="/assets/hockey icon-66b08d4368d6695e3871796d8aa5978d88f5efd669c056d01f8bbe0a170b4d3d.png">
+                    4 goals
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 division">
+              <div class="col-xs-5 section">
+                <img src="/assets/icon coin-a40eea64c1a1891b66756011ec48e43d67950c96647117597546d112983d9af7.png">
+              </div>
+              <div class="col-xs-7 section2">
+                <h2>CLAIM MONEY</h2>
+                <p>
+                  Simply come back to GameHedge.com to claim your refund.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+      
+    <section id="good-game-guarantee" class="hidden-md hidden-lg hidden-xl">
+      <div class="container">
+        <div class="title">Every Ticket Comes With Our Good Game Guarantee!</div>
+
+        <div class="content-background-mobile">
+          <div class="content-mobile">
+             <slick settings="slickConfig">
+                
+                <div class="row table-element">
+                  <div class="section-mobile table-ele-cell first-ele">
+                    <img src="/assets/icon ticket-a818a977ec378f09ad896d10d6851700a12d2ee1b11bf927ddfe311881571132.png">
+                  </div>
+                  <div class="section2-mobile table-ele-cell second-ele">
+                    <h2>BUY TICKETS</h2>
+                    <p>
+                      Find your game and purchase your tickets.<br>
+                      Good Game Guarantee is included at no additional cost with every ticket.
+                    </p>
+                  </div>
+                </div>
+                <div class="row table-element">
+                  <div class="section-mobile table-ele-cell first-ele">
+                    <img src="/assets/icon stadium-d84160b6bb6cf8d4dc832969dd15a71aed27c61e59c52252ec1c96a6549dc437.png">
+                  </div>
+                  <div class="section2-mobile table-ele-cell second-ele">
+                    <h2>ENJOY GAME</h2>
+                    <p>
+                      If the home team loses by amount below or more, you get 50% of your ticket price back.
+                    </p>
+                    <div class="row">
+                      <div class="fifty-perc block">
+                        <img class="icon-img" src="/assets/football icon-9a7d20380f240bd4ab7c5f211260dfe2de8ad1fa737653dc6ea44b6e55c6b7d2.png">
+                        <div>17 points</div>
+                      </div>
+                      <div class="fifty-perc block">
+                        <img class="icon-img" src="/assets/basketball icon-cdaf5028d46f84e9e9159e1eeb0b151eb7d2ec8e13fb8c00456084fb4e4e71f4.png">
+                        <div>20 points</div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="fifty-perc block">
+                        <img class="icon-img" src="/assets/baseball icon-836e64be846b054a8d6890a6af14ae0d63654eb2ed3b45723e9ae2241f802c12.png">
+                        <div>5 runs</div>
+                      </div>
+                      <div class="fifty-perc block">
+                        <img class="icon-img" src="/assets/hockey icon-66b08d4368d6695e3871796d8aa5978d88f5efd669c056d01f8bbe0a170b4d3d.png">
+                        <div>4 goals</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row table-element">
+                  <div class="section-mobile table-ele-cell first-ele">
+                    <img src="/assets/icon coin-a40eea64c1a1891b66756011ec48e43d67950c96647117597546d112983d9af7.png">
+                  </div>
+                  <div class="section2-mobile table-ele-cell second-ele">
+                    <h2>CLAIM MONEY</h2>
+                    <p>
+                      Simply come back to GameHedge.com to claim your refund.
+                    </p>
+                  </div>
+                </div> 
+            </slick>  
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="tiles">
+      <div class="container">
+        <div id="home-loading-data" class="row horizontal-center" ng-if="loading">
+            <div class='uil-default-css' style='transform:scale(0.32);'><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(0deg) translate(0,-60px);transform:rotate(0deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(30deg) translate(0,-60px);transform:rotate(30deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(60deg) translate(0,-60px);transform:rotate(60deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(90deg) translate(0,-60px);transform:rotate(90deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(120deg) translate(0,-60px);transform:rotate(120deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(150deg) translate(0,-60px);transform:rotate(150deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(180deg) translate(0,-60px);transform:rotate(180deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(210deg) translate(0,-60px);transform:rotate(210deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(240deg) translate(0,-60px);transform:rotate(240deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(270deg) translate(0,-60px);transform:rotate(270deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(300deg) translate(0,-60px);transform:rotate(300deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(330deg) translate(0,-60px);transform:rotate(330deg) translate(0,-60px);border-radius:10px;position:absolute;'></div></div>
+          </div>
+        <div id="results" ng-if="!loading">
+          <div class="grid row">
+            <div class="grid-sizer"></div>
+            <div class="grid-item" ng-repeat="tile in tiles track by $index" ng-hide="tile.sport.active == false" ng-if="(tile.tile_type.id == 1 && tile.sport.name != undefined) || (tile.tile_type.id == 2 && tile.performer.name != undefined) || (tile.tile_type.id == 3 && tile.venue.name != undefined) || tile.tile_type.id == 4" ng-class="{'hidden-xs': tile.tile_type.id != 1, 'hidden-sm': tile.tile_type.id != 1}">
+              <div id="home-loading-data" class="row horizontal-center" ng-if="!tile.ready">
+
+                <div class='uil-default-css' style='transform:scale(0.32);'><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(0deg) translate(0,-60px);transform:rotate(0deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(30deg) translate(0,-60px);transform:rotate(30deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(60deg) translate(0,-60px);transform:rotate(60deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(90deg) translate(0,-60px);transform:rotate(90deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(120deg) translate(0,-60px);transform:rotate(120deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(150deg) translate(0,-60px);transform:rotate(150deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(180deg) translate(0,-60px);transform:rotate(180deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(210deg) translate(0,-60px);transform:rotate(210deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(240deg) translate(0,-60px);transform:rotate(240deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(270deg) translate(0,-60px);transform:rotate(270deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(300deg) translate(0,-60px);transform:rotate(300deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(330deg) translate(0,-60px);transform:rotate(330deg) translate(0,-60px);border-radius:10px;position:absolute;'></div></div>
+            </div>
+              <div ng-if="tile.ready">
+              <a href="{{tile.url}}">
+                <div class="performer-name" ng-if="tile.tile_type.id == 1 && tile.image_url != '/images/original/missing.png' && tile.image_url">{{tile.sport.name | uppercase}}</div>
+                <div class="performer-name" ng-if="tile.tile_type.id == 2 && tile.image_url != '/images/original/missing.png' && tile.image_url">{{tile.performer.name | uppercase}}</div>
+                <div class="performer-name" ng-if="tile.tile_type.id == 3 && tile.image_url != '/images/original/missing.png' && tile.image_url">{{tile.venue.name | uppercase}}</div>
+                <img src="{{tile.image_url}}" ng-if="tile.image_url != '/images/original/missing.png' && tile.image_url" imageonload>
+                <div class="info-container" ng-if="tile.tile_type.id == 1 || tile.tile_type.id == 3 || tile.tile_type.id == 4">
+                  <div ng-if="tile.tile_type.id == 1" class="tile-title">{{tile.sport.name}} Games</div>
+                  <div ng-if="tile.tile_type.id == 3" class="tile-title">{{tile.venue.name}}</div>
+                  <div ng-if="tile.tile_type.id == 4" class="tile-title">{{tile.name}}</div>
+                  <div class="tile-description">{{tile.description}}</div>
+                </div>
+                </a>
+                <div ng-repeat="event in tile.events | limitTo:3" class="tile-event hidden-xs hidden-sm" ng-if="tile.tile_type.id != 4">
+                  <a href="{{(event.url + '/' + event.name + '-tickets') | spaceless | lowercase}}">
+                    <div class="row">
+                      <div class="col-xs-4 date-holder">
+                        <p class="date1">{{event.occurs_at | date:'MMM' : 'UTC' | uppercase}}</p>
+                        <p class="date2">{{event.occurs_at | date:'dd' : 'UTC' | uppercase}}</p>
+                        <p class="date3">{{event.occurs_at | date:'EEE' : 'UTC' | uppercase}}</p>  
+                      </div>
+
+
+                      <div class="col-xs-8 event-holder" ng-show="event.performances[0].primary == true">
+                        <p><span class="event1">{{event.performances[1].performer.name}}</span> <span class="at">at</span></p>
+                        <p><span class="event2">{{event.performances[0].performer.name}}</span></p>
+                        <p class="event3"><span class="at" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD</span><span class="at" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'h:mm a' : 'UTC' | uppercase}} at</span> <span>{{event.venue.name}}</span></p>
+                        <p class="event4">{{event.available_count}} tickets left</p>
+                      </div>
+
+
+                      <div class="col-xs-8 event-holder" ng-show="event.performances[1].primary == true">
+                        <p><span class="event1">{{event.performances[0].performer.name}}</span> <span class="at">at</span></p>
+                        <p><span class="event2">{{event.performances[1].performer.name}}</span></p>
+                        <p class="event3"><span class="at" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD</span><span class="at" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'h:mm a' : 'UTC' | uppercase}} at</span> <span>{{event.venue.name}}</span></p>
+                        <p class="event4">{{event.available_count}} tickets left</p>
+                      </div>
+
+
+                    </div>
+                  </a>
+                </div>
+
+
+
+
+
+
+                <div class="tile-event hidden-xs hidden-sm" ng-if="tile.tile_type.id == 4">
+                  <a href="{{tile.event1.url}}">
+                    <div class="row">
+                      <div class="col-xs-4 date-holder">
+                        <p class="date1">{{tile.event1.occurs_at | date:'MMM' : 'UTC' | uppercase}}</p>
+                        <p class="date2">{{tile.event1.occurs_at | date:'dd' : 'UTC' | uppercase}}</p>
+                        <p class="date3">{{tile.event1.occurs_at | date:'EEE' : 'UTC' | uppercase}}</p>  
+                      </div>
+
+
+                      <div class="col-xs-8 event-holder"">
+                        <p><span class="event1">{{tile.event1.away_performer.name}}</span> <span class="at">at</span></p>
+                        <p><span class="event2">{{tile.event1.home_performer.name}}</span></p>
+                        <p class="event3"><span class="at" ng-if="(tile.event1.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD</span><span class="at" ng-if="(tile.event1.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{tile.event1.occurs_at | date:'h:mm a' : 'UTC' | uppercase}} at</span> <span>{{tile.event1.venue.name}}</span></p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+
+                <div class="tile-event hidden-xs hidden-sm" ng-if="tile.tile_type.id == 4">
+                  <a href="{{tile.event2.url}}">
+                    <div class="row">
+                      <div class="col-xs-4 date-holder">
+                        <p class="date1">{{tile.event2.occurs_at | date:'MMM' : 'UTC' | uppercase}}</p>
+                        <p class="date2">{{tile.event2.occurs_at | date:'dd' : 'UTC' | uppercase}}</p>
+                        <p class="date3">{{tile.event2.occurs_at | date:'EEE' : 'UTC' | uppercase}}</p>  
+                      </div>
+
+
+                      <div class="col-xs-8 event-holder"">
+                        <p><span class="event1">{{tile.event2.away_performer.name}}</span> <span class="at">at</span></p>
+                        <p><span class="event2">{{tile.event2.home_performer.name}}</span></p>
+                        <p class="event3"><span class="at" ng-if="(tile.event2.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD</span><span class="at" ng-if="(tile.event2.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{tile.event2.occurs_at | date:'h:mm a' : 'UTC' | uppercase}} at</span> <span>{{tile.event2.venue.name}}</span></p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+
+                <div class="tile-event hidden-xs hidden-sm" ng-if="tile.tile_type.id == 4">
+                  <a href="{{tile.event3.url}}">
+                    <div class="row">
+                      <div class="col-xs-4 date-holder">
+                        <p class="date1">{{tile.event3.occurs_at | date:'MMM' : 'UTC' | uppercase}}</p>
+                        <p class="date2">{{tile.event3.occurs_at | date:'dd' : 'UTC' | uppercase}}</p>
+                        <p class="date3">{{tile.event3.occurs_at | date:'EEE' : 'UTC' | uppercase}}</p>  
+                      </div>
+
+
+                      <div class="col-xs-8 event-holder"">
+                        <p><span class="event1">{{tile.event3.away_performer.name}}</span> <span class="at">at</span></p>
+                        <p><span class="event2">{{tile.event3.home_performer.name}}</span></p>
+                        <p class="event3"><span class="at" ng-if="(tile.event3.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD</span><span class="at" ng-if="(tile.event3.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{tile.event3.occurs_at | date:'h:mm a' : 'UTC' | uppercase}} at</span> <span>{{tile.event3.venue.name}}</span></p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+
+
+
+
+
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="how-video" class="hidden-xs hidden-sm">
+      <div class="page-title">HOW DOES THE GOOD GAME GUARANTEE WORK</div>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 how-video-mobile">
+            <div class="videoWrapper">
+              <iframe src="https://player.vimeo.com/video/153604637" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><p><a href="https://vimeo.com/153604637">GameHedge Video</a> from <a href="https://vimeo.com/user41979068">Warren Friss</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="home-why" class="hidden-xs hidden-sm">
+      <div class="page-title">WE ARE FANS LIKE YOU</div>
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12 hidden-md hidden-lg"><img src="/assets/icon-fans-d237a1918de74f7474346c1aef58f843070bb5b13f14d82be14039c82672565f.png" alt="Fans" /></div>
+            <div class="col-md-8">
+              <p>We invest our time, our passion and our cash supporting our teams. Sometimes things are amazing! Our favorite hitter launches a walk-off rocket to the upper deck; our QB throws a TD to the back of the end zone with 12 ticks left; or our rookie sharp-shooter hits a fade away 3 at the buzzer. Woo hoo!!</p>
+              <p>But ... sometimes the team just doesn't return the love. You spend $400 on tix for the family, fight traffic for 3 hours and then ... well it's 6-0 in the fourth and your ace flame thrower heads to the showers with a tweaked hammie. If you're a true fan, you've been there.</p>
+              <p>That's why we created GameHedge.</p>
+              <p>We're fans like you.</p>
+            </div>
+            <div class="col-md-4 hidden-sm hidden-xs"><img src="/assets/icon-fans-d237a1918de74f7474346c1aef58f843070bb5b13f14d82be14039c82672565f.png" alt="Fans" /></div>
+          </div>
+        </div>
+    </section>
+  </main>
+</span>

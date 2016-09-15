@@ -1,5 +1,4 @@
 <span id="home">
-	
 	<section id="payments" ng-show="!order_success">
 	  	<div class="container">
 	  		<div class="row row-eq-height payment-container">
@@ -398,7 +397,14 @@
 		  					</div>
 		  					<hr>
 
-		  					<div class="pay_with_title">Pay With</div>
+		  					<div class="pay_with_title">
+		  					Pay With
+		  					<div class="img-holder hidden-xs hidden-sm">
+						    	<img src="<%= image_url "visa.png" %>">
+						    	<img src="<%= image_url "mastercard.png" %>">
+						    	<img src="<%= image_url "amex.png" %>">
+						    	<img src="<%= image_url "discover.png" %>">
+						    </div></div>
 		  					<div style="position:relative;">
 		  						<div ng-if="edit_credit_card == 3" class="edit_credit_card">
 			  						<div class="row">
@@ -507,10 +513,10 @@
 				  					<button ng-disabled="$parent.processing" ng-click="selectAddress('card')">DONE</button><button ng-disabled="$parent.processing" ng-click="addField('card')">ADD</button>
 			  					</div>
 			  					<div class="seals">
-									<script src="https://cdn.ywxi.net/js/inline.js?w=96"></script>
+			  						<div bind-unsafe-html='script' id="mcafeeseal"></div>
 									<span id="siteseal">
-			                            <script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script>
-			                        </span>	
+			                        	<script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script>
+			                        </span>
 								</div>
 							</div>
 
@@ -1050,11 +1056,12 @@
 						    		<div class="info" ng-if="ticket.format != 'Physical'">Email Delivery</div>
 								</div>
 								<div class="col-xs-6">
-									<div class="label-confirm">Public Note</div>
+									<div class="label-confirm">Tickets Notes</div>
 									<div class="info">{{ticket.public_notes}}</div>
 								</div>
 							</div>
 							<div class="row update-password" ng-if="first_time">
+							<h4>To receive any Good Game Guarantee refund, please provide:</h4>
 								<div class="col-md-6">
 									<input type="password" name="password" placeholder="password" ng-model="$parent.password" name="password">
 								</div>

@@ -7,10 +7,9 @@ app = angular.module('gamehedge',[
   'ui.bootstrap',
   'slickCarousel',
   'angular-ladda',
-  'angular-google-analytics'
+  'angular-google-analytics',   
+  'ngLocationUpdate'
 ])
-
-app
 
 app.config([ '$routeProvider','$locationProvider','AuthProvider', 'AnalyticsProvider',
     function($routeProvider,$locationProvider,AuthProvider, AnalyticsProvider){
@@ -53,6 +52,10 @@ app.config([ '$routeProvider','$locationProvider','AuthProvider', 'AnalyticsProv
             controller: 'EventController',
         })
         .when('/order/:ticektId', {
+            templateUrl: "order.html",
+            controller: 'OrderController',
+        })
+        .when('/order/:ticektId/confirm', {
             templateUrl: "order.html",
             controller: 'OrderController',
         })

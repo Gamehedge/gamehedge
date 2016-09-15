@@ -10,13 +10,13 @@
               <input type="hidden" name="type" value="full" />
               <div class="form-group">
                 <img src="<%= image_url "search icon.png" %>" ng-click="goToSearch()">
-                <input id="search_element" type="text" class="form-control" placeholder="Search by team, league, game, stadium or player..." ng-model="searchTerm" uib-typeahead="hint as hint.name for hint in getSearchHints($viewValue)" typeahead-template-url="typeahead/bind-node.html" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" typeahead-on-select="onSelect($item, $model, $label)" typeahead-no-results="noResults">
+                <input id="search_element" type="text" class="form-control" placeholder="Search team, venue or player..." ng-model="searchTerm" uib-typeahead="hint as hint.name for hint in getSearchHints($viewValue)" typeahead-template-url="typeahead/bind-node.html" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" typeahead-on-select="onSelect($item, $model, $label)" typeahead-no-results="noResults">
                  <div class="no-results" ng-show="noResults && searchTerm != ''">
                   No results. Please try again
                 </div>
             </form>
           </div>
-          <p class="hidden-xs hidden-sm">Every Ticket Comes With Our Good Game Guarantee!</p>
+          
         </div>
         <div class="press-images hidden-xs hidden-sm">
           <div class="container">
@@ -39,7 +39,7 @@
   <main>
     <section id="good-game-guarantee" class="hidden-xs hidden-sm">
       <div class="container">
-        <div class="title">HOW THE GOOD GAME GUARANTEE WORKS</div>
+        <div class="title">Every Ticket Comes With Our Good Game Guarantee!</div>
 
         <div class="content-background">
           <div class="content">
@@ -104,7 +104,7 @@
       
     <section id="good-game-guarantee" class="hidden-md hidden-lg hidden-xl">
       <div class="container">
-        <div class="title">HOW THE GOOD GAME GUARANTEE WORKS</div>
+        <div class="title">Every Ticket Comes With Our Good Game Guarantee!</div>
 
         <div class="content-background-mobile">
           <div class="content-mobile">
@@ -303,7 +303,7 @@
         </div>
       </div>
     </section>
-    <section id="how-video">
+    <!-- <section id="how-video" class="hidden-xs hidden-sm">
       <div class="page-title">HOW DOES THE GOOD GAME GUARANTEE WORK</div>
       <div class="container">
         <div class="row">
@@ -314,7 +314,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
     <section id="home-why" class="hidden-xs hidden-sm">
       <div class="page-title">WE ARE FANS LIKE YOU</div>
         <div class="container">
