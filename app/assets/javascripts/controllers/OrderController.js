@@ -296,6 +296,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 
 	$scope.goToConfirm = function(){
 		$location.update_path('/order/'+String($scope.ticket.id)+'/confirm', true);
+		Analytics.trackPage('/order/'+String($scope.ticket.id)+'/confirm');
 	}
 
 	$scope.confirmSave = function(type){
