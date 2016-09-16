@@ -25,6 +25,24 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
             return true;
         }
     }
+    
+    $scope.filterSectionsFn = function(_ele) {
+        if($scope.selectedSections.length > 0){
+            var indexSection = 0;
+            for(indexSection = 0; indexSection < $scope.selectedSections.length-1; indexSection++){
+                if(_ele.section == $scope.selectedSections[indexSection]){
+                    return true;
+                    break;
+                }
+                else {
+                    return false;
+                }
+            }
+        }
+        else {
+            return true;
+        }
+    }
 	
     $scope.getEventInfo = function(){
 		return apiService.getData('/api/v1/events/'+$routeParams.eventId)
@@ -247,6 +265,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	        	if(Section.Active && Section.Selected){
 	            	$scope.filterBySection = true;
 	                $scope.section = Section.Name;
+                    $scope.selectedSections.push(Section.Name);
 	                if(Section.SectionViewAvailable){
 	                   	$scope.sectionUrl = Section.SectionViewUrl;
 	                }
@@ -255,10 +274,15 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	                }
 	                $scope.applyChanges();
 	            }
+                else {
+                    var _indexDel = $scope.selectedSections.indexOf(Section.Name);
+                    $scope.selectedSections.splice(_indexDel, 1);
+                }
 	        }
 	        , OnReset: function () {
 	            $scope.filterBySection = false;
 				$scope.section = "";
+                $scope.selectedSections = [];
 				$scope.sectionUrl = "";
 				$scope.applyChanges();
 				$("#MapContainer").tuMap("RemoveMapControl","Unmapped");
@@ -332,6 +356,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	$scope.Data = [];
 	$scope.filterBySection = false;
 	$scope.section = "";
+    $scope.selectedSections = [];
 	$scope.loading = true;
 	$scope.sectionUrl = "";
 	$scope.onlyParking = false;
