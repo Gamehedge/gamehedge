@@ -27,21 +27,24 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
     }
     
     $scope.filterSectionsFn = function(_ele) {
+        var _result = false;
         if($scope.selectedSections.length > 0){
             var indexSection = 0;
-            for(indexSection = 0; indexSection < $scope.selectedSections.length-1; indexSection++){
+            for(indexSection = 0; indexSection < $scope.selectedSections.length; indexSection++){
                 if(_ele.section == $scope.selectedSections[indexSection]){
-                    return true;
+                    _result = true;
                     break;
                 }
                 else {
-                    return false;
+                    _result = false;
                 }
             }
         }
         else {
-            return true;
+            _result = true;
         }
+        
+        return _result;
     }
 	
     $scope.getEventInfo = function(){
@@ -274,10 +277,13 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	                }
 	                $scope.applyChanges();
 	            }
-                else {
+                else if(Section.Active == true && Section.Selected == false) {
                     var _indexDel = $scope.selectedSections.indexOf(Section.Name);
                     $scope.selectedSections.splice(_indexDel, 1);
                 }
+                
+                console.log($scope.selectedSections);
+                
 	        }
 	        , OnReset: function () {
 	            $scope.filterBySection = false;
