@@ -219,7 +219,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	        }
 	        , MapType: "Interactive"
 	        , EnableTooltipSectionView:false
-	        , SingleSectionSelection:true
+	        , SingleSectionSelection:false
 	        , AdaptiveThreshold: 0.8
 	        , Tickets: $scope.Data
 	        , ColorScheme: 1
