@@ -25,6 +25,27 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
             return true;
         }
     }
+    
+    $scope.filterSectionsFn = function(_ele) {
+        var _result = false;
+        if($scope.selectedSections.length > 0){
+            var indexSection = 0;
+            for(indexSection = 0; indexSection < $scope.selectedSections.length; indexSection++){
+                if(_ele.section == $scope.selectedSections[indexSection]){
+                    _result = true;
+                    break;
+                }
+                else {
+                    _result = false;
+                }
+            }
+        }
+        else {
+            _result = true;
+        }
+        
+        return _result;
+    }
 	
     $scope.getEventInfo = function(){
 		return apiService.getData('/api/v1/events/'+$routeParams.eventId)
@@ -221,7 +242,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	        }
 	        , MapType: "Interactive"
 	        , EnableTooltipSectionView:false
-	        , SingleSectionSelection:true
+	        , SingleSectionSelection:false
 	        , AdaptiveThreshold: 0.8
 	        , Tickets: $scope.Data
 	        , ColorScheme: 1
@@ -249,6 +270,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	        	if(Section.Active && Section.Selected){
 	            	$scope.filterBySection = true;
 	                $scope.section = Section.Name;
+                    $scope.selectedSections.push(Section.Name);
 	                if(Section.SectionViewAvailable){
 	                   	$scope.sectionUrl = Section.SectionViewUrl;
 	                }
@@ -257,10 +279,18 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	                }
 	                $scope.applyChanges();
 	            }
+                else if(Section.Active == true && Section.Selected == false) {
+                    var _indexDel = $scope.selectedSections.indexOf(Section.Name);
+                    $scope.selectedSections.splice(_indexDel, 1);
+                }
+                
+                console.log($scope.selectedSections);
+                
 	        }
 	        , OnReset: function () {
 	            $scope.filterBySection = false;
 				$scope.section = "";
+                $scope.selectedSections = [];
 				$scope.sectionUrl = "";
 				$scope.applyChanges();
 				$("#MapContainer").tuMap("RemoveMapControl","Unmapped");
@@ -334,6 +364,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	$scope.Data = [];
 	$scope.filterBySection = false;
 	$scope.section = "";
+    $scope.selectedSections = [];
 	$scope.loading = true;
 	$scope.sectionUrl = "";
 	$scope.onlyParking = false;
