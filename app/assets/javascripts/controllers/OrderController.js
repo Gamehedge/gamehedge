@@ -2,7 +2,7 @@ controllers = angular.module('gamehedge')
 
 controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,$location,$routeParams,$timeout,apiService,$filter,$window,Analytics){
     $rootScope.showHeader = true;
-	$scope.getTicket = function(){
+    $scope.getTicket = function(){
 		$http({
             method: 'GET',
             url: '/tickets/show?id='+$routeParams.ticektId,
@@ -14,7 +14,9 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	            .then(function(response){
 	            	// console.log("Event");
 	            	// console.log(response);
-	                $scope.event  = response;
+	                $scope.event = response;
+	                $rootScope.title = "Order";
+					$rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by "+$scope.event.sport.ggg+" or more, get 50% of your ticket price back.";
 	                $scope.amount = $location.search()['amount'];
 	                $scope.calculateValues();
 	        });

@@ -8,6 +8,8 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
                 //console.log("Performer");
             	//console.log(response);
                 $scope.performer  = response;
+                $rootScope.title = $scope.performer.name + " Tickets";
+                $rootScope.description = "Buy and Save up to 60% on all "+$scope.performer.name+" game tickets. If the home team losses by "+$scope.performer.sport.ggg+" or more, get 50% of your ticket price back.";
                 if($routeParams.slug == $scope.performer.slug){
                     $scope.getTestimonials();
                     $scope.getEvents();

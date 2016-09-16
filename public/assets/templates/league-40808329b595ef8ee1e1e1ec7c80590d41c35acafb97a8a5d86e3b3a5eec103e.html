@@ -15,7 +15,7 @@
             <form id="form-home-search" name="formSearch" onsubmit="function(){return false;};">
               <input type="hidden" name="type" value="full" />
               <div class="form-group">
-                <img src="<%= image_url "search icon.png" %>" ng-click="goToSearch()">
+                <img src="/assets/search icon-ddc57ae24d1e0b6ebb55f1742da8cca2a6b75cfc1339e507c71d46c821390c82.png" ng-click="goToSearch()">
                 <input id="search_element" type="text" class="form-control" placeholder="Search by team, league, game, stadium or player..." ng-model="searchTerm" uib-typeahead="hint as hint.name for hint in getSearchHints($viewValue)" typeahead-template-url="typeahead/bind-node.html" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" typeahead-on-select="onSelect($item, $model, $label)" typeahead-no-results="noResults">
                  <div class="no-results" ng-show="noResults && searchTerm != ''">
                   No results. Please try again
@@ -40,7 +40,7 @@
         <div class="content">
           <div class="col-md-4 division">
             <div class="col-xs-5 section">
-              <img src="<%= image_url "icon ticket.png" %>">
+              <img src="/assets/icon ticket-a818a977ec378f09ad896d10d6851700a12d2ee1b11bf927ddfe311881571132.png">
             </div>
             <div class="col-xs-7 section2">
               <h2>BUY TICKETS</h2>
@@ -52,7 +52,7 @@
           </div>
           <div class="col-md-4 division center-div">
             <div class="col-xs-5 section">
-              <img src="<%= image_url "icon stadium.png" %>">
+              <img src="/assets/icon stadium-d84160b6bb6cf8d4dc832969dd15a71aed27c61e59c52252ec1c96a6549dc437.png">
             </div>
             <div class="col-xs-7 section2">
               <h2>ENJOY GAME</h2>
@@ -60,26 +60,26 @@
                 If the home team loses by {{league.ggg}} or more, you get 50% of ticket price back.
               </p>
               <!-- <div class="col-xs-6 block">
-                <img class="icon-img" src="<%= image_url "football icon.png" %>">
+                <img class="icon-img" src="/assets/football icon-9a7d20380f240bd4ab7c5f211260dfe2de8ad1fa737653dc6ea44b6e55c6b7d2.png">
                 17 points
               </div>
               <div class="col-xs-6 block">
-                <img class="icon-img" src="<%= image_url "basketball icon.png" %>">
+                <img class="icon-img" src="/assets/basketball icon-cdaf5028d46f84e9e9159e1eeb0b151eb7d2ec8e13fb8c00456084fb4e4e71f4.png">
                 20 points
               </div>
               <div class="col-xs-6 block">
-                <img class="icon-img" src="<%= image_url "baseball icon.png" %>">
+                <img class="icon-img" src="/assets/baseball icon-836e64be846b054a8d6890a6af14ae0d63654eb2ed3b45723e9ae2241f802c12.png">
                 5 runs
               </div>
               <div class="col-xs-6 block">
-                <img class="icon-img" src="<%= image_url "hockey icon.png" %>">
+                <img class="icon-img" src="/assets/hockey icon-66b08d4368d6695e3871796d8aa5978d88f5efd669c056d01f8bbe0a170b4d3d.png">
                 4 goals
               </div> -->
             </div>
           </div>
           <div class="col-md-4 division">
             <div class="col-xs-5 section">
-              <img src="<%= image_url "icon coin.png" %>">
+              <img src="/assets/icon coin-a40eea64c1a1891b66756011ec48e43d67950c96647117597546d112983d9af7.png">
             </div>
             <div class="col-xs-7 section2">
               <h2>CLAIM MONEY</h2>
@@ -103,7 +103,7 @@
                 
                 <div class="row table-element">
                   <div class="section-mobile table-ele-cell first-ele">
-                    <img src="<%= image_url 'icon ticket.png' %>">
+                    <img src="/assets/icon ticket-a818a977ec378f09ad896d10d6851700a12d2ee1b11bf927ddfe311881571132.png">
                   </div>
                   <div class="section2-mobile table-ele-cell second-ele">
                     <h2>BUY TICKETS</h2>
@@ -115,7 +115,7 @@
                 </div>
                 <div class="row table-element">
                   <div class="section-mobile table-ele-cell first-ele">
-                    <img src="<%= image_url 'icon stadium.png' %>">
+                    <img src="/assets/icon stadium-d84160b6bb6cf8d4dc832969dd15a71aed27c61e59c52252ec1c96a6549dc437.png">
                   </div>
                   <div class="section2-mobile table-ele-cell second-ele">
                     <h2>ENJOY GAME</h2>
@@ -124,21 +124,21 @@
                     </p>
                     <!--div class="row">
                       <div class="fifty-perc block">
-                        <img class="icon-img" src="<%= image_url 'football icon.png' %>">
+                        <img class="icon-img" src="/assets/football icon-9a7d20380f240bd4ab7c5f211260dfe2de8ad1fa737653dc6ea44b6e55c6b7d2.png">
                         <div>17 points</div>
                       </div>
                       <div class="fifty-perc block">
-                        <img class="icon-img" src="<%= image_url 'basketball icon.png' %>">
+                        <img class="icon-img" src="/assets/basketball icon-cdaf5028d46f84e9e9159e1eeb0b151eb7d2ec8e13fb8c00456084fb4e4e71f4.png">
                         <div>20 points</div>
                       </div>
                     </div-->
                     <!--div class="row">
                       <div class="fifty-perc block">
-                        <img class="icon-img" src="<%= image_url 'baseball icon.png' %>">
+                        <img class="icon-img" src="/assets/baseball icon-836e64be846b054a8d6890a6af14ae0d63654eb2ed3b45723e9ae2241f802c12.png">
                         <div>5 runs</div>
                       </div>
                       <div class="fifty-perc block">
-                        <img class="icon-img" src="<%= image_url 'hockey icon.png' %>">
+                        <img class="icon-img" src="/assets/hockey icon-66b08d4368d6695e3871796d8aa5978d88f5efd669c056d01f8bbe0a170b4d3d.png">
                         <div>4 goals</div>
                       </div>
                     </div-->
@@ -146,7 +146,7 @@
                 </div>
                 <div class="row table-element">
                   <div class="section-mobile table-ele-cell first-ele">
-                    <img src="<%= image_url 'icon coin.png' %>">
+                    <img src="/assets/icon coin-a40eea64c1a1891b66756011ec48e43d67950c96647117597546d112983d9af7.png">
                   </div>
                   <div class="section2-mobile table-ele-cell second-ele">
                     <h2>CLAIM MONEY</h2>

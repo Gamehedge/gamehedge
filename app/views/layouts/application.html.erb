@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="gamehedge">
 <head>
-  <title>Gamehedge</title>
+  <title>{{$root.title}} | Gamehedge</title>
+  <meta name="description" content="{{$root.description}}">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, user-scalable=no" />
+  <meta name="fragment" content="!">
   <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -45,10 +47,9 @@ olark.identify('2065-539-10-9682');/*]]>*/</script><noscript><a href="https://ww
     src="https://www.facebook.com/tr?id=1221171167912729&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Facebook Pixel Code -->
-    
 </head>
     
-<body ng-app="gamehedge" ng-class="{'no-scrolling': $root.showMenu}" >
+<body ng-class="{'no-scrolling': $root.showMenu}" >
 <%= yield %>
 <p class="notice hidden"><%= notice %></p>
 <p class="alert hidden"><%= alert %></p>
@@ -69,5 +70,6 @@ twq('track','PageView');
 <div id="mcafee-seal" class="hidden">
   <script src="https://cdn.ywxi.net/js/inline.js?w=60" type="text/javascript"></script>
 </div>
+<script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
 </body>
 </html>
