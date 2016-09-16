@@ -48,7 +48,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
                     $scope.bold = "Verified tickets delivered on time | 100% Buyer Guarantee | Secure Checkout"
                     $scope.italic = "At GameHedge every ticket comes with the Good Game Guarantee at no additional cost. Buy MLB Baseball tickets on GameHedge and if the home team loses by 5 runs or more, GameHedge will refund 50% of the ticket price."
                 }
-                window.prerenderReady = true;
+                
                 if($routeParams.slug == $scope.league.slug){
                     if($scope.league.active == true){
                         $scope.getDivisions();

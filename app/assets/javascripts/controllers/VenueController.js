@@ -8,7 +8,7 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
                 $scope.venue  = response;
                 $rootScope.title = $scope.venue.name + " Tickets";
                 $rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by a certain amount or more, get 50% of your ticket price back.";
-                window.prerenderReady = true;
+                
              //    console.log("Venue");
             	// console.log($scope.venue);
                 if($routeParams.slug == $scope.venue.slug){

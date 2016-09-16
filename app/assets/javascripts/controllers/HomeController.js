@@ -87,7 +87,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 			if(index >= $scope.tiles.length){
 				//console.log("Tiles");
 				//console.log($scope.tiles);
-				window.prerenderReady = true;
+				
 			}
 			$timeout(function(){
 				$('.grid').masonry({
