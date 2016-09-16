@@ -55,6 +55,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                 $scope.event  = response;
                 $rootScope.title = $scope.event.name + " Tickets";
     			$rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by "+$scope.event.sport.ggg+" or more, get 50% of your ticket price back.";
+                window.prerenderReady = true;
+
                 if($routeParams.slug == $scope.event.slug){
                 	$scope.getTicketList();
                 }
