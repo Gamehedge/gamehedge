@@ -67,7 +67,7 @@ class OrdersController < ApplicationController
         	puts "error"
         else
         	@real_event_date = Time.parse @event_occurs_at
-        	Order.create(
+        	o = Order.create(
         		client_id: @user_id,
 	         	client_name: @ship_to_name,
 	         	te_order_id: @order["id"],
@@ -96,6 +96,9 @@ class OrdersController < ApplicationController
 				discount: @discount,
 				order_data: @order.to_s,
 			)
+			a = TicketEvolutionService.new({:type => "orders", :id => @order["id"]}).show
+	  		o.order_status = a["state"]
+	  		o.save
 		end
         render json: @order
     end

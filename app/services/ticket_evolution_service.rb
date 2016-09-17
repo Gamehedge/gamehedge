@@ -147,6 +147,9 @@ class TicketEvolutionService
     when 'clients'
       @client = @connection.clients.show(@id)
       return @client
+    when 'orders'
+      @order = @connection.orders.show(@id)
+      return @order
     else
       puts "Invalid type parameter, please check and try again"
     end
