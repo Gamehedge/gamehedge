@@ -8,6 +8,8 @@ class TicketsController < ActionController::Base
     req = Net::HTTP::Get.new(url.to_s)
     req.add_field("X-Signature", "fUFmAmPIMaoHXsrT5vHtERurnUViQN50h2n4J+u6GiI=")
     req.add_field("X-Token", "4665b0c543845003cd0f86763bdb5d43")
+    req.add_field("Accept-Encoding", "gzip")
+    req.add_field("User-Agent", "tickets (gzip)")
     res = Net::HTTP.new(url.host, url.port)
     res.use_ssl = true
     response = res.request(req)
