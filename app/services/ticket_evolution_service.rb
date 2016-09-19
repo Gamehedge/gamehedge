@@ -78,6 +78,7 @@ class TicketEvolutionService
                     te_performer_home_id = 0
                     home_performer_id = nil
                     te_performer_visit_id = 0
+                    sport_id = nil
                     away_performer_id = nil
                     venue_id = nil
                     ven = Venue.where(te_uid: te_venue_id).first
@@ -100,6 +101,7 @@ class TicketEvolutionService
                           away_performer_id = @performer.id
                           puts "not primary"
                         end
+                        sport_id = @performer.sport.id
                         puts "exist on db"
                         puts e.id
                       else
@@ -121,6 +123,7 @@ class TicketEvolutionService
                       @event.te_venue_id = te_venue_id
                       @event.occurs_at = occurs_at
                       @event.location = location
+                      @event.sport_id = sport_id
                       @event.slug = (name.downcase.gsub ' ', '-') + "-tickets"
                       @event.save
                       puts "Exists. Event Updated " + String(e.name)
