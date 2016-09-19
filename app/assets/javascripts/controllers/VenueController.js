@@ -31,6 +31,7 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
 
     $scope.getEvents = function(){
         var now = new Date();
+        now.setHours(00,00,01);
         var today_date = [[AddZero(now.getFullYear()), AddZero(now.getMonth() + 1), now.getDate()].join("-"), [AddZero(now.getHours()), AddZero(now.getMinutes())].join(":")].join(" ");
         //Pad given value to the left with "0"
         function AddZero(num) {
