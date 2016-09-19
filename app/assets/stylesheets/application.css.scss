@@ -1936,6 +1936,13 @@ body {
         margin-left: 0;
     }
 
+    #payments .seals{
+        position: relative;
+        right: 0px;
+        justify-content: flex-end;
+        top: 4px;
+    }
+
     #payments .card-in .first-name{
         margin-right: 7px;
     }
