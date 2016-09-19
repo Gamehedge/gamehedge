@@ -10,5 +10,10 @@ task :update_events => :environment do
   		o.save
   	end
   end
+  puts "removing older events"
+  Event.where('occurs_at < ?',Time.now).each do |e|
+  	e.delete()
+  	puts e.occurs_at
+  end
   puts "done."
 end
