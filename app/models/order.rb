@@ -18,16 +18,5 @@ class Order < ActiveRecord::Base
 	  		date.beginning_of_day } do |parent|
 	  	parent.table[:created_at]
 	end
-
-	after_update :send_refund_mail
-  
-	def send_refund_mail
-		if self.refund_status_id == 2
-	    	OrderMailer.refund_available(self.id).deliver
-	    elsif self.refund_status_id == 3
-	    	OrderMailer.refund_requested(self.id).deliver
-	    end
-	    #some data has been updated
-	end
   
 end

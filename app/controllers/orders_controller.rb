@@ -112,6 +112,9 @@ class OrdersController < ApplicationController
     	@order =  Order.where(te_order_id: request.POST["id"]).first
     	@order.refund_status_id = 3
     	@order.save
+        
+        OrderMailer.refund_requested(@order.id).deliver
+        
     	render text: "success"
     end
 end

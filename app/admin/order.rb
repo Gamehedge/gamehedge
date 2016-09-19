@@ -76,6 +76,19 @@ ActiveAdmin.register Order do
       end
       f.actions
   end
+    
+  after_update :send_refund_mail
+  
+  controller do
+    def send_refund_mail(element)
+        if element.refund_status_id == 2
+            OrderMailer.refund_available(element.id).deliver
+        elsif element.refund_status_id == 3
+            OrderMailer.refund_requested(element.id).deliver
+        end
+            #some data has been update
+    end
+  end
   #
   # or
   #
