@@ -516,6 +516,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    		$scope.order = response.data;
 			    		$scope.order_success = true;
 			    		$scope.goToConfirm();
+			    		$scope.gaScript = "<script type='text/javascript'>ga('require', 'ecommerce', 'ecommerce.js');ga('ecommerce:addTransaction', {id: '"+$scope.order.id+"',affiliation: 'Gamehedge',revenue: '"+$scope.total+"', shipping: '"+$scope.shipping_fee +"', tax: '"+$scope.service_fee+"' });ga('ecommerce:addItem', {id: '"+$scope.order.id+"', sku: '"+$scope.ticket.id+"', name: '"+$scope.event.name+"',category: '"+$scope.event.home_performer.sport.id+"', price: '"+$scope.ticket.retail_price+"', quantity: '"+$scope.amount+"'}); ga('ecommerce:send');</script>"
 			    		//console.log("Order");
 			    		//console.log($scope.order);
 			    	}
