@@ -129,7 +129,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default :charset => "utf-8"
 
-  config.middleware.use Rack::Prerender, prerender_token: ENV['PRERENDER_TOKEN']
+  config.middleware.use Rack::Prerender, prerender_token: ENV['PRERENDER_TOKEN'], whitelist: ['/', '/performer/.*/.*', '/venues/.*/.*', '/leagues/.*/.*']
 
     # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
