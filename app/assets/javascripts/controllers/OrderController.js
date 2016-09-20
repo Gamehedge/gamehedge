@@ -15,7 +15,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	            	// console.log("Event");
 	            	// console.log(response);
 	                $scope.event = response;
-	                $rootScope.title = "Order";
+	                $rootScope.title = "Order | Gamehedge";
 					$rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by "+$scope.event.home_performer.sport.ggg+" or more, get 50% of your ticket price back.";
 	                $scope.amount = $location.search()['amount'];
 	                $scope.calculateValues();

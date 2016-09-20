@@ -6,7 +6,7 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
 		apiService.getData('/api/v1/venues/'+$routeParams.venueId)
             .then(function(response){
                 $scope.venue  = response;
-                $rootScope.title = $scope.venue.name + " Tickets";
+                $rootScope.title = $scope.venue.name + " Tickets | Gamehedge";
                 $rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by a certain amount or more, get 50% of your ticket price back.";
                 
              //    console.log("Venue");
