@@ -237,7 +237,7 @@
 
 
           <div class="col-xs-12 tickets-data" ng-if="!loading">
-            <div class="row" ng-repeat="ticket in tickets.data | orderBy:ordering | filter: (etickets || '') && {eticket: true} | filter: (physicals || '') && {eticket: false} | filter: filterSectionsFn | filter: (onlyParking || '') && {type: 'parking'} | filter: (!onlyParking || '') && {type: 'event'} | numberOfSeats:index | filter: filterPriceFn" emit-last-repeater-element ng-mouseover="higlightSection(ticket.section, true)" ng-mouseleave="higlightSection(ticket.section, false)" ng-if="compareDates(event.occurs_at,ticket.format)">
+            <div class="row" ng-repeat="ticket in tickets | orderBy:ordering | filter: (etickets || '') && {eticket: true} | filter: (physicals || '') && {eticket: false} | filter: filterSectionsFn | filter: (onlyParking || '') && {type: 'parking'} | filter: (!onlyParking || '') && {type: 'event'} | numberOfSeats:index | filter: filterPriceFn" emit-last-repeater-element ng-mouseover="higlightSection(ticket.section, true)" ng-mouseleave="higlightSection(ticket.section, false)" ng-if="compareDates(event.occurs_at,ticket.format)">
               <!-- <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ticket.public_notes}}" ng-if="ticket.public_notes"></span> -->
               <div class="hidden-xs hidden-sm col-xs-1 info-ico">
                 <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ticket.public_notes}}" ng-if="ticket.public_notes"></span>
