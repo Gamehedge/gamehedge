@@ -65,8 +65,8 @@
 			  					<button ng-disabled="$parent.processing" ng-click="toogleReview('deliver')">EDIT</button>
 		  					</div>
 		  					<div ng-if="edit_deliver == 3">
-		  						<div class="inputs mobile-email" ng-if="!$root.isLoggedin">
-		  							<div class="email">
+		  						<div class="mobile-margin inputs mobile-email" ng-if="!$root.isLoggedin">
+		  							<div class="email bottom-line">
 			  							<input type="email" class="form-control" id="email-shipping" ng-model="$parent.$parent.client.email" placeholder="Email" name="email"  ng-change="checkEmail()">
 								    </div>
 								    <div class="confirm-email">
@@ -422,9 +422,9 @@
 						    	<img src="<%= image_url "discover.png" %>">
 						    </div></div>
 		  					<div style="position:relative;">
-		  						<div ng-if="edit_credit_card == 3" class="edit_credit_card">
+		  						<div ng-if="edit_credit_card == 3" class="edit_credit_card mobile-margin">
 			  						<div class="row">
-			  							<div class="cc col-md-5">
+			  							<div class="cc col-md-5 bottom-line">
 				  							<input type="tel"  ng-model="$parent.card.last_digits" class="form-control" id="cc" placeholder="Credit Card Number" ng-change="checkCardNumber()" name="credit_card">
 										    <div class="img-holder">
 										    	<img src="<%= image_url "visa.png" %>" ng-if="($parent.card.card_company | lowercase) == 'visa'">
@@ -435,7 +435,7 @@
 									    </div>
 									    <div class="col-md-7">
 									    	<div class="row">
-					  							<div class="cvv col-xs-4">
+					  							<div class="cvv col-xs-4 right-line">
 						  							<select class="form-control" id="exp-month" ng-model="$parent.card.expiration_month" name="month">
 												    	<option value="">Month</option>
 												    	<option value="01">JAN</option>
@@ -452,7 +452,7 @@
 												    	<option value="12">DEC</option>
 												    </select>
 											    </div>
-											    <div class="exp-month col-xs-4">
+											    <div class="exp-month col-xs-4 right-line">
 												    <select class="form-control" id="exp-year" ng-model="$parent.card.expiration_year" name="year">
 												    	<option value="">Year</option>
 												    	<option value="2016">2016</option>
@@ -570,23 +570,23 @@
 			  					</span>
 			  					<button ng-disabled="$parent.processing" ng-click="toogleReview('billing')">EDIT</button>
 		  					</div>
-		  					<div ng-if="edit_billing == 3">
-							    <div class="inputs">
+		  					<div ng-if="edit_billing == 3" class="mobile-margin">
+							    <div class="inputs bottom-line">
 		  							<div class="full-name">
 			  							<input type="text" class="form-control" id="first-name-billing" ng-model="$parent.billing_address.name" placeholder="Name as it appears on card" name="name">
 								    </div>
 		  						</div>
-		  						<div class="inputs">
+		  						<div class="inputs bottom-line">
 		  							<div class="address">
 			  							<input type="text" class="form-control" id="address-billing" ng-model="$parent.billing_address.street_address" placeholder="Address" name="address">
 								    </div>
 		  						</div>
                                 
-		  						<div class="inputs">
-								    <div class="zipcode">
+		  						<div class="inputs bottom-line">
+								    <div class="zipcode right-line">
 									    <input type="text" class="form-control" id="city-billing" ng-model="$parent.billing_address.locality" placeholder="City" name="city">	
 								    </div>
-								    <div class="city">
+								    <div class="city right-line">
 									    <select id="state_id-billing" data-value="shortcode" ng-model="$parent.billing_address.region" name="state">
 									    	<option value="">State</option>
 											<option value="AK">AK</option>
@@ -655,7 +655,7 @@
 								    </div>
 		  						</div>
                                 <div class="inputs">
-                                    <div class="country">
+                                    <div class="country right-line">
 									    <select id="country-billing" ng-model="$parent.billing_address.country_code">
 											<option value="">Select Country</option>
 											<option value="us">United States</option>
@@ -917,8 +917,8 @@
 		  							<button ng-disabled="$parent.$parent.processing" ng-click="cancelAdd('billing')">CANCEL</button>
 		  						</div>
 		  					</div>
-		  					<hr>
-		  					<div class="row">
+		  					<hr class="hidden-xs hidden-sm">
+		  					<div class="row hidden-xs hidden-sm">
 			  					<div class="ggg-badge-pledge col-md-6">
 				  					<div class="img-container col-xs-3">
 				  						<img src="<%= image_url "badge-gamehedge.png" %>" class="ggg-img">
@@ -1029,6 +1029,43 @@
 						    <div class="terms">By clicking Confirm and Pay, you agree to GameHedge <a href="/our-terms" target="_blank">Terms and Privacy Policy.</a></div>
 						    <div id="session_iframe" ng-bind-html="session_iframe"></div>
 	  					</div>
+                        
+                        <hr class="hidden-md hidden-lg hidden-xl">
+                        
+                        <div class="row hidden-md hidden-lg hidden-xl mobile-ggg">
+                            <div class="ggg-badge-pledge col-md-6">
+                                <div class="img-container col-xs-3">
+                                    <img src="<%= image_url "badge-gamehedge.png" %>" class="ggg-img">
+                                </div>
+                                <div class="col-xs-9">
+                                    <div class="title">
+                                        Your tickets come with the<br>GOOD GAME GUARANTEE!
+                                    </div>
+                                    <div class="cont">
+                                        If the home team loses by {{event.home_performer.sport.ggg}} or more, GameHedge will refund 50% of your ticket price at no additional cost to you.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ggg-badge-pledge col-md-6">
+                                <div class="img-container col-xs-3">
+                                    <img src="<%= image_url "pledge.png" %>" class="pledge-img">
+                                </div>
+                                <div class="col-xs-9">
+                                    <div class="title">
+                                        GAMEHEDE PLEDGE
+                                    </div>
+                                    <div class="cont">
+                                        Tickets will always be…
+                                        <ul>
+                                            <li>in time for the event</li>
+                                            <li>refunded if the event is canceled and not resecheduled</li>
+                                            <li>authentic</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
 	  				</div>
 	  			</div>
 	  		</div>
