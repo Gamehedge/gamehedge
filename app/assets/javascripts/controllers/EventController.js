@@ -206,7 +206,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         	$scope.loading = false;
         	//console.log($scope.tickets);
         	var sections = [];
-        	angular.forEach($scope.tickets, function(value, key) {
+        	angular.forEach($scope.tickets.data.ticket_groups , function(value, key) {
                 value.amount = value.splits[value.splits.length-1];
         		if(sections.indexOf(value.section) == -1){
 	                sections.push(value.section);
