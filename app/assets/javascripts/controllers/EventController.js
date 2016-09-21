@@ -144,18 +144,18 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                     break;
             case 1: $scope.price_filter = true;
                     $scope.price_filter_down_limit = 0;
-                    $scope.price_filter_up_limit = 50;
-                    break;
-            case 2: $scope.price_filter = true;
-                    $scope.price_filter_down_limit = 50;
                     $scope.price_filter_up_limit = 100;
                     break;
-            case 3: $scope.price_filter = true;
+            case 2: $scope.price_filter = true;
                     $scope.price_filter_down_limit = 100;
                     $scope.price_filter_up_limit = 200;
                     break;
-            case 4: $scope.price_filter = true;
+            case 3: $scope.price_filter = true;
                     $scope.price_filter_down_limit = 200;
+                    $scope.price_filter_up_limit = 300;
+                    break;
+            case 4: $scope.price_filter = true;
+                    $scope.price_filter_down_limit = 300;
                     $scope.price_filter_up_limit = 9999999999999999999999999999;
                     break;
         }
