@@ -4,6 +4,16 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 
 	$scope.prev_filter = true;
     $scope.mob_price = 0;
+    $scope.mob_price_a = false;
+    $scope.mob_price_b = false;
+    $scope.mob_price_c = false;
+    $scope.mob_price_d = false;
+    
+    $scope.mob_price_a_real = false;
+    $scope.mob_price_b_real = false;
+    $scope.mob_price_c_real = false;
+    $scope.mob_price_d_real = false;
+    
     $scope.mob_real_price = 0;
     $scope.price_filter = false;
     $scope.price_filter_down_limit = 0;
@@ -13,17 +23,47 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
     $rootScope.windoWidth = window.innerWidth;
     
     $scope.filterPriceFn = function(_ele) {
+        val = true;
         if($scope.price_filter == true){
-            if( _ele.retail_price > $scope.price_filter_down_limit && _ele.retail_price <= $scope.price_filter_up_limit ) {
-                return true;
+            val = false;
+            
+            if($scope.mob_price_a_real) {
+                $scope.price_filter_down_limit = 0;
+                $scope.price_filter_up_limit = 100;
+                if( _ele.retail_price > $scope.price_filter_down_limit && _ele.retail_price <= $scope.price_filter_up_limit ) {
+                    val =  true;
+                }
             }
-            else {
-                return false;
+            
+            if($scope.mob_price_b_real){
+                $scope.price_filter_down_limit = 100;
+                $scope.price_filter_up_limit = 200;
+                if( _ele.retail_price > $scope.price_filter_down_limit && _ele.retail_price <= $scope.price_filter_up_limit ) {
+                    val =  true;
+                }
+            }
+            
+            if($scope.mob_price_c_real){
+                $scope.price_filter_down_limit = 200;
+                $scope.price_filter_up_limit = 300;
+                if( _ele.retail_price > $scope.price_filter_down_limit && _ele.retail_price <= $scope.price_filter_up_limit ) {
+                    val =  true;
+                }
+            }
+            
+            if($scope.mob_price_d_real){
+                $scope.price_filter_down_limit = 300;
+                $scope.price_filter_up_limit = 99999999999999999999999;
+                if( _ele.retail_price > $scope.price_filter_down_limit && _ele.retail_price <= $scope.price_filter_up_limit ) {
+                    val =  true;
+                }
             }
         }
         else {
-            return true;
+            val = true;
         }
+        
+        return val;
     }
     
     $scope.filterSectionsFn = function(_ele) {
@@ -82,7 +122,10 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
             $scope.mob_delivery = 1;
         }
         
-        $scope.mob_price = $scope.mob_real_price;
+        $scope.mob_price_a = $scope.mob_price_a_real;
+        $scope.mob_price_b = $scope.mob_price_b_real;
+        $scope.mob_price_c = $scope.mob_price_c_real;
+        $scope.mob_price_d = $scope.mob_price_d_real;
     }
 
 	$scope.updateFilter = function(index){
@@ -116,7 +159,17 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
     }
     
     $scope.mob_price_update = function(_val) {
-        $scope.mob_price = _val;
+        switch(_val) {
+            case 1: $scope.mob_price_a = !$scope.mob_price_a;
+                    break;
+            case 2: $scope.mob_price_b = !$scope.mob_price_b;
+                    break;
+            case 3: $scope.mob_price_c = !$scope.mob_price_c;
+                    break;
+            case 4: $scope.mob_price_d = !$scope.mob_price_d;
+                    break;
+        }
+        //$scope.mob_price = _val;
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
     }
@@ -135,29 +188,19 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         //console.log($scope.mob_delivery);
         //console.log($scope.etickets);
         $scope.filter_active = false;
-        $scope.mob_real_price = $scope.mob_price;
+        
+        $scope.mob_price_a_real = $scope.mob_price_a;
+        $scope.mob_price_b_real = $scope.mob_price_b;
+        $scope.mob_price_c_real = $scope.mob_price_c;
+        $scope.mob_price_d_real = $scope.mob_price_d;
+        
         //console.log($scope.mob_price);
-        switch($scope.mob_price) {
-            case 0: $scope.price_filter = false;
-                    $scope.price_filter_down_limit = 0;
-                    $scope.price_filter_up_limit = 0;
-                    break;
-            case 1: $scope.price_filter = true;
-                    $scope.price_filter_down_limit = 0;
-                    $scope.price_filter_up_limit = 100;
-                    break;
-            case 2: $scope.price_filter = true;
-                    $scope.price_filter_down_limit = 100;
-                    $scope.price_filter_up_limit = 200;
-                    break;
-            case 3: $scope.price_filter = true;
-                    $scope.price_filter_down_limit = 200;
-                    $scope.price_filter_up_limit = 300;
-                    break;
-            case 4: $scope.price_filter = true;
-                    $scope.price_filter_down_limit = 300;
-                    $scope.price_filter_up_limit = 9999999999999999999999999999;
-                    break;
+        
+        if($scope.mob_price_a == false && $scope.mob_price_b == false && $scope.mob_price_c == false && $scope.mob_price_d == false) {
+            $scope.price_filter = false;
+        }
+        else {
+            $scope.price_filter = true;
         }
     }
     
