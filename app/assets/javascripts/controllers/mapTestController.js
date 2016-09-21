@@ -22,7 +22,12 @@ controllers.controller('mapTestController', function($scope,apiService,$http,ang
             for(i=0;i<$scope.tickets.data.ticket_groups.length;i++){
                 var b = "";
                 for(j=0;j<$scope.tickets.data.ticket_groups[i].splits.length;j++){
-                    b = b + $scope.tickets.data.ticket_groups[i].splits[j] +  ",";
+                    if(j==0){
+                        b = b + $scope.tickets.data.ticket_groups[i].splits[j];
+                    }
+                    else{
+                        b = b + "," + $scope.tickets.data.ticket_groups[i].splits[j];
+                    }
                 }
                 var a = {
                     id:$scope.tickets.data.ticket_groups[i].id,
@@ -41,7 +46,7 @@ controllers.controller('mapTestController', function($scope,apiService,$http,ang
                 'client_id':'99',
                 'map_name':'MY_MAP',
                 'key_map_name':'map_key',
-                'tickets_container':'TICKETS_CONTAINER',
+                'tickets_container':'tickets_list',
                 'map_width':777,
                 'map_height':637,   
                 'feed_type':'te',
@@ -53,6 +58,7 @@ controllers.controller('mapTestController', function($scope,apiService,$http,ang
                 'tickets_data_object': DATA_TICKTES,
                 'tickets_type':'json',
             };
+            console.log(DVM_map_params);
             angularLoad.loadScript("https://dynamicvenuemaps.com/maps/dvm.js?v=1.0").then(function() {
                 console.log("success");
                 // Script loaded succesfully.
