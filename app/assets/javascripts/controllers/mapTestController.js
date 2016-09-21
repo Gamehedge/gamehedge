@@ -61,7 +61,7 @@ controllers.controller('mapTestController', function($scope,apiService,$http,ang
             console.log("DVM_map_params")
             console.log(DVM_map_params);
             $timeout(function(){
-                angularLoad.loadScript("https://dynamicvenuemaps.com/maps/dvm.js?v=1.0").then(function() {
+                angularLoad.loadScript("https://dynamicvenuemaps.com/maps/dvm.js?v=beta").then(function() {
                     console.log("dvm.js loadded successfully");
                     // Script loaded succesfully.
                     // We can now start using the functions from someplugin.js
