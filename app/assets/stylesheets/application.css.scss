@@ -3234,7 +3234,7 @@ footer .footer-signature img{
         border-radius: 3px;
         overflow: hidden;
         background-color: rgba(0,0,0,0);
-        background: rgba(0,0,0,0) image-url("arrowdown.gif") no-repeat 100% 50%;
+        background: rgba(0,0,0,0) image-url("arrowdown.gif") no-repeat 90% 50%;
     }
     
     .custom-select select {
@@ -3446,6 +3446,11 @@ footer .footer-signature img{
         margin-top: 10px;
     }
     
+    .mobile-margin-select {
+        border: solid 1px #d3d3d3 !important;
+        border-radius: 5px;
+    }
+    
     .bottom-line {
         border-bottom: solid 1px #d3d3d3 !important;
     }
@@ -3508,18 +3513,22 @@ footer .footer-signature img{
     }
     
     .top-desc-container {
-        
+        display: inline-block;
+        width: 100%;
+        margin-top: 5px;
     }
     
     .top-val {
-        width: 50% !important;
         text-align: right;
+        float: right;
+        min-width: 80px;
     }
     
     .top-desc {
-        padding-left: 12px;
         padding-top: 4px;
         padding-bottom: 5px;
+        float: left;
+        color: #525252 !important;
     }
     #payments .container {
         padding-left: 0px;
@@ -3613,6 +3622,10 @@ footer .footer-signature img{
         width: 20px;
         height: 4px;
         border-radius: 2px
+    }
+    
+    .top-location {
+        margin-top: 5px;
     }
 }
 

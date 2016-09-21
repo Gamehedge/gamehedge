@@ -426,10 +426,10 @@
 		  					<div class="pay_with_title">
 		  					Pay With
 		  					<div class="img-holder">
-						    	<img src="<%= image_url "visa.png" %>">
-						    	<img src="<%= image_url "mastercard.png" %>">
-						    	<img src="<%= image_url "amex.png" %>">
-						    	<img src="<%= image_url "discover.png" %>">
+						    	<img src="/assets/visa-3ab4a39fbb8319cdcb82b2d91996ec378cb86a9140d6520a4d49f91b6ba7ca4f.png">
+						    	<img src="/assets/mastercard-87ffc649f4f4e58fd0c8a45b740105d6cc277dd5c8ca8d53ca83e046d8f28dc3.png">
+						    	<img src="/assets/amex-6a0a73c3b5952c522d0fdb371e47285563e143498c7805615dfc83920ec4c79b.png">
+						    	<img src="/assets/discover-e1c2e888d89671848706052194a0cc5303b8f4b60affd94127ee4163542411cf.png">
 						    </div></div>
 		  					<div style="position:relative;">
 		  						<div ng-if="edit_credit_card == 3" class="edit_credit_card mobile-margin">
@@ -437,10 +437,10 @@
 			  							<div class="cc col-md-5 bottom-line">
 				  							<input type="tel"  ng-model="$parent.card.last_digits" class="form-control" id="cc" placeholder="Credit Card Number" ng-change="checkCardNumber()" name="credit_card">
 										    <div class="img-holder">
-										    	<img src="<%= image_url "visa.png" %>" ng-if="($parent.card.card_company | lowercase) == 'visa'">
-										    	<img src="<%= image_url "mastercard.png" %>" ng-if="($parent.card.card_company | lowercase) == 'mastercard'">
-										    	<img src="<%= image_url "amex.png" %>" ng-if="($parent.card.card_company | lowercase) == 'amex'">
-										    	<img src="<%= image_url "discover.png" %>" ng-if="($parent.card.card_company | lowercase) == 'discover'">
+										    	<img src="/assets/visa-3ab4a39fbb8319cdcb82b2d91996ec378cb86a9140d6520a4d49f91b6ba7ca4f.png" ng-if="($parent.card.card_company | lowercase) == 'visa'">
+										    	<img src="/assets/mastercard-87ffc649f4f4e58fd0c8a45b740105d6cc277dd5c8ca8d53ca83e046d8f28dc3.png" ng-if="($parent.card.card_company | lowercase) == 'mastercard'">
+										    	<img src="/assets/amex-6a0a73c3b5952c522d0fdb371e47285563e143498c7805615dfc83920ec4c79b.png" ng-if="($parent.card.card_company | lowercase) == 'amex'">
+										    	<img src="/assets/discover-e1c2e888d89671848706052194a0cc5303b8f4b60affd94127ee4163542411cf.png" ng-if="($parent.card.card_company | lowercase) == 'discover'">
 										    </div>
 									    </div>
 									    <div class="col-md-7">
@@ -507,10 +507,10 @@
 				  						<div class="title">Credit Card</div>
 				  						<div class="ccard vertical-center">
 					  						<div class="img-holder">
-										    	<img src="<%= image_url "visa.png" %>" ng-if="($parent.card.card_company | lowercase) == 'visa'">
-										    	<img src="<%= image_url "mastercard.png" %>" ng-if="($parent.card.card_company | lowercase) == 'mastercard'">
-										    	<img src="<%= image_url "amex.png" %>" ng-if="($parent.card.card_company | lowercase) == 'amex'">
-										    	<img src="<%= image_url "discover.png" %>" ng-if="($parent.card.card_company | lowercase) == 'discover'">
+										    	<img src="/assets/visa-3ab4a39fbb8319cdcb82b2d91996ec378cb86a9140d6520a4d49f91b6ba7ca4f.png" ng-if="($parent.card.card_company | lowercase) == 'visa'">
+										    	<img src="/assets/mastercard-87ffc649f4f4e58fd0c8a45b740105d6cc277dd5c8ca8d53ca83e046d8f28dc3.png" ng-if="($parent.card.card_company | lowercase) == 'mastercard'">
+										    	<img src="/assets/amex-6a0a73c3b5952c522d0fdb371e47285563e143498c7805615dfc83920ec4c79b.png" ng-if="($parent.card.card_company | lowercase) == 'amex'">
+										    	<img src="/assets/discover-e1c2e888d89671848706052194a0cc5303b8f4b60affd94127ee4163542411cf.png" ng-if="($parent.card.card_company | lowercase) == 'discover'">
 										    </div>
 				  							ending in {{$parent.card.last_digits | limitTo:-4}}
 				  						</div>
@@ -525,10 +525,10 @@
 				  						<div class="ccard vertical-center" ng-repeat="c in cards">
 				  							<input type="radio" ng-model="$parent.$parent.credit_card_index" value="{{$index}}">
 					  						<div class="img-holder">
-										    	<img src="<%= image_url "visa.png" %>" ng-if="(c.card_company | lowercase) == 'visa'">
-										    	<img src="<%= image_url "mastercard.png" %>" ng-if="(c.card_company | lowercase) == 'mastercard'">
-										    	<img src="<%= image_url "amex.png" %>" ng-if="(c.card_company | lowercase) == 'amex'">
-										    	<img src="<%= image_url "discover.png" %>" ng-if="(c.card_company | lowercase) == 'discover'">
+										    	<img src="/assets/visa-3ab4a39fbb8319cdcb82b2d91996ec378cb86a9140d6520a4d49f91b6ba7ca4f.png" ng-if="(c.card_company | lowercase) == 'visa'">
+										    	<img src="/assets/mastercard-87ffc649f4f4e58fd0c8a45b740105d6cc277dd5c8ca8d53ca83e046d8f28dc3.png" ng-if="(c.card_company | lowercase) == 'mastercard'">
+										    	<img src="/assets/amex-6a0a73c3b5952c522d0fdb371e47285563e143498c7805615dfc83920ec4c79b.png" ng-if="(c.card_company | lowercase) == 'amex'">
+										    	<img src="/assets/discover-e1c2e888d89671848706052194a0cc5303b8f4b60affd94127ee4163542411cf.png" ng-if="(c.card_company | lowercase) == 'discover'">
 										    </div>
 				  							ending in {{c.last_digits | limitTo:-4}}
 				  						</div>
@@ -934,7 +934,7 @@
 		  					<div class="row hidden-xs hidden-sm">
 			  					<div class="ggg-badge-pledge col-md-6">
 				  					<div class="img-container col-xs-3">
-				  						<img src="<%= image_url "badge-gamehedge.png" %>" class="ggg-img">
+				  						<img src="/assets/badge-gamehedge-c6f8f51039f93f77379348b708f4f6cc8b087a2556df007b205cd85c4953a04e.png" class="ggg-img">
 				  					</div>
 				  					<div class="col-xs-9">
 					  					<div class="title">
@@ -947,7 +947,7 @@
 				  				</div>
 				  				<div class="ggg-badge-pledge col-md-6">
 				  					<div class="img-container col-xs-3">
-				  						<img src="<%= image_url "pledge.png" %>" class="pledge-img">
+				  						<img src="/assets/pledge-21b8f9f7cfe598cb92212f283c1d3ebd79bffc3100184d07481778edf6898f46.png" class="pledge-img">
 				  					</div>
 				  					<div class="col-xs-9">
 					  					<div class="title">
