@@ -24,6 +24,7 @@
 //= require bootstrap
 //= require sweetalert/dist/sweetalert.min
 //= require angular-location-update/angular-location-update.min
+//= require angular-load/angular-load.min
 //= require_tree .
 //= require_tree ./templates
 

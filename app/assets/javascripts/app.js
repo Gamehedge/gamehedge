@@ -8,7 +8,8 @@ app = angular.module('gamehedge',[
   'slickCarousel',
   'angular-ladda',
   'angular-google-analytics',   
-  'ngLocationUpdate'
+  'ngLocationUpdate',
+  'angularLoad'
 ])
 
 app.config([ '$routeProvider','$locationProvider','AuthProvider', 'AnalyticsProvider',
@@ -90,6 +91,10 @@ app.config([ '$routeProvider','$locationProvider','AuthProvider', 'AnalyticsProv
         .when('/privacy-policy', {
             templateUrl: "privacy-policy.html",
             controller: 'privacyPolicyController',
+        })
+        .when('/map-test', {
+            templateUrl: "map-test.html",
+            controller: 'mapTestController',
         })
         .otherwise({
             redirectTo: '/'
