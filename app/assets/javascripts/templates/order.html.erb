@@ -14,10 +14,15 @@
 						    	{{event.occurs_at | date: "EEE,	MMM dd, yyyy hh:mm a" : 'UTC'}}<br>
 						    	{{event.venue.name}}, {{event.venue.location}}<br>
 						    	<strong>Section {{ticket.section}}, Row {{ticket.row}}</strong>
+                                <div class="value">{{ticket.retail_price | currency}} ea.</div>
 						    </div>
-						    <div class="description-line">
-						    	<div class="description">Ticket Price</div>
-						    	<div class="value">{{ticket.retail_price | currency}} ea.</div>
+                            <div class="description-line">
+						    	<div class="description">Quantity</div>
+						    	<div class="value" >
+							    	<select class="amount" id="amount" ng-model="amount" ng-change="calculateValues()" >
+							    		<option ng-repeat="o in ticket.splits | orderBy:'-'" value="{{o}}">{{o}}</option>
+							    	</select>
+						    	</div>
 						    </div>
 	  					</div>
 	  					<div class="card-in deliver">
@@ -415,7 +420,7 @@
 
 		  					<div class="pay_with_title">
 		  					Pay With
-		  					<div class="img-holder hidden-xs hidden-sm">
+		  					<div class="img-holder">
 						    	<img src="<%= image_url "visa.png" %>">
 						    	<img src="<%= image_url "mastercard.png" %>">
 						    	<img src="<%= image_url "amex.png" %>">
@@ -582,11 +587,14 @@
 								    </div>
 		  						</div>
                                 
-		  						<div class="inputs bottom-line">
-								    <div class="zipcode right-line">
+                                <div class="inputs bottom-line">
+                                    <div class="address">
 									    <input type="text" class="form-control" id="city-billing" ng-model="$parent.billing_address.locality" placeholder="City" name="city">	
 								    </div>
-								    <div class="city right-line">
+                                </div>
+                                
+		  						<div class="inputs bottom-line">
+								    <div class="country right-line">
 									    <select id="state_id-billing" data-value="shortcode" ng-model="$parent.billing_address.region" name="state">
 									    	<option value="">State</option>
 											<option value="AK">AK</option>
@@ -650,7 +658,7 @@
 							  				<option value="WY">WY</option>
 							  			</select>
 								    </div>
-                                    <div class="state">
+                                    <div class="phone">
 			  							<input type="tel" class="form-control" id="zipcode-billing" ng-model="$parent.billing_address.postal_code" placeholder="Zipcode" name="zipcode">
 								    </div>
 		  						</div>
@@ -1029,42 +1037,6 @@
 						    <div class="terms">By clicking Confirm and Pay, you agree to GameHedge <a href="/our-terms" target="_blank">Terms and Privacy Policy.</a></div>
 						    <div id="session_iframe" ng-bind-html="session_iframe"></div>
 	  					</div>
-                        
-                        <hr class="hidden-md hidden-lg hidden-xl">
-                        
-                        <div class="row hidden-md hidden-lg hidden-xl mobile-ggg">
-                            <div class="ggg-badge-pledge col-md-6">
-                                <div class="img-container col-xs-3">
-                                    <img src="<%= image_url "badge-gamehedge.png" %>" class="ggg-img">
-                                </div>
-                                <div class="col-xs-9">
-                                    <div class="title">
-                                        Your tickets come with the<br>GOOD GAME GUARANTEE!
-                                    </div>
-                                    <div class="cont">
-                                        If the home team loses by {{event.home_performer.sport.ggg}} or more, GameHedge will refund 50% of your ticket price at no additional cost to you.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ggg-badge-pledge col-md-6">
-                                <div class="img-container col-xs-3">
-                                    <img src="<%= image_url "pledge.png" %>" class="pledge-img">
-                                </div>
-                                <div class="col-xs-9">
-                                    <div class="title">
-                                        GAMEHEDE PLEDGE
-                                    </div>
-                                    <div class="cont">
-                                        Tickets will always be…
-                                        <ul>
-                                            <li>in time for the event</li>
-                                            <li>refunded if the event is canceled and not resecheduled</li>
-                                            <li>authentic</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     
 	  				</div>
 	  			</div>
