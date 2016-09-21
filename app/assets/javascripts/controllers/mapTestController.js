@@ -43,7 +43,7 @@ controllers.controller('mapTestController', function($scope,apiService,$http,ang
             console.log(tickets)
             DATA_TICKTES={"list":tickets};
             DVM_map_params = {
-                'client_id':'99',
+                'client_id':99,
                 'map_name':'MY_MAP',
                 'key_map_name':'map_key',
                 'tickets_container':'tickets_list',
@@ -54,7 +54,7 @@ controllers.controller('mapTestController', function($scope,apiService,$http,ang
                 'event_id': $scope.event.id,
                 'headliner_id':$scope.event.home_performer.id,
                 'venue_id':$scope.event.venue.id,
-                'venue_configuration_id':'5895',
+                'venue_configuration_id':5895,
                 'tickets_data_object': DATA_TICKTES,
                 'tickets_type':'json',
             };
