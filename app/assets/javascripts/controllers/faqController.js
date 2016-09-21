@@ -4,7 +4,7 @@ controllers.controller('faqController', function($scope,$rootScope,$location,$wi
     $window.scrollTo(0, 0);
     $rootScope.showHeader = true;
     $scope.searchTerm = "";
-    $rootScope.title = "FAQ";
+    $rootScope.title = "FAQ | Gamehedge";
     $rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by a certain amount or more, get 50% of your ticket price back.";
     $scope.getSearchHints = function(val) {
         var now = new Date();

@@ -53,15 +53,12 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
             	// console.log("Event");
             	// console.log(response);
                 $scope.event  = response;
-                $rootScope.title = $scope.event.name + " Tickets";
+                $rootScope.title = $scope.event.name + " Tickets | Gamehedge";
     			$rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by "+$scope.event.home_performer.sport.ggg+" or more, get 50% of your ticket price back.";
                 
 
-                if($routeParams.slug == $scope.event.slug){
-                	$scope.getTicketList();
-                }
-                else{
-                	$location.path("/");
+                if($routeParams.slug != $scope.event.slug){
+                    $location.path("/");
                 }
         });
 	};
@@ -92,6 +89,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 		$scope.index = index;
 		$scope.prev_filter = false;
 		$scope.mob_index = index;
+        $('#tickets_list').scrollTop(-200);
+        $scope.showing_list = 20;
 	}
 
 	$scope.closePrevFilter = function() {
@@ -100,18 +99,26 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
     
     $scope.updateMobFilter = function(index){
 		$scope.mob_index = index;
+        $('#tickets_list').scrollTop(-200);
+        $scope.showing_list = 20;
 	}
     
     $scope.updateMobDelivery = function(index) {
         $scope.mob_delivery = index;
+        $('#tickets_list').scrollTop(-200);
+        $scope.showing_list = 20;
     }
     
     $scope.updateMobEticket = function(index) {
         $scope.mob_eticket = !$scope.mob_eticket;
+        $('#tickets_list').scrollTop(-200);
+        $scope.showing_list = 20;
     }
     
     $scope.mob_price_update = function(_val) {
         $scope.mob_price = _val;
+        $('#tickets_list').scrollTop(-200);
+        $scope.showing_list = 20;
     }
     
     $scope.showMobFilters = function() {
@@ -185,14 +192,20 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 		else{
 			$scope.ordering = sort
 		}
+        $('#tickets_list').scrollTop(-200);
+        $scope.showing_list = 20;
 	}
 
 	$scope.updateEtickets = function(){
 		$scope.etickets = !$scope.etickets;
+        $('#tickets_list').scrollTop(-200);
+        $scope.showing_list = 20;
 	}
 
 	$scope.updateParking = function(ids){
 		$scope.onlyParking = ids;
+        $('#tickets_list').scrollTop(-200);
+        $scope.showing_list = 20;
 	}
 
 	$scope.getTicketList = function(){
@@ -200,7 +213,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 		
 		$http({
             method: 'GET',
-            url: '/tickets/list/?id='+String($scope.event.te_uid),
+            url: '/tickets/list/?id='+$routeParams.eventId,
         }).then(function successCallback(response) {
         	$scope.tickets = response;
         	$scope.loading = false;
@@ -210,11 +223,12 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                 value.amount = value.splits[value.splits.length-1];
         		if(sections.indexOf(value.section) == -1){
 	                sections.push(value.section);
+                    $scope.Data.push({"section":value.section,"price":0,"quantity":1});
 	            }	
         	});
-        	$.each(sections, function(value, key) {
-	            $scope.Data.push({"section":key,"price":0,"quantity":1});
-	        });
+        	// $.each(sections, function(value, key) {
+	        //     $scope.Data.push({"section":key,"price":0,"quantity":1});
+	        // });
 	        $scope.loadMap();
 	        //console.log(response.data);
         }, function errorCallback(response) {
@@ -355,6 +369,10 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	  	$location.url(url);
 	};
 
+    $scope.showMore = function(){
+        $scope.showing_list = $scope.showing_list + 20;
+    }
+
 	$scope.$on('LastRepeaterElement', function(){
 		//console.log('good to go');
 		$timeout(function () {
@@ -363,6 +381,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	});
 
 	$scope.getEventInfo();
+    $scope.getTicketList();
+    $scope.showing_list = 20;
 	$scope.Data = [];
 	$scope.filterBySection = false;
 	$scope.section = "";
@@ -431,4 +451,19 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 			scope.$emit('LastRepeaterElement');
 		}
 	};
-});
+})
+.directive('scrolly', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            var raw = element[0];
+            console.log('loading directive');
+                
+            element.bind('scroll', function () {
+                if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
+                    scope.$apply(attrs.scrolly);
+                }
+            });
+        }
+    };
+});;

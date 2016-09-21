@@ -2,7 +2,7 @@ controllers = angular.module('gamehedge')
 
 controllers.controller('OrderHistoryController', function($scope,$rootScope,$http,$location,Auth,apiService){
     $rootScope.showHeader = true;
-    $rootScope.title = "Order history";
+    $rootScope.title = "Order history | Gamehedge";
     $rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by a certain amount or more, get 50% of your ticket price back.";
 	$scope.getLocalOrders = function(){
 		apiService.getData('/api/v1/orders/?client_id='+$rootScope.user.te_uid)
