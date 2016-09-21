@@ -91,6 +91,10 @@ app.config([ '$routeProvider','$locationProvider','AuthProvider', 'AnalyticsProv
             templateUrl: "privacy-policy.html",
             controller: 'privacyPolicyController',
         })
+        .when('/map-test', {
+            templateUrl: "map-test.html",
+            controller: 'mapTestController',
+        })
         .otherwise({
             redirectTo: '/'
         });
