@@ -1,6 +1,6 @@
 controllers = angular.module('gamehedge')
 
-controllers.controller('mapTestController', function($scope,apiService,$http,angularLoad){
+controllers.controller('mapTestController', function($scope,apiService,$http,angularLoad,$timeout){
 
     $scope.getEventInfo = function(){
         return apiService.getData('/api/v1/events/1013157')
@@ -59,14 +59,16 @@ controllers.controller('mapTestController', function($scope,apiService,$http,ang
                 'tickets_type':'json',
             };
             console.log(DVM_map_params);
-            angularLoad.loadScript("https://dynamicvenuemaps.com/maps/dvm.js?v=1.0").then(function() {
-                console.log("success");
-                // Script loaded succesfully.
-                // We can now start using the functions from someplugin.js
-            }).catch(function() {
-                console.log("failure");
-                // There was some error loading the script. Meh
-            });
+            $timeout(function(){
+                angularLoad.loadScript("https://dynamicvenuemaps.com/maps/dvm.js?v=1.0").then(function() {
+                    console.log("success");
+                    // Script loaded succesfully.
+                    // We can now start using the functions from someplugin.js
+                }).catch(function() {
+                    console.log("failure");
+                    // There was some error loading the script. Meh
+                });
+            },100);
         }, function errorCallback(response) {
             //console.log(response);
             // called asynchronously if an error occurs
