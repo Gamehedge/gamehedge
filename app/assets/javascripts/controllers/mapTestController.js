@@ -30,20 +30,20 @@ controllers.controller('mapTestController', function($scope,apiService,$http,ang
                     }
                 }
                 var a = {
-                    id:$scope.tickets.data.ticket_groups[i].id,
-                    section:$scope.tickets.data.ticket_groups[i].section,
-                    row:$scope.tickets.data.ticket_groups[i].row,
-                    price:$scope.tickets.data.ticket_groups[i].retail_price,
-                    qty:$scope.tickets.data.ticket_groups[i].available_quantity,
-                    avail:b,
-                    notes:$scope.tickets.data.ticket_groups[i].public_notes,
+                    id:String($scope.tickets.data.ticket_groups[i].id),
+                    section:String($scope.tickets.data.ticket_groups[i].section),
+                    row:String($scope.tickets.data.ticket_groups[i].row),
+                    price:String($scope.tickets.data.ticket_groups[i].retail_price),
+                    qty:String($scope.tickets.data.ticket_groups[i].available_quantity),
+                    avail:String(b),
+                    notes:String($scope.tickets.data.ticket_groups[i].public_notes),
                 }
                 tickets.push(a)
             }
             console.log(tickets)
-            DATA_TICKTES={"list":tickets};
+            var DATA_TICKTES={"list":tickets};
             DVM_map_params = {
-                'client_id':99,
+                'client_id':String(99),
                 'map_name':'MY_MAP',
                 'key_map_name':'map_key',
                 'tickets_container':'tickets_list',
@@ -51,10 +51,10 @@ controllers.controller('mapTestController', function($scope,apiService,$http,ang
                 'map_height':637,   
                 'feed_type':'te',
                 'map_type' : 'zone',
-                'event_id': $scope.event.id,
-                'headliner_id':$scope.event.home_performer.id,
-                'venue_id':$scope.event.venue.id,
-                'venue_configuration_id':5895,
+                'event_id': String($scope.event.id),
+                'headliner_id':String($scope.event.home_performer.id),
+                'venue_id':String($scope.event.venue.id),
+                'venue_conf':String(5895),
                 'tickets_data_object': DATA_TICKTES,
                 'tickets_type':'json',
             };
