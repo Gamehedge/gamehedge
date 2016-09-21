@@ -8,6 +8,7 @@
     "angular-ladda": "latest",
     "sweetalert": "latest",
     "angular-google-analytics": "latest",
-    "angular-location-update": "latest"
+    "angular-location-update": "latest",
+    "angular-load": "latest"
   }
 }

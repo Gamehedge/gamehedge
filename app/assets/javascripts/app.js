@@ -8,7 +8,8 @@ app = angular.module('gamehedge',[
   'slickCarousel',
   'angular-ladda',
   'angular-google-analytics',   
-  'ngLocationUpdate'
+  'ngLocationUpdate',
+  'angularLoad'
 ])
 
 app.config([ '$routeProvider','$locationProvider','AuthProvider', 'AnalyticsProvider',
