@@ -14,6 +14,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
     $scope.mob_price_c_real = false;
     $scope.mob_price_d_real = false;
     
+    $scope.secH = [];
+    
     $scope.mob_real_price = 0;
     $scope.price_filter = false;
     $scope.price_filter_down_limit = 0;
@@ -96,7 +98,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                 $rootScope.title = $scope.event.name + " Tickets | Gamehedge";
     			$rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by "+$scope.event.home_performer.sport.ggg+" or more, get 50% of your ticket price back.";
                 
-
+                $scope.getTicketList();
+                
                 if($routeParams.slug != $scope.event.slug){
                     $location.path("/");
                 }
@@ -295,7 +298,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 
 	$scope.loadMap = function(){
 		var date = $filter('date')($scope.event.occurs_at, 'yyyy-MM-ddTHH:mm');
-		//console.log(date);
+		//console.log($scope.Data);
 		$("#MapContainer").tuMap({
 	        EventInfo: {
 	            Venue: $scope.event.venue.name,
@@ -346,7 +349,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                     $scope.selectedSections.splice(_indexDel, 1);
                 }
                 
-                console.log($scope.selectedSections);
+                //console.log($scope.selectedSections);
                 
 	        }
 	        , OnReset: function () {
@@ -517,11 +520,22 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                             first = $(this);
                             first.addClass("row-selected");
                             
+                            if(scope.secH.length > 0){
+                                for(var u = 0; u < scope.secH.length; u++){
+                                    if(scope.secH[u].toString().indexOf( $(this).data("section").toString() ) == -1){
+                                        $("#MapContainer").tuMap("ResetSection", scope.secH[u].toString() );
+                                    }
+                                }
+                            }
                             
-                            //console.log( $(this).data("section").toString() );
+                            scope.secH = [];
                             
                             $("#MapContainer").tuMap("HighlightSection", $(this).data("section").toString() );
                             
+                            scope.secH.push( $(this).data("section").toString() );
+                            
+                            
+                            console.log(scope.secH);
                            // $("#MapContainer").tuMap("SetOptions",{
                             //    SingleSectionSelection:false
                             //});
