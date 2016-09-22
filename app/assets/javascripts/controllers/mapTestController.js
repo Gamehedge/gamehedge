@@ -43,20 +43,19 @@ controllers.controller('mapTestController', function($scope,apiService,$http,ang
             // console.log(tickets)
             var DATA_TICKTES={"list":tickets};
             DVM_map_params = {
-                'client_id':String(99),
-                'map_name':'MY_MAP',
+                'client_id':'99',
+                'map_name':'seatzone_map',
                 'key_map_name':'map_key',
-                'tickets_container':'tickets_list',
-                'map_width':777,
-                'map_height':637,   
+                'tickets_container':'ticketsx',
+                'map_width':800,
+                'map_height':700,   
                 'feed_type':'te',
-                'map_type' : 'zone',
                 'event_id': String($scope.event.te_uid),
                 'headliner_id':String($scope.event.home_performer.te_uid),
                 'venue_id':String($scope.event.venue.te_uid),
-                'venue_configuration_id':String(53),
+                'venue_conf':'53',
                 'tickets_data_object': DATA_TICKTES,
-                'tickets_type':'json',
+                'static_map': '',
             };
             console.log("DVM_map_params")
             console.log(DVM_map_params);
