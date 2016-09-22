@@ -100,6 +100,9 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                 if($routeParams.slug != $scope.event.slug){
                     $location.path("/");
                 }
+                else{
+                    $scope.getTicketList();
+                }
         });
 	};
     
@@ -424,7 +427,6 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	});
 
 	$scope.getEventInfo();
-    $scope.getTicketList();
     $scope.showing_list = 20;
 	$scope.Data = [];
 	$scope.filterBySection = false;

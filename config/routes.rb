@@ -19,7 +19,6 @@ Rails.application.routes.draw do
   post 'orders/create'
   get 'orders/list'
   post 'orders/request_refund'
-  get 'maps/test'
   
   get 'contact/send_message'
   get 'contact/send_email_message'
