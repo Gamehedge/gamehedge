@@ -304,7 +304,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	        }
 	        , MapType: "Interactive"
 	        , EnableTooltipSectionView:false
-	        , SingleSectionSelection:false
+	        , SingleSectionSelection:true
 	        , AdaptiveThreshold: 0.8
 	        , Tickets: $scope.Data
 	        , ColorScheme: 1
@@ -516,8 +516,19 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                         if( isScrolledIntoView($(this)) && !first) {
                             first = $(this);
                             first.addClass("row-selected");
+                            
+                            
                             //console.log( $(this).data("section").toString() );
+                            
                             $("#MapContainer").tuMap("HighlightSection", $(this).data("section").toString() );
+                            
+                           // $("#MapContainer").tuMap("SetOptions",{
+                            //    SingleSectionSelection:false
+                            //});
+                            
+                            //$("#MapContainer").tuMap("Refresh");
+                            
+                            
                         }            
                         else
                            $(this).removeClass("row-selected");
