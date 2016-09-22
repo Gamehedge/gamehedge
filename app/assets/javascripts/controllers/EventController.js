@@ -520,22 +520,22 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                             first = $(this);
                             first.addClass("row-selected");
                             
-                            if($scope.secH.length > 0){
-                                for(var u = 0; u < $scope.secH.length; u++){
-                                    if($scope.secH[u].toString().indexOf( $(this).data("section").toString() ) == -1){
-                                        $("#MapContainer").tuMap("ResetSection", $scope.secH[u].toString() );
+                            if(scope.secH.length > 0){
+                                for(var u = 0; u < scope.secH.length; u++){
+                                    if(scope.secH[u].toString().indexOf( $(this).data("section").toString() ) == -1){
+                                        $("#MapContainer").tuMap("ResetSection", scope.secH[u].toString() );
                                     }
                                 }
                             }
                             
-                            $scope.secH = [];
+                            scope.secH = [];
                             
                             $("#MapContainer").tuMap("HighlightSection", $(this).data("section").toString() );
                             
-                            $scope.secH.push( $(this).data("section").toString() );
+                            scope.secH.push( $(this).data("section").toString() );
                             
                             
-                            console.log($scope.secH);
+                            console.log(scope.secH);
                            // $("#MapContainer").tuMap("SetOptions",{
                             //    SingleSectionSelection:false
                             //});
