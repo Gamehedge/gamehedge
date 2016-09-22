@@ -1,35 +1,44 @@
 
 <script type="text/javascript">
-  var objet = {"list":[{"id":"100","price":"25","section":"124LG","row":"J","avail":"2","qty":"2","notes":"2"},{"id":"96","price":"25","section":"160LG","row":"F","avail":"5,3,2,1","qty":"5","notes":"5"},{"id":"98","price":"25","section":"51FD","row":"AA","avail":"3,1","qty":"3","notes":"3"}]};
+  
+
+                       var objet = {"list":[{"id":"100","price":"25","section":"124LG","row":"J","avail":"2","qty":"2","notes":"2"},{"id":"96","price":"25","section":"160LG","row":"F","avail":"5,3,2,1","qty":"5","notes":"5"},{"id":"98","price":"25","section":"51FD","row":"AA","avail":"3,1","qty":"3","notes":"3"}]};
 
                         var DVM_map_params = {
                             'client_id': '99',
-                            'map_name': 'MY_MAP',
+                            'map_name': 'seatzone_map',
                             'key_map_name': 'map_key',
-                            'tickets_container': 'tickets_list',
+                            'tickets_container': 'ticketsx',
                             'map_width': 800,
                             'map_height': 700,
                             'feed_type': 'te',
-                            'event_id': '909348',
-                            'venue_id': '5725',
+                            'event_id': '',
+                            'venue_id': '447',
                             'static_map': '',
-                            'venue_configuration_id': '53',
-                            'headliner_id': '15533',
+                            'venue_conf': '3173',
+                            'headliner_id': '',
                                     
-                            'tickets_data_object': objet,
+                            'tickets_url': 'http://seatzones.com/tick/447_3173.json',
                                 
-                            'tickets_type': 'json'
+                            'tickets_url_type': 'json'
 
                         };
+
+
+
+                    
   console.log("DVM_map_params")
   console.log(DVM_map_params);
 </script>
-<script src="https://dynamicvenuemaps.com/maps/dvm.js?v=1.0"></script>
-<div id="MY_MAP"></div>
-<div id="map_key"></div>
+<link rel="stylesheet" href="https://dynamicvenuemaps.com/maps/css/style_maps.css">
+<script src="https://dynamicvenuemaps.com/maps/dvm.js?v=beta"></script>
+<div id="mapkey">
+  <div id="seatzone_map"></div>
+  <div id="map_key"></div>
+</div>
 
 
-<div class="col-xs-12 tickets-data" id="tickets_list">
+<div class="col-xs-12 tickets-data" id="ticketsx">
    <% @tickets.each do |ticket|%>
      <div class="row rowTicket" data-section="<%= ticket["section"] %>" data-row="<%= ticket["row"] %>" data-price="<%= ticket["retail_price"] %>" data-ticketid="<%= ticket["id"] %>">
       <div class="hidden-xs hidden-sm col-xs-1 info-ico">
