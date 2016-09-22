@@ -330,7 +330,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
             'event_id': String($scope.event.te_uid),
             'headliner_id':String($scope.event.home_performer.te_uid),
             'venue_id':String($scope.event.venue.te_uid),
-            'venue_conf':String($scope.event.venue.venue_configuration_id),
+            'venue_conf':String($scope.event.venue_configuration_id),
             'tickets_data_object': DATA_TICKTES,
             'static_map': '',
         };

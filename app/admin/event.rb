@@ -5,7 +5,7 @@ ActiveAdmin.register Event do
 #
 permit_params 
 
-permit_params :id, :name, :te_uid, :te_performer_home_id, :te_performer_visit_id, :sport_id, :venue_id, :te_venue_id, :location, :occurs_at, :url, :home_performer_id, :away_performer_id, :slug
+permit_params :id, :name, :te_uid, :te_performer_home_id, :te_performer_visit_id, :sport_id, :venue_id, :te_venue_id, :location, :occurs_at, :url, :home_performer_id, :away_performer_id, :slug, :venue_configuration_id
 index :download_links => false do
     selectable_column
     column ("TEVO Id")  { |event| event.te_uid }
@@ -30,6 +30,7 @@ form do |f|
         	f.input :occurs_at
             f.input :slug
             f.input :url
+            f.input :venue_configuration_id
         	f.input :sport_id, :as => :select, :collection => Sport.all.order(:name)
         	f.input :venue_id, :as => :select, :collection => Venue.all.order(:name)
         	f.input :home_performer_id, :as => :select, :collection => Performer.all.order(:name)
