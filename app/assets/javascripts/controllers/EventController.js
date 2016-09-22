@@ -101,6 +101,9 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                 if($routeParams.slug != $scope.event.slug){
                     $location.path("/");
                 }
+                else{
+                    $scope.getTicketList();
+                }
         });
 	};
     

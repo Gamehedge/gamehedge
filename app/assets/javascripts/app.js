@@ -92,7 +92,7 @@ app.config([ '$routeProvider','$locationProvider','AuthProvider', 'AnalyticsProv
             templateUrl: "privacy-policy.html",
             controller: 'privacyPolicyController',
         })
-        .when('/map-test', {
+        .when('/map-test/:eventId/:slug', {
             templateUrl: "map-test.html",
             controller: 'mapTestController',
         })
