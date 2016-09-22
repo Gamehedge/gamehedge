@@ -522,8 +522,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                             
                             if($scope.secH.length > 0){
                                 for(var u = 0; u < $scope.secH.length; u++){
-                                    if(scope.secH[u].toString().indexOf( $(this).data("section").toString() ) == -1){
-                                        $("#MapContainer").tuMap("ResetSection", scope.secH[u].toString() );
+                                    if($scope.secH[u].toString().indexOf( $(this).data("section").toString() ) == -1){
+                                        $("#MapContainer").tuMap("ResetSection", $scope.secH[u].toString() );
                                     }
                                 }
                             }
