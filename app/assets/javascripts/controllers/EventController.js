@@ -96,7 +96,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                 $rootScope.title = $scope.event.name + " Tickets | Gamehedge";
     			$rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by "+$scope.event.home_performer.sport.ggg+" or more, get 50% of your ticket price back.";
                 
-
+                $scope.getTicketList();
+                
                 if($routeParams.slug != $scope.event.slug){
                     $location.path("/");
                 }
@@ -292,7 +293,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 
 	$scope.loadMap = function(){
 		var date = $filter('date')($scope.event.occurs_at, 'yyyy-MM-ddTHH:mm');
-		//console.log(date);
+		console.log($scope.Data);
 		$("#MapContainer").tuMap({
 	        EventInfo: {
 	            Venue: $scope.event.venue.name,
@@ -306,8 +307,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	        , Tickets: $scope.Data
 	        , ColorScheme: 1
 	        , ControlsPosition:"Inside"
-	        , ServiceUrl: "https://imap.ticketutils.net"
-	        , FailoverMapUrl: "https://static.ticketutils.com/Charts/No-Seating-Chart.jpg"
+	        //, ServiceUrl: "https://imap.ticketutils.net"
+	        //, FailoverMapUrl: "https://static.ticketutils.com/Charts/No-Seating-Chart.jpg"
 	        , OnError: function (e, Error) {
 	            //alert(JSON.stringify(e));
 	            //alert(JSON.stringify(Error));
@@ -424,7 +425,6 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	});
 
 	$scope.getEventInfo();
-    $scope.getTicketList();
     $scope.showing_list = 20;
 	$scope.Data = [];
 	$scope.filterBySection = false;
@@ -515,10 +515,20 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                             first = $(this);
                             first.addClass("row-selected");
                             
+                            var Sections=$("#MapContainer").tuMap("GetSelectedSections",
+                            {
+                                OnlyUnique:false
+                                ,  IncludeGroupName:true
+                            });
+                            
+                            console.log(Sections);
+                            //$("#MapContainer").tuMap("ResetSection",section);
                             
                             //console.log( $(this).data("section").toString() );
                             
                             $("#MapContainer").tuMap("HighlightSection", $(this).data("section").toString() );
+                            
+                            
                             
                            // $("#MapContainer").tuMap("SetOptions",{
                             //    SingleSectionSelection:false
