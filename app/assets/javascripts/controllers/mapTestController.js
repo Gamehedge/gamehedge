@@ -324,7 +324,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
             'map_name':'seatzone_map',
             'key_map_name':'map_key',
             'tickets_container':'tickets_list',
-            'map_width':'100%',
+            'map_width':800,
             'map_height':800,   
             'feed_type':'te',
             'event_id': String($scope.event.te_uid),
