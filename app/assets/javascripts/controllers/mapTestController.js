@@ -324,6 +324,9 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         if(map_width > 991){
             map_width = map_width*0.58;
         }
+        else{
+            map_height = map_width;
+        }
         DVM_map_params = {
             'client_id':'99',
             'map_name':'seatzone_map',
