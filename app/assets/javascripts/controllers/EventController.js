@@ -515,7 +515,19 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                             first = $(this);
                             first.addClass("row-selected");
                             //console.log( $(this).data("section").toString() );
+                            
+                            var Sections=$("Selector").tuMap("GetSelectedSections",
+                            {
+                                OnlyUnique:false
+                            });
+                            
+                            if(Sections.length > 0){
+                                $("Selector").tuMap("ToggleAll");
+                            }
+                            
                             $("#MapContainer").tuMap("HighlightSection", $(this).data("section").toString() );
+                            
+                            
                         }            
                         else
                            $(this).removeClass("row-selected");
