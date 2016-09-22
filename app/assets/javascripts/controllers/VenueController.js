@@ -152,6 +152,7 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
 
 	//Initializers
     $rootScope.isOrder = false;
+    $rootScope.isEvent = false;
     $rootScope.darkHeader = false;
     $scope.disable_toogle = false;
     $rootScope.noFooter = false;

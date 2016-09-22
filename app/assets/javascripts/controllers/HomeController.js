@@ -185,6 +185,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
     
 	//Initializers
 	$rootScope.isOrder = false;
+    $rootScope.isEvent = false;
 	$rootScope.darkHeader = false;
 	$rootScope.noFooter = false;
 	$scope.searchTerm = "";

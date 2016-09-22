@@ -180,6 +180,30 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         $scope.showing_list = 20;
     }
     
+    $scope.mob_price_update_real = function(_val) {
+        switch(_val) {
+            case 1: $scope.mob_price_a_real = !$scope.mob_price_a_real;
+                    break;
+            case 2: $scope.mob_price_b_real = !$scope.mob_price_b_real;
+                    break;
+            case 3: $scope.mob_price_c_real = !$scope.mob_price_c_real;
+                    break;
+            case 4: $scope.mob_price_d_real = !$scope.mob_price_d_real;
+                    break;
+        }
+        
+        if($scope.mob_price_a_real == false && $scope.mob_price_b_real == false && $scope.mob_price_c_real == false && $scope.mob_price_d_real == false) {
+            $scope.price_filter = false;
+        }
+        else {
+            $scope.price_filter = true;
+        }
+        
+        //$scope.mob_price = _val;
+        $('#tickets_list').scrollTop(-200);
+        $scope.showing_list = 20;
+    }
+    
     $scope.showMobFilters = function() {
         $scope.index = $scope.mob_index;
         
@@ -446,6 +470,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	$scope.etickets = false;
     $scope.physicals = false;
 	$rootScope.isOrder = false;
+    $rootScope.isEvent = true;
 	$rootScope.darkHeader = true;
 	$rootScope.noFooter = true;
 	$scope.searchTerm = "";

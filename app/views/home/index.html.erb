@@ -139,12 +139,7 @@
                 <img class="logo-image" alt="GameHedge.com" src="<%= image_url 'logo.png' %>">
             </a>
         </div>
-        <div class="navbar-header col-md-8 hidden-xs hidden-xm vertical-center help" ng-show="$root.isOrder">
-                  
-                <p>NEED HELP? CALL<br><span>(908) 312-3267</span></p>
-                <img class="help-image" alt="Call Us" src="<%= image_url "help.png" %>">
-            
-        </div>
+        
         <div class="col-xs-2 hidden">
             <div class="navbar navbar-default navbar-fixed-top right">
                 <button type="button" class="navbar-toggle search-button" style="padding-top:0;" data-toggle="offcanvas" data-target="#searchMenu" data-canvas="body" ng-click="showSlideSearch()">
@@ -191,7 +186,15 @@
                 </li>
             </ul>
         </div>
-        <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs" ng-show="!$root.isOrder">
+        
+        <div class="navbar-header col-md-4 hidden-xs hidden-xm vertical-center help" ng-if="$root.isOrder || $root.isEvent">
+                  
+                <p>NEED HELP? CALL<br><span>(908) 312-3267</span></p>
+                <img class="help-image" alt="Call Us" src="<%= image_url "help.png" %>">
+            
+        </div>
+        
+        <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs" ng-if="!$root.isOrder && $root.locat == '/'">
             <div class="press" ng-show="$root.locat == '/'">
                 <a href="/#/press"><img class="press-icon" src="<%= image_url 'press-icon.png' %>">PRESS</a>
             </div>

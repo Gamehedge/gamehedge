@@ -76,6 +76,7 @@ controllers.controller('LoginController', function($scope,$rootScope,Auth,$locat
     $scope.searchTerm = "";
     $scope.sending_password = false;
     $rootScope.isOrder = false;
+    $rootScope.isEvent = false;
     $rootScope.darkHeader = true;
     $scope.forgot_password = false;
     $window.scrollTo(0, 0);
