@@ -17,3 +17,17 @@ task :update_events => :environment do
   end
   puts "done."
 end
+
+task :update_conf => :environment do
+  Event.all.each do |e|
+    if !e.venue_configuration_id
+      @event = TicketEvolutionService.new({:type => "events", :id => e.te_uid}).show
+      if @event["configuration"]
+        e.venue_configuration_id = @event["configuration"]["id"]
+        e.save
+      end
+    end
+    puts "Updated"
+  end
+  puts "done"
+end
