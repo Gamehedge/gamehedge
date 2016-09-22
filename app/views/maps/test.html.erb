@@ -2,7 +2,7 @@
 <script type="text/javascript">
   
 
-                       var objet = {
+var objet = {
   "list": [
     {
       "id": "188288490",
@@ -111,17 +111,21 @@
                             'venue_conf': '3173',
                             'headliner_id': '',
                                     
-                            'tickets_data_object': JSON.stringify(objet),
-                                
-                            'tickets_url_type': 'json'
+                            'tickets_data_object': objet,
 
                         };
+                        console.log("DVM_map_params")
+                        console.log(DVM_map_params);
+                        // $.getJSON("/tick/447_3173.json", function (data) {
+                        //     DVM_map_params['tickets_data_object'] = data;
+                        //     console.log("DVM_map_params 2")
+                        //     console.log(DVM_map_params);
+                        // });
 
 
 
                     
-  console.log("DVM_map_params")
-  console.log(DVM_map_params);
+  
 </script>
 <link rel="stylesheet" href="https://dynamicvenuemaps.com/maps/css/style_maps.css">
 <script src="https://dynamicvenuemaps.com/maps/dvm.js?v=1.0"></script>
