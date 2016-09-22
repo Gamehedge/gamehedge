@@ -506,6 +506,32 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                 if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
                     scope.$apply(attrs.scrolly);
                 }
+                
+                if($( document ).width() < 900){
+                    var first = null;
+
+                    $("#tickets_list > div").each(function(){
+                        if( isScrolledIntoView($(this)) && !first) {
+                            first = $(this);
+                            first.addClass("row-selected");
+                            $("#MapContainer").tuMap("HighlightSection", $(this).data("section") );
+                        }            
+                        else
+                           $(this).removeClass("row-selected");
+                    });
+
+                    function isScrolledIntoView(elem) {
+                        var docViewTop = $("#tickets_list").scrollTop();
+                        var docViewBottom = docViewTop + $("#tickets_list").height();
+
+                        var elemTop = $(elem).position().top;
+                        var elemBottom = elemTop + $(elem).height();
+
+                        return ((elemBottom <= docViewBottom) && (elemTop > -30));
+                    }  
+                    
+                }
+                
             });
         }
     };
