@@ -3635,6 +3635,14 @@ footer .footer-signature img{
     .select-container select {
         padding-right: 20px;
     }
+    
+    #tickets-map .tickets-data .row:hover{
+        background: none;
+    }
+    
+    .row-selected {
+        background-color: beige !important;
+    }
 }
 
 .filter-row button {
