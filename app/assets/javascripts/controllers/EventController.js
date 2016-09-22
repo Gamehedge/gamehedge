@@ -514,18 +514,21 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                         if( isScrolledIntoView($(this)) && !first) {
                             first = $(this);
                             first.addClass("row-selected");
-                            //console.log( $(this).data("section").toString() );
                             
-                            var Sections=$("#MapContainer").tuMap("GetSelectedSections",
-                            {
-                                OnlyUnique:false
+                            $("#MapContainer").tuMap("SetOptions",{
+                                SingleSectionSelection:true
                             });
                             
-                            if(Sections.length > 0){
-                                $("#MapContainer").tuMap("ToggleAll");
-                            }
+                            $("#MapContainer").tuMap("Refresh");
+                            //console.log( $(this).data("section").toString() );
                             
                             $("#MapContainer").tuMap("HighlightSection", $(this).data("section").toString() );
+                            
+                            $("#MapContainer").tuMap("SetOptions",{
+                                SingleSectionSelection:false
+                            });
+                            
+                            $("#MapContainer").tuMap("Refresh");
                             
                             
                         }            
