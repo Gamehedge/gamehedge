@@ -319,13 +319,18 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         }
         // console.log(tickets)
         var DATA_TICKTES={"list":tickets};
+        var map_width = window.innerWidth;
+        var map_height = window.innerHeight - 148;
+        if(map_width > 991){
+            map_width = map_width*0.58;
+        }
         DVM_map_params = {
             'client_id':'99',
             'map_name':'seatzone_map',
             'key_map_name':'map_key',
             'tickets_container':'tickets_list',
-            'map_width':800,
-            'map_height':800,   
+            'map_width':map_width,
+            'map_height':map_height,
             'feed_type':'te',
             'event_id': String($scope.event.te_uid),
             'headliner_id':String($scope.event.home_performer.te_uid),
