@@ -514,8 +514,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                         if( isScrolledIntoView($(this)) && !first) {
                             first = $(this);
                             first.addClass("row-selected");
-                            console.log( $(this).data("section") );
-                            $("#MapContainer").tuMap("HighlightSection", $(this).data("section") );
+                            //console.log( $(this).data("section").toString() );
+                            $("#MapContainer").tuMap("HighlightSection", $(this).data("section").toString() );
                         }            
                         else
                            $(this).removeClass("row-selected");
