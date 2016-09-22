@@ -323,7 +323,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
             'client_id':'99',
             'map_name':'seatzone_map',
             'key_map_name':'map_key',
-            'tickets_container':'ticketsx',
+            'tickets_container':'tickets_list',
             'map_width':800,
             'map_height':700,   
             'feed_type':'te',
