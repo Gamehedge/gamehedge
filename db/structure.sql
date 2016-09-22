@@ -394,7 +394,8 @@ CREATE TABLE events (
     sport_id integer,
     slug character varying,
     updated_at timestamp without time zone,
-    created_at timestamp without time zone
+    created_at timestamp without time zone,
+    venue_configuration_id integer
 );
 
 
@@ -1790,4 +1791,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160909150628');
 INSERT INTO schema_migrations (version) VALUES ('20160909194337');
 
 INSERT INTO schema_migrations (version) VALUES ('20160913214106');
+
+INSERT INTO schema_migrations (version) VALUES ('20160922181545');
 

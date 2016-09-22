@@ -41,7 +41,7 @@ controllers.controller('OrderHistoryController', function($scope,$rootScope,$htt
 		swal({
 			html: true,
 			title: "Request Refund?",
-			text: "<strong>Sorry the game didn't work out as you may have hoped - but you are eligible for a Good Game Guarantee Refund!</strong><br><p>Simply click on REQUEST REFUND below and you will receive a refund of 50% of your ticket price within 5-10 business days.</p><br><p>The refund will be credited to the credit card that you used to make your purchase.</p><br><p>If you have any questions, please email us at support@gamehedge.com or give us a jingle at 908-312-FANS (3267).</p><br><p>Hope your team wins next time!</p>",
+			text: "<strong>Sorry the game didn't work out as you may have hoped - but you are eligible for a Good Game Guarantee Refund!</strong><br><p>Simply click on REQUEST REFUND below and you will receive a refund of 50% of your ticket price within 5-10 business days.</p><br><p>The refund will be credited to the credit card that you used to make your purchase.</p><br><p>If you have any questions, please email us at support@gamehedge.com or give us a jingle Toll Free at 888-804-4330.</p><br><p>Hope your team wins next time!</p>",
 			type: "warning",
 			showCancelButton: true,
 			confirmButtonColor: "#91c33f",

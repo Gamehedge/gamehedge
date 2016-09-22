@@ -74,6 +74,7 @@ class TicketEvolutionService
                     te_uid = e.id
                     location = e.venue.location
                     occurs_at = e.occurs_at
+                    venue_configuration_id = e.configuration.id
                     te_venue_id = e.venue.id
                     te_performer_home_id = 0
                     home_performer_id = nil
@@ -121,6 +122,7 @@ class TicketEvolutionService
                         occurs_at: occurs_at,
                         location: location,
                         sport_id: sport_id,
+                        venue_configuration_id: venue_configuration_id,
                         slug: (name.downcase.gsub ' ', '-') + "-tickets"
                       )
                       puts "Doesn't exist. Event Created " + String(e.name)
@@ -137,6 +139,7 @@ class TicketEvolutionService
                       @event.occurs_at = occurs_at
                       @event.location = location
                       @event.sport_id = sport_id
+                      @event.venue_configuration_id = venue_configuration_id
                       @event.slug = (name.downcase.gsub ' ', '-') + "-tickets"
                       @event.save
                       puts "Exists. Event Updated " + String(e.name)
@@ -160,6 +163,9 @@ class TicketEvolutionService
     when 'tickets'
       @ticket = @connection.ticket_groups.show(@id)
       return @ticket
+    when 'events'
+      @event = @connection.events.show(@id)
+      return @event
     when 'clients'
       @client = @connection.clients.show(@id)
       return @client
