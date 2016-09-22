@@ -1,0 +1,59 @@
+
+<script src="https://dynamicvenuemaps.com/maps/dvm.js?v=1.0"></script>
+<script type="text/javascript">
+  var objet = {"list":[{"id":"100","price":"25","section":"124LG","row":"J","avail":"2","qty":"2","notes":"2"},{"id":"96","price":"25","section":"160LG","row":"F","avail":"5,3,2,1","qty":"5","notes":"5"},{"id":"98","price":"25","section":"51FD","row":"AA","avail":"3,1","qty":"3","notes":"3"}]};
+
+                        var DVM_map_params = {
+                            'client_id': '99',
+                            'map_name': 'MY_MAP',
+                            'key_map_name': 'map_key',
+                            'tickets_container': 'tickets_list',
+                            'map_width': 800,
+                            'map_height': 700,
+                            'feed_type': 'te',
+                            'event_id': '',
+                            'venue_id': '447',
+                            'static_map': '',
+                            'venue_conf': '3173',
+                            'headliner_id': '',
+                                    
+                            'tickets_url': 'http://seatzones.com/tick/447_3173.json',
+                                
+                            'tickets_url_type': 'json'
+
+                        };
+  console.log("DVM_map_params")
+  console.log(DVM_map_params);
+</script>
+<div id="MY_MAP"></div>
+<div id="map_key"></div>
+
+
+<div class="col-xs-12 tickets-data" id="tickets_list">
+   <% @tickets.each do |ticket|%>
+     <div class="row rowTicket" data-section="<%= ticket["section"] %>" data-row="<%= ticket["row"] %>" data-price="<%= ticket["retail_price"] %>" data-ticketid="<%= ticket["id"] %>">
+      <div class="hidden-xs hidden-sm col-xs-1 info-ico">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="<%= ticket["public_notes"] %>"></span>
+      </div>
+      <div class="col-xs-4 col-md-3 vertical-center horizontal-center section full-height">
+        <%= ticket["section"] %>
+      </div>
+      <div class="col-xs-2 vertical-center horizontal-center full-height">
+        <%= ticket["row"] %>
+      </div>
+      <div class="col-xs-2 vertical-center horizontal-center full-height custom-select">
+        <select class="rowAvail">
+          <% ticket["splits"].each do |o|%>
+            <option value="<%= o %>"><%= o %></option>
+          <% end %>
+        </select>
+      </div>
+      <div class="col-xs-4 vertical-center horizontal-center buy-btn full-height">
+        <span class="buy-btn-span">
+          <button class="" >$<%= ticket["retail_price"] %>/ea</button>
+          <p class="format"><%= ticket["format"] %></p>
+        </span>
+      </div>
+    </div>
+  <% end %>
+</div>
