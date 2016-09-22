@@ -14,6 +14,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
     $scope.mob_price_c_real = false;
     $scope.mob_price_d_real = false;
     
+    $scope.secH = [];
+    
     $scope.mob_real_price = 0;
     $scope.price_filter = false;
     $scope.price_filter_down_limit = 0;
@@ -518,20 +520,19 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                             first = $(this);
                             first.addClass("row-selected");
                             
-                            var Sections=$("#MapContainer").tuMap("GetSelectedSections",
-                            {
-                                OnlyUnique:false
-                                ,  IncludeGroupName:true
-                            });
+                            if($scope.secH.length > 0){
+                                for(var u = 0; u < $scope.secH.length; u++){
+                                    $("#MapContainer").tuMap("ResetSection", scope.secH[u].toString() );    
+                                }
+                            }
                             
-                            console.log(Sections);
                             //$("#MapContainer").tuMap("ResetSection",section);
                             
                             //console.log( $(this).data("section").toString() );
                             
                             $("#MapContainer").tuMap("HighlightSection", $(this).data("section").toString() );
                             
-                            
+                            $scope.secH.push( $(this).data("section").toString() );
                             
                            // $("#MapContainer").tuMap("SetOptions",{
                             //    SingleSectionSelection:false
