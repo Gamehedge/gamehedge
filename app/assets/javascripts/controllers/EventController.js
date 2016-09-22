@@ -298,7 +298,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 
 	$scope.loadMap = function(){
 		var date = $filter('date')($scope.event.occurs_at, 'yyyy-MM-ddTHH:mm');
-		console.log($scope.Data);
+		//console.log($scope.Data);
 		$("#MapContainer").tuMap({
 	        EventInfo: {
 	            Venue: $scope.event.venue.name,
@@ -349,7 +349,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                     $scope.selectedSections.splice(_indexDel, 1);
                 }
                 
-                console.log($scope.selectedSections);
+                //console.log($scope.selectedSections);
                 
 	        }
 	        , OnReset: function () {
@@ -522,18 +522,20 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                             
                             if($scope.secH.length > 0){
                                 for(var u = 0; u < $scope.secH.length; u++){
-                                    $("#MapContainer").tuMap("ResetSection", scope.secH[u].toString() );    
+                                    if(scope.secH[u].toString().indexOf( $(this).data("section").toString() ) == -1){
+                                        $("#MapContainer").tuMap("ResetSection", scope.secH[u].toString() );
+                                    }
                                 }
                             }
                             
-                            //$("#MapContainer").tuMap("ResetSection",section);
-                            
-                            //console.log( $(this).data("section").toString() );
+                            $scope.secH = [];
                             
                             $("#MapContainer").tuMap("HighlightSection", $(this).data("section").toString() );
                             
                             $scope.secH.push( $(this).data("section").toString() );
                             
+                            
+                            console.log($scope.secH);
                            // $("#MapContainer").tuMap("SetOptions",{
                             //    SingleSectionSelection:false
                             //});
