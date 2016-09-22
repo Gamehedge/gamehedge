@@ -310,8 +310,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	        , Tickets: $scope.Data
 	        , ColorScheme: 1
 	        , ControlsPosition:"Inside"
-	        //, ServiceUrl: "https://imap.ticketutils.net"
-	        //, FailoverMapUrl: "https://static.ticketutils.com/Charts/No-Seating-Chart.jpg"
+	        , ServiceUrl: "https://imap.ticketutils.net"
+	        , FailoverMapUrl: "https://static.ticketutils.com/Charts/No-Seating-Chart.jpg"
 	        , OnError: function (e, Error) {
 	            //alert(JSON.stringify(e));
 	            //alert(JSON.stringify(Error));
