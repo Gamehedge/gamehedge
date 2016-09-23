@@ -136,11 +136,13 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
 
     $scope.updateFilter = function(index){
         client_dvm_reset_maps();
-        $scope.index = index;
-        $scope.prev_filter = false;
-        $scope.mob_index = index;
-        $('#tickets_list').scrollTop(-200);
-        $scope.showing_list = 20;
+        $timeout(function(){
+            $scope.index = index;
+            $scope.prev_filter = false;
+            $scope.mob_index = index;
+            $('#tickets_list').scrollTop(-200);
+            $scope.showing_list = 20;
+        },100);
     }
 
     $scope.closePrevFilter = function() {
@@ -149,65 +151,75 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     
     $scope.updateMobFilter = function(index){
         client_dvm_reset_maps();
-        $scope.mob_index = index;
-        $('#tickets_list').scrollTop(-200);
-        $scope.showing_list = 20;
+        $timeout(function(){
+            $scope.mob_index = index;
+            $('#tickets_list').scrollTop(-200);
+            $scope.showing_list = 20;
+        },100);
     }
     
     $scope.updateMobDelivery = function(index) {
         client_dvm_reset_maps();
-        $scope.mob_delivery = index;
-        $('#tickets_list').scrollTop(-200);
-        $scope.showing_list = 20;
+        $timeout(function(){
+            $scope.mob_delivery = index;
+            $('#tickets_list').scrollTop(-200);
+            $scope.showing_list = 20;
+        },100);
     }
     
     $scope.updateMobEticket = function(index) {
         client_dvm_reset_maps();
-        $scope.mob_eticket = !$scope.mob_eticket;
-        $('#tickets_list').scrollTop(-200);
-        $scope.showing_list = 20;
+        $timeout(function(){
+            $scope.mob_eticket = !$scope.mob_eticket;
+            $('#tickets_list').scrollTop(-200);
+            $scope.showing_list = 20;
+        },100);
     }
     
     $scope.mob_price_update = function(_val) {
         client_dvm_reset_maps();
-        switch(_val) {
-            case 1: $scope.mob_price_a = !$scope.mob_price_a;
-                    break;
-            case 2: $scope.mob_price_b = !$scope.mob_price_b;
-                    break;
-            case 3: $scope.mob_price_c = !$scope.mob_price_c;
-                    break;
-            case 4: $scope.mob_price_d = !$scope.mob_price_d;
-                    break;
-        }
-        //$scope.mob_price = _val;
-        $('#tickets_list').scrollTop(-200);
-        $scope.showing_list = 20;
+        $timeout(function(){
+            switch(_val) {
+                case 1: $scope.mob_price_a = !$scope.mob_price_a;
+                        break;
+                case 2: $scope.mob_price_b = !$scope.mob_price_b;
+                        break;
+                case 3: $scope.mob_price_c = !$scope.mob_price_c;
+                        break;
+                case 4: $scope.mob_price_d = !$scope.mob_price_d;
+                        break;
+            }
+            //$scope.mob_price = _val;
+            $('#tickets_list').scrollTop(-200);
+            $scope.showing_list = 20;
+        },100);
     }
     
     $scope.mob_price_update_real = function(_val) {
         client_dvm_reset_maps();
-        switch(_val) {
-            case 1: $scope.mob_price_a_real = !$scope.mob_price_a_real;
-                    break;
-            case 2: $scope.mob_price_b_real = !$scope.mob_price_b_real;
-                    break;
-            case 3: $scope.mob_price_c_real = !$scope.mob_price_c_real;
-                    break;
-            case 4: $scope.mob_price_d_real = !$scope.mob_price_d_real;
-                    break;
-        }
-        
-        if($scope.mob_price_a_real == false && $scope.mob_price_b_real == false && $scope.mob_price_c_real == false && $scope.mob_price_d_real == false) {
-            $scope.price_filter = false;
-        }
-        else {
-            $scope.price_filter = true;
-        }
-        
-        //$scope.mob_price = _val;
-        $('#tickets_list').scrollTop(-200);
-        $scope.showing_list = 20;
+        $timeout(function(){
+            switch(_val) {
+                case 1: $scope.mob_price_a_real = !$scope.mob_price_a_real;
+                        break;
+                case 2: $scope.mob_price_b_real = !$scope.mob_price_b_real;
+                        break;
+                case 3: $scope.mob_price_c_real = !$scope.mob_price_c_real;
+                        break;
+                case 4: $scope.mob_price_d_real = !$scope.mob_price_d_real;
+                        break;
+            }
+            
+            if($scope.mob_price_a_real == false && $scope.mob_price_b_real == false && $scope.mob_price_c_real == false && $scope.mob_price_d_real == false) {
+                $scope.price_filter = false;
+            }
+            else {
+                $scope.price_filter = true;
+            }
+            
+            //$scope.mob_price = _val;
+            $('#tickets_list').scrollTop(-200);
+            $scope.showing_list = 20;
+        },100);
     }
     
     $scope.showMobFilters = function() {
@@ -261,33 +273,39 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     
     $scope.updateSort = function(sort){
         client_dvm_reset_maps();
-        if(sort == $scope.ordering.replace("-","")){
-            if($scope.ordering.indexOf("-") == -1){
-                $scope.ordering = "-"+sort
+        $timeout(function(){
+            if(sort == $scope.ordering.replace("-","")){
+                if($scope.ordering.indexOf("-") == -1){
+                    $scope.ordering = "-"+sort
+                }
+                else{
+                    $scope.ordering = sort
+                }
             }
             else{
                 $scope.ordering = sort
             }
-        }
-        else{
-            $scope.ordering = sort
-        }
-        $('#tickets_list').scrollTop(-200);
-        $scope.showing_list = 20;
+            $('#tickets_list').scrollTop(-200);
+            $scope.showing_list = 20;
+        },100);
     }
 
     $scope.updateEtickets = function(){
         client_dvm_reset_maps();
-        $scope.etickets = !$scope.etickets;
-        $('#tickets_list').scrollTop(-200);
-        $scope.showing_list = 20;
+        $timeout(function(){
+            $scope.etickets = !$scope.etickets;
+            $('#tickets_list').scrollTop(-200);
+            $scope.showing_list = 20;
+        },100);
     }
 
     $scope.updateParking = function(ids){
         client_dvm_reset_maps();
-        $scope.onlyParking = ids;
-        $('#tickets_list').scrollTop(-200);
-        $scope.showing_list = 20;
+        $timeout(function(){
+            $scope.onlyParking = ids;
+            $('#tickets_list').scrollTop(-200);
+            $scope.showing_list = 20;
+        },100);
     }
 
     $scope.getTicketList = function(){
