@@ -177,6 +177,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
     
 	//Initializers
     $rootScope.isOrder = false;
+    $rootScope.isEvent = false;
     $rootScope.darkHeader = false;
     $rootScope.noFooter = false;
     $scope.loading = true;

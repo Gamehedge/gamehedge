@@ -177,6 +177,7 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
     
 	//Initializers
     $rootScope.isOrder = false;
+    $rootScope.isEvent = false;
     $rootScope.darkHeader = false;
     $scope.disable_toogle = false;
     $rootScope.noFooter = false;

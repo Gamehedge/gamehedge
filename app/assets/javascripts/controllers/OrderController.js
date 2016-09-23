@@ -865,6 +865,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	$scope.getPromoCodes();
 	$scope.getClient();
 	$rootScope.isOrder = true;
+    $rootScope.isEvent = false;
 	$rootScope.darkHeader = true;
 	$rootScope.noFooter = true;
 	$scope.order_success = false;
