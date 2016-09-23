@@ -147,7 +147,7 @@
                 </button>
             </div>
         </div>
-        <div class="col-md-4 hidden-sm hidden-xs horizontal-center main-menu">
+        <div class="col-md-6 hidden-sm hidden-xs horizontal-center main-menu">
             <ul class="nav navbar-nav navbar-leagues vertical-center horizontal-center" ng-show="!$root.isOrder" ng-repeat="league in leagueList | orderBy:'name' track by $index" ng-if="league.active == true">
                <li class="dropdown main-dropdown yamm-fw">
                      <a class="dropdown-toggle" href="{{league.url}}">{{league.name | uppercase}}</a>
@@ -187,19 +187,12 @@
             </ul>
         </div>
         
-        <div class="navbar-header col-md-4 hidden-xs hidden-xm vertical-center help" ng-if="$root.isOrder || $root.isEvent">
-                  
-                <p>NEED HELP? Toll Free<br><span>888-804-4330</span></p>
-                <img class="help-image" alt="Call Us" src="<%= image_url "help.png" %>">
-            
-        </div>
-        
-        <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs" ng-if="!$root.isOrder && $root.locat == '/'">
+        <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs" ng-if="!$root.isOrder && !$root.isEvent">
             <div class="press" ng-show="$root.locat == '/'">
                 <a href="/#/press"><img class="press-icon" src="<%= image_url 'press-icon.png' %>">PRESS</a>
             </div>
-            </div>
-        <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs" ng-show="!$root.isOrder">
+        </div>
+        <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs" ng-if="$root.isOrder == false && $root.isEvent == false">
             <div class="dropdown" ng-show="$root.isLoggedin">
                 <button class="dropdown-toggle myaccount-btn" type="button" data-toggle="dropdown"><img class="user-icon" src="<%= image_url "profile icon.png" %>">{{$root.user.name | uppercase}}<img class="dropdown-icon" src="<%= image_url "dropdown.png" %>"></button>
                 <ul class="dropdown-menu dropdown-menu-right">
@@ -211,6 +204,13 @@
             <div class="dropdown login" ng-show="!$root.isLoggedin">
                 <a href="/login"><img class="user-icon" src="<%= image_url "profile icon.png" %>">LOGIN</a>
             </div>
+        </div>
+        
+        <div class="navbar-header col-md-4 hidden-xs hidden-xm vertical-center help" ng-if="$root.isOrder || $root.isEvent">
+                  
+                <p>NEED HELP? Toll Free<br><span>888-804-4330</span></p>
+                <img class="help-image" alt="Call Us" src="<%= image_url "help.png" %>">
+            
         </div>
     </nav>
 </div>
