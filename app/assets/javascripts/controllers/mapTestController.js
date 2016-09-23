@@ -1,8 +1,7 @@
 controllers = angular.module('gamehedge')
 
-controllers.controller('mapTestController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http,$timeout,$location,$rootScope,Auth,angularLoad){
+controllers.controller('mapTestController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http,$timeout,$location,$rootScope,Auth){
 
-    
     $scope.prev_filter = true;
     $scope.mob_price = 0;
     $scope.mob_price_a = false;
@@ -14,6 +13,8 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     $scope.mob_price_b_real = false;
     $scope.mob_price_c_real = false;
     $scope.mob_price_d_real = false;
+    
+    $scope.secH = [];
     
     $scope.mob_real_price = 0;
     $scope.price_filter = false;
@@ -97,7 +98,8 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
                 $rootScope.title = $scope.event.name + " Tickets | Gamehedge";
                 $rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by "+$scope.event.home_performer.sport.ggg+" or more, get 50% of your ticket price back.";
                 
-
+                $scope.getTicketList();
+                
                 if($routeParams.slug != $scope.event.slug){
                     $location.path("/");
                 }
@@ -180,6 +182,32 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         //$scope.mob_price = _val;
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
+        client_dvm_reset_maps();
+    }
+    
+    $scope.mob_price_update_real = function(_val) {
+        switch(_val) {
+            case 1: $scope.mob_price_a_real = !$scope.mob_price_a_real;
+                    break;
+            case 2: $scope.mob_price_b_real = !$scope.mob_price_b_real;
+                    break;
+            case 3: $scope.mob_price_c_real = !$scope.mob_price_c_real;
+                    break;
+            case 4: $scope.mob_price_d_real = !$scope.mob_price_d_real;
+                    break;
+        }
+        
+        if($scope.mob_price_a_real == false && $scope.mob_price_b_real == false && $scope.mob_price_c_real == false && $scope.mob_price_d_real == false) {
+            $scope.price_filter = false;
+        }
+        else {
+            $scope.price_filter = true;
+        }
+        
+        //$scope.mob_price = _val;
+        $('#tickets_list').scrollTop(-200);
+        $scope.showing_list = 20;
+        client_dvm_reset_maps();
     }
     
     $scope.showMobFilters = function() {
@@ -220,7 +248,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         $scope.displayDetail = true;
         $scope.selectedTicket = _ticket;
         
-        // $("#MapContainer").tuMap("HighlightSection", _ticket.section);
+        $("#MapContainer").tuMap("HighlightSection", _ticket.section);
     }
     
     $scope.goToCheckout = function(){
@@ -245,10 +273,12 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         }
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
+        client_dvm_reset_maps();
     }
 
     $scope.updateEtickets = function(){
         $scope.etickets = !$scope.etickets;
+        
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
         client_dvm_reset_maps();
@@ -270,7 +300,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         }).then(function successCallback(response) {
             $scope.tickets = response;
             $scope.loading = false;
-            //console.log($scope.tickets);
+            console.log($scope.tickets);
             var sections = [];
             angular.forEach($scope.tickets.data.ticket_groups , function(value, key) {
                 value.amount = value.splits[value.splits.length-1];
@@ -381,11 +411,11 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     };
 
     $scope.zoomIn = function(){
-        // var Result=$("Selector").tuMap("ZoomIn");
+        var Result=$("Selector").tuMap("ZoomIn");
     }
 
     $scope.zoomOut = function(){
-        // var Result=$("Selector").tuMap("ZoomOut");
+        var Result=$("Selector").tuMap("ZoomOut");
     }
 
     $scope.redirect = function(amount,id) {
@@ -423,6 +453,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     $scope.etickets = false;
     $scope.physicals = false;
     $rootScope.isOrder = false;
+    $rootScope.isEvent = true;
     $rootScope.darkHeader = true;
     $rootScope.noFooter = true;
     $scope.searchTerm = "";
@@ -440,4 +471,104 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         $rootScope.user = undefined;
         $rootScope.isLoggedin = false;
     });
+})
+.filter('numberOfSeats', function() {
+  return function(input,numSeats) {
+    input = input || '';
+    var out = [];
+    if(numSeats == 0){
+        out = input;
+    }
+    else if(numSeats == 5){
+        angular.forEach(input, function(value, key) {
+            //console.log("Section "+value.section+" Row "+value.row);
+            var keepGoing = true;
+            angular.forEach(value.splits, function(value2, key2) {
+                if(value2 >= 5 && keepGoing == true){
+                    out.push(value);
+                    keepGoing = false;
+                }
+            });
+        });
+    }
+    else{
+        angular.forEach(input, function(value, key) {
+            if(value.splits.indexOf(numSeats) != -1){
+                out.push(value);
+            }   
+        });
+    }
+    return out;
+  };
+})
+.directive('emitLastRepeaterElement', function() {
+    return function(scope) {
+        if (scope.$last){
+            scope.$emit('LastRepeaterElement');
+        }
+    };
+})
+.directive('scrolly', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            var raw = element[0];
+            console.log('loading directive');
+                
+            element.bind('scroll', function () {
+                if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
+                    scope.$apply(attrs.scrolly);
+                }
+                
+                if($( document ).width() < 900){
+                    var first = null;
+
+                    $("#tickets_list > div").each(function(){
+                        if( isScrolledIntoView($(this)) && !first) {
+                            first = $(this);
+                            first.addClass("row-selected");
+                            
+                            if(scope.secH.length > 0){
+                                for(var u = 0; u < scope.secH.length; u++){
+                                    if(scope.secH[u].toString().indexOf( $(this).data("section").toString() ) == -1){
+                                        $("#MapContainer").tuMap("ResetSection", scope.secH[u].toString() );
+                                    }
+                                }
+                            }
+                            
+                            scope.secH = [];
+                            
+                            $("#MapContainer").tuMap("HighlightSection", $(this).data("section").toString() );
+                            
+                            scope.secH.push( $(this).data("section").toString() );
+                            
+                            
+                            console.log(scope.secH);
+                           // $("#MapContainer").tuMap("SetOptions",{
+                            //    SingleSectionSelection:false
+                            //});
+                            
+                            //$("#MapContainer").tuMap("Refresh");
+                            
+                            
+                        }            
+                        else
+                           $(this).removeClass("row-selected");
+                    });
+
+                    function isScrolledIntoView(elem) {
+                        var docViewTop = $("#tickets_list").scrollTop();
+                        var docViewBottom = docViewTop + $("#tickets_list").height();
+
+                        var elemTop = $(elem).position().top;
+                        var elemBottom = elemTop + $(elem).height();
+
+                        return ((elemBottom <= docViewBottom) && (elemTop > -30));
+                    }  
+                    
+                }
+                
+            });
+        }
+    };
 });
