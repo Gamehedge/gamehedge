@@ -135,12 +135,12 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     }
 
     $scope.updateFilter = function(index){
+        client_dvm_reset_maps();
         $scope.index = index;
         $scope.prev_filter = false;
         $scope.mob_index = index;
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
-        client_dvm_reset_maps();
     }
 
     $scope.closePrevFilter = function() {
@@ -148,27 +148,28 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     }
     
     $scope.updateMobFilter = function(index){
+        client_dvm_reset_maps();
         $scope.mob_index = index;
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
-        client_dvm_reset_maps();
     }
     
     $scope.updateMobDelivery = function(index) {
+        client_dvm_reset_maps();
         $scope.mob_delivery = index;
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
-        client_dvm_reset_maps();
     }
     
     $scope.updateMobEticket = function(index) {
+        client_dvm_reset_maps();
         $scope.mob_eticket = !$scope.mob_eticket;
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
-        client_dvm_reset_maps();
     }
     
     $scope.mob_price_update = function(_val) {
+        client_dvm_reset_maps();
         switch(_val) {
             case 1: $scope.mob_price_a = !$scope.mob_price_a;
                     break;
@@ -182,10 +183,10 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         //$scope.mob_price = _val;
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
-        client_dvm_reset_maps();
     }
     
     $scope.mob_price_update_real = function(_val) {
+        client_dvm_reset_maps();
         switch(_val) {
             case 1: $scope.mob_price_a_real = !$scope.mob_price_a_real;
                     break;
@@ -207,7 +208,6 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         //$scope.mob_price = _val;
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
-        client_dvm_reset_maps();
     }
     
     $scope.showMobFilters = function() {
@@ -260,6 +260,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     }
     
     $scope.updateSort = function(sort){
+        client_dvm_reset_maps();
         if(sort == $scope.ordering.replace("-","")){
             if($scope.ordering.indexOf("-") == -1){
                 $scope.ordering = "-"+sort
@@ -273,22 +274,20 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         }
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
-        client_dvm_reset_maps();
     }
 
     $scope.updateEtickets = function(){
+        client_dvm_reset_maps();
         $scope.etickets = !$scope.etickets;
-        
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
-        client_dvm_reset_maps();
     }
 
     $scope.updateParking = function(ids){
+        client_dvm_reset_maps();
         $scope.onlyParking = ids;
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
-        client_dvm_reset_maps();
     }
 
     $scope.getTicketList = function(){
