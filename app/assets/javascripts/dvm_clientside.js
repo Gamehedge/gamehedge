@@ -12,7 +12,7 @@ function client_dvm_initialize_filters_inputs(){
     
     //### Put your code here
     
-    
+    console.log("client_dvm_initialize_filters_inputs");
 }
 
 /** Filter map with given values
@@ -43,6 +43,8 @@ function client_dvm_arg_filter(args_to_filter){
     }else{
         $('#'+tickets_container+' .rowTicket').show();
     }*/
+    console.log("map filtered");
+    console.log(args_to_filter);
 }
 
 /** reset map
@@ -66,6 +68,7 @@ function client_dvm_reset_maps(init_filtre_vals){
     
     //### Put your code here
     console.log("map reseted");
+    console.log(init_filtre_vals);
 }
 
 /** compare tickets
