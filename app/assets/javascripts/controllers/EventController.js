@@ -271,6 +271,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 
 	$scope.updateEtickets = function(){
 		$scope.etickets = !$scope.etickets;
+        
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
 	}
@@ -454,7 +455,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	});
 
 	$scope.getEventInfo();
-    $scope.showing_list = 20;
+    $scope.showing_list = 200;
 	$scope.Data = [];
 	$scope.filterBySection = false;
 	$scope.section = "";
