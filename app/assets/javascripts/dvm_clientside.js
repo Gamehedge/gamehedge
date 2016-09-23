@@ -11,7 +11,7 @@ function client_dvm_initialize_filters_inputs(){
     //#############################
     
     //### Put your code here
-    alert("client_dvm_initialize_filters_inputs");
+    
     
 }
 
@@ -29,7 +29,7 @@ function client_dvm_arg_filter(args_to_filter){
         //you can use it to browse filtered ticket ids
         list_ticket_id_filtred = dvm_ticket_ids_by_filters(args_to_filter);
     }
-    alert("client_dvm_arg_filter");
+    
     //############################
     
     //### Put your code here
