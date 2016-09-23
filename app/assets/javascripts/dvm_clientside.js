@@ -63,7 +63,7 @@ function client_dvm_reset_maps(init_filtre_vals){
     //######################
     
     //### Put your code here
-    
+    console.log("map reseted");
 }
 
 /** compare tickets
