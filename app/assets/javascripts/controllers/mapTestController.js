@@ -135,13 +135,14 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     }
 
     $scope.updateFilter = function(index){
-        $scope.client_dvm_reset_maps(null,function(){
+        client_dvm_reset_maps();
+        $timeout(function(){
             $scope.index = index;
             $scope.prev_filter = false;
             $scope.mob_index = index;
             $('#tickets_list').scrollTop(-200);
             $scope.showing_list = 20;
-        });
+        },100);
     }
 
     $scope.closePrevFilter = function() {
@@ -193,39 +194,10 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
             $scope.showing_list = 20;
         },100);
     }
-
-    $scope.client_dvm_reset_maps = function(args_to_filter,callback){
-        //######################
-        //### DONT'T TOUCH IT
-        //init the input filter values or not
-        init_filtre_vals = typeof init_filtre_vals !== 'undefined' ? init_filtre_vals : true;
-        //initialize filters
-        if(init_filtre_vals){
-            client_dvm_initialize_filters_inputs();
-        }
-        //reset map
-        if(!is_static_map){
-            dvm_reset_maps(init_filtre_vals);
-        }
-        //######################
-        
-        //### Put your code here
-        console.log("map reseted");
-        callback();
+    $scope.resetMap = function(){
+        client_dvm_reset_maps();
     }
     
-    $scope.client_dvm_initialize_filters_inputs = function(){
-        //####Example
-        //$("#filter_qty").val('');         //Initialize Quantity Select
-        //$("#filter_min_price").val('');   //Initialize min price Select
-        //$("#filter_max_price").val('');   //Initialize max price Select
-        //#############################
-        
-        //### Put your code here
-        
-        
-    }
-
     $scope.mob_price_update_real = function(_val) {
         client_dvm_reset_maps();
         $timeout(function(){
