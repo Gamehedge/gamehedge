@@ -291,7 +291,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         }).then(function successCallback(response) {
         	$scope.tickets = response;
         	$scope.loading = false;
-        	//console.log($scope.tickets);
+        	console.log($scope.tickets);
         	var sections = [];
         	angular.forEach($scope.tickets.data.ticket_groups , function(value, key) {
                 value.amount = value.splits[value.splits.length-1];
@@ -455,7 +455,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	});
 
 	$scope.getEventInfo();
-    $scope.showing_list = 200;
+    $scope.showing_list = 20;
 	$scope.Data = [];
 	$scope.filterBySection = false;
 	$scope.section = "";
