@@ -62,13 +62,12 @@ function client_dvm_reset_maps(init_filtre_vals){
     }
     //reset map
     if(!is_static_map){
+        console.log("reseted")
         dvm_reset_maps(init_filtre_vals);
     }
     //######################
     
     //### Put your code here
-    console.log("map reseted");
-    console.log(init_filtre_vals);
 }
 
 /** compare tickets
