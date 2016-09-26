@@ -18,6 +18,7 @@ app.config([ '$routeProvider','$locationProvider','AuthProvider', 'AnalyticsProv
       AnalyticsProvider.setAccount('UA-76054076-1');
       AnalyticsProvider.useAnalytics(true);
       AnalyticsProvider.trackUrlParams(true);
+      AnalyticsProvider.useECommerce(true, false);
 
       AuthProvider.resourceName('client');
       AuthProvider.loginPath('/clients/sign_in.json');
