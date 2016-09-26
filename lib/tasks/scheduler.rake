@@ -17,3 +17,10 @@ task :update_events => :environment do
   end
   puts "done."
 end
+
+task :update_urls => :environment do
+  Event.all.each do |e|
+    e.save
+    puts "updated"
+  end
+end

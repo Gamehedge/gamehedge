@@ -126,7 +126,7 @@ class TicketEvolutionService
                         location: location,
                         sport_id: sport_id,
                         venue_configuration_id: venue_configuration_id,
-                        slug: (name.downcase.gsub ' ', '-') + "-tickets"
+                        url: '/events/' + te_uid + '/' + ((name.downcase.gsub ' ', '-') + "-tickets")
                       )
                       puts "Doesn't exist. Event Created " + String(e.name)
                     else
@@ -143,7 +143,7 @@ class TicketEvolutionService
                       @event.location = location
                       @event.sport_id = sport_id
                       @event.venue_configuration_id = venue_configuration_id
-                      @event.slug = (name.downcase.gsub ' ', '-') + "-tickets"
+                      @event.slug = ((name.downcase.gsub ' ', '-') + "-tickets"),
                       @event.save
                       puts "Exists. Event Updated " + String(e.name)
                     end
