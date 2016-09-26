@@ -51,8 +51,8 @@ class TicketEvolutionService
           puts String(s.name)
           @events = @connection.events.list({:category_id => s.te_uid, :per_page => 10000000, 'occurs_at.gte' => (Time.now - 1.day).strftime("%m/%d/%Y")})
           @events.each do |e|
-            if e.performances.count < 2
-              puts "Not added. Event with one performer."
+            if e.performances.count == 0
+              puts "Not added. Event with no performers."
             else
               is_home = true
               primaries = 0
@@ -67,7 +67,10 @@ class TicketEvolutionService
               end
               if primaries == 1
                 if is_home == true
-                  if (Performer.where(te_uid: e.performances[0].performer.id).first == nil || Performer.where(te_uid: e.performances[1].performer.id).first == nil) && e.performances.count == 2
+                  stop = false
+                  if e.performances.count == 2 && (Performer.where(te_uid: e.performances[0].performer.id).first == nil || Performer.where(te_uid: e.performances[1].performer.id).first == nil)
+                    puts "Not added. One of the performers doesn't belong to our database."
+                  elsif e.performances.count == 1 && (Performer.where(te_uid: e.performances[0].performer.id).first == nil)
                     puts "Not added. One of the performers doesn't belong to our database."
                   else
                     name = e.name

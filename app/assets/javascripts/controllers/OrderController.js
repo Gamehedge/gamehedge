@@ -299,7 +299,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 
 	$scope.goToConfirm = function(){
 		$location.update_path('/order/'+String($scope.ticket.id)+'/confirm', true);
-		Analytics.trackPage('/order/'+String($scope.ticket.id)+'/confirm');
+		// Analytics.trackPage('/order/'+String($scope.ticket.id)+'/confirm');
 	}
 
 	$scope.confirmSave = function(type){
@@ -515,13 +515,13 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    	if(response.data.error == undefined){
 			    		$scope.order = response.data;
 			    		$scope.order_success = true;
-			    		$scope.goToConfirm();
 			    		// Create transaction
 						Analytics.addTrans($scope.order.id, 'Gamehedge', $scope.total, $scope.shipping_fee, $scope.service_fee);
 						// Add items to transaction
 						Analytics.addItem($scope.order.id, $scope.ticket.id, $scope.event.name, $scope.event.sport.name, $scope.ticket.retail_price, $scope.quantity);
 						// Complete transaction
 						Analytics.trackTrans();
+						$scope.goToConfirm();
 						// Clear transaction
 						// Analytics.clearTrans();
 			    		//console.log("Order");
