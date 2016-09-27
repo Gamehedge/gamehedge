@@ -134,6 +134,11 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
                     if($scope.next_events[j].performances.length != 2){
                         $scope.next_events.splice(j,1);
                     }
+                    if($scope.next_events[j] != undefined){
+                        if(moment().add(1,'h').isAfter(String($scope.next_events[j].occurs_at).replace('Z',''))) {
+                            $scope.next_events.splice(j, 1);
+                        }
+                    }
                 }
             }
             $scope.ready = true;
