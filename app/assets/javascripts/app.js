@@ -58,10 +58,6 @@ app.config([ '$routeProvider','$locationProvider','AuthProvider', 'AnalyticsProv
             templateUrl: "order.html",
             controller: 'OrderController',
         })
-        .when('/order/:ticektId/confirm', {
-            templateUrl: "order.html",
-            controller: 'OrderController',
-        })
         .when('/confirm/:ticektId', {
             templateUrl: "confirm.html",
             controller: 'ConfirmController',
