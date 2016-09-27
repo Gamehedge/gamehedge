@@ -298,7 +298,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	}
 
 	$scope.goToConfirm = function(){
-		// $rootScope.orderId = $scope.order.id;
+		$rootScope.orderId = $scope.order.id;
 		$location.path('/confirm/'+String($scope.ticket.id));
 	}
 

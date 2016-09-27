@@ -37,70 +37,70 @@ class OrdersController < ApplicationController
 		@phone_number = request.POST["phone_number"]
 		@event_home_team = request.POST["event_home_team"]
 		@event_away_team = request.POST["event_away_team"]
-        @order = "OMG"
-  #       @order = TicketEvolutionService.new({id: @user_id}).createShipment({ address_id: @ship_address_id, 
-  #       	billing_address_id: @billing_address_id, 
-  #       	credit_card_id: @credit_card_id, 
-  #       	event_id: @event_id, 
-  #       	section: @section, 
-  #       	row: @row, 
-  #       	ticket_type: @ticket_type, 
-  #       	quantity: @quantity, 
-  #       	ticket_group_id: @ticket_group_id, 
-  #       	price: @price, 
-  #       	ticket_group_signature: @ticket_group_signature, 
-  #       	type: @type, 
-  #       	service_type: @service_type, 
-  #       	ship_to_name: @ship_to_name, 
-  #       	amount: @amount, 
-  #       	pay_type: @pay_type, 
-  #       	email_address_id: @email_address_id, 
-  #       	shipment_price: @shipment_price, 
-  #       	session_id: @session_id, 
-  #       	user_agent: @user_agent, 
-  #       	created_by_ip_address: request.remote_ip, 
-  #       	selectedPhone: @selectedPhone,
-  #       	service_fee: @service_fee,
-  #       	discount: @discount,
-  #       })
-  #       if @order["error"]
-  #       	puts "error"
-  #       else
-  #       	@real_event_date = Time.parse @event_occurs_at
-  #       	o = Order.create(
-  #       		client_id: @user_id,
-	 #         	client_name: @ship_to_name,
-	 #         	te_order_id: @order["id"],
-	 #         	event_name: @event_name,
-	 #         	event_date: @event_occurs_at,
-	 #         	event_location: @event_location,
-	 #         	ticket_section: @section,
-	 #         	cost: @cost,
-	 #         	ticket_row: @row,
-	 #         	ticket_seats: @quantity,
-	 #         	ticket_format: @ticket_format,
-	 #         	total: @amount,
-	 #         	customer_email: @email,
-		# 		number_of_tickets: @quantity,
-		# 		sale_price_per_ticket: @price,
-		# 		ticket_total: @subtotal,
-		# 		broker_name: @broker_name,
-		# 		service_fee: @service_fee,
-		# 		shipping_fee: @shipment_price,
-		# 		real_event_date:  @real_event_date,
-		# 		cc_last_digits:  @cc_last_digits,
-		# 		address: @address,
-		# 		phone_number: @phone_number,
-		# 		event_home_team: @event_home_team,
-		# 		event_away_team: @event_away_team,
-		# 		discount: @discount,
-		# 		order_data: @order.to_s,
-		# 	)
-		# 	a = TicketEvolutionService.new({:type => "orders", :id => @order["id"]}).show
-	 #  		o.order_status = a["state"]
-	 #  		o.save
-		# end
-        render text: @order
+        
+        @order = TicketEvolutionService.new({id: @user_id}).createShipment({ address_id: @ship_address_id, 
+        	billing_address_id: @billing_address_id, 
+        	credit_card_id: @credit_card_id, 
+        	event_id: @event_id, 
+        	section: @section, 
+        	row: @row, 
+        	ticket_type: @ticket_type, 
+        	quantity: @quantity, 
+        	ticket_group_id: @ticket_group_id, 
+        	price: @price, 
+        	ticket_group_signature: @ticket_group_signature, 
+        	type: @type, 
+        	service_type: @service_type, 
+        	ship_to_name: @ship_to_name, 
+        	amount: @amount, 
+        	pay_type: @pay_type, 
+        	email_address_id: @email_address_id, 
+        	shipment_price: @shipment_price, 
+        	session_id: @session_id, 
+        	user_agent: @user_agent, 
+        	created_by_ip_address: request.remote_ip, 
+        	selectedPhone: @selectedPhone,
+        	service_fee: @service_fee,
+        	discount: @discount,
+        })
+        if @order["error"]
+        	puts "error"
+        else
+        	@real_event_date = Time.parse @event_occurs_at
+        	o = Order.create(
+        		client_id: @user_id,
+	         	client_name: @ship_to_name,
+	         	te_order_id: @order["id"],
+	         	event_name: @event_name,
+	         	event_date: @event_occurs_at,
+	         	event_location: @event_location,
+	         	ticket_section: @section,
+	         	cost: @cost,
+	         	ticket_row: @row,
+	         	ticket_seats: @quantity,
+	         	ticket_format: @ticket_format,
+	         	total: @amount,
+	         	customer_email: @email,
+				number_of_tickets: @quantity,
+				sale_price_per_ticket: @price,
+				ticket_total: @subtotal,
+				broker_name: @broker_name,
+				service_fee: @service_fee,
+				shipping_fee: @shipment_price,
+				real_event_date:  @real_event_date,
+				cc_last_digits:  @cc_last_digits,
+				address: @address,
+				phone_number: @phone_number,
+				event_home_team: @event_home_team,
+				event_away_team: @event_away_team,
+				discount: @discount,
+				order_data: @order.to_s,
+			)
+			a = TicketEvolutionService.new({:type => "orders", :id => @order["id"]}).show
+	  		o.order_status = a["state"]
+	  		o.save
+		end
+        render json: @order
     end
 
     def list
