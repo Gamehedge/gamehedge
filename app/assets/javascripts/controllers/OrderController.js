@@ -298,8 +298,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	}
 
 	$scope.goToConfirm = function(){
-		$location.update_path('/order/'+String($scope.ticket.id)+'/confirm', true);
-		// Analytics.trackPage('/order/'+String($scope.ticket.id)+'/confirm');
+		$rootScope.orderId = $scope.order.id;
+		$location.path('/confirm/'+String($scope.ticket.id));
 	}
 
 	$scope.confirmSave = function(type){
@@ -718,7 +718,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
             //console.log(currentUser);
             $rootScope.user = currentUser;
             $rootScope.isLoggedin = true;
-            $scope.first_time = false;
+            $rootScope.first_time = false;
         });
 
         $scope.$on('devise:new-session', function(event, currentUser) {
@@ -764,7 +764,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				$scope.card = $scope.client.primary_credit_card;
 				$rootScope.isLoggedin = true;
 				$rootScope.user = user;
-				$scope.first_time = false;
+				$rootScope.first_time = false;
 				$('#myModal').modal('hide');
 				$scope.logging_in = false;
 				$scope.clientLoaded = true;
@@ -776,7 +776,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		    	$scope.edit_deliver = 3;
 				$scope.edit_credit_card = 3;
 				$scope.edit_billing = 3;
-				$scope.first_time = true;
+				$rootScope.first_time = true;
 				$scope.creditCardFieldEnable();
 				$('#myModal').modal('hide');
 				$scope.logging_in = false;
@@ -790,7 +790,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	    	$scope.edit_deliver = 3;
 			$scope.edit_credit_card = 3;
 			$scope.edit_billing = 3;
-			$scope.first_time = true;
+			$rootScope.first_time = true;
 			$scope.clientLoaded = true;
 			$scope.creditCardFieldEnable();
 			//console.log("Not logged in");
