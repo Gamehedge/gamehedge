@@ -4,26 +4,15 @@ controllers.controller('ConfirmController', function($scope,$rootScope,$http,Aut
 	$rootScope.showHeader = true;
     
     $scope.getTicket = function(){
-		$http({
-            method: 'GET',
-            url: '/tickets/show?id='+$routeParams.ticektId,
-        }).then(function successCallback(response) {
-        	$scope.ticket = response.data;
-        	// console.log("Ticket")
-        	// console.log($scope.ticket);
-        	apiService.getData('/api/v1/events/'+$scope.ticket.event.id)
-	            .then(function(response){
-	            	// console.log("Event");
-	            	// console.log(response);
-	                $scope.event = response;
-	                $scope.loading = false;
-	                $rootScope.title = "Order | Gamehedge";
-					$rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by "+$scope.event.home_performer.sport.ggg+" or more, get 50% of your ticket price back.";
-	                
-	        });
-        }, function errorCallback(response) {
-        	$scope.loading = false;
-            //console.log(response);
+    	apiService.getData('/api/v1/orders/'+$routeParams.orderId)
+            .then(function(response){
+            	console.log("Order");
+            	console.log(response);
+                $scope.order = response;
+                $scope.loading = false;
+                $rootScope.title = "Order | Gamehedge";
+				$rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by a certain amount or more, get 50% of your ticket price back.";
+                
         });
 	}
 
@@ -78,21 +67,37 @@ controllers.controller('ConfirmController', function($scope,$rootScope,$http,Aut
             //console.log(currentUser);
             $rootScope.user = currentUser;
             $rootScope.isLoggedin = true;
-            $rootScope.first_time = false;
+            $scope.first_time = false;
         });
 
         $scope.$on('devise:new-session', function(event, currentUser) {
             // user logged in by Auth.login({...})
         });
 	}
+
+	$scope.checkLogin = function(){
+		Auth.currentUser().then(function(user) {
+	        // User was logged in, or Devise returned
+	        // previously authenticated session.
+	        //console.log(user); // => {id: 1, ect: '...'}
+	        $rootScope.user = user;
+	        $rootScope.isLoggedin = true;
+	        $scope.getTicket();
+	    }, function(error) {
+	        // unauthenticated error
+	        //console.log("error login");
+	        $rootScope.user = undefined;
+	        $rootScope.isLoggedin = false;
+	    });
+	}
 	$scope.orderId = $rootScope.orderId;
-	$rootScope.orderId = null;
 	$rootScope.isOrder = true;
     $rootScope.isEvent = false;
 	$rootScope.darkHeader = true;
 	$rootScope.noFooter = true;
 	$scope.order_success = false;
+	$scope.first_time = ($location.search()['first_time'] === 'true');
 	$scope.loading = true;
 	$scope.password = "";
-	$scope.getTicket();
+	$scope.checkLogin();
 });

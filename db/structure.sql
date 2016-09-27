@@ -606,7 +606,9 @@ CREATE TABLE orders (
     cc_last_digits integer,
     address character varying,
     phone_number character varying,
-    discount double precision
+    discount double precision,
+    event_te_uid integer,
+    ticket_notes character varying
 );
 
 
@@ -1793,4 +1795,8 @@ INSERT INTO schema_migrations (version) VALUES ('20160909194337');
 INSERT INTO schema_migrations (version) VALUES ('20160913214106');
 
 INSERT INTO schema_migrations (version) VALUES ('20160922181545');
+
+INSERT INTO schema_migrations (version) VALUES ('20160927214245');
+
+INSERT INTO schema_migrations (version) VALUES ('20160927220902');
 

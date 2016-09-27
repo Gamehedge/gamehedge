@@ -37,6 +37,9 @@ class OrdersController < ApplicationController
 		@phone_number = request.POST["phone_number"]
 		@event_home_team = request.POST["event_home_team"]
 		@event_away_team = request.POST["event_away_team"]
+		@event_te_uid = request.POST["event_te_uid"]
+		@ticket_notes = request.POST["ticket_notes"]
+		
         
         @order = TicketEvolutionService.new({id: @user_id}).createShipment({ address_id: @ship_address_id, 
         	billing_address_id: @billing_address_id, 
@@ -94,13 +97,15 @@ class OrdersController < ApplicationController
 				event_home_team: @event_home_team,
 				event_away_team: @event_away_team,
 				discount: @discount,
+				event_te_uid: @event_te_uid,
+				ticket_notes: @ticket_notes,
 				order_data: @order.to_s,
 			)
 			a = TicketEvolutionService.new({:type => "orders", :id => @order["id"]}).show
 	  		o.order_status = a["state"]
 	  		o.save
 		end
-        render json: @order
+		render json: @order
     end
 
     def list

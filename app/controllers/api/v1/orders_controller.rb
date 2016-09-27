@@ -12,7 +12,7 @@ class Api::V1::OrdersController < ApplicationApiController
   
   
   def fetch_user
-    @order = Order.find_by_id(params[:id])
+    @order = Order.where(te_order_id: params[:id]).first
   end
 
   def index
@@ -22,15 +22,15 @@ class Api::V1::OrdersController < ApplicationApiController
       @orders = Order.where(data_params)
     end
     respond_to do |format|
-      format.json { render json: @orders.to_json(:only => [:client_id, :client_name, :discount, :te_order_id, :event_name, :event_date, :event_location, :ticket_section, :cost, :ticket_row, :ticket_seats, :ticket_format, :total, :customer_email, :number_of_tickets, :sale_price_per_ticket, :ticket_total, :broker_name, :service_fee, :shipping_fee, :real_event_date, :order_data], :include => {:refund_status => {:only =>[:id, :name]}})}
-      format.xml { render xml: @orders.to_json(:only => [:client_id, :client_name, :discount, :te_order_id, :event_name, :event_date, :event_location, :ticket_section, :cost, :ticket_row, :ticket_seats, :ticket_format, :total, :customer_email, :number_of_tickets, :sale_price_per_ticket, :ticket_total, :broker_name, :service_fee, :shipping_fee, :real_event_date, :order_data], :include => {:refund_status => {:only =>[:id, :name]}})}
+      format.json { render json: @orders.to_json(:only => [:client_id, :client_name, :discount, :te_order_id, :event_name, :event_date, :ticket_notes, :event_location, :ticket_section, :cost, :ticket_row, :ticket_seats, :ticket_format, :total, :customer_email, :number_of_tickets, :sale_price_per_ticket, :ticket_total, :broker_name, :service_fee, :shipping_fee, :real_event_date, :order_data], :include => {:refund_status => {:only =>[:id, :name]}})}
+      format.xml { render xml: @orders.to_json(:only => [:client_id, :client_name, :discount, :te_order_id, :event_name, :event_date, :ticket_notes, :event_location, :ticket_section, :cost, :ticket_row, :ticket_seats, :ticket_format, :total, :customer_email, :number_of_tickets, :sale_price_per_ticket, :ticket_total, :broker_name, :service_fee, :shipping_fee, :real_event_date, :order_data], :include => {:refund_status => {:only =>[:id, :name]}})}
     end
   end
 
   def show
     respond_to do |format|
-      format.json { render json: @order.to_json(:only => [:client_id, :client_name, :discount, :te_order_id, :event_name, :event_date, :event_location, :ticket_section, :cost, :ticket_row, :ticket_seats, :ticket_format, :total, :customer_email, :number_of_tickets, :sale_price_per_ticket, :ticket_total, :broker_name, :service_fee, :shipping_fee, :real_event_date, :order_data], :include => {:refund_status => {:only =>[:id, :name]}})}
-      format.xml { render xml: @order.to_json(:only => [:client_id, :client_name, :discount, :te_order_id, :event_name, :event_date, :event_location, :ticket_section, :cost, :ticket_row, :ticket_seats, :ticket_format, :total, :customer_email, :number_of_tickets, :sale_price_per_ticket, :ticket_total, :broker_name, :service_fee, :shipping_fee, :real_event_date, :order_data], :include => {:refund_status => {:only =>[:id, :name]}})}
+      format.json { render json: @order.to_json(:only => [:client_id, :client_name, :discount, :te_order_id, :event_name, :event_date, :ticket_notes, :event_location, :ticket_section, :cost, :ticket_row, :ticket_seats, :ticket_format, :total, :customer_email, :number_of_tickets, :sale_price_per_ticket, :ticket_total, :broker_name, :service_fee, :shipping_fee, :real_event_date, :order_data], :include => {:refund_status => {:only =>[:id, :name]}})}
+      format.xml { render xml: @order.to_json(:only => [:client_id, :client_name, :discount, :te_order_id, :event_name, :event_date, :ticket_notes, :event_location, :ticket_section, :cost, :ticket_row, :ticket_seats, :ticket_format, :total, :customer_email, :number_of_tickets, :sale_price_per_ticket, :ticket_total, :broker_name, :service_fee, :shipping_fee, :real_event_date, :order_data], :include => {:refund_status => {:only =>[:id, :name]}})}
     end
   end
 
@@ -75,7 +75,7 @@ class Api::V1::OrdersController < ApplicationApiController
   end
 
   def data_params
-    params.permit(:client_id, :client_name, :te_order_id, :event_name, :event_date, :discount, :event_location, :ticket_section, :cost, :ticket_row, :ticket_seats, :ticket_format, :total, :customer_email, :number_of_tickets, :sale_price_per_ticket, :ticket_total, :broker_name, :service_fee, :shipping_fee, :real_event_date, :order_data, :refund_status_id)
+    params.permit(:client_id, :client_name, :te_order_id, :event_name, :event_date, :discount, :event_location, :ticket_section, :cost, :ticket_row, :ticket_seats, :ticket_format, :total, :customer_email, :number_of_tickets, :sale_price_per_ticket, :ticket_total, :broker_name, :service_fee, :shipping_fee, :real_event_date, :order_data, :refund_status_id, :ticket_notes)
   end
 
 
