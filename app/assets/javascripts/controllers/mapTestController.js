@@ -140,7 +140,12 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         $scope.mob_index = index;
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
-        var args_to_filter = {'filter_qty':String(index)};
+        if(index == 5){
+            var args_to_filter = {'filter_qty':'5,6,7,8,9,10'};
+        }
+        else{
+            var args_to_filter = {'filter_qty':String(index)};
+        }
         client_dvm_arg_filter(args_to_filter);
     }
 
