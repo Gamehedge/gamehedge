@@ -518,11 +518,12 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    		$scope.order = response.data;
 			    		$scope.order_success = true;
 			    		// Create transaction
-						Analytics.addTrans($scope.order.id, 'Gamehedge', $scope.total, $scope.shipping_fee, $scope.service_fee);
-						// Add items to transaction
-						Analytics.addItem($scope.order.id, $scope.ticket.id, $scope.event.name, $scope.event.sport.name, $scope.ticket.retail_price, $scope.quantity);
+			    		Analytics.addTrans($scope.order.id, 'www.gamehedge.com', $scope.total, $scope.service_fee, Number($scope.shipping_fee));
+			    		// Add items to transaction
+						Analytics.addItem($scope.order.id, $scope.ticket.id, $scope.event.name, $scope.event.sport.name, $scope.ticket.retail_price, Number($scope.amount));
 						// Complete transaction
 						Analytics.trackTrans();
+						
 						$scope.goToConfirm();
 						// Clear transaction
 						// Analytics.clearTrans();
