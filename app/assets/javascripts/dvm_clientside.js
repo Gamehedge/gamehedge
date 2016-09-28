@@ -28,6 +28,7 @@ function client_dvm_arg_filter(args_to_filter){
         //this is the list of ticket ids resulted by the given filter values
         //you can use it to browse filtered ticket ids
         list_ticket_id_filtred = dvm_ticket_ids_by_filters(args_to_filter);
+        consle.log(list_ticket_id_filtred);
     }
     
     //############################
