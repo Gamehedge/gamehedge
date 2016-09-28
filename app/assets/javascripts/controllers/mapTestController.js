@@ -141,7 +141,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
         if(index == 5){
-            var args_to_filter = {'filter_qty':'6'};
+            var args_to_filter = {'filter_qty_min':'5'};
         }
         else{
             var args_to_filter = {'filter_qty':String(index)};
