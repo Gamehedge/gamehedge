@@ -2348,6 +2348,9 @@ function dvm_map_filter(filter_vals) {
     }
     if (!isNaN(filter_qty_min)) {
         for (q in tickets_qty_filtre) {
+            console.log(parseFloat(q));
+            console.log(parseFloat(filter_qty_min));
+            console.log("Break line");
             if (parseFloat(filter_qty_min) <= parseFloat(q)) {
                 for (key in tickets_qty_filtre[q]) {
                     id = tickets_qty_filtre[q][key];
