@@ -476,6 +476,15 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         console.log("failure");
         // There was some error loading the script. Meh
     });
+    angularLoad.loadScript("https://dynamicvenuemaps.com/maps/js/DVM_functions.js?v=201401071606").then(function() {
+        console.log("dvm.js loadded successfully");
+        // Script loaded succesfully.
+        // We can now start using the functions from someplugin.js
+    }).catch(function() {
+        console.log("failure");
+        // There was some error loading the script. Meh
+    });
+
     $window.scrollTo(0, 0);
     //The global variable locat gets the current location.path
     Auth.currentUser().then(function(user) {
