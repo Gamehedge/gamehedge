@@ -98,8 +98,6 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
                 $rootScope.title = $scope.event.name + " Tickets | Gamehedge";
                 $rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by "+$scope.event.home_performer.sport.ggg+" or more, get 50% of your ticket price back.";
                 
-                $scope.getTicketList();
-                
                 if($routeParams.slug != $scope.event.slug){
                     $location.path("/");
                 }
@@ -146,6 +144,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         else{
             var args_to_filter = {'filter_qty':String(index)};
         }
+        client_dvm_arg_filter(args_to_filter);
         //$scope.loadMap();
     }
 
