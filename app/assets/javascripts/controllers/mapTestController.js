@@ -337,33 +337,28 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
 
     $scope.loadMap = function(){
         var tickets = []
-        var tickets_data = $filter('filter')($scope.tickets.data.ticket_groups,$scope.filterSectionsFn());
-        tickets_data = $filter('filter')(tickets_data,($scope.onlyParking || '') && {type: 'parking'});
-        tickets_data = $filter('filter')(tickets_data,(!$scope.onlyParking || '') && {type: 'event'});
-        tickets_data = $filter('numberOfSeats')(tickets_data,$scope.index);
-        tickets_data = $filter('filter')(tickets_data,$scope.filterPriceFn());
-        for(i=0;i<tickets_data.length;i++){
+        for(i=0;i<$scope.tickets.data.ticket_groups.length;i++){
             var b = "";
-            for(j=0;j<tickets_data[i].splits.length;j++){
+            for(j=0;j<$scope.tickets.data.ticket_groups[i].splits.length;j++){
                 if(j==0){
-                    b = b + tickets_data[i].splits[j];
+                    b = b + $scope.tickets.data.ticket_groups[i].splits[j];
                 }
                 else{
-                    b = b + "," + tickets_data[i].splits[j];
+                    b = b + "," + $scope.tickets.data.ticket_groups[i].splits[j];
                 }
             }
             var a = {
-                id:String(tickets_data[i].id),
-                section:String(tickets_data[i].section),
-                row:String(tickets_data[i].row),
-                price:String(tickets_data[i].retail_price),
-                qty:String(tickets_data[i].available_quantity),
+                id:String($scope.tickets.data.ticket_groups[i].id),
+                section:String($scope.tickets.data.ticket_groups[i].section),
+                row:String($scope.tickets.data.ticket_groups[i].row),
+                price:String($scope.tickets.data.ticket_groups[i].retail_price),
+                qty:String($scope.tickets.data.ticket_groups[i].available_quantity),
                 avail:String(b),
-                notes:String(tickets_data[i].public_notes),
+                notes:String($scope.tickets.data.ticket_groups[i].public_notes),
             }
             tickets.push(a)
         }
-        console.log(tickets)
+        // console.log(tickets)
         var DATA_TICKTES={"list":tickets};
         var map_width = window.innerWidth;
         var map_height = window.innerHeight - 180;
