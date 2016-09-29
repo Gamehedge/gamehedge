@@ -2242,6 +2242,16 @@ function dvm_ticket_ids_by_filters(args_to_filter) {
             }
         }
     }
+    else if (!isNaN(args_to_filter['filter_qty_min'])) {
+        for (var q in tickets_qty_filtre) {
+            if (parseFloat(args_to_filter['filter_qty_min']) === parseFloat(q)) {
+                for (var key in tickets_qty_filtre[q]) {
+                    id = tickets_qty_filtre[q][key];
+                    array_ids_by_qty.push(id);
+                }
+            }
+        }
+    }
     //price filtre
     if ((!isNaN(args_to_filter['filter_min_price']) || !isNaN(args_to_filter['filter_max_price']))) {
         for (var p in tickets_price_filtre) {
@@ -2304,6 +2314,7 @@ function dvm_add_row_to_display_list(section_to_add, row_to_add) {
 function dvm_map_filter(filter_vals) {
     //to get filter values
     filter_qty = parseFloat(filter_vals['filter_qty']);
+    filter_qty_min = parseFloat(filter_vals['filter_qty_min']);
     filter_min_price = parseFloat(filter_vals['filter_min_price']);
     filter_max_price = parseFloat(filter_vals['filter_max_price']);
     //best value
@@ -2328,6 +2339,16 @@ function dvm_map_filter(filter_vals) {
     if (!isNaN(filter_qty)) {
         for (q in tickets_qty_filtre) {
             if (parseFloat(filter_qty) === parseFloat(q)) {
+                for (key in tickets_qty_filtre[q]) {
+                    id = tickets_qty_filtre[q][key];
+                    array_ids_by_qty.push(id);
+                }
+            }
+        }
+    }
+    else if (!isNaN(filter_qty_min)) {
+        for (q in tickets_qty_filtre) {
+            if (parseFloat(filter_qty_min) >= parseFloat(q)) {
                 for (key in tickets_qty_filtre[q]) {
                     id = tickets_qty_filtre[q][key];
                     array_ids_by_qty.push(id);
