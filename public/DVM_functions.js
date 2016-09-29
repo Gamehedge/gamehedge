@@ -2346,7 +2346,10 @@ function dvm_map_filter(filter_vals) {
             }
         }
     }
+    console.log("dvm map filter");
+    console.log(filter_qty_min);
     if (!isNaN(filter_qty_min)) {
+        console.log(tickets_qty_filtre);
         for (q in tickets_qty_filtre) {
             console.log(parseFloat(q));
             console.log(parseFloat(filter_qty_min));
