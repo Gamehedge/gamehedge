@@ -146,7 +146,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         else{
             var args_to_filter = {'filter_qty':String(index)};
         }
-        $scope.loadMap();
+        //$scope.loadMap();
     }
 
     $scope.closePrevFilter = function() {
@@ -157,21 +157,21 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         $scope.mob_index = index;
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
-        $scope.loadMap();    
+        //$scope.loadMap();    
     }
     
     $scope.updateMobDelivery = function(index) {
         $scope.mob_delivery = index;
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
-        $scope.loadMap();
+        //$scope.loadMap();
     }
     
     $scope.updateMobEticket = function(index) {
         $scope.mob_eticket = !$scope.mob_eticket;
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
-        $scope.loadMap();
+        //$scope.loadMap();
     }
     
     $scope.mob_price_update = function(_val) {
@@ -188,7 +188,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         //$scope.mob_price = _val;
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
-        $scope.loadMap();
+        //$scope.loadMap();
     }
     
     $scope.mob_price_update_real = function(_val) {
@@ -213,7 +213,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         //$scope.mob_price = _val;
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
-        $scope.loadMap();
+        //$scope.loadMap();
     }
     
     $scope.showMobFilters = function() {
@@ -279,21 +279,21 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         }
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
-        $scope.loadMap();
+        //$scope.loadMap();
     }
 
     $scope.updateEtickets = function(){
         $scope.etickets = !$scope.etickets;
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
-        $scope.loadMap();
+        //$scope.loadMap();
     }
 
     $scope.updateParking = function(ids){
         $scope.onlyParking = ids;
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
-        $scope.loadMap();
+        //$scope.loadMap();
     }
 
     $scope.getTicketList = function(){
@@ -317,7 +317,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
             // $.each(sections, function(value, key) {
             //     $scope.Data.push({"section":key,"price":0,"quantity":1});
             // });
-            $scope.loadMap();
+            //$scope.loadMap();
             //console.log(response.data);
         }, function errorCallback(response) {
             //console.log(response);
@@ -390,17 +390,16 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         };
         console.log("DVM_map_params")
         console.log(DVM_map_params);
-        set_map(DVM_map_params);
-        // $timeout(function(){
-        //     angularLoad.loadScript("https://dynamicvenuemaps.com/maps/dvm.js?v=1.0").then(function() {
-        //         console.log("dvm.js loadded successfully");
-        //         // Script loaded succesfully.
-        //         // We can now start using the functions from someplugin.js
-        //     }).catch(function() {
-        //         console.log("failure");
-        //         // There was some error loading the script. Meh
-        //     });
-        // },100);
+        $timeout(function(){
+            angularLoad.loadScript("/dvm.js").then(function() {
+                console.log("dvm.js loadded successfully");
+                // Script loaded succesfully.
+                // We can now start using the functions from someplugin.js
+            }).catch(function() {
+                console.log("failure");
+                // There was some error loading the script. Meh
+            });
+        },100);
     };
 
     $scope.compareDates = function(event_date,format){
@@ -468,23 +467,6 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     $rootScope.darkHeader = true;
     $rootScope.noFooter = true;
     $scope.searchTerm = "";
-    angularLoad.loadScript("https://dynamicvenuemaps.com/maps/dvm.js?v=1.0").then(function() {
-        console.log("dvm.js loadded successfully");
-        // Script loaded succesfully.
-        // We can now start using the functions from someplugin.js
-    }).catch(function() {
-        console.log("failure");
-        // There was some error loading the script. Meh
-    });
-    angularLoad.loadScript("https://dynamicvenuemaps.com/maps/js/DVM_functions.js?v=201401071606").then(function() {
-        console.log("dvm.js loadded successfully");
-        // Script loaded succesfully.
-        // We can now start using the functions from someplugin.js
-    }).catch(function() {
-        console.log("failure");
-        // There was some error loading the script. Meh
-    });
-
     $window.scrollTo(0, 0);
     //The global variable locat gets the current location.path
     Auth.currentUser().then(function(user) {

@@ -589,4 +589,4 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
             });
         }
     };
-});;
+});
