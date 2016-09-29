@@ -6,10 +6,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, user-scalable=no" />
   <meta name="fragment" content="!">
-  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="https://dynamicvenuemaps.com/maps/css/style_maps.css" />
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true, async: true %>
+    
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700" media="none" onload="if(media!='all')media='all'">
+  <link rel="stylesheet" href="https://dynamicvenuemaps.com/maps/css/style_maps.css" />
+    
   <%= csrf_meta_tags %>
     
     <!-- begin olark code -->
@@ -69,7 +71,7 @@ twq('track','PageView');
 </script>
 <!-- End Twitter universal website tag code -->
 <div id="mcafee-seal" class="hidden">
-  <script src="https://cdn.ywxi.net/js/inline.js?w=60" type="text/javascript"></script>
+  <script src="https://cdn.ywxi.net/js/inline.js?w=60" type="text/javascript" async></script>
 </div>
 <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
 </body>
