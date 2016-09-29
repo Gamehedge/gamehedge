@@ -317,7 +317,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
             // $.each(sections, function(value, key) {
             //     $scope.Data.push({"section":key,"price":0,"quantity":1});
             // });
-            //$scope.loadMap();
+            $scope.loadMap();
             //console.log(response.data);
         }, function errorCallback(response) {
             //console.log(response);
