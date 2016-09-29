@@ -390,16 +390,17 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         };
         console.log("DVM_map_params")
         console.log(DVM_map_params);
-        $timeout(function(){
-            angularLoad.loadScript("https://dynamicvenuemaps.com/maps/dvm.js?v=1.0").then(function() {
-                console.log("dvm.js loadded successfully");
-                // Script loaded succesfully.
-                // We can now start using the functions from someplugin.js
-            }).catch(function() {
-                console.log("failure");
-                // There was some error loading the script. Meh
-            });
-        },100);
+        set_map(DVM_map_params);
+        // $timeout(function(){
+        //     angularLoad.loadScript("https://dynamicvenuemaps.com/maps/dvm.js?v=1.0").then(function() {
+        //         console.log("dvm.js loadded successfully");
+        //         // Script loaded succesfully.
+        //         // We can now start using the functions from someplugin.js
+        //     }).catch(function() {
+        //         console.log("failure");
+        //         // There was some error loading the script. Meh
+        //     });
+        // },100);
     };
 
     $scope.compareDates = function(event_date,format){
@@ -467,6 +468,14 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     $rootScope.darkHeader = true;
     $rootScope.noFooter = true;
     $scope.searchTerm = "";
+    angularLoad.loadScript("https://dynamicvenuemaps.com/maps/dvm.js?v=1.0").then(function() {
+        console.log("dvm.js loadded successfully");
+        // Script loaded succesfully.
+        // We can now start using the functions from someplugin.js
+    }).catch(function() {
+        console.log("failure");
+        // There was some error loading the script. Meh
+    });
     $window.scrollTo(0, 0);
     //The global variable locat gets the current location.path
     Auth.currentUser().then(function(user) {
