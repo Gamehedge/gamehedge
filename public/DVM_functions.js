@@ -2346,9 +2346,15 @@ function dvm_map_filter(filter_vals) {
             }
         }
     }
-    else if (!isNaN(filter_qty_min)) {
+    console.log("dvm map filter");
+    console.log(filter_qty_min);
+    if (!isNaN(filter_qty_min)) {
+        console.log(tickets_qty_filtre);
         for (q in tickets_qty_filtre) {
-            if (parseFloat(filter_qty_min) >= parseFloat(q)) {
+            console.log(parseFloat(q));
+            console.log(parseFloat(filter_qty_min));
+            console.log("Break line");
+            if (parseFloat(filter_qty_min) <= parseFloat(q)) {
                 for (key in tickets_qty_filtre[q]) {
                     id = tickets_qty_filtre[q][key];
                     array_ids_by_qty.push(id);
