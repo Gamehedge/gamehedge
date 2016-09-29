@@ -135,7 +135,6 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     }
 
     $scope.updateFilter = function(index){
-        client_dvm_reset_maps();
         $scope.index = index;
         $scope.prev_filter = false;
         $scope.mob_index = index;
@@ -147,7 +146,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         else{
             var args_to_filter = {'filter_qty':String(index)};
         }
-        client_dvm_arg_filter(args_to_filter);
+        $scope.loadMap();
     }
 
     $scope.closePrevFilter = function() {
@@ -155,79 +154,66 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     }
     
     $scope.updateMobFilter = function(index){
-        client_dvm_reset_maps();
-        $timeout(function(){
-            $scope.mob_index = index;
-            $('#tickets_list').scrollTop(-200);
-            $scope.showing_list = 20;
-        },100);
+        $scope.mob_index = index;
+        $('#tickets_list').scrollTop(-200);
+        $scope.showing_list = 20;
+        $scope.loadMap();    
     }
     
     $scope.updateMobDelivery = function(index) {
-        client_dvm_reset_maps();
-        $timeout(function(){
-            $scope.mob_delivery = index;
-            $('#tickets_list').scrollTop(-200);
-            $scope.showing_list = 20;
-        },100);
+        $scope.mob_delivery = index;
+        $('#tickets_list').scrollTop(-200);
+        $scope.showing_list = 20;
+        $scope.loadMap();
     }
     
     $scope.updateMobEticket = function(index) {
-        client_dvm_reset_maps();
-        $timeout(function(){
-            $scope.mob_eticket = !$scope.mob_eticket;
-            $('#tickets_list').scrollTop(-200);
-            $scope.showing_list = 20;
-        },100);
+        $scope.mob_eticket = !$scope.mob_eticket;
+        $('#tickets_list').scrollTop(-200);
+        $scope.showing_list = 20;
+        $scope.loadMap();
     }
     
     $scope.mob_price_update = function(_val) {
-        client_dvm_reset_maps();
-        $timeout(function(){
-            switch(_val) {
-                case 1: $scope.mob_price_a = !$scope.mob_price_a;
-                        break;
-                case 2: $scope.mob_price_b = !$scope.mob_price_b;
-                        break;
-                case 3: $scope.mob_price_c = !$scope.mob_price_c;
-                        break;
-                case 4: $scope.mob_price_d = !$scope.mob_price_d;
-                        break;
-            }
-            //$scope.mob_price = _val;
-            $('#tickets_list').scrollTop(-200);
-            $scope.showing_list = 20;
-        },100);
-    }
-    $scope.resetMap = function(){
-        client_dvm_reset_maps();
+        switch(_val) {
+            case 1: $scope.mob_price_a = !$scope.mob_price_a;
+                    break;
+            case 2: $scope.mob_price_b = !$scope.mob_price_b;
+                    break;
+            case 3: $scope.mob_price_c = !$scope.mob_price_c;
+                    break;
+            case 4: $scope.mob_price_d = !$scope.mob_price_d;
+                    break;
+        }
+        //$scope.mob_price = _val;
+        $('#tickets_list').scrollTop(-200);
+        $scope.showing_list = 20;
+        $scope.loadMap();
     }
     
     $scope.mob_price_update_real = function(_val) {
-        client_dvm_reset_maps();
-        $timeout(function(){
-            switch(_val) {
-                case 1: $scope.mob_price_a_real = !$scope.mob_price_a_real;
-                        break;
-                case 2: $scope.mob_price_b_real = !$scope.mob_price_b_real;
-                        break;
-                case 3: $scope.mob_price_c_real = !$scope.mob_price_c_real;
-                        break;
-                case 4: $scope.mob_price_d_real = !$scope.mob_price_d_real;
-                        break;
-            }
-            
-            if($scope.mob_price_a_real == false && $scope.mob_price_b_real == false && $scope.mob_price_c_real == false && $scope.mob_price_d_real == false) {
-                $scope.price_filter = false;
-            }
-            else {
-                $scope.price_filter = true;
-            }
-            
-            //$scope.mob_price = _val;
-            $('#tickets_list').scrollTop(-200);
-            $scope.showing_list = 20;
-        },100);
+        switch(_val) {
+            case 1: $scope.mob_price_a_real = !$scope.mob_price_a_real;
+                    break;
+            case 2: $scope.mob_price_b_real = !$scope.mob_price_b_real;
+                    break;
+            case 3: $scope.mob_price_c_real = !$scope.mob_price_c_real;
+                    break;
+            case 4: $scope.mob_price_d_real = !$scope.mob_price_d_real;
+                    break;
+        }
+        
+        if($scope.mob_price_a_real == false && $scope.mob_price_b_real == false && $scope.mob_price_c_real == false && $scope.mob_price_d_real == false) {
+            $scope.price_filter = false;
+        }
+        else {
+            $scope.price_filter = true;
+        }
+        
+        //$scope.mob_price = _val;
+        $('#tickets_list').scrollTop(-200);
+        $scope.showing_list = 20;
+        $scope.loadMap();
     }
     
     $scope.showMobFilters = function() {
@@ -280,40 +266,34 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     }
     
     $scope.updateSort = function(sort){
-        client_dvm_reset_maps();
-        $timeout(function(){
-            if(sort == $scope.ordering.replace("-","")){
-                if($scope.ordering.indexOf("-") == -1){
-                    $scope.ordering = "-"+sort
-                }
-                else{
-                    $scope.ordering = sort
-                }
+        if(sort == $scope.ordering.replace("-","")){
+            if($scope.ordering.indexOf("-") == -1){
+                $scope.ordering = "-"+sort
             }
             else{
                 $scope.ordering = sort
             }
-            $('#tickets_list').scrollTop(-200);
-            $scope.showing_list = 20;
-        },100);
+        }
+        else{
+            $scope.ordering = sort
+        }
+        $('#tickets_list').scrollTop(-200);
+        $scope.showing_list = 20;
+        $scope.loadMap();
     }
 
     $scope.updateEtickets = function(){
-        client_dvm_reset_maps();
-        $timeout(function(){
-            $scope.etickets = !$scope.etickets;
-            $('#tickets_list').scrollTop(-200);
-            $scope.showing_list = 20;
-        },100);
+        $scope.etickets = !$scope.etickets;
+        $('#tickets_list').scrollTop(-200);
+        $scope.showing_list = 20;
+        $scope.loadMap();
     }
 
     $scope.updateParking = function(ids){
-        client_dvm_reset_maps();
-        $timeout(function(){
-            $scope.onlyParking = ids;
-            $('#tickets_list').scrollTop(-200);
-            $scope.showing_list = 20;
-        },100);
+        $scope.onlyParking = ids;
+        $('#tickets_list').scrollTop(-200);
+        $scope.showing_list = 20;
+        $scope.loadMap();
     }
 
     $scope.getTicketList = function(){
@@ -357,28 +337,33 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
 
     $scope.loadMap = function(){
         var tickets = []
-        for(i=0;i<$scope.tickets.data.ticket_groups.length;i++){
+        var tickets_data = $filter('filter')($scope.tickets.data.ticket_groups,$scope.filterSectionsFn());
+        tickets_data = $filter('filter')(tickets_data,($scope.onlyParking || '') && {type: 'parking'});
+        tickets_data = $filter('filter')(tickets_data,(!$scope.onlyParking || '') && {type: 'event'});
+        tickets_data = $filter('numberOfSeats')(tickets_data,$scope.index);
+        tickets_data = $filter('filter')(tickets_data,$scope.filterPriceFn());
+        for(i=0;i<tickets_data.length;i++){
             var b = "";
-            for(j=0;j<$scope.tickets.data.ticket_groups[i].splits.length;j++){
+            for(j=0;j<tickets_data[i].splits.length;j++){
                 if(j==0){
-                    b = b + $scope.tickets.data.ticket_groups[i].splits[j];
+                    b = b + tickets_data[i].splits[j];
                 }
                 else{
-                    b = b + "," + $scope.tickets.data.ticket_groups[i].splits[j];
+                    b = b + "," + tickets_data[i].splits[j];
                 }
             }
             var a = {
-                id:String($scope.tickets.data.ticket_groups[i].id),
-                section:String($scope.tickets.data.ticket_groups[i].section),
-                row:String($scope.tickets.data.ticket_groups[i].row),
-                price:String($scope.tickets.data.ticket_groups[i].retail_price),
-                qty:String($scope.tickets.data.ticket_groups[i].available_quantity),
+                id:String(tickets_data[i].id),
+                section:String(tickets_data[i].section),
+                row:String(tickets_data[i].row),
+                price:String(tickets_data[i].retail_price),
+                qty:String(tickets_data[i].available_quantity),
                 avail:String(b),
-                notes:String($scope.tickets.data.ticket_groups[i].public_notes),
+                notes:String(tickets_data[i].public_notes),
             }
             tickets.push(a)
         }
-        // console.log(tickets)
+        console.log(tickets)
         var DATA_TICKTES={"list":tickets};
         var map_width = window.innerWidth;
         var map_height = window.innerHeight - 180;
