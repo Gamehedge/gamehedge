@@ -467,6 +467,10 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				else if($scope.ticket.format == "TM_mobile"){
 					type = "TMMobile";
 				}
+                var away_team = "";
+                if($scope.event.away_performer != undefined){
+                    away_team = $scope.event.away_performer.name
+                }
 				$http({
 			        method: 'POST',
 			        url: '/orders/create',
@@ -507,7 +511,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			        	address: $scope.shipping_address.street_address,
 			        	phone: $scope.client.primary_phone_number.number,
 			        	event_home_team: $scope.event.home_performer.name,
-			        	event_away_team: $scope.event.away_performer.name,
+			        	event_away_team: away_team,
 			        	event_te_uid: $scope.event.id,
 			        	ticket_notes: $scope.ticket.public_notes,
 			        },
