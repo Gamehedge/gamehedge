@@ -2346,9 +2346,9 @@ function dvm_map_filter(filter_vals) {
             }
         }
     }
-    else if (!isNaN(filter_qty_min)) {
+    if (!isNaN(filter_qty_min)) {
         for (q in tickets_qty_filtre) {
-            if (parseFloat(filter_qty_min) >= parseFloat(q)) {
+            if (parseFloat(filter_qty_min) <= parseFloat(q)) {
                 for (key in tickets_qty_filtre[q]) {
                     id = tickets_qty_filtre[q][key];
                     array_ids_by_qty.push(id);
