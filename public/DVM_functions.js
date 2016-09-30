@@ -2410,6 +2410,7 @@ function dvm_map_filter(filter_vals) {
         }
     }
     if (!is_static_map) {
+        display_all_selected_tickets();
         reduceNotClickedSectionsOpacity();
     }
 }
