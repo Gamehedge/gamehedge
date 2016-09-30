@@ -92,13 +92,11 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
     $scope.getEventInfo = function(){
 		return apiService.getData('/api/v1/events/'+$routeParams.eventId)
             .then(function(response){
-            	// console.log("Event");
-            	// console.log(response);
+            	console.log("Event");
+            	console.log(response);
                 $scope.event  = response;
                 $rootScope.title = $scope.event.name + " Tickets | Gamehedge";
     			$rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by "+$scope.event.home_performer.sport.ggg+" or more, get 50% of your ticket price back.";
-                
-                $scope.getTicketList();
                 
                 if($routeParams.slug != $scope.event.slug){
                     $location.path("/");
@@ -324,7 +322,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	$scope.loadMap = function(){
 		var date = $filter('date')($scope.event.occurs_at, 'yyyy-MM-ddTHH:mm');
 		//console.log($scope.Data);
-		$("#MapContainer").tuMap({
+        $("#MapContainer").tuMap({
 	        EventInfo: {
 	            Venue: $scope.event.venue.name,
 	            EventName: $scope.event.name,
@@ -475,6 +473,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	$rootScope.darkHeader = true;
 	$rootScope.noFooter = true;
 	$scope.searchTerm = "";
+    $scope.compareDate =  "2015-09-05T00:00:00.000Z"
 	$window.scrollTo(0, 0);
 	//The global variable locat gets the current location.path
 	Auth.currentUser().then(function(user) {

@@ -28,7 +28,6 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         val = true;
         if($scope.price_filter == true){
             val = false;
-            
             if($scope.mob_price_a_real) {
                 $scope.price_filter_down_limit = 0;
                 $scope.price_filter_up_limit = 100;
@@ -64,7 +63,6 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         else {
             val = true;
         }
-        
         return val;
     }
     
@@ -139,13 +137,12 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
         if(index == 5){
-            var args_to_filter = {'filter_qty_min':String(index)};
+            var args_to_filter = {'filter_qty_min':index};
         }
         else{
-            var args_to_filter = {'filter_qty':String(index)};
+            var args_to_filter = {'filter_qty':index};
         }
         client_dvm_arg_filter(args_to_filter);
-        //$scope.loadMap();
     }
 
     $scope.closePrevFilter = function() {
@@ -156,6 +153,13 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         $scope.mob_index = index;
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
+        if(index == 5){
+            var args_to_filter = {'filter_qty_min':String(index)};
+        }
+        else{
+            var args_to_filter = {'filter_qty':String(index)};
+        }
+        client_dvm_arg_filter(args_to_filter);
         //$scope.loadMap();    
     }
     
@@ -174,16 +178,24 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     }
     
     $scope.mob_price_update = function(_val) {
+        var args_to_filter = {};
         switch(_val) {
             case 1: $scope.mob_price_a = !$scope.mob_price_a;
+                    args_to_filter = {'filter_min_price':0,'filter_max_price':100};
                     break;
             case 2: $scope.mob_price_b = !$scope.mob_price_b;
+                    args_to_filter = {'filter_min_price':100,'filter_max_price':200};         
                     break;
             case 3: $scope.mob_price_c = !$scope.mob_price_c;
+                    args_to_filter = {'filter_min_price':200,'filter_max_price':300};
                     break;
             case 4: $scope.mob_price_d = !$scope.mob_price_d;
+                    args_to_filter = {'filter_min_price':300,'filter_max_price':9999999999999999};
                     break;
+            default:
+                    args_to_filter = {'filter_qty':0};
         }
+        client_dvm_arg_filter(args_to_filter);
         //$scope.mob_price = _val;
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
@@ -191,15 +203,22 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     }
     
     $scope.mob_price_update_real = function(_val) {
+        var args_to_filter = {};
         switch(_val) {
             case 1: $scope.mob_price_a_real = !$scope.mob_price_a_real;
+                    args_to_filter = {'filter_min_price':0,'filter_max_price':100};
                     break;
             case 2: $scope.mob_price_b_real = !$scope.mob_price_b_real;
+                    args_to_filter = {'filter_min_price':100,'filter_max_price':200};
                     break;
             case 3: $scope.mob_price_c_real = !$scope.mob_price_c_real;
+                    args_to_filter = {'filter_min_price':200,'filter_max_price':300};
                     break;
             case 4: $scope.mob_price_d_real = !$scope.mob_price_d_real;
+                    args_to_filter = {'filter_min_price':300,'filter_max_price':9999999999999999};
                     break;
+            default:
+                    args_to_filter = {'filter_qty':0};
         }
         
         if($scope.mob_price_a_real == false && $scope.mob_price_b_real == false && $scope.mob_price_c_real == false && $scope.mob_price_d_real == false) {
@@ -208,7 +227,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         else {
             $scope.price_filter = true;
         }
-        
+        client_dvm_arg_filter(args_to_filter);
         //$scope.mob_price = _val;
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
