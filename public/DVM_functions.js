@@ -2460,6 +2460,7 @@ function dvm_reset_maps(init_filtre_vals) {
         //initialiser la liste des tickets
         $("#" + hiddenClickedSections).val('');
         $("#" + hiddenClickedRows).val('');
+        display_all_selected_tickets();
     }
 }
 //compare tickets
