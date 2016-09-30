@@ -43,7 +43,7 @@ function client_dvm_arg_filter(args_to_filter){
     }else{
         $('#'+tickets_container+' .rowTicket').show();
     }*/
-    console.log(args_to_filter);
+    
 }
 
 /** reset map
