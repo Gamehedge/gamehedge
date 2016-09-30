@@ -320,7 +320,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	}
 
 	$scope.loadMap = function(){
-		var date = $filter('date')($scope.event.occurs_at, 'yyyy-MM-ddTHH:mm');
+		var date = $filter('date')($scope.event.occurs_at, 'yyyy-MM-ddTHH:mm','UTC');
 		//console.log($scope.Data);
         $("#MapContainer").tuMap({
 	        EventInfo: {
