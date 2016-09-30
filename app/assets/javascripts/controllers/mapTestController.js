@@ -234,7 +234,6 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         else {
             $scope.price_filter = true;
         }
-        c
         client_dvm_arg_filter(args_to_filter);
         //$scope.mob_price = _val;
         $('#tickets_list').scrollTop(-200);
