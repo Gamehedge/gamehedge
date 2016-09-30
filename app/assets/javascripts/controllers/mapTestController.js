@@ -178,22 +178,26 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     }
     
     $scope.mob_price_update = function(_val) {
-        var args_to_filter = {};
+        var price_filters = [];
         switch(_val) {
             case 1: $scope.mob_price_a = !$scope.mob_price_a;
-                    args_to_filter = {'filter_min_price':0,'filter_max_price':100};
+                    price_filters.push({'filter_min_price':0,'filter_max_price':100});
                     break;
             case 2: $scope.mob_price_b = !$scope.mob_price_b;
-                    args_to_filter = {'filter_min_price':100,'filter_max_price':200};         
+                    price_filters.push({'filter_min_price':100,'filter_max_price':200});         
                     break;
             case 3: $scope.mob_price_c = !$scope.mob_price_c;
-                    args_to_filter = {'filter_min_price':200,'filter_max_price':300};
+                    price_filters.push({'filter_min_price':200,'filter_max_price':300});
                     break;
             case 4: $scope.mob_price_d = !$scope.mob_price_d;
-                    args_to_filter = {'filter_min_price':300,'filter_max_price':9999999999999999};
+                    price_filters.push({'filter_min_price':300,'filter_max_price':9999999999999999});
                     break;
-            default:
-                    args_to_filter = {'filter_qty':0};
+        }
+        if($scope.index == 5){
+            args_to_filter = {'filter_price':price_filters,'filter_qty_min':$scope.index};
+        }
+        else{
+            args_to_filter = {'filter_price':price_filters,'filter_qty':$scope.index};
         }
         client_dvm_arg_filter(args_to_filter);
         //$scope.mob_price = _val;
@@ -203,30 +207,34 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     }
     
     $scope.mob_price_update_real = function(_val) {
-        var args_to_filter = {};
+        var price_filters = [];
         switch(_val) {
             case 1: $scope.mob_price_a_real = !$scope.mob_price_a_real;
-                    args_to_filter = {'filter_min_price':0,'filter_max_price':100};
+                    price_filters.push({'filter_min_price':0,'filter_max_price':100});
                     break;
             case 2: $scope.mob_price_b_real = !$scope.mob_price_b_real;
-                    args_to_filter = {'filter_min_price':100,'filter_max_price':200};
+                    price_filters.push({'filter_min_price':100,'filter_max_price':200});
                     break;
             case 3: $scope.mob_price_c_real = !$scope.mob_price_c_real;
-                    args_to_filter = {'filter_min_price':200,'filter_max_price':300};
+                    price_filters.push({'filter_min_price':200,'filter_max_price':300});
                     break;
             case 4: $scope.mob_price_d_real = !$scope.mob_price_d_real;
-                    args_to_filter = {'filter_min_price':300,'filter_max_price':9999999999999999};
+                    price_filters.push({'filter_min_price':300,'filter_max_price':9999999999999999});
                     break;
-            default:
-                    args_to_filter = {'filter_qty':0};
         }
-        
+        if($scope.index == 5){
+            args_to_filter = {'filter_price':price_filters,'filter_qty_min':$scope.index};
+        }
+        else{
+            args_to_filter = {'filter_price':price_filters,'filter_qty':$scope.index};
+        }
         if($scope.mob_price_a_real == false && $scope.mob_price_b_real == false && $scope.mob_price_c_real == false && $scope.mob_price_d_real == false) {
             $scope.price_filter = false;
         }
         else {
             $scope.price_filter = true;
         }
+        c
         client_dvm_arg_filter(args_to_filter);
         //$scope.mob_price = _val;
         $('#tickets_list').scrollTop(-200);
@@ -404,7 +412,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         console.log("DVM_map_params")
         console.log(DVM_map_params);
         $timeout(function(){
-            angularLoad.loadScript("/dvm.js?v=4").then(function() {
+            angularLoad.loadScript("/dvm.js?v=5").then(function() {
                 console.log("dvm.js loadded successfully");
                 // Script loaded succesfully.
                 // We can now start using the functions from someplugin.js

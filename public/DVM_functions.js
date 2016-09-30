@@ -2317,6 +2317,7 @@ function dvm_map_filter(filter_vals) {
     filter_qty_min = parseFloat(filter_vals['filter_qty_min']);
     filter_min_price = parseFloat(filter_vals['filter_min_price']);
     filter_max_price = parseFloat(filter_vals['filter_max_price']);
+    filter_price = filter_vals['filter_price'];
     //best value
     filter_best_value = false;
     if (filter_vals['filter_best_value']) {
@@ -2377,6 +2378,27 @@ function dvm_map_filter(filter_vals) {
             }
         }
     }
+    if (!isNaN(filter_price))
+        if(filter_price.length > 0){
+            for(j=0;j<filter_price.length;j++){
+                filter_min_price = filter_price[j]['filter_min_price'];
+                filter_max_price = filter_price[j]['filter_max_price'];
+                if ((!isNaN(filter_min_price) || !isNaN(filter_max_price))) {
+                    for (p in tickets_price_filtre) {
+                        if (
+                                (isNaN(filter_min_price) || (parseFloat(p) >= parseFloat(filter_min_price)))
+                                &&
+                                (isNaN(filter_max_price) || (parseFloat(p) <= parseFloat(filter_max_price)))
+                                ) {
+                            for (key in tickets_price_filtre[p]) {
+                                id = tickets_price_filtre[p][key];
+                                array_ids_by_price.push(id);
+                            }
+                        }
+                    }
+                }
+            }
+        }
     //filter arrays intersection
     filter_result = [];
     if (array_ids_by_qty.length > 0) {
