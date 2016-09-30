@@ -76,7 +76,7 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
                 
                 $timeout(function(){
                     $scope.page_loading = false;  
-                }, 1000);
+                }, 100);
                 
         });
     }
