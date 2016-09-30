@@ -73,7 +73,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         if($scope.selectedSections.length > 0){
             var indexSection = 0;
             for(indexSection = 0; indexSection < $scope.selectedSections.length; indexSection++){
-                if(_ele.section == $scope.selectedSections[indexSection]){
+                if( _ele.section.indexOf( $scope.selectedSections[indexSection] ) ){
                     _result = true;
                     break;
                 }
