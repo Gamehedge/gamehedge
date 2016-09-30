@@ -19,7 +19,7 @@
  @import "slick-theme";
  @import "ladda/dist/ladda-themeless.min";
  @import "sweetalert/dist/sweetalert";
- 
+ @import "font-awesome.min";
 
 /*loading css*/
 
@@ -3669,6 +3669,11 @@ footer .footer-signature img{
     
     .row-selected {
         background-color: beige !important;
+    }
+    
+    .order-tel {
+        padding-left: 15px;
+        padding-right: 15px;
     }
 }
 
