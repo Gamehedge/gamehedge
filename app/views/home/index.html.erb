@@ -22,7 +22,7 @@
         </div>
         <div class="row menu-row" ng-show="$root.isLoggedin">
             <div class="col-xs-3"><img class="user-icon" src="<%= image_url "profile icon.png" %>"></div>
-            <div class="col-xs-9"><p>{{$root.user.name | uppercase}}</p></div>
+            <div class="col-xs-9"><p ng-cloak>{{$root.user.name | uppercase}}</p></div>
         </div>
         <div class="row menu-row" ng-show="$root.isLoggedin">
             <div class="col-xs-3"></div>
@@ -39,11 +39,11 @@
 
         <div class="row menu-row separator" ng-repeat-start="league in leagueList" ng-if="$first">
             <div class="col-xs-3" ng-if="league.active == true"></div>
-            <div class="col-xs-9" ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()">{{league.name | uppercase}}</a></div>
+            <div class="col-xs-9" ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()" ng-cloak>{{league.name | uppercase}}</a></div>
         </div>
         <div class="row menu-row" ng-repeat-end ng-if="!$first">
             <div class="col-xs-3" ng-if="league.active == true"></div>
-            <div class="col-xs-9" ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()">{{league.name | uppercase}}</a></div>
+            <div class="col-xs-9" ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()" ng-cloak>{{league.name | uppercase}}</a></div>
         </div>
 
 
@@ -101,7 +101,7 @@
     </div>
     <div class="results-container">
         <div ng-repeat="result in searchResults">
-            <a ng-href="result.url" ng-click="hideMenus()">{{result.name}}</a>
+            <a ng-href="result.url" ng-click="hideMenus()" ng-cloak>{{result.name}}</a>
         </div>
     </div>
     <div class="mobile-menu-footer">
@@ -155,17 +155,17 @@
         <div class="col-md-4 hidden-sm hidden-xs horizontal-center main-menu">
             <ul class="nav navbar-nav navbar-leagues vertical-center horizontal-center" ng-show="!$root.isOrder" ng-repeat="league in leagueList | orderBy:'name' track by $index" ng-if="league.active == true">
                <li class="dropdown main-dropdown yamm-fw">
-                     <a class="dropdown-toggle" href="{{league.url}}">{{league.name | uppercase}}</a>
+                     <a class="dropdown-toggle" href="{{league.url}}" ng-cloak>{{league.name | uppercase}}</a>
                      <ul class="dropdown-menu" ng-class="{'size1':league.name == 'MLB' || league.name == 'NBA','size2':league.name == 'NFL','size3':league.name == 'NHL','size4':league.name == 'NCAAFB'}">
                         <li>
                             <div class="yamm-content" ng-if="league.id != 5" >
                                 <div class="text-center" ng-repeat="main_division in divisions | filter:{is_main_division:true,sport_id:league.id} | orderBy:'name'">
-                                    <div class="col-xs-12 title vertical-center horizontal-center">{{main_division.name}}</div>
+                                    <div class="col-xs-12 title vertical-center horizontal-center" ng-cloak>{{main_division.name}}</div>
                                     <div ng-class="{'col-xs-4':league.name == 'MLB' || league.name == 'NBA','col-xs-3':league.name == 'NFL','col-xs-6':league.name == 'NHL'}" ng-repeat="division in divisions | filter:{division_id:main_division.id}">
-                                        <div class="subtitle">{{division.name | uppercase}}</div>
+                                        <div class="subtitle" ng-cloak>{{division.name | uppercase}}</div>
                                         <div class="performer-holder">
                                             <div ng-repeat="performer in performers | filter:{division_id:division.id}:true | orderBy:'name'">
-                                                <a href="{{performer.url}}">{{performer.name}}</a>
+                                                <a href="{{performer.url}}" ng-cloak>{{performer.name}}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -176,10 +176,10 @@
                                     <div ng-repeat="division in divisions | filter:{sport_id:league.id} | orderBy:'name'">
                                         <div class="clearfix" ng-if="$index % 3 == 0"></div>
                                         <div class="col-xs-4">
-                                            <div class="subtitle">{{division.name | uppercase}}</div>
+                                            <div class="subtitle" ng-cloak>{{division.name | uppercase}}</div>
                                             <div class="performer-holder">
                                                 <div ng-repeat="performer in performers | filter:{division_id:division.id}:true | orderBy:'name'">
-                                                    <a href="{{performer.url}}">{{performer.name}}</a>
+                                                    <a href="{{performer.url}}" ng-cloak>{{performer.name}}</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -198,7 +198,7 @@
             </div>
         <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs" ng-show="!$root.isOrder">
             <div class="dropdown" ng-show="$root.isLoggedin">
-                <button class="dropdown-toggle myaccount-btn" type="button" data-toggle="dropdown"><img class="user-icon" src="<%= image_url "profile icon.png" %>">{{$root.user.name | uppercase}}<img class="dropdown-icon" src="<%= image_url "dropdown.png" %>"></button>
+                <button ng-cloak class="dropdown-toggle myaccount-btn" type="button" data-toggle="dropdown"><img class="user-icon" src="<%= image_url "profile icon.png" %>">{{$root.user.name | uppercase}}<img class="dropdown-icon" src="<%= image_url "dropdown.png" %>"></button>
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li><a href="/member">Your Profile</a></li>
                     <li><a href="/order_history">Order History</a></li>
