@@ -1,7 +1,9 @@
 app = angular.module('gamehedge')
 
-app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,dataService,$http,apiService){
-
+app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,dataService,$http,apiService, $timeout){
+    
+    $scope.page_loading = true;
+    
 	$scope.logout = function(){
         $scope.hideMenus();
         var config = {
@@ -71,6 +73,11 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
         apiService.getData('/api/v1/sports/')
             .then(function(response){
                 $scope.leagueList = response;
+                
+                $timeout(function(){
+                    $scope.page_loading = false;  
+                }, 1000);
+                
         });
     }
 

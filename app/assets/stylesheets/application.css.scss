@@ -5589,3 +5589,22 @@ main#admin #order-stats .stat-item span {
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
+
+/* The starting CSS styles for the enter animation */
+.fade-intro.ng-enter {
+  //transition:0.5s linear all;
+  //opacity:0;
+}
+
+/* The finishing CSS styles for the enter animation */
+.fade-intro.ng-enter.ng-enter-active {
+  //opacity:1;
+}
+
+.fade-intro.ng-leave {
+  transition:0.5s linear all;
+  opacity:1;
+}
+.fade-intro.ng-leave.ng-leave-active {
+  opacity:0;
+}
