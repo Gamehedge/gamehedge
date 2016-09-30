@@ -136,11 +136,24 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         $scope.mob_index = index;
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
-        if(index == 5){
-            var args_to_filter = {'filter_qty_min':index};
+        var price_filters = [];
+        if($scope.mob_price_a_real == true){
+            price_filters.push({'filter_min_price':0,'filter_max_price':100});
+        }
+        if($scope.mob_price_b_real == true){
+            price_filters.push({'filter_min_price':100,'filter_max_price':200});
+        }
+        if($scope.mob_price_c_real == true){
+            price_filters.push({'filter_min_price':200,'filter_max_price':300});
+        }
+        if($scope.mob_price_d_real == true){
+            price_filters.push({'filter_min_price':200,'filter_max_price':9999999999999999});
+        }
+        if($scope.index == 5){
+            args_to_filter = {'filter_price':price_filters,'filter_qty_min':$scope.index};
         }
         else{
-            var args_to_filter = {'filter_qty':index};
+            args_to_filter = {'filter_price':price_filters,'filter_qty':$scope.index};
         }
         client_dvm_arg_filter(args_to_filter);
     }
@@ -153,11 +166,24 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         $scope.mob_index = index;
         $('#tickets_list').scrollTop(-200);
         $scope.showing_list = 20;
-        if(index == 5){
-            var args_to_filter = {'filter_qty_min':String(index)};
+        var price_filters = [];
+        if($scope.mob_price_a_real == true){
+            price_filters.push({'filter_min_price':0,'filter_max_price':100});
+        }
+        if($scope.mob_price_b_real == true){
+            price_filters.push({'filter_min_price':100,'filter_max_price':200});
+        }
+        if($scope.mob_price_c_real == true){
+            price_filters.push({'filter_min_price':200,'filter_max_price':300});
+        }
+        if($scope.mob_price_d_real == true){
+            price_filters.push({'filter_min_price':200,'filter_max_price':9999999999999999});
+        }
+        if($scope.index == 5){
+            args_to_filter = {'filter_price':price_filters,'filter_qty_min':$scope.index};
         }
         else{
-            var args_to_filter = {'filter_qty':String(index)};
+            args_to_filter = {'filter_price':price_filters,'filter_qty':$scope.index};
         }
         client_dvm_arg_filter(args_to_filter);
         //$scope.loadMap();    
@@ -427,7 +453,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         console.log("DVM_map_params")
         console.log(DVM_map_params);
         $timeout(function(){
-            angularLoad.loadScript("/dvm.js?v=10").then(function() {
+            angularLoad.loadScript("/dvm.js?v=11").then(function() {
                 console.log("dvm.js loadded successfully");
                 // Script loaded succesfully.
                 // We can now start using the functions from someplugin.js

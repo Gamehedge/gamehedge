@@ -2376,9 +2376,6 @@ function dvm_map_filter(filter_vals) {
             }
         }
     }
-    console.log("before filter_price");
-    console.log(filter_price);
-    console.log(filter_vals);
     if (filter_price != undefined){
         console.log("entered filter_price");
         if(filter_price.length > 0){
