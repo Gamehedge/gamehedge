@@ -2377,9 +2377,9 @@ function dvm_map_filter(filter_vals) {
         }
     }
     console.log("before filter_price");
+    console.log(filter_price);
     if (!isNaN(filter_price)){
         console.log("entered filter_price");
-        console.log(filter_price);
         if(filter_price.length > 0){
             for(j=0;j<filter_price.length;j++){
                 filter_min_price = filter_price[j]['filter_min_price'];
