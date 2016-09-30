@@ -2348,11 +2348,8 @@ function dvm_map_filter(filter_vals) {
         }
     }
     if (!isNaN(filter_qty_min)) {
-        console.log(tickets_qty_filtre);
+        
         for (q in tickets_qty_filtre) {
-            console.log(parseFloat(q));
-            console.log(parseFloat(filter_qty_min));
-            console.log("Break line");
             if (parseFloat(filter_qty_min) <= parseFloat(q)) {
                 for (key in tickets_qty_filtre[q]) {
                     id = tickets_qty_filtre[q][key];
@@ -2377,7 +2374,7 @@ function dvm_map_filter(filter_vals) {
         }
     }
     if (filter_price != undefined){
-        console.log("entered filter_price");
+        
         if(filter_price.length > 0){
             for(j=0;j<filter_price.length;j++){
                 filter_min_price = filter_price[j]['filter_min_price'];
@@ -3444,6 +3441,8 @@ function display_all_selected_tickets() {
                     reversed_sid_list = matched_sections_reverse[sid];
                     for (krsid in reversed_sid_list) {
                         var reversed_sid = reversed_sid_list[krsid];
+                        console.log("Section")
+                        console.log(reversed_sid);
                         $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').filter("[data-section='" + reversed_sid + "'][data-row='" + rid + "']").show();
                     }
                 }
