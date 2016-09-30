@@ -3422,6 +3422,7 @@ function display_row_tickets(section, row, unset) {
     display_all_selected_tickets();
     return true;
 }
+new CustomEvent('sectionSelected', {'detail': sections_show})
 function display_all_selected_tickets() {
     //############### ROWS
     //get section Ids from the hidden RowPass and split it
@@ -3429,6 +3430,7 @@ function display_all_selected_tickets() {
     //get section Ids from the hidden SectionPass and split it
     var sectionsIdsSplit = $("#" + hiddenClickedSections).val().split(",");
     if (this_map_params['rows_display'] === false) {
+        sections_show = [];
         if ($("#" + hiddenClickedSections).val() == '') {
             $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').show();
         } else {
@@ -3441,13 +3443,16 @@ function display_all_selected_tickets() {
                     reversed_sid_list = matched_sections_reverse[sid];
                     for (krsid in reversed_sid_list) {
                         var reversed_sid = reversed_sid_list[krsid];
-                        console.log("Section")
                         console.log(reversed_sid);
+                        if(sections_show.indexOf(reversed_sid) == -1){
+                            sections_show.push(reversed_sid);
+                        }
                         $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').filter("[data-section='" + reversed_sid + "'][data-row='" + rid + "']").show();
                     }
                 }
             }
         }
+        document.dispatchEvent(sectionSelected);
     } else {
         if ($("#" + hiddenClickedRows).val() == '') {
             $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').show();
