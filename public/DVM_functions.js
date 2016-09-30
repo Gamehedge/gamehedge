@@ -3422,6 +3422,7 @@ function display_row_tickets(section, row, unset) {
     display_all_selected_tickets();
     return true;
 }
+var sections_show = [];
 new CustomEvent('sectionSelected', {'detail': sections_show})
 function display_all_selected_tickets() {
     //############### ROWS
