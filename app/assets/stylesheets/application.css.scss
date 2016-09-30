@@ -1572,7 +1572,7 @@ body {
     height: 30px;
     border-radius: 5px;
     background-color: #ffffff;
-    border: solid 2px #d3d3d3;
+    border: solid 1px #d3d3d3;
     font-size: 12px;
     color: #999999;
     width: 100%;
@@ -1779,7 +1779,7 @@ body {
 }
 
 #payments .ggg-badge-pledge img{
-    height: 70px;
+    height: 80px;
 }
 
 #payments .ggg-badge-pledge ul{
@@ -1792,7 +1792,7 @@ body {
 }
 
 #payments .ggg-badge-pledge .cont{
-    font-size: 8px;
+    font-size: 9px !important;
 }
 
 #payments .review{
@@ -5512,8 +5512,34 @@ main#admin #order-stats .stat-item span {
 
 @media (max-width:1200px) and (min-width:992px) {
     #payments .ggg-badge-pledge img{
-        height: 60px;
+        height: 70px;
     }
+    
+    #payments .ggg-badge-pledge .title {
+        font-size: 6px !important;
+    }
+    
+    #payments .ggg-badge-pledge .cont {
+        font-size: 8px !important;
+    }
+    
+    .badge-right-element .title-1 {
+        font-size: 10px !important;
+    }
+    .sub-cont {
+        font-size: 6px !important;
+    }
+    #payments .ggg-badge-pledge ul {
+        
+    }
+    .left-custom {
+        width: 35% !important;   
+    }
+    .right-custom {
+        width: 65% !important
+    }
+    
+    
 }
 
 
@@ -5613,3 +5639,67 @@ main#admin #order-stats .stat-item span {
 .fade-intro.ng-leave.ng-leave-active {
   opacity:0;
 }
+
+.badge-container {
+    display: flex;
+}
+
+.pledge-left {
+    padding: 5px;
+    border: 1px #cccccc solid;
+    border-radius: 5px;
+    margin-right: 7px;
+    width: 50%;
+}
+
+.pledge-right {
+    padding: 5px;
+    border: 1px #cccccc solid;
+    border-radius: 5px;
+    margin-left: 7px;
+    width: 50%;
+}
+
+.badge-left-element {
+    width: 40%;
+    text-align: center;
+}
+.badge-right-element {
+    width: 60%;
+}
+
+#payments .ggg-badge-pledge ul {
+    margin-bottom: 0px !important;
+    padding-right: 5px;
+}
+
+.badge-right-element .title {
+    text-align: justify;
+    -moz-text-align-last: justify; /* Code for Firefox */
+    text-align-last: justify;
+    font-weight: bold;
+    font-size: 9px !important;
+    line-height: 1em;
+}
+.badge-right-element .title:after{
+   content: "";
+   display: inline-block;
+   width: 100%;
+}
+
+.badge-right-element .title-1 {
+    font-weight: bold;
+    font-size: 13px;
+    text-align: center;
+}
+.badge-right-element .cont {
+    text-align: justify;
+}
+
+.sub-cont {
+    text-align: center;
+    font-size: 8px;
+    font-weight: bold;
+    margin: 2px 0px;
+}
+
