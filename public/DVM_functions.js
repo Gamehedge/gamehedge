@@ -3444,7 +3444,6 @@ function display_all_selected_tickets() {
                     reversed_sid_list = matched_sections_reverse[sid];
                     for (krsid in reversed_sid_list) {
                         var reversed_sid = reversed_sid_list[krsid];
-                        console.log(reversed_sid);
                         if(sections_show.indexOf(reversed_sid) == -1){
                             sections_show.push(reversed_sid);
                         }
@@ -3453,6 +3452,8 @@ function display_all_selected_tickets() {
                 }
             }
         }
+        console.log(sections_show);
+        sectionsEvent = CustomEvent('sectionSelected', {'detail': sections_show})
         document.body.dispatchEvent(sectionsEvent);
     } else {
         if ($("#" + hiddenClickedRows).val() == '') {
