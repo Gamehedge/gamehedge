@@ -3453,7 +3453,7 @@ function display_all_selected_tickets() {
             }
         }
         console.log(sections_show);
-        sectionsEvent = CustomEvent('sectionSelected', {'detail': sections_show})
+        sectionsEvent = new CustomEvent('sectionSelected', {'detail': sections_show});
         document.body.dispatchEvent(sectionsEvent);
     } else {
         if ($("#" + hiddenClickedRows).val() == '') {
