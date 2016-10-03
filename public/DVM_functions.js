@@ -856,6 +856,7 @@ function set_map(args) {
                         //safari bug correction
                         rMap.safari();
                         current = section;
+                        alert(section);
                     }
                     //No tickets available in this section
                     else {
