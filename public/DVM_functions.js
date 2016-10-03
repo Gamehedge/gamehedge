@@ -3390,6 +3390,8 @@ function display_section_tickets(section, unset) {
         else {
             dvm_add_section_to_display_list(section_id, false);
         }
+        console.log("selected 1");
+        console.log(allSectionsToShow);
     }
     if (map_args['self_display_tickets_by_client']===true){
         // console.log("****"+matched_sections_reverse[section_id]+"***");
@@ -3397,6 +3399,7 @@ function display_section_tickets(section, unset) {
         display_tickets_by_client(matched_sections_reverse[section_id]);
        
     }else{
+        console.log("selected 2");
         console.log(hiddenClickedSections)
         display_all_selected_tickets();
     }
@@ -3442,9 +3445,6 @@ function display_all_selected_tickets() {
             //hide all tickets
             $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').hide();
             //show 
-            console.log("showing")
-            console.log(hiddenClickedSections);
-            console.log("showed")
             for (kid in sectionsIdsSplit) {
                 sid = sectionsIdsSplit[kid];
                 for (rid in sections_tickets_list[sid]) {
