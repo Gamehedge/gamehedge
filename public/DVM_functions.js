@@ -3628,6 +3628,7 @@ function fill_tooltip_section(parts, x, y) {
         $("#sectionTooltip .colr").css("background-color", color);
         $("#sectionTooltip #smallimg").attr("class", "fancybox_no");
         $("#sectionTooltip #imgsmall").attr("src", limg);
+        console.log(limg);
         section_id = pars[4];
         $.ajax({
             url: 'https://dynamicvenuemaps.com/maps/svg_ajax/tooltip_infos.php',
