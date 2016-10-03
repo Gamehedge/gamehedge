@@ -131,9 +131,9 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
             $scope.next_events = response2.data;
             if($scope.next_events != null){
                 for(j=$scope.next_events.length - 1;j>=0;j--){
-                    if($scope.next_events[j].performances.length != 2){
-                        $scope.next_events.splice(j,1);
-                    }
+                    // if($scope.next_events[j].performances.length != 2){
+                    //     $scope.next_events.splice(j,1);
+                    // }
                     if($scope.next_events[j] != undefined){
                         if(moment().add(1,'h').isAfter(String($scope.next_events[j].occurs_at).replace('Z',''))) {
                             $scope.next_events.splice(j, 1);
