@@ -819,11 +819,8 @@ function set_map(args) {
             clickSection = function (sts, section, section_has_tix) {
                 //e = jQuery.event.fix(e);
                 //if (section_as_row(section) || panZoom.getCurrentZoom()<1) {
-                console.log("enterd click");
                 if (section_as_row(section) || (this_map_params['rows_display'] === false)) {// || (this_map_params['rows_display'] && panZoom.getCurrentZoom()<1)
-                    console.log("enterd first");
                     if (section_has_tix) {
-                        console.log("enterd second");
                         if (sts[0].state === 0) {
                             //change sections color and stroke
                             attrs = click_attr_section_setting(section);
@@ -862,7 +859,6 @@ function set_map(args) {
                     }
                     //No tickets available in this section
                     else {
-                        console.log("enterd third");
                         //change sections color and stroke
                         attrs = normal_attr_section_setting(section);
                         //st.attr(attrs);
@@ -2297,10 +2293,14 @@ function dvm_ticket_ids_by_filters(args_to_filter) {
  * @returns 
  */
 function dvm_add_section_to_display_list(section_to_add, row_to_add) {
-    if ($("#" + hiddenClickedSections).val() && $("#" + hiddenClickedSections).val() != '')
+    if ($("#" + hiddenClickedSections).val() && $("#" + hiddenClickedSections).val() != ''){
         $("#" + hiddenClickedSections).val($("#" + hiddenClickedSections).val() + ',' + section_to_add);
-    else
+        console.log("entered first");
+    }
+    else{
         $("#" + hiddenClickedSections).val(section_to_add);
+        console.log("entered second");
+    }
 }
 /**
  * add row to the hidden containing rows to display
