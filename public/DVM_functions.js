@@ -3757,23 +3757,23 @@ function display_tooltip_row(section, row, x, y) {
 //hide tooltip row
 function hide_tooltip_row(delayHide) {
     //document.getElementById('hswfRow').value=0;
-    if (!ifInsideTooltipRow) {
-        if (!delayHide) {
-            $("#rowTooltip").clearQueue();
-            $("#rowTooltip").hide();
-        } else {
-            //if (document.getElementById('hfdivRow').value === 0) {
-            if (imgRowHidden === false) {
-                $("#rowTooltip").show().delay(5000).queue(function () {
-                    if (!ifInsideTooltipRow)
-                    {
-                        $(this).hide();
-                    }
-                });
-            }
-        }
-        imgRowHidden = true;
-    }
+    // if (!ifInsideTooltipRow) {
+    //     if (!delayHide) {
+    //         $("#rowTooltip").clearQueue();
+    //         $("#rowTooltip").hide();
+    //     } else {
+    //         //if (document.getElementById('hfdivRow').value === 0) {
+    //         if (imgRowHidden === false) {
+    //             $("#rowTooltip").show().delay(5000).queue(function () {
+    //                 if (!ifInsideTooltipRow)
+    //                 {
+    //                     $(this).hide();
+    //                 }
+    //             });
+    //         }
+    //     }
+    //     imgRowHidden = true;
+    // }
 }
 //fill tooltip by section details and image
 function jsonp_display_tooltip_row(data) {
