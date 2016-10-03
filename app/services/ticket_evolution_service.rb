@@ -47,7 +47,7 @@ class TicketEvolutionService
       when 'events'
         #@events = Order.all
         puts "Updating events began"
-        Sport.all.each do |s|
+        Sport.all.order(:id).each do |s|
           puts String(s.name)
           @events = @connection.events.list({:category_id => s.te_uid, :per_page => 10000000, 'occurs_at.gte' => (Time.now - 1.day).strftime("%m/%d/%Y")})
           @events.each do |e|
@@ -144,6 +144,7 @@ class TicketEvolutionService
                       @event.sport_id = sport_id
                       @event.venue_configuration_id = venue_configuration_id
                       @event.slug = ((name.downcase.gsub ' ', '-') + "-tickets"),
+                      @event.url = '/events/' + String(te_uid) + '/' + ((name.downcase.gsub ' ', '-') + "-tickets")
                       @event.save
                       puts "Exists. Event Updated " + String(e.name)
                     end

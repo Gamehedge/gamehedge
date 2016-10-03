@@ -3397,7 +3397,7 @@ function display_section_tickets(section, unset) {
         display_tickets_by_client(matched_sections_reverse[section_id]);
        
     }else{
-        alert("selected 2")
+        console.log(hiddenClickedSections)
         display_all_selected_tickets();
     }
     
