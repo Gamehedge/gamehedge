@@ -126,7 +126,7 @@ class TicketEvolutionService
                         location: location,
                         sport_id: sport_id,
                         venue_configuration_id: venue_configuration_id,
-                        url: '/events/' + te_uid + '/' + ((name.downcase.gsub ' ', '-') + "-tickets")
+                        url: '/events/' + String(te_uid) + '/' + ((name.downcase.gsub ' ', '-') + "-tickets")
                       )
                       puts "Doesn't exist. Event Created " + String(e.name)
                     else

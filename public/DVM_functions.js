@@ -3434,11 +3434,14 @@ function display_all_selected_tickets() {
             $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').show();
         } else {
             //hide all tickets
+            console.log("hiding")
             $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').hide();
             //show 
+            console.log("showing")
             console.log(sectionsIdsSplit);
             console.log(sections_tickets_list);
             console.log(matched_sections_reverse);
+            console.log("showed")
             for (kid in sectionsIdsSplit) {
                 sid = sectionsIdsSplit[kid];
                 for (rid in sections_tickets_list[sid]) {
