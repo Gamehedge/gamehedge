@@ -3436,6 +3436,9 @@ function display_all_selected_tickets() {
             //hide all tickets
             $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').hide();
             //show 
+            console.log(sectionsIdsSplit);
+            console.log(sections_tickets_list);
+            console.log(matched_sections_reverse);
             for (kid in sectionsIdsSplit) {
                 sid = sectionsIdsSplit[kid];
                 for (rid in sections_tickets_list[sid]) {
