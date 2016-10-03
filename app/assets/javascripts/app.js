@@ -9,7 +9,8 @@ app = angular.module('gamehedge',[
   'angular-ladda',
   'angular-google-analytics',   
   'ngLocationUpdate',
-  'angularLoad'
+  'angularLoad',
+  'sly'
 ])
 
 app.config([ '$routeProvider','$locationProvider','AuthProvider', 'AnalyticsProvider',

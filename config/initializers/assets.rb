@@ -11,6 +11,10 @@ Rails.application.config.assets.precompile += %w( masonry.pkgd.min.js )
 Rails.application.config.assets.precompile += %w( moment.js )
 Rails.application.config.assets.precompile += %w( crs.min.js )
 Rails.application.config.assets.precompile += %w( dvm_clientside.js )
+Rails.application.config.assets.precompile += %w( scalyr.js )
+Rails.application.config.assets.precompile += %w( src/js/directives/slyEvaluate.js )
+Rails.application.config.assets.precompile += %w( src/js/directives/slyRepeat.js )
+
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 
