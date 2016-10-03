@@ -859,7 +859,6 @@ function set_map(args) {
                         //safari bug correction
                         rMap.safari();
                         current = section;
-                        alert(section);
                     }
                     //No tickets available in this section
                     else {
@@ -3394,9 +3393,11 @@ function display_section_tickets(section, unset) {
     }
     if (map_args['self_display_tickets_by_client']===true){
         // console.log("****"+matched_sections_reverse[section_id]+"***");
+        alert("selected 1")
         display_tickets_by_client(matched_sections_reverse[section_id]);
        
     }else{
+        alert("selected 2")
         display_all_selected_tickets();
     }
     
