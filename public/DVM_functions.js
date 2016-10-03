@@ -3636,6 +3636,8 @@ function fill_tooltip_section(parts, x, y) {
             type: 'GET',
             contentType: 'jsonp',
             dataType: 'jsonp'
+        }).done(function(response){
+            console.log(response);
         });
         imgSectionHidden = false;
     } else {
