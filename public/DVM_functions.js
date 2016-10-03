@@ -2293,15 +2293,11 @@ function dvm_ticket_ids_by_filters(args_to_filter) {
  * @returns 
  */
 function dvm_add_section_to_display_list(section_to_add, row_to_add) {
-    console.log("section " + section_id);
-    console.log($("#" + hiddenClickedSections).val());
     if ($("#" + hiddenClickedSections).val() && $("#" + hiddenClickedSections).val() != ''){
         $("#" + hiddenClickedSections).val($("#" + hiddenClickedSections).val() + ',' + section_to_add);
-        console.log("entered first");
     }
     else{
         $("#" + hiddenClickedSections).val(section_to_add);
-        console.log("entered second");
     }
 }
 /**
@@ -3387,13 +3383,10 @@ function display_section_tickets(section, unset) {
                 }
             }
             $("#" + hiddenClickedSections).val(allSectionsToShow.join(','));
-            console.log("selected 1");
-            console.log(allSectionsToShow);
+            
         }
         //add section to hidden SectionPass list
         else {
-            console.log("selected 2");
-            console.log(section_id);
             dvm_add_section_to_display_list(section_id, false);
         }
         

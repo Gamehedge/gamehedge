@@ -147,7 +147,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
             price_filters.push({'filter_min_price':200,'filter_max_price':300});
         }
         if($scope.mob_price_d_real == true){
-            price_filters.push({'filter_min_price':200,'filter_max_price':9999999999999999});
+            price_filters.push({'filter_min_price':300,'filter_max_price':9999999999999999});
         }
         if($scope.index == 5){
             args_to_filter = {'filter_price':price_filters,'filter_qty_min':$scope.index};
@@ -177,7 +177,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
             price_filters.push({'filter_min_price':200,'filter_max_price':300});
         }
         if($scope.mob_price_d_real == true){
-            price_filters.push({'filter_min_price':200,'filter_max_price':9999999999999999});
+            price_filters.push({'filter_min_price':300,'filter_max_price':9999999999999999});
         }
         if($scope.index == 5){
             args_to_filter = {'filter_price':price_filters,'filter_qty_min':$scope.index};
@@ -225,7 +225,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
             price_filters.push({'filter_min_price':200,'filter_max_price':300});
         }
         if($scope.mob_price_d == true){
-            price_filters.push({'filter_min_price':200,'filter_max_price':9999999999999999});
+            price_filters.push({'filter_min_price':300,'filter_max_price':9999999999999999});
         }
         if($scope.index == 5){
             args_to_filter = {'filter_price':price_filters,'filter_qty_min':$scope.index};
@@ -262,7 +262,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
             price_filters.push({'filter_min_price':200,'filter_max_price':300});
         }
         if($scope.mob_price_d_real == true){
-            price_filters.push({'filter_min_price':200,'filter_max_price':9999999999999999});
+            price_filters.push({'filter_min_price':300,'filter_max_price':9999999999999999});
         }
         if($scope.index == 5){
             args_to_filter = {'filter_price':price_filters,'filter_qty_min':$scope.index};
@@ -453,7 +453,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         console.log("DVM_map_params")
         console.log(DVM_map_params);
         $timeout(function(){
-            angularLoad.loadScript("/dvm.js?v=26").then(function() {
+            angularLoad.loadScript("/dvm.js?v=27").then(function() {
                 console.log("dvm.js loadded successfully");
                 $timeout(function(){
                     document.body.addEventListener("sectionSelected", function (e) {
