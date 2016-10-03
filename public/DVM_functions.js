@@ -3422,8 +3422,6 @@ function display_row_tickets(section, row, unset) {
     display_all_selected_tickets();
     return true;
 }
-var sections_show = [];
-var sectionsEvent = new CustomEvent('sectionSelected', {'detail': sections_show})
 function display_all_selected_tickets() {
     //############### ROWS
     //get section Ids from the hidden RowPass and split it
@@ -3453,8 +3451,7 @@ function display_all_selected_tickets() {
             }
         }
         console.log(sections_show);
-        sectionsEvent = new CustomEvent('sectionSelected', {'detail': sections_show});
-        document.body.dispatchEvent(sectionsEvent);
+        
     } else {
         if ($("#" + hiddenClickedRows).val() == '') {
             $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').show();
