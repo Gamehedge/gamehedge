@@ -2294,6 +2294,7 @@ function dvm_ticket_ids_by_filters(args_to_filter) {
  */
 function dvm_add_section_to_display_list(section_to_add, row_to_add) {
     console.log("section " + section_id);
+    console.log($("#" + hiddenClickedSections).val());
     if ($("#" + hiddenClickedSections).val() && $("#" + hiddenClickedSections).val() != ''){
         $("#" + hiddenClickedSections).val($("#" + hiddenClickedSections).val() + ',' + section_to_add);
         console.log("entered first");
