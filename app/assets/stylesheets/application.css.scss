@@ -1670,11 +1670,9 @@ body {
 }
 
 #payments .seals{
-    position: absolute;
-    right: 0;
-    top: -27px;
-    height: 26px;
-    display: flex;
+    float: right;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 #payments .edit_credit_card{
@@ -5544,10 +5542,7 @@ main#admin #order-stats .stat-item span {
     .right-custom {
         width: 65% !important
     }
-    
-    
 }
-
 
 #press_container {
     background-color: #ffffff;
