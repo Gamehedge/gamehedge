@@ -819,8 +819,11 @@ function set_map(args) {
             clickSection = function (sts, section, section_has_tix) {
                 //e = jQuery.event.fix(e);
                 //if (section_as_row(section) || panZoom.getCurrentZoom()<1) {
+                console.log("enterd click");
                 if (section_as_row(section) || (this_map_params['rows_display'] === false)) {// || (this_map_params['rows_display'] && panZoom.getCurrentZoom()<1)
+                    console.log("enterd first");
                     if (section_has_tix) {
+                        console.log("enterd second");
                         if (sts[0].state === 0) {
                             //change sections color and stroke
                             attrs = click_attr_section_setting(section);
@@ -859,6 +862,7 @@ function set_map(args) {
                     }
                     //No tickets available in this section
                     else {
+                        console.log("enterd third");
                         //change sections color and stroke
                         attrs = normal_attr_section_setting(section);
                         //st.attr(attrs);
@@ -3386,12 +3390,17 @@ function display_section_tickets(section, unset) {
         else {
             dvm_add_section_to_display_list(section_id, false);
         }
+        console.log("selected 1");
+        console.log(allSectionsToShow);
     }
     if (map_args['self_display_tickets_by_client']===true){
         // console.log("****"+matched_sections_reverse[section_id]+"***");
+        alert("selected 1")
         display_tickets_by_client(matched_sections_reverse[section_id]);
        
     }else{
+        console.log("selected 2");
+        console.log(hiddenClickedSections)
         display_all_selected_tickets();
     }
     
@@ -3422,7 +3431,6 @@ function display_row_tickets(section, row, unset) {
     display_all_selected_tickets();
     return true;
 }
-new CustomEvent('sectionSelected', {'detail': sections_show})
 function display_all_selected_tickets() {
     //############### ROWS
     //get section Ids from the hidden RowPass and split it
@@ -3443,7 +3451,6 @@ function display_all_selected_tickets() {
                     reversed_sid_list = matched_sections_reverse[sid];
                     for (krsid in reversed_sid_list) {
                         var reversed_sid = reversed_sid_list[krsid];
-                        console.log(reversed_sid);
                         if(sections_show.indexOf(reversed_sid) == -1){
                             sections_show.push(reversed_sid);
                         }
@@ -3452,7 +3459,8 @@ function display_all_selected_tickets() {
                 }
             }
         }
-        document.dispatchEvent(sectionSelected);
+        console.log(sections_show);
+        
     } else {
         if ($("#" + hiddenClickedRows).val() == '') {
             $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').show();

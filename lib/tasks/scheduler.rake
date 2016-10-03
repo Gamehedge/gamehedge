@@ -1,5 +1,10 @@
 desc "This task is called by the Heroku scheduler add-on"
 task :update_events => :environment do
+  puts "removing older events"
+  Event.where('occurs_at < ?',Time.now).each do |e|
+    e.delete()
+    puts e.occurs_at
+  end
   puts "Updating events..."
   TicketEvolutionService.new({:type => "events"}).sync
   puts "Updating orders state"
@@ -9,11 +14,6 @@ task :update_events => :environment do
   		o.order_status = a["state"]
   		o.save
   	end
-  end
-  puts "removing older events"
-  Event.where('occurs_at < ?',Time.now).each do |e|
-  	e.delete()
-  	puts e.occurs_at
   end
   puts "done."
 end
