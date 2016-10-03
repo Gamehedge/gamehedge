@@ -77,9 +77,9 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 			}
 			if($scope.tiles[index].events != null){
 				for(j=$scope.tiles[index].events.length - 1;j>=0;j--){
-					if($scope.tiles[index].events[j].performances.length != 2){
-						$scope.tiles[index].events.splice(j,1);
-					}
+					// if($scope.tiles[index].events[j].performances.length != 2){
+					// 	$scope.tiles[index].events.splice(j,1);
+					// }
 					if($scope.tiles[index].events[j] != undefined){
                         if(moment().add(1,'h').isAfter(String($scope.tiles[index].events[j].occurs_at).replace('Z',''))) {
                             $scope.tiles[index].events.splice(j, 1);
