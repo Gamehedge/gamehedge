@@ -334,6 +334,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	        , AdaptiveThreshold: 0.8
 	        , Tickets: $scope.Data
 	        , ColorScheme: 1
+            , ZoomLevel: 5
 	        , ControlsPosition:"Inside"
 	        , ServiceUrl: "https://imap.ticketutils.net"
 	        , FailoverMapUrl: "https://static.ticketutils.com/Charts/No-Seating-Chart.jpg"
@@ -441,8 +442,12 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	  	$location.url(url);
 	};
 
+    $("#tickets_list").scroll(function() {
+        console.log("jeje");
+    });
+    
     $scope.showMore = function(){
-        $scope.showing_list = $scope.showing_list + 20;
+        //$scope.showing_list = $scope.showing_list + 20;
     }
 
 	$scope.$on('LastRepeaterElement', function(){
@@ -530,12 +535,12 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         restrict: 'A',
         link: function (scope, element, attrs) {
             var raw = element[0];
-            console.log('loading directive');
+            //console.log('loading directive');
                 
             element.bind('scroll', function () {
-                if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
-                    scope.$apply(attrs.scrolly);
-                }
+                //if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
+                //    scope.$apply(attrs.scrolly);
+                //}
                 
                 if($( document ).width() < 900){
                     var first = null;
