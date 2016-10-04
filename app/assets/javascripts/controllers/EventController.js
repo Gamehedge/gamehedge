@@ -298,7 +298,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                     $scope.Data.push({"section":value.section,"price":0,"quantity":1});
 	            }	
         	});
-            fillEventsData();
+            $scope.fillEventsData();
         }, function errorCallback(response) {
             //console.log(response);
             // called asynchronously if an error occurs
