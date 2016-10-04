@@ -3628,7 +3628,6 @@ function fill_tooltip_section(parts, x, y) {
         $("#sectionTooltip .colr").css("background-color", color);
         $("#sectionTooltip #smallimg").attr("class", "fancybox_no");
         $("#sectionTooltip #imgsmall").attr("src", limg);
-        console.log(limg);
         section_id = pars[4];
         $.ajax({
             url: 'https://dynamicvenuemaps.com/maps/svg_ajax/tooltip_infos.php',
@@ -3637,8 +3636,10 @@ function fill_tooltip_section(parts, x, y) {
             contentType: 'jsonp',
             dataType: 'jsonp'
         }).done(function(response){
+            console.log(limg);
             console.log(response);
         });
+        console.log("ajax comleted");
         imgSectionHidden = false;
     } else {
         hide_tooltip_section(false);
