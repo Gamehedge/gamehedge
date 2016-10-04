@@ -334,7 +334,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	        , AdaptiveThreshold: 0.8
 	        , Tickets: $scope.Data
 	        , ColorScheme: 1
-            , ZoomLevel: 5
+            , ZoomLevel: 7
 	        , ControlsPosition:"Inside"
 	        , ServiceUrl: "https://imap.ticketutils.net"
 	        , FailoverMapUrl: "https://static.ticketutils.com/Charts/No-Seating-Chart.jpg"
