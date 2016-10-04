@@ -936,38 +936,41 @@
 		  						</div>
 		  					</div>
 		  					<hr class="hidden-xs hidden-sm">
-		  					<div class="row hidden-xs hidden-sm">
-			  					<div class="ggg-badge-pledge col-md-6">
-				  					<div class="img-container col-xs-3">
+		  					<div class="hidden-xs hidden-sm badge-container">
+			  					<div class="ggg-badge-pledge pledge-left">
+				  					<div class="badge-left-element">
 				  						<img src="<%= image_url "badge-gamehedge.png" %>" class="ggg-img">
 				  					</div>
-				  					<div class="col-xs-9">
+				  					<div class="badge-right-element">
 					  					<div class="title">
-					  						Your tickets come with the<br>GOOD GAME GUARANTEE!
+					  						YOUR TICKETS COME WITH THE GOOD GAME GUARANTEE! 
 					  					</div>
 					  					<div class="cont">
 					  						If the home team loses by {{event.home_performer.sport.ggg}} or more, GameHedge will refund 50% of your ticket price at no additional cost to you.
 					  					</div>
 					  				</div>
 				  				</div>
-				  				<div class="ggg-badge-pledge col-md-6">
-				  					<div class="img-container col-xs-3">
+				  				<!-- <div class="ggg-badge-pledge pledge-right">
+				  					<div class="badge-left-element left-custom">
 				  						<img src="<%= image_url "pledge.png" %>" class="pledge-img">
 				  					</div>
-				  					<div class="col-xs-9">
-					  					<div class="title">
+				  					<div class="badge-right-element right-custom">
+					  					<div class="title-1">
 					  						GAMEHEDE PLEDGE
 					  					</div>
+                                        <div class="sub-cont">
+                                            Tickets will always be…
+                                        </div>
 					  					<div class="cont">
-					  						Tickets will always be…
 					  						<ul>
-					  							<li>in time for the event</li>
-					  							<li>refunded if the event is canceled and not resecheduled</li>
-					  							<li>authentic</li>
+					  							<li>In time for the event</li>
+					  							<li>Refunded if the event is canceled &amp; not resecheduled</li>
+					  							<li>Authentic</li>
 					  						</ul>
 					  					</div>
 					  				</div>
-				  				</div>
+				  				</div> -->
+				  				<img class="ggg-image-pledge" src="<%= image_url "pledge2.png" %>">
 				  			</div>
 	  					</div>
 	  				</div>
@@ -981,7 +984,7 @@
 							    <div class="info">
 							    	{{event.occurs_at | date: "EEE,	MMM dd, yyyy hh:mm a" : 'UTC'}}<br>
 							    	{{event.venue.name}}, {{event.venue.location}}<br>
-							    	<strong>Section {{ticket.section}}, Row {{ticket.row}}</strong>
+							    	<span class="title" style="line-height: 1em;"><strong>Section {{ticket.section}}, Row {{ticket.row}}</strong></span>
 							    </div>
 							</span>
 						    <hr>

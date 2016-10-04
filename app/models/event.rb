@@ -6,7 +6,8 @@ class Event < ActiveRecord::Base
 	belongs_to :sport
 	has_many :tiles
   	def update_url
-	     self.update_column(:url, '/events/' + String(self.te_uid) + '/' + self.slug)
+  		self.update_column(:slug, ((name.downcase.gsub ' ', '-') + "-tickets"))
+	    self.update_column(:url, '/events/' + String(self.te_uid) + '/' + self.slug)
   	end
 
 	def display_name
