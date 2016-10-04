@@ -3,7 +3,7 @@
   <section id="game_info">
     <div class="row max-container-width">
       <div class="col-md-3 col-xs-12 ggg-logo vertical-center hidden-xs hidden-sm">
-          <img src="<%= image_url "badge-gamehedge.png" %>" alt="GameHedge" />
+          <img src="/assets/badge-gamehedge-c6f8f51039f93f77379348b708f4f6cc8b087a2556df007b205cd85c4953a04e.png" alt="GameHedge" />
           Your tickets come with the<br>
           GOOD GAME GUARANTEE!
       </div>
@@ -55,7 +55,7 @@
   <div id="filters_prev_mobile" ng-if="prev_filter" class="zipper hidden-md hidden-lg hidden-xl">
     
     <div class="close_mobile_x" ng-click="closePrevFilter()">
-        <img width="15px" src="<%= image_url 'close-menu-black.png' %>">
+        <img width="15px" src="/assets/close-menu-black-9dd50ffa9d7058e6b0dd61ecb88a5d6f282972acfbd760204d93bc0f8d949877.png">
     </div>
     <div class="how_prev_filter">HOW MANY TICKETS?</div>
     <div class="row text-center">
@@ -71,7 +71,7 @@
 
   <div id="filters_mobile" ng-if="filter_active" class="zipper">
     <div class="close_mobile_x" ng-click="closeFilter()">
-        <img width="15px" src="<%= image_url 'close-menu-black.png' %>">
+        <img width="15px" src="/assets/close-menu-black-9dd50ffa9d7058e6b0dd61ecb88a5d6f282972acfbd760204d93bc0f8d949877.png">
     </div>
     
     <div class="filters-mobile">
@@ -123,7 +123,7 @@
     
   <div id="detail_mobile" ng-if="displayDetail" class="zipper">
     <div class="close_mobile_x" ng-click="closeDetail()">
-        <img width="15px" src="<%= image_url 'close-menu-black.png' %>">
+        <img width="15px" src="/assets/close-menu-black-9dd50ffa9d7058e6b0dd61ecb88a5d6f282972acfbd760204d93bc0f8d949877.png">
     </div>
       
     <div class="detail_title">ORDER DETAILS</div>
@@ -228,7 +228,7 @@
 
           <div class="col-xs-12 filter-header">
             <div class="row full-height">
-              <div class="col-xs-1 hidden" ng-click="openFilter()"><img width="20px" src="<%= image_url 'filter_icon.png' %>"></div>
+              <div class="col-xs-1 hidden" ng-click="openFilter()"><img width="20px" src="/assets/filter_icon-c5783f85a4e2ae0238ae00d9ef825fc5f5ff7c97b544b913142707b0f5dba7f3.png"></div>
               <div class="col-xs-3 col-md-4 vertical-center horizontal-center sorting full-height" ng-click="updateSort('section')">
                 Section <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
               </div>
@@ -260,7 +260,7 @@
           <!-- <div class="row" sly-repeat="ticket in tickets | orderBy:ordering | filter: (etickets || '') && {eticket: true} | filter: (physicals || '') && {eticket: false} | filter: filterSectionsFn | filter: (onlyParking || '') && {type: 'parking'} | filter: (!onlyParking || '') && {type: 'event'} | numberOfSeats:index | filter: filterPriceFn" emit-last-repeater-element ng-mouseover="higlightSection(::ticket.section, true)" ng-mouseleave="higlightSection(ticket.section, false)" data-section="{{::ticket.section}}">
 
               <div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height">
-                <span aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{::ticket.public_notes}}" ng-if="ticket.public_notes"><img src="<%= image_url 'icon__info_1x' %>" alt="info" /></span>
+                <span aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{::ticket.public_notes}}" ng-if="ticket.public_notes"><img src="/assets/icon__info_1x-86e84f5c5aaf6beafb282f2272677960b9846ee3e8bcc5e2a9af2d3ab38e3942.png" alt="info" /></span>
               </div>
               <div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">
                 {{::ticket.section}}
