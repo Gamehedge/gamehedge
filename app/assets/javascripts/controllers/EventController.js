@@ -298,6 +298,24 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                     $scope.Data.push({"section":value.section,"price":0,"quantity":1});
 	            }	
         	});
+            var htm = "";
+            for(i=0;i<$scope.tickets.length;i++){
+                var list = $scope.tickets;
+                var select_list = ""
+                for(j=0;j<list[i].splits;j++){
+                    select_list += '<option value="'+list[i].splits[j]+'">'+list[i].splits[j]+'</option>'
+                }
+                if(list[i].public_notes != ""){
+                    htm +='<div class="row" data-section="'+list[i].section+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"><span aria-hidden="true" data-toggle="tooltip" data-placement="right" title='+list[i].public_notes+'><img src="'+info_url+'" alt="info" /></span></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].ssection+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button>$'+list[i]retail_price+'/ea</button><!--button class="hidden-md hidden-lg hidden-xl">$'+list[i].retail_price+'}}/ea</button--><p class="format">'+list[i].format+'</span></div></div>'
+                }
+                else{
+                    htm +='<div class="row" data-section="'+list[i].section+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].ssection+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button>$'+list[i]retail_price+'/ea</button><!--button class="hidden-md hidden-lg hidden-xl">$'+list[i].retail_price+'}}/ea</button--><p class="format">'+list[i].format+'</span></div></div>'
+                }
+                $('#tickets_list').html(htm);
+            }
+
+
+
         	// $.each(sections, function(value, key) {
 	        //     $scope.Data.push({"section":key,"price":0,"quantity":1});
 	        // });
@@ -447,7 +465,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
     });
     
     $scope.showMore = function(){
-        $scope.showing_list = $scope.showing_list + 20;
+        // $scope.showing_list = $scope.showing_list + 20;
     }
 
 	$scope.$on('LastRepeaterElement', function(){
@@ -530,69 +548,6 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 		}
 	};
 })
-.directive('infiniteScroll', [
-  '$rootScope', '$window', '$timeout', function($rootScope, $window, $timeout) {
-    return {
-      link: function(scope, elem, attrs) {
-        var checkWhenEnabled, handler, scrollDistance, scrollEnabled;
-        $window = angular.element($window);
-        elem.css('overflow-y', 'scroll');
-        elem.css('overflow-x', 'hidden');
-        // elem.css('height', 'inherit');
-        scrollDistance = 0;
-        if (attrs.infiniteScrollDistance != null) {
-          scope.$watch(attrs.infiniteScrollDistance, function(value) {
-            return scrollDistance = parseInt(value, 10);
-          });
-        }
-        scrollEnabled = true;
-        checkWhenEnabled = false;
-        if (attrs.infiniteScrollDisabled != null) {
-          scope.$watch(attrs.infiniteScrollDisabled, function(value) {
-            scrollEnabled = !value;
-            if (scrollEnabled && checkWhenEnabled) {
-              checkWhenEnabled = false;
-              return handler();
-            }
-          });
-        }
-        $rootScope.$on('refreshStart', function(event, parameters){
-            elem.animate({ scrollTop: "0" });
-        });
-        handler = function() {
-          var container, elementBottom, remaining, shouldScroll, containerBottom;
-          container = $(elem.children()[0]);
-          elementBottom = elem.offset().top + elem.height();
-          containerBottom = container.offset().top + container.height();
-          remaining = containerBottom - elementBottom ;
-          shouldScroll = remaining <= elem.height() * scrollDistance;
-          if (shouldScroll && scrollEnabled) {
-            if ($rootScope.$$phase) {
-              return scope.$eval(attrs.infiniteScroll);
-            } else {
-              return scope.$apply(attrs.infiniteScroll);
-            }
-          } else if (shouldScroll) {
-            return checkWhenEnabled = true;
-          }
-        };
-        elem.on('scroll', handler);
-        scope.$on('$destroy', function() {
-          return $window.off('scroll', handler);
-        });
-        return $timeout((function() {
-          if (attrs.infiniteScrollImmediateCheck) {
-            if (scope.$eval(attrs.infiniteScrollImmediateCheck)) {
-              return handler();
-            }
-          } else {
-            return handler();
-          }
-        }), 0);
-      }
-    };
-  }
-])
 .directive('scrolly', function () {
     return {
         restrict: 'A',
