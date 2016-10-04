@@ -3510,8 +3510,11 @@ function jsonp_display_tooltip_section(data) {
     data = $.parseJSON(data);
     if (data.status === 1)
     {
+
         bimg = data.bimg;
         simg = data.simg;
+        console.log(simg);
+        console.log(bimg);
         is_tooltip_big = data.iszoom;
         if (is_tooltip_big === 1)
         {
@@ -3635,11 +3638,7 @@ function fill_tooltip_section(parts, x, y) {
             type: 'GET',
             contentType: 'jsonp',
             dataType: 'jsonp'
-        }).done(function(response){
-            console.log(limg);
-            console.log(response);
         });
-        console.log("ajax comleted");
         imgSectionHidden = false;
     } else {
         hide_tooltip_section(false);
