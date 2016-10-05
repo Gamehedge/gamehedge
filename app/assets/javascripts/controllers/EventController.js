@@ -201,6 +201,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         //$scope.mob_price = _val;
         $('#tickets_list').scrollTop(-200);
         //$scope.showing_list = 20;
+        $scope.filterEventsData();
     }
     
     $scope.showMobFilters = function() {
@@ -231,6 +232,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         else {
             $scope.price_filter = true;
         }
+        $scope.filterEventsData();
     }
     
     $scope.displayDetail = false;
@@ -278,6 +280,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	$scope.updateParking = function(ids){
 		$scope.onlyParking = ids;
         $('#tickets_list').scrollTop(-200);
+         $scope.filterEventsData();
         //$scope.showing_list = 20;
 	}
 
@@ -318,16 +321,24 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                 select_list += '<option value="'+amount[j]+'">'+amount[j]+'</option>'
             }
             if(list[i].public_notes == null){
-                htm +='<div class="row listing-row"  data-info="'+amount+'" data-section="'+list[i].section+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button>$'+list[i].retail_price+'/ea</button><!--button class="hidden-md hidden-lg hidden-xl">$'+list[i].retail_price+'}}/ea</button--><p class="format">'+list[i].format+'</span></div></div>'
+                htm +='<div class="row listing-row"  data-info="'+amount+'" data-section="'+list[i].section+'" data-value="'+list[i].retail_price+'" data-type="'+list[i].type+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button>$'+list[i].retail_price+'/ea</button><!--button class="hidden-md hidden-lg hidden-xl">$'+list[i].retail_price+'}}/ea</button--><p class="format">'+list[i].format+'</span></div></div>'
             }
             else{
-                htm +='<div class="row listing-row"  data-info="'+amount+'" data-section="'+list[i].section+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"><span aria-hidden="true" data-toggle="tooltip" data-placement="right" title='+list[i].public_notes+'><img src="'+info_url+'" alt="info" /></span></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button>$'+list[i].retail_price+'/ea</button><!--button class="hidden-md hidden-lg hidden-xl">$'+list[i].retail_price+'}}/ea</button--><p class="format">'+list[i].format+'</span></div></div>'
+                htm +='<div class="row listing-row"  data-info="'+amount+'" data-section="'+list[i].section+'" data-value="'+list[i].retail_price+'" data-type="'+list[i].type+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"><span aria-hidden="true" data-toggle="tooltip" data-placement="right" title='+list[i].public_notes+'><img src="'+info_url+'" alt="info" /></span></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button>$'+list[i].retail_price+'/ea</button><!--button class="hidden-md hidden-lg hidden-xl">$'+list[i].retail_price+'}}/ea</button--><p class="format">'+list[i].format+'</span></div></div>'
             }
         }
         $('#tickets_list').html(htm);
         $timeout(function () {
             $('[data-toggle="tooltip"]').tooltip();
+            // $('.listing-row').mouseover($scope.higlightSection($(this).attr('data-section'), true));
+            $('.listing-row').mouseover(function(){
+                $("#MapContainer").tuMap("HighlightSection",$(this).attr('data-section'));
+            });
+            $('.listing-row').mouseleave(function(){
+                $("#MapContainer").tuMap("ResetSection",$(this).attr('data-section'));
+            });
         }, 100);
+        $scope.filterEventsData();
         $scope.loadMap();
     }
 
@@ -336,30 +347,80 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         if($scope.index != 0){
             $('.listing-row').each(function(){
                 if($scope.index == 5){
-                    if(Number($(this).attr('data-info')[0]) < $scope.index){
+                    if(Number($(this).attr('data-info').split(',')[0]) < $scope.index){
                         $(this).addClass("hidden");
                     }
                 }
                 else{
-                    if($(this).attr('data-info').indexOf($scope.index) == -1){
+                    if($(this).attr('data-info').split(',').indexOf(String($scope.index)) == -1){
                         $(this).addClass("hidden");
                     }    
                 }
             });
         }
-        else if($scope.index == 5){
-            
+        if($scope.price_filter == true){
+            $('.listing-row').each(function(){
+                var val = false;
+                if($scope.mob_price_a_real) {
+                    $scope.price_filter_down_limit = 0;
+                    $scope.price_filter_up_limit = 100;
+                    if(Number($(this).attr('data-value')) > $scope.price_filter_down_limit && Number($(this).attr('data-value')) <= $scope.price_filter_up_limit ) {
+                        val =  true;
+                    }
+                }
+                
+                if($scope.mob_price_b_real){
+                    $scope.price_filter_down_limit = 100;
+                    $scope.price_filter_up_limit = 200;
+                    if( Number($(this).attr('data-value')) > $scope.price_filter_down_limit && Number($(this).attr('data-value')) <= $scope.price_filter_up_limit ) {
+                        val =  true;
+                    }
+                }
+                
+                if($scope.mob_price_c_real){
+                    $scope.price_filter_down_limit = 200;
+                    $scope.price_filter_up_limit = 300;
+                    if( Number($(this).attr('data-value')) > $scope.price_filter_down_limit && Number($(this).attr('data-value')) <= $scope.price_filter_up_limit ) {
+                        val =  true;
+                    }
+                }
+                
+                if($scope.mob_price_d_real){
+                    $scope.price_filter_down_limit = 300;
+                    $scope.price_filter_up_limit = 99999999999999999999999;
+                    if( Number($(this).attr('data-value')) > $scope.price_filter_down_limit && Number($(this).attr('data-value')) <= $scope.price_filter_up_limit ) {
+                        val =  true;
+                    }
+                }
+                if(val == false){
+                    $(this).addClass("hidden");
+                }
+            });
         }
-        
+        $('.listing-row').each(function(){
+            if($scope.onlyParking == true){
+                if($(this).attr('data-type') == 'event'){
+                    $(this).addClass("hidden");
+                }
+            }
+            else{
+                if($(this).attr('data-type') == 'parking'){
+                    $(this).addClass("hidden");
+                }
+            }
+        });
     }
 
 	$scope.higlightSection = function(section,highlight){
-		if(highlight == true){
-			$("#MapContainer").tuMap("HighlightSection",section);
-		}
-		else{
-			$("#MapContainer").tuMap("ResetSection",section);
-		}
+        console.log(section);
+        if(section != undefined){
+    		if(highlight == true){
+    			$("#MapContainer").tuMap("HighlightSection",section);
+    		}
+    		else{
+    			$("#MapContainer").tuMap("ResetSection",section);
+    		}
+        }
 	}
 
 	$scope.loadMap = function(){
