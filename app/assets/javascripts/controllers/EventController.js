@@ -137,7 +137,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 		$scope.prev_filter = false;
 		$scope.mob_index = index;
         $('#tickets_list').scrollTop(-200);
-        $scope.showing_list = 20;
+        $scope.filterEventsData();
+        //$scope.showing_list = 20;
 	}
 
 	$scope.closePrevFilter = function() {
@@ -147,19 +148,19 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
     $scope.updateMobFilter = function(index){
 		$scope.mob_index = index;
         $('#tickets_list').scrollTop(-200);
-        $scope.showing_list = 20;
+        //$scope.showing_list = 20;
 	}
     
     $scope.updateMobDelivery = function(index) {
         $scope.mob_delivery = index;
         $('#tickets_list').scrollTop(-200);
-        $scope.showing_list = 20;
+        //$scope.showing_list = 20;
     }
     
     $scope.updateMobEticket = function(index) {
         $scope.mob_eticket = !$scope.mob_eticket;
         $('#tickets_list').scrollTop(-200);
-        $scope.showing_list = 20;
+        //$scope.showing_list = 20;
     }
     
     $scope.mob_price_update = function(_val) {
@@ -175,7 +176,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         }
         //$scope.mob_price = _val;
         $('#tickets_list').scrollTop(-200);
-        $scope.showing_list = 20;
+        //$scope.showing_list = 20;
     }
     
     $scope.mob_price_update_real = function(_val) {
@@ -199,7 +200,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         
         //$scope.mob_price = _val;
         $('#tickets_list').scrollTop(-200);
-        $scope.showing_list = 20;
+        //$scope.showing_list = 20;
     }
     
     $scope.showMobFilters = function() {
@@ -264,20 +265,20 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 			$scope.ordering = sort
 		}
         $('#tickets_list').scrollTop(-200);
-        $scope.showing_list = 20;
+        //$scope.showing_list = 20;
 	}
 
 	$scope.updateEtickets = function(){
 		$scope.etickets = !$scope.etickets;
         
         $('#tickets_list').scrollTop(-200);
-        $scope.showing_list = 20;
+        //$scope.showing_list = 20;
 	}
 
 	$scope.updateParking = function(ids){
 		$scope.onlyParking = ids;
         $('#tickets_list').scrollTop(-200);
-        $scope.showing_list = 20;
+        //$scope.showing_list = 20;
 	}
 
 	$scope.getTicketList = function(){
@@ -316,12 +317,11 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
             for(j=0;j<amount.length;j++){
                 select_list += '<option value="'+amount[j]+'">'+amount[j]+'</option>'
             }
-            console.log(list[i].public_notes);
             if(list[i].public_notes == null){
-                htm +='<div class="row" data-section="'+list[i].section+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button>$'+list[i].retail_price+'/ea</button><!--button class="hidden-md hidden-lg hidden-xl">$'+list[i].retail_price+'}}/ea</button--><p class="format">'+list[i].format+'</span></div></div>'
+                htm +='<div class="row listing-row"  data-info="'+amount+'" data-section="'+list[i].section+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button>$'+list[i].retail_price+'/ea</button><!--button class="hidden-md hidden-lg hidden-xl">$'+list[i].retail_price+'}}/ea</button--><p class="format">'+list[i].format+'</span></div></div>'
             }
             else{
-                htm +='<div class="row" data-section="'+list[i].section+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"><span aria-hidden="true" data-toggle="tooltip" data-placement="right" title='+list[i].public_notes+'><img src="'+info_url+'" alt="info" /></span></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button>$'+list[i].retail_price+'/ea</button><!--button class="hidden-md hidden-lg hidden-xl">$'+list[i].retail_price+'}}/ea</button--><p class="format">'+list[i].format+'</span></div></div>'
+                htm +='<div class="row listing-row"  data-info="'+amount+'" data-section="'+list[i].section+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"><span aria-hidden="true" data-toggle="tooltip" data-placement="right" title='+list[i].public_notes+'><img src="'+info_url+'" alt="info" /></span></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button>$'+list[i].retail_price+'/ea</button><!--button class="hidden-md hidden-lg hidden-xl">$'+list[i].retail_price+'}}/ea</button--><p class="format">'+list[i].format+'</span></div></div>'
             }
         }
         $('#tickets_list').html(htm);
@@ -329,6 +329,28 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
             $('[data-toggle="tooltip"]').tooltip();
         }, 100);
         $scope.loadMap();
+    }
+
+    $scope.filterEventsData = function(){
+        $('.listing-row').removeClass('hidden');
+        if($scope.index != 0){
+            $('.listing-row').each(function(){
+                if($scope.index == 5){
+                    if(Number($(this).attr('data-info')[0]) < $scope.index){
+                        $(this).addClass("hidden");
+                    }
+                }
+                else{
+                    if($(this).attr('data-info').indexOf($scope.index) == -1){
+                        $(this).addClass("hidden");
+                    }    
+                }
+            });
+        }
+        else if($scope.index == 5){
+            
+        }
+        
     }
 
 	$scope.higlightSection = function(section,highlight){
@@ -468,7 +490,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
     });
     
     $scope.showMore = function(){
-        // $scope.showing_list = $scope.showing_list + 20;
+        // //$scope.showing_list = //$scope.showing_list + 20;
     }
 
 	$scope.$on('LastRepeaterElement', function(){
@@ -479,7 +501,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	});
 
 	$scope.getEventInfo();
-    $scope.showing_list = 20;
+    //$scope.showing_list = 20;
 	$scope.Data = [];
 	$scope.filterBySection = false;
 	$scope.section = "";
