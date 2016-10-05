@@ -1671,7 +1671,7 @@ body {
 }
 
 #payments .seals{
-    float: right;
+    /*float: right;*/
     margin-top: 5px;
     margin-bottom: 10px;
 }
@@ -1685,7 +1685,7 @@ body {
 }
 
 #payments .seals #siteseal img{
-    width: 80px;
+    width: 102px;
 }
 
 #payments .seals #mcafeeseal img{
@@ -1738,9 +1738,9 @@ body {
 }
 
 #payments .summary button{
-    width: 70%;
-    margin-left: 15%;
-    margin-right: 15%;
+    width: 100%;
+    margin-left: 0%;
+    margin-right: 0%;
     height: 55px;
     margin-bottom: 15px;
     border-radius: 3px;
