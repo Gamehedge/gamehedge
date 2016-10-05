@@ -330,8 +330,13 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         $('#tickets_list').html(htm);
         $timeout(function () {
             $('[data-toggle="tooltip"]').tooltip();
-            $('.listing-row').mouseover($scope.higlightSection($(this).attr('data-section'), true));
-            $('.listing-row').mouseleave($scope.higlightSection($(this).attr('data-section'), true));
+            // $('.listing-row').mouseover($scope.higlightSection($(this).attr('data-section'), true));
+            $('.listing-row').mouseover(function(){
+                $("#MapContainer").tuMap("HighlightSection",$(this).attr('data-section'));
+            });
+            $('.listing-row').mouseleave(function(){
+                $("#MapContainer").tuMap("ResetSection",$(this).attr('data-section'));
+            });
         }, 100);
         $scope.filterEventsData();
         $scope.loadMap();
@@ -407,12 +412,15 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
     }
 
 	$scope.higlightSection = function(section,highlight){
-		if(highlight == true){
-			$("#MapContainer").tuMap("HighlightSection",section);
-		}
-		else{
-			$("#MapContainer").tuMap("ResetSection",section);
-		}
+        console.log(section);
+        if(section != undefined){
+    		if(highlight == true){
+    			$("#MapContainer").tuMap("HighlightSection",section);
+    		}
+    		else{
+    			$("#MapContainer").tuMap("ResetSection",section);
+    		}
+        }
 	}
 
 	$scope.loadMap = function(){
