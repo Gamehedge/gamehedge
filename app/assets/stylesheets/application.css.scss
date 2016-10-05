@@ -1680,12 +1680,18 @@ body {
     position: relative;
 }
 
+.ssl-text {
+    font-size: 12px;
+    margin-top: 15px;
+    color: #999999;
+}
+
 #payments .seals img{
     cursor: pointer !important;
 }
 
 #payments .seals #siteseal img{
-    width: 102px;
+    width: 92px;
 }
 
 #payments .seals #mcafeeseal img{
@@ -1769,7 +1775,7 @@ body {
 
 #payments .ggg-badge-pledge{
     display: flex;
-    color: #999999;
+    color: #888888;
     margin-top: 15px;
 }
 
@@ -1784,7 +1790,7 @@ body {
 }
 
 #payments .ggg-badge-pledge img{
-    height: 80px;
+    height: 110px;
 }
 
 #payments .ggg-badge-pledge ul{
@@ -1797,7 +1803,7 @@ body {
 }
 
 #payments .ggg-badge-pledge .cont{
-    font-size: 9px !important;
+    font-size: 12px !important;
 }
 
 #payments .review{
@@ -5517,15 +5523,15 @@ main#admin #order-stats .stat-item span {
 
 @media (max-width:1200px) and (min-width:992px) {
     #payments .ggg-badge-pledge img{
-        height: 70px;
+        height: 85px;
     }
     
     #payments .ggg-badge-pledge .title {
-        font-size: 6px !important;
+        font-size: 8px !important;
     }
     
     #payments .ggg-badge-pledge .cont {
-        font-size: 8px !important;
+        font-size: 9px !important;
     }
     
     .badge-right-element .title-1 {
@@ -5648,7 +5654,7 @@ main#admin #order-stats .stat-item span {
 
 .pledge-left {
     padding: 5px;
-    border: 1px #cccccc solid;
+    border: 1px #aaaaaa solid;
     border-radius: 5px;
     margin-right: 7px;
     width: 50%;
@@ -5680,8 +5686,9 @@ main#admin #order-stats .stat-item span {
     -moz-text-align-last: justify; /* Code for Firefox */
     text-align-last: justify;
     font-weight: bold;
-    font-size: 9px !important;
+    font-size: 10px !important;
     line-height: 1em;
+    margin-top: 5px;
 }
 .badge-right-element .title:after{
    content: "";
