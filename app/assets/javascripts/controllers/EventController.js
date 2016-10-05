@@ -321,10 +321,10 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                 select_list += '<option value="'+amount[j]+'">'+amount[j]+'</option>'
             }
             if(list[i].public_notes == null){
-                htm +='<div class="row listing-row"  data-info="'+amount+'" data-section="'+list[i].section+'" data-value="'+list[i].retail_price+'" data-type="'+list[i].type+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button>$'+list[i].retail_price+'/ea</button><!--button class="hidden-md hidden-lg hidden-xl">$'+list[i].retail_price+'}}/ea</button--><p class="format">'+list[i].format+'</span></div></div>'
+                htm += '<div class="row listing-row"  data-info="'+amount+'" data-section="'+list[i].section+'" data-value="'+list[i].retail_price+'" data-type="'+list[i].type+'" data-id="'+list[i].id+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button class="redirect-button">$'+list[i].retail_price+'/ea</button><p class="format">'+list[i].format+'</span></div></div>'
             }
             else{
-                htm +='<div class="row listing-row"  data-info="'+amount+'" data-section="'+list[i].section+'" data-value="'+list[i].retail_price+'" data-type="'+list[i].type+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"><span aria-hidden="true" data-toggle="tooltip" data-placement="right" title='+list[i].public_notes+'><img src="'+info_url+'" alt="info" /></span></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button>$'+list[i].retail_price+'/ea</button><!--button class="hidden-md hidden-lg hidden-xl">$'+list[i].retail_price+'}}/ea</button--><p class="format">'+list[i].format+'</span></div></div>'
+                htm +='<div class="row listing-row"  data-info="'+amount+'" data-section="'+list[i].section+'" data-value="'+list[i].retail_price+'" data-type="'+list[i].type+'" data-id="'+list[i].id+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"><span aria-hidden="true" data-toggle="tooltip" data-placement="right" title='+list[i].public_notes+'><img src="'+info_url+'" alt="info" /></span></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button class="redirect-button">$'+list[i].retail_price+'/ea</button><p class="format">'+list[i].format+'</span></div></div>'
             }
         }
         $('#tickets_list').html(htm);
@@ -337,9 +337,20 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
             $('.listing-row').mouseleave(function(){
                 $("#MapContainer").tuMap("ResetSection",$(this).attr('data-section'));
             });
+            $('.redirect-button').click(function(){
+                var vid = $(this).parents().eq('2').attr('data-id');
+                var val = $(this).parents().eq('2').find('select').val()
+                $scope.relocateURL(vid,val);
+            });
         }, 100);
         $scope.filterEventsData();
         $scope.loadMap();
+    }
+
+    $scope.relocateURL = function(id,val){
+        $location.search('amount', val);
+        $location.path('/order/'+id);
+        $scope.applyChanges();
     }
 
     $scope.filterEventsData = function(){
@@ -405,6 +416,11 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
             }
             else{
                 if($(this).attr('data-type') == 'parking'){
+                    $(this).addClass("hidden");
+                }
+            }
+            if($scope.selectedSections.length > 0){
+                if($scope.selectedSections.indexOf($(this).attr('data-section')) == -1){
                     $(this).addClass("hidden");
                 }
             }
@@ -476,7 +492,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                     var _indexDel = $scope.selectedSections.indexOf(Section.Name);
                     $scope.selectedSections.splice(_indexDel, 1);
                 }
-                
+                 $scope.filterEventsData();
                 //console.log($scope.selectedSections);
                 
 	        }
@@ -488,7 +504,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 				$scope.applyChanges();
 				$("#MapContainer").tuMap("RemoveMapControl","Unmapped");
 	            $("#MapContainer").tuMap("RemoveMapControl","Parking");
-	            $("#MapContainer").tuMap("RemoveMapControl","Tailgate");     
+	            $("#MapContainer").tuMap("RemoveMapControl","Tailgate");
+                 $scope.filterEventsData();   
 	        }
 	        , OnMouseover:function(e,Section){
 	            if(Section.Active) {    
