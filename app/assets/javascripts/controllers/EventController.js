@@ -330,6 +330,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
         $('#tickets_list').html(htm);
         $timeout(function () {
             $('[data-toggle="tooltip"]').tooltip();
+            $('.listing-row').mouseover($scope.higlightSection($(this).attr('data-section'), true));
+            $('.listing-row').mouseleave($scope.higlightSection($(this).attr('data-section'), true));
         }, 100);
         $scope.filterEventsData();
         $scope.loadMap();
