@@ -528,7 +528,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         console.log("DVM_map_params")
         console.log(DVM_map_params);
         $timeout(function(){
-            angularLoad.loadScript("/dvm.js?v=38").then(function() {
+            angularLoad.loadScript("/dvm.js?v=39").then(function() {
                 console.log("dvm.js loadded successfully");
                 $timeout(function(){
                     document.body.addEventListener("sectionSelected", function (e) {
@@ -543,8 +543,14 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
             });
         },100);
     };
-    $("body").on( "sectionSelected", function(event,section) {
-        alert(section);
+    $("body").on( "sectionSelected", function(event,section,selected) {
+        if(selected == true){
+            $scope.selectedSections.push(section)
+        }
+        else{
+            $scope.selectedSections.splice($scope.selectedSections.indexOf(section),1);
+        }
+        $scope.filterEventsData();
     });
     $scope.compareDates = function(event_date,format){
         if(format == "Physical"){

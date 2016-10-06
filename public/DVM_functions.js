@@ -819,7 +819,6 @@ function set_map(args) {
             clickSection = function (sts, section, section_has_tix) {
                 //e = jQuery.event.fix(e);
                 //if (section_as_row(section) || panZoom.getCurrentZoom()<1) {
-                $( "body" ).trigger( "sectionSelected", [ section ] );
                 if (section_as_row(section) || (this_map_params['rows_display'] === false)) {// || (this_map_params['rows_display'] && panZoom.getCurrentZoom()<1)
                     if (section_has_tix) {
                         if (sts[0].state === 0) {
@@ -840,12 +839,14 @@ function set_map(args) {
                             //                        console.log(glows);
                             //                        console.log(glows.length);
                             //display section tickets
+                            $( "body" ).trigger( "sectionSelected", [ section, true ] );
                             display_section_tickets(section, false);
                         } else {
                             //change sections color and stroke
                             attrs = normal_attr_section_setting(section);
                             sts.animate(attrs, 500);
                             //display section tickets
+                            $( "body" ).trigger( "sectionSelected", [ section, false ] );
                             display_section_tickets(section, true);
                         }
                         //reduire l'opacitÃƒÂ© des autres sections et ne laisser actifs que les sections sÃ¯Â¿Â½lectionnÃ¯Â¿Â½es 
