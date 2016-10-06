@@ -462,6 +462,10 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
                     if($(this).attr('data-section').indexOf($scope.selectedSections[i]) == -1){
                         $(this).addClass("hidden");
                     }
+                    else{
+                        $(this).removeClass("hidden");
+                        break;
+                    }
                 }
             }
         });
