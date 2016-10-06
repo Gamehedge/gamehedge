@@ -266,6 +266,45 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 		else{
 			$scope.ordering = sort
 		}
+        var reA = /[^a-zA-Z]/g;
+        var reN = /[^0-9]/g;
+        var htm = $('.listing-row').sort(function (a1, b1) {
+            var a = "";
+            var b = "";
+            if($scope.ordering.indexOf("section") != -1){
+                a = $(a1).attr('data-section');
+                b = $(b1).attr('data-section');
+            }
+            else if($scope.ordering.indexOf("row") != -1){
+                a = $(a1).attr('data-row');
+                b = $(b1).attr('data-row');
+            }
+            else if($scope.ordering.indexOf("retail_price") != -1){
+                a = $(a1).attr('data-value');
+                b = $(b1).attr('data-value');
+            }
+            var aA = a.replace(reA, "");
+            var bA = b.replace(reA, "");
+            if($scope.ordering.indexOf("-") == -1){
+                if(aA === bA) {
+                var aN = parseInt(a.replace(reN, ""), 10);
+                    var bN = parseInt(b.replace(reN, ""), 10);
+                    return aN === bN ? 0 : aN > bN ? 1 : -1;
+                } else {
+                    return aA > bA ? 1 : -1;
+                }
+            }
+            else{
+                if(aA === bA) {
+                var aN = parseInt(a.replace(reN, ""), 10);
+                    var bN = parseInt(b.replace(reN, ""), 10);
+                    return aN === bN ? 0 : aN > bN ? -1 : 1;
+                } else {
+                    return aA > bA ? -1 : 1;
+                }
+            }
+        })
+        $('#tickets_list').html(htm);
         $('#tickets_list').scrollTop(-200);
         //$scope.showing_list = 20;
 	}
@@ -321,10 +360,10 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                 select_list += '<option value="'+amount[j]+'">'+amount[j]+'</option>'
             }
             if(list[i].public_notes == null){
-                htm += '<div class="row listing-row"  data-info="'+amount+'" data-section="'+list[i].section+'" data-value="'+list[i].retail_price+'" data-type="'+list[i].type+'" data-id="'+list[i].id+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button class="redirect-button">$'+list[i].retail_price+'/ea</button><p class="format">'+list[i].format+'</span></div></div>'
+                htm += '<div class="row listing-row" data-info="'+amount+'" data-section="'+list[i].section+'" data-row="'+list[i].row+'" data-value="'+list[i].retail_price+'" data-type="'+list[i].type+'" data-id="'+list[i].id+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button class="redirect-button">$'+list[i].retail_price+'/ea</button><p class="format">'+list[i].format+'</span></div></div>'
             }
             else{
-                htm +='<div class="row listing-row"  data-info="'+amount+'" data-section="'+list[i].section+'" data-value="'+list[i].retail_price+'" data-type="'+list[i].type+'" data-id="'+list[i].id+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"><span aria-hidden="true" data-toggle="tooltip" data-placement="right" title='+list[i].public_notes+'><img src="'+info_url+'" alt="info" /></span></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button class="redirect-button">$'+list[i].retail_price+'/ea</button><p class="format">'+list[i].format+'</span></div></div>'
+                htm +='<div class="row listing-row"  data-info="'+amount+'" data-section="'+list[i].section+'" data-row="'+list[i].row+'" data-value="'+list[i].retail_price+'" data-type="'+list[i].type+'" data-id="'+list[i].id+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"><span aria-hidden="true" data-toggle="tooltip" data-placement="right" title='+list[i].public_notes+'><img src="'+info_url+'" alt="info" /></span></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button class="redirect-button">$'+list[i].retail_price+'/ea</button><p class="format">'+list[i].format+'</span></div></div>'
             }
         }
         $('#tickets_list').html(htm);
