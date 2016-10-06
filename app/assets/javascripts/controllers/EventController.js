@@ -459,8 +459,10 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                 }
             }
             if($scope.selectedSections.length > 0){
-                if($scope.selectedSections.indexOf($(this).attr('data-section')) == -1){
-                    $(this).addClass("hidden");
+                for(i=0;i<$scope.selectedSections.length;i++){
+                    if($(this).attr('data-section').indexOf($scope.selectedSections[i]) == -1){
+                        $(this).addClass("hidden");
+                    }
                 }
             }
         });
