@@ -279,8 +279,8 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
                 b = $(b1).attr('data-row');
             }
             else if($scope.ordering.indexOf("retail_price") != -1){
-                a = $(a1).attr('data-value');
-                b = $(b1).attr('data-value');
+                a = $(a1).attr('data-price');
+                b = $(b1).attr('data-price');
             }
             var aA = a.replace(reA, "");
             var bA = b.replace(reA, "");
@@ -359,10 +359,10 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
                 select_list += '<option value="'+amount[j]+'">'+amount[j]+'</option>'
             }
             if(list[i].public_notes == null){
-                htm += '<div class="row listing-row" data-info="'+amount+'" data-section="'+list[i].section+'" data-row="'+list[i].row+'" data-value="'+list[i].retail_price+'" data-type="'+list[i].type+'" data-id="'+list[i].id+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button class="redirect-button">$'+list[i].retail_price+'/ea</button><p class="format">'+list[i].format+'</span></div></div>'
+                htm += '<div class="row listing-row rowTicket" data-info="'+amount+'" data-section="'+list[i].section+'" data-row="'+list[i].row+'" data-price="'+list[i].retail_price+'" data-type="'+list[i].type+'" data-ticketid="'+list[i].id+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select class="rowAvail" value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button class="redirect-button">$'+list[i].retail_price+'/ea</button><p class="format">'+list[i].format+'</span></div></div>'
             }
             else{
-                htm +='<div class="row listing-row"  data-info="'+amount+'" data-section="'+list[i].section+'" data-row="'+list[i].row+'" data-value="'+list[i].retail_price+'" data-type="'+list[i].type+'" data-id="'+list[i].id+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"><span aria-hidden="true" data-toggle="tooltip" data-placement="right" title='+list[i].public_notes+'><img src="'+info_url+'" alt="info" /></span></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button class="redirect-button">$'+list[i].retail_price+'/ea</button><p class="format">'+list[i].format+'</span></div></div>'
+                htm +='<div class="row listing-row"  data-info="'+amount+'" data-section="'+list[i].section+'" data-row="'+list[i].row+'" data-price="'+list[i].retail_price+'" data-type="'+list[i].type+'" data-ticketid="'+list[i].id+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"><span aria-hidden="true" data-toggle="tooltip" data-placement="right" title='+list[i].public_notes+'><img src="'+info_url+'" alt="info" /></span></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select class="rowAvail" value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button class="redirect-button">$'+list[i].retail_price+'/ea</button><p class="format">'+list[i].format+'</span></div></div>'
             }
         }
         $('#tickets_list').html(htm);
@@ -376,7 +376,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
                 $("#MapContainer").tuMap("ResetSection",$(this).attr('data-section'));
             });
             $('.redirect-button').click(function(){
-                var vid = $(this).parents().eq('2').attr('data-id');
+                var vid = $(this).parents().eq('2').attr('data-ticketid');
                 var val = $(this).parents().eq('2').find('select').val()
                 $scope.relocateURL(vid,val);
             });
@@ -413,7 +413,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
                 if($scope.mob_price_a_real) {
                     $scope.price_filter_down_limit = 0;
                     $scope.price_filter_up_limit = 100;
-                    if(Number($(this).attr('data-value')) > $scope.price_filter_down_limit && Number($(this).attr('data-value')) <= $scope.price_filter_up_limit ) {
+                    if(Number($(this).attr('data-price')) > $scope.price_filter_down_limit && Number($(this).attr('data-price')) <= $scope.price_filter_up_limit ) {
                         val =  true;
                     }
                 }
@@ -421,7 +421,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
                 if($scope.mob_price_b_real){
                     $scope.price_filter_down_limit = 100;
                     $scope.price_filter_up_limit = 200;
-                    if( Number($(this).attr('data-value')) > $scope.price_filter_down_limit && Number($(this).attr('data-value')) <= $scope.price_filter_up_limit ) {
+                    if( Number($(this).attr('data-price')) > $scope.price_filter_down_limit && Number($(this).attr('data-price')) <= $scope.price_filter_up_limit ) {
                         val =  true;
                     }
                 }
@@ -429,7 +429,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
                 if($scope.mob_price_c_real){
                     $scope.price_filter_down_limit = 200;
                     $scope.price_filter_up_limit = 300;
-                    if( Number($(this).attr('data-value')) > $scope.price_filter_down_limit && Number($(this).attr('data-value')) <= $scope.price_filter_up_limit ) {
+                    if( Number($(this).attr('data-price')) > $scope.price_filter_down_limit && Number($(this).attr('data-price')) <= $scope.price_filter_up_limit ) {
                         val =  true;
                     }
                 }
@@ -437,7 +437,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
                 if($scope.mob_price_d_real){
                     $scope.price_filter_down_limit = 300;
                     $scope.price_filter_up_limit = 99999999999999999999999;
-                    if( Number($(this).attr('data-value')) > $scope.price_filter_down_limit && Number($(this).attr('data-value')) <= $scope.price_filter_up_limit ) {
+                    if( Number($(this).attr('data-price')) > $scope.price_filter_down_limit && Number($(this).attr('data-price')) <= $scope.price_filter_up_limit ) {
                         val =  true;
                     }
                 }
