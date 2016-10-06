@@ -516,13 +516,15 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         else{
             map_height = map_width;
         }
+        console.log("map_width " + String(map_width));
+        console.log("map_height " + String(map_height));
         DVM_map_params = {
             'client_id':'99',
             'map_name':'seatzone_map',
             'key_map_name':'map_key',
             'tickets_container':'tickets_list',
-            'map_width':map_width,
-            'map_height':map_height,
+            'map_width':320,
+            'map_height':320,
             'feed_type':'te',
             'event_id': String($scope.event.te_uid),
             'headliner_id':String($scope.event.home_performer.te_uid),
