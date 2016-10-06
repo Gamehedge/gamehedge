@@ -1339,6 +1339,8 @@ body {
     padding:0;
     position: relative;
     text-align: center;
+    display: flex;
+    font-weight: normal;
 }
 
 #tickets-map .tickets-data .right-content{
@@ -1944,6 +1946,16 @@ body {
     color: #005e9b;
 }
 
+@media (min-width: 992px){
+    .col-md-3 {
+        width: 25% !important;
+    }
+    .col-xs-3 {
+        width: 25% !important;
+    }
+}
+
+
 @media(max-width: 992px) {
     
     #payments label{
@@ -2022,7 +2034,7 @@ body {
         min-width: inherit;
     }
 
-    #tickets-map .tickets-data .section {
+    #tickets-map .tickets-data .section2 {
         padding-left: 20px;
     }
 
