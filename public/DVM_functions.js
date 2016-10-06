@@ -3513,8 +3513,9 @@ function jsonp_display_tooltip_section(data) {
 
         bimg = data.bimg;
         simg = data.simg;
-        console.log(simg);
+        // console.log(simg);
         console.log(bimg);
+        $(body).di
         is_tooltip_big = data.iszoom;
         if (is_tooltip_big === 1)
         {
@@ -3697,23 +3698,23 @@ function display_tooltip_section(section, x, y) {
 }
 //hide tooltip section
 function hide_tooltip_section(delayHide) {
-    // if (!ifInsideTooltipSection) {
-    //     if (!delayHide) {
-    //         $("#sectionTooltip").clearQueue();
-    //         $("#sectionTooltip").hide();
-    //     } else {
-    //         if (imgSectionHidden === false)
-    //         {
-    //             $("#sectionTooltip").show().delay(0).queue(function () {
-    //                 if (!ifInsideTooltipSection)
-    //                 {
-    //                     $("#sectionTooltip").hide();
-    //                 }
-    //             });
-    //         }
-    //     }
-    //     imgSectionHidden = true;
-    // }
+    if (!ifInsideTooltipSection) {
+        if (!delayHide) {
+            $("#sectionTooltip").clearQueue();
+            $("#sectionTooltip").hide();
+        } else {
+            if (imgSectionHidden === false)
+            {
+                $("#sectionTooltip").show().delay(0).queue(function () {
+                    if (!ifInsideTooltipSection)
+                    {
+                        $("#sectionTooltip").hide();
+                    }
+                });
+            }
+        }
+        imgSectionHidden = true;
+    }
 }
 
 
