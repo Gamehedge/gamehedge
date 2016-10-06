@@ -607,50 +607,44 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
     
     $("#tickets_list").scroll(function() {
         
-        clearTimeout(_timeout);
-        _timeout = setTimeout(function(){
-            if($( document ).width() < 900){
-                var first = null;
+        var first = null;
                 
-                $("#tickets_list > div").removeClass("row-selected");
-                
-                console.log($("#tickets_list").scrollTop());
-                
-                var ini_element = parseInt($("#tickets_list").scrollTop() / 60) - 2;
-                if(ini_element < 0){
-                    ini_element = 0
-                }
-                
-                for(var xx = ini_element; xx < $("#tickets_list > div").not(".hidden").length; xx++){
-                    var _this = $("#tickets_list > div").not(".hidden")[xx];
-                 
-                    if( isScrolledIntoView($(_this)) && !first) {
-                        first = $(_this);
-                        first.addClass("row-selected");
+        $("#tickets_list > div").removeClass("row-selected");
 
-                        if($scope.secH.length > 0){
-                            for(var u = 0; u < $scope.secH.length; u++){
-                                if($scope.secH[u].toString().indexOf( $(_this).data("section").toString() ) == -1){
-                                    $("#MapContainer").tuMap("ResetSection", $scope.secH[u].toString() );
-                                }
-                            }
+        console.log($("#tickets_list").scrollTop());
+
+        var ini_element = parseInt($("#tickets_list").scrollTop() / 60) - 2;
+        if(ini_element < 0){
+            ini_element = 0
+        }
+
+        for(var xx = ini_element; xx < $("#tickets_list > div").not(".hidden").length; xx++){
+            var _this = $("#tickets_list > div").not(".hidden")[xx];
+
+            if( isScrolledIntoView($(_this)) && !first) {
+                first = $(_this);
+                first.addClass("row-selected");
+
+                if($scope.secH.length > 0){
+                    for(var u = 0; u < $scope.secH.length; u++){
+                        if($scope.secH[u].toString().indexOf( $(_this).data("section").toString() ) == -1){
+                            $("#MapContainer").tuMap("ResetSection", $scope.secH[u].toString() );
                         }
-
-                        $scope.secH = [];
-
-                        $("#MapContainer").tuMap("HighlightSection", $(_this).data("section").toString() );
-
-                        $scope.secH.push( $(_this).data("section").toString() );
-
-                        //console.log($scope.secH);
-                        break;
-
-                    }            
-                    
+                    }
                 }
 
-            }
-        },delay);
+                $scope.secH = [];
+
+                $("#MapContainer").tuMap("HighlightSection", $(_this).data("section").toString() );
+
+                $scope.secH.push( $(_this).data("section").toString() );
+
+                //console.log($scope.secH);
+                break;
+
+            }            
+
+        }
         
     });
     
