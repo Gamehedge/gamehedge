@@ -349,8 +349,10 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     }
 
     $scope.resetMap = function(){
+        alert("map reset");
         client_dvm_reset_maps();
         $scope.selectedSections = [];
+        $scope.filterEventsData();
     }
 
     $scope.fillEventsData = function(){
@@ -533,7 +535,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         console.log("DVM_map_params")
         console.log(DVM_map_params);
         $timeout(function(){
-            angularLoad.loadScript("/dvm.js?v=44").then(function() {
+            angularLoad.loadScript("/dvm.js?v=45").then(function() {
                 console.log("dvm.js loadded successfully");
                 $timeout(function(){
                     document.body.addEventListener("sectionSelected", function (e) {
