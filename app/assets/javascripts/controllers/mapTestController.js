@@ -1,7 +1,6 @@
 controllers = angular.module('gamehedge')
 
-controllers.controller('MapTestController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http,$timeout,$location,$rootScope,Auth){
-
+controllers.controller('mapTestController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http,$timeout,$location,$rootScope,Auth,angularLoad){
     $scope.prev_filter = true;
     $scope.mob_price = 0;
     $scope.mob_price_a = false;
@@ -480,24 +479,24 @@ controllers.controller('MapTestController', function($scope,$routeParams,dataSer
 
     $scope.loadMap = function(){
         var tickets = []
-        for(i=0;i<$scope.tickets.data.ticket_groups.length;i++){
+        for(i=0;i<$scope.tickets.length;i++){
             var b = "";
-            for(j=0;j<$scope.tickets.data.ticket_groups[i].splits.length;j++){
+            for(j=0;j<$scope.tickets[i].splits.length;j++){
                 if(j==0){
-                    b = b + $scope.tickets.data.ticket_groups[i].splits[j];
+                    b = b + $scope.tickets[i].splits[j];
                 }
                 else{
-                    b = b + "," + $scope.tickets.data.ticket_groups[i].splits[j];
+                    b = b + "," + $scope.tickets[i].splits[j];
                 }
             }
             var a = {
-                id:String($scope.tickets.data.ticket_groups[i].id),
-                section:String($scope.tickets.data.ticket_groups[i].section),
-                row:String($scope.tickets.data.ticket_groups[i].row),
-                price:String($scope.tickets.data.ticket_groups[i].retail_price),
-                qty:String($scope.tickets.data.ticket_groups[i].available_quantity),
+                id:String($scope.tickets[i].id),
+                section:String($scope.tickets[i].section),
+                row:String($scope.tickets[i].row),
+                price:String($scope.tickets[i].retail_price),
+                qty:String($scope.tickets[i].available_quantity),
                 avail:String(b),
-                notes:String($scope.tickets.data.ticket_groups[i].public_notes),
+                notes:String($scope.tickets[i].public_notes),
             }
             tickets.push(a)
         }
@@ -586,13 +585,6 @@ controllers.controller('MapTestController', function($scope,$routeParams,dataSer
         // //$scope.showing_list = //$scope.showing_list + 20;
     }
 
-    $scope.$on('LastRepeaterElement', function(){
-        //console.log('good to go');
-        $timeout(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        }, 1000);
-    });
-
     $scope.getEventInfo();
     //$scope.showing_list = 20;
     $scope.Data = [];
@@ -629,4 +621,4 @@ controllers.controller('MapTestController', function($scope,$routeParams,dataSer
         $rootScope.user = undefined;
         $rootScope.isLoggedin = false;
     });
-})
+});

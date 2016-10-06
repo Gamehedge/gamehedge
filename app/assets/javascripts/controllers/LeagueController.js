@@ -123,8 +123,8 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
 	$scope.getNextEvents = function(){
         id = $scope.league.te_uid;
         source = "league";
-        console.log('/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true');
-        url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=10&geolocated=true';  
+        console.log('/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=50&geolocated=true');
+        url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=50&geolocated=true';  
         $http({
             method: 'GET',
             url: url,
