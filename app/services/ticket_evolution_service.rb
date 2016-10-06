@@ -49,7 +49,7 @@ class TicketEvolutionService
         puts "Updating events began"
         Sport.all.order(:id).each do |s|
           puts String(s.name)
-          @events = @connection.events.list({:category_id => s.te_uid, :per_page => 10000000, 'occurs_at.gte' => (Time.now - 1.day).strftime("%m/%d/%Y")})
+          @events = @connection.events.list({:category_id => s.te_uid, :per_page => 10000000})
           @events.each do |e|
             if e.performances.count == 0
               puts "Not added. Event with no performers."
@@ -231,7 +231,7 @@ class TicketEvolutionService
               end
             end
           end
-          @events = @events2
+          @events = @events
         else
           puts "Invalid type parameter, please check and try again"
         end

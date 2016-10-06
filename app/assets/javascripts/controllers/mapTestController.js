@@ -1,6 +1,6 @@
 controllers = angular.module('gamehedge')
 
-controllers.controller('EventController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http,$timeout,$location,$rootScope,Auth){
+controllers.controller('MapTestController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http,$timeout,$location,$rootScope,Auth){
 
     $scope.prev_filter = true;
     $scope.mob_price = 0;
