@@ -231,7 +231,7 @@ class TicketEvolutionService
               end
             end
           end
-          @events = @events
+          @events = @events2
         else
           puts "Invalid type parameter, please check and try again"
         end
