@@ -393,6 +393,29 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
 
     $scope.filterEventsData = function(){
         $('.listing-row').removeClass('hidden');
+        $('.listing-row').each(function(){
+            if($scope.selectedSections.length > 0){
+                for(i=0;i<$scope.selectedSections.length;i++){
+                    if($(this).attr('data-section').indexOf($scope.selectedSections[i]) == -1){
+                        $(this).addClass("hidden");
+                    }
+                    else{
+                        $(this).removeClass("hidden");
+                        break;
+                    }
+                }
+            }
+            if($scope.onlyParking == true){
+                if($(this).attr('data-type') == 'event'){
+                    $(this).addClass("hidden");
+                }
+            }
+            else{
+                if($(this).attr('data-type') == 'parking'){
+                    $(this).addClass("hidden");
+                }
+            }
+        });
         if($scope.index != 0){
             $('.listing-row').each(function(){
                 if($scope.index == 5){
@@ -446,29 +469,6 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
                 }
             });
         }
-        $('.listing-row').each(function(){
-            if($scope.onlyParking == true){
-                if($(this).attr('data-type') == 'event'){
-                    $(this).addClass("hidden");
-                }
-            }
-            else{
-                if($(this).attr('data-type') == 'parking'){
-                    $(this).addClass("hidden");
-                }
-            }
-            if($scope.selectedSections.length > 0){
-                for(i=0;i<$scope.selectedSections.length;i++){
-                    if($(this).attr('data-section').indexOf($scope.selectedSections[i]) == -1){
-                        $(this).addClass("hidden");
-                    }
-                    else{
-                        $(this).removeClass("hidden");
-                        break;
-                    }
-                }
-            }
-        });
     }
 
     $scope.higlightSection = function(section,highlight){
