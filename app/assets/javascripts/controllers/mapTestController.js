@@ -349,7 +349,6 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     }
 
     $scope.resetMap = function(){
-        alert("map reset");
         client_dvm_reset_maps();
         $scope.selectedSections = [];
         $scope.filterEventsData();
