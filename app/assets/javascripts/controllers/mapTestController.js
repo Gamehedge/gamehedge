@@ -348,6 +348,11 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         });
     }
 
+    $scope.resetMap = function(){
+        client_dvm_reset_maps();
+        $scope.selectedSections = [];
+    }
+
     $scope.fillEventsData = function(){
         var htm = "";
         var list = $scope.tickets;
