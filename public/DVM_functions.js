@@ -73,10 +73,10 @@ function set_map(args) {
 //    }
     //mobile width and height
     is_mobile = detectmob();
-    if (is_mobile) {
-        map_width = 600;
-        map_height = 300;
-    }
+    // if (is_mobile) {
+    //     map_width = 600;
+    //     map_height = 300;
+    // }
     //tickets_data json decode
     //correct a bug in xml version of tickets list
     if (map_args['tickets_data_object']['ticket']) {
