@@ -72,7 +72,7 @@ function set_map(args) {
 //        venue_folder += '-parking';
 //    }
     //mobile width and height
-    is_mobile = detectmob();
+    // is_mobile = detectmob();
     // if (is_mobile) {
     //     map_width = 600;
     //     map_height = 300;
