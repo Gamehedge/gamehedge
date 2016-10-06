@@ -528,7 +528,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         console.log("DVM_map_params")
         console.log(DVM_map_params);
         $timeout(function(){
-            angularLoad.loadScript("/dvm.js?v=41").then(function() {
+            angularLoad.loadScript("/dvm.js?v=42").then(function() {
                 console.log("dvm.js loadded successfully");
                 $timeout(function(){
                     document.body.addEventListener("sectionSelected", function (e) {
@@ -544,13 +544,12 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         },100);
     };
     $("body").on( "sectionSelected", function(event,section,selected) {
-        console.log(section);
-        console.log(selected);
+        var bare_section = section.split("-")[section.split("-").length - 1]
         if(selected == true){
-            $scope.selectedSections.push(section)
+            $scope.selectedSections.push(bare_section)
         }
         else{
-            $scope.selectedSections.splice($scope.selectedSections.indexOf(section),1);
+            $scope.selectedSections.splice($scope.selectedSections.indexOf(bare_section),1);
         }
         console.log($scope.selectedSections);
         $scope.filterEventsData();
