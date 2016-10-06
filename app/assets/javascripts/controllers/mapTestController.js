@@ -458,8 +458,10 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
                 }
             }
             if($scope.selectedSections.length > 0){
-                if($scope.selectedSections.indexOf($(this).attr('data-section')) == -1){
-                    $(this).addClass("hidden");
+                for(i=0;i<$scope.selectedSections.length;i++){
+                    if($(this).attr('data-section').indexOf($scope.selectedSections[i]) == -1){
+                        $(this).addClass("hidden");
+                    }
                 }
             }
         });
@@ -528,7 +530,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         console.log("DVM_map_params")
         console.log(DVM_map_params);
         $timeout(function(){
-            angularLoad.loadScript("/dvm.js?v=42").then(function() {
+            angularLoad.loadScript("/dvm.js?v=43").then(function() {
                 console.log("dvm.js loadded successfully");
                 $timeout(function(){
                     document.body.addEventListener("sectionSelected", function (e) {
