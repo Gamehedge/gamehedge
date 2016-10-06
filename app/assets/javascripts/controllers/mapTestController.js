@@ -528,7 +528,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         console.log("DVM_map_params")
         console.log(DVM_map_params);
         $timeout(function(){
-            angularLoad.loadScript("/dvm.js?v=40").then(function() {
+            angularLoad.loadScript("/dvm.js?v=41").then(function() {
                 console.log("dvm.js loadded successfully");
                 $timeout(function(){
                     document.body.addEventListener("sectionSelected", function (e) {
@@ -552,7 +552,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         else{
             $scope.selectedSections.splice($scope.selectedSections.indexOf(section),1);
         }
-        console.log(selectedSections);
+        console.log($scope.selectedSections);
         $scope.filterEventsData();
     });
     $scope.compareDates = function(event_date,format){

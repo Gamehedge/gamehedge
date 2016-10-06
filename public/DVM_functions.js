@@ -839,15 +839,15 @@ function set_map(args) {
                             //                        console.log(glows);
                             //                        console.log(glows.length);
                             //display section tickets
-                            $( "body" ).trigger( "sectionSelected", [ section, true ] );
                             display_section_tickets(section, false);
+                            $( "body" ).trigger( "sectionSelected", [ section, true ] );
                         } else {
                             //change sections color and stroke
                             attrs = normal_attr_section_setting(section);
                             sts.animate(attrs, 500);
                             //display section tickets
-                            $( "body" ).trigger( "sectionSelected", [ section, false ] );
                             display_section_tickets(section, true);
+                            $( "body" ).trigger( "sectionSelected", [ section, false ] );
                         }
                         //reduire l'opacitÃƒÂ© des autres sections et ne laisser actifs que les sections sÃ¯Â¿Â½lectionnÃ¯Â¿Â½es 
                         reduceNotClickedSectionsOpacity();
