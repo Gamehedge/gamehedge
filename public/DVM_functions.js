@@ -3323,8 +3323,7 @@ function click_attr_row_setting(section, row) {
 function display_section_tickets(section, unset) {
     if (section && is_section_has_tix(section)) {
         section_id = bare_section(section);
-        console.log("section");
-        console.log(section_id);
+        console.log(bare_section(section) + section);
         //remove section from hidden SectionPass list
         if (unset) {
             //remove from the ticket listing
@@ -3383,8 +3382,6 @@ function display_all_selected_tickets() {
     var rowsIdsSplit = $("#" + hiddenClickedRows).val().split(",");
     //get section Ids from the hidden SectionPass and split it
     var sectionsIdsSplit = $("#" + hiddenClickedSections).val().split(",");
-    console.log("sections");
-    console.log(sectionsIdsSplit);
     if (this_map_params['rows_display'] === false) {
         if ($("#" + hiddenClickedSections).val() == '') {
             $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').show();
