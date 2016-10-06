@@ -976,7 +976,7 @@ function set_map(args) {
                                     }, 250);
                                 });
                                 //hide ticket list
-                                $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').hide();
+                                // $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').hide();
                                 $('#' + hiddenClickedSections).val('');
 
                                 //Section list to display
@@ -1039,7 +1039,7 @@ function set_map(args) {
 
                                 if ($('#zone').multipleSelect('getSelects').length === 0)
                                 {
-                                    $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').show();
+                                    // $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').show();
 
                                     $.each(sectionsCopy, function (i, value) {
 
@@ -1231,7 +1231,7 @@ function set_map(args) {
         }
     }
     //show all ticket sets
-    $("#"+tickets_container+" .rowTicket").show();
+    // $("#"+tickets_container+" .rowTicket").show();
             
         var sectionList = $.map(seatingChart, function (element, index) {
                             return index;
@@ -1547,7 +1547,7 @@ function displayTicketsBySectionList(sectionList)
         sectionsCopy[value].animate(attrs, 500);
 
         $.each(matched_sections_reverse[bare_section(value)], function (msrId, dataSection) {
-            $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').filter("[data-section='" + dataSection + "']").show();
+            // $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').filter("[data-section='" + dataSection + "']").show();
 
         });
     });
@@ -3384,10 +3384,10 @@ function display_all_selected_tickets() {
     var sectionsIdsSplit = $("#" + hiddenClickedSections).val().split(",");
     if (this_map_params['rows_display'] === false) {
         if ($("#" + hiddenClickedSections).val() == '') {
-            $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').show();
+            // $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').show();
         } else {
             //hide all tickets
-            $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').hide();
+            // $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').hide();
             //show 
             for (kid in sectionsIdsSplit) {
                 sid = sectionsIdsSplit[kid];
@@ -3395,23 +3395,23 @@ function display_all_selected_tickets() {
                     reversed_sid_list = matched_sections_reverse[sid];
                     for (krsid in reversed_sid_list) {
                         var reversed_sid = reversed_sid_list[krsid];
-                        $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').filter("[data-section='" + reversed_sid + "'][data-row='" + rid + "']").show();
+                        // $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').filter("[data-section='" + reversed_sid + "'][data-row='" + rid + "']").show();
                     }
                 }
             }
         }
     } else {
         if ($("#" + hiddenClickedRows).val() == '') {
-            $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').show();
+            // $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').show();
         } else {
             //hide all tickets
-            $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').hide();
+            // $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').hide();
             //show 
             for (ksid in rowsIdsSplit) {
                 pars = rowsIdsSplit[ksid].split('|');
                 sid = pars[0];
                 rid = pars[1];
-                $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').filter("[data-section='" + sid + "'][data-row='" + rid + "']").show();
+                // $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').filter("[data-section='" + sid + "'][data-row='" + rid + "']").show();
             }
         }
     }
