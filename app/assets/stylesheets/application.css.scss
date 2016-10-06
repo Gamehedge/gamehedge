@@ -1394,7 +1394,8 @@ body {
 }
 
 #tickets-map .map-container {
-    text-align: -webkit-center;
+    display: flex;
+    justify-content: center;
 }
 
 #tickets-map .map-container .glyphicon-zoom-in {
