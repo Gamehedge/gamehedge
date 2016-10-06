@@ -463,6 +463,10 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                     if($(this).attr('data-section').indexOf($scope.selectedSections[i]) == -1){
                         $(this).addClass("hidden");
                     }
+                    else{
+                        $(this).removeClass("hidden");
+                        break;
+                    }
                 }
             }
         });
