@@ -819,7 +819,7 @@ function set_map(args) {
             clickSection = function (sts, section, section_has_tix) {
                 //e = jQuery.event.fix(e);
                 //if (section_as_row(section) || panZoom.getCurrentZoom()<1) {
-
+                $( "body" ).trigger( "sectionSelected", [ section ] );
                 if (section_as_row(section) || (this_map_params['rows_display'] === false)) {// || (this_map_params['rows_display'] && panZoom.getCurrentZoom()<1)
                     if (section_has_tix) {
                         if (sts[0].state === 0) {
@@ -3323,7 +3323,6 @@ function click_attr_row_setting(section, row) {
 function display_section_tickets(section, unset) {
     if (section && is_section_has_tix(section)) {
         section_id = bare_section(section);
-        console.log(bare_section(section) + section);
         //remove section from hidden SectionPass list
         if (unset) {
             //remove from the ticket listing
