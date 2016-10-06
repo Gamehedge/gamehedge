@@ -819,6 +819,7 @@ function set_map(args) {
             clickSection = function (sts, section, section_has_tix) {
                 //e = jQuery.event.fix(e);
                 //if (section_as_row(section) || panZoom.getCurrentZoom()<1) {
+                console.log(section);
                 if (section_as_row(section) || (this_map_params['rows_display'] === false)) {// || (this_map_params['rows_display'] && panZoom.getCurrentZoom()<1)
                     if (section_has_tix) {
                         if (sts[0].state === 0) {
@@ -3872,4 +3873,3 @@ function trimString(string) {
     return string.replace(/^\s+|\s+$/g, '');
 }
 //---------------------------------------------------------------
-         
