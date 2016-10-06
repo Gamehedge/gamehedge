@@ -528,7 +528,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         console.log("DVM_map_params")
         console.log(DVM_map_params);
         $timeout(function(){
-            angularLoad.loadScript("/dvm.js?v=37").then(function() {
+            angularLoad.loadScript("/dvm.js?v=41").then(function() {
                 console.log("dvm.js loadded successfully");
                 $timeout(function(){
                     document.body.addEventListener("sectionSelected", function (e) {
@@ -543,7 +543,18 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
             });
         },100);
     };
-
+    $("body").on( "sectionSelected", function(event,section,selected) {
+        console.log(section);
+        console.log(selected);
+        if(selected == true){
+            $scope.selectedSections.push(section)
+        }
+        else{
+            $scope.selectedSections.splice($scope.selectedSections.indexOf(section),1);
+        }
+        console.log($scope.selectedSections);
+        $scope.filterEventsData();
+    });
     $scope.compareDates = function(event_date,format){
         if(format == "Physical"){
             if(moment().add(72,'h').isAfter(event_date.replace("Z",""))){
@@ -608,6 +619,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     $scope.searchTerm = "";
     $scope.compareDate =  "2015-09-05T00:00:00.000Z"
     $window.scrollTo(0, 0);
+    
     //The global variable locat gets the current location.path
     Auth.currentUser().then(function(user) {
         // User was logged in, or Devise returned
