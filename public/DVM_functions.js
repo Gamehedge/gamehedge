@@ -2242,16 +2242,6 @@ function dvm_ticket_ids_by_filters(args_to_filter) {
             }
         }
     }
-    else if (!isNaN(args_to_filter['filter_qty_min'])) {
-        for (var q in tickets_qty_filtre) {
-            if (parseFloat(args_to_filter['filter_qty_min']) === parseFloat(q)) {
-                for (var key in tickets_qty_filtre[q]) {
-                    id = tickets_qty_filtre[q][key];
-                    array_ids_by_qty.push(id);
-                }
-            }
-        }
-    }
     //price filtre
     if ((!isNaN(args_to_filter['filter_min_price']) || !isNaN(args_to_filter['filter_max_price']))) {
         for (var p in tickets_price_filtre) {
@@ -2293,12 +2283,10 @@ function dvm_ticket_ids_by_filters(args_to_filter) {
  * @returns 
  */
 function dvm_add_section_to_display_list(section_to_add, row_to_add) {
-    if ($("#" + hiddenClickedSections).val() && $("#" + hiddenClickedSections).val() != ''){
+    if ($("#" + hiddenClickedSections).val() && $("#" + hiddenClickedSections).val() != '')
         $("#" + hiddenClickedSections).val($("#" + hiddenClickedSections).val() + ',' + section_to_add);
-    }
-    else{
+    else
         $("#" + hiddenClickedSections).val(section_to_add);
-    }
 }
 /**
  * add row to the hidden containing rows to display
@@ -2316,10 +2304,8 @@ function dvm_add_row_to_display_list(section_to_add, row_to_add) {
 function dvm_map_filter(filter_vals) {
     //to get filter values
     filter_qty = parseFloat(filter_vals['filter_qty']);
-    filter_qty_min = parseFloat(filter_vals['filter_qty_min']);
     filter_min_price = parseFloat(filter_vals['filter_min_price']);
     filter_max_price = parseFloat(filter_vals['filter_max_price']);
-    filter_price = filter_vals['filter_price'];
     //best value
     filter_best_value = false;
     if (filter_vals['filter_best_value']) {
@@ -2349,17 +2335,6 @@ function dvm_map_filter(filter_vals) {
             }
         }
     }
-    if (!isNaN(filter_qty_min)) {
-        
-        for (q in tickets_qty_filtre) {
-            if (parseFloat(filter_qty_min) <= parseFloat(q)) {
-                for (key in tickets_qty_filtre[q]) {
-                    id = tickets_qty_filtre[q][key];
-                    array_ids_by_qty.push(id);
-                }
-            }
-        }
-    }
     //price filtre
     if ((!isNaN(filter_min_price) || !isNaN(filter_max_price))) {
         for (p in tickets_price_filtre) {
@@ -2371,29 +2346,6 @@ function dvm_map_filter(filter_vals) {
                 for (key in tickets_price_filtre[p]) {
                     id = tickets_price_filtre[p][key];
                     array_ids_by_price.push(id);
-                }
-            }
-        }
-    }
-    if (filter_price != undefined){
-        
-        if(filter_price.length > 0){
-            for(j=0;j<filter_price.length;j++){
-                filter_min_price = filter_price[j]['filter_min_price'];
-                filter_max_price = filter_price[j]['filter_max_price'];
-                if ((!isNaN(filter_min_price) || !isNaN(filter_max_price))) {
-                    for (p in tickets_price_filtre) {
-                        if (
-                                (isNaN(filter_min_price) || (parseFloat(p) >= parseFloat(filter_min_price)))
-                                &&
-                                (isNaN(filter_max_price) || (parseFloat(p) <= parseFloat(filter_max_price)))
-                                ) {
-                            for (key in tickets_price_filtre[p]) {
-                                id = tickets_price_filtre[p][key];
-                                array_ids_by_price.push(id);
-                            }
-                        }
-                    }
                 }
             }
         }
@@ -2431,7 +2383,6 @@ function dvm_map_filter(filter_vals) {
         }
     }
     if (!is_static_map) {
-        display_all_selected_tickets();
         reduceNotClickedSectionsOpacity();
     }
 }
@@ -2482,7 +2433,6 @@ function dvm_reset_maps(init_filtre_vals) {
         //initialiser la liste des tickets
         $("#" + hiddenClickedSections).val('');
         $("#" + hiddenClickedRows).val('');
-        display_all_selected_tickets();
     }
 }
 //compare tickets
@@ -3383,13 +3333,11 @@ function display_section_tickets(section, unset) {
                 }
             }
             $("#" + hiddenClickedSections).val(allSectionsToShow.join(','));
-            
         }
         //add section to hidden SectionPass list
         else {
             dvm_add_section_to_display_list(section_id, false);
         }
-        
     }
     if (map_args['self_display_tickets_by_client']===true){
         // console.log("****"+matched_sections_reverse[section_id]+"***");
@@ -3432,9 +3380,7 @@ function display_all_selected_tickets() {
     var rowsIdsSplit = $("#" + hiddenClickedRows).val().split(",");
     //get section Ids from the hidden SectionPass and split it
     var sectionsIdsSplit = $("#" + hiddenClickedSections).val().split(",");
-
     if (this_map_params['rows_display'] === false) {
-        sections_show = [];
         if ($("#" + hiddenClickedSections).val() == '') {
             $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').show();
         } else {
@@ -3447,16 +3393,11 @@ function display_all_selected_tickets() {
                     reversed_sid_list = matched_sections_reverse[sid];
                     for (krsid in reversed_sid_list) {
                         var reversed_sid = reversed_sid_list[krsid];
-                        if(sections_show.indexOf(reversed_sid) == -1){
-                            sections_show.push(reversed_sid);
-                        }
                         $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').filter("[data-section='" + reversed_sid + "'][data-row='" + rid + "']").show();
                     }
                 }
             }
         }
-        console.log(sections_show);
-        
     } else {
         if ($("#" + hiddenClickedRows).val() == '') {
             $('#' + DVM_map_params['tickets_container'] + ' .rowTicket').show();
@@ -3510,12 +3451,8 @@ function jsonp_display_tooltip_section(data) {
     data = $.parseJSON(data);
     if (data.status === 1)
     {
-
         bimg = data.bimg;
         simg = data.simg;
-        // console.log(simg);
-        console.log(bimg);
-        $(body).di
         is_tooltip_big = data.iszoom;
         if (is_tooltip_big === 1)
         {
