@@ -602,10 +602,62 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	  	$location.url(url);
 	};
 
+    var delay = 200;
+    var _timeout = null;
+    
     $("#tickets_list").scroll(function() {
-        console.log("jeje");
+        
+        var first = null;
+                
+        $("#tickets_list > div").removeClass("row-selected");
+
+        console.log($("#tickets_list").scrollTop());
+
+        var ini_element = parseInt($("#tickets_list").scrollTop() / 60) - 2;
+        if(ini_element < 0){
+            ini_element = 0
+        }
+
+        for(var xx = ini_element; xx < $("#tickets_list > div").not(".hidden").length; xx++){
+            var _this = $("#tickets_list > div").not(".hidden")[xx];
+
+            if( isScrolledIntoView($(_this)) && !first) {
+                first = $(_this);
+                first.addClass("row-selected");
+
+                if($scope.secH.length > 0){
+                    for(var u = 0; u < $scope.secH.length; u++){
+                        if($scope.secH[u].toString().indexOf( $(_this).data("section").toString() ) == -1){
+                            $("#MapContainer").tuMap("ResetSection", $scope.secH[u].toString() );
+                        }
+                    }
+                }
+
+                $scope.secH = [];
+
+                $("#MapContainer").tuMap("HighlightSection", $(_this).data("section").toString() );
+
+                $scope.secH.push( $(_this).data("section").toString() );
+
+                //console.log($scope.secH);
+                break;
+
+            }            
+
+        }
+        
     });
     
+    function isScrolledIntoView(elem) {
+        var docViewTop = $("#tickets_list").scrollTop();
+        var docViewBottom = docViewTop + $("#tickets_list").height();
+
+        var elemTop = $(elem).position().top;
+        var elemBottom = elemTop + $(elem).height();
+
+        return ((elemBottom <= docViewBottom) && (elemTop > -30));
+    }  
+
     $scope.showMore = function(){
         // //$scope.showing_list = //$scope.showing_list + 20;
     }
@@ -697,60 +749,6 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
             var raw = element[0];
             //console.log('loading directive');
                 
-            element.bind('scroll', function () {
-                //if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
-                //    scope.$apply(attrs.scrolly);
-                //}
-                
-                if($( document ).width() < 900){
-                    var first = null;
-
-                    $("#tickets_list > div").each(function(){
-                        if( isScrolledIntoView($(this)) && !first) {
-                            first = $(this);
-                            first.addClass("row-selected");
-                            
-                            if(scope.secH.length > 0){
-                                for(var u = 0; u < scope.secH.length; u++){
-                                    if(scope.secH[u].toString().indexOf( $(this).data("section").toString() ) == -1){
-                                        $("#MapContainer").tuMap("ResetSection", scope.secH[u].toString() );
-                                    }
-                                }
-                            }
-                            
-                            scope.secH = [];
-                            
-                            $("#MapContainer").tuMap("HighlightSection", $(this).data("section").toString() );
-                            
-                            scope.secH.push( $(this).data("section").toString() );
-                            
-                            
-                            console.log(scope.secH);
-                           // $("#MapContainer").tuMap("SetOptions",{
-                            //    SingleSectionSelection:false
-                            //});
-                            
-                            //$("#MapContainer").tuMap("Refresh");
-                            
-                            
-                        }            
-                        else
-                           $(this).removeClass("row-selected");
-                    });
-
-                    function isScrolledIntoView(elem) {
-                        var docViewTop = $("#tickets_list").scrollTop();
-                        var docViewBottom = docViewTop + $("#tickets_list").height();
-
-                        var elemTop = $(elem).position().top;
-                        var elemBottom = elemTop + $(elem).height();
-
-                        return ((elemBottom <= docViewBottom) && (elemTop > -30));
-                    }  
-                    
-                }
-                
-            });
         }
     };
 });
