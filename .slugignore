@@ -2,3 +2,5 @@
 *.psd
 *.eps
 *.pdf
+/test
+/tmp
