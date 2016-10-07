@@ -6198,6 +6198,7 @@
 
             function u(z) {
                 if (!s.enabled) {
+                    console.log("returned and screwd")
                     return false
                 }
                 var x = window.event || z,
@@ -6214,6 +6215,7 @@
                 } else {
                     x.returnValue = false
                 }
+                console.log("returned and OK")
                 return false
             }
 
