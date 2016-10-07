@@ -6115,10 +6115,10 @@
                 s.dragTime = 0;
                 k = a(n, g);
                 g.className += " grabbing";
-                g.ontouchmove = u;
-                document.ontouchmove = function() {
+                g.addEventListener('touchmove',u);
+                document.addEventListener('touchmove',function() {
                     return false
-                };
+                });
                 if (n.preventDefault) {
                     n.preventDefault()
                 } else {
@@ -6126,11 +6126,11 @@
                 }
                 return false
             });
-            g.addEventListener('ontouchend',function(n) {
+            g.addEventListener('touchend',function(n) {
                 console.log("TOUCHING STOP");
-                document.ontouchmove = null;
+                document.removeEventListener('touchmove');
                 g.className = g.className.replace(/(?:^|\s)grabbing(?!\S)/g, "");
-                g.ontouchmove = null
+                g.removeEventListener('touchmove');
             });
             if (g.attachEvent) {
                 g.attachEvent("on" + t, q)
