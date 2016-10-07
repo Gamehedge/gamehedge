@@ -6106,7 +6106,7 @@
                 g.className = g.className.replace(/(?:^|\s)grabbing(?!\S)/g, "");
                 g.onmousemove = null
             };
-            g.ontouchstart = function(w) {
+            g.addEventListener('touchstart',function(w) {
                 console.log("TOUCHING");
                 var n = window.event || w;
                 if (!s.enabled) {
@@ -6126,7 +6126,7 @@
                 }
                 return false
             };
-            g.ontouchend = function(n) {
+            g.addEventListener('ontouchend',function(n) {
                 console.log("TOUCHING STOP");
                 document.ontouchmove = null;
                 g.className = g.className.replace(/(?:^|\s)grabbing(?!\S)/g, "");
