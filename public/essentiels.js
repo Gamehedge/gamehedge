@@ -6125,13 +6125,13 @@
                     n.returnValue = false
                 }
                 return false
-            };
+            });
             g.addEventListener('ontouchend',function(n) {
                 console.log("TOUCHING STOP");
                 document.ontouchmove = null;
                 g.className = g.className.replace(/(?:^|\s)grabbing(?!\S)/g, "");
                 g.ontouchmove = null
-            };
+            });
             if (g.attachEvent) {
                 g.attachEvent("on" + t, q)
             } else {
