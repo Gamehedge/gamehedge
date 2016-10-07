@@ -2533,6 +2533,7 @@
             start: S
         });
         this.mousedown(S);
+        console.log("DRAGGING");
         return this
     };
     aq.onDragOver = function(b) {
