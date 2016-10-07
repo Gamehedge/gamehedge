@@ -2533,7 +2533,6 @@
             start: S
         });
         this.mousedown(S);
-        console.log("DRAGGING");
         return this
     };
     aq.onDragOver = function(b) {
@@ -6082,6 +6081,7 @@
             this.currPos = m.initialPosition;
             l();
             g.onmousedown = function(w) {
+                console.log("DRAGGING");
                 var n = window.event || w;
                 if (!s.enabled) {
                     return false
@@ -6101,6 +6101,7 @@
                 return false
             };
             g.onmouseup = function(n) {
+                console.log("DRAGGING STOP");
                 document.onmousemove = null;
                 g.className = g.className.replace(/(?:^|\s)grabbing(?!\S)/g, "");
                 g.onmousemove = null
