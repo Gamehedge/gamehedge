@@ -6207,6 +6207,11 @@
                     y = j.width * (1 - (s.currZoom * m.zoomStep)),
                     w = j.height * (1 - (s.currZoom * m.zoomStep)),
                     n = a(x, g);
+                console.log("error trace");
+                console.log(x);
+                console.log(y);
+                console.log(w);
+                console.log(n);
                 p = (y * (n.x - k.x) / j.width) * -1;
                 o = (w * (n.y - k.y) / j.height) * -1;
                 k = n;
@@ -6222,12 +6227,10 @@
             }
 
             function l() {
-                console.log("before process");
-                console.log(s.currPos);
+                
                 s.currPos.x = s.currPos.x + p;
                 s.currPos.y = s.currPos.y + o;
-                console.log("after process");
-                console.log(s.currPos);
+                
                 var w = j.width * (1 - (s.currZoom * m.zoomStep)),
                     n = j.height * (1 - (s.currZoom * m.zoomStep));
                 if (s.currPos.x < 0) {
