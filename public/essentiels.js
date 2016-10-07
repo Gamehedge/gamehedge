@@ -4954,12 +4954,12 @@
         };
         bi._engine.setViewBox = function(ce, cc, cg, E, S) {
             b7("raphael.setViewBox", this, this._viewBox, [ce, cc, cg, E, S]);
+            console.log("second error");
+            console.log(S);
+            console.log(S ? "meet" : "xMinYMin");
             var ci = ca(cg / this.width, E / this.height),
                 cd = this.top,
-                console.log("second error");
-                console.log(S);
                 ch = S ? "meet" : "xMinYMin",
-                console.log(ch);
                 cb, cf;
             if (ce == null) {
                 if (this._vbSize) {
