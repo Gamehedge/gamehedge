@@ -3878,6 +3878,8 @@
                     }
                     for (var S in E) {
                         if (E[i](S)) {
+                            console.log("here is the error");
+                            console.log(S);
                             if (S.substring(0, 6) == "xlink:") {
                                 cb.setAttributeNS(bW, S.substring(6), b9(E[S]))
                             } else {
