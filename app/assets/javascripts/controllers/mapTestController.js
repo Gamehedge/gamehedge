@@ -534,7 +534,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         console.log("DVM_map_params")
         console.log(DVM_map_params);
         $timeout(function(){
-            angularLoad.loadScript("/dvm.js?v=70").then(function() {
+            angularLoad.loadScript("/dvm.js?v=71").then(function() {
                 console.log("dvm.js loadded successfully");
                 $timeout(function(){
                     document.body.addEventListener("sectionSelected", function (e) {

@@ -6255,8 +6255,8 @@
             g = i.pageX;
             k = i.pageY
         } else {
-            g = i.changedTouches[0]clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-            k = i.changedTouches[0]clientY + document.body.scrollTop + document.documentElement.scrollTop
+            g = i.changedTouches[0].clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+            k = i.changedTouches[0].clientY + document.body.scrollTop + document.documentElement.scrollTop
         }
         j = b(h);
         g -= j[0];
