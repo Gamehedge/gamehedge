@@ -3,7 +3,7 @@ class Sport < ActiveRecord::Base
 	has_many :performers
 	has_many :tiles
   has_many :events
-	has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100#" }
+	has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100#" }, convert_options: { original: "-quality 70 -strip -interlace Line", :all => '-quality 70 -strip -interlace Line' }, :s3_headers => { 'Cache-Control' => 'max-age=315576000', 'Expires' => 10.years.from_now.httpdate }
   	validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   	after_update :update_url
