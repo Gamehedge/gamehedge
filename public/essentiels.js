@@ -6207,11 +6207,6 @@
                     y = j.width * (1 - (s.currZoom * m.zoomStep)),
                     w = j.height * (1 - (s.currZoom * m.zoomStep)),
                     n = a(x, g);
-                console.log("error trace");
-                console.log(x);
-                console.log(y);
-                console.log(w);
-                console.log(n);
                 p = (y * (n.x - k.x) / j.width) * -1;
                 o = (w * (n.y - k.y) / j.height) * -1;
                 k = n;
@@ -6255,6 +6250,9 @@
     c.prototype = e;
 
     function a(i, h) {
+        console.log("error trace");
+        console.log(i);
+        console.log(h);
         var g, k, j;
         if (i.pageX || i.pageY) {
             g = i.pageX;
@@ -6263,9 +6261,14 @@
             g = i.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
             k = i.clientY + document.body.scrollTop + document.documentElement.scrollTop
         }
+        console.log(g);
+        console.log(k);
         j = b(h);
+        console.log(j);
         g -= j[0];
         k -= j[1];
+        console.log(g);
+        console.log(k);
         return {
             x: g,
             y: k
