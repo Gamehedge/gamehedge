@@ -3878,9 +3878,8 @@
                     }
                     for (var S in E) {
                         if (E[i](S)) {
-                            console.log("here is the error");
-                            console.log(S);
-                            console.log(b9(E[S]));
+                            // console.log("here is the error");
+                            // console.log(E[S]);
                             if (S.substring(0, 6) == "xlink:") {
                                 cb.setAttributeNS(bW, S.substring(6), b9(E[S]))
                             } else {
@@ -4957,7 +4956,10 @@
             b7("raphael.setViewBox", this, this._viewBox, [ce, cc, cg, E, S]);
             var ci = ca(cg / this.width, E / this.height),
                 cd = this.top,
+                console.log("second error");
+                console.log(S);
                 ch = S ? "meet" : "xMinYMin",
+                console.log(ch);
                 cb, cf;
             if (ce == null) {
                 if (this._vbSize) {
