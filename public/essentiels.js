@@ -6226,6 +6226,8 @@
                 console.log(s.currPos);
                 s.currPos.x = s.currPos.x + p;
                 s.currPos.y = s.currPos.y + o;
+                console.log("after process");
+                console.log(s.currPos);
                 var w = j.width * (1 - (s.currZoom * m.zoomStep)),
                     n = j.height * (1 - (s.currZoom * m.zoomStep));
                 if (s.currPos.x < 0) {
@@ -6244,8 +6246,6 @@
                         s.currPos.y = (j.height * s.currZoom * m.zoomStep)
                     }
                 }
-                console.log("after process");
-                console.log(s.currPos);
                 j.setViewBox(s.currPos.x, s.currPos.y, w / d, n / f)
             }
         };
