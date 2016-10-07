@@ -4953,8 +4953,6 @@
             return S
         };
         bi._engine.setViewBox = function(ce, cc, cg, E, S) {
-            console.log(ce);
-            console.log(cc);
             b7("raphael.setViewBox", this, this._viewBox, [ce, cc, cg, E, S]);
             var ci = ca(cg / this.width, E / this.height),
                 cd = this.top,
@@ -6224,6 +6222,8 @@
             }
 
             function l() {
+                console.log("before process");
+                console.log(s.currPos);
                 s.currPos.x = s.currPos.x + p;
                 s.currPos.y = s.currPos.y + o;
                 var w = j.width * (1 - (s.currZoom * m.zoomStep)),
@@ -6244,6 +6244,8 @@
                         s.currPos.y = (j.height * s.currZoom * m.zoomStep)
                     }
                 }
+                console.log("after process");
+                console.log(s.currPos);
                 j.setViewBox(s.currPos.x, s.currPos.y, w / d, n / f)
             }
         };
