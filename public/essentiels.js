@@ -6106,6 +6106,32 @@
                 g.className = g.className.replace(/(?:^|\s)grabbing(?!\S)/g, "");
                 g.onmousemove = null
             };
+            g.ontouchstart = function(w) {
+                console.log("TOUCHING");
+                var n = window.event || w;
+                if (!s.enabled) {
+                    return false
+                }
+                s.dragTime = 0;
+                k = a(n, g);
+                g.className += " grabbing";
+                g.ontouchmove = u;
+                document.ontouchmove = function() {
+                    return false
+                };
+                if (n.preventDefault) {
+                    n.preventDefault()
+                } else {
+                    n.returnValue = false
+                }
+                return false
+            };
+            g.ontouchend = function(n) {
+                console.log("TOUCHING STOP");
+                document.ontouchmove = null;
+                g.className = g.className.replace(/(?:^|\s)grabbing(?!\S)/g, "");
+                g.ontouchmove = null
+            };
             if (g.attachEvent) {
                 g.attachEvent("on" + t, q)
             } else {
