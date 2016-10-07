@@ -6128,9 +6128,11 @@
             });
             g.addEventListener('touchend',function(n) {
                 console.log("TOUCHING STOP");
-                document.removeEventListener('touchmove');
+                document.removeEventListener('touchmove',function() {
+                    return false
+                });
                 g.className = g.className.replace(/(?:^|\s)grabbing(?!\S)/g, "");
-                g.removeEventListener('touchmove');
+                g.removeEventListener('touchmove',u);
             });
             if (g.attachEvent) {
                 g.attachEvent("on" + t, q)
