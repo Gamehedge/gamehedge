@@ -6252,19 +6252,11 @@
     function a(i, h) {
         var g, k, j;
         if (i.pageX || i.pageY) {
-            console.log("error 1");
-            console.log(i);
             g = i.pageX;
             k = i.pageY
         } else {
-            console.log("error 2");
-            console.log(i);
-            console.log(document.body.scrollLeft);
-            console.log(document.body.scrollTop);
-            console.log(document.documentElement.scrollLeft);
-            console.log(document.documentElement.scrollTop);
-            g = i.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-            k = i.clientY + document.body.scrollTop + document.documentElement.scrollTop
+            g = i.changedTouches[0]clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+            k = i.changedTouches[0]clientY + document.body.scrollTop + document.documentElement.scrollTop
         }
         j = b(h);
         g -= j[0];
