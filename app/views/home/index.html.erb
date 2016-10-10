@@ -1,7 +1,7 @@
 <div ng-controller="MenuBarController">
 <div class="intro-full fade-intro" ng-if="page_loading == true">
     <div class="intro-img-container">
-        <img src="<%= image_url "GameHedge_Logo_Footer.png" %>" alt="Gamehedge" width="300" class="img-intro-full"/>
+        <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/GameHedge_Logo_Footer.png" alt="Gamehedge" width="300" class="img-intro-full"/>
     </div>
 </div>
 <div class="mobile-menu main-menu-transition ng-hide" ng-show="showMainMenu" ng-if="!$root.isOrder">
@@ -9,12 +9,12 @@
         <div class="row">
             <div class="col-xs-2">
                 <div ng-click="hideMenus()">
-                    <img src="<%= image_url 'close-menu.png' %>" class="img-header">
+                    <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/close-menu.png" class="img-header">
                 </div>
             </div>
             <div class="navbar-header col-xs-8">
                 <a href="/" ng-click="hideMenus()">
-                    <img class="logo-image menu" alt="GameHedge.com" src="<%= image_url 'logo.png' %>">
+                    <img class="logo-image menu" alt="GameHedge.com" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/logo.png">
                 </a>
             </div>
             <div class="col-xs-2"></div>
@@ -22,11 +22,11 @@
     </div>
     <div class="menu-container">
         <div class="row menu-row" ng-show="!$root.isLoggedin">
-            <div class="col-xs-3"><img class="user-icon" src="<%= image_url "profile icon.png" %>"></div>
+            <div class="col-xs-3"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png"></div>
             <div class="col-xs-9"><a href="/login" ng-click="hideMenus()">Login</a></div>
         </div>
         <div class="row menu-row" ng-show="$root.isLoggedin">
-            <div class="col-xs-3"><img class="user-icon" src="<%= image_url "profile icon.png" %>"></div>
+            <div class="col-xs-3"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png"></div>
             <div class="col-xs-9"><p ng-cloak>{{$root.user.name | uppercase}}</p></div>
         </div>
         <div class="row menu-row" ng-show="$root.isLoggedin">
@@ -69,13 +69,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-4">
-                        <a href="http://www.facebook.com/gamehedge" target="_blank"><img src="<%= image_url "facebook-footer.png" %>" alt="Like GameHedge on Facebook" /></a>          
+                        <a href="http://www.facebook.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/facebook-footer.png" alt="Like GameHedge on Facebook" /></a>          
                     </div>
                     <div class="col-xs-4">
-                        <a href="http://www.twitter.com/gamehedge" target="_blank"><img src="<%= image_url "twitter-footer.png" %>" alt="Foollow GameHedge on Twitter" /></a>          
+                        <a href="http://www.twitter.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/twitter-footer.png" alt="Foollow GameHedge on Twitter" /></a>          
                     </div>
                     <div class="col-xs-4">
-                        <a href="http://www.instagram.com/gamehedge" target="_blank"><img src="<%= image_url "instagram-footer.png" %>" alt="Like GameHedge on Instagram" /></a>
+                        <a href="http://www.instagram.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/instagram-footer.png" alt="Like GameHedge on Instagram" /></a>
                     </div>
                 </div>
             </div>
@@ -88,12 +88,12 @@
 <div class="mobile-menu search-menu-transition ng-hide" ng-show="showSearchMenu" ng-if="!$root.isOrder">
     <div class="mobile-menu-header">
             <div class="navbar-header search-header col-xs-10">
-                <img src="<%= image_url 'search icon.png' %>">
+                <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/search icon.png">
                 <input type="text" placeholder="search tickets" ng-model="searchTerm" ng-change="getSearchHints(searchTerm)">
             </div>
             <div class="col-xs-2">
                 <div ng-click="hideMenus()">
-                    <img src="<%= image_url 'close-menu.png' %>" class="img-header">
+                    <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/close-menu.png" class="img-header">
                 </div>
             </div>
         
@@ -108,13 +108,13 @@
         <nav role="navigation" class="footer-social-media">
             
                     <div class="col-xs-4">
-                        <a href="http://www.facebook.com/gamehedge" target="_blank"><img src="<%= image_url "facebook-footer.png" %>" alt="Like GameHedge on Facebook" /></a>          
+                        <a href="http://www.facebook.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/facebook-footer.png" alt="Like GameHedge on Facebook" /></a>          
                     </div>
                     <div class="col-xs-4">
-                        <a href="http://www.twitter.com/gamehedge" target="_blank"><img src="<%= image_url "twitter-footer.png" %>" alt="Follow GameHedge on Twitter" /></a>          
+                        <a href="http://www.twitter.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/twitter-footer.png" alt="Follow GameHedge on Twitter" /></a>          
                     </div>
                     <div class="col-xs-4">
-                        <a href="http://www.instagram.com/gamehedge" target="_blank"><img src="<%= image_url "instagram-footer.png" %>" alt="Like GameHedge on Instagram" /></a>
+                        <a href="http://www.instagram.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/instagram-footer.png" alt="Like GameHedge on Instagram" /></a>
                     </div>
                
         </nav>
@@ -135,19 +135,19 @@
         </div>
         <div class="navbar-header col-md-4 col-xs-8">
             <a href="/">
-                <img class="logo-image" alt="GameHedge.com" src="<%= image_url 'logo.png' %>">
+                <img class="logo-image" alt="GameHedge.com" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/logo.png">
             </a>
         </div>
         <div class="navbar-header col-md-8 hidden-xs hidden-xm vertical-center help" ng-show="$root.isOrder">
                   
                 <p>NEED HELP? CALL TOLL FREE <br><span>(888) 804-4330</span></p>
-                <img class="help-image" alt="Call Us" src="<%= image_url "help.png" %>">
+                <img class="help-image" alt="Call Us" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/help.png">
             
         </div>
         <div class="col-xs-2 hidden">
             <div class="navbar navbar-default navbar-fixed-top right">
                 <button type="button" class="navbar-toggle search-button" style="padding-top:0;" data-toggle="offcanvas" data-target="#searchMenu" data-canvas="body" ng-click="showSlideSearch()">
-                    <img src="<%= image_url 'search icon.png' %>">
+                    <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/search icon.png">
                 </button>
             </div>
         </div>
@@ -192,12 +192,12 @@
         </div>
         <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs" ng-show="!$root.isOrder">
             <div class="press" ng-show="$root.locat == '/'">
-                <a href="/#/press"><img class="press-icon" src="<%= image_url 'press-icon.png' %>">PRESS</a>
+                <a href="/#/press"><img class="press-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/press-icon.png">PRESS</a>
             </div>
             </div>
         <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs" ng-show="!$root.isOrder">
             <div class="dropdown" ng-show="$root.isLoggedin">
-                <button ng-cloak class="dropdown-toggle myaccount-btn" type="button" data-toggle="dropdown"><img class="user-icon" src="<%= image_url "profile icon.png" %>">{{$root.user.name | uppercase}}<img class="dropdown-icon" src="<%= image_url "dropdown.png" %>"></button>
+                <button ng-cloak class="dropdown-toggle myaccount-btn" type="button" data-toggle="dropdown"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png">{{$root.user.name | uppercase}}<img class="dropdown-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/dropdown.png"></button>
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li><a href="/member">Your Profile</a></li>
                     <li><a href="/order_history">Order History</a></li>
@@ -205,7 +205,7 @@
                 </ul>
             </div>
             <div class="dropdown login" ng-show="!$root.isLoggedin">
-                <a href="/login"><img class="user-icon" src="<%= image_url "profile icon.png" %>">LOGIN</a>
+                <a href="/login"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png">LOGIN</a>
             </div>
         </div>
     </nav>
@@ -250,19 +250,19 @@
                 <div class="footer-nav">
                     <h2>Connect with us</h2>
                     <nav role="navigation" class="footer-social-media">
-                        <a href="http://www.facebook.com/gamehedge" target="_blank" class="hidden-sm hidden-xs"><img src="<%= image_url "facebook-footer.png" %>" alt="Like GameHedge on Facebook" /></a>
-                        <a href="http://www.twitter.com/gamehedge" target="_blank" class="hidden-sm hidden-xs"><img src="<%= image_url "twitter-footer.png" %>" alt="Follow GameHedge on Twitter" /></a>
-                        <a href="http://www.instagram.com/gamehedge" target="_blank" class="hidden-sm hidden-xs"><img src="<%= image_url "instagram-footer.png" %>" alt="Like GameHedge on Instagram" /></a>
+                        <a href="http://www.facebook.com/gamehedge" target="_blank" class="hidden-sm hidden-xs"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/facebook-footer.png" alt="Like GameHedge on Facebook" /></a>
+                        <a href="http://www.twitter.com/gamehedge" target="_blank" class="hidden-sm hidden-xs"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/twitter-footer.png" alt="Follow GameHedge on Twitter" /></a>
+                        <a href="http://www.instagram.com/gamehedge" target="_blank" class="hidden-sm hidden-xs"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/instagram-footer.png" alt="Like GameHedge on Instagram" /></a>
                         <div class="container hidden-md hidden-lg">
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <a href="http://www.facebook.com/gamehedge" target="_blank"><img src="<%= image_url "facebook-footer.png" %>" alt="Like GameHedge on Facebook" /></a>          
+                                    <a href="http://www.facebook.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/facebook-footer.png" alt="Like GameHedge on Facebook" /></a>          
                                 </div>
                                 <div class="col-xs-4">
-                                    <a href="http://www.twitter.com/gamehedge" target="_blank"><img src="<%= image_url "twitter-footer.png" %>" alt="Follow GameHedge on Twitter" /></a>          
+                                    <a href="http://www.twitter.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/twitter-footer.png" alt="Follow GameHedge on Twitter" /></a>          
                                 </div>
                                 <div class="col-xs-4">
-                                    <a href="http://www.instagram.com/gamehedge" target="_blank"><img src="<%= image_url "instagram-footer.png" %>" alt="Like GameHedge on Instagram" /></a>
+                                    <a href="http://www.instagram.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/instagram-footer.png" alt="Like GameHedge on Instagram" /></a>
                                 </div>
                             </div>
                         </div>
@@ -281,12 +281,12 @@
             </div>
             <div class="col-md-2">
                 <div class="footer-nav text-center">
-                    <div class="col-md-4"><img src="<%= image_url "badge-gamehedge.png" %>" alt="GameHedge" /></div>
+                    <div class="col-md-4"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/badge-gamehedge.png" alt="GameHedge" /></div>
                 </div>
             </div>
         </div>
         <div class="footer-signature">
-            <img src="<%= image_url "GameHedge_Logo_Footer.png" %>" alt="Gamehedge" />
+            <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/GameHedge_Logo_Footer.png" alt="Gamehedge" />
             <div class="footer-bottom clearfix">
                 © <%= @year %> GameHedge and Good Game Guarantee are trademarks of GameHedge LLC.<br>All Rights Reserved. Patent Pending.
             </div>

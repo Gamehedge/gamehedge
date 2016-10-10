@@ -44,6 +44,8 @@ GEM
       rack-test (~> 0.6.2)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    actionpack-action_caching (1.1.1)
+      actionpack (>= 4.0.0, < 5.0)
     actionview (4.2.6)
       activesupport (= 4.2.6)
       builder (~> 3.1)
@@ -315,6 +317,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  actionpack-action_caching
   activeadmin!
   angular-rails-templates
   angular-ui-bootstrap-rails
@@ -363,7 +366,7 @@ DEPENDENCIES
   will_paginate
 
 RUBY VERSION
-   ruby 2.3.0p0
+   ruby 2.3.1p112
 
 BUNDLED WITH
    1.13.2

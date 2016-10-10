@@ -125,6 +125,8 @@ gem 'dalli'
 
 gem 'kgio'
 
+gem 'actionpack-action_caching'
+
 gem "memcachier"
 
 gem 'image_optim'
