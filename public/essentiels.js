@@ -6224,8 +6224,8 @@
                 s.currPos.x = s.currPos.x + p;
                 s.currPos.y = s.currPos.y + o;
                 
-                var w = j.width * 2 * (1 - (s.currZoom * m.zoomStep)),
-                    n = j.height * 2 * (1 - (s.currZoom * m.zoomStep));
+                var w = j.width * (1 - (s.currZoom * m.zoomStep)),
+                    n = j.height * (1 - (s.currZoom * m.zoomStep));
                 if (s.currPos.x < 0) {
                     s.currPos.x = 0
                 } else {
@@ -6242,7 +6242,7 @@
                         s.currPos.y = (j.height * s.currZoom * m.zoomStep)
                     }
                 }
-                j.setViewBox(s.currPos.x, s.currPos.y, w / d, n / f);
+                j.setViewBox(s.currPos.x*2, s.currPos.y*2, w / d, n / f);
                 console.log("posicion");
                 console.log(j.width);
                 console.log(j.height);
