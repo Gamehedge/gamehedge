@@ -6224,8 +6224,8 @@
                 s.currPos.x = s.currPos.x + p;
                 s.currPos.y = s.currPos.y + o;
                 
-                var w = j.width * (1 - (s.currZoom * m.zoomStep)),
-                    n = j.height * (1 - (s.currZoom * m.zoomStep));
+                var w = j.width * 2 * (1 - (s.currZoom * m.zoomStep)),
+                    n = j.height * 2 * (1 - (s.currZoom * m.zoomStep));
                 if (s.currPos.x < 0) {
                     s.currPos.x = 0
                 } else {
