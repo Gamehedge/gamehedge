@@ -8,7 +8,6 @@ class Api::V1::SportsController < ApplicationApiController
   skip_before_filter :authenticate_user! # we do not need devise authentication here
   before_filter :fetch_user, :except => [:index, :create]
 
-
   
   
   def fetch_user
