@@ -6242,10 +6242,15 @@
                         s.currPos.y = (j.height * s.currZoom * m.zoomStep)
                     }
                 }
-                if (ix.pageX || ix.pageY) {
+                if(ix != undefined){
+                    if (ix.pageX || ix.pageY) {
+                        j.setViewBox(s.currPos.x, s.currPos.y, w / d, n / f);
+                    } else {
+                        j.setViewBox(s.currPos.x*2, s.currPos.y*2, w / d, n / f);
+                    }
+                }
+                else{
                     j.setViewBox(s.currPos.x, s.currPos.y, w / d, n / f);
-                } else {
-                    j.setViewBox(s.currPos.x*2, s.currPos.y*2, w / d, n / f);
                 }
                 console.log("posicion");
                 console.log(j.width);
