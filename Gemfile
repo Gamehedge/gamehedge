@@ -70,7 +70,7 @@ group :production do
   gem "rails_serve_static_assets"
 end
 
-ruby "2.3.0"
+ruby "2.3.1"
 
 
 gem 'puma'
@@ -136,3 +136,5 @@ gem 'image_optim_rails'
 #SEO gems
 
 gem 'prerender_rails'
+
+gem 'heroku-deflater', :group => :production
