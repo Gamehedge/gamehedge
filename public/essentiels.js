@@ -6244,8 +6244,8 @@
                 }
                 j.setViewBox(s.currPos.x, s.currPos.y, w / d, n / f);
                 console.log("posicion");
-                console.log(s.currPos.x);
-                console.log(s.currPos.y);
+                console.log(j.width);
+                console.log(j.height);
             }
         };
     c.prototype = e;
