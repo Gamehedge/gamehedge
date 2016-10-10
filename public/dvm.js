@@ -368,7 +368,7 @@ head.js(
 //        "https://dynamicvenuemaps.com/maps/js/maps_general_settings.js",
         ///
         // "https://dynamicvenuemaps.com/maps/js/essentiels.min.js?v=201310031607",
-        "/essentiels.js?v=76",
+        "/essentiels.js?v=77",
         ///
 
         "https://dynamicvenuemaps.com/maps/js/jquery.fancybox.js?v=2.1.4",
@@ -376,7 +376,7 @@ head.js(
         "https://dynamicvenuemaps.com/maps/maps_setting/" + venue_folder + "/map_shapes.js",
         "https://dynamicvenuemaps.com/maps/maps_setting/" + venue_folder + "/section_matching.js?v=201401071606",
         "https://dynamicvenuemaps.com/maps/maps_setting/" + venue_folder + "/synonyms.js?v=201403071228",
-        "/DVM_functions.js?v=76",
+        "/DVM_functions.js?v=77",
         function () {
              if(DVM_map_params['tickets_url']){
             var tickets_url = DVM_map_params['tickets_url'];
