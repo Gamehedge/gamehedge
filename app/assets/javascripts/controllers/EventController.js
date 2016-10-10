@@ -542,6 +542,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	            	$scope.filterBySection = true;
 	                $scope.section = Section.Name;
                     $scope.selectedSections.push(Section.Name);
+                    console.log($scope.selectedSections);
 	                if(Section.SectionViewAvailable){
 	                   	$scope.sectionUrl = Section.SectionViewUrl;
 	                }
