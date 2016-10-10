@@ -8,7 +8,7 @@ class Performer < ActiveRecord::Base
   has_many :home_events, class_name: "Event", foreign_key: "home_performer_id"
   has_many :away_events, class_name: "Event", foreign_key: "away_performer_id"
 	has_many :tiles
-	has_attached_file :image, styles: { medium: ["150x150>", :jpg], thumb: ["100x100#", :jpg] }, convert_options: { medium: "-quality 60 -strip", :all => '-background white -flatten +matte' }
+	has_attached_file :image, styles: { medium: ["150x150>", :jpg], thumb: ["100x100#", :jpg] }, convert_options: { medium: "-quality 60 -strip -interlace Line", :all => '-background white -flatten +matte -interlace Line' }, :s3_headers => { 'Cache-Control' => 'max-age=315576000', 'Expires' => 10.years.from_now.httpdate }
   	validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 	def display_name
 		return self.name
