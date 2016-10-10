@@ -1956,6 +1956,12 @@ body {
 
 @media(max-width: 992px) {
     
+    #reset-map-button{
+        position: relative;
+        bottom: 10px;
+        top: 0;
+    }
+
     #payments label{
         margin-left: 0;
     }
