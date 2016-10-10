@@ -6255,7 +6255,7 @@
         } else {
             // g = i.changedTouches[0].clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
             // k = i.changedTouches[0].clientY + document.body.scrollTop + document.documentElement.scrollTop;
-            console.log(document.body.scrollLeft);
+            console.log(document.documentElement.scrollTop);
             g = i.changedTouches[0].clientX + document.body.scrollLeft;
             k = i.changedTouches[0].clientY + document.body.scrollTop;
         }
