@@ -73,7 +73,7 @@ class TicketEvolutionService
                   elsif e.performances.count == 1 && (Performer.where(te_uid: e.performances[0].performer.id).first == nil)
                     puts "Not added. One of the performers doesn't belong to our database."
                   else
-                    name = e.name
+                    name = (e.name.gsub '/', '-')
                     te_uid = e.id
                     location = e.venue.location
                     occurs_at = e.occurs_at

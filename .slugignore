@@ -1,0 +1,6 @@
+# Heres a comment
+*.psd
+*.eps
+*.pdf
+/test
+/tmp

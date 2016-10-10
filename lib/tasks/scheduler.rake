@@ -20,7 +20,9 @@ end
 
 task :update_urls => :environment do
   Event.all.each do |e|
-    e.save
-    puts "updated"
-  end
+      e.name = (e.name.gsub '/', '-')
+      e.save
+      puts "updated"
+    end
+    
 end
