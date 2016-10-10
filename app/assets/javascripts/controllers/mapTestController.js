@@ -400,7 +400,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
                 for(i=0;i<$scope.selectedSections.length;i++){
                     a = $(this).attr('data-section').replace(/[^0-9]/g, '');
                     b = $scope.selectedSections[i].replace(/[^0-9]/g, '');
-                    if(a == b){
+                    if(a != b){
                         $(this).addClass("hidden");
                     }
                     else{

@@ -421,7 +421,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                     console.log("sections");
                     console.log(a);
                     console.log(b);
-                    if(a == b){
+                    if(a != b){
                         $(this).addClass("hidden");
                     }
                     else{
