@@ -418,6 +418,9 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                 for(i=0;i<$scope.selectedSections.length;i++){
                     a = $(this).attr('data-section').replace(/[^0-9]/g, '');
                     b = $scope.selectedSections[i].replace(/[^0-9]/g, '');
+                    console.log("sections");
+                    console.log(a);
+                    console.log(b);
                     if(a == b){
                         $(this).addClass("hidden");
                     }

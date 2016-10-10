@@ -6083,7 +6083,7 @@
             this.currPos = m.initialPosition;
             l();
             g.onmousedown = function(w) {
-                console.log("DRAGGING");
+                // console.log("DRAGGING");
                 var n = window.event || w;
                 if (!s.enabled) {
                     return false
@@ -6103,13 +6103,13 @@
                 return false
             };
             g.onmouseup = function(n) {
-                console.log("DRAGGING STOP");
+                // console.log("DRAGGING STOP");
                 document.onmousemove = null;
                 g.className = g.className.replace(/(?:^|\s)grabbing(?!\S)/g, "");
                 g.onmousemove = null
             };
             g.addEventListener('touchstart',function(w) {
-                console.log("TOUCHING");
+                // console.log("TOUCHING");
                 var n = window.event || w;
                 if (!s.enabled) {
                     return false
@@ -6129,7 +6129,7 @@
                 return false
             });
             g.addEventListener('touchend',function(n) {
-                console.log("TOUCHING STOP");
+                // console.log("TOUCHING STOP");
                 document.removeEventListener('touchmove',function() {
                     return false
                 });
@@ -6200,7 +6200,6 @@
 
             function u(z) {
                 if (!s.enabled) {
-                    console.log("returned and screwd")
                     return false
                 }
                 var x = window.event || z,
@@ -6217,7 +6216,6 @@
                 } else {
                     x.returnValue = false
                 }
-                console.log("returned and OK")
                 return false
             }
 
