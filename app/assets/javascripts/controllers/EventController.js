@@ -99,7 +99,9 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
     			$rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by "+$scope.event.home_performer.sport.ggg+" or more, get 50% of your ticket price back.";
                 
                 if($routeParams.slug != $scope.event.slug){
-                    $location.path("/");
+                    // $location.path("/");
+                    console.log($scope.event.slug)
+                    console.log($routeParams.slug)
                 }
                 else{
                     $scope.getTicketList();
@@ -305,6 +307,21 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
             }
         })
         $('#tickets_list').html(htm);
+        $timeout(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            // $('.listing-row').mouseover($scope.higlightSection($(this).attr('data-section'), true));
+            $('.listing-row').mouseover(function(){
+                $("#MapContainer").tuMap("HighlightSection",$(this).attr('data-section'));
+            });
+            $('.listing-row').mouseleave(function(){
+                $("#MapContainer").tuMap("ResetSection",$(this).attr('data-section'));
+            });
+            $('.redirect-button').click(function(){
+                var vid = $(this).parents().eq('2').attr('data-id');
+                var val = $(this).parents().eq('2').find('select').val()
+                $scope.relocateURL(vid,val);
+            });
+        }, 100);
         $('#tickets_list').scrollTop(-200);
         //$scope.showing_list = 20;
 	}
