@@ -6209,7 +6209,7 @@
                 p = (y * (n.x - k.x) / j.width) * -1;
                 o = (w * (n.y - k.y) / j.height) * -1;
                 k = n;
-                l();
+                l(x);
                 s.dragTime += 1;
                 if (x.preventDefault) {
                     x.preventDefault()
@@ -6219,7 +6219,7 @@
                 return false
             }
 
-            function l() {
+            function l(ix) {
                 
                 s.currPos.x = s.currPos.x + p;
                 s.currPos.y = s.currPos.y + o;
@@ -6242,7 +6242,11 @@
                         s.currPos.y = (j.height * s.currZoom * m.zoomStep)
                     }
                 }
-                j.setViewBox(s.currPos.x*2, s.currPos.y*2, w / d, n / f);
+                if (ix.pageX || ix.pageY) {
+                    j.setViewBox(s.currPos.x, s.currPos.y, w / d, n / f);
+                } else {
+                    j.setViewBox(s.currPos.x*2, s.currPos.y*2, w / d, n / f);
+                }
                 console.log("posicion");
                 console.log(j.width);
                 console.log(j.height);
