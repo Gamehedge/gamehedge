@@ -395,8 +395,12 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         $('.listing-row').removeClass('hidden');
         $('.listing-row').each(function(){
             if($scope.selectedSections.length > 0){
+                var a = "";
+                var b = "";
                 for(i=0;i<$scope.selectedSections.length;i++){
-                    if($(this).attr('data-section').indexOf($scope.selectedSections[i]) == -1){
+                    a = $(this).attr('data-section').replace(/[^0-9]/g, '');
+                    b = $scope.selectedSections[i].replace(/[^0-9]/g, '');
+                    if(a == b){
                         $(this).addClass("hidden");
                     }
                     else{

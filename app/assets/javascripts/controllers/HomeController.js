@@ -213,9 +213,12 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 })
 .filter('spaceless', function () {
   return function (input) {
-  		var a = input.replace(/ /g, '-');
-  		a = a.replace(/\//g, '-');
-      	return a;
+  		return input.replace(/ /g, '-');
+  };
+})
+.filter('dashless', function () {
+  return function (input) {
+  		return input.replace(/\//g, '-');
   };
 })
 .directive('imageonload', function() {

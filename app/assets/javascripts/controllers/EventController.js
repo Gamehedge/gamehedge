@@ -411,6 +411,33 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 
     $scope.filterEventsData = function(){
         $('.listing-row').removeClass('hidden');
+        $('.listing-row').each(function(){
+            if($scope.selectedSections.length > 0){
+                var a = "";
+                var b = "";
+                for(i=0;i<$scope.selectedSections.length;i++){
+                    a = $(this).attr('data-section').replace(/[^0-9]/g, '');
+                    b = $scope.selectedSections[i].replace(/[^0-9]/g, '');
+                    if(a == b){
+                        $(this).addClass("hidden");
+                    }
+                    else{
+                        $(this).removeClass("hidden");
+                        break;
+                    }
+                }
+            }
+            if($scope.onlyParking == true){
+                if($(this).attr('data-type') == 'event'){
+                    $(this).addClass("hidden");
+                }
+            }
+            else{
+                if($(this).attr('data-type') == 'parking'){
+                    $(this).addClass("hidden");
+                }
+            }
+        });
         if($scope.index != 0){
             $('.listing-row').each(function(){
                 if($scope.index == 5){
@@ -431,7 +458,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                 if($scope.mob_price_a_real) {
                     $scope.price_filter_down_limit = 0;
                     $scope.price_filter_up_limit = 100;
-                    if(Number($(this).attr('data-value')) > $scope.price_filter_down_limit && Number($(this).attr('data-value')) <= $scope.price_filter_up_limit ) {
+                    if(Number($(this).attr('data-price')) > $scope.price_filter_down_limit && Number($(this).attr('data-price')) <= $scope.price_filter_up_limit ) {
                         val =  true;
                     }
                 }
@@ -439,7 +466,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                 if($scope.mob_price_b_real){
                     $scope.price_filter_down_limit = 100;
                     $scope.price_filter_up_limit = 200;
-                    if( Number($(this).attr('data-value')) > $scope.price_filter_down_limit && Number($(this).attr('data-value')) <= $scope.price_filter_up_limit ) {
+                    if( Number($(this).attr('data-price')) > $scope.price_filter_down_limit && Number($(this).attr('data-price')) <= $scope.price_filter_up_limit ) {
                         val =  true;
                     }
                 }
@@ -447,7 +474,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                 if($scope.mob_price_c_real){
                     $scope.price_filter_down_limit = 200;
                     $scope.price_filter_up_limit = 300;
-                    if( Number($(this).attr('data-value')) > $scope.price_filter_down_limit && Number($(this).attr('data-value')) <= $scope.price_filter_up_limit ) {
+                    if( Number($(this).attr('data-price')) > $scope.price_filter_down_limit && Number($(this).attr('data-price')) <= $scope.price_filter_up_limit ) {
                         val =  true;
                     }
                 }
@@ -455,7 +482,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                 if($scope.mob_price_d_real){
                     $scope.price_filter_down_limit = 300;
                     $scope.price_filter_up_limit = 99999999999999999999999;
-                    if( Number($(this).attr('data-value')) > $scope.price_filter_down_limit && Number($(this).attr('data-value')) <= $scope.price_filter_up_limit ) {
+                    if( Number($(this).attr('data-price')) > $scope.price_filter_down_limit && Number($(this).attr('data-price')) <= $scope.price_filter_up_limit ) {
                         val =  true;
                     }
                 }
@@ -464,29 +491,6 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                 }
             });
         }
-        $('.listing-row').each(function(){
-            if($scope.onlyParking == true){
-                if($(this).attr('data-type') == 'event'){
-                    $(this).addClass("hidden");
-                }
-            }
-            else{
-                if($(this).attr('data-type') == 'parking'){
-                    $(this).addClass("hidden");
-                }
-            }
-            if($scope.selectedSections.length > 0){
-                for(i=0;i<$scope.selectedSections.length;i++){
-                    if($(this).attr('data-section').indexOf($scope.selectedSections[i]) == -1){
-                        $(this).addClass("hidden");
-                    }
-                    else{
-                        $(this).removeClass("hidden");
-                        break;
-                    }
-                }
-            }
-        });
     }
 
 	$scope.higlightSection = function(section,highlight){
