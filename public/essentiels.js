@@ -6259,8 +6259,8 @@
             k = 2 * i.changedTouches[0].clientY;
         }
         j = b(h);
-        g -= j[0];
-        k -= j[1];
+        // g -= j[0];
+        // k -= j[1];
         return {
             x: g,
             y: k
