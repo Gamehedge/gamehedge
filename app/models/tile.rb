@@ -6,7 +6,11 @@ class Tile < ActiveRecord::Base
     belongs_to :event1, :class_name => 'Event', :foreign_key => 'event_id'
     belongs_to :event2, :class_name => 'Event', :foreign_key => 'event_id2'
     belongs_to :event3, :class_name => 'Event', :foreign_key => 'event_id3'
-	has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100#" }
+	has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100#" }, :s3_headers => { 
+        'Cache-Control' => 'max-age=315576000', 'Expires' => 10.years.from_now.httpdate 
+    }, 
+    :url => ':s3_alias_url',
+    :s3_host_alias => 'd2fj37dggc6l3c.cloudfront.net'
   	validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
     after_update :update_url
