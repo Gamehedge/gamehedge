@@ -231,7 +231,9 @@ class TicketEvolutionService
           @events.each do |e|
             if @e != {}
               if Event.where(te_uid: e.id).exists?
-                @events2.push(e)
+                if Event.where(te_uid: e.id).first.is_active == true
+                  @events2.push(e)
+                end
               end
             end
           end
