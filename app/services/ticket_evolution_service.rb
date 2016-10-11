@@ -199,7 +199,7 @@ class TicketEvolutionService
               @events2.each do |e|
                 if @e != {}
                   if Event.where(te_uid: e.id).exists?
-                    if Event.where(te_uid: e.id).is_active == true
+                    if Event.where(te_uid: e.id).first.is_active == true
                       @events3.push(e)
                     end
                   end
@@ -218,7 +218,7 @@ class TicketEvolutionService
           @events.each do |e|
             if @e != {}
               if Event.where(te_uid: e.id).exists?
-                if Event.where(te_uid: e.id).is_active == true
+                if Event.where(te_uid: e.id).first.is_active == true
                   @events2.push(e)
                 end
               end
@@ -247,7 +247,7 @@ class TicketEvolutionService
           @events.each do |e|
             if @e != {}
               if Event.where(te_uid: e.id).exists?
-                if Event.where(te_uid: e.id).is_active == true
+                if Event.where(te_uid: e.id).first.is_active == true
                   @events2.push(e)
                 end
               end
@@ -260,7 +260,7 @@ class TicketEvolutionService
           @events.each do |e|
             if @e != {}
               if Event.where(te_uid: e.id).exists?
-                if Event.where(te_uid: e.id).is_active == true
+                if Event.where(te_uid: e.id).first.is_active == true
                   @events2.push(e)
                 end
               end
@@ -273,7 +273,7 @@ class TicketEvolutionService
           @events.each do |e|
             if @e != {}
               if Event.where(te_uid: e.id).exists?
-                if Event.where(te_uid: e.id).is_active == true
+                if Event.where(te_uid: e.id).first.is_active == true
                   @events2.push(e)
                 end
               end
