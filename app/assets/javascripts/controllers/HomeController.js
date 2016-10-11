@@ -22,6 +22,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 				$scope.loading = false;
 				$scope.TilesIndex = 0;
 				for(i=0;i<$scope.tiles.length;i++){
+					console.log($scope.tiles[i]);
 					if($scope.tiles[i].tile_type.id != "4"){
 						$scope.getNextEvents(i);	
 					}
