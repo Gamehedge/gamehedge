@@ -5,8 +5,8 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
     $scope.getLeagueInfo = function(){
 		apiService.getData('/api/v1/sports/'+$routeParams.leagueId)
             .then(function(response){
-                //console.log("League");
-            	//console.log(response);
+                console.log("League");
+            	console.log(response);
                 $scope.league  = response;
                 if($scope.league.name == "NHL"){
                     $rootScope.title = "NHL Hockey Tickets | Gamehedge";
@@ -55,11 +55,11 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
                         $scope.getNextEvents();
                     }
                     else{
-                        $location.path("/");
+                        // $location.path("/");
                     }
                 }
                 else{
-                    $location.path("/");
+                    // $location.path("/");
                 }
         });
 	};
@@ -123,7 +123,6 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
 	$scope.getNextEvents = function(){
         id = $scope.league.te_uid;
         source = "league";
-        console.log('/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=50&geolocated=true');
         url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=50&geolocated=true';  
         $http({
             method: 'GET',
