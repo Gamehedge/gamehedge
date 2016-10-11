@@ -6246,7 +6246,7 @@
                     if (ix.pageX || ix.pageY) {
                         j.setViewBox(s.currPos.x, s.currPos.y, w / d, n / f);
                     } else {
-                        j.setViewBox(s.currPos.x*3, s.currPos.y*2, w / d, n / f);
+                        j.setViewBox(s.currPos.x*2, s.currPos.y*4, w / d, n / f);
                     }
                 }
                 else{
