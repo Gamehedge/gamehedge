@@ -518,7 +518,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
             map_width = map_width*0.58;
         }
         else{
-            map_height = map_width;
+            map_height = window.innerHeight - 385;
         }
         DVM_map_params = {
             'client_id':'99',
