@@ -44,7 +44,7 @@ class Api::V1::EventsController < ApplicationApiController
         total = @events.count
         @events = @events.paginate(:page => params[:page],  :per_page => per_page)
         @events2 = { }
-        @events2[:data] = ActiveSupport::JSON.decode(@events.to_json(:only => [:id, :name, :venue_configuration_id, :te_uid, :te_date, :url, :occurs_at, :location, :slug], :include => {:home_performer => {:only =>[:id, :name, :te_uid, :description, :url],:include => {:sport => {:only =>[:id, :name, :ggg]}}},:away_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:sport => {:only =>[:id, :name, :te_uid, :description, :url, :ggg]},:venue => {:only =>[:id, :te_uid, :name, :description, :url, :location]}}))
+        @events2[:data] = ActiveSupport::JSON.decode(@events.to_json(:only => [:id, :name, :is_active, :venue_configuration_id, :te_uid, :te_date, :url, :occurs_at, :location, :slug], :include => {:home_performer => {:only =>[:id, :name, :te_uid, :description, :url],:include => {:sport => {:only =>[:id, :name, :ggg]}}},:away_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:sport => {:only =>[:id, :name, :te_uid, :description, :url, :ggg]},:venue => {:only =>[:id, :te_uid, :name, :description, :url, :location]}}))
         @events2[:total] = total
         @events2[:page] = params[:page]
         @events2[:per_page] = per_page
@@ -58,8 +58,8 @@ class Api::V1::EventsController < ApplicationApiController
 
   def show
     respond_to do |format|
-      format.json { render json: @event.to_json(:only => [:id, :name, :venue_configuration_id, :te_uid, :te_date, :url, :occurs_at, :location, :slug], :include => {:home_performer => {:only =>[:id, :name, :te_uid, :description, :url],:include => {:sport => {:only =>[:id, :name, :ggg]}}},:away_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:sport => {:only =>[:id, :name, :te_uid, :description, :url, :ggg]},:venue => {:only =>[:id, :te_uid, :name, :description, :url, :location]}})}
-      format.xml { render xml: @event.to_json(:only => [:id, :name, :venue_configuration_id, :te_uid, :te_date, :url, :occurs_at, :location, :slug], :include => {:home_performer => {:only =>[:id, :name, :te_uid, :description, :url],:include => {:sport => {:only =>[:id, :name, :ggg]}}},:away_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:sport => {:only =>[:id, :name, :te_uid, :description, :url, :ggg]},:venue => {:only =>[:id, :te_uid, :name, :description, :url, :location]}})}
+      format.json { render json: @event.to_json(:only => [:id, :name, :is_active, :venue_configuration_id, :te_uid, :te_date, :url, :occurs_at, :location, :slug], :include => {:home_performer => {:only =>[:id, :name, :te_uid, :description, :url],:include => {:sport => {:only =>[:id, :name, :ggg]}}},:away_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:sport => {:only =>[:id, :name, :te_uid, :description, :url, :ggg]},:venue => {:only =>[:id, :te_uid, :name, :description, :url, :location]}})}
+      format.xml { render xml: @event.to_json(:only => [:id, :name, :is_active, :venue_configuration_id, :te_uid, :te_date, :url, :occurs_at, :location, :slug], :include => {:home_performer => {:only =>[:id, :name, :te_uid, :description, :url],:include => {:sport => {:only =>[:id, :name, :ggg]}}},:away_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:sport => {:only =>[:id, :name, :te_uid, :description, :url, :ggg]},:venue => {:only =>[:id, :te_uid, :name, :description, :url, :location]}})}
     end
   end
 
@@ -104,7 +104,7 @@ class Api::V1::EventsController < ApplicationApiController
   end
 
   def data_params
-    params.permit(:id, :te_uid, :te_performer_home_id, :te_performer_visit_id, :te_date, :name, :home_performer_id, :away_performer_id, :sport_id, :occurs_at, :location, :venue_id, :slug, :venue_configuration_id)
+    params.permit(:id, :te_uid, :te_performer_home_id, :is_active, :te_performer_visit_id, :te_date, :name, :home_performer_id, :away_performer_id, :sport_id, :occurs_at, :location, :venue_id, :slug, :venue_configuration_id)
   end
 
   private

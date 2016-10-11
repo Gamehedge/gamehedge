@@ -395,7 +395,8 @@ CREATE TABLE events (
     slug character varying,
     updated_at timestamp without time zone,
     created_at timestamp without time zone,
-    venue_configuration_id integer
+    venue_configuration_id integer,
+    is_active boolean DEFAULT true
 );
 
 
@@ -1799,4 +1800,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160922181545');
 INSERT INTO schema_migrations (version) VALUES ('20160927214245');
 
 INSERT INTO schema_migrations (version) VALUES ('20160927220902');
+
+INSERT INTO schema_migrations (version) VALUES ('20161011161733');
 

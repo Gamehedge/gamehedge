@@ -97,11 +97,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                 $scope.event  = response;
                 $rootScope.title = $scope.event.name + " Tickets | Gamehedge";
     			$rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by "+$scope.event.home_performer.sport.ggg+" or more, get 50% of your ticket price back.";
-                
-                if($routeParams.slug != $scope.event.slug){
-                    // $location.path("/");
-                    console.log($scope.event.slug)
-                    console.log($routeParams.slug)
+                if($scope.event.is_active == true){
+                    $location.path("/");
                 }
                 else{
                     $scope.getTicketList();
