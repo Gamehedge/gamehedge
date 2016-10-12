@@ -6249,11 +6249,11 @@
                     } else {
                         var abc = 2.5*$('#mapkey').width()/$('#mapkey').height();
                         var bac = 2.5*$('#mapkey').height()/$('#mapkey').width();
-
                         j.setViewBox(s.currPos.x*bac, s.currPos.y*abc, w / d, n / f);
                     }
                 }
                 else{
+                    console.log("here is the count");
                     j.setViewBox(s.currPos.x, s.currPos.y, w / d, n / f);
                 }
             }
