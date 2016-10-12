@@ -6258,7 +6258,7 @@
                 }
                 if(first_load == true && $('#mapkey').width() < 991){
                     first_load = false;
-                    var x = $('#mapkey').width()/$('#mapkey').height();
+                    var x = $('#mapkey').height()/$('#mapkey').width();
                     var y = 12 - (12 * x);
                     r(Number(y.toFixed(0)));
                     console.log("zommed");
