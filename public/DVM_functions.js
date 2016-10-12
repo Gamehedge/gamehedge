@@ -2414,16 +2414,19 @@ function dvm_map_filter(filter_vals) {
 }
 //reset filters
 function dvm_reset_maps(init_filtre_vals) {
-    if($('#mapkey').width() < 991){
-        var x = $('#mapkey').height()/$('#mapkey').width();
-        var y = 10 - (10 * x);
-        console.log("zommed");
-        console.log(Number(y.toFixed(0)));
-        panZoom.zoomIn(y);
-        rows_or_sections_display();
-        //zoom seeker change
-        zoom_seeker_change('+');
-    }
+    setTimeout(function() {
+        if($('#mapkey').width() < 991){
+            var x = $('#mapkey').height()/$('#mapkey').width();
+            var y = 10 - (10 * x);
+            console.log("zommed");
+            console.log(Number(y.toFixed(0)));
+            panZoom.zoomIn(y,true);
+            rows_or_sections_display();
+            //zoom seeker change
+            zoom_seeker_change('+');
+        }
+    }, 100);
+    
     init_filtre_vals = typeof init_filtre_vals !== 'undefined' ? init_filtre_vals : true;
     if (!is_static_map) {
         //real size of the map

@@ -6032,7 +6032,10 @@
             disable: function() {
                 this.enabled = false
             },
-            zoomIn: function(g) {
+            zoomIn: function(g,zz) {
+                if(zz == true){
+                    count_load = 1;
+                }
                 this.applyZoom(g)
             },
             zoomOut: function(g) {
