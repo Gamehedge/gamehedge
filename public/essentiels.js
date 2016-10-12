@@ -6246,8 +6246,9 @@
                     if (ix.pageX || ix.pageY) {
                         j.setViewBox(s.currPos.x, s.currPos.y, w / d, n / f);
                     } else {
-                        var abc = 2*$('#mapkey').width()/$('#mapkey').height();
-                        j.setViewBox(s.currPos.x*2, s.currPos.y*abc, w / d, n / f);
+                        var abc = 2.5*$('#mapkey').width()/$('#mapkey').height();
+                        var bac = 2.5*$('#mapkey').height()/$('#mapkey').width();
+                        j.setViewBox(s.currPos.x*bac, s.currPos.y*abc, w / d, n / f);
                     }
                 }
                 else{
