@@ -6242,16 +6242,23 @@
                         s.currPos.y = (j.height * s.currZoom * m.zoomStep)
                     }
                 }
+                console.log("break");
+                console.log(s.currPos);
+                console.log(w / d);
+                console.log(n / f);
+
                 if(ix != undefined){
                     if (ix.pageX || ix.pageY) {
                         j.setViewBox(s.currPos.x, s.currPos.y, w / d, n / f);
                     } else {
                         var abc = 2.5*$('#mapkey').width()/$('#mapkey').height();
                         var bac = 2.5*$('#mapkey').height()/$('#mapkey').width();
+
                         j.setViewBox(s.currPos.x*bac, s.currPos.y*abc, w / d, n / f);
                     }
                 }
                 else{
+
                     j.setViewBox(s.currPos.x, s.currPos.y, w / d, n / f);
                 }
             }
