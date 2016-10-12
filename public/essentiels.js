@@ -6246,15 +6246,13 @@
                     if (ix.pageX || ix.pageY) {
                         j.setViewBox(s.currPos.x, s.currPos.y, w / d, n / f);
                     } else {
-                        j.setViewBox(s.currPos.x*2, s.currPos.y*4, w / d, n / f);
+                        var abc = 2*$('#mapkey').width()/$('#mapkey').height();
+                        j.setViewBox(s.currPos.x*2, s.currPos.y*abc, w / d, n / f);
                     }
                 }
                 else{
                     j.setViewBox(s.currPos.x, s.currPos.y, w / d, n / f);
                 }
-                console.log("posicion");
-                console.log(j.width);
-                console.log(j.height);
             }
         };
     c.prototype = e;
