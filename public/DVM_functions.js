@@ -193,13 +193,13 @@ function set_map(args) {
     //set the containers
     //zoom & pan buttons
     $('#' + map_name).before(
-            '<div class="left" id="zoom_div">' +
-            '<a id="map_zoom_plus" href="javascript:void()" title="Zoom In"><img src="https://dynamicvenuemaps.com/maps/images/plus.png" alt="Zoom In" border="0" /></a>' +
-            '<div id="slider-vertical"></div>' +
-            '<a id="map_zoom_less" href="javascript:void()" title="Zoom Out">' +
-            '<img src="https://dynamicvenuemaps.com/maps/images/sk.png" style="height:5px;width: 22px;" border="0" />' +
-            '<img src="https://dynamicvenuemaps.com/maps/images/minus.png" alt="Zoom Out" border="0" /></a>' +
-            '</div>'
+            // '<div class="left" id="zoom_div">' +
+            // '<a id="map_zoom_plus" href="javascript:void()" title="Zoom In"><img src="https://dynamicvenuemaps.com/maps/images/plus.png" alt="Zoom In" border="0" /></a>' +
+            // '<div id="slider-vertical"></div>' +
+            // '<a id="map_zoom_less" href="javascript:void()" title="Zoom Out">' +
+            // '<img src="https://dynamicvenuemaps.com/maps/images/sk.png" style="height:5px;width: 22px;" border="0" />' +
+            // '<img src="https://dynamicvenuemaps.com/maps/images/minus.png" alt="Zoom Out" border="0" /></a>' +
+            // '</div>'
 //    +'<div id="pan_map">'+
 //        '<div class="left">'+
 //            '<div title="Up" id="map_pan_up"></div>'+
@@ -1161,7 +1161,7 @@ function set_map(args) {
 //        }
     });
     //map zoom buttons
-    $("#map_zoom_less").click(
+    $("#map_zoom_less_mine").click(
             function (event) {
                 event.preventDefault();
                 //new zoom out with panZoom
@@ -1173,7 +1173,7 @@ function set_map(args) {
                 }
             }
     );
-    $("#map_zoom_plus").click(
+    $("#map_zoom_plus_mine").click(
             function (event) {
                 event.preventDefault();
                 //new zoom in with panZoom
