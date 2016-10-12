@@ -193,13 +193,13 @@ function set_map(args) {
     //set the containers
     //zoom & pan buttons
     $('#' + map_name).before(
-            // '<div class="left" id="zoom_div">' +
-            // '<a id="map_zoom_plus" href="javascript:void()" title="Zoom In"><img src="https://dynamicvenuemaps.com/maps/images/plus.png" alt="Zoom In" border="0" /></a>' +
-            // '<div id="slider-vertical"></div>' +
-            // '<a id="map_zoom_less" href="javascript:void()" title="Zoom Out">' +
-            // '<img src="https://dynamicvenuemaps.com/maps/images/sk.png" style="height:5px;width: 22px;" border="0" />' +
-            // '<img src="https://dynamicvenuemaps.com/maps/images/minus.png" alt="Zoom Out" border="0" /></a>' +
-            // '</div>'
+            '<div class="left" id="zoom_div">' +
+            '<a id="map_zoom_plus" href="javascript:void()" title="Zoom In"><img src="https://dynamicvenuemaps.com/maps/images/plus.png" alt="Zoom In" border="0" /></a>' +
+            '<div id="slider-vertical"></div>' +
+            '<a id="map_zoom_less" href="javascript:void()" title="Zoom Out">' +
+            '<img src="https://dynamicvenuemaps.com/maps/images/sk.png" style="height:5px;width: 22px;" border="0" />' +
+            '<img src="https://dynamicvenuemaps.com/maps/images/minus.png" alt="Zoom Out" border="0" /></a>' +
+            '</div>'
 //    +'<div id="pan_map">'+
 //        '<div class="left">'+
 //            '<div title="Up" id="map_pan_up"></div>'+
@@ -1161,7 +1161,31 @@ function set_map(args) {
 //        }
     });
     //map zoom buttons
-    $("#map_zoom_less_mine").click(
+    $("#map_zoom_less").click(
+            function (event) {
+                event.preventDefault();
+                //new zoom out with panZoom
+                if (panZoom.getCurrentZoom() > 0) {
+                    panZoom.zoomOut(1);
+                    rows_or_sections_display();
+                    //zoom seeker change
+                    zoom_seeker_change('-');
+                }
+            }
+    );
+    $("#map_zoom_plus").click(
+            function (event) {
+                event.preventDefault();
+                //new zoom in with panZoom
+                if (panZoom.getCurrentZoom() < 9) {
+                    panZoom.zoomIn(1);
+                    rows_or_sections_display();
+                    //zoom seeker change
+                    zoom_seeker_change('+');
+                }
+            }
+    );
+     $("#map_zoom_less_mine").click(
             function (event) {
                 event.preventDefault();
                 //new zoom out with panZoom
