@@ -2415,7 +2415,7 @@ function dvm_map_filter(filter_vals) {
 //reset filters
 function dvm_reset_maps(init_filtre_vals) {
     setTimeout(function() {
-        if($('#mapkey').width() < 991){
+        if(window.outerWidth < 991){
             var x = $('#mapkey').height()/$('#mapkey').width();
             var y = 10 - (10 * x);
             console.log("zommed");
@@ -2425,7 +2425,7 @@ function dvm_reset_maps(init_filtre_vals) {
             //zoom seeker change
             zoom_seeker_change('+');
         }
-    }, 100);
+    }, 10);
     
     init_filtre_vals = typeof init_filtre_vals !== 'undefined' ? init_filtre_vals : true;
     if (!is_static_map) {
