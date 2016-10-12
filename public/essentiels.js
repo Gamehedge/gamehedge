@@ -6261,6 +6261,8 @@
                     var x = $('#mapkey').width()/$('#mapkey').height();
                     var y = 12 - (12 * x);
                     r(Number(y.toFixed(0)));
+                    console.log("zommed");
+                    console.log(Number(y.toFixed(0)));
                 }
             }
         };
