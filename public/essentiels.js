@@ -6254,7 +6254,14 @@
                 }
                 else{
                     console.log("here is the count");
-                    j.setViewBox(s.currPos.x, s.currPos.y, w / d, n / f);
+                    count_load += 1;
+                    console.log(count_load);
+                    if(count_load == 2){
+                        j.setViewBox(0, n / (2*f), w / d, n / f);
+                    }
+                    else{
+                        j.setViewBox(s.currPos.x, s.currPos.y, w / d, n / f);
+                    }
                 }
             }
         };
@@ -6423,3 +6430,4 @@ var color_price_ranges = {
     2: "#F46C21",
     3: "#E22B2B"
 };
+var count_load = 0;
