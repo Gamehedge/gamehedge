@@ -6254,14 +6254,13 @@
                     }
                 }
                 else{
-                    if($('#mapkey').width() < 992){
-                        console.log("ONLY 1 TIME mobile")
-                        j.setViewBox(s.currPos.x, s.currPos.y, w / d, n / f);
-                    }
-                    else{
-                        console.log("ONLY 1 TIME desktop")
-                        j.setViewBox(s.currPos.x, s.currPos.y, w / d, n / f);    
-                    }
+                    j.setViewBox(s.currPos.x, s.currPos.y, w / d, n / f);
+                }
+                if(first_load == true && $('#mapkey').width() < 991){
+                    first_load = false;
+                    var x = $('#mapkey').width()/$('#mapkey').height();
+                    var y = 12 - (12 * x);
+                    r(Number(y.toFixed(0)));
                 }
             }
         };
@@ -6430,3 +6429,4 @@ var color_price_ranges = {
     2: "#F46C21",
     3: "#E22B2B"
 };
+var first_load = true;
