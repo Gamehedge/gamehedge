@@ -6242,11 +6242,7 @@
                         s.currPos.y = (j.height * s.currZoom * m.zoomStep)
                     }
                 }
-                console.log("break");
-                console.log(s.currPos);
-                console.log(w / d);
-                console.log(n / f);
-
+                
                 if(ix != undefined){
                     if (ix.pageX || ix.pageY) {
                         j.setViewBox(s.currPos.x, s.currPos.y, w / d, n / f);
@@ -6258,8 +6254,14 @@
                     }
                 }
                 else{
-
-                    j.setViewBox(s.currPos.x, s.currPos.y, w / d, n / f);
+                    if($('#mapkey').width() < 992){
+                        console.log("ONLY 1 TIME mobile")
+                        j.setViewBox(s.currPos.x, s.currPos.y, w / d, n / f);
+                    }
+                    else{
+                        console.log("ONLY 1 TIME desktop")
+                        j.setViewBox(s.currPos.x, s.currPos.y, w / d, n / f);    
+                    }
                 }
             }
         };
