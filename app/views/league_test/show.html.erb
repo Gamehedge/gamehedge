@@ -104,7 +104,9 @@
                       <% else %>
                         <span class="at"><%= event.occurs_at.strftime("%l:%M %p") %> at</span>
                       <% end %>
-                      <span class="stadium"><%= event.venue.name %></span>
+                      <% if event.venue %>
+                        <span class="stadium"><%= event.venue.name %></span>
+                      <% end %>
                     </p>
                     <p class="event4"><%= event.available_count %> tickets left</p>
                   </div>
@@ -140,7 +142,9 @@
                         </div>
                         <div class="league-detail-text">
                             <a class="detail-title" href="<%= performer.url %>"><%= performer.name %></a>
-                            <p class="detail-text">Stadium <a href="<%= performer.venue.url %>"><%= performer.venue.name %></a></p>
+                            <% if performer.venue %>
+                              <p class="detail-text">Stadium <a href="<%= performer.venue.url %>"><%= performer.venue.name %></a></p>
+                            <% end %>
                             <div>
                                 <table>
                                   <thead>
@@ -177,7 +181,9 @@
                       </div>
                       <div class="col-xs-8 col-md-7 name hidden-xs hidden-sm">
                         <a href="<%= performer.url %>"><%= performer.name %></a>
-                        <p>Stadium <a href="<%= performer.venue.url %>"><%= performer.venue.name %></a></p>
+                        <% if performer.venue %>
+                          <p>Stadium <a href="<%= performer.venue.url %>"><%= performer.venue.name %></a></p>
+                        <% end%>
                       </div>
                       <div class="col-xs-3 col-md-2 score hidden-xs hidden-sm">
                         <table>
