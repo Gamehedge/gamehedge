@@ -5729,3 +5729,48 @@ main#admin #order-stats .stat-item span {
     margin: 2px 0px;
 }
 
+.ggg-left {
+    width: 50%;
+    margin-right: 7px;
+    margin-top: 10px;
+}
+
+.ggg-left img, .ggg-right img{
+    width: 100%;
+}
+
+.ggg-right {
+    width: 50%;
+    margin-left: 7px;
+    margin-top: 10px;
+}
+
+.ggg-bold {
+    color:#424242;
+}
+
+@media (min-width:1200px) {
+    .ggg-text {
+        text-align: justify;
+        position: absolute;
+        width: 212px;
+        font-size: 11px;
+        margin-top: 48px;
+        margin-left: 60px;
+        color: #717171;
+    }
+}
+
+@media(max-width: 1199px) {
+    .ggg-text {
+        text-align: justify;
+        position: absolute;
+        width: 170px;
+        font-size: 9px;
+        margin-top: 39px;
+        margin-left: 48px;
+        color: #717171;
+    }
+}
+
+
