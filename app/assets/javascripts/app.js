@@ -13,9 +13,9 @@ app = angular.module('gamehedge',[
   'sly'
 ])
 
-app.config([ '$routeProvider','$locationProvider','AuthProvider', 'AnalyticsProvider',
-    function($routeProvider,$locationProvider,AuthProvider, AnalyticsProvider){
-      
+app.config([ '$routeProvider','$locationProvider','AuthProvider', 'AnalyticsProvider', '$httpProvider',
+    function($routeProvider,$locationProvider,AuthProvider,AnalyticsProvider,$httpProvider){
+      $httpProvider.useApplyAsync(true);
       AnalyticsProvider.setAccount('UA-76054076-1');
       AnalyticsProvider.useAnalytics(true);
       AnalyticsProvider.trackUrlParams(true);
