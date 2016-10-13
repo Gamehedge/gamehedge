@@ -1,0 +1,299 @@
+<span id="home" class=leagues>
+  <section id="hero" style="background: transparent url(<%= @league.image_url %>) center;background-size:cover;">
+    <div id="shader"></div>
+    <div id="wrapper">
+      <div id="content">
+        <div class="container">
+          <p class="hidden-md hidden-lg hidden-xl"><%= @league.name.upcase %> Tickets with Good Game Guarantee!</p>
+          <div id="hero-search" class="">
+            <form id="form-home-search" name="formSearch" onsubmit="function(){return false;};">
+              <input type="hidden" name="type" value="full" />
+              <div class="form-group">
+                <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/search icon.png">
+                <input id="search_element" type="text" class="form-control" placeholder="Search by team, league, game, stadium or player..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+              </div>
+            </form>
+          </div>
+          <p class="hidden-xs hidden-sm"><%= @league.name.upcase %> Tickets with Good Game Guarantee!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="good-game-guarantee" class="hidden-xs hidden-sm">
+    <div class="container">
+      <div class="title">Every Ticket Comes With Our Good Game Guarantee!</div>
+
+      <div class="content-background">
+        <div class="content">
+          <div class="col-md-4 division">
+            <div class="col-xs-5 section">
+              <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/icon ticket.png">
+            </div>
+            <div class="col-xs-7 section2">
+              <h2>BUY TICKETS</h2>
+              <p>
+                Find your game and purchase your tickets.<br>
+                Good Game Guarantee is included at no additional cost with every ticket.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4 division center-div">
+            <div class="col-xs-5 section">
+              <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/icon stadium.png">
+            </div>
+            <div class="col-xs-7 section2">
+              <h2>ENJOY GAME</h2>
+              <p>
+                If the home team loses by <%= @league.ggg %> or more, you get 50% of ticket price back.
+              </p>
+              <!-- <div class="col-xs-6 block">
+                <img class="icon-img" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/football icon.png">
+                17 points
+              </div>
+              <div class="col-xs-6 block">
+                <img class="icon-img" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/basketball icon.png">
+                20 points
+              </div>
+              <div class="col-xs-6 block">
+                <img class="icon-img" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/baseball icon.png">
+                5 runs
+              </div>
+              <div class="col-xs-6 block">
+                <img class="icon-img" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/hockey icon.png">
+                4 goals
+              </div> -->
+            </div>
+          </div>
+          <div class="col-md-4 division">
+            <div class="col-xs-5 section">
+              <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/icon coin.png">
+            </div>
+            <div class="col-xs-7 section2">
+              <h2>CLAIM MONEY</h2>
+              <p>
+                Simply come back to GameHedge.com to claim your refund.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <% if @next_events %>
+    <section id="near-events">
+      <div class="container">
+        <div class="title">UPCOMING GAMES NEAR YOU</div>
+        <% @next_events.take(4).each do |event| %>
+          <div class="col-md-3 mobile-near-events">
+            <a href="<%= ((event.url + '/' + (event.name.gsub '/','-') + '-tickets').gsub ' ','-').downcase %>">
+              <div class="back">
+                <div class="front">
+                  <div class="date-holder">
+                    <div class="date-inner">
+                      <p class="date1"><%= event.occurs_at.strftime("%^B") %></p>
+                      <p class="date2"><%= event.occurs_at.strftime("%d") %></p>
+                      <p class="date3"><%= event.occurs_at.strftime("%^a") %></p>
+                    </div>
+                  </div>
+                  <!-- <div class="event-holder" ng-show="event.performances[0].primary == true"> -->
+                  <div class="event-holder">
+                    <p class="teams"><%= event.name %></p>
+                    <p class="event3">
+                      <% if event.occurs_at.strftime("%l:%M %p") == "12:00 AM" %>
+                        <span class="at">TBD</span>
+                      <% else %>
+                        <span class="at"><%= event.occurs_at.strftime("%l:%M %p") %> at</span>
+                      <% end %>
+                      <span class="stadium"><%= event.venue.name %></span>
+                    </p>
+                    <p class="event4"><%= event.available_count %> tickets left</p>
+                  </div>
+                  <!-- <div class="event-holder" ng-show="event.performances[1].primary == true">
+                     <p class="teams">{{event.performances[0].performer.name.replace('Football', '')}}<span class="at"> at </span><br>{{event.performances[1].performer.name.replace('Football', '')}}</p>
+                    <p class="event3"><span class="at" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD</span><span class="at" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'h:mm a' : 'UTC' | uppercase}} at</span> <span class="stadium">{{event.venue.name}}</span></p>
+                    <p class="event4">{{event.available_count}} tickets left</p>
+                  </div> -->
+                  <button>Buy Tickets</button>
+                </div>
+              </div>
+            </a>
+          </div>
+        <% end %>
+      </div>
+    </section>
+  <% end %>
+  <section id="divisions">
+    <div class="container divisions-container">
+      <% @divisions.where(is_main_division: true).order(:name).each do |main_division| %>
+        <div class="col-md-6 text-center main-division-container">
+          <p class="main-division"><%= main_division.name %></p>
+          <% @divisions.where(is_main_division: false).where(division_id: main_division.id).each do |division| %>
+            <div class="small-division">
+              <%= main_division.name.upcase %> <%= division.name.upcase %> TICKETS
+              <div class="small-division-back row">
+                <div class="small-division-front">
+                  <% @performers.where(division_id: division.id).order('wins DESC, name').each do |performer| %>
+                    <div class="row performer-detail">
+                      <div class="league-detail-table hidden-md hidden-lg hidden-xl">
+                        <div class="league-detail-image">
+                          <a href="<%= performer.url %>"><img src="<%= performer.image_url_medium %>"></a>
+                        </div>
+                        <div class="league-detail-text">
+                            <a class="detail-title" href="<%= performer.url %>"><%= performer.name %></a>
+                            <p class="detail-text">Stadium <a href="<%= performer.venue.url %>"><%= performer.venue.name %></a></p>
+                            <div>
+                                <table>
+                                  <thead>
+                                    <tr>
+                                      <th class="right-cell">
+                                        W
+                                      </th>
+                                      <th class="left-cell">
+                                        L
+                                      </th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td class="right-cell">
+                                        <%= performer.wins %>
+                                      </td>
+                                      <td class="left-cell">
+                                        <%= performer.losses %>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                        </div>
+                      </div>
+                        
+                      <div class="col-xs-4 col-md-3 image hidden-xs hidden-sm">
+                        <div class="dummy"></div>
+                        <div class="img-container">
+                          <div class="centerer mobile-upper"></div>
+                          <a href="<%= performer.url %>"><img src="<%= performer.image_url_medium %>"></a>
+                        </div>
+                      </div>
+                      <div class="col-xs-8 col-md-7 name hidden-xs hidden-sm">
+                        <a href="<%= performer.url %>"><%= performer.name %></a>
+                        <p>Stadium <a href="<%= performer.venue.url %>"><%= performer.venue.name %></a></p>
+                      </div>
+                      <div class="col-xs-3 col-md-2 score hidden-xs hidden-sm">
+                        <table>
+                          <thead>
+                            <tr>
+                              <th>
+                                W
+                              </th>
+                              <th>
+                                L
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <%= performer.wins %>
+                              </td>
+                              <td>
+                                <%= performer.losses %>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </section>
+  <section id="about">
+    <div class="page-title">ABOUT <%= @league.name.upcase %></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 description">
+          <%= raw @league.description %>
+        </div>
+      </div>
+    </div>
+  </section>
+    
+  <section id="good-game-guarantee" class="hidden-md hidden-lg hidden-xl">
+      <div class="container">
+        <div class="title">Every Ticket Comes With Our Good Game Guarantee!</div>
+
+        <div class="content-background-mobile">
+          <div class="content-mobile">
+             <slick settings="slickConfig">
+                
+                <div class="row table-element">
+                  <div class="section-mobile table-ele-cell first-ele">
+                    <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/icon ticket.png">
+                  </div>
+                  <div class="section2-mobile table-ele-cell second-ele">
+                    <h2>BUY TICKETS</h2>
+                    <p>
+                      Find your game and purchase your tickets.<br>
+                      Good Game Guarantee is included at no additional cost with every ticket.
+                    </p>
+                  </div>
+                </div>
+                <div class="row table-element">
+                  <div class="section-mobile table-ele-cell first-ele">
+                    <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/icon stadium.png">
+                  </div>
+                  <div class="section2-mobile table-ele-cell second-ele">
+                    <h2>ENJOY GAME</h2>
+                    <p>
+                      If the home team loses by <%= @league.ggg %> or more, you get 50% of ticket price back.
+                    </p>
+                    <!--div class="row">
+                      <div class="fifty-perc block">
+                        <img class="icon-img" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/football icon.png">
+                        <div>17 points</div>
+                      </div>
+                      <div class="fifty-perc block">
+                        <img class="icon-img" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/basketball icon.png">
+                        <div>20 points</div>
+                      </div>
+                    </div-->
+                    <!--div class="row">
+                      <div class="fifty-perc block">
+                        <img class="icon-img" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/baseball icon.png">
+                        <div>5 runs</div>
+                      </div>
+                      <div class="fifty-perc block">
+                        <img class="icon-img" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/hockey icon.png">
+                        <div>4 goals</div>
+                      </div>
+                    </div-->
+                  </div>
+                </div>
+                <div class="row table-element">
+                  <div class="section-mobile table-ele-cell first-ele">
+                    <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/icon coin.png">
+                  </div>
+                  <div class="section2-mobile table-ele-cell second-ele">
+                    <h2>CLAIM MONEY</h2>
+                    <p>
+                      Simply come back to GameHedge.com to claim your refund.
+                    </p>
+                  </div>
+                </div> 
+                
+            </slick>
+  
+              
+              
+              
+          </div>
+        </div>
+      </div>
+  </section>
+</span>
