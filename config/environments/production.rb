@@ -25,8 +25,10 @@ Rails.application.configure do
   config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Compress JavaScripts and CSS.
-  config.assets.js_compressor = :uglifier
+  config.assets.js_compressor = Uglifier.new(mangle: false)
   config.assets.css_compressor = :sass
+    
+  config.assets.gzip = true
     
   config.assets.image_optim.nice = 20
   config.assets.image_optim.svgo = false
@@ -145,6 +147,6 @@ Rails.application.configure do
   config.static_cache_control = "public, max-age=31536000"
   #config.action_controller.asset_host = ENV['CDN_HOSTNAME']
   #config.assets.compress = true
+  
 
-  config.assets.gzip = true
 end
