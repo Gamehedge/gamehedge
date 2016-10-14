@@ -121,8 +121,8 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
                 }
             }
             $scope.ready = true;
-            //console.log("Next events");
-            //console.log($scope.next_events);
+            console.log("Next events");
+            console.log($scope.next_events);
         }, function errorCallback(response2) {
             //console.log(response2);
             // called asynchronously if an error occurs

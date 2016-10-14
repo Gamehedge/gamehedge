@@ -17,7 +17,7 @@ class EventsController < ApplicationController
 	end
 	def next
 		require 'json'
-		id = Event.find_by_id(request.GET["id"]).te_uid
+		id = Sport.find_by_id(request.GET["id"]).te_uid
 		if request.GET["geolocated"] == "true"
 			if cookies[:location_]
 				info = ActiveSupport::JSON.decode(cookies[:location_])
