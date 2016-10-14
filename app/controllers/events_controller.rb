@@ -17,6 +17,7 @@ class EventsController < ApplicationController
 	end
 	def next
 		require 'json'
+		id = Event.find_by_id(request.GET["id"]).te_uid
 		if request.GET["geolocated"] == "true"
 			if cookies[:location_]
 				info = ActiveSupport::JSON.decode(cookies[:location_])
@@ -32,9 +33,9 @@ class EventsController < ApplicationController
 				latitude = info.latitude
 				longitude = info.longitude
 			end
-			@events = TicketEvolutionService.new({:type => request.GET["type"], :within => 25, :id => request.GET["id"], :geolocated => "true", :latitude => latitude, :longitude => longitude, :page => request.GET["page"], :source => request.GET["source"], :perpage => request.GET["perpage"]}).list
+			@events = TicketEvolutionService.new({:type => request.GET["type"], :within => 25, :id => id, :geolocated => "true", :latitude => latitude, :longitude => longitude, :page => request.GET["page"], :source => request.GET["source"], :perpage => request.GET["perpage"]}).list
 		else
-			@events = TicketEvolutionService.new({:type => request.GET["type"], :id => request.GET["id"], :geolocated => "false", :page => request.GET["page"], :source => request.GET["source"], :perpage => request.GET["perpage"]}).list
+			@events = TicketEvolutionService.new({:type => request.GET["type"], :id => id, :geolocated => "false", :page => request.GET["page"], :source => request.GET["source"], :perpage => request.GET["perpage"]}).list
 		end
 		render json: @events
 	end

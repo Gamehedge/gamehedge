@@ -5,9 +5,13 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
     $scope.getLeagueInfo = function(){
 		apiService.getData('/api/v1/sports/'+$routeParams.leagueId)
             .then(function(response){
-                console.log("League");
-            	console.log(response);
                 $scope.league  = response;
+                if($scope.league.active == true){
+                    $scope.getNextEvents();
+                }
+                else{
+                    $location.path("/");
+                }
                 if($scope.league.name == "NHL"){
                     $rootScope.title = "NHL Hockey Tickets | Gamehedge";
                     $rootScope.description = "Meta Description - Buy and Save up to 60% on all NHL Hockey game tickets. If the home team loses by 4 goals or more, get 50% of your ticket price back.";
@@ -48,42 +52,19 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
                     $scope.bold = "Verified tickets delivered on time | 100% Buyer Guarantee | Secure Checkout"
                     $scope.italic = "At GameHedge every ticket comes with the Good Game Guarantee at no additional cost. Buy MLB Baseball tickets on GameHedge and if the home team loses by 5 runs or more, GameHedge will refund 50% of the ticket price."
                 }
-                
-                if($routeParams.slug == $scope.league.slug){
-                    if($scope.league.active == true){
-                        $scope.getDivisions();
-                        $scope.getNextEvents();
-                    }
-                    else{
-                        // $location.path("/");
-                    }
-                }
-                else{
-                    // $location.path("/");
-                }
         });
 	};
 
 	$scope.getDivisions = function(){
-		apiService.getData('/api/v1/divisions/?sport_id='+$scope.league.id)
+		apiService.getData('/api/v1/divisions/?sport_id='+$routeParams.leagueId)
             .then(function(response){
-                //console.log("Divisions");
-            	//console.log(response);
+                console.log("Divisions");
+            	console.log(response);
                 $scope.divisions = response;
                 var len = $scope.divisions.length;
                 var mid = len / 2;
                 $scope.divisions_first  = $scope.divisions.slice(0, mid);  
                 $scope.divisions_last = $scope.divisions.slice(mid, len);
-                $scope.getPerformers();
-        });
-	};
-
-	$scope.getPerformers = function(){
-		apiService.getData('/api/v1/performers/?sport_id='+$scope.league.id)
-            .then(function(response){
-                //console.log("Performers");
-            	//console.log(response);
-                $scope.performers = response;
                 $scope.loading = false;
         });
 	};
@@ -121,9 +102,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
         }
     }
 	$scope.getNextEvents = function(){
-        id = $scope.league.te_uid;
-        source = "league";
-        url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=50&geolocated=true';  
+        url = '/events/next/?type=events&id='+$routeParams.leagueId+'&source=league&page=1&perpage=50&geolocated=true';  
         $http({
             method: 'GET',
             url: url,
@@ -189,6 +168,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
     $scope.searchTerm = "";
     $scope.next_events = [];
 	$scope.getLeagueInfo();
+    $scope.getDivisions();
     $window.scrollTo(0, 0);
     Auth.currentUser().then(function(user) {
         // User was logged in, or Devise returned
