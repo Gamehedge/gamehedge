@@ -6,10 +6,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
 		apiService.getData('/api/v1/sports/'+$routeParams.leagueId)
             .then(function(response){
                 $scope.league  = response;
-                if($scope.league.active == true){
-                    $scope.getNextEvents();
-                }
-                else{
+                if($scope.league.active != true){
                     $location.path("/");
                 }
                 if($scope.league.name == "NHL"){
@@ -169,6 +166,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
     $scope.next_events = [];
 	$scope.getLeagueInfo();
     $scope.getDivisions();
+    $scope.getNextEvents();
     $window.scrollTo(0, 0);
     Auth.currentUser().then(function(user) {
         // User was logged in, or Devise returned

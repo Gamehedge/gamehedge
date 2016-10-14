@@ -118,5 +118,8 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
     $scope.searchTerm = "";
     $scope.getLeagues();
     $scope.getDivisions();
-    $scope.getPerformers()
+    $scope.getPerformers();
+    $timeout(function(){
+        $rootScope.load_complete = true;
+    },100);
 });
