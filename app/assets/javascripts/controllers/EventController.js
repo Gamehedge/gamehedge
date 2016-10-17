@@ -373,7 +373,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
             for(j=0;j<amount.length;j++){
                 select_list += '<option value="'+amount[j]+'">'+amount[j]+'</option>'
             }
-            if(list[i].public_notes == null){
+            if(list[i].public_notes == null || list[i].public_notes.split(' ').join('') == "" || list[i].public_notes == undefined){
                 htm += '<div class="row listing-row" data-info="'+amount+'" data-section="'+list[i].section+'" data-row="'+list[i].row+'" data-price="'+list[i].retail_price+'" data-type="'+list[i].type+'" data-id="'+list[i].id+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button class="redirect-button">$'+list[i].retail_price+'/ea</button><p class="format">'+list[i].format+'</span></div></div>'
             }
             else{
@@ -415,9 +415,6 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                 for(i=0;i<$scope.selectedSections.length;i++){
                     a = $(this).attr('data-section').replace(/[^0-9]/g, '');
                     b = $scope.selectedSections[i].replace(/[^0-9]/g, '');
-                    console.log("sections");
-                    console.log(a);
-                    console.log(b);
                     if(a != b){
                         $(this).addClass("hidden");
                     }
@@ -494,7 +491,6 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
     }
 
 	$scope.higlightSection = function(section,highlight){
-        console.log(section);
         if(section != undefined){
     		if(highlight == true){
     			$("#MapContainer").tuMap("HighlightSection",section);
