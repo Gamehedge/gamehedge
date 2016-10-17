@@ -518,7 +518,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
             map_width = map_width*0.58;
         }
         else{
-            map_height = map_width;
+            map_height = window.innerHeight - 385;
         }
         DVM_map_params = {
             'client_id':'99',
@@ -538,7 +538,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         console.log("DVM_map_params")
         console.log(DVM_map_params);
         $timeout(function(){
-            angularLoad.loadScript("/dvm.js?v=84").then(function() {
+            angularLoad.loadScript("/dvm.js?v=103").then(function() {
                 console.log("dvm.js loadded successfully");
                 $timeout(function(){
                     document.body.addEventListener("sectionSelected", function (e) {

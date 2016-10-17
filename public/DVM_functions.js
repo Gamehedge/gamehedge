@@ -1185,6 +1185,30 @@ function set_map(args) {
                 }
             }
     );
+     $("#map_zoom_less_mine").click(
+            function (event) {
+                event.preventDefault();
+                //new zoom out with panZoom
+                if (panZoom.getCurrentZoom() > 0) {
+                    panZoom.zoomOut(1);
+                    rows_or_sections_display();
+                    //zoom seeker change
+                    zoom_seeker_change('-');
+                }
+            }
+    );
+    $("#map_zoom_plus_mine").click(
+            function (event) {
+                event.preventDefault();
+                //new zoom in with panZoom
+                if (panZoom.getCurrentZoom() < 9) {
+                    panZoom.zoomIn(1);
+                    rows_or_sections_display();
+                    //zoom seeker change
+                    zoom_seeker_change('+');
+                }
+            }
+    );
     //tooltip display
     $('#sectionTooltip').on('mouseenter', inTooltip).on('mouseleave', outTooltip);
     $('#rowTooltip').on('mouseenter', inTooltipRow).on('mouseleave', outTooltipRow);
@@ -2390,6 +2414,19 @@ function dvm_map_filter(filter_vals) {
 }
 //reset filters
 function dvm_reset_maps(init_filtre_vals) {
+    setTimeout(function() {
+        if(window.outerWidth < 991){
+            var x = $('#mapkey').height()/$('#mapkey').width();
+            var y = 10 - (10 * x);
+            console.log("zommed");
+            console.log(Number(y.toFixed(0)));
+            panZoom.zoomIn(y,true);
+            rows_or_sections_display();
+            //zoom seeker change
+            zoom_seeker_change('+');
+        }
+    }, 10);
+    
     init_filtre_vals = typeof init_filtre_vals !== 'undefined' ? init_filtre_vals : true;
     if (!is_static_map) {
         //real size of the map

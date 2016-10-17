@@ -26,8 +26,8 @@ class Api::V1::DivisionsController < ApplicationApiController
         format.json { render json: @divisions.to_json(:only => [:id, :name, :sport_id, :division_id, :is_main_division, :url])}
         format.xml { render json: @divisions.to_json(:only => [:id, :name, :sport_id, :division_id, :is_main_division, :url])}
       else
-        format.json { render json: @divisions }
-        format.xml { render xml: @divisions }
+        format.json { render json: @divisions.to_json(:only => [:id, :name, :sport_id, :division_id, :is_main_division], :include => {:performers => {:only =>[:id,:name,:url,:wins,:losses,:division_id],:include => {:venue => {:only =>[:id,:name,:url]}}, :methods => [:image_url, :image_url_medium, :image_url_thumb, :image_cover]}})}
+      format.xml { render json: @divisions.to_json(:only => [:id, :name, :sport_id, :division_id, :is_main_division], :include => {:performers => {:only =>[:id,:name,:url,:wins,:losses,:division_id],:include => {:venue => {:only =>[:id,:name,:url]}}, :methods => [:image_url, :image_url_medium, :image_url_thumb, :image_cover]}})}
       end
     end
   end

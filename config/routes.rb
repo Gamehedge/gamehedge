@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   get 'events/near'
 
   devise_for :clients
@@ -23,7 +24,7 @@ Rails.application.routes.draw do
   get 'contact/send_message'
   get 'contact/send_email_message'
 
-  resources :search, :signature
+  resources :search, :signature, :league_test
   
   devise_for :admin_users, ActiveAdmin::Devise.config
   
