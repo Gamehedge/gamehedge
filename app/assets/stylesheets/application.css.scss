@@ -5774,8 +5774,10 @@ main#admin #order-stats .stat-item span {
 }
 
 @media(max-width: 400px) {
-    font-size: 9px !important;
-    width: 57% !important;
+    .ggg-text {
+        font-size: 9px !important;
+        width: 57% !important;
+    }
 }
 
 @media (min-width:1200px) {
