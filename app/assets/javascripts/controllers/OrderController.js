@@ -526,6 +526,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			        	event_away_team: away_team,
 			        	event_te_uid: $scope.event.id,
 			        	ticket_notes: $scope.ticket.public_notes,
+			        	sport_id: $scope.event.home_performer.sport.id
 			        },
 			    }).then(function successCallback(response) {
 			    	$scope.processing = false;

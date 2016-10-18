@@ -3,7 +3,7 @@ ActiveAdmin.register Order do
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :refund_status_id, :email, :cc_last_digits, :address, :phone_number
+  permit_params :refund_status_id, :email, :cc_last_digits, :address, :phone_number, :sport_id
 
   menu :if => proc{ current_admin_user.permissions.where(:name => "Order").any? }
 
@@ -16,6 +16,7 @@ ActiveAdmin.register Order do
     column :event_name
     column :event_date
     column :refund_status
+    column :sport_id
     actions
     # ...
   end
@@ -72,7 +73,9 @@ ActiveAdmin.register Order do
         	f.input :refund_status_id, :as => :select, :collection => RefundStatus.all
           f.input :cc_last_digits
           f.input :address
+          f.input :event_name
           f.input :phone_number
+          f.input :sport_id, :as => :select, :collection => Sport.all
       end
       f.actions
   end

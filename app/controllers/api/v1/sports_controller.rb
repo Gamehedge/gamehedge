@@ -21,15 +21,15 @@ class Api::V1::SportsController < ApplicationApiController
       @sports = Sport.where(data_params)
     end
     respond_to do |format|
-      format.json { render json: @sports.to_json(:only => [:id, :name, :description, :te_uid, :url, :ggg, :slug, :active], :methods => [:image_url, :image_url_medium, :image_url_thumb])}
-      format.xml { render xml: @sports.to_json(:only => [:id, :name, :description, :te_uid, :url, :ggg, :slug, :active], :methods => [:image_url, :image_url_medium, :image_url_thumb])}
+      format.json { render json: @sports.to_json(:only => [:id, :name, :description, :contract_code, :te_uid, :url, :ggg, :slug, :active], :methods => [:image_url, :image_url_medium, :image_url_thumb])}
+      format.xml { render xml: @sports.to_json(:only => [:id, :name, :description, :contract_code, :te_uid, :url, :ggg, :slug, :active], :methods => [:image_url, :image_url_medium, :image_url_thumb])}
     end
   end
 
   def show
     respond_to do |format|
-      format.json { render json: @sport.to_json(:only => [:id, :name, :description, :te_uid, :url, :ggg, :slug, :active], :methods => [:image_url, :image_url_medium, :image_url_thumb])}
-      format.xml { render xml: @sport.to_json(:only => [:id, :name, :description, :te_uid, :url, :ggg, :slug, :active], :methods => [:image_url, :image_url_medium, :image_url_thumb])}
+      format.json { render json: @sport.to_json(:only => [:id, :name, :description, :contract_code, :te_uid, :url, :ggg, :slug, :active], :methods => [:image_url, :image_url_medium, :image_url_thumb])}
+      format.xml { render xml: @sport.to_json(:only => [:id, :name, :description, :contract_code, :te_uid, :url, :ggg, :slug, :active], :methods => [:image_url, :image_url_medium, :image_url_thumb])}
     end
   end
 
@@ -74,7 +74,7 @@ class Api::V1::SportsController < ApplicationApiController
   end
 
   def data_params
-    params.permit(:id, :name, :description, :te_uid, :image, :ggg, :active, :slug)
+    params.permit(:id, :name, :description, :te_uid, :image, :ggg, :active, :slug, :contract_code)
   end
 
   private

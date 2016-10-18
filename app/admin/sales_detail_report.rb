@@ -19,6 +19,8 @@ index :download_links => [:csv] do
     column ("Section")  { |order| order.ticket_section }
     column ("Row")  { |order| order.ticket_row }
     column ("Customer Name")  { |order| order.client_name }
+    column ("League Type")  { |order| order.sport.name }
+    column ("Contract Code")  { |order| order.sport.contract_code }
     column :customer_email
     column :number_of_tickets
     column :sale_price_per_ticket
@@ -28,6 +30,7 @@ end
 filter :order_date, label: 'Order Date Range', as: :date_range
 filter :real_event_date, label: 'Event Date Range'
 filter :te_order_id, label: 'Order Id'
+filter :sport_id, as: :select, collection: proc { Sport.all }
 filter :event_name
 filter :order_status
 filter :event_home_team, label: 'Home Team'
@@ -46,6 +49,8 @@ csv do
     column ("Section")  { |order| order.ticket_section }
     column ("Row")  { |order| order.ticket_row }
     column ("Customer Name")  { |order| order.client_name }
+    column ("League Type")  { |order| order.sport.name }
+    column ("Contract Code")  { |order| order.sport.contract_code }
     column :customer_email
     column :number_of_tickets
     column :sale_price_per_ticket

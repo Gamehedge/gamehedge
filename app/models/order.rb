@@ -1,5 +1,6 @@
 class Order < ActiveRecord::Base
 	belongs_to :refund_status, class_name: "RefundStatus", foreign_key: "refund_status_id"
+	belongs_to :sport
 	
 	def display_name
 		return self.id

@@ -609,7 +609,8 @@ CREATE TABLE orders (
     phone_number character varying,
     discount double precision,
     event_te_uid integer,
-    ticket_notes character varying
+    ticket_notes character varying,
+    sport_id integer
 );
 
 
@@ -821,7 +822,8 @@ CREATE TABLE sports (
     url character varying,
     ggg character varying,
     slug character varying,
-    active boolean
+    active boolean,
+    contract_code character varying(8)
 );
 
 
@@ -1570,6 +1572,14 @@ ALTER TABLE ONLY tiles
 
 
 --
+-- Name: fk_rails_79007e9555; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY orders
+    ADD CONSTRAINT fk_rails_79007e9555 FOREIGN KEY (sport_id) REFERENCES sports(id);
+
+
+--
 -- Name: fk_rails_8ccbe0c182; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1802,4 +1812,8 @@ INSERT INTO schema_migrations (version) VALUES ('20160927214245');
 INSERT INTO schema_migrations (version) VALUES ('20160927220902');
 
 INSERT INTO schema_migrations (version) VALUES ('20161011161733');
+
+INSERT INTO schema_migrations (version) VALUES ('20161017215915');
+
+INSERT INTO schema_migrations (version) VALUES ('20161017220721');
 

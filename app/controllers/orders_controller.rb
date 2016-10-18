@@ -39,6 +39,7 @@ class OrdersController < ApplicationController
 		@event_away_team = request.POST["event_away_team"]
 		@event_te_uid = request.POST["event_te_uid"]
 		@ticket_notes = request.POST["ticket_notes"]
+		@sport_id = request.POST["sport_id"]
 		
         
         @order = TicketEvolutionService.new({id: @user_id}).createShipment({ address_id: @ship_address_id, 
@@ -72,6 +73,7 @@ class OrdersController < ApplicationController
         	@real_event_date = Time.parse @event_occurs_at
         	o = Order.create(
         		client_id: @user_id,
+        		sport_id: @sport_id,
 	         	client_name: @ship_to_name,
 	         	te_order_id: @order["id"],
 	         	event_name: @event_name,
