@@ -287,34 +287,40 @@
                 }
             }
         }
-        var htm = "";
-        for(i=0;i<4;i++){
-          event = next_events[i];
-          var url2 = event.url + '/' + event.name.split('/').join('-').split(' ').join('-') + '-tickets';
-          var event_date = moment(event.occurs_at.replace("Z",""));
-          var date_text = "";
-          var venue_name = "";
-          if(event_date.format('hh:mm A') == '12:00 AM'){
-            date_text = "TBD";
-          }
-          else{
-            date_text = event_date.format('hh:mm A')
-          }
-          if(event.venue == undefined){
-            venue_name = '';
-          }
-          else{
-            venue_name = event.venue.name;
-          }
-          htm += '<div class="col-md-3 mobile-near-events"><a href="'+url2+'"><div class="back"><div class="front"><div class="date-holder"><div class="date-inner"><p class="date1">'+event_date.format('MMM')+'</p><p class="date2">'+event_date.format('DD')+'</p><p class="date3">'+event_date.format('ddd')+'</p></div></div><div class="event-holder"><p class="teams">'+event.name+'</p><p class="event3"><span class="at">'+date_text+' </span><span class="stadium">'+venue_name+'</span></p><p class="event4">'+event.available_count+' tickets left</p></div><button>Buy Tickets</button></div></div></a></div>'
-
-        }
-        $("#next_events_holder").html(htm);
-        $("#home-loading-data").addClass("hidden");
-        console.log("Next events");
-        console.log(next_events);
         if(next_events.length == 0){
           $("#near-events").addClass("hidden");
+        }
+        else{
+          var htm = "";
+          var ax = 4;
+          if(next_events.length < 4){
+            ax = next_events.length
+          }
+          for(i=0;i<ax;i++){
+            event = next_events[i];
+            var url2 = event.url + '/' + event.name.split('/').join('-').split(' ').join('-') + '-tickets';
+            var event_date = moment(event.occurs_at.replace("Z",""));
+            var date_text = "";
+            var venue_name = "";
+            if(event_date.format('hh:mm A') == '12:00 AM'){
+              date_text = "TBD";
+            }
+            else{
+              date_text = event_date.format('hh:mm A')
+            }
+            if(event.venue == undefined){
+              venue_name = '';
+            }
+            else{
+              venue_name = event.venue.name;
+            }
+            htm += '<div class="col-md-3 mobile-near-events"><a href="'+url2+'"><div class="back"><div class="front"><div class="date-holder"><div class="date-inner"><p class="date1">'+event_date.format('MMM')+'</p><p class="date2">'+event_date.format('DD')+'</p><p class="date3">'+event_date.format('ddd')+'</p></div></div><div class="event-holder"><p class="teams">'+event.name+'</p><p class="event3"><span class="at">'+date_text+' </span><span class="stadium">'+venue_name+'</span></p><p class="event4">'+event.available_count+' tickets left</p></div><button>Buy Tickets</button></div></div></a></div>'
+
+          }
+          $("#next_events_holder").html(htm);
+          $("#home-loading-data").addClass("hidden");
+          console.log("Next events");
+          console.log(next_events);
         }
       },
       error: function(response2){
