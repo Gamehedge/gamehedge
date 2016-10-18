@@ -1,3 +1,4 @@
+
 <span id="home" class=leagues>
   <section id="hero" style="background: transparent url(<%= @league.image_url %>) center;background-size:cover;">
     <div id="shader"></div>
@@ -79,51 +80,20 @@
       </div>
     </div>
   </section>
-  <% if @next_events %>
+  
     <section id="near-events">
       <div class="container">
         <div class="title">UPCOMING GAMES NEAR YOU</div>
-        <% @next_events.take(4).each do |event| %>
-          <div class="col-md-3 mobile-near-events">
-            <a href="<%= ((event.url + '/' + (event.name.gsub '/','-') + '-tickets').gsub ' ','-').downcase %>">
-              <div class="back">
-                <div class="front">
-                  <div class="date-holder">
-                    <div class="date-inner">
-                      <p class="date1"><%= event.occurs_at.strftime("%^B") %></p>
-                      <p class="date2"><%= event.occurs_at.strftime("%d") %></p>
-                      <p class="date3"><%= event.occurs_at.strftime("%^a") %></p>
-                    </div>
-                  </div>
-                  <!-- <div class="event-holder" ng-show="event.performances[0].primary == true"> -->
-                  <div class="event-holder">
-                    <p class="teams"><%= event.name %></p>
-                    <p class="event3">
-                      <% if event.occurs_at.strftime("%l:%M %p") == "12:00 AM" %>
-                        <span class="at">TBD</span>
-                      <% else %>
-                        <span class="at"><%= event.occurs_at.strftime("%l:%M %p") %> at</span>
-                      <% end %>
-                      <% if event.venue %>
-                        <span class="stadium"><%= event.venue.name %></span>
-                      <% end %>
-                    </p>
-                    <p class="event4"><%= event.available_count %> tickets left</p>
-                  </div>
-                  <!-- <div class="event-holder" ng-show="event.performances[1].primary == true">
-                     <p class="teams">{{event.performances[0].performer.name.replace('Football', '')}}<span class="at"> at </span><br>{{event.performances[1].performer.name.replace('Football', '')}}</p>
-                    <p class="event3"><span class="at" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD</span><span class="at" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'h:mm a' : 'UTC' | uppercase}} at</span> <span class="stadium">{{event.venue.name}}</span></p>
-                    <p class="event4">{{event.available_count}} tickets left</p>
-                  </div> -->
-                  <button>Buy Tickets</button>
-                </div>
-              </div>
-            </a>
+        
+        <span id="next_events_holder">
+          <div id="home-loading-data" class="row horizontal-center" ng-if="loading">
+            <div class='uil-default-css' style='transform:scale(0.32);'><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(0deg) translate(0,-60px);transform:rotate(0deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(30deg) translate(0,-60px);transform:rotate(30deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(60deg) translate(0,-60px);transform:rotate(60deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(90deg) translate(0,-60px);transform:rotate(90deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(120deg) translate(0,-60px);transform:rotate(120deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(150deg) translate(0,-60px);transform:rotate(150deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(180deg) translate(0,-60px);transform:rotate(180deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(210deg) translate(0,-60px);transform:rotate(210deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(240deg) translate(0,-60px);transform:rotate(240deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(270deg) translate(0,-60px);transform:rotate(270deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(300deg) translate(0,-60px);transform:rotate(300deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(330deg) translate(0,-60px);transform:rotate(330deg) translate(0,-60px);border-radius:10px;position:absolute;'></div></div>
           </div>
-        <% end %>
+  <section id="divisions" ng-if="!loading">
+        </span>
       </div>
     </section>
-  <% end %>
+  
   <section id="divisions">
     <div class="container divisions-container">
       <% @divisions.where(is_main_division: true).order(:name).each do |main_division| %>
@@ -292,14 +262,64 @@
                     </p>
                   </div>
                 </div> 
-                
             </slick>
-  
-              
-              
-              
           </div>
         </div>
       </div>
   </section>
 </span>
+<script>
+  $(document).ready(function(){
+    url = '/events/next/?type=events&id='+<%= @id %>+'&source=league&page=1&perpage=50&geolocated=true';  
+    $.ajax({
+      url: url,
+      success: function(response2){
+        next_events = response2;
+        if(next_events != null){
+            for(j=next_events.length - 1;j>=0;j--){
+                // if(next_events[j].performances.length != 2){
+                //     next_events.splice(j,1);
+                // }
+                if(next_events[j] != undefined){
+                    if(moment().add(1,'h').isAfter(String(next_events[j].occurs_at).replace('Z',''))) {
+                        next_events.splice(j, 1);
+                    }
+                }
+            }
+        }
+        var htm = "";
+        for(i=0;i<4;i++){
+          event = next_events[i];
+          var url2 = event.url + '/' + event.name.split('/').join('-').split(' ').join('-') + '-tickets';
+          var event_date = moment(event.occurs_at.replace("Z",""));
+          var date_text = "";
+          var venue_name = "";
+          if(event_date.format('hh:mm A') == '12:00 AM'){
+            date_text = "TBD";
+          }
+          else{
+            date_text = event_date.format('hh:mm A')
+          }
+          if(event.venue == undefined){
+            venue_name = '';
+          }
+          else{
+            venue_name = event.venue.name;
+          }
+          htm += '<div class="col-md-3 mobile-near-events"><a href="'+url2+'"><div class="back"><div class="front"><div class="date-holder"><div class="date-inner"><p class="date1">'+event_date.format('MMM')+'</p><p class="date2">'+event_date.format('DD')+'</p><p class="date3">'+event_date.format('ddd')+'</p></div></div><div class="event-holder"><p class="teams">'+event.name+'</p><p class="event3"><span class="at">'+date_text+' </span><span class="stadium">'+venue_name+'</span></p><p class="event4">'+event.available_count+' tickets left</p></div><button>Buy Tickets</button></div></div></a></div>'
+
+        }
+        $("#next_events_holder").html(htm);
+        $("#home-loading-data").addClass("hidden");
+        console.log("Next events");
+        console.log(next_events);
+        if(next_events.length == 0){
+          $("#near-events").addClass("hidden");
+        }
+      },
+      error: function(response2){
+        $("#near-events").addClass("hidden");
+      },
+    });
+  });
+</script>
