@@ -275,6 +275,8 @@
       url: url,
       success: function(response2){
         next_events = response2;
+        console.log("Next events");
+        console.log(next_events);
         if(next_events != null){
             for(j=next_events.length - 1;j>=0;j--){
                 // if(next_events[j].performances.length != 2){
@@ -319,8 +321,6 @@
           }
           $("#next_events_holder").html(htm);
           $("#home-loading-data").addClass("hidden");
-          console.log("Next events");
-          console.log(next_events);
         }
       },
       error: function(response2){
