@@ -13,9 +13,9 @@ app = angular.module('gamehedge',[
   'sly'
 ])
 
-app.config([ '$routeProvider','$locationProvider','AuthProvider', 'AnalyticsProvider',
-    function($routeProvider,$locationProvider,AuthProvider, AnalyticsProvider){
-      
+app.config([ '$routeProvider','$locationProvider','AuthProvider', 'AnalyticsProvider', '$httpProvider',
+    function($routeProvider,$locationProvider,AuthProvider,AnalyticsProvider,$httpProvider){
+      $httpProvider.useApplyAsync(true);
       AnalyticsProvider.setAccount('UA-76054076-1');
       AnalyticsProvider.useAnalytics(true);
       AnalyticsProvider.trackUrlParams(true);
@@ -99,9 +99,9 @@ app.config([ '$routeProvider','$locationProvider','AuthProvider', 'AnalyticsProv
             templateUrl: "map-test.html",
             controller: 'mapTestController',
         })
-        .otherwise({
-            redirectTo: '/'
-        });
+        // .otherwise({
+        //     redirectTo: '/'
+        // });
       if(window.history && window.history.pushState){
           //$locationProvider.html5Mode(true); will cause an error $location in HTML5 mode requires a  tag to be present! Unless you set baseUrl tag after head tag like so: <head> <base href="/">
 

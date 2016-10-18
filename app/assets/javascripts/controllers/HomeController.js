@@ -5,7 +5,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 	$scope.TilesIndex = 0;
 	$scope.loading = true;
 	$rootScope.locat = $location.url();
-    
+	
     $scope.car_interval = 0;
     $scope.car_noWrapSlides = false;
     $scope.car_active = 0;
@@ -39,7 +39,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 		source = "";
 		if($scope.tiles[index].tile_type != undefined){
 			if($scope.tiles[index].tile_type.id == '1'){
-				id = $scope.tiles[index].sport.te_uid;
+				id = $scope.tiles[index].sport.id;
 				source = "league";
 			}
 			else if($scope.tiles[index].tile_type.id == '2'){

@@ -28,6 +28,8 @@ Rails.application.configure do
   config.assets.js_compressor = Uglifier.new(mangle: false)
   config.assets.css_compressor = :sass
     
+  config.assets.gzip = true
+    
   config.assets.image_optim.nice = 20
   config.assets.image_optim.svgo = false
 

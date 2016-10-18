@@ -929,9 +929,9 @@
 		  							<button ng-disabled="$parent.$parent.processing" ng-click="cancelAdd('billing')">CANCEL</button>
 		  						</div>
 		  					</div>
-		  					<hr class="hidden-xs hidden-sm">
-		  					<div class="hidden-xs hidden-sm badge-container">
-			  					<div class="ggg-badge-pledge pledge-left">
+		  					<hr class="hidden-xs hidden-sm hidden">
+		  					<div class="badge-container">
+			  					<!--div class="ggg-badge-pledge pledge-left">
 				  					<div class="badge-left-element">
 				  						<img src="<%= image_url "badge-gamehedge.png" %>" class="ggg-img">
 				  					</div>
@@ -943,7 +943,7 @@
 					  						If the home team loses by {{event.home_performer.sport.ggg}} or more, GameHedge will refund 50% of your ticket price at no additional cost to you.
 					  					</div>
 					  				</div>
-				  				</div>
+				  				</div-->
 				  				<!-- <div class="ggg-badge-pledge pledge-right">
 				  					<div class="badge-left-element left-custom">
 				  						<img src="<%= image_url "pledge.png" %>" class="pledge-img">
@@ -964,7 +964,14 @@
 					  					</div>
 					  				</div>
 				  				</div> -->
-				  				<img class="ggg-image-pledge" src="<%= image_url "pledge2.png" %>">
+                                <div class="ggg-left">
+                                    <div class="ggg-text">If the home team loses by {{event.home_performer.sport.ggg}} or more, <span class="ggg-bold"><strong>GameHedge will refund 50% of your ticket price</strong></span> at no additional cost to you.</div>
+                                    <div><img src="<%= image_url "ggg.jpg" %>"></div>
+                                </div>
+                                <div class="ggg-right">
+                                    <img src="<%= image_url "pledge_new.png" %>">
+                                </div>
+				  				
 				  			</div>
 	  					</div>
 	  				</div>
@@ -1044,9 +1051,7 @@
 						    	<div class="value">{{total | currency}}</div>
 						    </div>
 						    <button class="confirm_pay" ladda="payProcess" ng-disabled="processing || editing" ng-click="confirmPay()">Confirm and Pay</button>
-						    <div class="terms">By clicking Confirm and Pay, you agree to GameHedge <a href="/our-terms" target="_blank">Terms and Privacy Policy.</a></div>
-                            
-                            <div class="ssl-text">The link between our servers and your browser is protected using SSL encryption</div>
+						    <div class="terms">By clicking Confirm and Pay, you agree to GameHedge <a href="/our-terms" target="_blank">Terms and Privacy Policy.</a> The link between our servers and your browser is protected using SSL encryption</div>
                             
                             <div class="seals">
                                 <div class="row">

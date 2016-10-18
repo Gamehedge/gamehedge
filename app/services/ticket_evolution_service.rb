@@ -226,7 +226,8 @@ class TicketEvolutionService
           end
           @events = @events2
         when 'league'
-          @events = @connection.events.list({:category_id => @id, :page => @page, :within => 25, :per_page => @perpage, :lat => @latitude, :lon => @longitude, :order_by => 'events.occurs_at ASC, events.popularity_score DESC'})
+          id = Sport.find_by_id(@id).te_uid
+          @events = @connection.events.list({:category_id => id, :page => @page, :within => 25, :per_page => @perpage, :lat => @latitude, :lon => @longitude, :order_by => 'events.occurs_at ASC, events.popularity_score DESC'})
           @events2 = []
           @events.each do |e|
             if @e != {}
@@ -270,7 +271,8 @@ class TicketEvolutionService
           end
           @events = @events2
         when 'league'
-          @events = @connection.events.list({:category_id => @id, :page => @page, :per_page => @perpage, :order_by => 'events.occurs_at ASC, events.popularity_score DESC'})
+          id = Sport.find_by_id(@id).te_uid
+          @events = @connection.events.list({:category_id => id, :page => @page, :per_page => @perpage, :order_by => 'events.occurs_at ASC, events.popularity_score DESC'})
           @events2 = []
           @events.each do |e|
             if @e != {}

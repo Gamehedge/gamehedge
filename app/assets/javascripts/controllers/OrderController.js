@@ -1,6 +1,18 @@
 controllers = angular.module('gamehedge')
 
 controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,$location,$routeParams,$timeout,apiService,$filter,$window,Analytics){
+    
+    setInterval(function() {
+        if ($(window).width() > 992){
+            if($(".badge-container").offset().top > 0){
+                if($(".confirm_pay").offset().top > $(".badge-container").offset().top){
+                    var diff = $(".confirm_pay").offset().top - $(".badge-container").offset().top;
+                    $(".badge-container").css("padding-top", diff + "px");
+                }
+            }   
+        }
+    }, 100); 
+    
     $rootScope.showHeader = true;
     $scope.getTicket = function(){
 		$http({
@@ -514,6 +526,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			        	event_away_team: away_team,
 			        	event_te_uid: $scope.event.id,
 			        	ticket_notes: $scope.ticket.public_notes,
+			        	sport_id: $scope.event.home_performer.sport.id
 			        },
 			    }).then(function successCallback(response) {
 			    	$scope.processing = false;

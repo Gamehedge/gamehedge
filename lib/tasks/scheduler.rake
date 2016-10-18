@@ -19,10 +19,14 @@ task :update_events => :environment do
 end
 
 task :update_urls => :environment do
-  Event.all.each do |e|
-      e.name = (e.name.gsub '/', '-')
-      e.save
-      puts "updated"
+    Order.all.each do |o|
+      e = Event.where(name: o.event_name).first
+      if e != nil
+        o.sport_id = e.home_performer.sport.id
+        o.save
+      end
+      puts "updated " + o.id.to_s
     end
+
     
 end

@@ -1,180 +1,166 @@
 <div ng-controller="MenuBarController">
-<div class="intro-full fade-intro" ng-if="page_loading == true">
-    <div class="intro-img-container">
-        <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/GameHedge_Logo_Footer.png" alt="Gamehedge" width="300" class="img-intro-full"/>
+    <div class="intro-full fade-intro" ng-if="page_loading == true">
+        <div class="intro-img-container">
+            <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/GameHedge_Logo_Footer.png" alt="Gamehedge" width="300" class="img-intro-full"/>
+        </div>
     </div>
-</div>
-<div class="mobile-menu main-menu-transition ng-hide" ng-show="showMainMenu" ng-if="!$root.isOrder">
-    <div class="mobile-menu-header">
-        <div class="row">
-            <div class="col-xs-2">
-                <div ng-click="hideMenus()">
-                    <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/close-menu.png" class="img-header">
+    <div class="mobile-menu main-menu-transition ng-hide" ng-show="showMainMenu" ng-if="!$root.isOrder">
+        <div class="mobile-menu-header">
+            <div class="row">
+                <div class="col-xs-2">
+                    <div ng-click="hideMenus()">
+                        <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/close-menu.png" class="img-header">
+                    </div>
+                </div>
+                <div class="navbar-header col-xs-8">
+                    <a href="/" ng-click="hideMenus()">
+                        <img class="logo-image menu" alt="GameHedge.com" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/logo.png">
+                    </a>
+                </div>
+                <div class="col-xs-2"></div>
+            </div>
+        </div>
+        <div class="menu-container">
+            <div class="row menu-row" ng-show="!$root.isLoggedin">
+                <div class="col-xs-3"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png"></div>
+                <div class="col-xs-9"><a href="/login" ng-click="hideMenus()">Login</a></div>
+            </div>
+            <div class="row menu-row" ng-show="$root.isLoggedin">
+                <div class="col-xs-3"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png"></div>
+                <div class="col-xs-9"><p ng-cloak>{{$root.user.name | uppercase}}</p></div>
+            </div>
+            <div class="row menu-row" ng-show="$root.isLoggedin">
+                <div class="col-xs-3"></div>
+                <div class="col-xs-9"><a href="/member" ng-click="hideMenus()">Your profile</a></div>
+            </div>
+            <div class="row menu-row" ng-show="$root.isLoggedin">
+                <div class="col-xs-3"></div>
+                <div class="col-xs-9"><a  href="/order_history" ng-click="hideMenus()">Order history</a></div>
+            </div>
+            <div class="row menu-row" ng-show="$root.isLoggedin">
+                <div class="col-xs-3"></div>
+                <div class="col-xs-9"><a ng-click="logout()" ng-click="hideMenus()">Logout</a></div>
+            </div>
+
+            <div class="row menu-row separator" ng-repeat-start="league in leagueList" ng-if="$first">
+                <div class="col-xs-3" ng-if="league.active == true"></div>
+                <div class="col-xs-9" ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()" ng-cloak>{{league.name | uppercase}}</a></div>
+            </div>
+            <div class="row menu-row" ng-repeat-end ng-if="!$first">
+                <div class="col-xs-3" ng-if="league.active == true"></div>
+                <div class="col-xs-9" ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()" ng-cloak>{{league.name | uppercase}}</a></div>
+            </div>
+            <div class="row menu-row">
+                <div class="col-xs-3"></div>
+                <div class="col-xs-9"><a href="/faq/" ng-click="hideMenus()">FAQ</a></div>
+            </div>
+            <div class="row menu-row">
+                <div class="col-xs-3"></div>
+                <div class="col-xs-9"><a href="tel:8888044330">Toll Free: 888-804-4330</a></div>
+            </div>
+            <div class="row menu-row">
+                <div class="col-xs-3"></div>
+                <div class="col-xs-9"><a href="/contact/" ng-click="hideMenus()">Contact Us</a></div>
+            </div>
+        </div>
+        <div class="mobile-menu-footer">
+            <h2>Connect with us</h2>
+            <nav role="navigation" class="footer-social-media">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <a href="http://www.facebook.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/facebook-footer.png" alt="Like GameHedge on Facebook" /></a>          
+                        </div>
+                        <div class="col-xs-4">
+                            <a href="http://www.twitter.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/twitter-footer.png" alt="Foollow GameHedge on Twitter" /></a>          
+                        </div>
+                        <div class="col-xs-4">
+                            <a href="http://www.instagram.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/instagram-footer.png" alt="Like GameHedge on Instagram" /></a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <script type="text/ng-template" id="typeahead/bind-node.html">
+        <a href="{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
+    </script>
+    <div class="mobile-menu search-menu-transition ng-hide" ng-show="showSearchMenu" ng-if="!$root.isOrder">
+        <div class="mobile-menu-header">
+                <div class="navbar-header search-header col-xs-10">
+                    <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/search icon.png">
+                    <input type="text" placeholder="search tickets" ng-model="searchTerm" ng-change="getSearchHints(searchTerm)">
+                </div>
+                <div class="col-xs-2">
+                    <div ng-click="hideMenus()">
+                        <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/close-menu.png" class="img-header">
+                    </div>
+                </div>
+            
+        </div>
+        <div class="results-container">
+            <div ng-repeat="result in searchResults">
+                <a ng-href="result.url" ng-click="hideMenus()" ng-cloak>{{result.name}}</a>
+            </div>
+        </div>
+        <div class="mobile-menu-footer">
+            <h2>Connect with us</h2>
+            <nav role="navigation" class="footer-social-media">
+                
+                        <div class="col-xs-4">
+                            <a href="http://www.facebook.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/facebook-footer.png" alt="Like GameHedge on Facebook" /></a>          
+                        </div>
+                        <div class="col-xs-4">
+                            <a href="http://www.twitter.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/twitter-footer.png" alt="Follow GameHedge on Twitter" /></a>          
+                        </div>
+                        <div class="col-xs-4">
+                            <a href="http://www.instagram.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/instagram-footer.png" alt="Like GameHedge on Instagram" /></a>
+                        </div>
+                   
+            </nav>
+        </div>
+    </div>
+
+    <div ng-class="{'dark-header': $root.darkHeader}">
+        <nav ng-if="showHeader == true || windoWidth > 991" class="navbar navbar-default navbar-gamehedge vertical-center" role="navigation">
+
+            <div class="col-xs-2 hidden-md hidden-lg" ng-show="!$root.isOrder">
+                <div class="navbar navbar-default navbar-fixed-top">
+                    <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target="#slideMenu" data-canvas="body" ng-click="showSlideMain()">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                 </div>
             </div>
-            <div class="navbar-header col-xs-8">
-                <a href="/" ng-click="hideMenus()">
-                    <img class="logo-image menu" alt="GameHedge.com" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/logo.png">
+            <div class="navbar-header col-md-4 col-xs-8">
+                <a href="/">
+                    <img class="logo-image" alt="GameHedge.com" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/logo.png">
                 </a>
             </div>
-            <div class="col-xs-2"></div>
-        </div>
-    </div>
-    <div class="menu-container">
-        <div class="row menu-row" ng-show="!$root.isLoggedin">
-            <div class="col-xs-3"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png"></div>
-            <div class="col-xs-9"><a href="/login" ng-click="hideMenus()">Login</a></div>
-        </div>
-        <div class="row menu-row" ng-show="$root.isLoggedin">
-            <div class="col-xs-3"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png"></div>
-            <div class="col-xs-9"><p ng-cloak>{{$root.user.name | uppercase}}</p></div>
-        </div>
-        <div class="row menu-row" ng-show="$root.isLoggedin">
-            <div class="col-xs-3"></div>
-            <div class="col-xs-9"><a href="/member" ng-click="hideMenus()">Your profile</a></div>
-        </div>
-        <div class="row menu-row" ng-show="$root.isLoggedin">
-            <div class="col-xs-3"></div>
-            <div class="col-xs-9"><a  href="/order_history" ng-click="hideMenus()">Order history</a></div>
-        </div>
-        <div class="row menu-row" ng-show="$root.isLoggedin">
-            <div class="col-xs-3"></div>
-            <div class="col-xs-9"><a ng-click="logout()" ng-click="hideMenus()">Logout</a></div>
-        </div>
-
-        <div class="row menu-row separator" ng-repeat-start="league in leagueList" ng-if="$first">
-            <div class="col-xs-3" ng-if="league.active == true"></div>
-            <div class="col-xs-9" ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()" ng-cloak>{{league.name | uppercase}}</a></div>
-        </div>
-        <div class="row menu-row" ng-repeat-end ng-if="!$first">
-            <div class="col-xs-3" ng-if="league.active == true"></div>
-            <div class="col-xs-9" ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()" ng-cloak>{{league.name | uppercase}}</a></div>
-        </div>
-        <div class="row menu-row">
-            <div class="col-xs-3"></div>
-            <div class="col-xs-9"><a href="/faq/" ng-click="hideMenus()">FAQ</a></div>
-        </div>
-        <div class="row menu-row">
-            <div class="col-xs-3"></div>
-            <div class="col-xs-9"><a href="tel:8888044330">Toll Free: 888-804-4330</a></div>
-        </div>
-        <div class="row menu-row">
-            <div class="col-xs-3"></div>
-            <div class="col-xs-9"><a href="/contact/" ng-click="hideMenus()">Contact Us</a></div>
-        </div>
-    </div>
-    <div class="mobile-menu-footer">
-        <h2>Connect with us</h2>
-        <nav role="navigation" class="footer-social-media">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-4">
-                        <a href="http://www.facebook.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/facebook-footer.png" alt="Like GameHedge on Facebook" /></a>          
-                    </div>
-                    <div class="col-xs-4">
-                        <a href="http://www.twitter.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/twitter-footer.png" alt="Foollow GameHedge on Twitter" /></a>          
-                    </div>
-                    <div class="col-xs-4">
-                        <a href="http://www.instagram.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/instagram-footer.png" alt="Like GameHedge on Instagram" /></a>
-                    </div>
+            <div class="navbar-header col-md-8 hidden-xs hidden-xm vertical-center help" ng-show="$root.isOrder">
+                      
+                    <p>NEED HELP? CALL TOLL FREE <br><span>(888) 804-4330</span></p>
+                    <img class="help-image" alt="Call Us" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/help.png">
+                
+            </div>
+            <div class="col-xs-2 hidden">
+                <div class="navbar navbar-default navbar-fixed-top right">
+                    <button type="button" class="navbar-toggle search-button" style="padding-top:0;" data-toggle="offcanvas" data-target="#searchMenu" data-canvas="body" ng-click="showSlideSearch()">
+                        <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/search icon.png">
+                    </button>
                 </div>
             </div>
-        </nav>
-    </div>
-</div>
-<script type="text/ng-template" id="typeahead/bind-node.html">
-    <a href="{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
-</script>
-<div class="mobile-menu search-menu-transition ng-hide" ng-show="showSearchMenu" ng-if="!$root.isOrder">
-    <div class="mobile-menu-header">
-            <div class="navbar-header search-header col-xs-10">
-                <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/search icon.png">
-                <input type="text" placeholder="search tickets" ng-model="searchTerm" ng-change="getSearchHints(searchTerm)">
-            </div>
-            <div class="col-xs-2">
-                <div ng-click="hideMenus()">
-                    <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/close-menu.png" class="img-header">
-                </div>
-            </div>
-        
-    </div>
-    <div class="results-container">
-        <div ng-repeat="result in searchResults">
-            <a ng-href="result.url" ng-click="hideMenus()" ng-cloak>{{result.name}}</a>
-        </div>
-    </div>
-    <div class="mobile-menu-footer">
-        <h2>Connect with us</h2>
-        <nav role="navigation" class="footer-social-media">
-            
-                    <div class="col-xs-4">
-                        <a href="http://www.facebook.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/facebook-footer.png" alt="Like GameHedge on Facebook" /></a>          
-                    </div>
-                    <div class="col-xs-4">
-                        <a href="http://www.twitter.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/twitter-footer.png" alt="Follow GameHedge on Twitter" /></a>          
-                    </div>
-                    <div class="col-xs-4">
-                        <a href="http://www.instagram.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/instagram-footer.png" alt="Like GameHedge on Instagram" /></a>
-                    </div>
-               
-        </nav>
-    </div>
-</div>
-
-<div ng-class="{'dark-header': $root.darkHeader}">
-    <nav ng-if="showHeader == true || windoWidth > 991" class="navbar navbar-default navbar-gamehedge vertical-center" role="navigation">
-
-        <div class="col-xs-2 hidden-md hidden-lg" ng-show="!$root.isOrder">
-            <div class="navbar navbar-default navbar-fixed-top">
-                <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target="#slideMenu" data-canvas="body" ng-click="showSlideMain()">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-        </div>
-        <div class="navbar-header col-md-4 col-xs-8">
-            <a href="/">
-                <img class="logo-image" alt="GameHedge.com" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/logo.png">
-            </a>
-        </div>
-        <div class="navbar-header col-md-8 hidden-xs hidden-xm vertical-center help" ng-show="$root.isOrder">
-                  
-                <p>NEED HELP? CALL TOLL FREE <br><span>(888) 804-4330</span></p>
-                <img class="help-image" alt="Call Us" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/help.png">
-            
-        </div>
-        <div class="col-xs-2 hidden">
-            <div class="navbar navbar-default navbar-fixed-top right">
-                <button type="button" class="navbar-toggle search-button" style="padding-top:0;" data-toggle="offcanvas" data-target="#searchMenu" data-canvas="body" ng-click="showSlideSearch()">
-                    <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/search icon.png">
-                </button>
-            </div>
-        </div>
-        <div class="col-md-4 hidden-sm hidden-xs horizontal-center main-menu">
-            <ul class="nav navbar-nav navbar-leagues vertical-center horizontal-center" ng-show="!$root.isOrder" ng-repeat="league in leagueList | orderBy:'name' track by $index" ng-if="league.active == true">
-               <li class="dropdown main-dropdown yamm-fw">
-                     <a class="dropdown-toggle" href="{{league.url}}" ng-cloak>{{league.name | uppercase}}</a>
-                     <ul class="dropdown-menu" ng-class="{'size1':league.name == 'MLB' || league.name == 'NBA','size2':league.name == 'NFL','size3':league.name == 'NHL','size4':league.name == 'NCAAFB'}">
-                        <li>
-                            <div class="yamm-content" ng-if="league.id != 5" >
-                                <div class="text-center" ng-repeat="main_division in divisions | filter:{is_main_division:true,sport_id:league.id} | orderBy:'name'">
-                                    <div class="col-xs-12 title vertical-center horizontal-center" ng-cloak>{{main_division.name}}</div>
-                                    <div ng-class="{'col-xs-4':league.name == 'MLB' || league.name == 'NBA','col-xs-3':league.name == 'NFL','col-xs-6':league.name == 'NHL'}" ng-repeat="division in divisions | filter:{division_id:main_division.id}">
-                                        <div class="subtitle" ng-cloak>{{division.name | uppercase}}</div>
-                                        <div class="performer-holder">
-                                            <div ng-repeat="performer in performers | filter:{division_id:division.id}:true | orderBy:'name'">
-                                                <a href="{{performer.url}}" ng-cloak>{{performer.name}}</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="yamm-content" ng-if="league.id == 5" >
-                                <div class="text-center">
-                                    <div ng-repeat="division in divisions | filter:{sport_id:league.id} | orderBy:'name'">
-                                        <div class="clearfix" ng-if="$index % 3 == 0"></div>
-                                        <div class="col-xs-4">
+            <div class="col-md-4 hidden-sm hidden-xs horizontal-center main-menu">
+                <ul class="nav navbar-nav navbar-leagues vertical-center horizontal-center" ng-show="!$root.isOrder" ng-repeat="league in leagueList | orderBy:'name' track by $index" ng-if="league.active == true">
+                   <li class="dropdown main-dropdown yamm-fw">
+                         <a class="dropdown-toggle" href="{{league.url}}" ng-cloak>{{league.name | uppercase}}</a>
+                         <ul class="dropdown-menu" ng-class="{'size1':league.name == 'MLB' || league.name == 'NBA','size2':league.name == 'NFL','size3':league.name == 'NHL','size4':league.name == 'NCAAFB'}">
+                            <li>
+                                <div class="yamm-content" ng-if="league.id != 5" >
+                                    <div class="text-center" ng-repeat="main_division in divisions | filter:{is_main_division:true,sport_id:league.id} | orderBy:'name'">
+                                        <div class="col-xs-12 title vertical-center horizontal-center" ng-cloak>{{main_division.name}}</div>
+                                        <div ng-class="{'col-xs-4':league.name == 'MLB' || league.name == 'NBA','col-xs-3':league.name == 'NFL','col-xs-6':league.name == 'NHL'}" ng-repeat="division in divisions | filter:{division_id:main_division.id}">
                                             <div class="subtitle" ng-cloak>{{division.name | uppercase}}</div>
                                             <div class="performer-holder">
                                                 <div ng-repeat="performer in performers | filter:{division_id:division.id}:true | orderBy:'name'">
@@ -184,116 +170,130 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs" ng-show="!$root.isOrder">
-            <div class="press" ng-show="$root.locat == '/'">
-                <a href="/#/press"><img class="press-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/press-icon.png">PRESS</a>
-            </div>
-            </div>
-        <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs" ng-show="!$root.isOrder">
-            <div class="dropdown" ng-show="$root.isLoggedin">
-                <button ng-cloak class="dropdown-toggle myaccount-btn" type="button" data-toggle="dropdown"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png">{{$root.user.name | uppercase}}<img class="dropdown-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/dropdown.png"></button>
-                <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href="/member">Your Profile</a></li>
-                    <li><a href="/order_history">Order History</a></li>
-                    <li><a ng-click="logout()" ng-show="$root.isLoggedin">Logout</a></li>
+                                <div class="yamm-content" ng-if="league.id == 5" >
+                                    <div class="text-center">
+                                        <div ng-repeat="division in divisions | filter:{sport_id:league.id} | orderBy:'name'">
+                                            <div class="clearfix" ng-if="$index % 3 == 0"></div>
+                                            <div class="col-xs-4">
+                                                <div class="subtitle" ng-cloak>{{division.name | uppercase}}</div>
+                                                <div class="performer-holder">
+                                                    <div ng-repeat="performer in performers | filter:{division_id:division.id}:true | orderBy:'name'">
+                                                        <a href="{{performer.url}}" ng-cloak>{{performer.name}}</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
-            <div class="dropdown login" ng-show="!$root.isLoggedin">
-                <a href="/login"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png">LOGIN</a>
-            </div>
-        </div>
-    </nav>
-</div>
-<div class="view-container">
-    <div ng-view class="view-frame animate-view"></div>
-</div>
-
-
-
-
-<footer ng-show="!$root.noFooter">
-    <div class="container">
-        <div class="row hidden-xs hidden-sm" id="data_footer">
-            <div class="col-md-3 hidden-xs hidden-sm">
-                <div class="footer-nav">
-                    <h2>What to Know</h2>
-                    <nav role="navigation">
-                        <ul>
-                            <li><a href="/our-terms">Terms</a></li>
-                            <li><a href="/faq">Privacy</a></li>
-                            <li><a href="/faq">FAQ</a></li>
-                            <li><a href="/contact">Contact Us</a></li>
-                        </ul>
-                    </nav>
+            <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs" ng-show="!$root.isOrder">
+                <div class="press" ng-show="$root.locat == '/'">
+                    <a href="/#/press"><img class="press-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/press-icon.png">PRESS</a>
+                </div>
+                </div>
+            <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs" ng-show="!$root.isOrder">
+                <div class="dropdown" ng-show="$root.isLoggedin">
+                    <button ng-cloak class="dropdown-toggle myaccount-btn" type="button" data-toggle="dropdown"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png">{{$root.user.name | uppercase}}<img class="dropdown-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/dropdown.png"></button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="/member">Your Profile</a></li>
+                        <li><a href="/order_history">Order History</a></li>
+                        <li><a ng-click="logout()" ng-show="$root.isLoggedin">Logout</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown login" ng-show="!$root.isLoggedin">
+                    <a href="/login"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png">LOGIN</a>
                 </div>
             </div>
-            <div class="col-md-3 hidden-xs hidden-sm">
-                <div class="footer-nav">
-                    <h2>Important Links</h2>
-                    <nav role="navigation">
-                        <ul>
-                            <li><a href="/how-it-works">How it Works</a></li>
-                            <li><a href="/member">My Account</a></li>
-                            <li><a href="/press">Press</a></li>
-                            <li><a href="http://blog.gamehedge.com">Blog</a></li>
-                        </ul>
-                    </nav>
+        </nav>
+    </div>
+    <div class="view-container">
+        <div ng-view class="view-frame animate-view"></div>
+    </div>
+
+
+
+
+    <footer ng-show="!$root.noFooter">
+        <div class="container">
+            <div class="row hidden-xs hidden-sm" id="data_footer">
+                <div class="col-md-3 hidden-xs hidden-sm">
+                    <div class="footer-nav">
+                        <h2>What to Know</h2>
+                        <nav role="navigation">
+                            <ul>
+                                <li><a href="/our-terms">Terms</a></li>
+                                <li><a href="/faq">Privacy</a></li>
+                                <li><a href="/faq">FAQ</a></li>
+                                <li><a href="/contact">Contact Us</a></li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="footer-nav">
-                    <h2>Connect with us</h2>
-                    <nav role="navigation" class="footer-social-media">
-                        <a href="http://www.facebook.com/gamehedge" target="_blank" class="hidden-sm hidden-xs"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/facebook-footer.png" alt="Like GameHedge on Facebook" /></a>
-                        <a href="http://www.twitter.com/gamehedge" target="_blank" class="hidden-sm hidden-xs"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/twitter-footer.png" alt="Follow GameHedge on Twitter" /></a>
-                        <a href="http://www.instagram.com/gamehedge" target="_blank" class="hidden-sm hidden-xs"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/instagram-footer.png" alt="Like GameHedge on Instagram" /></a>
-                        <div class="container hidden-md hidden-lg">
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <a href="http://www.facebook.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/facebook-footer.png" alt="Like GameHedge on Facebook" /></a>          
-                                </div>
-                                <div class="col-xs-4">
-                                    <a href="http://www.twitter.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/twitter-footer.png" alt="Follow GameHedge on Twitter" /></a>          
-                                </div>
-                                <div class="col-xs-4">
-                                    <a href="http://www.instagram.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/instagram-footer.png" alt="Like GameHedge on Instagram" /></a>
+                <div class="col-md-3 hidden-xs hidden-sm">
+                    <div class="footer-nav">
+                        <h2>Important Links</h2>
+                        <nav role="navigation">
+                            <ul>
+                                <li><a href="/how-it-works">How it Works</a></li>
+                                <li><a href="/member">My Account</a></li>
+                                <li><a href="/press">Press</a></li>
+                                <li><a href="http://blog.gamehedge.com">Blog</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="footer-nav">
+                        <h2>Connect with us</h2>
+                        <nav role="navigation" class="footer-social-media">
+                            <a href="http://www.facebook.com/gamehedge" target="_blank" class="hidden-sm hidden-xs"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/facebook-footer.png" alt="Like GameHedge on Facebook" /></a>
+                            <a href="http://www.twitter.com/gamehedge" target="_blank" class="hidden-sm hidden-xs"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/twitter-footer.png" alt="Follow GameHedge on Twitter" /></a>
+                            <a href="http://www.instagram.com/gamehedge" target="_blank" class="hidden-sm hidden-xs"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/instagram-footer.png" alt="Like GameHedge on Instagram" /></a>
+                            <div class="container hidden-md hidden-lg">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <a href="http://www.facebook.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/facebook-footer.png" alt="Like GameHedge on Facebook" /></a>          
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <a href="http://www.twitter.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/twitter-footer.png" alt="Follow GameHedge on Twitter" /></a>          
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <a href="http://www.instagram.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/instagram-footer.png" alt="Like GameHedge on Instagram" /></a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </nav>
-                    <h3>Enter email to receive updates and deals</h3>
-                    
-                    <form name="footer_form" ng-submit="sendEmailRequest()" novalidate>
-                        <div class="footer-email-container">
-                            <input type="email" name="email" ng-model="footer_email" class="form-control footer-input" required autocomplete="off">
-                            <button ladda="footer_proccessing" ng-disabled="footer_form.$invalid" class="btn footer-btn">SEND</button>
-                        </div>
-                        <p ng-show="footer_form.email.$invalid && !footer_form.email.$pristine" class="help-block footer-form-msg">Enter a valid email.</p>
-                    </form>
-                    
+                        </nav>
+                        <h3>Enter email to receive updates and deals</h3>
+                        
+                        <form name="footer_form" ng-submit="sendEmailRequest()" novalidate>
+                            <div class="footer-email-container">
+                                <input type="email" name="email" ng-model="footer_email" class="form-control footer-input" required autocomplete="off">
+                                <button ladda="footer_proccessing" ng-disabled="footer_form.$invalid" class="btn footer-btn">SEND</button>
+                            </div>
+                            <p ng-show="footer_form.email.$invalid && !footer_form.email.$pristine" class="help-block footer-form-msg">Enter a valid email.</p>
+                        </form>
+                        
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="footer-nav text-center">
+                        <div class="col-md-4"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/badge-gamehedge.png" alt="GameHedge" /></div>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="footer-nav text-center">
-                    <div class="col-md-4"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/badge-gamehedge.png" alt="GameHedge" /></div>
+            <div class="footer-signature">
+                <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/GameHedge_Logo_Footer.png" alt="Gamehedge" />
+                <div class="footer-bottom clearfix">
+                    © <%= @year %> GameHedge and Good Game Guarantee are trademarks of GameHedge LLC.<br>All Rights Reserved. Patent Pending.
                 </div>
             </div>
         </div>
-        <div class="footer-signature">
-            <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/GameHedge_Logo_Footer.png" alt="Gamehedge" />
-            <div class="footer-bottom clearfix">
-                © <%= @year %> GameHedge and Good Game Guarantee are trademarks of GameHedge LLC.<br>All Rights Reserved. Patent Pending.
-            </div>
-        </div>
-    </div>
-</footer>
-<div growl></div>
+    </footer>
+    <div growl></div>
 </div>
         
    

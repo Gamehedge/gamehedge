@@ -75,7 +75,7 @@ class Api::V1::OrdersController < ApplicationApiController
   end
 
   def data_params
-    params.permit(:client_id, :client_name, :te_order_id, :event_name, :event_date, :discount, :event_location, :ticket_section, :cost, :ticket_row, :ticket_seats, :ticket_format, :total, :customer_email, :number_of_tickets, :sale_price_per_ticket, :ticket_total, :broker_name, :service_fee, :shipping_fee, :real_event_date, :order_data, :refund_status_id, :ticket_notes)
+    params.permit(:client_id, :client_name, :te_order_id, :event_name, :event_date, :sport_id, :discount, :event_location, :ticket_section, :cost, :ticket_row, :ticket_seats, :ticket_format, :total, :customer_email, :number_of_tickets, :sale_price_per_ticket, :ticket_total, :broker_name, :service_fee, :shipping_fee, :real_event_date, :order_data, :refund_status_id, :ticket_notes)
   end
 
 

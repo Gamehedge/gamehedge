@@ -2,6 +2,7 @@ class Division < ActiveRecord::Base
 	belongs_to :sport
 	belongs_to :division
 	has_many :divisions
+  has_many :performers
 	has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100#" }, :s3_headers => { 
             'Cache-Control' => 'max-age=315576000', 'Expires' => 10.years.from_now.httpdate 
     }, 
