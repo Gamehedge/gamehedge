@@ -5,6 +5,8 @@ class HomeController < ApplicationController
 		require 'date'
 		@year = Date.today.strftime("%Y")
 
+		@tiles = Tile.where.not(tile_type_id: nil).order(:position)
+
 		
 		# Event.all.each do |e|
 		# 	if !e.venue_configuration_id

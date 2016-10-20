@@ -1,10 +1,16 @@
-<div ng-controller="MenuBarController">
-    <div class="intro-full fade-intro hidden" ng-if="page_loading == true">
+<% content_for :title, "Gamehedge - Home" %>
+<div>
+    <!-- <div class="intro-full fade-intro hidden" ng-if="page_loading == true">
         <div class="intro-img-container">
             <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/GameHedge_Logo_Footer.png" alt="Gamehedge" width="300" class="img-intro-full"/>
         </div>
-    </div>
-    <div class="mobile-menu main-menu-transition ng-hide" ng-show="showMainMenu" ng-if="!$root.isOrder">
+    </div> -->
+
+                            <!-- MOBILE MENU -->
+
+
+
+    <div class="mobile-menu main-menu-transition hidden">
         <div class="mobile-menu-header">
             <div class="row">
                 <div class="col-xs-2">
@@ -82,6 +88,10 @@
             </nav>
         </div>
     </div>
+
+                            <!-- END MOBILE MENU -->
+
+
     <script type="text/ng-template" id="typeahead/bind-node.html">
         <a href="{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
     </script>
@@ -107,26 +117,26 @@
             <h2>Connect with us</h2>
             <nav role="navigation" class="footer-social-media">
                 
-                        <div class="col-xs-4">
-                            <a href="http://www.facebook.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/facebook-footer.png" alt="Like GameHedge on Facebook" /></a>          
-                        </div>
-                        <div class="col-xs-4">
-                            <a href="http://www.twitter.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/twitter-footer.png" alt="Follow GameHedge on Twitter" /></a>          
-                        </div>
-                        <div class="col-xs-4">
-                            <a href="http://www.instagram.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/instagram-footer.png" alt="Like GameHedge on Instagram" /></a>
-                        </div>
-                   
+                <div class="col-xs-4">
+                    <a href="http://www.facebook.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/facebook-footer.png" alt="Like GameHedge on Facebook" /></a>          
+                </div>
+                <div class="col-xs-4">
+                    <a href="http://www.twitter.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/twitter-footer.png" alt="Follow GameHedge on Twitter" /></a>          
+                </div>
+                <div class="col-xs-4">
+                    <a href="http://www.instagram.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/instagram-footer.png" alt="Like GameHedge on Instagram" /></a>
+                </div>
+           
             </nav>
         </div>
     </div>
 
-    <div ng-class="{'dark-header': $root.darkHeader}">
-        <nav ng-if="showHeader == true || windoWidth > 991" class="navbar navbar-default navbar-gamehedge vertical-center" role="navigation">
+    <div>
+        <nav class="navbar navbar-default navbar-gamehedge vertical-center" role="navigation">
 
-            <div class="col-xs-2 hidden-md hidden-lg" ng-show="!$root.isOrder">
+            <div class="col-xs-2 hidden-md hidden-lg">
                 <div class="navbar navbar-default navbar-fixed-top">
-                    <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target="#slideMenu" data-canvas="body" ng-click="showSlideMain()">
+                    <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target="#slideMenu" data-canvas="body">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -138,12 +148,16 @@
                     <img class="logo-image" alt="GameHedge.com" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/logo.png">
                 </a>
             </div>
-            <div class="navbar-header col-md-8 hidden-xs hidden-xm vertical-center help" ng-show="$root.isOrder">
+
+
+            <div class="navbar-header col-md-8 hidden-xs hidden-xm vertical-center help hidden">
                       
                     <p>NEED HELP? CALL TOLL FREE <br><span>(888) 804-4330</span></p>
                     <img class="help-image" alt="Call Us" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/help.png">
                 
             </div>
+
+
             <div class="col-xs-2 hidden">
                 <div class="navbar navbar-default navbar-fixed-top right">
                     <button type="button" class="navbar-toggle search-button" style="padding-top:0;" data-toggle="offcanvas" data-target="#searchMenu" data-canvas="body" ng-click="showSlideSearch()">
@@ -151,6 +165,8 @@
                     </button>
                 </div>
             </div>
+
+
             <div class="col-md-4 hidden-sm hidden-xs horizontal-center main-menu">
                 <ul class="nav navbar-nav navbar-leagues vertical-center horizontal-center" ng-show="!$root.isOrder" ng-repeat="league in leagueList | orderBy:'name' track by $index" ng-if="league.active == true">
                    <li class="dropdown main-dropdown yamm-fw">
@@ -190,34 +206,390 @@
                     </li>
                 </ul>
             </div>
-            <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs" ng-show="!$root.isOrder">
-                <div class="press" ng-show="$root.locat == '/'">
+            <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs">
+                <div class="press">
                     <a href="/#/press"><img class="press-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/press-icon.png">PRESS</a>
                 </div>
                 </div>
-            <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs" ng-show="!$root.isOrder">
-                <div class="dropdown" ng-show="$root.isLoggedin">
-                    <button ng-cloak class="dropdown-toggle myaccount-btn" type="button" data-toggle="dropdown"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png">{{$root.user.name | uppercase}}<img class="dropdown-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/dropdown.png"></button>
+            <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs">
+                <div class="dropdown">
+                    <button class="dropdown-toggle myaccount-btn" type="button" data-toggle="dropdown"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png">{{$root.user.name | uppercase}}<img class="dropdown-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/dropdown.png"></button>
                     <ul class="dropdown-menu dropdown-menu-right">
                         <li><a href="/member">Your Profile</a></li>
                         <li><a href="/order_history">Order History</a></li>
-                        <li><a ng-click="logout()" ng-show="$root.isLoggedin">Logout</a></li>
+                        <li><a ng-click="logout()">Logout</a></li>
                     </ul>
                 </div>
-                <div class="dropdown login" ng-show="!$root.isLoggedin">
+                <div class="dropdown login">
                     <a href="/login"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png">LOGIN</a>
                 </div>
             </div>
         </nav>
     </div>
     <div class="view-container">
-        <div ng-view class="view-frame animate-view"></div>
+        <div class="view-frame animate-view">
+            
+            <span id="home">
+              <section id="hero">
+                <div id="shader"></div>
+                <div id="wrapper">
+                  <div id="content">
+                    <div class="container">
+                      <p class="hidden-md hidden-lg hidden-xl">Every Ticket Comes With Our Good Game Guarantee!</p>
+                      <div id="hero-search">
+                        <form id="form-home-search" name="formSearch" onsubmit="function(){return false;};">
+                          <input type="hidden" name="type" value="full" />
+                          <div class="form-group">
+                            <img src="<%= image_url "search icon.png" %>" ng-click="goToSearch()">
+                            <input id="search_element" type="text" class="form-control" placeholder="Search team, venue or player..." ng-model="searchTerm" uib-typeahead="hint as hint.name for hint in getSearchHints($viewValue)" typeahead-template-url="typeahead/bind-node.html" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" typeahead-on-select="onSelect($item, $model, $label)" typeahead-no-results="noResults">
+                             <div class="no-results" ng-show="noResults && searchTerm != ''">
+                              No results. Please try again
+                            </div>
+                        </form>
+                      </div>
+                      
+                    </div>
+                    <div class="press-images hidden-xs hidden-sm">
+                      <div class="container">
+                        <div class="spacing-div">AS FEATURED IN</div>
+                        <div class="spacing-div"><img src="<%= image_url "press2/CNBC copy.png" %>"></div>
+                        <div class="spacing-div"><img src="<%= image_url "press2/USA Today copy.png" %>"></div>
+                        <div class="spacing-div"><img src="<%= image_url "press2/Sports Illustrated Red.png" %>"></div>
+                        <div class="spacing-div"><img src="<%= image_url "press2/Yahoo Finance.png" %>"></div>
+                        <div class="spacing-div"><img src="<%= image_url "press2/ESPN Radio copy.png" %>"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <script type="text/ng-template" id="typeahead/bind-node.html">
+                <a href="{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
+              </script>
+
+              <main>
+                <section id="good-game-guarantee" class="hidden-xs hidden-sm">
+                  <div class="container">
+                    <div class="title">Every Ticket Comes With Our Good Game Guarantee!</div>
+
+                    <div class="content-background">
+                      <div class="content">
+                        <div class="col-md-4 division">
+                          <div class="col-xs-5 section">
+                            <img src="<%= image_url "icon ticket.png" %>">
+                          </div>
+                          <div class="col-xs-7 section2">
+                            <h2>BUY TICKETS</h2>
+                            <p>
+                              Find your game and purchase your tickets.<br>
+                              Good Game Guarantee is included at no additional cost with every ticket.
+                            </p>
+                          </div>
+                        </div>
+                        <div class="col-md-4 division center-div">
+                          <div class="col-xs-5 section">
+                            <img src="<%= image_url "icon stadium.png" %>">
+                          </div>
+                          <div class="col-xs-7 section2">
+                            <h2>ENJOY GAME</h2>
+                            <p>
+                              If the home team loses by the amount below or more, you get 50% of your ticket price back.
+                            </p>
+                            <div class="row">
+                              <div class="col-xs-6 block">
+                                <img class="icon-img" src="<%= image_url "football icon.png" %>">
+                                17 points
+                              </div>
+                              <div class="col-xs-6 block">
+                                <img class="icon-img" src="<%= image_url "basketball icon.png" %>">
+                                20 points
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-xs-6 block">
+                                <img class="icon-img" src="<%= image_url "baseball icon.png" %>">
+                                5 runs
+                              </div>
+                              <div class="col-xs-6 block">
+                                <img class="icon-img" src="<%= image_url "hockey icon.png" %>">
+                                4 goals
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4 division">
+                          <div class="col-xs-5 section">
+                            <img src="<%= image_url "icon coin.png" %>">
+                          </div>
+                          <div class="col-xs-7 section2">
+                            <h2>CLAIM MONEY</h2>
+                            <p>
+                              Simply come back to GameHedge.com to claim your refund.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                  
+
+                        <!-- TILES -->
+                <section id="tiles">
+                  <div class="container">
+                    <div id="home-loading-data" class="row horizontal-center">
+                      <div class='uil-default-css' style='transform:scale(0.32);'><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(0deg) translate(0,-60px);transform:rotate(0deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(30deg) translate(0,-60px);transform:rotate(30deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(60deg) translate(0,-60px);transform:rotate(60deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(90deg) translate(0,-60px);transform:rotate(90deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(120deg) translate(0,-60px);transform:rotate(120deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(150deg) translate(0,-60px);transform:rotate(150deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(180deg) translate(0,-60px);transform:rotate(180deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(210deg) translate(0,-60px);transform:rotate(210deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(240deg) translate(0,-60px);transform:rotate(240deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(270deg) translate(0,-60px);transform:rotate(270deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(300deg) translate(0,-60px);transform:rotate(300deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(330deg) translate(0,-60px);transform:rotate(330deg) translate(0,-60px);border-radius:10px;position:absolute;'></div>
+                      </div>
+                    </div>
+                    <script>
+                      $(document).ready(function(){
+                        setTimeout(function(){
+                          $('.grid').masonry({
+                            itemSelector: '.grid-item',
+                            columnWidth: '.grid-sizer',
+                            percentPosition: true,
+                            gutter: 23,
+                          });
+                          console.log("masonry done")
+                        },10);
+                        url = '/api/v1/tiles/';  
+                        $.ajax({
+                          method: 'get',
+                          url: url,
+                          headers: {
+                             'Authorization': 'Token token="TokenHere"'
+                          },
+                          success: function(response){
+                            for(i=0;i<tiles.length;i++){
+                              
+                            }
+                            console.log(response);
+                          },
+                          error: function(response){
+                          },
+                        });
+                      });
+                    </script>
+                    <div id="results">
+                      <div class="grid row">
+                        <div class="grid-sizer"></div>
+                        <% @tiles.each do |tile| %>
+                          <div class="grid-item">
+                            <div>
+                              <a href="<%= tile.url %>">
+                                <% if tile.image_url && tile.image_url != '/images/original/missing.png'%>
+                                  <% if tile.tile_type.id == 1 %>
+                                    <div class="performer-name"><%= tile.sport.name.upcase %></div>
+                                  <% elsif tile.tile_type.id == 2 %>
+                                    <div class="performer-name"><%= tile.performer.name.upcase %></div>
+                                  <% elsif tile.tile_type.id == 3 %>
+                                    <div class="performer-name"><%= tile.venue.name.upcase %></div>
+                                  <% end %>
+                                  <img src="<%= tile.image_url %>">
+                                <% end %>
+                                <% if tile.tile_type.id == 1 || tile.tile_type.id == 3 || tile.tile_type.id == 4 %>
+                                  <div class="info-container">
+                                    <% if tile.tile_type.id == 1  %>
+                                      <div class="tile-title"><%= tile.sport.name %> Games</div>
+                                    <% elsif tile.tile_type.id == 3  %>
+                                      <div class="tile-title"><%= tile.venue.name %></div>
+                                    <% elsif tile.tile_type.id == 4  %>
+                                      <div class="tile-title"><%= tile.name %></div>
+                                    <% end %>
+                                    <div class="tile-description"><%= tile.description %></div>
+                                  </div>
+                                <% end %>
+                              </a>
+
+
+                                    <!-- TILE EVENTS -->
+                             <!--  <div ng-repeat="event in tile.events | limitTo:3" class="tile-event hidden-xs hidden-sm" ng-if="tile.tile_type.id != 4">
+                                <a href="{{(event.url + '/' + (event.name | dashless) + '-tickets') | spaceless | lowercase}}">
+                                  <div class="row">
+                                    <div class="col-xs-4 date-holder">
+                                      <p class="date1">{{event.occurs_at | date:'MMM' : 'UTC' | uppercase}}</p>
+                                      <p class="date2">{{event.occurs_at | date:'dd' : 'UTC' | uppercase}}</p>
+                                      <p class="date3">{{event.occurs_at | date:'EEE' : 'UTC' | uppercase}}</p>  
+                                    </div>
+                                    <div class="col-xs-8 event-holder">
+                                      <p><span class="event1">{{event.name}}</span></p>
+                                      <p class="event3"><span class="at" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD</span><span class="at" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'h:mm a' : 'UTC' | uppercase}} at</span> <span>{{event.venue.name}}</span></p>
+                                      <p class="event4">{{event.available_count}} tickets left</p>
+                                    </div>
+                                  </div>
+                                </a>
+                              </div> -->
+                              <% if tile.tile_type.id == 4 %>
+                                <div class="tile-event hidden-xs hidden-sm">
+                                  <a href="<%= tile.event1.url %>">
+                                    <div class="row">
+                                      <div class="col-xs-4 date-holder">
+                                        <p class="date1"><%= tile.event1.occurs_at.strftime('%^b') %></p>
+                                        <p class="date2"><%= tile.event1.occurs_at.strftime('%d') %></p>
+                                        <p class="date3"><%= tile.event1.occurs_at.strftime('%^a') %></p>  
+                                      </div><div class="col-xs-8 event-holder">
+                                        <p><span class="event1"><%= tile.event1.name %></span></p>
+                                        <p class="event3">
+                                          <span class="at" ng-if="(tile.event1.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">
+                                            TBD
+                                          </span>
+                                          <span class="at" ng-if="(tile.event1.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">
+                                            <%= tile.event1.occurs_at | date:'h:mm a' : 'UTC' | uppercase %> at
+                                          </span> <%= tile.event1.venue.name %></p>
+                                      </div>
+                                    </div>
+                                  </a>
+                                </div>
+                                <div class="tile-event hidden-xs hidden-sm" ng-if="tile.tile_type.id == 4">
+                                  <a href="<%= tile.event2.url %>">
+                                    <div class="row">
+                                      <div class="col-xs-4 date-holder">
+                                        <p class="date1"><%= tile.event2.occurs_at | date:'MMM' : 'UTC' | uppercase %></p>
+                                        <p class="date2"><%= tile.event2.occurs_at | date:'dd' : 'UTC' | uppercase %></p>
+                                        <p class="date3"><%= tile.event2.occurs_at | date:'EEE' : 'UTC' | uppercase %></p>  
+                                      </div>
+
+
+                                      <div class="col-xs-8 event-holder">
+                                        <p><span class="event1"><%= tile.event2.name %></span></p>
+                                        <p class="event3"><span class="at" ng-if="(tile.event2.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD</span><span class="at" ng-if="(tile.event2.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')"><%= tile.event2.occurs_at | date:'h:mm a' : 'UTC' | uppercase %> at</span> <span><%= tile.event2.venue.name %></span></p>
+                                      </div>
+                                    </div>
+                                  </a>
+                                </div>
+                                <div class="tile-event hidden-xs hidden-sm" ng-if="tile.tile_type.id == 4">
+                                  <a href="<%= tile.event3.url %>">
+                                    <div class="row">
+                                      <div class="col-xs-4 date-holder">
+                                        <p class="date1"><%= tile.event3.occurs_at | date:'MMM' : 'UTC' | uppercase %></p>
+                                        <p class="date2"><%= tile.event3.occurs_at | date:'dd' : 'UTC' | uppercase %></p>
+                                        <p class="date3"><%= tile.event3.occurs_at | date:'EEE' : 'UTC' | uppercase %></p>  
+                                      </div>
+
+
+                                      <div class="col-xs-8 event-holder">
+                                        <p><span class="event1"><%= tile.event3.name %></span></p>
+                                        <p class="event3"><span class="at" ng-if="(tile.event3.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD</span><span class="at" ng-if="(tile.event3.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')"><%= tile.event3.occurs_at | date:'h:mm a' : 'UTC' | uppercase %> at</span> <span><%= tile.event3.venue.name %></span></p>
+                                      </div>
+                                    </div>
+                                  </a>
+                                </div>
+                              <% end %>
+                                  <!-- TILE EVENTS END -->
+                            </div>
+                          </div>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                        <!-- TILES END-->
+                  
+                <section id="good-game-guarantee" class="hidden-md hidden-lg hidden-xl">
+                  <div class="container">
+                    <div class="title">Every Ticket Comes With Our Good Game Guarantee!</div>
+
+                    <div class="content-background-mobile">
+                      <div class="content-mobile">
+                         <slick settings="slickConfig">
+                            
+                            <div class="row table-element">
+                              <div class="section-mobile table-ele-cell first-ele">
+                                <img src="<%= image_url 'icon ticket.png' %>">
+                              </div>
+                              <div class="section2-mobile table-ele-cell second-ele">
+                                <h2>BUY TICKETS</h2>
+                                <p>
+                                  Find your game and purchase your tickets.<br>
+                                  Good Game Guarantee is included at no additional cost with every ticket.
+                                </p>
+                              </div>
+                            </div>
+                            <div class="row table-element">
+                              <div class="section-mobile table-ele-cell first-ele">
+                                <img src="<%= image_url 'icon stadium.png' %>">
+                              </div>
+                              <div class="section2-mobile table-ele-cell second-ele">
+                                <h2>ENJOY GAME</h2>
+                                <p>
+                                  If the home team loses by amount below or more, you get 50% of your ticket price back.
+                                </p>
+                                <div class="row">
+                                  <div class="fifty-perc block">
+                                    <img class="icon-img" src="<%= image_url 'football icon.png' %>">
+                                    <div>17 points</div>
+                                  </div>
+                                  <div class="fifty-perc block">
+                                    <img class="icon-img" src="<%= image_url 'basketball icon.png' %>">
+                                    <div>20 points</div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="fifty-perc block">
+                                    <img class="icon-img" src="<%= image_url 'baseball icon.png' %>">
+                                    <div>5 runs</div>
+                                  </div>
+                                  <div class="fifty-perc block">
+                                    <img class="icon-img" src="<%= image_url 'hockey icon.png' %>">
+                                    <div>4 goals</div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row table-element">
+                              <div class="section-mobile table-ele-cell first-ele">
+                                <img src="<%= image_url 'icon coin.png' %>">
+                              </div>
+                              <div class="section2-mobile table-ele-cell second-ele">
+                                <h2>CLAIM MONEY</h2>
+                                <p>
+                                  Simply come back to GameHedge.com to claim your refund.
+                                </p>
+                              </div>
+                            </div> 
+                        </slick>  
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                  
+                <!-- <section id="how-video" class="hidden-xs hidden-sm">
+                  <div class="page-title">HOW DOES THE GOOD GAME GUARANTEE WORK</div>
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-xs-12 how-video-mobile">
+                        <div class="videoWrapper">
+                          <iframe src="https://player.vimeo.com/video/153604637" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><p><a href="https://vimeo.com/153604637">GameHedge Video</a> from <a href="https://vimeo.com/user41979068">Warren Friss</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section> -->
+                <section id="home-why" class="hidden-xs hidden-sm">
+                  <div class="page-title">WE ARE FANS LIKE YOU</div>
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-xs-12 hidden-md hidden-lg"><img src="<%= image_url "icon-fans.png" %>" alt="Fans" /></div>
+                        <div class="col-md-8">
+                          <p>We invest our time, our passion and our cash supporting our teams. Sometimes things are amazing! Our favorite hitter launches a walk-off rocket to the upper deck; our QB throws a TD to the back of the end zone with 12 ticks left; or our rookie sharp-shooter hits a fade away 3 at the buzzer. Woo hoo!!</p>
+                          <p>But ... sometimes the team just doesn't return the love. You spend $400 on tix for the family, fight traffic for 3 hours and then ... well it's 6-0 in the fourth and your ace flame thrower heads to the showers with a tweaked hammie. If you're a true fan, you've been there.</p>
+                          <p>That's why we created GameHedge.</p>
+                          <p>We're fans like you.</p>
+                        </div>
+                        <div class="col-md-4 hidden-sm hidden-xs"><img src="<%= image_url "icon-fans.png" %>" alt="Fans" /></div>
+                      </div>
+                    </div>
+                </section>
+              </main>
+            </span>
+
+        </div>
     </div>
 
 
 
 
-    <footer ng-show="!$root.noFooter">
+    <footer>
         <div class="container">
             <div class="row hidden-xs hidden-sm" id="data_footer">
                 <div class="col-md-3 hidden-xs hidden-sm">
