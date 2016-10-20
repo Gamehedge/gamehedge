@@ -475,7 +475,7 @@ body {
 }
 
 
-#form-home-search [uib-typeahead-popup].dropdown-menu{
+#form-home-search [uib-typeahead-popup].dropdown-menu, .typeahead.dropdown-menu{
 	margin-top: -5px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
