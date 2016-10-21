@@ -10,7 +10,7 @@
 
 
 
-    <div class="mobile-menu main-menu-transition hidden">
+    <!-- <div class="mobile-menu main-menu-transition hidden">
         <div class="mobile-menu-header">
             <div class="row">
                 <div class="col-xs-2">
@@ -33,7 +33,7 @@
             </div>
             <div class="row menu-row" ng-show="$root.isLoggedin">
                 <div class="col-xs-3"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png"></div>
-                <div class="col-xs-9"><p ng-cloak>{{$root.user.name | uppercase}}</p></div>
+                <div class="col-xs-9"><p >{{$root.user.name | uppercase}}</p></div>
             </div>
             <div class="row menu-row" ng-show="$root.isLoggedin">
                 <div class="col-xs-3"></div>
@@ -50,11 +50,11 @@
 
             <div class="row menu-row separator" ng-repeat-start="league in leagueList" ng-if="$first">
                 <div class="col-xs-3" ng-if="league.active == true"></div>
-                <div class="col-xs-9" ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()" ng-cloak>{{league.name | uppercase}}</a></div>
+                <div class="col-xs-9" ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()" >{{league.name | uppercase}}</a></div>
             </div>
             <div class="row menu-row" ng-repeat-end ng-if="!$first">
                 <div class="col-xs-3" ng-if="league.active == true"></div>
-                <div class="col-xs-9" ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()" ng-cloak>{{league.name | uppercase}}</a></div>
+                <div class="col-xs-9" ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()" >{{league.name | uppercase}}</a></div>
             </div>
             <div class="row menu-row">
                 <div class="col-xs-3"></div>
@@ -89,9 +89,6 @@
         </div>
     </div>
 
-                            <!-- END MOBILE MENU -->
-
-
     <script type="text/ng-template" id="typeahead/bind-node.html">
         <a href="{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
     </script>
@@ -110,7 +107,7 @@
         </div>
         <div class="results-container">
             <div ng-repeat="result in searchResults">
-                <a ng-href="result.url" ng-click="hideMenus()" ng-cloak>{{result.name}}</a>
+                <a ng-href="result.url" ng-click="hideMenus()" >{{result.name}}</a>
             </div>
         </div>
         <div class="mobile-menu-footer">
@@ -129,7 +126,8 @@
            
             </nav>
         </div>
-    </div>
+    </div> -->
+                        <!-- END MOBILE MENU -->
 
     <div>
         <nav class="navbar navbar-default navbar-gamehedge vertical-center" role="navigation">
@@ -168,43 +166,74 @@
 
 
             <div class="col-md-4 hidden-sm hidden-xs horizontal-center main-menu">
-                <ul class="nav navbar-nav navbar-leagues vertical-center horizontal-center" ng-show="!$root.isOrder" ng-repeat="league in leagueList | orderBy:'name' track by $index" ng-if="league.active == true">
-                   <li class="dropdown main-dropdown yamm-fw">
-                         <a class="dropdown-toggle" href="{{league.url}}" ng-cloak>{{league.name | uppercase}}</a>
-                         <ul class="dropdown-menu" ng-class="{'size1':league.name == 'MLB' || league.name == 'NBA','size2':league.name == 'NFL','size3':league.name == 'NHL','size4':league.name == 'NCAAFB'}">
-                            <li>
-                                <div class="yamm-content" ng-if="league.id != 5" >
-                                    <div class="text-center" ng-repeat="main_division in divisions | filter:{is_main_division:true,sport_id:league.id} | orderBy:'name'">
-                                        <div class="col-xs-12 title vertical-center horizontal-center" ng-cloak>{{main_division.name}}</div>
-                                        <div ng-class="{'col-xs-4':league.name == 'MLB' || league.name == 'NBA','col-xs-3':league.name == 'NFL','col-xs-6':league.name == 'NHL'}" ng-repeat="division in divisions | filter:{division_id:main_division.id}">
-                                            <div class="subtitle" ng-cloak>{{division.name | uppercase}}</div>
-                                            <div class="performer-holder">
-                                                <div ng-repeat="performer in performers | filter:{division_id:division.id}:true | orderBy:'name'">
-                                                    <a href="{{performer.url}}" ng-cloak>{{performer.name}}</a>
-                                                </div>
-                                            </div>
+              <% @leagueList.each do |league| %>
+                <ul class="nav navbar-nav navbar-leagues vertical-center horizontal-center">
+                  <li class="dropdown main-dropdown yamm-fw">
+                    <a class="dropdown-toggle" href="<%= league.url %>"><%= league.name.upcase %></a>
+                    <% if league.name == 'MLB' || league.name == 'NBA' %>
+                       <ul class="dropdown-menu size1">
+                    <% elsif league.name == 'NFL' %>
+                      <ul class="dropdown-menu size2">
+                    <% elsif league.name == 'NHL' %>
+                      <ul class="dropdown-menu size3">
+                    <% elsif league.name == 'NCAAFB' %>
+                      <ul class="dropdown-menu size4">
+                    <% end %>
+                      <li>
+                        <% if league.id == 5 %>
+                          <div class="yamm-content">
+                            <div class="text-center">
+                              <% @divisions_menu.where(sport_id: league.id).order(:name).each_with_index do |division, ind| %>
+                                <div>
+                                  <% if ind % 3 == 0 %>
+                                    <div class="clearfix"></div>
+                                  <% end %>
+                                  <div class="col-xs-4">
+                                    <div class="subtitle"><%= division.name.upcase %></div>
+                                    <div class="performer-holder">
+                                      <% @performers_menu.where(division_id: division.id).order(:name).each do |performer| %>
+                                        <div>
+                                          <a href="<%= performer.url %>"><%= performer.name %></a>
                                         </div>
+                                      <% end %>
                                     </div>
+                                  </div>
                                 </div>
-                                <div class="yamm-content" ng-if="league.id == 5" >
-                                    <div class="text-center">
-                                        <div ng-repeat="division in divisions | filter:{sport_id:league.id} | orderBy:'name'">
-                                            <div class="clearfix" ng-if="$index % 3 == 0"></div>
-                                            <div class="col-xs-4">
-                                                <div class="subtitle" ng-cloak>{{division.name | uppercase}}</div>
-                                                <div class="performer-holder">
-                                                    <div ng-repeat="performer in performers | filter:{division_id:division.id}:true | orderBy:'name'">
-                                                        <a href="{{performer.url}}" ng-cloak>{{performer.name}}</a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                              <% end %>
+                            </div>
+                          </div>
+                        <% else %>
+                          <div class="yamm-content">
+                            <% @divisions_menu.where(is_main_division: true).where(sport_id: league.id).order(:name).each do |main_division| %>
+                              <div class="text-center">
+                                <div class="col-xs-12 title vertical-center horizontal-center"><%= main_division.name %></div>
+                                <% @divisions_menu.where(division_id: main_division.id).order(:name).each do |division| %>
+                                  <% if league.name == 'MLB' || league.name == 'NBA' %>
+                                    <div class="col-xs-4">
+                                  <% elsif league.name == 'NFL' %>
+                                    <div class="col-xs-3">
+                                  <% elsif league.name == 'NHL' %>
+                                    <div class="col-xs-6">
+                                  <% end %>
+                                    <div class="subtitle"><%= division.name.upcase %></div>
+                                    <div class="performer-holder">
+                                      <% @performers_menu.where(division_id: division.id).order(:name).each do |performer| %>
+                                        <div>
+                                          <a href="<%= performer.url %>" ><%= performer.name %></a>
                                         </div>
+                                      <% end %>
                                     </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
+                                  </div>
+                                <% end %>
+                              </div>
+                            <% end %>
+                          </div>
+                        <% end %>
+                      </li>
+                    </ul>
+                  </li>
                 </ul>
+              <% end %>
             </div>
             <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs">
                 <div class="press">
@@ -243,7 +272,7 @@
                         <form id="form-home-search" name="formSearch" onsubmit="function(){return false;};">
                           <input type="hidden" name="type" value="full" />
                           <div class="form-group">
-                            <img src="<%= image_url "search icon.png" %>" ng-click="goToSearch()">
+                            <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/search icon.png">
                             <input id="search_element" type="text" class="form-control typeahead" placeholder="Search team, venue or player..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
                         </form>
                       </div>
@@ -337,138 +366,6 @@
                         <!-- TILES -->
                 <section id="tiles">
                   <div class="container">
-                    <script>
-                      $(document).ready(function(){
-                        var now = new Date();
-                        now.setHours(now.getHours() + 1);
-                        var today_date = [[AddZero(now.getFullYear()), AddZero(now.getMonth() + 1), now.getDate()].join("-"), [AddZero(now.getHours()), AddZero(now.getMinutes())].join(":")].join(" ");
-                        function AddZero(num) {
-                            return (num >= 0 && num < 10) ? "0" + num : num + "";
-                        }
-                        $('.typeahead').typeahead({
-                          source: function (query, process) {
-                            return $.get("/search", { search: query, limit: 4, today_date: today_date }, function (data) {
-                              return process(data);
-                            });
-                          },
-                          afterSelect: function (item) {
-                            console.log(item.url);
-                            window.location.href = item.url;
-                          },
-                          fitToElement: true,
-                        });
-
-
-                        setTimeout(function(){
-                          $('.grid').masonry({
-                            itemSelector: '.grid-item',
-                            columnWidth: '.grid-sizer',
-                            percentPosition: true,
-                            gutter: 23,
-                          });
-                        },50);
-                        url = '/api/v1/tiles/';  
-                        $.ajax({
-                          method: 'get',
-                          url: url,
-                          headers: {
-                             'Authorization': 'Token token="TokenHere"'
-                          },
-                          success: function(response){
-                            tiles = response;
-                            for(i=0;i<tiles.length;i++){
-                              if(tiles[i].tile_type.id != 4){
-                                getNextEvents(i);
-                              }
-                            }
-                          },
-                          error: function(response){
-                          },
-                        });
-                        function getNextEvents(index){
-                          var id = 0;
-                          var url = "";
-                          source = "";
-                          if(tiles[index].tile_type != undefined){
-                            if(tiles[index].tile_type.id == '1'){
-                              id = tiles[index].sport.id;
-                              source = "league";
-                            }
-                            else if(tiles[index].tile_type.id == '2'){
-                              id = tiles[index].performer.te_uid;  
-                              source = "team";
-                            }
-                            else if(tiles[index].tile_type.id == '3'){
-                              if(tiles[index].has_geolocation == false){
-                                id = tiles[index].venue.te_uid;
-                              }
-                              else{
-                                id = 0;
-                              }
-                              source = "venue";
-                            }
-                          }
-                          if(tiles[index].has_geolocation == true){
-                            url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=50&geolocated=true';
-                          }
-                          else{
-                            url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=50';
-                          }
-                          $.ajax({
-                              method: 'GET',
-                              url: url,
-                              success: function(response){
-                                if(tiles[index].tile_type.id == '3' && tiles[index].has_geolocation == true){
-                                  $("#tile-info-"+String(tiles[index].id)).find('a').attr('href',response.venue.url)
-                                  $("#tile-info-"+String(tiles[index].id)).find('.performer-name').html(response.venue.name.toUpperCase());
-                                  $("#tile-info-"+String(tiles[index].id)).find('.tile-title').html(response.venue.name);
-                                  tiles[index].events = response.events;
-                                }
-                                else{
-                                  tiles[index].events = response;
-                                }
-                                if(tiles[index].events != null){
-                                  for(j=tiles[index].events.length - 1;j>=0;j--){
-                                    if(tiles[index].events[j] != undefined){
-                                      if(moment().add(1,'h').isAfter(String(tiles[index].events[j].occurs_at).replace('Z',''))) {
-                                          tiles[index].events.splice(j, 1);
-                                      }
-                                    }
-                                  }
-                                }
-                                var htm = ""
-                                for(i=0;i<tiles[index].events.length;i++){
-                                  var event = tiles[index].events[i];
-                                  var event_date = moment(event.occurs_at.replace("Z",""));
-                                  if(event_date.format('hh:mm A') == '12:00 AM'){
-                                    date_text = "TBD";
-                                  }
-                                  else{
-                                    date_text = event_date.format('hh:mm A')
-                                  }
-                                  htm += '<div class="tile-event hidden-xs hidden-sm"><a href="'+event.url+'/'+event.name.split('/').join('-').split(' ').join('-')+ '-tickets"><div class="row"><div class="col-xs-4 date-holder"><p class="date1">'+event_date.format('MMM')+'</p><p class="date2">'+event_date.format('DD')+'</p><p class="date3">'+event_date.format('ddd')+'</p></div><div class="col-xs-8 event-holder"><p><span class="event1">'+event.name+'</span></p><p class="event3"><span class="at">'+date_text+' at</span> '+event.venue.name+'</p><p class="event4">'+event.available_count+' tickets left</p></div></div></a></div>';
-                                  if(i == 2){
-                                    break;
-                                  }
-                                }
-                                $("#home-loading-data-"+String(tiles[index].id)).addClass("hidden");
-                                $("#events-loaded-"+String(tiles[index].id)).html(htm);
-                                setTimeout(function(){
-                                  $('.grid').masonry({
-                                    itemSelector: '.grid-item',
-                                    columnWidth: '.grid-sizer',
-                                    percentPosition: true,
-                                    gutter: 23,
-                                  });
-                                },10);
-                            
-                              },error:function(response) {
-                            
-                            }
-                          });
-                        }
-                      });
-                    </script>
                     <div id="results">
                       <div class="grid row">
                         <div class="grid-sizer"></div>
@@ -769,5 +666,151 @@
     </footer>
     <div growl></div>
 </div>
+
+
+
+
+
+
+
+
+<script>
+  $(document).ready(function(){
+
+      //*******************************Typeahead INIT****************************************
+    var now = new Date();
+    now.setHours(now.getHours() + 1);
+    var today_date = [[AddZero(now.getFullYear()), AddZero(now.getMonth() + 1), now.getDate()].join("-"), [AddZero(now.getHours()), AddZero(now.getMinutes())].join(":")].join(" ");
+    function AddZero(num) {
+        return (num >= 0 && num < 10) ? "0" + num : num + "";
+    }
+    $('.typeahead').typeahead({
+      source: function (query, process) {
+        return $.get("/search", { search: query, limit: 4, today_date: today_date }, function (data) {
+          return process(data);
+        });
+      },
+      afterSelect: function (item) {
+        console.log(item.url);
+        window.location.href = item.url;
+      },
+      fitToElement: true,
+    });
+      //*******************************Typeahead INIT end****************************************
+      //*******************************Masonry INIT****************************************
+    setTimeout(function(){
+      $('.grid').masonry({
+        itemSelector: '.grid-item',
+        columnWidth: '.grid-sizer',
+        percentPosition: true,
+        gutter: 23,
+      });
+    },50);
+      //*******************************Masonry INIT end****************************************
+      //*******************************Get Tiles****************************************
+    url = '/api/v1/tiles/';  
+    $.ajax({
+      method: 'get',
+      url: url,
+      headers: {
+         'Authorization': 'Token token="TokenHere"'
+      },
+      success: function(response){
+        tiles = response;
+        for(i=0;i<tiles.length;i++){
+          if(tiles[i].tile_type.id != 4){
+            getNextEvents(i);
+          }
+        }
+      },
+      error: function(response){
+      },
+    });
+      //*******************************Get Tiles end****************************************
+      //*******************************Get Near events****************************************
+    function getNextEvents(index){
+      var id = 0;
+      var url = "";
+      source = "";
+      if(tiles[index].tile_type != undefined){
+        if(tiles[index].tile_type.id == '1'){
+          id = tiles[index].sport.id;
+          source = "league";
+        }
+        else if(tiles[index].tile_type.id == '2'){
+          id = tiles[index].performer.te_uid;  
+          source = "team";
+        }
+        else if(tiles[index].tile_type.id == '3'){
+          if(tiles[index].has_geolocation == false){
+            id = tiles[index].venue.te_uid;
+          }
+          else{
+            id = 0;
+          }
+          source = "venue";
+        }
+      }
+      if(tiles[index].has_geolocation == true){
+        url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=50&geolocated=true';
+      }
+      else{
+        url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=50';
+      }
+      $.ajax({
+          method: 'GET',
+          url: url,
+          success: function(response){
+            if(tiles[index].tile_type.id == '3' && tiles[index].has_geolocation == true){
+              $("#tile-info-"+String(tiles[index].id)).find('a').attr('href',response.venue.url)
+              $("#tile-info-"+String(tiles[index].id)).find('.performer-name').html(response.venue.name.toUpperCase());
+              $("#tile-info-"+String(tiles[index].id)).find('.tile-title').html(response.venue.name);
+              tiles[index].events = response.events;
+            }
+            else{
+              tiles[index].events = response;
+            }
+            if(tiles[index].events != null){
+              for(j=tiles[index].events.length - 1;j>=0;j--){
+                if(tiles[index].events[j] != undefined){
+                  if(moment().add(1,'h').isAfter(String(tiles[index].events[j].occurs_at).replace('Z',''))) {
+                      tiles[index].events.splice(j, 1);
+                  }
+                }
+              }
+            }
+            var htm = ""
+            for(i=0;i<tiles[index].events.length;i++){
+              var event = tiles[index].events[i];
+              var event_date = moment(event.occurs_at.replace("Z",""));
+              if(event_date.format('hh:mm A') == '12:00 AM'){
+                date_text = "TBD";
+              }
+              else{
+                date_text = event_date.format('hh:mm A')
+              }
+              htm += '<div class="tile-event hidden-xs hidden-sm"><a href="'+event.url+'/'+event.name.split('/').join('-').split(' ').join('-')+ '-tickets"><div class="row"><div class="col-xs-4 date-holder"><p class="date1">'+event_date.format('MMM').toUpperCase()+'</p><p class="date2">'+event_date.format('DD')+'</p><p class="date3">'+event_date.format('ddd')+'</p></div><div class="col-xs-8 event-holder"><p><span class="event1">'+event.name+'</span></p><p class="event3"><span class="at">'+date_text+' at</span> '+event.venue.name+'</p><p class="event4">'+event.available_count+' tickets left</p></div></div></a></div>';
+              if(i == 2){
+                break;
+              }
+            }
+            $("#home-loading-data-"+String(tiles[index].id)).addClass("hidden");
+            $("#events-loaded-"+String(tiles[index].id)).html(htm);
+            setTimeout(function(){
+              $('.grid').masonry({
+                itemSelector: '.grid-item',
+                columnWidth: '.grid-sizer',
+                percentPosition: true,
+                gutter: 23,
+              });
+            },10);
         
+          },error:function(response) {
+        
+        }
+      });
+    }
+      //*******************************Get Near events end****************************************
+  });
+</script>
    

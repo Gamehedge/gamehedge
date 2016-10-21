@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   get 'contact/send_message'
   get 'contact/send_email_message'
 
-  resources :search, :signature, :league_test
+  resources :search, :signature, :league, :performer
   
   devise_for :admin_users, ActiveAdmin::Devise.config
   
