@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
 	def index
+		require 'date'
+		@year = Date.today.strftime("%Y")
 	end	
   	def near
   		@connection = TicketEvolution::Connection.new({
