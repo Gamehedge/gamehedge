@@ -12,22 +12,22 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require ladda/dist/spin.min
+//= require ladda/dist/ladda.min
+//= require bootstrap
+//= require sweetalert/dist/sweetalert.min
+// require_tree .
+// require_tree ./templates
+//= require slick.min
+
 // require angular/angular
 // require angular-ui-bootstrap-tpls
 // require angular-route/angular-route
 // require angular-rails-templates
 // require angular-devise
 // require angular-animate
-//= require ladda/dist/spin.min
-//= require ladda/dist/ladda.min
 // require angular-ladda/dist/angular-ladda.min
-//= require bootstrap
-//= require sweetalert/dist/sweetalert.min
 // require angular-location-update/angular-location-update.min
 // require angular-load/angular-load.min
-//= require_tree .
-//= require_tree ./templates
-
-//= require slick.min
 // require angular-slick
 // require angular-google-analytics/dist/angular-google-analytics.min

@@ -1,4 +1,4 @@
-<% content_for :title, "Gamehedge - Home" %>
+<% content_for :title, "Gamehedge - " + @league.name %>
 <div>
     <!-- <div class="intro-full fade-intro hidden" ng-if="page_loading == true">
         <div class="intro-img-container">
@@ -610,6 +610,11 @@
     </footer>
     <div growl></div>
 </div>
+
+<%= javascript_include_tag 'bootstrap3-typeahead.min', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'moment', 'data-turbolinks-track' => true %>
+
+
 <script>
   $(document).ready(function(){
     //*******************************Typeahead INIT****************************************
@@ -679,7 +684,7 @@
             else{
               venue_name = event.venue.name;
             }
-            htm += '<div class="col-md-3 mobile-near-events"><a href="'+url2+'"><div class="back"><div class="front"><div class="date-holder"><div class="date-inner"><p class="date1">'+event_date.format('MMM')+'</p><p class="date2">'+event_date.format('DD')+'</p><p class="date3">'+event_date.format('ddd')+'</p></div></div><div class="event-holder"><p class="teams">'+event.name+'</p><p class="event3"><span class="at">'+date_text+' </span><span class="stadium">'+venue_name+'</span></p><p class="event4">'+event.available_count+' tickets left</p></div><button>Buy Tickets</button></div></div></a></div>'
+            htm += '<div class="col-md-3 mobile-near-events"><a href="'+url2+'"><div class="back"><div class="front"><div class="date-holder"><div class="date-inner"><p class="date1">'+event_date.format('MMM').toUpperCase()+'</p><p class="date2">'+event_date.format('DD')+'</p><p class="date3">'+event_date.format('ddd')+'</p></div></div><div class="event-holder"><p class="teams">'+event.name+'</p><p class="event3"><span class="at">'+date_text+' </span><span class="stadium">'+venue_name+'</span></p><p class="event4">'+event.available_count+' tickets left</p></div><button>Buy Tickets</button></div></div></a></div>'
 
           }
           $("#next_events_holder").html(htm);
