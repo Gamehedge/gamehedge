@@ -20,6 +20,10 @@ Rails.application.config.assets.precompile += %w( angular-animate.min.js )
 Rails.application.config.assets.precompile += %w( spin.min.js )
 Rails.application.config.assets.precompile += %w( ladda.min.js )
 Rails.application.config.assets.precompile += %w( angular-ladda.min.js )
+Rails.application.config.assets.precompile += %w( devise.js )
+Rails.application.config.assets.precompile += %w( 401.js )
+Rails.application.config.assets.precompile += %w( auth.js )
+
 
 
 # Add additional assets to the asset load path

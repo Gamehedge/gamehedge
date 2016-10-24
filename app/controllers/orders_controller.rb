@@ -1,4 +1,7 @@
 class OrdersController < ApplicationController
+	def show
+
+	end
 	def create
 		@user_id = request.POST["user_id"]
 		@billing_address_id = request.POST["billing_address_id"]
