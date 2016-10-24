@@ -14,15 +14,12 @@ Rails.application.config.assets.precompile += %w( moment.js )
 Rails.application.config.assets.precompile += %w( crs.min.js )
 Rails.application.config.assets.precompile += %w( dvm_clientside.js )
 Rails.application.config.assets.precompile += %w( scalyr.js )
-Rails.application.config.assets.precompile += %w( src/js/directives/slyEvaluate.js )
-Rails.application.config.assets.precompile += %w( src/js/directives/slyRepeat.js )
 Rails.application.config.assets.precompile += %w( bootstrap3-typeahead.min.js )
 Rails.application.config.assets.precompile += %w( angular.min.js )
 Rails.application.config.assets.precompile += %w( angular-animate.min.js )
 Rails.application.config.assets.precompile += %w( spin.min.js )
 Rails.application.config.assets.precompile += %w( ladda.min.js )
 Rails.application.config.assets.precompile += %w( angular-ladda.min.js )
-Rails.application.config.assets.precompile += %w( controllers/EventController.js )
 
 
 # Add additional assets to the asset load path

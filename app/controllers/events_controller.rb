@@ -1,7 +1,8 @@
 class EventsController < ApplicationController
-	def index
-		require 'date'
-		@year = Date.today.strftime("%Y")
+	def show
+		@leagueList = Sport.where(active: true)
+	  	@divisions_menu = Division.all
+	  	@performers_menu = Performer.all
 	end	
   	def near
   		@connection = TicketEvolution::Connection.new({
