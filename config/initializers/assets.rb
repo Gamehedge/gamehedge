@@ -5,6 +5,7 @@ Rails.application.config.assets.version = '1.0'
 
 Rails.application.config.assets.precompile += %w( tuMap.css )
 Rails.application.config.assets.precompile += %w( style_maps.css )
+Rails.application.config.assets.precompile += %w( sweetalert.css )
 Rails.application.config.assets.precompile += %w( ladda-themeless.min.css )
 Rails.application.config.assets.precompile += %w( jquery.tuMap-min.js )
 Rails.application.config.assets.precompile += %w( jquery.hammer.min.js )
@@ -20,6 +21,7 @@ Rails.application.config.assets.precompile += %w( angular-animate.min.js )
 Rails.application.config.assets.precompile += %w( spin.min.js )
 Rails.application.config.assets.precompile += %w( ladda.min.js )
 Rails.application.config.assets.precompile += %w( angular-ladda.min.js )
+Rails.application.config.assets.precompile += %w( sweetalert.min.js )
 
 
 

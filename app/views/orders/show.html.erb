@@ -1164,12 +1164,15 @@
 </span>
 
 <%= stylesheet_link_tag 'ladda-themeless.min', 'data-turbolinks-track' => true %>
+<%= stylesheet_link_tag 'sweetalert', 'data-turbolinks-track' => true %>
 <%= javascript_include_tag 'angular.min', 'data-turbolinks-track' => true %>
 <%= javascript_include_tag 'jquery.tuMap-min', 'data-turbolinks-track' => true %>
 <%= javascript_include_tag 'angular-animate.min', 'data-turbolinks-track' => true %>
 <%= javascript_include_tag 'spin.min', 'data-turbolinks-track' => true %>
 <%= javascript_include_tag 'ladda.min', 'data-turbolinks-track' => true %>
 <%= javascript_include_tag 'angular-ladda.min', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'sweetalert.min', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'jquery.payment.min', 'data-turbolinks-track' => true %>
 
         
 <script>
@@ -1984,7 +1987,7 @@
                 password: $scope.temp_password,
             };
             $.ajax({
-              method: 'post',
+              method: 'POST',
               url: '/auth/login',
               data: credentials,
               success: function(response){
@@ -2001,7 +2004,7 @@
                   $rootScope.isLoggedin = false;
                 }
               },
-              error: function(){
+              error: function(response){
                 // Authentication failed...
                 //console.log("failed");
                 $rootScope.user = undefined;
@@ -2013,125 +2016,147 @@
 
       $scope.login2 = function(){
         var credentials = {
-                email: $scope.client.primary_email_address.address,
-                password: $scope.password,
-            };
-            $.ajax({
-              method: 'post',
-              url: '/auth/login',
-              data: credentials,
-              success: function(response){
-                //console.log(user); // => {id: 1, ect: '...'}
-                if(response.response == "valid user"){
-                  $rootScope.user = currentUser;
-                  $rootScope.isLoggedin = true;
-                  $scope.first_time = false;
-                }
-                else{
-                  $rootScope.user = undefined;
-                  $rootScope.isLoggedin = false;
-                }
-              },
-              error: function(){
-                // Authentication failed...
-                //console.log("failed");
-                $rootScope.user = undefined;
-                $rootScope.isLoggedin = false;
-                //console.log("Email or password incorrect");
-              }
-            })
+            email: $scope.client.primary_email_address.address,
+            password: $scope.password,
+        };
+        $.ajax({
+          method: 'POST',
+          url: '/auth/login',
+          data: credentials,
+          success: function(response){
+            //console.log(user); // => {id: 1, ect: '...'}
+            if(response.response == "valid user"){
+              $rootScope.user = response.user;
+              $rootScope.isLoggedin = true;
+              $scope.first_time = false;
+            }
+            else{
+              $rootScope.user = undefined;
+              $rootScope.isLoggedin = false;
+            }
+          },
+          error: function(response){
+            // Authentication failed...
+            //console.log("failed");
+            $rootScope.user = undefined;
+            $rootScope.isLoggedin = false;
+            //console.log("Email or password incorrect");
+          }
+        })
       }
 
       $scope.checkLogin = function(){
-        Auth.currentUser().then(function(user) {
-              // User was logged in, or Devise returned
-              // previously authenticated session.
-              //console.log(user); // => {id: 1, ect: '...'}
-              $rootScope.user = user;
+        $.ajax({
+          method: 'POST',
+          url: '/auth/get_user',
+          success: function(response){
+            //console.log(user); // => {id: 1, ect: '...'}
+            if(response.response == "user logged"){
+              $rootScope.user = response.user;
               $rootScope.isLoggedin = true;
-          }, function(error) {
-              // unauthenticated error
-              //console.log("error login");
+            }
+            else{
               $rootScope.user = undefined;
               $rootScope.isLoggedin = false;
-          });
+            }
+          },
+          error: function(response){
+            $rootScope.user = undefined;
+            $rootScope.isLoggedin = false;
+          }
+        })
       }
 
       $scope.getClient = function(){
-        Auth.currentUser().then(function(user) {
-          $http({
+        $.ajax({
+          method: 'POST',
+          url: '/auth/get_user',
+          success: function(user){
+            //console.log(user); // => {id: 1, ect: '...'}
+            if(user.response == "user logged"){
+              $http({
                 method: 'GET',
-                url: '/clients/show?id='+user.te_uid,
-            }).then(function successCallback(response) {
-              $scope.client = response.data.client;
-              $scope.cards = response.data.cards;
-              $scope.addresses = response.data.client.addresses;
-              //console.log("Client");
-              //console.log($scope.client);
-              //console.log("Cards");
-              //console.log($scope.cards);
-              //console.log("Addresses");
-              //console.log($scope.addresses);
-              $scope.edit_deliver = 1;
-            $scope.edit_credit_card = 1;
-            $scope.edit_billing = 1;
-            $scope.shipping_address = $scope.client.primary_shipping_address;
-            $scope.billing_address = $scope.client.primary_billing_address;
-            $scope.card = $scope.client.primary_credit_card;
-            $rootScope.isLoggedin = true;
-            $rootScope.user = user;
-            $scope.first_time = false;
-            $('#myModal').modal('hide');
-            $scope.logging_in = false;
-            $scope.clientLoaded = true;
-            //console.log($scope.shipping_address);
-
-            }, function errorCallback(response) {
+                url: '/clients/show?id='+user.user.te_uid,
+              }).then(function successCallback(response) {
+                  $scope.client = response.data.client;
+                  $scope.cards = response.data.cards;
+                  $scope.addresses = response.data.client.addresses;
+                  //console.log("Client");
+                  //console.log($scope.client);
+                  //console.log("Cards");
+                  //console.log($scope.cards);
+                  //console.log("Addresses");
+                  //console.log($scope.addresses);
+                  $scope.edit_deliver = 1;
+                  $scope.edit_credit_card = 1;
+                  $scope.edit_billing = 1;
+                  $scope.shipping_address = $scope.client.primary_shipping_address;
+                  $scope.billing_address = $scope.client.primary_billing_address;
+                  $scope.card = $scope.client.primary_credit_card;
+                  $rootScope.isLoggedin = true;
+                  $rootScope.user = user.user;
+                  $scope.first_time = false;
+                  $('#myModal').modal('hide');
+                  $scope.logging_in = false;
+                  $scope.clientLoaded = true;
+                  //console.log($scope.shipping_address);
+              }, function errorCallback(response) {
+                $rootScope.user = undefined;
+                $rootScope.isLoggedin = false;
+                $scope.edit_deliver = 3;
+                $scope.edit_credit_card = 3;
+                $scope.edit_billing = 3;
+                $scope.first_time = true;
+                $scope.creditCardFieldEnable();
+                $('#myModal').modal('hide');
+                $scope.logging_in = false;
+                $scope.clientLoaded = true;
+                //console.log("Not logged in");
+                //console.log(response);
+              });
+            }
+            else{
               $rootScope.user = undefined;
               $rootScope.isLoggedin = false;
               $scope.edit_deliver = 3;
+              $scope.edit_credit_card = 3;
+              $scope.edit_billing = 3;
+              $scope.first_time = true;
+              $scope.clientLoaded = true;
+              $scope.creditCardFieldEnable();
+            }
+          },
+          error: function(response){
+            $rootScope.user = undefined;
+            $rootScope.isLoggedin = false;
+            $scope.edit_deliver = 3;
             $scope.edit_credit_card = 3;
             $scope.edit_billing = 3;
             $scope.first_time = true;
-            $scope.creditCardFieldEnable();
-            $('#myModal').modal('hide');
-            $scope.logging_in = false;
             $scope.clientLoaded = true;
-            //console.log("Not logged in");
-                //console.log(response);
-            });
-          }, function(error) {
-            $rootScope.user = undefined;
-              $rootScope.isLoggedin = false;
-            $scope.edit_deliver = 3;
-          $scope.edit_credit_card = 3;
-          $scope.edit_billing = 3;
-          $scope.first_time = true;
-          $scope.clientLoaded = true;
-          $scope.creditCardFieldEnable();
-          //console.log("Not logged in");
-              //console.log(error);
-          });
+            $scope.creditCardFieldEnable();
+          }
+        });
       }
 
       $http({
-            method: 'GET',
-            url: '/signature?url=settings/shipping?',
-        }).then(function successCallback(response) {
-          $scope.shipping_list = response.data.settings;
-        }, function errorCallback(response) {
-            //console.log(response);
-        });
-        $http({
-            method: 'POST',
-            url: '/clients/get_session',
-            data: {},
-        }).then(function successCallback(response) {
-          $scope.session_id = response.data;
-          $("#session_iframe").html('<iframe frameborder="0" height="1" scrolling="no" src="/clients/info?session=' + $scope.session_id + '" width="1"></iframe>');
-        }, function errorCallback(response) {
-            //console.log(response);
-        });
+          method: 'GET',
+          url: '/signature?url=settings/shipping?',
+      }).then(function successCallback(response) {
+        $scope.shipping_list = response.data.settings;
+      }, function errorCallback(response) {
+          //console.log(response);
+      });
+      $http({
+          method: 'POST',
+          url: '/clients/get_session',
+          data: {},
+      }).then(function successCallback(response) {
+        $scope.session_id = response.data;
+        $("#session_iframe").html('<iframe frameborder="0" height="1" scrolling="no" src="/clients/info?session=' + $scope.session_id + '" width="1"></iframe>');
+      }, function errorCallback(response) {
+          //console.log(response);
+      });
       // Initializers
       $scope.client = {}
       $scope.client.email = "";
@@ -2203,39 +2228,36 @@
       }
 
       $scope.login = function(){
-            $scope.logging_in = true;
+        $scope.logging_in = true;
         var credentials = {
-                email: $scope.client.email,
-                password: $scope.password,
-            };
-            var config = {
-                headers: {
-                    'X-HTTP-Method-Override': 'POST'
-                }
-            };
-            //console.log(credentials);
-            Auth.login(credentials, config).then(function(user) {
-                //console.log(user); // => {id: 1, ect: '...'}
-            }, function(error) {
-                // Authentication failed...
-                //console.log("failed");
-                $rootScope.user = undefined;
-                $rootScope.isLoggedin = false;
-                $scope.logging_in = false;
-                swal("Error", "Email or password incorrect. Please check amd try again.", "error");
-            });
-
-            $scope.$on('devise:login', function(event, currentUser) {
-                // after a login, a hard refresh, a new tab
-                //console.log(currentUser);
-                $rootScope.user = currentUser;
-                $rootScope.isLoggedin = true;
-                $scope.getClient();
-            });
-
-            $scope.$on('devise:new-session', function(event, currentUser) {
-                // user logged in by Auth.login({...})
-            });
+            email: $scope.client.email,
+            password: $scope.password,
+        };
+        $.ajax({
+          method: 'POST',
+          url: '/auth/login',
+          data: credentials,
+          success: function(response){
+            //console.log(user); // => {id: 1, ect: '...'}
+            if(response.response == "valid user"){
+              $rootScope.user = response.user;
+              $rootScope.isLoggedin = true;
+              $scope.getClient();
+            }
+            else{
+              $rootScope.user = undefined;
+              $rootScope.isLoggedin = false;
+              $scope.logging_in = false;
+              swal("Error", "Email or password incorrect. Please check amd try again.", "error");
+            }
+          },
+          error: function(response){
+            $rootScope.user = undefined;
+            $rootScope.isLoggedin = false;
+            $scope.logging_in = false;
+            swal("Error", "Email or password incorrect. Please check amd try again.", "error");
+          }
+        })
       }
 
         $scope.forgotPass = function(value){
@@ -2243,21 +2265,29 @@
         }
 
         $scope.updatePasswordAuth = function(){
-            $scope.sending_password = true;
-            var parameters = {
-                email: $scope.client.email
-            };
-            
-            Auth.sendResetPasswordInstructions(parameters).then(function() {
+          $scope.sending_password = true;
+          var parameters = {
+              email: $scope.client.email
+          };
+          $.ajax({
+            method: 'POST',
+            url: '/auth/send_password',
+            data: parameters,
+            success: function(response){
+              if(response == "sent"){
                 $scope.sending_password = false;
                 swal("Request submitted", "You will be receiving an email with the recovery password instructions shortly.", "success");
-                
-            },function(error){
-                if(error.data.errors){
-                    $scope.sending_password = false;
-                    swal("Request failed", "E-mail not found. Please check your e-mail address.", "error");
-                }
-            });
+              }
+              else{
+                $scope.sending_password = false;
+                swal("Request failed", "E-mail not found. Please check your e-mail address.", "error");
+              }
+            },
+            error: function(response){
+              $scope.sending_password = false;
+              swal("Request failed", "E-mail not found. Please check your e-mail address.", "error");
+            }
+          })
         }
 
         $scope.showPromoField = function(){

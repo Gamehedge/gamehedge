@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get 'events/near'
 
   post 'auth/login'
+  post 'auth/get_user'
+  post 'auth/send_password'
 
   devise_for :clients
   
