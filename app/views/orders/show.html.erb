@@ -1333,8 +1333,8 @@
                   // console.log(response);
                     $scope.event = response;
                     $rootScope.title = "Order | Gamehedge";
-            $rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by "+$scope.event.home_performer.sport.ggg+" or more, get 50% of your ticket price back.";
-                    $scope.amount = $location.search()['amount'];
+                    $rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by "+$scope.event.home_performer.sport.ggg+" or more, get 50% of your ticket price back.";
+                    $scope.amount = Number(<%= params[:amount] %>);
                     $scope.calculateValues();
             });
             if($scope.ticket.format == "Physical"){
@@ -2050,7 +2050,6 @@
           method: 'POST',
           url: '/auth/get_user',
           success: function(response){
-            //console.log(user); // => {id: 1, ect: '...'}
             if(response.response == "user logged"){
               $rootScope.user = response.user;
               $rootScope.isLoggedin = true;
@@ -2072,7 +2071,6 @@
           method: 'POST',
           url: '/auth/get_user',
           success: function(user){
-            //console.log(user); // => {id: 1, ect: '...'}
             if(user.response == "user logged"){
               $http({
                 method: 'GET',
