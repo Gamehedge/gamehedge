@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   
+  get 'auth/login'
+
   get 'events/near'
+
+  post 'auth/login'
 
   devise_for :clients
   

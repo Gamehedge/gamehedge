@@ -21,7 +21,7 @@
                 </div>
             </nav>
         </div>
-        <div class="view-container" ng-controller="EventController">
+        <div class="view-container" ng-controller="OrderController">
             <div class="view-frame animate-view">
                <div id="home-loading-data" class="row horizontal-center" ng-if="!clientLoaded || !ticketsLoaded">
                   <div class='uil-default-css' style='transform:scale(0.32);'><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(0deg) translate(0,-60px);transform:rotate(0deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(30deg) translate(0,-60px);transform:rotate(30deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(60deg) translate(0,-60px);transform:rotate(60deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(90deg) translate(0,-60px);transform:rotate(90deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(120deg) translate(0,-60px);transform:rotate(120deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(150deg) translate(0,-60px);transform:rotate(150deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(180deg) translate(0,-60px);transform:rotate(180deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(210deg) translate(0,-60px);transform:rotate(210deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(240deg) translate(0,-60px);transform:rotate(240deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(270deg) translate(0,-60px);transform:rotate(270deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(300deg) translate(0,-60px);transform:rotate(300deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(330deg) translate(0,-60px);transform:rotate(330deg) translate(0,-60px);border-radius:10px;position:absolute;'></div>
@@ -1170,17 +1170,12 @@
 <%= javascript_include_tag 'spin.min', 'data-turbolinks-track' => true %>
 <%= javascript_include_tag 'ladda.min', 'data-turbolinks-track' => true %>
 <%= javascript_include_tag 'angular-ladda.min', 'data-turbolinks-track' => true %>
-<%= javascript_include_tag 'devise', 'data-turbolinks-track' => true %>
-<%= javascript_include_tag '401', 'data-turbolinks-track' => true %>
-<%= javascript_include_tag 'auth', 'data-turbolinks-track' => true %>
 
         
 <script>
     app = angular.module('gamehedge',[
-        'Devise',
         'angular-ladda',
     ])
-
     app.service('apiService', function($http) {
     
         this.getData = function( url ) {
@@ -1307,7 +1302,7 @@
             return( response );
         }
     })
-    app.controller('OrderController', function($scope,$rootScope,$http,Auth,$location,$timeout,apiService,$filter,$window,Analytics){
+    app.controller('OrderController', function($scope,$rootScope,$http,$location,$timeout,apiService,$filter,$window){
     
       setInterval(function() {
           if ($(window).width() > 992){
@@ -1841,12 +1836,12 @@
                 if(response.data.error == undefined){
                   $scope.order = response.data;
                   $scope.order_success = true;
-                  // Create transaction
-                  Analytics.addTrans($scope.order.id, 'www.gamehedge.com', $scope.total, 0, 0);
-                  // Add items to transaction
-                Analytics.addItem($scope.order.id, $scope.ticket.id, $scope.event.name, $scope.event.sport.name, $scope.ticket.retail_price, Number($scope.amount));
-                // Complete transaction
-                Analytics.trackTrans();
+                //   // Create transaction
+                //   Analytics.addTrans($scope.order.id, 'www.gamehedge.com', $scope.total, 0, 0);
+                //   // Add items to transaction
+                // Analytics.addItem($scope.order.id, $scope.ticket.id, $scope.event.name, $scope.event.sport.name, $scope.ticket.retail_price, Number($scope.amount));
+                // // Complete transaction
+                // Analytics.trackTrans();
                 
                 $scope.goToConfirm();
                 // Clear transaction
@@ -1984,39 +1979,36 @@
       $scope.loginFcn = function(){
             console.log("login ENTER");
             console.log(credentials);
-        var credentials = {
+            var credentials = {
                 email: $scope.client.email,
                 password: $scope.temp_password,
             };
-            var config = {
-                headers: {
-                    'X-HTTP-Method-Override': 'POST'
-                }
-            };
-            //console.log(credentials);
-            Auth.login(credentials, config).then(function(user) {
+            $.ajax({
+              method: 'post',
+              url: '/auth/login',
+              data: credentials,
+              success: function(response){
                 //console.log(user); // => {id: 1, ect: '...'}
-            }, function(error) {
+                if(response.response == "valid user"){
+                  $rootScope.user = response.user;
+                  $rootScope.isLoggedin = true;
+                  if($scope.order_success == false){
+                      $scope.createCard();
+                  }
+                }
+                else{
+                  $rootScope.user = undefined;
+                  $rootScope.isLoggedin = false;
+                }
+              },
+              error: function(){
                 // Authentication failed...
                 //console.log("failed");
                 $rootScope.user = undefined;
                 $rootScope.isLoggedin = false;
                 //console.log("Email or password incorrect");
-            });
-
-            $scope.$on('devise:login', function(event, currentUser) {
-                // after a login, a hard refresh, a new tab
-                //console.log(currentUser);
-                $rootScope.user = currentUser;
-                $rootScope.isLoggedin = true;
-                if($scope.order_success == false){
-                    $scope.createCard();
-                }
-            });
-
-            $scope.$on('devise:new-session', function(event, currentUser) {
-                // user logged in by Auth.login({...})
-            });
+              }
+            })
       }
 
       $scope.login2 = function(){
@@ -2024,33 +2016,30 @@
                 email: $scope.client.primary_email_address.address,
                 password: $scope.password,
             };
-            var config = {
-                headers: {
-                    'X-HTTP-Method-Override': 'POST'
-                }
-            };
-            //console.log(credentials);
-            Auth.login(credentials, config).then(function(user) {
+            $.ajax({
+              method: 'post',
+              url: '/auth/login',
+              data: credentials,
+              success: function(response){
                 //console.log(user); // => {id: 1, ect: '...'}
-            }, function(error) {
+                if(response.response == "valid user"){
+                  $rootScope.user = currentUser;
+                  $rootScope.isLoggedin = true;
+                  $scope.first_time = false;
+                }
+                else{
+                  $rootScope.user = undefined;
+                  $rootScope.isLoggedin = false;
+                }
+              },
+              error: function(){
                 // Authentication failed...
                 //console.log("failed");
                 $rootScope.user = undefined;
                 $rootScope.isLoggedin = false;
                 //console.log("Email or password incorrect");
-            });
-
-            $scope.$on('devise:login', function(event, currentUser) {
-                // after a login, a hard refresh, a new tab
-                //console.log(currentUser);
-                $rootScope.user = currentUser;
-                $rootScope.isLoggedin = true;
-                $scope.first_time = false;
-            });
-
-            $scope.$on('devise:new-session', function(event, currentUser) {
-                // user logged in by Auth.login({...})
-            });
+              }
+            })
       }
 
       $scope.checkLogin = function(){
@@ -2291,13 +2280,5 @@
             return text.replace(/\_/g, ' '); // Replaces all occurences
         };
     });
-    app.config(['AuthProvider',
-    function(AuthProvider){
-      AuthProvider.resourceName('client');
-      AuthProvider.loginPath('/clients/sign_in.json');
-      AuthProvider.logoutPath('/clients/sign_out.json');
-      AuthProvider.sendResetPasswordInstructionsPath('/clients/password.json');
-    }]);
-    
 </script>
 
