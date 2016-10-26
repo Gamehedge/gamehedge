@@ -20,6 +20,7 @@ index :download_links => [:csv] do
     column ("Section")  { |order| order.ticket_section }
     column ("Row")  { |order| order.ticket_row }
     column ("Customer Name")  { |order| order.client_name }
+    column :refund_status
     column :customer_email
     column :sale_price_per_ticket
     column :ticket_total
@@ -35,6 +36,7 @@ filter :real_event_date, label: 'Event Date Range'
 filter :te_order_id, label: 'Order Id'
 filter :event_name
 filter :order_status
+filter :refund_status_id, as: :select, collection: proc { RefundStatus.all }
 filter :event_home_team, label: 'Home Team'
 filter :event_away_team, label: 'Away Team'
 filter :event_location, label: 'Venue'
@@ -51,6 +53,7 @@ csv do
     column ("Section")  { |order| order.ticket_section }
     column ("Row")  { |order| order.ticket_row }
     column ("Customer Name")  { |order| order.client_name }
+    column :refund_status
     column :customer_email
     column :sale_price_per_ticket
     column :ticket_total
