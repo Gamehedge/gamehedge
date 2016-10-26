@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   
+  get 'contactus/index'
+
+  get 'faq/index'
+
+  get 'terms/index'
+
   get 'auth/login'
 
   get 'events/near'
@@ -30,7 +36,7 @@ Rails.application.routes.draw do
   get 'contact/send_message'
   get 'contact/send_email_message'
 
-  resources :search, :signature, :league, :performer, :events, :orders
+  resources :search, :signature, :league, :performer, :events, :orders, :terms, :faq, :contact
   
   devise_for :admin_users, ActiveAdmin::Devise.config
   

@@ -138,3 +138,6 @@ gem 'image_optim_rails'
 gem 'prerender_rails'
 
 gem 'heroku-deflater', :group => :production
+
+
+gem 'friendly_id', '~> 5.0.0'
