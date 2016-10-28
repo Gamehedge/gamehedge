@@ -360,7 +360,7 @@
             btn = '<a class="a-btn vertical-center" href="" style="cursor:default;">Sold Out</a>'
           }
           else{
-            btn = '<a class="a-btn vertical-center" href="/events'+event.te_uid+'">Buy Tickets</a>'
+            btn = '<a class="a-btn vertical-center" href="/events/'+event.te_uid+'">Buy Tickets</a>'
           }
           htm += '<div class="row event-holder-back"><div class="event-holder"><div class="col-md-2 col-xs-3 date-holder"><p class="date1">'+event_date.format('MMM').toUpperCase()+'</p><p class="date2">'+event_date.format('DD')+'</p><p class="date3">'+event_date.format('ddd')+'</p></div><div class="col-md-10 col-xs-9 event-info-container"><div class="col-xs-12 col-md-9 event-info"><span><p class="first-line"><a href="/events/'+event.te_uid+'">'+event.name+'</a></p><p class="second-line">'+date_text+'</p></span></div><div class="col-xs-12 col-md-3">'+btn+'</div></div></div></div>';
         }
