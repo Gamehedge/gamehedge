@@ -125,7 +125,7 @@ Rails.application.configure do
 
   config.force_ssl = true
 
-  config.action_mailer.default_url_options = { host: 'gamehedge-ruby.herokuapp.com/', port: 80 }
+  config.action_mailer.default_url_options = { host: 'www.gamehedge.com', port: 80 }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
