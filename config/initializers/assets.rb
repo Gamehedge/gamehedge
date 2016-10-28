@@ -22,6 +22,7 @@ Rails.application.config.assets.precompile += %w( spin.min.js )
 Rails.application.config.assets.precompile += %w( ladda.min.js )
 Rails.application.config.assets.precompile += %w( angular-ladda.min.js )
 Rails.application.config.assets.precompile += %w( sweetalert.min.js )
+Rails.application.config.assets.precompile += %w( fonts )
 
 
 

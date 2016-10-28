@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  get 'venue/show'
+
   get 'order_history/index'
 
   get 'member/index'
@@ -46,7 +48,7 @@ Rails.application.routes.draw do
   get 'contact/send_message'
   get 'contact/send_email_message'
 
-  resources :search, :signature, :league, :performer, :events, :orders, :terms, :faq, :contact, :how_it_works, :press, :member, :order_history
+  resources :search, :signature, :league, :performer, :events, :orders, :terms, :faq, :contact, :how_it_works, :press, :member, :order_history, :venue
   
   devise_for :admin_users, ActiveAdmin::Devise.config
   

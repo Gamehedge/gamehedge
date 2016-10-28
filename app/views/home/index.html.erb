@@ -142,7 +142,7 @@
                               
                               <% if tile.tile_type.id == 4 %>
                                 <div class="tile-event hidden-xs hidden-sm">
-                                  <a href="<%= tile.event1.url %>">
+                                  <a href="<%= "/events/"+tile.event1.te_uid.to_s %>">
                                     <div class="row">
                                       <div class="col-xs-4 date-holder">
                                         <p class="date1"><%= tile.event1.occurs_at.strftime('%^b') %></p>
@@ -163,7 +163,7 @@
                                   </a>
                                 </div>
                                 <div class="tile-event hidden-xs hidden-sm" ng-if="tile.tile_type.id == 4">
-                                  <a href="<%= tile.event2.url %>">
+                                  <a href="<%= "/events/"+tile.event2.te_uid.to_s %>">
                                     <div class="row">
                                       <div class="col-xs-4 date-holder">
                                         <p class="date1"><%= tile.event2.occurs_at.strftime('%^b') %></p>
@@ -187,7 +187,7 @@
                                   </a>
                                 </div>
                                 <div class="tile-event hidden-xs hidden-sm" ng-if="tile.tile_type.id == 4">
-                                  <a href="<%= tile.event3.url %>">
+                                  <a href="<%= "/events/"+tile.event3.te_uid.to_s %>">
                                     <div class="row">
                                       <div class="col-xs-4 date-holder">
                                        <p class="date1"><%= tile.event3.occurs_at.strftime('%^b') %></p>
@@ -424,7 +424,7 @@
           url: url,
           success: function(response){
             if(tiles[index].tile_type.id == '3' && tiles[index].has_geolocation == true){
-              $("#tile-info-"+String(tiles[index].id)).find('a').attr('href',response.venue.url)
+              $("#tile-info-"+String(tiles[index].id)).find('a').attr('href','/venue/'+response.venue.id)
               $("#tile-info-"+String(tiles[index].id)).find('.performer-name').html(response.venue.name.toUpperCase());
               $("#tile-info-"+String(tiles[index].id)).find('.tile-title').html(response.venue.name);
               tiles[index].events = response.events;
@@ -451,7 +451,8 @@
               else{
                 date_text = event_date.format('hh:mm A')
               }
-              htm += '<div class="tile-event hidden-xs hidden-sm"><a href="/events/'+event.id+'/'+event.name.split('/').join('-').split(' ').join('-')+ '-tickets"><div class="row"><div class="col-xs-4 date-holder"><p class="date1">'+event_date.format('MMM').toUpperCase()+'</p><p class="date2">'+event_date.format('DD')+'</p><p class="date3">'+event_date.format('ddd')+'</p></div><div class="col-xs-8 event-holder"><p><span class="event1">'+event.name+'</span></p><p class="event3"><span class="at">'+date_text+' at</span> '+event.venue.name+'</p><p class="event4">'+event.available_count+' tickets left</p></div></div></a></div>';
+              //'/'+event.name.split('/').join('-').split(' ').join('-')+ '-tickets'
+              htm += '<div class="tile-event hidden-xs hidden-sm"><a href="/events/'+event.id+'"><div class="row"><div class="col-xs-4 date-holder"><p class="date1">'+event_date.format('MMM').toUpperCase()+'</p><p class="date2">'+event_date.format('DD')+'</p><p class="date3">'+event_date.format('ddd')+'</p></div><div class="col-xs-8 event-holder"><p><span class="event1">'+event.name+'</span></p><p class="event3"><span class="at">'+date_text+' at</span> '+event.venue.name+'</p><p class="event4">'+event.available_count+' tickets left</p></div></div></a></div>';
               if(i == 2){
                 break;
               }

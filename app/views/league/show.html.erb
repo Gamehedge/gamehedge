@@ -117,7 +117,7 @@
                                   <div class="league-detail-text">
                                       <a class="detail-title" href="<%= "/performer/"+performer.te_uid.to_s %>"><%= performer.name %></a>
                                       <% if performer.venue %>
-                                        <p class="detail-text">Stadium <a href="<%= performer.venue.url %>"><%= performer.venue.name %></a></p>
+                                        <p class="detail-text">Stadium <a href="<%= "/venue/"+performer.venue.te_uid.to_s %>"><%= performer.venue.name %></a></p>
                                       <% end %>
                                       <div>
                                           <table>
@@ -156,7 +156,7 @@
                                 <div class="col-xs-8 col-md-7 name hidden-xs hidden-sm">
                                   <a href="<%= "/performer/"+performer.te_uid.to_s %>"><%= performer.name %></a>
                                   <% if performer.venue %>
-                                    <p>Stadium <a href="<%= performer.venue.url %>"><%= performer.venue.name %></a></p>
+                                    <p>Stadium <a href="<%= "/venue/"+performer.venue.te_uid.to_s %>"><%= performer.venue.name %></a></p>
                                   <% end%>
                                 </div>
                                 <div class="col-xs-3 col-md-2 score hidden-xs hidden-sm">
