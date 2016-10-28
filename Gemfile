@@ -87,11 +87,6 @@ gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 
 gem 'bower-rails'
 
-gem 'angular-rails-templates'
-
-gem 'bootstrap-sass', '~> 3.3.6'
-
-gem 'angular-ui-bootstrap-rails'
 
 
 # Get IP address and location

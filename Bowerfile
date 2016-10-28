@@ -1,10 +1,4 @@
-asset 'angular'
-asset 'angular-route'
-asset 'angular-devise'
-asset 'angular-animate'
-asset 'angular-ladda'
-asset 'sweetalert'
-asset 'angular-google-analytics'
-asset 'angular-location-update'
-asset 'angular-load'
-# vim: ft=ruby
+# A sample Bowerfile
+# Check out https://github.com/42dev/bower-rails#ruby-dsl-configuration for more options
+
+# asset 'bootstrap'

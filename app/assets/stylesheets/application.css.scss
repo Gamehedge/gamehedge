@@ -13,12 +13,12 @@
  
  */
 
- @import "bootstrap-sprockets";
- @import "bootstrap";
+ 
+ @import "bootstrap.min";
  @import "slick";
  @import "slick-theme";
- @import "ladda/dist/ladda-themeless.min";
- @import "sweetalert/dist/sweetalert";
+ @import "ladda-themeless.min";
+ @import "sweetalert";
  @import "font-awesome.min";
 
 /*loading css*/

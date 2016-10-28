@@ -12,10 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require ladda/dist/spin.min
-//= require ladda/dist/ladda.min
-//= require bootstrap
-//= require sweetalert/dist/sweetalert.min
+//= require spin.min
+// require ladda/dist/ladda.min
+//= require bootstrap.min
+// require sweetalert.min
 // require_tree .
 // require_tree ./templates
 //= require slick.min

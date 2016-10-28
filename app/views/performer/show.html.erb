@@ -112,12 +112,12 @@
                   <div class="title">
                     <h2>STAY UP TO DATE</h2>
                     <p>Sign up for savings, info and more!</p>
-                    <form name="up_date_form" ng-submit="sendPerformerEmailRequest()" novalidate>
+                    <form name="up_date_form" onsubmit="return false;" onclick="sendPerformerEmailRequest()" novalidate>
                         <div class="form">
-                          <input type="email" name="email" ng-model="up_date_email"placeholder="example@example.com" required autocomplete="off">
-                          <button ladda="up_date_email_proccessing" ng-disabled="up_date_form.$invalid" >SEND</button>
+                          <input type="email" name="email" placeholder="example@example.com" required autocomplete="off" id="customer_email_input">
+                          <button id="customerEmailBtn">SEND</button>
                         </div>
-                        <p ng-show="up_date_form.email.$invalid && !up_date_form.email.$pristine" class="help-block footer-form-msg">Enter a valid email.</p>
+                        <p class="help-block footer-form-msg hidden">Enter a valid email.</p>
                     </form>
                   </div>
                   <% if @testimonials.length > 0 %>
@@ -272,7 +272,33 @@
       //*******************************Typeahead INIT end****************************************
       
   });
+  function sendPerformerEmailRequest(){
+    if (isValidEmailAddress($(".footer-input").val())) {
+        $(".footer-form-msg").addClass("hidden");
+        var l = Ladda.create( document.querySelector('#customerEmailBtn'));
+        l.start();
+        $.ajax({
+          method: "GET",
+          url: "/contact/send_email_message?email=" + $("#customer_email_input").val(),
+          success: function(response){
+            l.stop();
+            $("#customer_email_input").val("");
+            swal({   
+                title: "Thanks!",   
+                text: "Our team will send you updates and deals.",   
+                type: "success"
+            });
+          },
+          error: function(response){
 
+          },
+        })
+    }
+    else{
+      $(".footer-form-msg").removeClass("hidden");
+    }
+    return false;
+  }
   function toogleHome(t){
     all_games = t;
     if(all_games == true){
