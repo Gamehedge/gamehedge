@@ -34,10 +34,6 @@
                 </div>
               </section>
 
-             <!--  <script type="text/ng-template" id="typeahead/bind-node.html">
-                <a href="{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
-              </script> -->
-
               <main>
                 <section id="good-game-guarantee" class="hidden-xs hidden-sm">
                   <div class="container">
@@ -455,7 +451,7 @@
               else{
                 date_text = event_date.format('hh:mm A')
               }
-              htm += '<div class="tile-event hidden-xs hidden-sm"><a href="'+event.url+'/'+event.name.split('/').join('-').split(' ').join('-')+ '-tickets"><div class="row"><div class="col-xs-4 date-holder"><p class="date1">'+event_date.format('MMM').toUpperCase()+'</p><p class="date2">'+event_date.format('DD')+'</p><p class="date3">'+event_date.format('ddd')+'</p></div><div class="col-xs-8 event-holder"><p><span class="event1">'+event.name+'</span></p><p class="event3"><span class="at">'+date_text+' at</span> '+event.venue.name+'</p><p class="event4">'+event.available_count+' tickets left</p></div></div></a></div>';
+              htm += '<div class="tile-event hidden-xs hidden-sm"><a href="/events/'+event.id+'/'+event.name.split('/').join('-').split(' ').join('-')+ '-tickets"><div class="row"><div class="col-xs-4 date-holder"><p class="date1">'+event_date.format('MMM').toUpperCase()+'</p><p class="date2">'+event_date.format('DD')+'</p><p class="date3">'+event_date.format('ddd')+'</p></div><div class="col-xs-8 event-holder"><p><span class="event1">'+event.name+'</span></p><p class="event3"><span class="at">'+date_text+' at</span> '+event.venue.name+'</p><p class="event4">'+event.available_count+' tickets left</p></div></div></a></div>';
               if(i == 2){
                 break;
               }

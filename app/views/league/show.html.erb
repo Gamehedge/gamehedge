@@ -112,10 +112,10 @@
                               <div class="row performer-detail">
                                 <div class="league-detail-table hidden-md hidden-lg hidden-xl">
                                   <div class="league-detail-image">
-                                    <a href="<%= performer.url %>"><img src="<%= performer.image_url_medium %>"></a>
+                                    <a href="<%= "/performer/"+performer.te_uid.to_s %>"><img src="<%= performer.image_url_medium %>"></a>
                                   </div>
                                   <div class="league-detail-text">
-                                      <a class="detail-title" href="<%= performer.url %>"><%= performer.name %></a>
+                                      <a class="detail-title" href="<%= "/performer/"+performer.te_uid.to_s %>"><%= performer.name %></a>
                                       <% if performer.venue %>
                                         <p class="detail-text">Stadium <a href="<%= performer.venue.url %>"><%= performer.venue.name %></a></p>
                                       <% end %>
@@ -150,11 +150,11 @@
                                   <div class="dummy"></div>
                                   <div class="img-container">
                                     <div class="centerer mobile-upper"></div>
-                                    <a href="<%= performer.url %>"><img src="<%= performer.image_url_medium %>"></a>
+                                    <a href="<%= "/performer/"+performer.te_uid.to_s %>"><img src="<%= performer.image_url_medium %>"></a>
                                   </div>
                                 </div>
                                 <div class="col-xs-8 col-md-7 name hidden-xs hidden-sm">
-                                  <a href="<%= performer.url %>"><%= performer.name %></a>
+                                  <a href="<%= "/performer/"+performer.te_uid.to_s %>"><%= performer.name %></a>
                                   <% if performer.venue %>
                                     <p>Stadium <a href="<%= performer.venue.url %>"><%= performer.venue.name %></a></p>
                                   <% end%>
@@ -335,7 +335,8 @@
           }
           for(i=0;i<ax;i++){
             event = next_events[i];
-            var url2 = event.url + '/' + event.name.split('/').join('-').split(' ').join('-') + '-tickets';
+            // var url2 = event.url + '/' + event.name.split('/').join('-').split(' ').join('-') + '-tickets';
+            var url2 = "/events/"+event.id
             var event_date = moment(event.occurs_at.replace("Z",""));
             var date_text = "";
             var venue_name = "";
