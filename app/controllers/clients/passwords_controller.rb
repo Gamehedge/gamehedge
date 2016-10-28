@@ -1,8 +1,11 @@
 class Clients::PasswordsController < Devise::PasswordsController
   # GET /resource/password/new
-  # def new
-  #   super
-  # end
+  def new
+    @leagueList = Sport.where(active: true)
+    @divisions_menu = Division.all
+    @performers_menu = Performer.all
+    super
+  end
 
   # POST /resource/password
   # def create

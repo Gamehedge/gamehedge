@@ -25,7 +25,9 @@ Rails.application.routes.draw do
   post 'auth/send_password'
 
   devise_for :clients, controllers: {
-        sessions: 'clients/sessions'
+        sessions: 'clients/sessions',
+        passwords: 'clients/passwords',
+        registrations: 'clients/registrations'
       }
   
   get 'home/index'
