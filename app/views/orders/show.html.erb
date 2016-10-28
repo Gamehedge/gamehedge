@@ -1,26 +1,4 @@
-<span ng-app="gamehedge">
-    <div>
-        <div class="dark-header">
-            <nav class="navbar navbar-default navbar-gamehedge vertical-center" role="navigation">
-
-                <div class="col-xs-2 hidden-md hidden-lg">
-                    
-                </div>
-                <div class="navbar-header col-md-4 col-xs-8">
-                    <a href="/">
-                        <img class="logo-image" alt="GameHedge.com" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/logo.png">
-                    </a>
-                </div>
-
-                
-                  <div class="navbar-header col-md-8 hidden-xs hidden-xm vertical-center help hidden">
-                      
-                    <p>NEED HELP? CALL TOLL FREE <br><span>(888) 804-4330</span></p>
-                    <img class="help-image" alt="Call Us" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/help.png">
-                
-                </div>
-            </nav>
-        </div>
+<% content_for :title, "Gamehedge - Order" %>
         <div class="view-container hidden" ng-controller="OrderController">
             <div class="view-frame animate-view">
                <div id="home-loading-data" class="row horizontal-center" ng-if="!clientLoaded || !ticketsLoaded">
@@ -1156,13 +1134,6 @@
         </div>
 
 
-
-
-       
-        <div growl></div>
-    </div>
-</span>
-
 <%= stylesheet_link_tag 'ladda-themeless.min', 'data-turbolinks-track' => true %>
 <%= stylesheet_link_tag 'sweetalert', 'data-turbolinks-track' => true %>
 <%= javascript_include_tag 'angular.min', 'data-turbolinks-track' => true %>
@@ -1176,6 +1147,10 @@
 
         
 <script>
+    $(document).ready(function(){
+      $("#head-container").addClass("dark-header");
+      $("footer").addClass("hidden");
+    })
     app = angular.module('gamehedge',[
         'angular-ladda',
     ])

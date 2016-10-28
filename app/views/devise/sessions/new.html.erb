@@ -8,7 +8,10 @@
         <div class="outter">
           <div class="inner">
             <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-              <div class="row update-password" ng-if="!forgot_password">
+              <%- flash.each do |name, msg| -%>
+                <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+              <%- end -%>  
+              <div class="row update-password">
                 <div class="col-xs-12">
                   <%= f.email_field :email, autofocus: true %>
                 </div>
@@ -31,3 +34,11 @@
     </div>
   </div>
 </section>
+
+<script>
+  $(document).ready(function(){
+      $("#head-container").addClass("dark-header");
+      $("footer").addClass("hidden");
+      $(".intro-full").addClass("hidden");
+  })
+</script>

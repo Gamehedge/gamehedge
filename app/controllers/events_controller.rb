@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
 	def show
+		@event =  Event.where(te_uid: params[:id]).first
 		@leagueList = Sport.where(active: true)
 	  	@divisions_menu = Division.all
 	  	@performers_menu = Performer.all

@@ -1,18 +1,4 @@
 
-<div class="dark-header">
-    <nav class="navbar navbar-default navbar-gamehedge vertical-center">
-
-        <div class="navbar-header col-md-4 col-xs-8">
-            <a href="/">
-                <img class="logo-image" alt="GameHedge" src="<%= image_url 'logo.png' %>">
-            </a>
-        </div>
-        <div class="navbar-header col-md-8 hidden-xs hidden-xm vertical-center help">
-               
-            
-        </div>
-    </nav>
-</div>
 <section id="confirmation">
   <div class="container" style="justify-content: center;display: flex;">
     <div class="row" style="max-width:500px">
@@ -49,3 +35,10 @@
   </div>
 </section>
 
+<script>
+  $(document).ready(function(){
+      $("#head-container").addClass("dark-header");
+      $("footer").addClass("hidden");
+      $(".intro-full").addClass("hidden");
+  })
+</script>

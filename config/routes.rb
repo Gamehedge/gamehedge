@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
   
+  get 'order_history/index'
+
+  get 'member/index'
+
+  get 'press/index'
+
+  get 'how_it_works/index'
+
   get 'contactus/index'
 
   get 'faq/index'
@@ -14,7 +22,9 @@ Rails.application.routes.draw do
   post 'auth/get_user'
   post 'auth/send_password'
 
-  devise_for :clients
+  devise_for :clients, controllers: {
+        sessions: 'clients/sessions'
+      }
   
   get 'home/index'
   get 'events/near'
@@ -36,7 +46,7 @@ Rails.application.routes.draw do
   get 'contact/send_message'
   get 'contact/send_email_message'
 
-  resources :search, :signature, :league, :performer, :events, :orders, :terms, :faq, :contact
+  resources :search, :signature, :league, :performer, :events, :orders, :terms, :faq, :contact, :how_it_works, :press, :member, :order_history
   
   devise_for :admin_users, ActiveAdmin::Devise.config
   

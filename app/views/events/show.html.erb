@@ -1,128 +1,4 @@
-<span ng-app="gamehedge">
-    <div>
-        <div class="intro-full fade-intro" ng-if="page_loading == true">
-            <div class="intro-img-container">
-                <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/GameHedge_Logo_Footer.png" alt="Gamehedge" width="300" class="img-intro-full"/>
-            </div>
-        </div>
-        <div class="dark-header">
-            <nav class="navbar navbar-default navbar-gamehedge vertical-center" role="navigation">
-
-                <div class="col-xs-2 hidden-md hidden-lg">
-                    <div class="navbar navbar-default navbar-fixed-top">
-                        <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target="#slideMenu" data-canvas="body">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
-                </div>
-                <div class="navbar-header col-md-4 col-xs-8">
-                    <a href="/">
-                        <img class="logo-image" alt="GameHedge.com" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/logo.png">
-                    </a>
-                </div>
-
-                <div class="col-xs-2 hidden">
-                    <div class="navbar navbar-default navbar-fixed-top right">
-                        <button type="button" class="navbar-toggle search-button" style="padding-top:0;" data-toggle="offcanvas" data-target="#searchMenu" data-canvas="body" ng-click="showSlideSearch()">
-                            <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/search icon.png">
-                        </button>
-                    </div>
-                </div>
-
-
-                <div class="col-md-4 hidden-sm hidden-xs horizontal-center main-menu">
-                  <% @leagueList.each do |league| %>
-                    <ul class="nav navbar-nav navbar-leagues vertical-center horizontal-center">
-                      <li class="dropdown main-dropdown yamm-fw">
-                        <a class="dropdown-toggle" href="<%= league.url %>"><%= league.name.upcase %></a>
-                        <% if league.name == 'MLB' || league.name == 'NBA' %>
-                           <ul class="dropdown-menu size1">
-                        <% elsif league.name == 'NFL' %>
-                          <ul class="dropdown-menu size2">
-                        <% elsif league.name == 'NHL' %>
-                          <ul class="dropdown-menu size3">
-                        <% elsif league.name == 'NCAAFB' %>
-                          <ul class="dropdown-menu size4">
-                        <% end %>
-                          <li>
-                            <% if league.id == 5 %>
-                              <div class="yamm-content">
-                                <div class="text-center">
-                                  <% @divisions_menu.where(sport_id: league.id).order(:name).each_with_index do |division, ind| %>
-                                    <div>
-                                      <% if ind % 3 == 0 %>
-                                        <div class="clearfix"></div>
-                                      <% end %>
-                                      <div class="col-xs-4">
-                                        <div class="subtitle"><%= division.name.upcase %></div>
-                                        <div class="performer-holder">
-                                          <% @performers_menu.where(division_id: division.id).order(:name).each do |performer| %>
-                                            <div>
-                                              <a href="<%= performer.url %>"><%= performer.name %></a>
-                                            </div>
-                                          <% end %>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  <% end %>
-                                </div>
-                              </div>
-                            <% else %>
-                              <div class="yamm-content">
-                                <% @divisions_menu.where(is_main_division: true).where(sport_id: league.id).order(:name).each do |main_division| %>
-                                  <div class="text-center">
-                                    <div class="col-xs-12 title vertical-center horizontal-center"><%= main_division.name %></div>
-                                    <% @divisions_menu.where(division_id: main_division.id).order(:name).each do |division| %>
-                                      <% if league.name == 'MLB' || league.name == 'NBA' %>
-                                        <div class="col-xs-4">
-                                      <% elsif league.name == 'NFL' %>
-                                        <div class="col-xs-3">
-                                      <% elsif league.name == 'NHL' %>
-                                        <div class="col-xs-6">
-                                      <% end %>
-                                        <div class="subtitle"><%= division.name.upcase %></div>
-                                        <div class="performer-holder">
-                                          <% @performers_menu.where(division_id: division.id).order(:name).each do |performer| %>
-                                            <div>
-                                              <a href="<%= performer.url %>" ><%= performer.name %></a>
-                                            </div>
-                                          <% end %>
-                                        </div>
-                                      </div>
-                                    <% end %>
-                                  </div>
-                                <% end %>
-                              </div>
-                            <% end %>
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
-                  <% end %>
-                </div>
-                <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs">
-                    
-                </div>
-                <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs">
-                    <% if client_signed_in? %>
-                      <div class="dropdown">
-                        <button class="dropdown-toggle myaccount-btn" type="button" data-toggle="dropdown"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png"><%= current_client.name.upcase %><img class="dropdown-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/dropdown.png"></button>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href="/member">Your Profile</a></li>
-                            <li><a href="/order_history">Order History</a></li>
-                            <li><%= link_to "Logout", destroy_client_session_path, :method => :delete %></li>
-                        </ul>
-                      </div>
-                    <% else %>
-                      <div class="dropdown login">
-                          <a href="/clients/sign_in"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png">LOGIN</a>
-                      </div>
-                    <% end %>
-                </div>
-            </nav>
-        </div>
+<% content_for :title, "Gamehedge - " + @event.name %>
         <div class="view-container" ng-controller="EventController">
             <div class="view-frame animate-view">
                 <div id="home" class="event-container">
@@ -395,14 +271,7 @@
 
             </div>
         </div>
-
-
-
-
-       
-        <div growl></div>
-    </div>
-</span>
+  
 
 <%= stylesheet_link_tag 'ladda-themeless.min', 'data-turbolinks-track' => true %>
 <%= javascript_include_tag 'angular.min', 'data-turbolinks-track' => true %>
@@ -413,6 +282,10 @@
 <%= javascript_include_tag 'angular-ladda.min', 'data-turbolinks-track' => true %>
         
 <script>
+    $(document).ready(function(){
+      $("#head-container").addClass("dark-header");
+      $("footer").addClass("hidden");
+    })
     app = angular.module('gamehedge',[
         
         'angular-ladda',

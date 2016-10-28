@@ -1,0 +1,164 @@
+<% content_for :title, "Gamehedge - " + current_client.name %>
+
+    <div class="view-container">
+        <div class="view-frame animate-view">
+            <main id="account">
+                <div class="container">
+                    <div id="home-loading-data" class="row horizontal-center">
+                      <div class='uil-default-css' style='transform:scale(0.32);'><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(0deg) translate(0,-60px);transform:rotate(0deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(30deg) translate(0,-60px);transform:rotate(30deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(60deg) translate(0,-60px);transform:rotate(60deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(90deg) translate(0,-60px);transform:rotate(90deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(120deg) translate(0,-60px);transform:rotate(120deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(150deg) translate(0,-60px);transform:rotate(150deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(180deg) translate(0,-60px);transform:rotate(180deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(210deg) translate(0,-60px);transform:rotate(210deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(240deg) translate(0,-60px);transform:rotate(240deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(270deg) translate(0,-60px);transform:rotate(270deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(300deg) translate(0,-60px);transform:rotate(300deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(330deg) translate(0,-60px);transform:rotate(330deg) translate(0,-60px);border-radius:10px;position:absolute;'></div>
+                      </div>
+                    </div>
+                    <section id="order-history" class="hidden">
+                        <h2>Previous Orders</h2>
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Order Date</th>
+                                    <th>Event</th>
+                                    <th>Total</th>
+                                    <th>Order Status</th>
+                                    <th>Refund Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </div>
+
+
+<%= javascript_include_tag 'bootstrap3-typeahead.min', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'moment', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'sweetalert.min', 'data-turbolinks-track' => true %>
+
+
+
+
+
+<script>
+    $(document).ready(function(){
+        $(".intro-full").addClass("hidden");
+        $("#head-container").addClass("dark-header");
+        getLocalOrders();
+    });
+    function getLocalOrders(){
+        $.ajax({
+          method: 'GET',
+          url: '/api/v1/orders/?client_id='+<%= current_client.te_uid %>,
+          headers: {
+             'Authorization': 'Token token="TokenHere"'
+          },
+          success: function(response){
+            console.log
+            local_orders  = response;
+            getOrders();
+                
+          },
+          error: function(response){
+            console.log(response);
+          },
+        });
+    }
+
+    function getOrders(){
+        $.ajax({
+          method: 'GET',
+          url: '/orders/list/?id='+<%= current_client.te_uid %>,
+          success: function(response){
+            orders = response;
+            var htm ="";
+            for(i=0;i<orders.length;i++){
+                var o = orders[i];
+                var result = $.grep(local_orders, function(e){ return e.te_order_id == orders[i].id; });
+                var occurs_at = moment(o.items[0].ticket_group.event.occurs_at.replace("Z",""));
+                var occurs_at_text = occurs_at.format('YYYY-DD-M hh:mm A')
+                var created_at = moment(o.created_at.replace("Z",""));
+                var created_at_text = created_at.format('YYYY/DD/MM')
+                if(result.length > 0){
+                    orders[i].refund_status = result[0].refund_status;
+                }
+                var refund_av = "";
+                if(o.refund_status != null){
+                    if(o.refund_status.name == 'Refund Available'){
+                        refund_av = '<div class="refund_available" onclick="requestRefund(o.id,this)">' + o.refund_status.name + '</div>';
+                    }
+                    else{
+                        refund_av = o.refund_status.name;
+                    }
+                }
+                else{
+                    refund_av = 'Not available';
+                }
+                htm += '<tr><td>' + o.id + '</td><td>' + created_at_text + '</td><td>' + o.items[0].ticket_group.event.name + '<br/>' + o.items[0].ticket_group.event.venue.name + ', ' + o.items[0].ticket_group.event.venue.address.locality + ', ' + o.items[0].ticket_group.event.venue.address.region + '<br />' + occurs_at_text + '<br />Section ' + o.items[0].ticket_group.section + ', Row ' + o.items[0].ticket_group.row + ', Seats ' + o.items[0].ticket_group.quantity + '</td><td>' + o.total + '</td><td>' + o.state + '</td><td>' + refund_av + '</td></tr>'
+            }
+            if(orders.length == 0){
+                htm = '<tr><td colspan="11">No previous Order History</td></tr>';
+            }
+            $("tbody").html(htm);
+            $("#order-history").removeClass("hidden");
+            $("#home-loading-data").addClass("hidden");
+          },
+          error: function(response){
+            console.log(response);
+          },
+        });
+    }
+
+    function requestRefund(oid,DOM){
+        swal({
+            html: true,
+            title: "Request Refund?",
+            text: "<strong>Sorry the game didn't work out as you may have hoped - but you are eligible for a Good Game Guarantee Refund!</strong><br><p>Simply click on REQUEST REFUND below and you will receive a refund of 50% of your ticket price within 5-10 business days.</p><br><p>The refund will be credited to the credit card that you used to make your purchase.</p><br><p>If you have any questions, please email us at support@gamehedge.com or give us a jingle Toll Free at 888-804-4330.</p><br><p>Hope your team wins next time!</p>",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#91c33f",
+            confirmButtonText: "Yes, request refund!",
+            closeOnConfirm: false 
+        },function(){
+            $.ajax({
+              method: 'POST',
+              url: '/orders/request_refund/',
+              data: {id: oid},
+              success: function(response){
+                if(response == "success"){
+                    $(DOM).html("Refund Requested");
+                    swal({
+                        title: "Refund Requested",
+                        text: "Your refund has been requested successfully",
+                        type: "success",
+                        confirmButtonColor: "#91c33f",
+                    });
+                }
+                else{
+                    swal({
+                        title: "Refund not Requested",
+                        text: "There was an error processing your request.",
+                        type: "error",
+                        confirmButtonColor: "#DD6B55",
+                    });
+                }
+              },
+              error: function(response){
+                swal({
+                    title: "Refund not Requested",
+                    text: "There was an error processing your request.",
+                    type: "error",
+                    confirmButtonColor: "#DD6B55",
+                });
+              },
+            });
+        });
+    }
+</script>
+   
+
+
+
+
+
+   

@@ -1,254 +1,5 @@
 <% content_for :title, "Gamehedge - Contact Us" %>
-<div>
-    <!-- <div class="intro-full fade-intro hidden" ng-if="page_loading == true">
-        <div class="intro-img-container">
-            <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/GameHedge_Logo_Footer.png" alt="Gamehedge" width="300" class="img-intro-full"/>
-        </div>
-    </div> -->
 
-                            <!-- MOBILE MENU -->
-
-
-
-    <!-- <div class="mobile-menu main-menu-transition hidden">
-        <div class="mobile-menu-header">
-            <div class="row">
-                <div class="col-xs-2">
-                    <div ng-click="hideMenus()">
-                        <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/close-menu.png" class="img-header">
-                    </div>
-                </div>
-                <div class="navbar-header col-xs-8">
-                    <a href="/" ng-click="hideMenus()">
-                        <img class="logo-image menu" alt="GameHedge.com" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/logo.png">
-                    </a>
-                </div>
-                <div class="col-xs-2"></div>
-            </div>
-        </div>
-        <div class="menu-container">
-            <div class="row menu-row" ng-show="!$root.isLoggedin">
-                <div class="col-xs-3"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png"></div>
-                <div class="col-xs-9"><a href="/login" ng-click="hideMenus()">Login</a></div>
-            </div>
-            <div class="row menu-row" ng-show="$root.isLoggedin">
-                <div class="col-xs-3"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png"></div>
-                <div class="col-xs-9"><p >{{$root.user.name | uppercase}}</p></div>
-            </div>
-            <div class="row menu-row" ng-show="$root.isLoggedin">
-                <div class="col-xs-3"></div>
-                <div class="col-xs-9"><a href="/member" ng-click="hideMenus()">Your profile</a></div>
-            </div>
-            <div class="row menu-row" ng-show="$root.isLoggedin">
-                <div class="col-xs-3"></div>
-                <div class="col-xs-9"><a  href="/order_history" ng-click="hideMenus()">Order history</a></div>
-            </div>
-            <div class="row menu-row" ng-show="$root.isLoggedin">
-                <div class="col-xs-3"></div>
-                <div class="col-xs-9"><a ng-click="logout()" ng-click="hideMenus()">Logout</a></div>
-            </div>
-
-            <div class="row menu-row separator" ng-repeat-start="league in leagueList" ng-if="$first">
-                <div class="col-xs-3" ng-if="league.active == true"></div>
-                <div class="col-xs-9" ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()" >{{league.name | uppercase}}</a></div>
-            </div>
-            <div class="row menu-row" ng-repeat-end ng-if="!$first">
-                <div class="col-xs-3" ng-if="league.active == true"></div>
-                <div class="col-xs-9" ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()" >{{league.name | uppercase}}</a></div>
-            </div>
-            <div class="row menu-row">
-                <div class="col-xs-3"></div>
-                <div class="col-xs-9"><a href="/faq/" ng-click="hideMenus()">FAQ</a></div>
-            </div>
-            <div class="row menu-row">
-                <div class="col-xs-3"></div>
-                <div class="col-xs-9"><a href="tel:8888044330">Toll Free: 888-804-4330</a></div>
-            </div>
-            <div class="row menu-row">
-                <div class="col-xs-3"></div>
-                <div class="col-xs-9"><a href="/contact/" ng-click="hideMenus()">Contact Us</a></div>
-            </div>
-        </div>
-        <div class="mobile-menu-footer">
-            <h2>Connect with us</h2>
-            <nav role="navigation" class="footer-social-media">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <a href="http://www.facebook.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/facebook-footer.png" alt="Like GameHedge on Facebook" /></a>          
-                        </div>
-                        <div class="col-xs-4">
-                            <a href="http://www.twitter.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/twitter-footer.png" alt="Foollow GameHedge on Twitter" /></a>          
-                        </div>
-                        <div class="col-xs-4">
-                            <a href="http://www.instagram.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/instagram-footer.png" alt="Like GameHedge on Instagram" /></a>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
-
-    <script type="text/ng-template" id="typeahead/bind-node.html">
-        <a href="{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
-    </script>
-    <div class="mobile-menu search-menu-transition ng-hide" ng-show="showSearchMenu" ng-if="!$root.isOrder">
-        <div class="mobile-menu-header">
-                <div class="navbar-header search-header col-xs-10">
-                    <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/search icon.png">
-                    <input type="text" placeholder="search tickets" ng-model="searchTerm" ng-change="getSearchHints(searchTerm)">
-                </div>
-                <div class="col-xs-2">
-                    <div ng-click="hideMenus()">
-                        <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/close-menu.png" class="img-header">
-                    </div>
-                </div>
-            
-        </div>
-        <div class="results-container">
-            <div ng-repeat="result in searchResults">
-                <a ng-href="result.url" ng-click="hideMenus()" >{{result.name}}</a>
-            </div>
-        </div>
-        <div class="mobile-menu-footer">
-            <h2>Connect with us</h2>
-            <nav role="navigation" class="footer-social-media">
-                
-                <div class="col-xs-4">
-                    <a href="http://www.facebook.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/facebook-footer.png" alt="Like GameHedge on Facebook" /></a>          
-                </div>
-                <div class="col-xs-4">
-                    <a href="http://www.twitter.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/twitter-footer.png" alt="Follow GameHedge on Twitter" /></a>          
-                </div>
-                <div class="col-xs-4">
-                    <a href="http://www.instagram.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/instagram-footer.png" alt="Like GameHedge on Instagram" /></a>
-                </div>
-           
-            </nav>
-        </div>
-    </div> -->
-                        <!-- END MOBILE MENU -->
-
-    <div>
-        <nav class="navbar navbar-default navbar-gamehedge vertical-center" role="navigation">
-
-            <div class="col-xs-2 hidden-md hidden-lg">
-                <div class="navbar navbar-default navbar-fixed-top">
-                    <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target="#slideMenu" data-canvas="body">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-            </div>
-            <div class="navbar-header col-md-4 col-xs-8">
-                <a href="/">
-                    <img class="logo-image" alt="GameHedge.com" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/logo.png">
-                </a>
-            </div>
-
-
-            
-            <div class="col-xs-2 hidden">
-                <div class="navbar navbar-default navbar-fixed-top right">
-                    <button type="button" class="navbar-toggle search-button" style="padding-top:0;" data-toggle="offcanvas" data-target="#searchMenu" data-canvas="body" ng-click="showSlideSearch()">
-                        <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/search icon.png">
-                    </button>
-                </div>
-            </div>
-
-
-            <div class="col-md-4 hidden-sm hidden-xs horizontal-center main-menu">
-              <% @leagueList.each do |league| %>
-                <ul class="nav navbar-nav navbar-leagues vertical-center horizontal-center">
-                  <li class="dropdown main-dropdown yamm-fw">
-                    <a class="dropdown-toggle" href="<%= league.url %>"><%= league.name.upcase %></a>
-                    <% if league.name == 'MLB' || league.name == 'NBA' %>
-                       <ul class="dropdown-menu size1">
-                    <% elsif league.name == 'NFL' %>
-                      <ul class="dropdown-menu size2">
-                    <% elsif league.name == 'NHL' %>
-                      <ul class="dropdown-menu size3">
-                    <% elsif league.name == 'NCAAFB' %>
-                      <ul class="dropdown-menu size4">
-                    <% end %>
-                      <li>
-                        <% if league.id == 5 %>
-                          <div class="yamm-content">
-                            <div class="text-center">
-                              <% @divisions_menu.where(sport_id: league.id).order(:name).each_with_index do |division, ind| %>
-                                <div>
-                                  <% if ind % 3 == 0 %>
-                                    <div class="clearfix"></div>
-                                  <% end %>
-                                  <div class="col-xs-4">
-                                    <div class="subtitle"><%= division.name.upcase %></div>
-                                    <div class="performer-holder">
-                                      <% @performers_menu.where(division_id: division.id).order(:name).each do |performer| %>
-                                        <div>
-                                          <a href="<%= performer.url %>"><%= performer.name %></a>
-                                        </div>
-                                      <% end %>
-                                    </div>
-                                  </div>
-                                </div>
-                              <% end %>
-                            </div>
-                          </div>
-                        <% else %>
-                          <div class="yamm-content">
-                            <% @divisions_menu.where(is_main_division: true).where(sport_id: league.id).order(:name).each do |main_division| %>
-                              <div class="text-center">
-                                <div class="col-xs-12 title vertical-center horizontal-center"><%= main_division.name %></div>
-                                <% @divisions_menu.where(division_id: main_division.id).order(:name).each do |division| %>
-                                  <% if league.name == 'MLB' || league.name == 'NBA' %>
-                                    <div class="col-xs-4">
-                                  <% elsif league.name == 'NFL' %>
-                                    <div class="col-xs-3">
-                                  <% elsif league.name == 'NHL' %>
-                                    <div class="col-xs-6">
-                                  <% end %>
-                                    <div class="subtitle"><%= division.name.upcase %></div>
-                                    <div class="performer-holder">
-                                      <% @performers_menu.where(division_id: division.id).order(:name).each do |performer| %>
-                                        <div>
-                                          <a href="<%= performer.url %>" ><%= performer.name %></a>
-                                        </div>
-                                      <% end %>
-                                    </div>
-                                  </div>
-                                <% end %>
-                              </div>
-                            <% end %>
-                          </div>
-                        <% end %>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              <% end %>
-            </div>
-            <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs">
-                
-            </div>
-            <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs">
-                <% if client_signed_in? %>
-                  <div class="dropdown">
-                    <button class="dropdown-toggle myaccount-btn" type="button" data-toggle="dropdown"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png"><%= current_client.name.upcase %><img class="dropdown-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/dropdown.png"></button>
-                    <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a href="/member">Your Profile</a></li>
-                        <li><a href="/order_history">Order History</a></li>
-                        <li><%= link_to "Logout", destroy_client_session_path, :method => :delete %></li>
-                    </ul>
-                  </div>
-                <% else %>
-                  <div class="dropdown login">
-                      <a href="/clients/sign_in"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png">LOGIN</a>
-                  </div>
-                <% end %>
-            </div>
-        </nav>
-    </div>
     <div class="view-container">
         <div class="view-frame animate-view">
             
@@ -284,161 +35,84 @@
                 </section>
 
                 <main id="contact_container">
-        <div class="container">
-            <h1 class="text-center">CONTACT US</h1>
-            <section id="contact-us">
-                <div class="row">
-                    <div class="col-md-12 text-center" style="font-size:18px; margin-bottom:10px;">
-                        <img width="40px" src="<%= image_url 'icon_home.png' %>"><div style="display:inline; margin-left:10px;">GameHedge 1460 Broadway New York, NY 10036</div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="col-md-12 text-center">
-                            <img width="100" src="<%= image_url 'phone_icon_grey.png' %>">
+                        <div class="container">
+                            <h1 class="text-center">CONTACT US</h1>
+                            <section id="contact-us">
+                                <div class="row">
+                                    <div class="col-md-12 text-center" style="font-size:18px; margin-bottom:10px;">
+                                        <img width="40px" src="<%= image_url 'icon_home.png' %>"><div style="display:inline; margin-left:10px;">GameHedge 1460 Broadway New York, NY 10036</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="col-md-12 text-center">
+                                            <img width="100" src="<%= image_url 'phone_icon_grey.png' %>">
+                                        </div>
+                                        <div class="col-md-12 text-center">
+                                            <h3>(888) 804-4330</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-12 text-center">
+                                            <img width="100" src="<%= image_url 'email_icon_grey.png' %>">
+                                        </div>
+                                        <div class="col-md-12 text-center contact-mobile">
+                                            <h3><a href="mailto:support@gamehedge.com">support@gamehedge.com</a></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12"><h2 class="text-center">- OR -</h2></div>
+                                </div>
+                                <div class="row contact-form">
+                                   
+                                        <form name="contactForm" class="form-horizontal" onsubmit="return false;">
+                                            <div class="form-group" ng-class="{ 'has-error' : contactForm.name.$invalid && !contactForm.name.$pristine }">
+                                                <label for="name" class="col-sm-2 control-label">Name</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control form-input" name="name" placeholder="First & Last Name" required>
+                                                    <p class="help-block hidden" id="name_required">You name is required.</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" ng-class="{ 'has-error' : contactForm.email.$invalid && !contactForm.email.$pristine }">
+                                                <label for="email" class="col-sm-2 control-label">Email</label>
+                                                <div class="col-sm-10">
+                                                    <input type="email" class="form-control form-input"name="email" placeholder="example@domain.com" required>
+                                                    <p class="help-block hidden" id="email_required">Enter a valid email.</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" ng-class="{ 'has-error' : contactForm.message.$invalid && !contactForm.message.$pristine }">
+                                                <label for="message" class="col-sm-2 control-label">Message</label>
+                                                <div class="col-sm-10">
+                                                    <textarea class="form-control form-input" rows="4" name="message" required></textarea>
+                                                    <p class="help-block hidden" id="message_required">Enter a message.</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" id="answer_holder" ng-class="{ 'has-error' : contactForm.human.$invalid && !contactForm.human.$pristine }">
+                                                <label for="human" class="col-sm-2 control-label" id="human_answer"></label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control myCustomRule form-input" name="human" placeholder="Your Answer" required autocomplete='off'>
+                                                    <p class="help-block hidden" id="answer_required">The answer is required.</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-10 col-sm-offset-2">
+                                                    <button class="btn btn-primary" id="send_btn" onclick="sendForm();">Send</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    
+                                </div>
+                            </section>
                         </div>
-                        <div class="col-md-12 text-center">
-                            <h3>(888) 804-4330</h3>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="col-md-12 text-center">
-                            <img width="100" src="<%= image_url 'email_icon_grey.png' %>">
-                        </div>
-                        <div class="col-md-12 text-center contact-mobile">
-                            <h3><a href="mailto:support@gamehedge.com">support@gamehedge.com</a></h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12"><h2 class="text-center">- OR -</h2></div>
-                </div>
-                <div class="row contact-form">
-                   
-                        <form name="contactForm" class="form-horizontal" onsubmit="return false;">
-                            <div class="form-group" ng-class="{ 'has-error' : contactForm.name.$invalid && !contactForm.name.$pristine }">
-                                <label for="name" class="col-sm-2 control-label">Name</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control form-input" name="name" placeholder="First & Last Name" required>
-                                    <p class="help-block hidden" id="name_required">You name is required.</p>
-                                </div>
-                            </div>
-                            <div class="form-group" ng-class="{ 'has-error' : contactForm.email.$invalid && !contactForm.email.$pristine }">
-                                <label for="email" class="col-sm-2 control-label">Email</label>
-                                <div class="col-sm-10">
-                                    <input type="email" class="form-control form-input"name="email" placeholder="example@domain.com" required>
-                                    <p class="help-block hidden" id="email_required">Enter a valid email.</p>
-                                </div>
-                            </div>
-                            <div class="form-group" ng-class="{ 'has-error' : contactForm.message.$invalid && !contactForm.message.$pristine }">
-                                <label for="message" class="col-sm-2 control-label">Message</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control form-input" rows="4" name="message" required></textarea>
-                                    <p class="help-block hidden" id="message_required">Enter a message.</p>
-                                </div>
-                            </div>
-                            <div class="form-group" id="answer_holder" ng-class="{ 'has-error' : contactForm.human.$invalid && !contactForm.human.$pristine }">
-                                <label for="human" class="col-sm-2 control-label" id="human_answer"></label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control myCustomRule form-input" name="human" placeholder="Your Answer" required autocomplete='off'>
-                                    <p class="help-block hidden" id="answer_required">The answer is required.</p>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-10 col-sm-offset-2">
-                                    <button class="btn btn-primary" id="send_btn" onclick="sendForm();">Send</button>
-                                </div>
-                            </div>
-                        </form>
-                    
-                </div>
-            </section>
-        </div>
-    </main>
+                </main>
                 
             </section>
 
 
         </div>
     </div>
-    <footer>
-        <div class="container">
-            <div class="row hidden-xs hidden-sm" id="data_footer">
-                <div class="col-md-3 hidden-xs hidden-sm">
-                    <div class="footer-nav">
-                        <h2>What to Know</h2>
-                        <nav role="navigation">
-                            <ul>
-                                <li><a href="/terms">Terms</a></li>
-                                <li><a href="/privacy">Privacy</a></li>
-                                <li><a href="/faq">FAQ</a></li>
-                                <li><a href="/contact">Contact Us</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-                <div class="col-md-3 hidden-xs hidden-sm">
-                    <div class="footer-nav">
-                        <h2>Important Links</h2>
-                        <nav role="navigation">
-                            <ul>
-                                <li><a href="/how-it-works">How it Works</a></li>
-                                <li><a href="/member">My Account</a></li>
-                                <li><a href="/press">Press</a></li>
-                                <li><a href="http://blog.gamehedge.com">Blog</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="footer-nav">
-                        <h2>Connect with us</h2>
-                        <nav role="navigation" class="footer-social-media">
-                            <a href="http://www.facebook.com/gamehedge" target="_blank" class="hidden-sm hidden-xs"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/facebook-footer.png" alt="Like GameHedge on Facebook" /></a>
-                            <a href="http://www.twitter.com/gamehedge" target="_blank" class="hidden-sm hidden-xs"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/twitter-footer.png" alt="Follow GameHedge on Twitter" /></a>
-                            <a href="http://www.instagram.com/gamehedge" target="_blank" class="hidden-sm hidden-xs"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/instagram-footer.png" alt="Like GameHedge on Instagram" /></a>
-                            <div class="container hidden-md hidden-lg">
-                                <div class="row">
-                                    <div class="col-xs-4">
-                                        <a href="http://www.facebook.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/facebook-footer.png" alt="Like GameHedge on Facebook" /></a>          
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <a href="http://www.twitter.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/twitter-footer.png" alt="Follow GameHedge on Twitter" /></a>          
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <a href="http://www.instagram.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/instagram-footer.png" alt="Like GameHedge on Instagram" /></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </nav>
-                        <h3>Enter email to receive updates and deals</h3>
-                        
-                        <form name="footer_form" ng-submit="sendEmailRequest()" novalidate>
-                            <div class="footer-email-container">
-                                <input type="email" name="email" ng-model="footer_email" class="form-control footer-input" required autocomplete="off">
-                                <button ladda="footer_proccessing" ng-disabled="footer_form.$invalid" class="btn footer-btn">SEND</button>
-                            </div>
-                            <p ng-show="footer_form.email.$invalid && !footer_form.email.$pristine" class="help-block footer-form-msg">Enter a valid email.</p>
-                        </form>
-                        
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="footer-nav text-center">
-                        <div class="col-md-4"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/badge-gamehedge.png" alt="GameHedge" /></div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-signature">
-                <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/GameHedge_Logo_Footer.png" alt="Gamehedge" />
-                <div class="footer-bottom clearfix">
-                    © <%= @year %> GameHedge and Good Game Guarantee are trademarks of GameHedge LLC.<br>All Rights Reserved. Patent Pending.
-                </div>
-            </div>
-        </div>
-    </footer>
-    <div growl></div>
-</div>
+    
 
 
 <%= javascript_include_tag 'bootstrap3-typeahead.min', 'data-turbolinks-track' => true %>
@@ -451,7 +125,7 @@
 
 <script>
   $(document).ready(function(){
-
+    $(".intro-full").addClass("hidden");
       //*******************************Typeahead INIT****************************************
     var now = new Date();
     now.setHours(now.getHours() + 1);
