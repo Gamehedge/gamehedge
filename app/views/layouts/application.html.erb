@@ -25,8 +25,16 @@
           position: fixed;
           z-index: 9999999999999;
           background-color: black;
+          transition-property: visibility, opacity;
+          transition-duration: 0s, 0.5s;
       }
-
+      .intro-full.hidden2 {
+          opacity: 0;
+          visibility: hidden;
+          transition-property: opacity, visibility;
+          transition-duration: 0.5s, 0s;
+          transition-delay: 0s, 0.5s;
+      }
       .intro-img-container{
           position: absolute;
           width: 300px;
@@ -84,20 +92,31 @@
     <script type="text/javascript">
       var info_url = "<%= image_url 'icon__info_1x.png' %>";
     </script>
+
+
+
+
+
+
+
+
+
+
+
                                                           <!-- MOBILE MENU -->
 
 
 
-    <!-- <div class="mobile-menu main-menu-transition hidden">
+    <div class="mobile-menu main-menu-transition hidden2">
         <div class="mobile-menu-header">
             <div class="row">
                 <div class="col-xs-2">
-                    <div ng-click="hideMenus()">
+                    <div onclick="hideMenus()">
                         <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/close-menu.png" class="img-header">
                     </div>
                 </div>
                 <div class="navbar-header col-xs-8">
-                    <a href="/" ng-click="hideMenus()">
+                    <a href="/">
                         <img class="logo-image menu" alt="GameHedge.com" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/logo.png">
                     </a>
                 </div>
@@ -105,38 +124,45 @@
             </div>
         </div>
         <div class="menu-container">
-            <div class="row menu-row" ng-show="!$root.isLoggedin">
+          <% if !client_signed_in? %>
+            <div class="row menu-row">
                 <div class="col-xs-3"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png"></div>
-                <div class="col-xs-9"><a href="/login" ng-click="hideMenus()">Login</a></div>
+                <div class="col-xs-9"><a href="/clients/sign_in">Login</a></div>
             </div>
-            <div class="row menu-row" ng-show="$root.isLoggedin">
+          <% else %>
+            <div class="row menu-row">
                 <div class="col-xs-3"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png"></div>
-                <div class="col-xs-9"><p >{{$root.user.name | uppercase}}</p></div>
-            </div>
-            <div class="row menu-row" ng-show="$root.isLoggedin">
-                <div class="col-xs-3"></div>
-                <div class="col-xs-9"><a href="/member" ng-click="hideMenus()">Your profile</a></div>
-            </div>
-            <div class="row menu-row" ng-show="$root.isLoggedin">
-                <div class="col-xs-3"></div>
-                <div class="col-xs-9"><a  href="/order_history" ng-click="hideMenus()">Order history</a></div>
-            </div>
-            <div class="row menu-row" ng-show="$root.isLoggedin">
-                <div class="col-xs-3"></div>
-                <div class="col-xs-9"><a ng-click="logout()" ng-click="hideMenus()">Logout</a></div>
-            </div>
-
-            <div class="row menu-row separator" ng-repeat-start="league in leagueList" ng-if="$first">
-                <div class="col-xs-3" ng-if="league.active == true"></div>
-                <div class="col-xs-9" ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()" >{{league.name | uppercase}}</a></div>
-            </div>
-            <div class="row menu-row" ng-repeat-end ng-if="!$first">
-                <div class="col-xs-3" ng-if="league.active == true"></div>
-                <div class="col-xs-9" ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()" >{{league.name | uppercase}}</a></div>
+                <div class="col-xs-9"><p ><%= current_client.name.upcase %></p></div>
             </div>
             <div class="row menu-row">
                 <div class="col-xs-3"></div>
-                <div class="col-xs-9"><a href="/faq/" ng-click="hideMenus()">FAQ</a></div>
+                <div class="col-xs-9"><a href="/member">Your profile</a></div>
+            </div>
+            <div class="row menu-row">
+                <div class="col-xs-3"></div>
+                <div class="col-xs-9"><a  href="/order_history">Order history</a></div>
+            </div>
+            <div class="row menu-row">
+                <div class="col-xs-3"></div>
+                <div class="col-xs-9"><%= link_to "Logout", destroy_client_session_path, :method => :delete %></div>
+            </div>
+          <% end %>
+          <% @leagueList.each_with_index do |league, index| %>
+            <% if index == 0 %>
+              <div class="row menu-row separator">
+                  <div class="col-xs-3" ng-if="league.active == true"></div>
+                  <div class="col-xs-9" ng-if="league.active == true"><a href="<%= league.url %>"><%= league.name.upcase %></a></div>
+              </div>
+            <% else %>
+              <div class="row menu-row">
+                  <div class="col-xs-3" ng-if="league.active == true"></div>
+                  <div class="col-xs-9" ng-if="league.active == true"><a href="<%= league.url %>"><%= league.name.upcase %></a></div>
+              </div>
+            <% end %>
+          <% end %>
+            <div class="row menu-row">
+                <div class="col-xs-3"></div>
+                <div class="col-xs-9"><a href="/faq">FAQ</a></div>
             </div>
             <div class="row menu-row">
                 <div class="col-xs-3"></div>
@@ -144,7 +170,7 @@
             </div>
             <div class="row menu-row">
                 <div class="col-xs-3"></div>
-                <div class="col-xs-9"><a href="/contact/" ng-click="hideMenus()">Contact Us</a></div>
+                <div class="col-xs-9"><a href="/contact">Contact Us</a></div>
             </div>
         </div>
         <div class="mobile-menu-footer">
@@ -167,48 +193,21 @@
         </div>
     </div>
 
-    <script type="text/ng-template" id="typeahead/bind-node.html">
-        <a href="{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
-    </script>
-    <div class="mobile-menu search-menu-transition ng-hide" ng-show="showSearchMenu" ng-if="!$root.isOrder">
-        <div class="mobile-menu-header">
-                <div class="navbar-header search-header col-xs-10">
-                    <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/search icon.png">
-                    <input type="text" placeholder="search tickets" ng-model="searchTerm" ng-change="getSearchHints(searchTerm)">
-                </div>
-                <div class="col-xs-2">
-                    <div ng-click="hideMenus()">
-                        <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/close-menu.png" class="img-header">
-                    </div>
-                </div>
-            
-        </div>
-        <div class="results-container">
-            <div ng-repeat="result in searchResults">
-                <a ng-href="result.url" ng-click="hideMenus()" >{{result.name}}</a>
-            </div>
-        </div>
-        <div class="mobile-menu-footer">
-            <h2>Connect with us</h2>
-            <nav role="navigation" class="footer-social-media">
-                
-                <div class="col-xs-4">
-                    <a href="http://www.facebook.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/facebook-footer.png" alt="Like GameHedge on Facebook" /></a>          
-                </div>
-                <div class="col-xs-4">
-                    <a href="http://www.twitter.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/twitter-footer.png" alt="Follow GameHedge on Twitter" /></a>          
-                </div>
-                <div class="col-xs-4">
-                    <a href="http://www.instagram.com/gamehedge" target="_blank"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/instagram-footer.png" alt="Like GameHedge on Instagram" /></a>
-                </div>
-           
-            </nav>
-        </div>
-    </div> -->
+    
                                                                         <!-- END MOBILE MENU -->
+
+
+
+
+
+
+
+
+
+
   <span ng-app="gamehedge">
     <div>
-        <div class="intro-full fade-intro" ng-if="page_loading == true">
+        <div class="intro-full fade-intro">
             <div class="intro-img-container">
                 <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/GameHedge_Logo_Footer.png" alt="Gamehedge" width="300" class="img-intro-full"/>
             </div>
@@ -218,7 +217,7 @@
 
                 <div class="col-xs-2 hidden-md hidden-lg">
                     <div class="navbar navbar-default navbar-fixed-top">
-                        <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target="#slideMenu" data-canvas="body">
+                        <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target="#slideMenu" data-canvas="body" onclick="showMenu();">
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -336,6 +335,14 @@
         <%= yield %>
     </div>
   </span>
+  <script>
+    function showMenu(){
+      $(".mobile-menu").removeClass("hidden2");
+    }
+    function hideMenus(){
+      $(".mobile-menu").addClass("hidden2");
+    }
+  </script>
 
    
 

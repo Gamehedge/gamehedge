@@ -1,6 +1,8 @@
 class OrdersController < ApplicationController
 	def show
-
+		@leagueList = Sport.where(active: true)
+		@divisions_menu = Division.all
+		@performers_menu = Performer.all
 	end
 	def create
 		@user_id = request.POST["user_id"]

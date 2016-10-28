@@ -2,7 +2,6 @@ app = angular.module('gamehedge')
 
 app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,dataService,$http,apiService, $timeout){
     
-    $scope.page_loading = true;
     
 	$scope.logout = function(){
         $scope.hideMenus();
@@ -75,7 +74,8 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
                 $scope.leagueList = response;
                 
                 $timeout(function(){
-                    $scope.page_loading = false;  
+                    alert("adde hidden")
+                    $(".intro-full").addClass("hidden2"); 
                 }, 100);
                 
         });

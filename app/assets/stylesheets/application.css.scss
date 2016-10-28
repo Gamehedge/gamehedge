@@ -413,6 +413,16 @@ body {
     width: 100%;
     height: 100%;
     z-index: 999999;
+    transition-property: visibility, opacity;
+    transition-duration: 0s, 0.5s;
+}
+
+.mobile-menu.hidden2{
+    opacity: 0;
+    visibility: hidden;
+    transition-property: opacity, visibility;
+    transition-duration: 0.5s, 0s;
+    transition-delay: 0s, 0.5s;
 }
 
 .no-scrolling{
