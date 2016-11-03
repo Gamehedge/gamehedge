@@ -16,9 +16,9 @@ class Api::V1::SportsController < ApplicationApiController
 
   def index
     if params == nil
-      @sports = Sport.all
+      @sports = Sport.all.limit(10)
     else
-      @sports = Sport.where(data_params)
+      @sports = Sport.where(data_params).limit(10)
     end
     respond_to do |format|
       format.json { render json: @sports.to_json(:only => [:id, :name, :description, :contract_code, :te_uid, :url, :ggg, :slug, :active], :methods => [:image_url, :image_url_medium, :image_url_thumb])}

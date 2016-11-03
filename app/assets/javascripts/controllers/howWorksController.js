@@ -16,7 +16,7 @@ controllers.controller('howWorksController', function($scope,$rootScope,$locatio
         }
         return dataService.getData("/search/?search=" + val + "&limit=4&today_date="+today_date)
             .then(function(response){
-            	//console.log(response)
+                //console.log(response)
                 var width = $("#search_element").width() + 50;
                 //console.log("width: " + width);
                 $('#form-home-search [uib-typeahead-popup].dropdown-menu').width(width);
@@ -36,9 +36,38 @@ controllers.controller('howWorksController', function($scope,$rootScope,$locatio
         }
     }
     
-    $scope.slickConfig = {
-        enabled: true,
-        autoplay: false,
+    // $scope.slickConfig = {
+    //     enabled: true,
+    //     autoplay: false,
+    //     draggable: true,
+    //     arrows: false,  
+    //     infinite: false,
+    //     dots: true,
+    //     method: {},
+    //     event: {
+    //         beforeChange: function (event, slick, currentSlide, nextSlide) {
+    //         },
+    //         afterChange: function (event, slick, currentSlide, nextSlide) {
+    //         }
+    //     }
+    // };
+    
+    // $timeout(function () {
+    //     $scope.slickConfig.method.slickSetOption(null, null, true);  
+    // }, 100);
+    
+    // $timeout(function () {
+    //     $scope.slickConfig.method.slickSetOption(null, null, true);  
+    // }, 200);
+    
+    // $timeout(function () {
+    //     $scope.slickConfig.method.slickSetOption(null, null, true);  
+    // }, 500);
+   // Modified slick slider start
+
+    var slickConfig = $('.slider').slick({
+      enabled: true,
+        autoplay: true,
         draggable: true,
         arrows: false,  
         infinite: false,
@@ -50,17 +79,16 @@ controllers.controller('howWorksController', function($scope,$rootScope,$locatio
             afterChange: function (event, slick, currentSlide, nextSlide) {
             }
         }
-    };
-    
+    });
+
     $timeout(function () {
-        $scope.slickConfig.method.slickSetOption(null, null, true);  
+    $(slickConfig).slick("slickSetOption", null, null, true);
     }, 100);
-    
     $timeout(function () {
-        $scope.slickConfig.method.slickSetOption(null, null, true);  
+    $(slickConfig).slick("slickSetOption", null, null, true);
     }, 200);
-    
     $timeout(function () {
-        $scope.slickConfig.method.slickSetOption(null, null, true);  
+    $(slickConfig).slick("slickSetOption", null, null, true);
     }, 500);
+// Modified slick slider end
 });

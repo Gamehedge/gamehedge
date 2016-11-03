@@ -17,9 +17,9 @@ class Api::V1::DivisionsController < ApplicationApiController
 
   def index
     if params == nil
-      @divisions = Division.all
+      @divisions = Division.all.limit(10)
     else
-      @divisions = Division.where(data_params)
+      @divisions = Division.includes(:performers).where(data_params).limit(10)
     end
     respond_to do |format|
       if params[:light]

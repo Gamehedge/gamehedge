@@ -2,15 +2,15 @@ app = angular.module('gamehedge')
 
 app.controller('VenueController', function($scope,$rootScope,$routeParams,dataService, apiService,$window,$location, $timeout,Auth){
     $rootScope.showHeader = true;
-	$scope.getVenueInfo = function(){
-		apiService.getData('/api/v1/venues/'+$routeParams.venueId)
+    $scope.getVenueInfo = function(){
+        apiService.getData('/api/v1/venues/'+$routeParams.venueId)
             .then(function(response){
                 $scope.venue  = response;
                 $rootScope.title = $scope.venue.name + " Tickets | Gamehedge";
                 $rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by a certain amount or more, get 50% of your ticket price back.";
                 
              //    console.log("Venue");
-            	// console.log($scope.venue);
+                // console.log($scope.venue);
                 if($routeParams.slug == $scope.venue.slug){
                     $scope.getEvents();
                 }
@@ -18,7 +18,7 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
                     $location.path("/");
                 }
         });
-	};
+    };
 
     $scope.getTestimonials = function(){
         apiService.getData('/api/v1/testimonials/?performer_id='+String($scope.performer.id))
@@ -74,9 +74,9 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
         }   
     }
 
-	//Search call
+    //Search call
 
-	$scope.getSearchHints = function(val) {
+    $scope.getSearchHints = function(val) {
         var now = new Date();
         now.setHours(now.getHours() + 1);
         var today_date = [[AddZero(now.getFullYear()), AddZero(now.getMonth() + 1), now.getDate()].join("-"), [AddZero(now.getHours()), AddZero(now.getMinutes())].join(":")].join(" ");
@@ -86,14 +86,14 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
         }
         return dataService.getData("/search/?search=" + val + "&limit=4&today_date="+today_date)
             .then(function(response){
-            	//console.log(response);
+                //console.log(response);
                 var width = $("#search_element").width() + 50;
                 //console.log("width: " + width);
                 $('#form-home-search [uib-typeahead-popup].dropdown-menu').width(width);
                 $scope.searchBarResults = response.data;
                 return response.data;
         });
-    };	
+    };  
     $scope.onSelect = function ($item, $model, $label) {
         $location.path($scope.searchTerm.url);
     };
@@ -121,10 +121,40 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
         $scope.page += 1;
         $scope.getEvents();
     }
-	  
-    $scope.slickConfig = {
-        enabled: true,
-        autoplay: false,
+      
+    // $scope.slickConfig = {
+    //     enabled: true,
+    //     autoplay: false,
+    //     draggable: true,
+    //     arrows: false,  
+    //     infinite: false,
+    //     dots: true,
+    //     method: {},
+    //     event: {
+    //         beforeChange: function (event, slick, currentSlide, nextSlide) {
+    //         },
+    //         afterChange: function (event, slick, currentSlide, nextSlide) {
+    //         }
+    //     }
+    // };
+    
+    // $timeout(function () {
+    //     $scope.slickConfig.method.slickSetOption(null, null, true);
+    // }, 100);
+    
+    // $timeout(function () {
+    //     $scope.slickConfig.method.slickSetOption(null, null, true);
+    // }, 200);
+    
+    // $timeout(function () {
+    //     $scope.slickConfig.method.slickSetOption(null, null, true);
+    // }, 500);
+
+    // Modified slick slider start
+
+    var slickConfig = $('.slider').slick({
+      enabled: true,
+        autoplay: true,
         draggable: true,
         arrows: false,  
         infinite: false,
@@ -136,21 +166,20 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
             afterChange: function (event, slick, currentSlide, nextSlide) {
             }
         }
-    };
-    
-    $timeout(function () {
-        $scope.slickConfig.method.slickSetOption(null, null, true);
-    }, 100);
-    
-    $timeout(function () {
-        $scope.slickConfig.method.slickSetOption(null, null, true);
-    }, 200);
-    
-    $timeout(function () {
-        $scope.slickConfig.method.slickSetOption(null, null, true);
-    }, 500);
+    });
 
-	//Initializers
+    $timeout(function () {
+    $(slickConfig).slick("slickSetOption", null, null, true);
+    }, 100);
+    $timeout(function () {
+    $(slickConfig).slick("slickSetOption", null, null, true);
+    }, 200);
+    $timeout(function () {
+    $(slickConfig).slick("slickSetOption", null, null, true);
+    }, 500);
+// Modified slick slider end
+
+    //Initializers
     $rootScope.isOrder = false;
     $rootScope.isEvent = false;
     $rootScope.darkHeader = false;
@@ -162,7 +191,7 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
     $scope.load_more = false;
     $scope.events = []
     $scope.testimonials = []
-	$scope.getVenueInfo();
+    $scope.getVenueInfo();
     $scope.searchTerm = "";
     $scope.performer_id = 0;
     $scope.compareDate =  "2015-09-05T00:00:00.000Z"

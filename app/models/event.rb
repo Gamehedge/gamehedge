@@ -5,6 +5,7 @@ class Event < ActiveRecord::Base
 	belongs_to :venue
 	belongs_to :sport
 	has_many :tiles
+	scope :league_event, lambda {|e| where(te_uid: e.id)}
   	def update_url
   		self.update_column(:slug, ((name.downcase.gsub ' ', '-') + "-tickets"))
 	    self.update_column(:url, '/events/' + String(self.te_uid) + '/' + self.slug)

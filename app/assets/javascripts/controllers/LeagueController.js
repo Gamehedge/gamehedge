@@ -1,9 +1,9 @@
 app = angular.module('gamehedge')
 
 app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataService,apiService,$window,$http,$location, $timeout,Auth){
-	$rootScope.showHeader = true;
+  $rootScope.showHeader = true;
     $scope.getLeagueInfo = function(){
-		apiService.getData('/api/v1/sports/'+$routeParams.leagueId)
+    apiService.getData('/api/v1/sports/'+$routeParams.leagueId)
             .then(function(response){
                 $scope.league  = response;
                 if($scope.league.active != true){
@@ -50,13 +50,13 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
                     $scope.italic = "At GameHedge every ticket comes with the Good Game Guarantee at no additional cost. Buy MLB Baseball tickets on GameHedge and if the home team loses by 5 runs or more, GameHedge will refund 50% of the ticket price."
                 }
         });
-	};
+  };
 
-	$scope.getDivisions = function(){
-		apiService.getData('/api/v1/divisions/?sport_id='+$routeParams.leagueId)
+  $scope.getDivisions = function(){
+    apiService.getData('/api/v1/divisions/?sport_id='+$routeParams.leagueId)
             .then(function(response){
                 console.log("Divisions");
-            	console.log(response);
+              console.log(response);
                 $scope.divisions = response;
                 var len = $scope.divisions.length;
                 var mid = len / 2;
@@ -64,11 +64,11 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
                 $scope.divisions_last = $scope.divisions.slice(mid, len);
                 $scope.loading = false;
         });
-	};
+  };
 
-	//Search call
+  //Search call
 
-	$scope.getSearchHints = function(val) {
+  $scope.getSearchHints = function(val) {
         var now = new Date();
         now.setHours(now.getHours() + 1);
         var today_date = [[AddZero(now.getFullYear()), AddZero(now.getMonth() + 1), now.getDate()].join("-"), [AddZero(now.getHours()), AddZero(now.getMinutes())].join(":")].join(" ");
@@ -78,7 +78,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
         }
         return dataService.getData("/search/?search=" + val + "&limit=4&today_date="+today_date)
             .then(function(response){
-            	//console.log(response);
+              //console.log(response);
             
                 var width = $("#search_element").width() + 50;
                 //console.log("width: " + width);
@@ -86,7 +86,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
                 $scope.searchBarResults = response.data;
                 return response.data;
         });
-    };	
+    };  
     $scope.onSelect = function ($item, $model, $label) {
         $location.path($scope.searchTerm.url);
     };
@@ -98,8 +98,8 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
             }
         }
     }
-	$scope.getNextEvents = function(){
-        url = '/events/next/?type=events&id='+$routeParams.leagueId+'&source=league&page=1&perpage=50&geolocated=true';  
+  $scope.getNextEvents = function(){
+        url = '/events/next/?type=events&id='+$routeParams.leagueId+'&source=league&page=1&perpage=10&geolocated=true';  
         $http({
             method: 'GET',
             url: url,
@@ -128,9 +128,39 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
         
     }
 
-    $scope.slickConfig = {
-        enabled: true,
-        autoplay: false,
+    // $scope.slickConfig = {
+    //     enabled: true,
+    //     autoplay: false,
+    //     draggable: true,
+    //     arrows: false,  
+    //     infinite: false,
+    //     dots: true,
+    //     method: {},
+    //     event: {
+    //         beforeChange: function (event, slick, currentSlide, nextSlide) {
+    //         },
+    //         afterChange: function (event, slick, currentSlide, nextSlide) {
+    //         }
+    //     }
+    // };
+    
+    // $timeout(function () {
+    //     $scope.slickConfig.method.slickSetOption(null, null, true);
+    // }, 100);
+    
+    // $timeout(function () {
+    //     $scope.slickConfig.method.slickSetOption(null, null, true);
+    // }, 200);
+    
+    // $timeout(function () {
+    //     $scope.slickConfig.method.slickSetOption(null, null, true);
+    // }, 500);
+
+  // Modified slick slider start
+
+    var slickConfig = $('.slider').slick({
+      enabled: true,
+        autoplay: true,
         draggable: true,
         arrows: false,  
         infinite: false,
@@ -142,21 +172,20 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
             afterChange: function (event, slick, currentSlide, nextSlide) {
             }
         }
-    };
-    
+    });
+
     $timeout(function () {
-        $scope.slickConfig.method.slickSetOption(null, null, true);
+    $(slickConfig).slick("slickSetOption", null, null, true);
     }, 100);
-    
     $timeout(function () {
-        $scope.slickConfig.method.slickSetOption(null, null, true);
+    $(slickConfig).slick("slickSetOption", null, null, true);
     }, 200);
-    
     $timeout(function () {
-        $scope.slickConfig.method.slickSetOption(null, null, true);
+    $(slickConfig).slick("slickSetOption", null, null, true);
     }, 500);
+  // Modified slick slider end
     
-	//Initializers
+  //Initializers
     $rootScope.isOrder = false;
     $rootScope.isEvent = false;
     $rootScope.darkHeader = false;
@@ -164,7 +193,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
     $scope.loading = true;
     $scope.searchTerm = "";
     $scope.next_events = [];
-	$scope.getLeagueInfo();
+  $scope.getLeagueInfo();
     $scope.getDivisions();
     $scope.getNextEvents();
     $window.scrollTo(0, 0);
