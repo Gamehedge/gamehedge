@@ -36,7 +36,7 @@
           enhancedEcommerce = false,
           enhancedLinkAttribution = false,
           experimentId,
-          ignoreFirstPageLoad = false,
+          ignoreFirstPageLoad = true,
           logAllCalls = false,
           hybridMobileSupport = false,
           offlineMode = false,
