@@ -17,9 +17,9 @@ class Api::V1::PerformersController < ApplicationApiController
 
   def index
     if params == nil
-      @performers = Performer.all.limit(10)
+      @performers = Performer.all
     else
-      @performers = Performer.where(data_params).limit(10)
+      @performers = Performer.where(data_params)
     end
     respond_to do |format|
       if params[:light]

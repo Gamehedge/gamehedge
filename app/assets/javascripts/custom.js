@@ -1,5 +1,6 @@
 $(document).ready(function(){
-window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https:"?"https:":"http:",z=c.name,r="load";var nt=function(){
+  var explode = function(){
+    window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https:"?"https:":"http:",z=c.name,r="load";var nt=function(){
   f[z]=function(){
   (a.s=a.s||[]).push(arguments)};var a=f[z]._={
   },q=c.methods.length;while(q--){(function(n){f[z][n]=function(){
@@ -37,5 +38,6 @@ window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https
   // Insert Twitter Pixel ID and Standard Event data below
   twq('init','nuys0');
   twq('track','PageView');
-
+  };
+  setTimeout(explode, 4000);
 });
