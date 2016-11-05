@@ -7,7 +7,7 @@ app = angular.module('gamehedge',[
   'ui.bootstrap',
   'slickCarousel',
   'angular-ladda',
-  // 'angular-google-analytics',
+  'angular-google-analytics',
   'ngLocationUpdate',
   'angularLoad',
   'sly'
