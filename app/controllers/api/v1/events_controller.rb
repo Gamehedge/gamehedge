@@ -29,7 +29,7 @@ class Api::V1::EventsController < ApplicationApiController
         if params[:selected_team] == nil
           @events = Event.where(data_params).where("occurs_at >=?", params[:today_date]).where(is_active: true).order("occurs_at")
         else
-          @events = Event.where( 
+          @events = Event.includes(:sport,:venue,:home_performer,:away_performer).where(
             Event.arel_table[:home_performer_id].eq(params[:selected_team]).or(
             Event.arel_table[:away_performer_id].eq(params[:selected_team])) 
           ).where(data_params).where("occurs_at >=?", params[:today_date]).where(is_active: true).order("occurs_at")

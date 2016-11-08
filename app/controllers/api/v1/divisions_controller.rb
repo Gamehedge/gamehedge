@@ -19,7 +19,7 @@ class Api::V1::DivisionsController < ApplicationApiController
     if params == nil
       @divisions = Division.all
     else
-      @divisions = Division.where(data_params)
+      @divisions = Division.includes(:performers).where(data_params)
     end
     respond_to do |format|
       if params[:light]

@@ -331,7 +331,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         }).then(function successCallback(response) {
             $scope.tickets = response.data.ticket_groups;
             $scope.loading = false;
-            console.log($scope.tickets);
+            //console.log($scope.tickets);
             var sections = [];
             angular.forEach($scope.tickets , function(value, key) {
                 value.amount = value.splits[value.splits.length-1];
@@ -476,7 +476,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     }
 
     $scope.higlightSection = function(section,highlight){
-        console.log(section);
+        //console.log(section);
         if(section != undefined){
             if(highlight == true){
                 $("#MapContainer").tuMap("HighlightSection",section);
@@ -535,20 +535,20 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
             'tickets_data_object': DATA_TICKTES,
             'static_map': '',
         };
-        console.log("DVM_map_params")
-        console.log(DVM_map_params);
+        //console.log("DVM_map_params")
+        //console.log(DVM_map_params);
         $timeout(function(){
             angularLoad.loadScript("/dvm.js?v=103").then(function() {
-                console.log("dvm.js loadded successfully");
+                //console.log("dvm.js loadded successfully");
                 $timeout(function(){
                     document.body.addEventListener("sectionSelected", function (e) {
-                        console.log(e);
+                        //console.log(e);
                     },false);
                 },1000);
                 // Script loaded succesfully.
                 // We can now start using the functions from someplugin.js
             }).catch(function() {
-                console.log("failure");
+                //console.log("failure");
                 // There was some error loading the script. Meh
             });
         },100);
@@ -561,7 +561,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         else{
             $scope.selectedSections.splice($scope.selectedSections.indexOf(bare_section),1);
         }
-        console.log($scope.selectedSections);
+        //console.log($scope.selectedSections);
         $scope.filterEventsData();
     });
     $scope.compareDates = function(event_date,format){
@@ -598,7 +598,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     };
 
     $("#tickets_list").scroll(function() {
-        console.log("jeje");
+        //console.log("jeje");
     });
     
     $scope.showMore = function(){

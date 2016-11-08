@@ -56,8 +56,8 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
                     $scope.load_more = false;   
                 }
                 $scope.disable_toogle = false;
-                console.log("Events");
-                console.log($scope.events);
+                //console.log("Events");
+                //console.log($scope.events);
                 $scope.loading = false;
         });
     };
@@ -122,9 +122,40 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
         $scope.getEvents();
     }
 	  
-    $scope.slickConfig = {
-        enabled: true,
-        autoplay: false,
+    // $scope.slickConfig = {
+    //     enabled: true,
+    //     autoplay: false,
+    //     draggable: true,
+    //     arrows: false,  
+    //     infinite: false,
+    //     dots: true,
+    //     method: {},
+    //     event: {
+    //         beforeChange: function (event, slick, currentSlide, nextSlide) {
+    //         },
+    //         afterChange: function (event, slick, currentSlide, nextSlide) {
+    //         }
+    //     }
+    // };
+    
+    // $timeout(function () {
+    //     $scope.slickConfig.method.slickSetOption(null, null, true);
+    // }, 100);
+    
+    // $timeout(function () {
+    //     $scope.slickConfig.method.slickSetOption(null, null, true);
+    // }, 200);
+    
+    // $timeout(function () {
+    //     $scope.slickConfig.method.slickSetOption(null, null, true);
+    // }, 500);
+
+    
+    // Modified slick slider start
+
+    var slickConfig = $('.slider').slick({
+      enabled: true,
+        autoplay: true,
         draggable: true,
         arrows: false,  
         infinite: false,
@@ -136,19 +167,19 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
             afterChange: function (event, slick, currentSlide, nextSlide) {
             }
         }
-    };
-    
+    });
+
     $timeout(function () {
-        $scope.slickConfig.method.slickSetOption(null, null, true);
+    $(slickConfig).slick("slickSetOption", null, null, true);
     }, 100);
-    
     $timeout(function () {
-        $scope.slickConfig.method.slickSetOption(null, null, true);
+    $(slickConfig).slick("slickSetOption", null, null, true);
     }, 200);
-    
     $timeout(function () {
-        $scope.slickConfig.method.slickSetOption(null, null, true);
+    $(slickConfig).slick("slickSetOption", null, null, true);
     }, 500);
+    
+    // Modified slick slider end
 
 	//Initializers
     $rootScope.isOrder = false;

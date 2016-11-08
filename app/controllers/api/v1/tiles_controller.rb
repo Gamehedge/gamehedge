@@ -17,9 +17,11 @@ class Api::V1::TilesController < ApplicationApiController
 
   def index
     if params == nil
-      @tiles = Tile.all.order(:position)
+      # @tiles = Tile.all.order(:position)
+      @tiles = Tile.includes(:sport, :event1, :event2, :event3, :venue, :tile_type, :performer).order(:position).limit(10)
     else
-      @tiles = Tile.where(data_params).order(:position)
+      # @tiles = Tile.where(data_params).order(:position)
+      @tiles = Tile.includes(:sport, :event1, :event2, :event3, :venue, :tile_type, :performer).where(data_params).order(:position).limit(10)
     end
     respond_to do |format|
       format.json { render json: @tiles.to_json(:only => [:id, :name, :link, :slug, :description, :position, :has_geolocation, :url],:include => {:sport =>   {:only =>[:id, :te_uid, :name, :description, :active]},:performer => {:only =>[:id, :te_uid, :name]},:venue => {:only =>[:id, :te_uid, :name, :description]},:tile_type => {:only =>[:id, :name]},:event1 => {:only =>[:id, :name, :te_uid, :te_date, :url, :occurs_at, :location, :slug],:include => {:home_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:away_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:sport => {:only =>[:id, :name, :te_uid, :description, :url, :ggg]},:venue => {:only =>[:id, :te_uid, :name, :description, :url, :location]}}},:event2 => {:only =>[:id, :name, :te_uid, :te_date, :url, :occurs_at, :location, :slug],:include => {:home_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:away_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:sport => {:only =>[:id, :name, :te_uid, :description, :url, :ggg]},:venue => {:only =>[:id, :te_uid, :name, :description, :url, :location]}}},:event3 => {:only =>[:id, :name, :te_uid, :te_date, :url, :occurs_at, :location, :slug],:include => {:home_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:away_performer => {:only =>[:id, :name, :te_uid, :description, :url]},:sport => {:only =>[:id, :name, :te_uid, :description, :url, :ggg]},:venue => {:only =>[:id, :te_uid, :name, :description, :url, :location]}}}}, :methods => [:image_url, :image_url_medium, :image_url_thumb, :image_cover])}

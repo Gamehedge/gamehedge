@@ -26,7 +26,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 						$scope.getNextEvents(i);	
 					}
 					else{
-						console.log($scope.tiles[i]);
+						//console.log($scope.tiles[i]);
 						$scope.tiles[i].ready = true;
 					}
 				}
@@ -57,10 +57,12 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 			}
 		}
 		if($scope.tiles[index].has_geolocation == true){
-			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=50&geolocated=true';
+			// url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=50&geolocated=true';
+			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=3&geolocated=true';
 		}
 		else{
-			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=50';
+			// url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=50';
+			url = '/events/next/?type=events&id='+id+'&source='+source+'&page=1&perpage=3';
 		}
 		//console.log(url)
 		$http({
@@ -160,9 +162,39 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
         }
     }
     
-    $scope.slickConfig = {
-        enabled: true,
-        autoplay: false,
+    // $scope.slickConfig = {
+    //     enabled: true,
+    //     autoplay: false,
+    //     draggable: true,
+    //     arrows: false,  
+    //     infinite: false,
+    //     dots: true,
+    //     method: {},
+    //     event: {
+    //         beforeChange: function (event, slick, currentSlide, nextSlide) {
+    //         },
+    //         afterChange: function (event, slick, currentSlide, nextSlide) {
+    //         }
+    //     }
+    // };
+    
+    // $timeout(function () {
+    //     $scope.slickConfig.method.slickSetOption(null, null, true);  
+    // }, 100);
+    
+    // $timeout(function () {
+    //     $scope.slickConfig.method.slickSetOption(null, null, true);  
+    // }, 200);
+    
+    // $timeout(function () {
+    //     $scope.slickConfig.method.slickSetOption(null, null, true);  
+    // }, 500);
+
+	// Modified slick slider start
+
+	var slickConfig = $('.slider').slick({
+      enabled: true,
+        autoplay: true,
         draggable: true,
         arrows: false,  
         infinite: false,
@@ -174,19 +206,19 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
             afterChange: function (event, slick, currentSlide, nextSlide) {
             }
         }
-    };
-    
+    });
+
     $timeout(function () {
-        $scope.slickConfig.method.slickSetOption(null, null, true);  
+    $(slickConfig).slick("slickSetOption", null, null, true);
     }, 100);
-    
     $timeout(function () {
-        $scope.slickConfig.method.slickSetOption(null, null, true);  
+    $(slickConfig).slick("slickSetOption", null, null, true);
     }, 200);
-    
     $timeout(function () {
-        $scope.slickConfig.method.slickSetOption(null, null, true);  
+    $(slickConfig).slick("slickSetOption", null, null, true);
     }, 500);
+	
+	// Modified slick slider end
     
 	//Initializers
 	$rootScope.isOrder = false;

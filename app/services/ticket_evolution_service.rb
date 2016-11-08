@@ -231,10 +231,14 @@ class TicketEvolutionService
           @events2 = []
           @events.each do |e|
             if @e != {}
-              if Event.where(te_uid: e.id).exists?
-                if Event.where(te_uid: e.id).first.is_active == true
-                  @events2.push(e)
-                end
+              # if Event.where(te_uid: e.id).exists?
+              #   if Event.where(te_uid: e.id).first.is_active == true
+              #     @events2.push(e)
+              #   end
+              # end
+              event = Event.league_event(e)
+              if event.present? && event.first.is_active == true
+                @events2.push(e)
               end
             end
           end
@@ -276,10 +280,14 @@ class TicketEvolutionService
           @events2 = []
           @events.each do |e|
             if @e != {}
-              if Event.where(te_uid: e.id).exists?
-                if Event.where(te_uid: e.id).first.is_active == true
-                  @events2.push(e)
-                end
+              # if Event.where(te_uid: e.id).exists?
+              #   if Event.where(te_uid: e.id).first.is_active == true
+              #     @events2.push(e)
+              #   end
+              # end
+              event = Event.league_event(e)
+              if event.present? && event.first.is_active == true
+                @events2.push(e)
               end
             end
           end

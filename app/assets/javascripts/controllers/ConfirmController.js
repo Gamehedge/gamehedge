@@ -6,8 +6,8 @@ controllers.controller('ConfirmController', function($scope,$rootScope,$http,Aut
     $scope.getTicket = function(){
     	apiService.getData('/api/v1/orders/'+$routeParams.orderId)
             .then(function(response){
-            	console.log("Order");
-            	console.log(response);
+            	//console.log("Order");
+            	//console.log(response);
                 $scope.order = response;
                 $scope.loading = false;
                 $rootScope.title = "Order | Gamehedge";

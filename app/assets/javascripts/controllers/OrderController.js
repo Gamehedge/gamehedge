@@ -548,8 +548,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    		//console.log($scope.order);
 			    	}
 			    	else{
-			    		console.log("Error");
-			    		console.log(response);
+			    		//console.log("Error");
+			    		//console.log(response);
 			    		swal("Error", response.data.error, "error");
 			    	}
 			    }, function errorCallback(response) {
@@ -608,22 +608,22 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			        },
 			    }).then(function successCallback(response) {
 			    	if(response.data.error == undefined){
-			    		console.log("Client created");
-			    		console.log("Client");
-			    		console.log(response.data.client);
-			    		console.log("User");
-                        console.log(response.data.temp_password);
-			    		console.log(response.data.user);
+			    		//console.log("Client created");
+			    		//console.log("Client");
+			    		//console.log(response.data.client);
+			    		//console.log("User");
+                        //console.log(response.data.temp_password);
+			    		//console.log(response.data.user);
 			    		$scope.client = response.data.client;
 			    		$scope.temp_password = response.data.temp_password;
 			    		$rootScope.isLoggedin = true;
 			    		$rootScope.isLoggedin = true;
-                        console.log("pre login...");
+                        //console.log("pre login...");
 			    		$rootScope.user = response.data.user;
 			    		$scope.addresses = $scope.client.addresses;
 			    		$scope.billing_address = $scope.client.primary_billing_address;
 			    		$scope.shipping_address = $scope.client.primary_shipping_address;
-                        console.log("GO TO LOGIN");
+                        //console.log("GO TO LOGIN");
 			    		$scope.loginFcn();
 			    	}
 			    	else{
@@ -675,8 +675,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	}
 
 	$scope.loginFcn = function(){
-        console.log("login ENTER");
-        console.log(credentials);
+        //console.log("login ENTER");
+        //console.log(credentials);
 		var credentials = {
             email: $scope.client.email,
             password: $scope.temp_password,

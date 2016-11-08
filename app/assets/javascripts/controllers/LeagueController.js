@@ -55,8 +55,8 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
 	$scope.getDivisions = function(){
 		apiService.getData('/api/v1/divisions/?sport_id='+$routeParams.leagueId)
             .then(function(response){
-                console.log("Divisions");
-            	console.log(response);
+                //console.log("Divisions");
+            	//console.log(response);
                 $scope.divisions = response;
                 var len = $scope.divisions.length;
                 var mid = len / 2;
@@ -118,8 +118,8 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
                 }
             }
             $scope.ready = true;
-            console.log("Next events");
-            console.log($scope.next_events);
+            //console.log("Next events");
+            //console.log($scope.next_events);
         }, function errorCallback(response2) {
             //console.log(response2);
             // called asynchronously if an error occurs
@@ -128,9 +128,40 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
         
     }
 
-    $scope.slickConfig = {
-        enabled: true,
-        autoplay: false,
+    // $scope.slickConfig = {
+    //     enabled: true,
+    //     autoplay: false,
+    //     draggable: true,
+    //     arrows: false,  
+    //     infinite: false,
+    //     dots: true,
+    //     method: {},
+    //     event: {
+    //         beforeChange: function (event, slick, currentSlide, nextSlide) {
+    //         },
+    //         afterChange: function (event, slick, currentSlide, nextSlide) {
+    //         }
+    //     }
+    // };
+    
+    // $timeout(function () {
+    //     $scope.slickConfig.method.slickSetOption(null, null, true);
+    // }, 100);
+    
+    // $timeout(function () {
+    //     $scope.slickConfig.method.slickSetOption(null, null, true);
+    // }, 200);
+    
+    // $timeout(function () {
+    //     $scope.slickConfig.method.slickSetOption(null, null, true);
+    // }, 500);
+
+
+    // Modified slick slider start
+
+    var slickConfig = $('.slider').slick({
+      enabled: true,
+        autoplay: true,
         draggable: true,
         arrows: false,  
         infinite: false,
@@ -142,19 +173,19 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
             afterChange: function (event, slick, currentSlide, nextSlide) {
             }
         }
-    };
-    
+    });
+
     $timeout(function () {
-        $scope.slickConfig.method.slickSetOption(null, null, true);
+    $(slickConfig).slick("slickSetOption", null, null, true);
     }, 100);
-    
     $timeout(function () {
-        $scope.slickConfig.method.slickSetOption(null, null, true);
+    $(slickConfig).slick("slickSetOption", null, null, true);
     }, 200);
-    
     $timeout(function () {
-        $scope.slickConfig.method.slickSetOption(null, null, true);
+    $(slickConfig).slick("slickSetOption", null, null, true);
     }, 500);
+    
+    // Modified slick slider end
     
 	//Initializers
     $rootScope.isOrder = false;

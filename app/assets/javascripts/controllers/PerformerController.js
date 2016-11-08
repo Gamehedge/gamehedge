@@ -119,9 +119,39 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
         $scope.getEvents();
     }
     
-    $scope.slickConfig = {
-        enabled: true,
-        autoplay: false,
+ //    $scope.slickConfig = {
+ //        enabled: true,
+ //        autoplay: false,
+ //        draggable: true,
+ //        arrows: false,  
+ //        infinite: false,
+ //        dots: true,
+ //        method: {},
+ //        event: {
+ //            beforeChange: function (event, slick, currentSlide, nextSlide) {
+ //            },
+ //            afterChange: function (event, slick, currentSlide, nextSlide) {
+ //            }
+ //        }
+ //    };
+	// $timeout(function () {
+ //        $scope.slickConfig.method.slickSetOption(null, null, true);
+ //    }, 100);
+    
+ //    $timeout(function () {
+ //        $scope.slickConfig.method.slickSetOption(null, null, true);
+ //    }, 200);
+    
+ //    $timeout(function () {
+ //        $scope.slickConfig.method.slickSetOption(null, null, true);
+ //    }, 500);
+
+    
+    // Modified slick slider start
+
+    var slickConfig = $('.slider').slick({
+      enabled: true,
+        autoplay: true,
         draggable: true,
         arrows: false,  
         infinite: false,
@@ -133,18 +163,19 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
             afterChange: function (event, slick, currentSlide, nextSlide) {
             }
         }
-    };
-	$timeout(function () {
-        $scope.slickConfig.method.slickSetOption(null, null, true);
+    });
+
+    $timeout(function () {
+    $(slickConfig).slick("slickSetOption", null, null, true);
     }, 100);
-    
     $timeout(function () {
-        $scope.slickConfig.method.slickSetOption(null, null, true);
+    $(slickConfig).slick("slickSetOption", null, null, true);
     }, 200);
-    
     $timeout(function () {
-        $scope.slickConfig.method.slickSetOption(null, null, true);
-    }, 500);  
+    $(slickConfig).slick("slickSetOption", null, null, true);
+    }, 500);
+    
+    // Modified slick slider end  
     
     $scope.up_date_email_proccessing = false;
     $scope.up_date_email = "";
