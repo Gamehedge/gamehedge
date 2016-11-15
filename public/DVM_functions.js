@@ -1086,7 +1086,7 @@ function set_map(args) {
     //add tooltips html to body
     $(
             //tooltip div
-            '<div id="sectionTooltip" style="position: absolute; display:none;z-index:900;">' +
+            '<div id="sectionTooltip" class="move_right" style="position: absolute; display:none;z-index:900;">' +
             '<div class="tpit tpit_no_img">' +
             '<div class="had">' +
             '<div class="colr">' +
@@ -1630,7 +1630,9 @@ function section_zon(ticketId) {
 //-------------------------------------------------------------------------------------------------------
 //some buttons functions
 $(document).ready(function () {
-
+    setInterval(function() { 
+        $('#smallimg').show();
+     },1000);
     $('#' + DVM_map_params['tickets_container']).on('mouseenter', '.rowTicket', function (event) {
 
         //section_zon('134663424');
@@ -3496,15 +3498,21 @@ function jsonp_display_tooltip_section(data) {
         if (is_tooltip_big === 1)
         {
             $("#sectionTooltip #smallimg").attr("class", "fancybox");
-            $("#sectionTooltip #smallimg").attr("href", bimg);
+            //$("#sectionTooltip #smallimg").attr("href", bimg);
             $("#sectionTooltip #imgsmall").attr("src", simg);
             $("#sectionTooltip #imgsmall").attr("class", "lb_img");
             //tooltip in big size
             $("#sectionTooltip .lti").attr("class", "lti"); //big container
             $("#sectionTooltip .tpit").attr("class", "tpit"); //small container
+            $(".fancybox").fancybox({
+               openEffect  : 'none',
+               closeEffect : 'none',
+               content : '<img src='+bimg+' height="600" width="750" alt="" />'
+            });
+
         } else {
             $("#sectionTooltip #smallimg").attr("class", "fancybox_no");
-            $("#sectionTooltip #smallimg").attr("href", bimg);
+            //$("#sectionTooltip #smallimg").attr("href", bimg);
             $("#sectionTooltip #imgsmall").attr("src", simg);
             $("#sectionTooltip #imgsmall").attr("class", "lb_img_no");
             //tooltip in small size
@@ -3557,8 +3565,8 @@ function jsonp_display_tooltip_section(data) {
         );
 
         $("#sectionTooltip").css({
-            "left": data.x + "px",
-            "top": data.y + "px"
+            "left": 600 + "px",
+            "top": 295 + "px"
         }).delay(500).queue(function (next) {
             $(this).show();
             next();
@@ -3681,7 +3689,7 @@ function hide_tooltip_section(delayHide) {
         } else {
             if (imgSectionHidden === false)
             {
-                $("#sectionTooltip").show().delay(0).queue(function () {
+                $("#sectionTooltip").show().delay(3000).queue(function () {
                     if (!ifInsideTooltipSection)
                     {
                         $("#sectionTooltip").hide();
