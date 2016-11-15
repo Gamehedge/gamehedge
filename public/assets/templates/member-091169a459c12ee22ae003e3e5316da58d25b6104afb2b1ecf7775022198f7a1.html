@@ -1,0 +1,51 @@
+<main id="account">
+	<div class="loading-button-holder">
+		<button ladda="loading" data-spinner-color="#000000" ng-show="loading"></button>
+	</div>
+	<div class="container" ng-show="!loading">
+				<div class="row">
+					<div class="col-md-4">
+						<section id="customer-billing" ng-if="client.primary_credit_card != null">
+							<h2>Default Billing Method</h2>
+							<img src="/assets/visa-5fd6107dfd784934bf7bacca7bcf1cb82ff07a41d9aa4bd491ac556359a6b4e3.png" ng-if="(client.primary_credit_card.card_company | lowercase) == 'visa'" class="credicard-img">
+					    	<img src="/assets/mastercard-98ea22f7b772dbffd7701c5947fdaa14f85db5acb2f419c6695effde34db924d.png" ng-if="(client.primary_credit_card.card_company | lowercase) == 'mastercard'" class="credicard-img">
+					    	<img src="/assets/amex-7315ff6eb33fc969a4d83b2790be24e056bb75fd6f4bb1a2b3fc84f4d2a71a12.png" ng-if="(client.primary_credit_card.card_company | lowercase) == 'amex'" class="credicard-img">
+					    	<img src="/assets/discover-540ace96ebb6f14d17ddec95f6d621d5034a2e9f4ab9a6a2d0cadf392aa17077.png" ng-if="(client.primary_credit_card.card_company | lowercase) == 'discover'" class="credicard-img">
+							{{client.primary_credit_card.card_company}} ending in {{client.primary_credit_card.last_digits}} Exp {{client.primary_credit_card.expiration_month}}/{{client.primary_credit_card.expiration_year}}
+							<address>
+								{{client.primary_credit_card.address.name}}<br />
+								{{client.primary_credit_card.address.street_address}}<br />
+								{{client.primary_credit_card.address.locality}}, {{client.primary_credit_card.address.region}} {{client.primary_credit_card.address.postal_code}}
+							</address>
+						</section>
+						<section id="customer-billing" ng-if="client.primary_credit_card == null">
+							<h2>Default Billing Method</h2>
+							No credit card stored
+						</section>
+					</div>
+					<div class="col-md-4">
+						<section id="customer-shipping" ng-if="client.primary_shipping_address != null">
+							<h2>Default Shipping Address</h2>
+							<address>
+								{{client.primary_shipping_address.name}}<br />
+								{{client.primary_shipping_address.street_address}}<br />
+								{{client.primary_shipping_address.locality}}, {{client.primary_shipping_address.region}} {{client.primary_shipping_address.postal_code}}
+							</address>
+						</section>
+						<section id="customer-shipping" ng-if="client.primary_shipping_address == null">
+							<h2>Default Shipping Address</h2>
+							No addresses stored
+						</section>
+					</div>
+					<div class="col-md-4">
+						<section id="customer-contact">
+							<h2>Contact Information</h2>
+							<p><strong>Phone Number: </strong> {{client.primary_phone_number.number}}</p>
+							<p><strong>Email Address: </strong> {{client.primary_email_address.address}}</p>
+						</section>
+					</div>
+				</div>
+				
+		</div>
+	</div>
+</main>
