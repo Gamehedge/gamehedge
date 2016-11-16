@@ -6090,3 +6090,10 @@ main#admin #order-stats .stat-item span {
        top : 295px !important;
     }
 }
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    #sectionTooltip {
+       left : 600px !important;
+       top : 295px !important;
+    }
+}

@@ -3504,11 +3504,19 @@ function jsonp_display_tooltip_section(data) {
             //tooltip in big size
             $("#sectionTooltip .lti").attr("class", "lti"); //big container
             $("#sectionTooltip .tpit").attr("class", "tpit"); //small container
-            $(".fancybox").fancybox({
-               openEffect  : 'none',
-               closeEffect : 'none',
-               content : '<img src='+bimg+' height="600" width="750" alt="" />'
-            });
+            if (navigator.userAgent.toLowerCase().split('firefox/')[1] >= 30) {
+                $(".fancybox").fancybox({
+                   openEffect  : 'none',
+                   closeEffect : 'none',
+                   content : '<img src='+bimg+' height="600" width="750" alt="" />'
+                });
+            }else {
+                $(".fancybox").fancybox({
+                   openEffect  : 'none',
+                   closeEffect : 'none',
+                   content : '<img src='+bimg+' height="600" width="750" alt="" />'
+                });
+            }
 
         } else {
             $("#sectionTooltip #smallimg").attr("class", "fancybox_no");
@@ -3564,10 +3572,7 @@ function jsonp_display_tooltip_section(data) {
         }
         );
 
-        $("#sectionTooltip").css({
-            "left": 600 + "px",
-            "top": 295 + "px"
-        }).delay(500).queue(function (next) {
+        $("#sectionTooltip").delay(500).queue(function (next) {
             $(this).show();
             next();
         });
