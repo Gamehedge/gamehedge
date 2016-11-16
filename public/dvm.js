@@ -10,7 +10,7 @@ return}i()}}()}setTimeout(function(){C=!0;g(B,function(b){b()})},300)})(window);
 var is_static_map = true;
 var client_data = { 
     'dvm_client_id': DVM_map_params["client_id"],
-    'domain_name': document.domain,
+    'domain_name': 'gamehedge-ruby.herokuapp.com',
     'headliner_id':DVM_map_params['headliner_id'],
     'feed_type': DVM_map_params['feed_type'],
     'venue_id': DVM_map_params['venue_id'],
