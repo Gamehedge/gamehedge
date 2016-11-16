@@ -3512,6 +3512,7 @@ function jsonp_display_tooltip_section(data) {
                 //    content : '<img src='+bimg+' height="600" width="750" alt="" />'
                 // });
             }else {
+                console.log(navigator.userAgent)
                 $(".fancybox").fancybox({
                    openEffect  : 'none',
                    closeEffect : 'none',
