@@ -3505,6 +3505,7 @@ function jsonp_display_tooltip_section(data) {
             $("#sectionTooltip .lti").attr("class", "lti"); //big container
             $("#sectionTooltip .tpit").attr("class", "tpit"); //small container
             if (navigator.userAgent.toLowerCase().split('firefox/')[1] >= 30) {
+                console.log(bimg)
                 $(".fancybox").fancybox({
                    openEffect  : 'none',
                    closeEffect : 'none',
@@ -3572,7 +3573,10 @@ function jsonp_display_tooltip_section(data) {
         }
         );
 
-        $("#sectionTooltip").delay(500).queue(function (next) {
+        $("#sectionTooltip").css({
+            "left": 600 + "px",
+            "top": 295 + "px"
+        }).delay(500).queue(function (next) {
             $(this).show();
             next();
         });
