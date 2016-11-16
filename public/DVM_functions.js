@@ -3506,11 +3506,11 @@ function jsonp_display_tooltip_section(data) {
             $("#sectionTooltip .tpit").attr("class", "tpit"); //small container
             if (navigator.userAgent.toLowerCase().split('firefox/')[1] >= 30) {
                 console.log(bimg)
-                $(".fancybox").fancybox({
-                   openEffect  : 'none',
-                   closeEffect : 'none',
-                   content : '<img src='+bimg+' height="600" width="750" alt="" />'
-                });
+                // $(".fancybox").fancybox({
+                //    openEffect  : 'none',
+                //    closeEffect : 'none',
+                //    content : '<img src='+bimg+' height="600" width="750" alt="" />'
+                // });
             }else {
                 $(".fancybox").fancybox({
                    openEffect  : 'none',
