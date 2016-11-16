@@ -3504,21 +3504,11 @@ function jsonp_display_tooltip_section(data) {
             //tooltip in big size
             $("#sectionTooltip .lti").attr("class", "lti"); //big container
             $("#sectionTooltip .tpit").attr("class", "tpit"); //small container
-            if (navigator.userAgent.toLowerCase().split('firefox/')[1] >= 30) {
-                alert("if")
-                // $(".fancybox").fancybox({
-                //    openEffect  : 'none',
-                //    closeEffect : 'none',
-                //    content : '<img src='+bimg+' height="600" width="750" alt="" />'
-                // });
-            }else {
-                alert("else")
-                $(".fancybox").fancybox({
-                   openEffect  : 'none',
-                   closeEffect : 'none',
-                   content : '<img src='+bimg+' height="600" width="750" alt="" />'
-                });
-            }
+            $(".fancybox").fancybox({
+               openEffect  : 'none',
+               closeEffect : 'none',
+               content : '<img src='+bimg+' height="600" width="750" alt="" />'
+            });
 
         } else {
             $("#sectionTooltip #smallimg").attr("class", "fancybox_no");
