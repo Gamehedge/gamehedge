@@ -3505,14 +3505,14 @@ function jsonp_display_tooltip_section(data) {
             $("#sectionTooltip .lti").attr("class", "lti"); //big container
             $("#sectionTooltip .tpit").attr("class", "tpit"); //small container
             if (navigator.userAgent.toLowerCase().split('firefox/')[1] >= 30) {
-                console.log(bimg)
+                alert("if")
                 // $(".fancybox").fancybox({
                 //    openEffect  : 'none',
                 //    closeEffect : 'none',
                 //    content : '<img src='+bimg+' height="600" width="750" alt="" />'
                 // });
             }else {
-                console.log(navigator.userAgent)
+                alert("else")
                 $(".fancybox").fancybox({
                    openEffect  : 'none',
                    closeEffect : 'none',
