@@ -3486,11 +3486,11 @@ function format_section_to_id(section) {
     return fs_es;
 }
 //fill tooltip by section details and image
+console.log(navigator.userAgent)
 function jsonp_display_tooltip_section(data) {
     //data = JSON && JSON.parse(data) || $.parseJSON(data);
     //console.log('data tooltip'+data);
     data = $.parseJSON(data);
-    console.log(navigator.userAgent)
     if (data.status === 1)
     {
         bimg = data.bimg;
