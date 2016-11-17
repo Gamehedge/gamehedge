@@ -3486,11 +3486,9 @@ function format_section_to_id(section) {
     return fs_es;
 }
 //fill tooltip by section details and image
-alert("above");
 function jsonp_display_tooltip_section(data) {
     //data = JSON && JSON.parse(data) || $.parseJSON(data);
     //console.log('data tooltip'+data);
-    alert("below");
     data = $.parseJSON(data);
     if (data.status === 1)
     {
@@ -3499,7 +3497,6 @@ function jsonp_display_tooltip_section(data) {
         is_tooltip_big = data.iszoom;
         if (is_tooltip_big === 1)
         {
-            alert(navigator.userAgent);
             $("#sectionTooltip #smallimg").attr("class", "fancybox");
             //$("#sectionTooltip #smallimg").attr("href", bimg);
             $("#sectionTooltip #imgsmall").attr("src", simg);
@@ -3514,7 +3511,6 @@ function jsonp_display_tooltip_section(data) {
             });
 
         } else {
-            alert("testing");
             $("#sectionTooltip #smallimg").attr("class", "fancybox_no");
             //$("#sectionTooltip #smallimg").attr("href", bimg);
             $("#sectionTooltip #imgsmall").attr("src", simg);
