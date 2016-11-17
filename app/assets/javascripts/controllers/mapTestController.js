@@ -349,10 +349,12 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     }
 
     $scope.resetMap = function(){
+        isSeatClicked = 0;
+        selectedSeats = [];
         client_dvm_reset_maps();
         $scope.selectedSections = [];
         $scope.filterEventsData();
-    }
+     }
 
     $scope.fillEventsData = function(){
         var htm = "";
@@ -535,8 +537,8 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
             'tickets_data_object': DATA_TICKTES,
             'static_map': '',
         };
-        console.log("DVM_map_params")
-        console.log(DVM_map_params);
+        // console.log("DVM_map_params")
+        // console.log(DVM_map_params);
         $timeout(function(){
             angularLoad.loadScript("/dvm.js?v=104").then(function() {
                 console.log("dvm.js loadded successfully");
@@ -561,7 +563,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         else{
             $scope.selectedSections.splice($scope.selectedSections.indexOf(bare_section),1);
         }
-        console.log($scope.selectedSections);
+        // console.log($scope.selectedSections);
         $scope.filterEventsData();
     });
     $scope.compareDates = function(event_date,format){

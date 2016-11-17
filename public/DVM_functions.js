@@ -38,6 +38,9 @@ function set_map(args) {
     headliner_id = map_args['headliner_id'];
     //venue folder
     venue_folder = venue_id;
+
+    isSeatClicked = 0;
+    selectedSeats = [];
     //folders exceptions
     //clippers
 //    if (headliner_id === '101535') {
@@ -707,45 +710,89 @@ function set_map(args) {
                 section_has_tix = true;
             }
             mouseoverSection = function (sts, section, section_has_tix) {
-                if (section_as_row(section) || (this_map_params['rows_display'] === false) ) {// || (this_map_params['rows_display'] && panZoom.getCurrentZoom()<1)
-                    //tooltip display
-                    if (section_has_tix ) {
-                        //mouse coordinates &&  groub_zon_km.length  === 0
+              if(isSeatClicked == 0) {
+                  if (section_as_row(section) || (this_map_params['rows_display'] === false) ) {// || (this_map_params['rows_display'] && panZoom.getCurrentZoom()<1)
+                      //tooltip display
+                      if (section_has_tix ) {
+                          //mouse coordinates &&  groub_zon_km.length  === 0
 
-//                        x = e.pageX;
+  //                        x = e.pageX;
 
-                        var decalage = $('#' + section).offset();
-                        x = decalage.left;
-                        y = decalage.top;
-                        if (sts[0].state === 0) {
-                            //change sections color and stroke
-                            attrs = hover_attr_section_setting(section);
-                            //st.attr(attrs);
-                            sts.animate(attrs, 200);
+                          var decalage = $('#' + section).offset();
+                          x = decalage.left;
+                          y = decalage.top;
+                          if (sts[0].state === 0) {
+                              //change sections color and stroke
+                              attrs = hover_attr_section_setting(section);
+                              //st.attr(attrs);
+                              sts.animate(attrs, 200);
 
- //-----------------------------------------------------KM-Select------------------------------------------------                           
-                            var chaine = $("#" + hiddenClickedSections).val();
-                            if (chaine.length )
-                            {
-                                var tableau = chaine.split(',');
-                                // console.log(tableau);
-                                for (var i = 0; i < tableau.length; i++) {
-                                 // console.log("tableau[" + i + "] = " + 's-' + tableau[i]);
-                                  click_attr_section_setting('s-' + tableau[i]);
+   //-----------------------------------------------------KM-Select------------------------------------------------                           
+                              var chaine = $("#" + hiddenClickedSections).val();
+                              if (chaine.length )
+                              {
+                                  var tableau = chaine.split(',');
+                                  // console.log(tableau);
+                                  for (var i = 0; i < tableau.length; i++) {
+                                   // console.log("tableau[" + i + "] = " + 's-' + tableau[i]);
+                                    click_attr_section_setting('s-' + tableau[i]);
+                                  }
+                              }
+       
+                             
+  //-------------------------------------------------------------------------------------------------------------------
+
+                          }
+                          
+                          display_tooltip_section(section, x, y);
+                      }
+                      //correction bug safari
+                      rMap.safari();
+                  }
+                  current = section;
+                }else{
+                    if(selectedSeats.indexOf(section) >= 0){
+                        if (section_as_row(section) || (this_map_params['rows_display'] === false) ) {// || (this_map_params['rows_display'] && panZoom.getCurrentZoom()<1)
+                            //tooltip display
+                            if (section_has_tix ) {
+                                //mouse coordinates &&  groub_zon_km.length  === 0
+
+        //                        x = e.pageX;
+
+                                var decalage = $('#' + section).offset();
+                                x = decalage.left;
+                                y = decalage.top;
+                                if (sts[0].state === 0) {
+                                    //change sections color and stroke
+                                    attrs = hover_attr_section_setting(section);
+                                    //st.attr(attrs);
+                                    sts.animate(attrs, 200);
+
+         //-----------------------------------------------------KM-Select------------------------------------------------                           
+                                    var chaine = $("#" + hiddenClickedSections).val();
+                                    if (chaine.length )
+                                    {
+                                        var tableau = chaine.split(',');
+                                        // console.log(tableau);
+                                        for (var i = 0; i < tableau.length; i++) {
+                                         // console.log("tableau[" + i + "] = " + 's-' + tableau[i]);
+                                          click_attr_section_setting('s-' + tableau[i]);
+                                        }
+                                    }
+             
+                                   
+        //-------------------------------------------------------------------------------------------------------------------
+
                                 }
+                                
+                                display_tooltip_section(section, x, y);
                             }
-     
-                           
-//-------------------------------------------------------------------------------------------------------------------
-
+                            //correction bug safari
+                            rMap.safari();
                         }
-                        
-                        display_tooltip_section(section, x, y);
+                        current = section;
                     }
-                    //correction bug safari
-                    rMap.safari();
                 }
-                current = section;
             };
             st[0].onmouseover = function (e) {
                 
@@ -841,7 +888,46 @@ function set_map(args) {
                             //display section tickets
                             display_section_tickets(section, false);
                             $( "body" ).trigger( "sectionSelected", [ section, true ] );
+                            selectedSeats.push(section);
+                            isSeatClicked = isSeatClicked + 1;
+                              if (section_has_tix ) {
+                                //mouse coordinates &&  groub_zon_km.length  === 0
+
+        //                        x = e.pageX;
+
+                                var decalage = $('#' + section).offset();
+                                x = decalage.left;
+                                y = decalage.top;
+                                if (sts[0].state === 0) {
+                                    //change sections color and stroke
+                                    attrs = hover_attr_section_setting(section);
+                                    //st.attr(attrs);
+                                    sts.animate(attrs, 200);
+
+         //-----------------------------------------------------KM-Select------------------------------------------------                           
+                                    var chaine = $("#" + hiddenClickedSections).val();
+                                    if (chaine.length )
+                                    {
+                                        var tableau = chaine.split(',');
+                                        // console.log(tableau);
+                                        for (var i = 0; i < tableau.length; i++) {
+                                         // console.log("tableau[" + i + "] = " + 's-' + tableau[i]);
+                                          click_attr_section_setting('s-' + tableau[i]);
+                                        }
+                                    }
+             
+                                   
+        //-------------------------------------------------------------------------------------------------------------------
+
+                                }
+                                
+                                display_tooltip_section(section, x, y);
+                            }
                         } else {
+                            var indexOfSeat = selectedSeats.indexOf(section);
+                            selectedSeats.splice(indexOfSeat, 1);
+                            isSeatClicked = isSeatClicked - 1;
+                            // console.log(selectedSeats);
                             //change sections color and stroke
                             attrs = normal_attr_section_setting(section);
                             sts.animate(attrs, 500);
@@ -2420,8 +2506,8 @@ function dvm_reset_maps(init_filtre_vals) {
         if(window.outerWidth < 991){
             var x = $('#mapkey').height()/$('#mapkey').width();
             var y = 10 - (10 * x);
-            console.log("zommed");
-            console.log(Number(y.toFixed(0)));
+            // console.log("zommed");
+            // console.log(Number(y.toFixed(0)));
             panZoom.zoomIn(y,true);
             rows_or_sections_display();
             //zoom seeker change
