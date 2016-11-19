@@ -2,16 +2,19 @@ controllers = angular.module('gamehedge')
 
 controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,$location,$routeParams,$timeout,apiService,$filter,$window,Analytics){
     
-    setInterval(function() {
+    var trigger = setInterval(function() {
         if ($(window).width() > 992){
             if($(".badge-container").offset().top > 0){
                 if($(".confirm_pay").offset().top > $(".badge-container").offset().top){
                     var diff = $(".confirm_pay").offset().top - $(".badge-container").offset().top;
                     $(".badge-container").css("padding-top", diff + "px");
-                }
-            }   
-        }
-    }, 100); 
+                    clearInterval(trigger);
+                 }else{
+                    clearInterval(trigger);
+                 }
+             }
+         }
+     }, 100);
     
     $rootScope.showHeader = true;
     $scope.getTicket = function(){
