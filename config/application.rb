@@ -39,6 +39,8 @@ module Gamehedge
 
     config.assets.precompile << %r(.*.(?:eot|svg|ttf|woff|woff2)$)
 
+    config.assets.enabled = false
+
     config.cache_store = :dalli_store
     
     # To compress json files
