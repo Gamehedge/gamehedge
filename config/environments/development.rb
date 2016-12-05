@@ -61,8 +61,6 @@ Rails.application.configure do
   }
   config.assets.precompile += ['active_admin.css']
 
-  config.serve_static_assets = false
-  config.serve_static_files = false
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 5000 }
   config.action_mailer.delivery_method = :smtp
