@@ -28,7 +28,7 @@ Rails.application.configure do
   config.assets.js_compressor = Uglifier.new(mangle: false)
   config.assets.css_compressor = :sass
     
-  config.assets.gzip = false
+  config.assets.gzip = true
     
   config.assets.image_optim.nice = 20
   config.assets.image_optim.svgo = false
@@ -107,7 +107,7 @@ Rails.application.configure do
   }
   #config.static_cache_control = "public, max-age=2592000"
 
-  config.serve_static_files = false
+  config.serve_static_files = true
 
   config.paperclip_defaults = {
       :storage => :s3,
@@ -143,7 +143,7 @@ Rails.application.configure do
    :enable_starttls_auto => true
   }
     
-  config.serve_static_assets = false
+  config.serve_static_assets = true
   config.static_cache_control = "public, max-age=31536000"
   #config.action_controller.asset_host = ENV['CDN_HOSTNAME']
   #config.assets.compress = true
