@@ -122,8 +122,8 @@
     </div>
 
     <div ng-class="{'dark-header': $root.darkHeader}">
-        <nav ng-if="showHeader == true || windoWidth > 991" class="navbar navbar-default navbar-gamehedge vertical-center" role="navigation">
-
+        <nav ng-if="showHeader == true || windoWidth > 991" class="navbar navbar-default navbar-gamehedge vertical-center" role="navigation" ng-class="{'order-page': $root.isOrder}">
+        <div class="mnav-container">
             <div class="col-xs-2 hidden-md hidden-lg" ng-show="!$root.isOrder">
                 <div class="navbar navbar-default navbar-fixed-top">
                     <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target="#slideMenu" data-canvas="body" ng-click="showSlideMain()">
@@ -134,7 +134,7 @@
                 </div>
             </div>
             <div class="navbar-header col-md-4 col-xs-8">
-                <a href="/">
+                <a href="/" >
                     <img class="logo-image" alt="GameHedge.com" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/logo.png">
                 </a>
             </div>
@@ -208,6 +208,7 @@
                     <a href="/login"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png">LOGIN</a>
                 </div>
             </div>
+          </div>
         </nav>
     </div>
     <div class="view-container">
@@ -295,5 +296,6 @@
     </footer>
     <div growl></div>
 </div>
+        
         
    
