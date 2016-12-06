@@ -2329,7 +2329,7 @@ a {
     }
 
     .top-banner .logo-left .b-sub span{
-        font-size: 17px;
+        font-size: 16px;
         letter-spacing: 0px;
         display: block;
     }
@@ -2349,8 +2349,8 @@ a {
     .top-banner-homepage .logo-left .b-sub b{
         display: inline;
         text-align: center;
-        font-size: 20px;
-        line-height: 20px;
+        font-size: 18px;
+        line-height: 19px;
     }
 
 
@@ -3409,6 +3409,8 @@ footer .footer-signature img{
         font-size: 10px !important;
         text-transform: uppercase;
         margin-bottom: 10px !important;
+        display: inline-block;
+        width: 100%;
     }
     
     #home section#hero #hero-search {

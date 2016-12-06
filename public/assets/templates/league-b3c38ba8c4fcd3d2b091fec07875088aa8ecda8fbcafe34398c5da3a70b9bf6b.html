@@ -12,7 +12,10 @@
       <div id="content">
         <div class="container">
           <p class="hidden-md hidden-lg hidden-xl">{{::league.name | uppercase}} Tickets with Good Game Guarantee!</p>
-          <div id="hero-search" class="">
+
+          <p class="hidden-xs hidden-sm" style="margin-top: 20px; margin-bottom: 0px;">{{::league.name | uppercase}} Tickets with Good Game Guarantee!</p>
+
+          <div id="hero-search" class="" style="margin-top: 25px;margin-bottom: 50px;">
             <form id="form-home-search" name="formSearch" onsubmit="function(){return false;};">
               <input type="hidden" name="type" value="full" />
               <div class="form-group">
@@ -24,7 +27,7 @@
               </div>
             </form>
           </div>
-          <p class="hidden-xs hidden-sm">{{::league.name | uppercase}} Tickets with Good Game Guarantee!</p>
+
         </div>
       </div>
     </div>
@@ -35,63 +38,87 @@
   </script>
   <section id="good-game-guarantee" class="hidden-xs hidden-sm">
     <div class="container">
-      <div class="title">Every Ticket Comes With Our Good Game Guarantee!</div>
 
-      <div class="content-background">
-        <div class="content">
-          <div class="col-md-4 division">
-            <div class="col-xs-5 section">
-              <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/icon ticket.png">
-            </div>
-            <div class="col-xs-7 section2">
-              <h2>BUY TICKETS</h2>
-              <p>
-                Find your game and purchase your tickets.<br>
-                Good Game Guarantee is included at no additional cost with every ticket.
-              </p>
-            </div>
-          </div>
-          <div class="col-md-4 division center-div">
-            <div class="col-xs-5 section">
-              <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/icon stadium.png">
-            </div>
-            <div class="col-xs-7 section2">
-              <h2>ENJOY GAME</h2>
-              <p>
-                If the home team loses by {{::league.ggg}} or more, you get 50% of ticket price back.
-              </p>
-              <!-- <div class="col-xs-6 block">
-                <img class="icon-img" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/football icon.png">
-                17 points
-              </div>
-              <div class="col-xs-6 block">
-                <img class="icon-img" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/basketball icon.png">
-                20 points
-              </div>
-              <div class="col-xs-6 block">
-                <img class="icon-img" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/baseball icon.png">
-                5 runs
-              </div>
-              <div class="col-xs-6 block">
-                <img class="icon-img" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/hockey icon.png">
-                4 goals
-              </div> -->
-            </div>
-          </div>
-          <div class="col-md-4 division">
-            <div class="col-xs-5 section">
-              <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/icon coin.png">
-            </div>
-            <div class="col-xs-7 section2">
-              <h2>CLAIM MONEY</h2>
-              <p>
-                Simply come back to GameHedge.com to claim your refund.
-              </p>
-            </div>
-          </div>
-        </div>
+
+<div class="top-banner">
+      <div class="ggg-blogo"><span>Good Game Guarantee</span></div>
+      <div class="logo-left">
+        <div class="b-title"><span class="b-perc">50%</span> Refund</div>
+        <div class="b-sub"><span>If home team loses by </span><b>{{::league.ggg}}</b> or more</div>
       </div>
-    </div>
+      <div class="logo-right">
+        <div class="b-sm-left">
+              <img src="/assets/icon coin-a40eea64c1a1891b66756011ec48e43d67950c96647117597546d112983d9af7.png">
+        </div>
+        <div class="b-sm-right">
+          <div class="hl-text">Buy Tickets</div>
+          <div class="hl-text">Claim Money</div>
+          <div>No gimmicks</div>
+          <div>No catches</div>
+          <div id='ggg_explanation' style="line-height: 13px; font-size: 11px; color: #226ea5;">More <i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
+
+
+                  <div class="ggg-tooltip" style="display: none;" id="ggg-tooltip">
+										<ul class="qtip_ul1">
+										<li>Buy your tickets</li>
+										<li>If game qualifies for Good Game Guarantee</li>
+											<ul class="qtip_ul2">
+												<li>{{::league.ggg}} or more</li>
+											</ul>
+										<li>Log in with your E-mail</li>
+										<li>Click Refund under Order Status in Order History</li>
+										<li>Refund to credit card in 3-4 days</li>
+										</ul>
+                    <a href="/how-it-works" target='_blank' style="font-size: 11px;">Read more <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+									</div>
+	                <script>
+									jQuery( document ).ready(function() {
+										
+    									jQuery("#ggg_explanation").qtip({											
+         									hide: {												 
+             								    fixed: true,
+                								delay: 300
+            								},
+											
+										      position: {
+        									  	my: 'right center', 
+        										  at: 'left center', 
+        										  target: jQuery('#ggg_explanation')
+    										  },	
+											    style: {
+     										     classes: 'qtip-light qtip-shadow qtip-checkout'
+    										  },										
+        									content: {
+											      	title: 'How Good Game Guarantee works',
+            									text: jQuery("#ggg-tooltip")
+        									},
+    											events: {
+       										   show: function(event, api) {
+            										mixpanel.track("GGG Tooltip Pops");
+        										}
+    	  									}
+
+    									
+										});
+										
+									})
+									</script>
+
+        </div>
+        <div class="sep"></div>        
+      </div>
+      <div class="sep"></div>
+      </div>
+
+
+
+
+
+
+
+
+
+    
   </section>
   
   <section id="near-events" ng-show="next_events.length != 0">
