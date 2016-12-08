@@ -19,6 +19,7 @@
 						    	{{event.occurs_at | date: "EEE,	MMM dd, yyyy hh:mm a" : 'UTC'}}<br>
 						    	{{event.venue.name}}, {{event.venue.location}}<br>
 						    	<div class="top-location"><strong class="info-summary">Section {{ticket.section}}, Row {{ticket.row}}</strong></div>
+								<div class="top-price-ea">{{ticket.retail_price | currency}} Each</div>
                                 <!--
 								<div class="top-info-price">
                                     <div class="price-top-mobile">{{ticket.retail_price | currency}} ea.</div>
@@ -32,9 +33,10 @@
 
 						    	<div class="top-val mobile-margin-select" >
 							    	<select class="mobile-top-amount" id="amount" ng-model="amount" ng-change="calculateValues()" >
-							    		<option  ng-repeat="o in ticket.splits | orderBy:'-'" value="{{o}}">{{o}} {{o>1 ? 'tickets':'ticket'}}: &nbsp;&nbsp;&nbsp;{{ticket.retail_price*o | currency}}&nbsp;</option>
+							    		<option  ng-repeat="o in ticket.splits | orderBy:'-'" value="{{o}}">{{o}}</option>
 							    	</select>
 						    	</div>
+								 <span class="seats-note m-invis" id="seats_note">Your seats will be together</span>
 
 						    </div>
 	  					</div>
@@ -977,11 +979,10 @@
 									<div class="ggg-tooltip" style="display: none;" id="ggg-tooltip">
 										<ul class="qtip_ul1">
 										<li>Buy your tickets</li>
-										<li>If game qualifies for Good Game Guarantee</li>
+										<li>if home team loses by/li>
 											<ul class="qtip_ul2">
 												<li>{{event.home_performer.sport.ggg}} or more</li>
 											</ul>
-										<li>Log in with your E-mail</li>
 										<li>Click Refund under Order Status in Order History</li>
 										<li>Refund to credit card in 3-4 days</li>
 										</ul>
