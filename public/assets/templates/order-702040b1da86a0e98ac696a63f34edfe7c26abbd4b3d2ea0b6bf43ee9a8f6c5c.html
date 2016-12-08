@@ -18,19 +18,24 @@
 						    <div class="info">
 						    	{{event.occurs_at | date: "EEE,	MMM dd, yyyy hh:mm a" : 'UTC'}}<br>
 						    	{{event.venue.name}}, {{event.venue.location}}<br>
-						    	<div class="top-location"><strong class="info-summary">Section {{ticket.section}}</strong></div>
-                                <div class="top-info-price">
-                                    <strong>Row {{ticket.row}}</strong>
+						    	<div class="top-location"><strong class="info-summary">Section {{ticket.section}}, Row {{ticket.row}}</strong></div>
+                                <!--
+								<div class="top-info-price">
                                     <div class="price-top-mobile">{{ticket.retail_price | currency}} ea.</div>
-                                </div>                                                                
+                                </div>
+								-->
+								<br/>                                                                
 						    </div>
+
                             <div class="top-desc-container">
-						    	<div class="description top-desc">Quantity</div>
+								<div style="margin-bottom: 8px;">Quantity:</div>
+
 						    	<div class="top-val mobile-margin-select" >
 							    	<select class="mobile-top-amount" id="amount" ng-model="amount" ng-change="calculateValues()" >
-							    		<option ng-repeat="o in ticket.splits | orderBy:'-'" value="{{o}}">{{o}}</option>
+							    		<option  ng-repeat="o in ticket.splits | orderBy:'-'" value="{{o}}">{{o}} {{o>1 ? 'tickets':'ticket'}}: &nbsp;&nbsp;&nbsp;{{ticket.retail_price*o | currency}}&nbsp;</option>
 							    	</select>
 						    	</div>
+
 						    </div>
 	  					</div>
 	  					<div class="card-in deliver">
@@ -1047,8 +1052,7 @@
  						  </div>	
 						  <div class="summary-subtitle"><i class="fa fa-angle-double-right" aria-hidden="true"></i>Ticket Details</div>
 						  <div class="summary-box ticket-details">						  
-							    <span><b>Section:</b> {{ticket.section}}</span>
-								<span><b>Row:</b> {{ticket.row}}</span>
+							    <span style="font-size: 14px;"><b>Section:</b> {{ticket.section}}, <b>Row:</b> {{ticket.row}}</span>
                             	<!--<span>ADDITIONAL INFO WILL BE HERE</span>-->
 						  </div>
 
@@ -1068,11 +1072,13 @@
 							    	</select>
 						    	</div>
 						    </div>
+							<!--
 						    <div class="description-line">
 						    	<div class="description">Subtotal</div>
 						    	<div class="value">{{subtotal | currency}}</div>
 						    </div>
                             <hr>
+							-->
                             <div class="description-line">
 						    	<div class="description short">Fee</div>
 						    	<div class="value short">{{service_fee | currency}}</div>
@@ -1096,7 +1102,7 @@
 					    		<div class="value short" ng-if="ticket.format != 'Eticket' && ticket.format != 'Physical'">{{ticket.format | replaceText}}</div>
 						    </div>
 						    <div class="description-line ggg">
-						    	<div class="description short" style="width: 66%;">Good Game Guarantee 50% Refund</div>
+						    	<div class="description short" style="width: 66%;">Good Game Guarantee</div>
 						    	<div class="value short" style="width: 34%;">FREE</div>
 						    </div>
 						    <div class="description-line" ng-if="active_promos">
@@ -1112,10 +1118,10 @@
 						    <hr>
 						    <div class="description-line total">
 						    	<div class="description">TOTAL</div>
-						    	<div class="value">{{total | currency}}</div>
+						    	<div class="value" style="color: #2b74a9;">{{total | currency}}</div>
 						    </div>
-						    <button class="confirm_pay" ladda="payProcess" ng-disabled="processing || editing" ng-click="confirmPay()"><i class="fa fa-lock" aria-hidden="true"></i> Pay</button>
-						    <div class="terms">By clicking "Pay", you agree to GameHedge <a href="/our-terms"  target="_blank">Terms and Privacy Policy.</a></div>
+						    <button class="confirm_pay" ladda="payProcess" ng-disabled="processing || editing" ng-click="confirmPay()"><i class="fa fa-lock" aria-hidden="true"></i> Place Order</button>
+						    <div class="terms">By clicking "Place Order", you agree to GameHedge <a href="/our-terms"  target="_blank">Terms and Privacy Policy.</a></div>
                             
                             <div class="seals">
                                 <div class="row">
