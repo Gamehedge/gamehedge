@@ -2264,6 +2264,16 @@ a {
         width: 100%;
 }
 
+.m-invis{
+    display: none !important;
+}
+
+
+.header-claim-refund{
+    margin-top: 5px;
+    display: block;
+}
+
 
 
 @media(max-width: 1200px) {
@@ -2301,12 +2311,26 @@ a {
         box-shadow: 0px 0px 8px -3px rgba(0, 0, 0, 0.85);
     }
 
+    .top-val #amount{
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+    }
     .mobile-margin-select{
         float: none !important;
     }
     .mobile-top-amount{
         height: 38px !important;
+
     }
+    .mobile-margin-select{
+        display: inline-block;
+    }
+
+    .seats-note{
+        padding-left: 5px;
+        font-size: 14px;
+    }
+
 
     .top-banner .ggg-blogo{
         display: none;
@@ -3937,8 +3961,14 @@ footer .footer-signature img{
     
     .top-val #amount {
         font-size: 14px !important;
-        margin-top: 5px !important;
     }
+
+    .top-price-ea{
+        color: #226ea5;
+        font-size: 22px;
+        margin-top: 11px;
+    }
+
     
     #payments input, #payments select {
         border: none;

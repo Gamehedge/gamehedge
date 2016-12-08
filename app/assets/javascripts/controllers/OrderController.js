@@ -127,6 +127,13 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		else{
 			$scope.service_fee = 0;
 		}
+
+		if ($scope.amount > 1){
+			jQuery('#seats_note').removeClass('m-invis');
+		}else{
+			jQuery('#seats_note').addClass('m-invis');
+		}
+
 		for(i=0;i<$scope.promo_codes.length;i++){
 			// console.log($scope.promo_codes[i].code);
 			// console.log($scope.promo_code);

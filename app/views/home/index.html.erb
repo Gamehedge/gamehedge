@@ -204,6 +204,10 @@
                         <li><a ng-click="logout()" ng-show="$root.isLoggedin">Logout</a></li>
                     </ul>
                 </div>
+
+                 <div class="dropdown login" ng-show="!$root.isLoggedin">
+                    <a href="/login" class="header-claim-refund">Claim Refund</a>
+                </div>
             </div>
           </div>
         </nav>
