@@ -61,12 +61,13 @@
                   <div class="ggg-tooltip" style="display: none;" id="ggg-tooltip">
 										<ul class="qtip_ul1">
 										<li>Buy your tickets</li>
-										<li>if home team loses by/li>
+										<li>If <b>Home Team</b> loses by</li>
 											<ul class="qtip_ul2">
 												<li>{{::league.ggg}} or more</li>
 											</ul>
-										<li>Click Refund under Order Status in Order History</li>
-										<li>Refund to credit card in 3-4 days</li>
+                    <li>Click on Claim Refund</li>  
+										<li>We will refund to your credit card in 3-4 days</li>
+
 										</ul>
                     <!--
                     <a href="/how-it-works" target='_blank' style="font-size: 11px;">Read more <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
@@ -209,7 +210,8 @@
                   </div>
                   <div class="col-xs-8 col-md-7 name hidden-xs hidden-sm">
                     <a href="{{::performer.url}}">{{::performer.name}}</a>
-                    <p>Stadium <a href="{{::performer.venue.url}}">{{::performer.venue.name}}</a></p>
+                    <!--<p>Stadium <a href="{{::performer.venue.url}}">{{::performer.venue.name}}</a></p>-->
+                    <p>Stadium {{::performer.venue.name}}</p>
                   </div>
                   <div class="col-xs-3 col-md-2 score hidden-xs hidden-sm">
                     <table>
