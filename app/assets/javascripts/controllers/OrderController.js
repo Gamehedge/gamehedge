@@ -130,8 +130,10 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 
 		if ($scope.amount > 1){
 			jQuery('#seats_note').removeClass('m-invis');
+			jQuery('#seats_note2').removeClass('m-invis');
 		}else{
 			jQuery('#seats_note').addClass('m-invis');
+			jQuery('#seats_note2').addClass('m-invis');
 		}
 
 		for(i=0;i<$scope.promo_codes.length;i++){

@@ -503,6 +503,28 @@ a {
     color: #226ea5 !important;
 }
 
+
+.tsmnl_box {
+    margin-bottom: 16px;
+}
+.tsmnl {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-size: 12px;
+}
+.tsmnl_author {
+    display: block;
+    text-align: right;
+    font-size: 11px;
+    color: #777;
+}
+.tsmnl_author span{
+    color: #555;
+}
+
+
+
 @media(min-width: 992px) {
     #form-home-search [uib-typeahead-popup].dropdown-menu{
         width: 700px !important;
@@ -1974,6 +1996,10 @@ a {
     width: 24px;
 }
 
+.ggg-tooltip-hp .qtip_ul2{
+    list-style: none;
+}
+
 .qtip_ul2  img{
     width: 18px;
 }
@@ -2270,11 +2296,73 @@ a {
 
 
 .header-claim-refund{
-    margin-top: 5px;
+    background-color: rgba(255, 255, 255, 0.18);
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-radius: 3px;
+    margin-top: 3px;
     display: block;
 }
 
+.refund-box{
+    margin-bottom: 10px;
+    border-bottom: 1px solid #d6d6d6;
+    padding-bottom: 10px;
+    line-height: 26px;
+    font-size: 12px;
+}
+.refund-box .fa-check{
+    display: inline-block;
+    width: 20px;
+    color: green;
+}
+.rfnd-team1{
+    font-weight: normal;
+}
+.rfnd-team2{
+    font-weight: bold;
+}
+.rfnd-name{
+    float: left;
+    width: 85%;
+}
+.rfnd-team1 .rfnd-name{
+    padding-left: 20px;
+}
+.rfnd-score{
+    float: right;
+    width: 14%;
+    text-align: right;
+}
+.rfnd-text{
+    color: #555;
+    padding-left: 20px;
+    font-size: 12px;
+}
+.rfnd-text b{
+    font-weight: bold;
+    color: green;
+}
 
+.hl-green{
+    color: green;
+}
+.hlsize{
+    font-size: 14px;
+}
+.subheader1m{
+    background-color: #5a5a5a;
+    padding-top: 10px;
+    padding-bottom: 8px;
+    margin-top: 29px;
+    text-align: center;
+    color: #fff !important;
+}
+.subheader1m span{
+    color: #9aca3c;
+}
 
 @media(max-width: 1200px) {
     .top-banner .logo-left .b-title{

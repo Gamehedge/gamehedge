@@ -155,8 +155,88 @@
           <button ng-click="loadMore()" ng-if="load_more" class="load-more-btn">Load more</button>
         </div>
         <div class="col-md-3 ggg-container sidebar1">
-          <div class="title">
-            <h2 class='subheader1'>STAY UP TO DATE</h2>
+          
+
+
+          <h2 class='subheader1m hidden-xs hidden-sm'><span>RECENT</span> REFUNDS</h2>  
+          <div class='hidden-xs hidden-sm'> 
+            <div class="refund-box">
+              <div class="rfnd-team2 hlsize">
+                <div class="rfnd-name" style="padding-left: 20px;">Manuel F.</div>
+                <div class="rfnd-score hl-green">$31</div>
+                <div class="sep"></div>
+              </div>
+
+              <div class="rfnd-team1">
+                <div class="rfnd-name">Golden State Warriors</div>
+                <div class="rfnd-score">120</div>
+                <div class="sep"></div>
+              </div>
+              <div class="rfnd-team2">
+                <div class="rfnd-name"><i class="fa fa-check" aria-hidden="true"></i>Indiana Pacers</div>
+                <div class="rfnd-score">83</div>
+                <div class="sep"></div>
+              </div>
+
+            </div>
+
+
+            <div class="refund-box" style="border-bottom: 0px;">
+              <div class="rfnd-team2 hlsize">
+                <div class="rfnd-name" style="padding-left: 20px;">Jeremy F., Fort Wayne, IN</div>
+                <div class="rfnd-score hl-green">$869</div>
+                <div class="sep"></div>
+              </div>
+
+              <div class="rfnd-team1">
+                <div class="rfnd-name">Pittsburgh Steelers</div>
+                <div class="rfnd-score">28</div>
+                <div class="sep"></div>
+              </div>
+              <div class="rfnd-team2">
+                <div class="rfnd-name"><i class="fa fa-check" aria-hidden="true"></i>Indianapolis Colts</div>
+                <div class="rfnd-score">7</div>
+                <div class="sep"></div>
+              </div>
+              
+            </div>
+
+          </div>
+
+          <h2 class='subheader1m hidden-xs hidden-sm'>TESTIMONIALS</h2>  
+          <div class='hidden-xs hidden-sm'> 
+
+            <div class="tsmnl_box">
+              <span class="tsmnl"><i>"Assurance on my ticket in case of a bad game. Why would I buy anywhere else as long as the price is the same"</i></span>
+              <span class="tsmnl_author"><span>Samuel H.</span>, Saddle River, NJ</span>
+            </div>
+          
+            <div class="tsmnl_box">
+              <span class="tsmnl"><i>"Bought my tickets from GameHedge two days in a row, same section and row. Nats are my team, I love double-plays, and it's my birthday. Happy birthday to me!"</i></span>
+              <span class="tsmnl_author"><span>Elizabeth D.</span></span>
+            </div>
+
+            <div class="tsmnl_box">
+              <span class="tsmnl"><i>"Makes it more fun to buy tickets, Just get the word out!"</i></span>
+              <span class="tsmnl_author"><span>H. Clarke</span>, New York, NY</span>
+            </div>
+
+            <div class="tsmnl_box">
+              <span class="tsmnl"><i>"Awesome site, brilliant idea!"</i></span>
+              <span class="tsmnl_author"><span>Khalid K.</span>, Glenview, IL</span>
+            </div>
+
+
+            <div class="tsmnl_box">
+              <span class="tsmnl"><i>"I think it is a wonderful benefit, easy and helpful"</i></span>
+              <span class="tsmnl_author"><span>Navid S.</span>, Alvarado, TX </span>
+            </div>
+
+          </div>
+
+
+        <div class="title">
+            <h2 class='subheader1m'>STAY UP TO DATE</h2>
             <p>Sign up for savings, info and more!</p>
             <form name="up_date_form" ng-submit="sendPerformerEmailRequest()" novalidate>
                 <div class="form">
@@ -166,6 +246,8 @@
                 <p ng-show="up_date_form.email.$invalid && !up_date_form.email.$pristine" class="help-block footer-form-msg">Enter a valid email.</p>
             </form>
           </div>
+
+
           <div class="body" ng-show="testimonials.length != 0">
             <h2>TESTIMONIALS</h2>
             <p>Why {{performer.name}} fans love GameHedge!</p>
