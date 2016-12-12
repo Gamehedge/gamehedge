@@ -10,7 +10,7 @@ return}i()}}()}setTimeout(function(){C=!0;g(B,function(b){b()})},300)})(window);
 var is_static_map = true;
 var client_data = { 
     'dvm_client_id': DVM_map_params["client_id"],
-    'domain_name': document.domain,
+    'domain_name': 'gamehedge-ruby.herokuapp.com',
     'headliner_id':DVM_map_params['headliner_id'],
     'feed_type': DVM_map_params['feed_type'],
     'venue_id': DVM_map_params['venue_id'],
@@ -368,7 +368,7 @@ head.js(
 //        "https://dynamicvenuemaps.com/maps/js/maps_general_settings.js",
         ///
         // "https://dynamicvenuemaps.com/maps/js/essentiels.min.js?v=201310031607",
-        "/essentiels.js?v=103",
+        "/essentiels.js?v=105",
         ///
 
         "https://dynamicvenuemaps.com/maps/js/jquery.fancybox.js?v=2.1.4",
@@ -376,7 +376,7 @@ head.js(
         "https://dynamicvenuemaps.com/maps/maps_setting/" + venue_folder + "/map_shapes.js",
         "https://dynamicvenuemaps.com/maps/maps_setting/" + venue_folder + "/section_matching.js?v=201401071606",
         "https://dynamicvenuemaps.com/maps/maps_setting/" + venue_folder + "/synonyms.js?v=201403071228",
-        "/DVM_functions.js?v=103",
+        "/DVM_functions.js?v=105",
         function () {
              if(DVM_map_params['tickets_url']){
             var tickets_url = DVM_map_params['tickets_url'];

@@ -237,7 +237,7 @@ class TicketEvolutionService
               #   end
               # end
               event = Event.league_event(e)
-              if event.present? && event.first.is_active == true
+              if event.present?&&event.first.is_active == true
                 @events2.push(e)
               end
             end
@@ -286,7 +286,7 @@ class TicketEvolutionService
               #   end
               # end
               event = Event.league_event(e)
-              if event.present? && event.first.is_active == true
+              if event.present?&&event.first.is_active == true
                 @events2.push(e)
               end
             end

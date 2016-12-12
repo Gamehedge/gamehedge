@@ -2,11 +2,11 @@ app = angular.module('gamehedge')
 
 app.controller('PerformerController', function($scope,$rootScope,$routeParams,dataService, apiService,$window,$location, $timeout,Auth,Analytics){
     $rootScope.showHeader = true;
-	$scope.getPerformerInfo = function(){
-		apiService.getData('/api/v1/performers/'+$routeParams.performerId)
+  $scope.getPerformerInfo = function(){
+    apiService.getData('/api/v1/performers/'+$routeParams.performerId)
             .then(function(response){
                 //console.log("Performer");
-            	//console.log(response);
+              //console.log(response);
                 $scope.performer  = response;
                 $rootScope.title = $scope.performer.name + " Tickets | Gamehedge";
                 $rootScope.description = "Buy and Save up to 60% on all "+$scope.performer.name+" game tickets. If the home team losses by "+$scope.performer.sport.ggg+" or more, get 50% of your ticket price back.";
@@ -19,7 +19,7 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
                     $location.path("/");
                 }
         });
-	};
+  };
 
     $scope.getTestimonials = function(){
         apiService.getData('/api/v1/testimonials/?performer_id='+String($scope.performer.id))
@@ -81,9 +81,9 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
         }   
     }
 
-	//Search call
+  //Search call
 
-	$scope.getSearchHints = function(val) {
+  $scope.getSearchHints = function(val) {
         var now = new Date();
         now.setHours(now.getHours() + 1);
         var today_date = [[AddZero(now.getFullYear()), AddZero(now.getMonth() + 1), now.getDate()].join("-"), [AddZero(now.getHours()), AddZero(now.getMinutes())].join(":")].join(" ");
@@ -93,7 +93,7 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
         }
         return dataService.getData("/search/?search=" + val + "&limit=4&today_date="+today_date)
             .then(function(response){
-            	var width = $("#search_element").width() + 50;
+              var width = $("#search_element").width() + 50;
                 $('#form-home-search [uib-typeahead-popup].dropdown-menu').width(width);
                 $scope.searchBarResults = response.data;
                 return response.data;
@@ -119,35 +119,34 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
         $scope.getEvents();
     }
     
- //    $scope.slickConfig = {
- //        enabled: true,
- //        autoplay: false,
- //        draggable: true,
- //        arrows: false,  
- //        infinite: false,
- //        dots: true,
- //        method: {},
- //        event: {
- //            beforeChange: function (event, slick, currentSlide, nextSlide) {
- //            },
- //            afterChange: function (event, slick, currentSlide, nextSlide) {
- //            }
- //        }
- //    };
-	// $timeout(function () {
- //        $scope.slickConfig.method.slickSetOption(null, null, true);
- //    }, 100);
+  //   $scope.slickConfig = {
+  //       enabled: true,
+  //       autoplay: false,
+  //       draggable: true,
+  //       arrows: false,  
+  //       infinite: false,
+  //       dots: true,
+  //       method: {},
+  //       event: {
+  //           beforeChange: function (event, slick, currentSlide, nextSlide) {
+  //           },
+  //           afterChange: function (event, slick, currentSlide, nextSlide) {
+  //           }
+  //       }
+  //   };
+  // $timeout(function () {
+  //       $scope.slickConfig.method.slickSetOption(null, null, true);
+  //   }, 100);
     
- //    $timeout(function () {
- //        $scope.slickConfig.method.slickSetOption(null, null, true);
- //    }, 200);
+  //   $timeout(function () {
+  //       $scope.slickConfig.method.slickSetOption(null, null, true);
+  //   }, 200);
     
- //    $timeout(function () {
- //        $scope.slickConfig.method.slickSetOption(null, null, true);
- //    }, 500);
+  //   $timeout(function () {
+  //       $scope.slickConfig.method.slickSetOption(null, null, true);
+  //   }, 500);  
 
-    
-    // Modified slick slider start
+  // Modified slick slider start
 
     var slickConfig = $('.slider').slick({
       enabled: true,
@@ -174,8 +173,7 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
     $timeout(function () {
     $(slickConfig).slick("slickSetOption", null, null, true);
     }, 500);
-    
-    // Modified slick slider end  
+  // Modified slick slider end
     
     $scope.up_date_email_proccessing = false;
     $scope.up_date_email = "";
@@ -206,7 +204,7 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
         }
     }
     
-	//Initializers
+  //Initializers
     $rootScope.isOrder = false;
     $rootScope.isEvent = false;
     $rootScope.darkHeader = false;
@@ -222,7 +220,7 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
     $scope.load_more = false;
     $scope.events = []
     $scope.testimonials = []
-	$scope.getPerformerInfo();
+  $scope.getPerformerInfo();
     $scope.searchTerm = "";
     $scope.compareDate =  "2015-09-05T00:00:00.000Z"
     $window.scrollTo(0, 0);

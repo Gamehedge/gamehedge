@@ -14,7 +14,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
                  }
              }
          }
-    }, 100);
+     }, 100);
     
     $rootScope.showHeader = true;
     $scope.getTicket = function(){
@@ -127,6 +127,15 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		else{
 			$scope.service_fee = 0;
 		}
+
+		if ($scope.amount > 1){
+			jQuery('#seats_note').removeClass('m-invis');
+			jQuery('#seats_note2').removeClass('m-invis');
+		}else{
+			jQuery('#seats_note').addClass('m-invis');
+			jQuery('#seats_note2').addClass('m-invis');
+		}
+
 		for(i=0;i<$scope.promo_codes.length;i++){
 			// console.log($scope.promo_codes[i].code);
 			// console.log($scope.promo_code);
@@ -455,11 +464,13 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		$scope.edit_deliver = 1;
 		$scope.edit_billing = 1;
 		$scope.edit_credit_card = 1;
+
 		if($rootScope.isLoggedin == true){
 			if($scope.last_digits == ""){
 				$scope.processing = false;
 				$scope.payProcess = false;
-				swal("Error", "No credit card selected", "warning");
+				mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': 'No credit card selected'});
+				swal("Error", "No credit card selected", "warning");				
 			}
 			else{
 				var service_type = "LEAST_EXPENSIVE"
@@ -544,6 +555,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 						// Complete transaction
 						Analytics.trackTrans();
 						
+						mixpanel.track("PayButton Click", {'Status':'Success'});
+
 						$scope.goToConfirm();
 						// Clear transaction
 						// Analytics.clearTrans();
@@ -551,8 +564,11 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    		//console.log($scope.order);
 			    	}
 			    	else{
-			    		//console.log("Error");
-			    		//console.log(response);
+			    		console.log("Error");
+			    		console.log(response);
+
+						mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': 'Unknown Error'});
+
 			    		swal("Error", response.data.error, "error");
 			    	}
 			    }, function errorCallback(response) {
@@ -569,6 +585,9 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				$scope.edit_deliver = 3;
 				$scope.edit_billing = 3;
 				$scope.edit_credit_card = 3;
+
+				mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': 'All fields are requierd'});
+
 				swal("Error", "All fields are requierd", "warning");
 			}
 			else if($.payment.validateCardExpiry($scope.card.expiration_month,$scope.card.expiration_year) == false){
@@ -577,6 +596,9 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				$scope.edit_deliver = 3;
 				$scope.edit_billing = 3;
 				$scope.edit_credit_card = 3;
+
+				mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': 'Expiration date not valid!'});
+
 				swal("Error", "Expiration date not valid!", "warning");
 			}
 			else if($.payment.validateCardNumber($scope.card.last_digits) == false){
@@ -585,6 +607,9 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				$scope.edit_deliver = 3;
 				$scope.edit_billing = 3;
 				$scope.edit_credit_card = 3;
+
+				mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': 'Card number not valid'});
+				
 				swal("Error", "Card number not valid.", "warning");
 			}
 			else if($scope.client.email != $scope.client.confirm_email){
@@ -593,6 +618,9 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				$scope.edit_deliver = 3;
 				$scope.edit_billing = 3;
 				$scope.edit_credit_card = 3;
+
+				mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': 'Email and confirm email fields shpuld be equal'});
+
 				swal("Error", "Email and confirm email fields shpuld be equal", "warning");
 			}
 			else{
@@ -611,22 +639,25 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			        },
 			    }).then(function successCallback(response) {
 			    	if(response.data.error == undefined){
-			    		//console.log("Client created");
-			    		//console.log("Client");
-			    		//console.log(response.data.client);
-			    		//console.log("User");
-                        //console.log(response.data.temp_password);
-			    		//console.log(response.data.user);
+			    		console.log("Client created");
+			    		console.log("Client");
+			    		console.log(response.data.client);
+			    		console.log("User");
+                        console.log(response.data.temp_password);
+			    		console.log(response.data.user);
 			    		$scope.client = response.data.client;
 			    		$scope.temp_password = response.data.temp_password;
 			    		$rootScope.isLoggedin = true;
 			    		$rootScope.isLoggedin = true;
-                        //console.log("pre login...");
+                        console.log("pre login...");
 			    		$rootScope.user = response.data.user;
 			    		$scope.addresses = $scope.client.addresses;
 			    		$scope.billing_address = $scope.client.primary_billing_address;
 			    		$scope.shipping_address = $scope.client.primary_shipping_address;
-                        //console.log("GO TO LOGIN");
+                        console.log("GO TO LOGIN");
+
+						mixpanel.track("PayButton Click", {'Status':'Success'});
+						
 			    		$scope.loginFcn();
 			    	}
 			    	else{
@@ -637,6 +668,9 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 						$scope.edit_deliver = 3;
 						$scope.edit_billing = 3;
 						$scope.edit_credit_card = 3;
+
+						mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': 'Unknown Error'});
+						
 						swal("Error", response.data.error, "error");
 			    	}
 			    }, function errorCallback(response) {
@@ -646,6 +680,9 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 					$scope.edit_deliver = 3;
 					$scope.edit_billing = 3;
 					$scope.edit_credit_card = 3;
+
+					mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': 'Unknown Error'});
+					
 			    });
 			}
 			
@@ -678,8 +715,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	}
 
 	$scope.loginFcn = function(){
-        //console.log("login ENTER");
-        //console.log(credentials);
+        console.log("login ENTER");
+        console.log(credentials);
 		var credentials = {
             email: $scope.client.email,
             password: $scope.temp_password,

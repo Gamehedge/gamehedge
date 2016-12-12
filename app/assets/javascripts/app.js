@@ -7,20 +7,24 @@ app = angular.module('gamehedge',[
   'ui.bootstrap',
   'slickCarousel',
   'angular-ladda',
-  'angular-google-analytics',   
+  'angular-google-analytics',
   'ngLocationUpdate',
   'angularLoad',
   'sly'
 ])
 
-app.config([ '$routeProvider','$locationProvider','AuthProvider', 'AnalyticsProvider', '$httpProvider',
-    function($routeProvider,$locationProvider,AuthProvider,AnalyticsProvider,$httpProvider){
+app.config([ '$routeProvider','$locationProvider','AuthProvider', '$httpProvider',
+    function($routeProvider,$locationProvider,AuthProvider,$httpProvider){
       $httpProvider.useApplyAsync(true);
-      AnalyticsProvider.setAccount('UA-76054076-1');
-      AnalyticsProvider.useAnalytics(true);
-      AnalyticsProvider.trackUrlParams(true);
-      AnalyticsProvider.useECommerce(true, false);
-      AnalyticsProvider.setPageEvent('$viewContentLoaded');
+
+      // app.config([ '$routeProvider','$locationProvider','AuthProvider', 'AnalyticsProvider', '$httpProvider',
+      //     function($routeProvider,$locationProvider,AuthProvider,AnalyticsProvider,$httpProvider){
+      //       $httpProvider.useApplyAsync(true);
+      // AnalyticsProvider.setAccount('UA-76054076-1');
+      // AnalyticsProvider.useAnalytics(true);
+      // AnalyticsProvider.trackUrlParams(true);
+      // AnalyticsProvider.useECommerce(true, false);
+      // AnalyticsProvider.setPageEvent('$viewContentLoaded');
 
       AuthProvider.resourceName('client');
       AuthProvider.loginPath('/clients/sign_in.json');
@@ -116,9 +120,9 @@ app.config([ '$routeProvider','$locationProvider','AuthProvider', 'AnalyticsProv
     }
 ]);
 
-app.run(function(Analytics) {
-    Analytics.log;
-});
+// app.run(function(Analytics) {
+//     Analytics.log;
+// });
 
 app.run(function ($rootScope) {
     $rootScope.$on('$locationChangeSuccess', function (event, next, nextParams) {

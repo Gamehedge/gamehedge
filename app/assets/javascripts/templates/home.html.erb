@@ -5,8 +5,9 @@
     <div id="wrapper">
       <div id="content">
         <div class="container">
-          <p class="hidden-md hidden-lg hidden-xl">Every Ticket Comes With Our Good Game Guarantee!</p>
-          <div id="hero-search">
+         <p class="hidden-xs hidden-sm" style="margin-bottom: 0px; margin-top: 40px;">Every Ticket Comes With Our Good Game Guarantee!</p>          
+
+          <div id="hero-search" style="margin-top: 10px;">
             <form id="form-home-search" name="formSearch" onsubmit="function(){return false;};">
               <input type="hidden" name="type" value="full" />
               <div class="form-group">
@@ -38,9 +39,96 @@
   </script>
 
   <main>
-    <section id="good-game-guarantee" class="hidden-xs hidden-sm">
+    <section id="good-game-guarantee" class="">
       <div class="container">
+
+
+<div class="top-banner top-banner-homepage">
+      <div class="ggg-blogo"><span>Good Game Guarantee</span></div>
+      <div class="logo-left">
+        <div class="b-title"><span class="b-perc">50%</span> Refund</div>
+        <div class="b-sub"><span>If home team loses by </span>
+          <b><img class="icon-img" src="<%= image_url "football icon.png" %>"> 17 points</b>
+          <b><img class="icon-img" src="<%= image_url "basketball icon.png" %>"> 20 points</b>
+          <b><img class="icon-img" src="<%= image_url "baseball icon.png" %>"> 5 runs</b>
+          <b><img class="icon-img" src="<%= image_url "hockey icon.png" %>"> 4 goals</b>
+           or more
+        </div>
+      </div>
+      <div class="logo-right">
+        <div class="b-sm-left">
+              <img src="<%= image_url "icon coin.png" %>">
+        </div>
+        <div class="b-sm-right">
+          <div class="hl-text">Buy Tickets</div>
+          <div class="hl-text">Claim Money</div>
+          <div>No gimmicks</div>
+          <div>No catches</div>
+          <div id='ggg_explanation' style="line-height: 13px; font-size: 11px; color: #226ea5;">More <i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
+
+
+                  <div class="ggg-tooltip ggg-tooltip-hp" style="display: none;" id="ggg-tooltip">
+										<ul class="qtip_ul1">
+										<li>Buy your tickets</li>
+										<li>If <b>Home Team</b> loses by</li>
+											<ul class="qtip_ul2">
+    					          <li><img class="icon-img" src="<%= image_url "football icon.png" %>"> 17 points</li>
+                        <li><img class="icon-img" src="<%= image_url "basketball icon.png" %>"> 20 points</li>
+                        <li><img class="icon-img" src="<%= image_url "baseball icon.png" %>"> 5 runs</li>
+                        <li><img class="icon-img" src="<%= image_url "hockey icon.png" %>"> 4 goals</li>
+                        or more
+
+											</ul>
+                    <li>Click on Claim Refund</li>  
+										<li>We will refund to your credit card in 3-4 days</li>
+
+										</ul>
+                    <!--
+                    <a href="/how-it-works" target='_blank' style="font-size: 11px;">Read more <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                    -->
+									</div>
+	                <script>
+									jQuery( document ).ready(function() {
+										
+    									jQuery("#ggg_explanation").qtip({											
+         									hide: {												 
+             								    fixed: true,
+                								delay: 300
+            								},
+											
+										      position: {
+        									  	my: 'right center', 
+        										  at: 'left center', 
+        										  target: jQuery('#ggg_explanation')
+    										  },	
+											    style: {
+     										     classes: 'qtip-light qtip-shadow qtip-checkout'
+    										  },										
+        									content: {
+											      	title: 'How Good Game Guarantee works',
+            									text: jQuery("#ggg-tooltip")
+        									},
+    											events: {
+       										   show: function(event, api) {
+            										mixpanel.track("GGG Tooltip Pops");
+        										}
+    	  									}
+
+    									
+										});
+										
+									})
+									</script>
+
+        </div>
+        <div class="sep"></div>        
+      </div>
+      <div class="sep"></div>
+      </div>
+
+<!--
         <div class="title">Every Ticket Comes With Our Good Game Guarantee!</div>
+
 
         <div class="content-background">
           <div class="content">
@@ -100,6 +188,8 @@
             </div>
           </div>
         </div>
+        -->
+
       </div>
     </section>
       
@@ -341,3 +431,7 @@
     </section>
   </main>
 </span>
+
+<script>
+mixpanel.track("HomePage Visit");
+</script>

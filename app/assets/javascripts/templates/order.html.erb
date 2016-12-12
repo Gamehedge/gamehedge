@@ -11,32 +11,37 @@
                 </div>
             </div>
 	  		<div class="row row-eq-height payment-container">
-	  			<div class="col-md-8 card-element">
+	  			<div class="col-md-8 card-element payments-left-form">
 	  				<div class="card">
 	  					<div class="card-in summary hidden-md hidden-lg hidden-xl" style="padding-bottom:0;">
 						    <div class="title">{{ticket.event.name}}</div>
 						    <div class="info">
 						    	{{event.occurs_at | date: "EEE,	MMM dd, yyyy hh:mm a" : 'UTC'}}<br>
 						    	{{event.venue.name}}, {{event.venue.location}}<br>
-						    	<div class="top-location"><strong class="info-summary">Section {{ticket.section}}</strong></div>
-                                <div class="top-info-price">
-                                    <strong>Row {{ticket.row}}</strong>
+						    	<div class="top-location"><strong class="info-summary">Section {{ticket.section}}, Row {{ticket.row}}</strong></div>
+								<div class="top-price-ea">{{ticket.retail_price | currency}} Each</div>
+                                <!--
+								<div class="top-info-price">
                                     <div class="price-top-mobile">{{ticket.retail_price | currency}} ea.</div>
                                 </div>
-                                
-                                
+								-->
+								<br/>                                                                
 						    </div>
+
                             <div class="top-desc-container">
-						    	<div class="description top-desc">Quantity</div>
+								<div style="margin-bottom: 8px;">Quantity:</div>
+
 						    	<div class="top-val mobile-margin-select" >
 							    	<select class="mobile-top-amount" id="amount" ng-model="amount" ng-change="calculateValues()" >
-							    		<option ng-repeat="o in ticket.splits | orderBy:'-'" value="{{o}}">{{o}}</option>
+							    		<option  ng-repeat="o in ticket.splits | orderBy:'-'" value="{{o}}">{{o}}</option>
 							    	</select>
 						    	</div>
+								 <span class="seats-note m-invis" id="seats_note">Your seats will be together</span>
+
 						    </div>
 	  					</div>
 	  					<div class="card-in deliver">
-	  						Deliver tickets to
+	  						Deliver Tickets To
 	  						<div ng-if="edit_deliver == 4">
 		  						<span>
 		  							<div class="inputs">
@@ -964,12 +969,68 @@
 					  					</div>
 					  				</div>
 				  				</div> -->
-                                <div class="ggg-left">
-                                    <div class="ggg-text">If the home team loses by {{event.home_performer.sport.ggg}} or more, <span class="ggg-bold"><strong>GameHedge will refund 50% of your ticket price</strong></span> at no additional cost to you.</div>
-                                    <div><img src="<%= image_url "ggg.jpg" %>"></div>
+                                <div class="ggg-left" id="ggg-mainbox">
+									<div class="ggg-header">
+									Good Game Guarantee
+									</div>
+									<div class="ggg-body"  style="background: URL(<%= image_url 'ggg-logo-new.png' %>); background-repeat: no-repeat;background-size: 85px;background-position: 8px 6px;">
+										If the home team loses by <span id="ggg_rule">{{event.home_performer.sport.ggg}}</span> or more, <span class="ggg-bold"><a href='#' id='ggg_explanation'>GameHedge will refund 50% of your ticket price</a></span> at no additional cost to you.
+									</div>
+									<div class="ggg-tooltip" style="display: none;" id="ggg-tooltip">
+										<ul class="qtip_ul1">
+										<li>Buy your tickets</li>
+										<li>If <b>Home Team</b> loses by</li>
+											<ul class="qtip_ul2">
+												<li>{{event.home_performer.sport.ggg}} or more</li>
+											</ul>
+					                    <li>Click on Claim Refund</li>  
+										<li>We will refund to your credit card in 3-4 days</li>
+
+										</ul>
+									</div>
+									<script>
+									jQuery( document ).ready(function() {
+										
+    									jQuery("#ggg_explanation").qtip({											
+         									hide: {												 
+             								    fixed: true,
+                								delay: 300
+            								},
+											
+										    position: {
+        										my: 'bottom center',  // Position my top left...
+        										at: 'top center', // at the bottom right of...
+        										target: jQuery('#ggg_explanation') // my target
+    										},	
+											style: {
+     										   classes: 'qtip-light qtip-shadow qtip-checkout'
+    										},										
+        									content: {
+												title: 'How Good Game Guarantee works',
+            									text: jQuery("#ggg-tooltip")
+        									},
+											events: {
+     										   show: function(event, api) {
+            										mixpanel.track("GGG Tooltip Pops");
+        										}
+    										}
+    									
+										});
+										
+									})
+									</script>
                                 </div>
                                 <div class="ggg-right">
-                                    <img src="<%= image_url "pledge_new.png" %>">
+									<div class="ggg-header">
+									The GameHedge Pledge
+									</div>
+									<div class="ggg-body"  style="background: URL(<%= image_url 'chcekmark.png' %>); background-repeat: no-repeat;background-size: 71px;background-position: 14px 6px;">
+										<div><b>100% REFUND</b> if event is canceled</div>
+										<div><b>100% ON TIME</b> delivery</div>
+										<div><b>100% AUTHENTIC</b> tickets</div>
+										<div><b>100% SECURE</b> transaction</div>
+
+									</div>
                                 </div>
 				  				
 				  			</div>
@@ -979,19 +1040,30 @@
 	  			<div class="col-md-4 mobile-separator card-element second-card">
 	  				<div class="card">
 	  					<div class="card-in summary">
-	  						<div class="title hidden-md hidden-lg hidden-xl">Order Summary</div>
+	  						<div class="title hidden-md hidden-lg hidden-xl hidden-sm" style="display: none;">Order Summary</div>
+						  <!--<div class="summary-subtitle hidden-xs hidden-sm" style="border-top-right-radius: 0px;"><i class="fa fa-angle-double-right" aria-hidden="true"></i>Event Details</div>-->
+						  <div class="summary-box hidden-xs hidden-sm">						  
+							  
 	  						<span class="hidden-xs hidden-sm">
 							    <div class="title">{{ticket.event.name}}</div>
-                                <div class="info" style="height:10px;"> </div>
-							    <div class="info">
-							    	{{event.occurs_at | date: "EEE,	MMM dd, yyyy hh:mm a" : 'UTC'}}<br>
-							    	{{event.venue.name}}, {{event.venue.location}}<br>
-                                    <div class="info" style="height:10px;"> </div>
-							    	<span class="title" style="line-height: 1em;">Section {{ticket.section}}, Row {{ticket.row}}</span>
+							    <div class="info event-location">
+							    	{{event.occurs_at | date: "EEE,	MMM dd, yyyy hh:mm a" : 'UTC'}} <span class="def-markup">at
+							    	{{event.venue.name}}, {{event.venue.location}}</span>
 							    </div>
-                                <div class="info" style="height:10px;"> </div>
 							</span>
-						    <hr>
+ 						  </div>	
+						  <div class="summary-subtitle"><i class="fa fa-angle-double-right" aria-hidden="true"></i>Ticket Details</div>
+						  <div class="summary-box ticket-details">						  
+							    <span style="font-size: 14px;"><b>Section:</b> {{ticket.section}}, <b>Row:</b> {{ticket.row}}</span>
+								<span class="seats-note m-invis" id="seats_note2" style="padding-left: 0px;">Your seats will be together</span>
+
+                            	<!--<span>ADDITIONAL INFO WILL BE HERE</span>-->
+						  </div>
+
+
+  						  <div class="summary-subtitle"><i class="fa fa-angle-double-right" aria-hidden="true"></i>Purchase Summary</div>
+						  <div class="summary-box purchace-summary">						  
+
 						    <div class="description-line">
 						    	<div class="description">Ticket Price</div>
 						    	<div class="value">{{ticket.retail_price | currency}} ea.</div>
@@ -1004,13 +1076,15 @@
 							    	</select>
 						    	</div>
 						    </div>
+							<!--
 						    <div class="description-line">
 						    	<div class="description">Subtotal</div>
 						    	<div class="value">{{subtotal | currency}}</div>
 						    </div>
                             <hr>
+							-->
                             <div class="description-line">
-						    	<div class="description short">Service Fee</div>
+						    	<div class="description short">Fee</div>
 						    	<div class="value short">{{service_fee | currency}}</div>
 						    </div>
                             <div class="description-line" ng-show="ticket.format == 'Physical'">
@@ -1031,9 +1105,9 @@
 					    		<div class="value short" ng-if="ticket.format == 'Eticket'">Email Delivery</div>
 					    		<div class="value short" ng-if="ticket.format != 'Eticket' && ticket.format != 'Physical'">{{ticket.format | replaceText}}</div>
 						    </div>
-						    <div class="description-line">
-						    	<div class="description short">Good Game Guarantee</div>
-						    	<div class="value short">FREE</div>
+						    <div class="description-line ggg">
+						    	<div class="description short" style="width: 66%;">Good Game Guarantee</div>
+						    	<div class="value short" style="width: 34%;">FREE</div>
 						    </div>
 						    <div class="description-line" ng-if="active_promos">
 						    	<div class="description promo-btn" ng-click="showPromoField()">Promo Code</div>
@@ -1048,29 +1122,20 @@
 						    <hr>
 						    <div class="description-line total">
 						    	<div class="description">TOTAL</div>
-						    	<div class="value">{{total | currency}}</div>
+						    	<div class="value" style="color: #2b74a9;">{{total | currency}}</div>
 						    </div>
-						    <button class="confirm_pay" ladda="payProcess" ng-disabled="processing || editing" ng-click="confirmPay()">Buy Tickets</button>
-						    <div class="terms">By clicking Buy Tickets, you agree to GameHedge <a href="/our-terms" target="_blank">Terms and Privacy Policy.</a> The link between our servers and your browser is protected using SSL encryption</div>
+						    <button class="confirm_pay" ladda="payProcess" ng-disabled="processing || editing" ng-click="confirmPay()"><i class="fa fa-lock" aria-hidden="true"></i> Place Order</button>
+						    <div class="terms">By clicking "Place Order", you agree to GameHedge <a href="/our-terms"  target="_blank">Terms and Privacy Policy.</a></div>
                             
                             <div class="seals">
                                 <div class="row">
-                                    <div class="col-xs-4 text-left">
                                         <span id="siteseal">
                                             <script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script>
                                         </span>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <div bind-unsafe-html='script' id="mcafeeseal"></div>
-                                    </div>
-                                    <div class="col-xs-4 text-right">
-                                        <a href="https://www.braintreegateway.com/merchants/5n2r8dvdp2mmbtw7/verified" target="_blank">
-                                            <img src="https://s3.amazonaws.com/braintree-badges/braintree-badge-dark.png" width="82px" height ="22px" border="0"/>
-                                        </a>
-                                    </div>
                                 </div>
                                 
                             </div>
+						</div>	
                             
 						    <div id="session_iframe" ng-bind-html="session_iframe"></div>
 	  					</div>
@@ -1125,3 +1190,7 @@
     </div>
   </div>
 </div>
+
+<script>
+mixpanel.track("CheckoutPage Visit");
+</script>

@@ -16,7 +16,7 @@ controllers.controller('howWorksController', function($scope,$rootScope,$locatio
         }
         return dataService.getData("/search/?search=" + val + "&limit=4&today_date="+today_date)
             .then(function(response){
-            	//console.log(response)
+                //console.log(response)
                 var width = $("#search_element").width() + 50;
                 //console.log("width: " + width);
                 $('#form-home-search [uib-typeahead-popup].dropdown-menu').width(width);
@@ -63,9 +63,7 @@ controllers.controller('howWorksController', function($scope,$rootScope,$locatio
     // $timeout(function () {
     //     $scope.slickConfig.method.slickSetOption(null, null, true);  
     // }, 500);
-
-    
-    // Modified slick slider start
+   // Modified slick slider start
 
     var slickConfig = $('.slider').slick({
       enabled: true,
@@ -92,6 +90,5 @@ controllers.controller('howWorksController', function($scope,$rootScope,$locatio
     $timeout(function () {
     $(slickConfig).slick("slickSetOption", null, null, true);
     }, 500);
-    
-    // Modified slick slider end
+// Modified slick slider end
 });

@@ -1,5 +1,5 @@
 <div ng-controller="MenuBarController">
-    <div class="intro-full fade-intro" ng-if="page_loading == true">
+    <div class="intro-full fade-intro hidden" ng-if="page_loading == true">
         <div class="intro-img-container">
             <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/GameHedge_Logo_Footer.png" alt="Gamehedge" width="300" class="img-intro-full"/>
         </div>
@@ -122,8 +122,8 @@
     </div>
 
     <div ng-class="{'dark-header': $root.darkHeader}">
-        <nav ng-if="showHeader == true || windoWidth > 991" class="navbar navbar-default navbar-gamehedge vertical-center" role="navigation">
-
+        <nav ng-if="showHeader == true || windoWidth > 991" class="navbar navbar-default navbar-gamehedge vertical-center" role="navigation" ng-class="{'order-page': $root.isOrder}">
+        <div class="mnav-container">
             <div class="col-xs-2 hidden-md hidden-lg" ng-show="!$root.isOrder">
                 <div class="navbar navbar-default navbar-fixed-top">
                     <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target="#slideMenu" data-canvas="body" ng-click="showSlideMain()">
@@ -134,7 +134,7 @@
                 </div>
             </div>
             <div class="navbar-header col-md-4 col-xs-8">
-                <a href="/">
+                <a href="/" >
                     <img class="logo-image" alt="GameHedge.com" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/logo.png">
                 </a>
             </div>
@@ -192,7 +192,7 @@
             </div>
             <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs" ng-show="!$root.isOrder">
                 <div class="press" ng-show="$root.locat == '/'">
-                    <a href="/#/press"><img class="press-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/press-icon.png">PRESS</a>
+                    <a href="/#/press"><!--<img class="press-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/press-icon.png">-->Press</a>
                 </div>
                 </div>
             <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs" ng-show="!$root.isOrder">
@@ -204,10 +204,12 @@
                         <li><a ng-click="logout()" ng-show="$root.isLoggedin">Logout</a></li>
                     </ul>
                 </div>
-                <div class="dropdown login" ng-show="!$root.isLoggedin">
-                    <a href="/login"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png">LOGIN</a>
+
+                 <div class="dropdown login" ng-show="!$root.isLoggedin">
+                    <a href="/how-it-works" class="header-claim-refund" style="background-image: URL(<%= image_url 'hand_white.png' %>);"><span style="background-image: URL(<%= image_url 'money_white.png' %>);"></span>Claim Refund</a>
                 </div>
             </div>
+          </div>
         </nav>
     </div>
     <div class="view-container">
@@ -239,7 +241,7 @@
                         <nav role="navigation">
                             <ul>
                                 <li><a href="/how-it-works">How it Works</a></li>
-                                <li><a href="/member">My Account</a></li>
+                                <li ng-show="!$root.isLoggedin"><a href="/login">My Account</a></li>
                                 <li><a href="/press">Press</a></li>
                                 <li><a href="http://blog.gamehedge.com">Blog</a></li>
                             </ul>
@@ -295,5 +297,6 @@
     </footer>
     <div growl></div>
 </div>
+        
         
    

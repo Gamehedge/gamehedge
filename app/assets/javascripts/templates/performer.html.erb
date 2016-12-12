@@ -12,7 +12,8 @@
       <div id="content">
         <div class="container">
           <p class="hidden-md hidden-lg hidden-xl">{{performer.name}} Tickets</p>
-          <div id="hero-search" class="">
+          <h1 class="hidden-xs hidden-sm" style="margin-bottom: 0px;">{{performer.name}} Tickets</h1>          
+          <div id="hero-search" class="" style="margin-top: 25px;margin-bottom: 50px;">
             <form id="form-home-search" name="formSearch" onsubmit="function(){return false;};">
               <input type="hidden" name="type" value="full" />
               <div class="form-group">
@@ -24,7 +25,7 @@
               </div>
             </form>
           </div>
-          <h1 class="hidden-xs hidden-sm">{{performer.name}} Tickets</h1>
+
         </div>
       </div>
     </div>
@@ -33,65 +34,82 @@
   <script type="text/ng-template" id="typeahead/bind-node.html">
     <a href="#" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
   </script>
-  <section id="good-game-guarantee" class="hidden-xs hidden-sm">
+  <section id="good-game-guarantee" >
     <div class="container">
-      <div class="title">Every Ticket Comes With Our Good Game Guarantee!</div>
-
-      <div class="content-background">
-        <div class="content">
-          <div class="col-md-4 division">
-            <div class="col-xs-5 section">
-              <img src="<%= image_url "icon ticket.png" %>">
-            </div>
-            <div class="col-xs-7 section2">
-              <h2>BUY TICKETS</h2>
-              <p>
-                Find your game and purchase your tickets.<br>
-                Good Game Guarantee is included at no additional cost with every ticket.
-              </p>
-            </div>
-          </div>
-          <div class="col-md-4 division center-div">
-            <div class="col-xs-5 section">
-              <img src="<%= image_url "icon stadium.png" %>">
-            </div>
-            <div class="col-xs-7 section2">
-              <h2>ENJOY GAME</h2>
-              <p>
-                If the home team loses by {{performer.sport.ggg}} or more, you get 50% of ticket price back.
-              </p>
-              <!-- <div class="col-xs-6 block">
-                <img class="icon-img" src="<%= image_url "football icon.png" %>">
-                17 points
-              </div>
-              <div class="col-xs-6 block">
-                <img class="icon-img" src="<%= image_url "basketball icon.png" %>">
-                20 points
-              </div>
-              <div class="col-xs-6 block">
-                <img class="icon-img" src="<%= image_url "baseball icon.png" %>">
-                5 runs
-              </div>
-              <div class="col-xs-6 block">
-                <img class="icon-img" src="<%= image_url "hockey icon.png" %>">
-                4 goals
-              </div> -->
-            </div>
-          </div>
-          <div class="col-md-4 division">
-            <div class="col-xs-5 section">
-              <img src="<%= image_url "icon coin.png" %>">
-            </div>
-            <div class="col-xs-7 section2">
-              <h2>CLAIM MONEY</h2>
-              <p>
-                Simply come back to GameHedge.com to claim your refund.
-              </p>
-            </div>
-          </div>
-        </div>
+      <div class="top-banner">
+      <div class="ggg-blogo"><span>Good Game Guarantee</span></div>
+      <div class="logo-left">
+        <div class="b-title"><span class="b-perc">50%</span> Refund</div>
+        <div class="b-sub"><span>If home team loses by </span><b>{{performer.sport.ggg}}</b> or more</div>
       </div>
-    </div>
+      <div class="logo-right">
+        <div class="b-sm-left">
+              <img src="<%= image_url "icon coin.png" %>">
+        </div>
+        <div class="b-sm-right">
+          <div class="hl-text">Buy Tickets</div>
+          <div class="hl-text">Claim Money</div>
+          <div>No gimmicks</div>
+          <div>No catches</div>
+          <div id='ggg_explanation' style="line-height: 13px; font-size: 11px; color: #226ea5;">More <i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
+
+
+                  <div class="ggg-tooltip" style="display: none;" id="ggg-tooltip">
+										<ul class="qtip_ul1">
+										<li>Buy your tickets</li>
+										<li>If <b>Home Team</b> loses by</li>
+											<ul class="qtip_ul2">
+												<li>{{performer.sport.ggg}} or more</li>
+											</ul>
+                    <li>Click on Claim Refund</li>  
+										<li>We will refund to your credit card in 3-4 days</li>
+									
+										</ul>
+                    <!--
+                    <a href="/how-it-works" target='_blank' style="font-size: 11px;">Read more <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                    -->
+									</div>
+	                <script>
+									jQuery( document ).ready(function() {
+										
+    									jQuery("#ggg_explanation").qtip({											
+         									hide: {												 
+             								    fixed: true,
+                								delay: 300
+            								},
+											
+										      position: {
+        									  	my: 'right center', 
+        										  at: 'left center', 
+        										  target: jQuery('#ggg_explanation')
+    										  },	
+											    style: {
+     										     classes: 'qtip-light qtip-shadow qtip-checkout'
+    										  },										
+        									content: {
+											      	title: 'How Good Game Guarantee works',
+            									text: jQuery("#ggg-tooltip")
+        									},
+    											events: {
+       										   show: function(event, api) {
+            										mixpanel.track("GGG Tooltip Pops");
+        										}
+    	  									}
+
+    									
+										});
+										
+									})
+									</script>
+
+        </div>
+        <div class="sep"></div>        
+      </div>
+      <div class="sep"></div>
+      </div>
+  </div>
+
+    
   </section> 
   
   <section id="performer">
@@ -118,12 +136,13 @@
                     <span>
                       <!-- <p class="first-line"><a href="{{event.url}}">{{event.away_performer.name}} <span class="at">at</span> {{event.home_performer.name}}</a></p> -->
                       <p class="first-line"><a href="{{event.url}}">{{event.name}}</a></p>
-                      <p class="second-line" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'hh:mm a' : 'UTC'| uppercase}} at <a href="{{event.venue.url}}">{{event.venue.name}}</a> - {{event.location}}</p>
+                      <!--<p class="second-line" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'hh:mm a' : 'UTC'| uppercase}} at <a href="{{event.venue.url}}">{{event.venue.name}}</a> - {{event.location}}</p>-->
+                      <p class="second-line" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'hh:mm a' : 'UTC'| uppercase}} at {{event.venue.name}} - {{event.location}}</p>
                       <p class="second-line" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD at <a href="{{event.venue.url}}">{{event.venue.name}}</a> - {{event.location}}</p>
                     </span>
                   </div>
                   <div class="col-xs-12 col-md-3">
-                    <a class="a-btn vertical-center" href="{{event.url}}" ng-if="compareDates(event.occurs_at)">Buy Tickets</a>
+                    <a class="a-btn vertical-center" href="{{event.url}}" ng-if="compareDates(event.occurs_at)">See Tickets</a>
                     <a class="a-btn vertical-center" href="#" ng-if="!compareDates(event.occurs_at)" style="cursor:default;">Sold Out</a>
                   </div>
               </div>
@@ -135,9 +154,162 @@
           </div>
           <button ng-click="loadMore()" ng-if="load_more" class="load-more-btn">Load more</button>
         </div>
-        <div class="col-md-3 ggg-container">
-          <div class="title">
-            <h2>STAY UP TO DATE</h2>
+        <div class="col-md-3 ggg-container sidebar1">
+          
+
+
+          <h2 class='subheader1m hidden-xs hidden-sm'><span>RECENT</span> REFUNDS</h2>  
+          <div class='hidden-xs hidden-sm'> 
+            <div class="refund-box">
+              <div class="rfnd-team2 hlsize">
+                <div class="rfnd-name" style="padding-left: 20px;">M. F.</div>
+                <div class="rfnd-score hl-green">$31</div>
+                <div class="sep"></div>
+              </div>
+
+              <div class="rfnd-team1">
+                <div class="rfnd-name">Golden State Warriors</div>
+                <div class="rfnd-score">120</div>
+                <div class="sep"></div>
+              </div>
+              <div class="rfnd-team2">
+                <div class="rfnd-name"><i class="fa fa-check" aria-hidden="true"></i>Indiana Pacers</div>
+                <div class="rfnd-score">83</div>
+                <div class="sep"></div>
+              </div>
+
+            </div>
+
+
+            <div class="refund-box" >
+              <div class="rfnd-team2 hlsize">
+                <div class="rfnd-name" style="padding-left: 20px;">J. F., Fort Wayne, IN</div>
+                <div class="rfnd-score hl-green">$869</div>
+                <div class="sep"></div>
+              </div>
+
+              <div class="rfnd-team1">
+                <div class="rfnd-name">Pittsburgh Steelers</div>
+                <div class="rfnd-score">28</div>
+                <div class="sep"></div>
+              </div>
+              <div class="rfnd-team2">
+                <div class="rfnd-name"><i class="fa fa-check" aria-hidden="true"></i>Indianapolis Colts</div>
+                <div class="rfnd-score">7</div>
+                <div class="sep"></div>
+              </div>              
+            </div>
+
+
+            <div class="refund-box">
+              <div class="rfnd-team2 hlsize">
+                <div class="rfnd-name" style="padding-left: 20px;">K. C., Warren, OH</div>
+                <div class="rfnd-score hl-green">$221</div>
+                <div class="sep"></div>
+              </div>
+
+              <div class="rfnd-team1">
+                <div class="rfnd-name">Dallas Cowboys</div>
+                <div class="rfnd-score">35</div>
+                <div class="sep"></div>
+              </div>
+              <div class="rfnd-team2">
+                <div class="rfnd-name"><i class="fa fa-check" aria-hidden="true"></i>Cleveland Browns</div>
+                <div class="rfnd-score">10</div>
+                <div class="sep"></div>
+              </div>              
+            </div>
+
+
+            <div class="refund-box">
+              <div class="rfnd-team2 hlsize">
+                <div class="rfnd-name" style="padding-left: 20px;">R. P., Ceres, CA </div>
+                <div class="rfnd-score hl-green">$32</div>
+                <div class="sep"></div>
+              </div>
+
+              <div class="rfnd-team1">
+                <div class="rfnd-name">Tampa Bay Buccaneers</div>
+                <div class="rfnd-score">34</div>
+                <div class="sep"></div>
+              </div>
+              <div class="rfnd-team2">
+                <div class="rfnd-name"><i class="fa fa-check" aria-hidden="true"></i>San Francisco 49ers</div>
+                <div class="rfnd-score">17</div>
+                <div class="sep"></div>
+              </div>              
+            </div>
+
+
+            <div class="refund-box" style="border-bottom: 0px;">
+              <div class="rfnd-team2 hlsize">
+                <div class="rfnd-name" style="padding-left: 20px;">M.M., Akron, OH </div>
+                <div class="rfnd-score hl-green">$527</div>
+                <div class="sep"></div>
+              </div>
+
+              <div class="rfnd-team1">
+                <div class="rfnd-name">Chicago Cubs</div>
+                <div class="rfnd-score">9</div>
+                <div class="sep"></div>
+              </div>
+              <div class="rfnd-team2">
+                <div class="rfnd-name"><i class="fa fa-check" aria-hidden="true"></i>Cleveland Indians</div>
+                <div class="rfnd-score">3</div>
+                <div class="sep"></div>
+              </div>              
+            </div>
+
+
+          </div>
+
+          <h2 class='subheader1m hidden-xs hidden-sm'>TESTIMONIALS</h2>  
+          <div class='hidden-xs hidden-sm'> 
+
+            <div class="tsmnl_box">
+              <span class="tsmnl"><i>"Purchased tickets for a trip to see Bryce Harper and was betting against the Braves. Both games were on track for a refund in the late innings and we had a lot more fun watching the Nationals bullpen give up the extra cushion in the 8th and 9th."</i></span>
+              <span class="tsmnl_author"><span>L. M.</span>, Washington, D.C</span>
+            </div>
+
+
+            <div class="tsmnl_box">
+              <span class="tsmnl"><i>"Assurance on my ticket in case of a bad game. Why would I buy anywhere else as long as the price is the same"</i></span>
+              <span class="tsmnl_author"><span>S. H.</span>, Saddle River, NJ</span>
+            </div>
+          
+            <div class="tsmnl_box">
+              <span class="tsmnl"><i>"Bought my tickets from GameHedge two days in a row, same section and row. Nats are my team, I love double-plays, and it's my birthday. Happy birthday to me!"</i></span>
+              <span class="tsmnl_author"><span>E. D.</span></span>
+            </div>
+
+            <div class="tsmnl_box">
+              <span class="tsmnl"><i>"Makes it more fun to buy tickets, Just get the word out!"</i></span>
+              <span class="tsmnl_author"><span>H. C.</span>, New York, NY</span>
+            </div>
+
+            <div class="tsmnl_box">
+              <span class="tsmnl"><i>"Awesome site, brilliant idea!"</i></span>
+              <span class="tsmnl_author"><span>K. K.</span>, Glenview, IL</span>
+            </div>
+
+
+            <div class="tsmnl_box">
+              <span class="tsmnl"><i>"I think it is a wonderful benefit, easy and helpful"</i></span>
+              <span class="tsmnl_author"><span>N. S.</span>, Alvarado, TX </span>
+            </div>
+
+            <div class="tsmnl_box">
+              <span class="tsmnl"><i>"Amazing! I used it! Got my money back!"</i></span>
+              <span class="tsmnl_author"><span>M. M.</span></span>
+            </div>
+
+            
+
+          </div>
+
+
+        <div class="title">
+            <h2 class='subheader1m'>STAY UP TO DATE</h2>
             <p>Sign up for savings, info and more!</p>
             <form name="up_date_form" ng-submit="sendPerformerEmailRequest()" novalidate>
                 <div class="form">
@@ -147,6 +319,8 @@
                 <p ng-show="up_date_form.email.$invalid && !up_date_form.email.$pristine" class="help-block footer-form-msg">Enter a valid email.</p>
             </form>
           </div>
+
+
           <div class="body" ng-show="testimonials.length != 0">
             <h2>TESTIMONIALS</h2>
             <p>Why {{performer.name}} fans love GameHedge!</p>
@@ -241,7 +415,7 @@
 
   <section id="about">
     <div class="container">
-      <div class="container">
+     <!-- <div class="container">-->
         <div class="page-title">About {{performer.name}}</div>
         <div class="row">
           <div class="col-xs-12 description" bind-unsafe-html="performer.description">
@@ -254,7 +428,11 @@
             
           </div>
         </div>
-      </div>
+     <!-- </div>-->
     </div>
+    <script>
+      mixpanel.track("PerformerPage Visit");
+    </script>
+
   </section>
 </span>

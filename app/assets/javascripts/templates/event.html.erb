@@ -2,12 +2,14 @@
   
   <section id="game_info">
     <div class="row max-container-width">
+    <!--
       <div class="col-md-3 col-xs-12 ggg-logo vertical-center hidden-xs hidden-sm">
           <img src="<%= image_url "badge-gamehedge.png" %>" alt="GameHedge" />
           Your tickets come with the<br>
           GOOD GAME GUARANTEE!
       </div>
-      <div class="col-md-5 col-xs-12 moto vertical-center hidden-xs hidden-sm">
+      -->
+      <div class="col-md-5 col-xs-12 moto vertical-center hidden-xs hidden-sm" style="width: 60%;">
         
         <div class="col-md-2 date-holder hidden-xs hidden-sm">
           <p class="date1">{{event.occurs_at | date:'MMM': 'UTC' | uppercase}}</p>
@@ -24,12 +26,66 @@
         </div>
           
       </div>
-      <div class="col-md-4 col-xs-12 mobile-event-container" style="height: 100%;">
+      <div class="col-md-4 col-xs-12 mobile-event-container" style="height: 100%; float: right;">
         
         <div class="hidden-xs hidden-sm ggg-event vertical-center">
-            All GameHedge tickets come with our exclusive Good Game Guarantee at no additional cost. So, if the home team loses by {{event.home_performer.sport.ggg}} or more, we will refund 50% of the price of your ticket. No gimmicks. No catches.  
+            <div class="singlebanner-left" id='ggg_explanation'>
+              <div class='ref'>50% Refund</div>
+              If <b>Home Team</b> loses by <b>{{event.home_performer.sport.ggg}} </b> or more
+            </div>
+            <div class="singlebanner-right">
+              <img src="<%= image_url "icon coin.png" %>">
+            </div>
+            <div class="sep"></div>              
         </div>
-          
+
+                  <div class="ggg-tooltip" style="display: none;" id="ggg-tooltip">
+										<ul class="qtip_ul1">
+										<li>Buy your tickets</li>
+										<li>If <b>Home Team</b> loses by</li>
+											<ul class="qtip_ul2">
+												<li>{{event.home_performer.sport.ggg}} or more</li>
+											</ul>
+                    <li>Click on Claim Refund</li>  
+										<li>We will refund to your credit card in 3-4 days</li>
+										</ul>
+                    <!--
+                    <a href="/how-it-works" target='_blank' style="font-size: 11px;">Read more <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                    -->
+									</div>
+	                <script>
+									jQuery( document ).ready(function() {
+										
+    									jQuery("#ggg_explanation").qtip({											
+         									hide: {												 
+             								    fixed: true,
+                								delay: 300
+            								},
+											
+										      position: {
+        									  	my: 'right center', 
+        										  at: 'left center', 
+        										  target: jQuery('#ggg_explanation')
+    										  },	
+											    style: {
+     										     classes: 'qtip-light qtip-shadow qtip-checkout'
+    										  },										
+        									content: {
+											      	title: 'How Good Game Guarantee works',
+            									text: jQuery("#ggg-tooltip")
+        									},
+    											events: {
+       										   show: function(event, api) {
+            										mixpanel.track("GGG Tooltip Pops");
+        										}
+    	  									}
+
+    									
+										});
+										
+									})
+									</script>
+
           
         <div class="col-md-10 col-xs-12 event-info vertical-center mobile-event-info hidden-md hidden-lg hidden-xl">
            <div class="mobile-top-bt">
@@ -265,3 +321,8 @@
   </section>
   
 </div>
+
+
+<script>
+mixpanel.track("SingleEventPage Visit");
+</script>

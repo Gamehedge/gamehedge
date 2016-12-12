@@ -33,10 +33,13 @@ module Gamehedge
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
     config.api_only = false
+    config.assets.paths << Rails.root.join("public","assets")
     config.assets.paths << Rails.root.join("vendor","assets","bower_components")
     config.assets.paths << Rails.root.join("vendor","assets","bower_components","bootstrap-sass-official","assets","fonts")
 
     config.assets.precompile << %r(.*.(?:eot|svg|ttf|woff|woff2)$)
+
+    
 
     config.cache_store = :dalli_store
     
