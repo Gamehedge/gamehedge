@@ -17,14 +17,18 @@ app.config([ '$routeProvider','$locationProvider','AuthProvider', '$httpProvider
     function($routeProvider,$locationProvider,AuthProvider,$httpProvider){
       $httpProvider.useApplyAsync(true);
 
-      // app.config([ '$routeProvider','$locationProvider','AuthProvider', 'AnalyticsProvider', '$httpProvider',
-      //     function($routeProvider,$locationProvider,AuthProvider,AnalyticsProvider,$httpProvider){
-      //       $httpProvider.useApplyAsync(true);
-      // AnalyticsProvider.setAccount('UA-76054076-1');
-      // AnalyticsProvider.useAnalytics(true);
-      // AnalyticsProvider.trackUrlParams(true);
-      // AnalyticsProvider.useECommerce(true, false);
-      // AnalyticsProvider.setPageEvent('$viewContentLoaded');
+      /*GA Enabled START*/
+
+       app.config([ '$routeProvider','$locationProvider','AuthProvider', 'AnalyticsProvider', '$httpProvider',
+           function($routeProvider,$locationProvider,AuthProvider,AnalyticsProvider,$httpProvider){
+             $httpProvider.useApplyAsync(true);
+       AnalyticsProvider.setAccount('UA-76054076-1');
+       AnalyticsProvider.useAnalytics(true);
+       AnalyticsProvider.trackUrlParams(true);
+       AnalyticsProvider.useECommerce(true, false);
+       AnalyticsProvider.setPageEvent('$viewContentLoaded');
+
+      /*GA DIsabled END*/
 
       AuthProvider.resourceName('client');
       AuthProvider.loginPath('/clients/sign_in.json');
