@@ -124,9 +124,9 @@ app = angular.module('gamehedge',[
     }
 ]);
 
-// app.run(function(Analytics) {
-//     Analytics.log;
-// });
+ app.run(function(Analytics) {
+     Analytics.log;
+ });
 
 app.run(function ($rootScope) {
     $rootScope.$on('$locationChangeSuccess', function (event, next, nextParams) {
