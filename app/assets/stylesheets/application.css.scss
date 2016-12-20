@@ -6299,7 +6299,7 @@ main#admin #order-stats .stat-item span {
 }
 
 .testimonial {
-    width: 80%;
+    width: 100%;
     text-align: left;
     background-color: #efefef;
     padding: 15px;
@@ -6485,6 +6485,18 @@ main#admin #order-stats .stat-item span {
 .ggg-bold {
     color:#424242;
 }
+
+
+.half-left2{
+    float: left;
+    width: 70%;
+}
+.half-right2{
+    float: right;
+    width: 29%;
+    text-align: left;
+}
+
 
 @media(max-width: 992px) {
     
