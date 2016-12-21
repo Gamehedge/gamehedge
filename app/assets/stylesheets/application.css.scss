@@ -708,7 +708,13 @@ a {
     padding-right: 70px;
 }
 
-#hero .press-images .spacing-div{
+.ftr-link, .ftr-link:hover{
+    width: 100%;
+    display: block;
+    text-decoration: none;
+}
+
+#hero .press-images .spacing-div, #hero .press-images a .spacing-div{
     height: 100%;
     width: 16%;
     text-align: center;
@@ -716,6 +722,9 @@ a {
     color: black;
     font-size: 13px;
     line-height: 30px;
+}
+#hero .press-images a .spacing-div{
+    display: inline-block;
 }
 
 
@@ -898,7 +907,7 @@ a {
 
 .leagues #divisions .divisions-container .name a{
 	font-size: 20px;
-	color: #000000;
+	color: #226ea5;
 }
 
 .leagues #divisions .divisions-container .name p{
@@ -1725,10 +1734,14 @@ a {
     background-color: #ffffff;
     border: solid 1px #d3d3d3;
     font-size: 12px;
-    color: #999999;
+    color: #404040;
     width: 100%;
     margin-top: 10px;
     padding-left: 12px;
+}
+
+#payments select{
+    color: #888;
 }
 
 #payments .badge-container {
@@ -5973,7 +5986,10 @@ main#admin #order-stats .stat-item span {
 }
 
 
-
+.half-left2, .half-right2{
+    float: none !important;
+    width: 100% !important;
+}
 
 
 
@@ -6286,6 +6302,40 @@ main#admin #order-stats .stat-item span {
     padding-bottom: 40px;
 }
 
+.testimonial {
+    width: 100%;
+    text-align: left;
+    background-color: #efefef;
+    padding: 15px;
+    border-radius: 5px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    margin-bottom: 30px;
+    box-shadow: 0px 0px 5px -1px #000;
+}
+.testimonial p{
+        padding-left: 15px;
+}
+.testimonial span{
+    background-color: #226ea5;
+    color: #fff;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-bottom-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    font-size: 12px;
+}
+
+
+#page_container{
+    background-color: #FFF;
+    text-align: justify;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
 #how-works-bottom {
     margin-top: 30px;
     margin-bottom: 30px;
@@ -6439,6 +6489,18 @@ main#admin #order-stats .stat-item span {
 .ggg-bold {
     color:#424242;
 }
+
+
+.half-left2{
+    float: left;
+    width: 70%;
+}
+.half-right2{
+    float: right;
+    width: 29%;
+    text-align: left;
+}
+
 
 @media(max-width: 992px) {
     

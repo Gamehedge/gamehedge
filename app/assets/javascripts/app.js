@@ -22,11 +22,18 @@ app = angular.module('gamehedge',[
        app.config([ '$routeProvider','$locationProvider','AuthProvider', 'AnalyticsProvider', '$httpProvider',
            function($routeProvider,$locationProvider,AuthProvider,AnalyticsProvider,$httpProvider){
              $httpProvider.useApplyAsync(true);
-       AnalyticsProvider.setAccount('UA-76054076-1');
+       //AnalyticsProvider.setAccount('UA-76054076-1');
+       AnalyticsProvider.setAccount({
+            tracker: 'UA-76054076-1',
+            fields: {
+                siteSpeedSampleRate: 30
+            }
+        });
        AnalyticsProvider.useAnalytics(true);
        AnalyticsProvider.trackUrlParams(true);
        AnalyticsProvider.useECommerce(true, false);
        AnalyticsProvider.setPageEvent('$viewContentLoaded');
+       
 
       /*GA DIsabled END*/
 
@@ -98,6 +105,10 @@ app = angular.module('gamehedge',[
         .when('/how-it-works', {
             templateUrl: "how-it-works.html",
             controller: 'howWorksController',
+        })
+        .when('/testimonials', {
+            templateUrl: "testimonials.html",
+            controller: 'Testimonials',
         })
         .when('/privacy-policy', {
             templateUrl: "privacy-policy.html",
