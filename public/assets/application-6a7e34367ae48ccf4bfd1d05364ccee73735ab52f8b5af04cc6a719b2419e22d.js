@@ -68572,8 +68572,8 @@ controllers.controller('ConfirmController', function($scope,$rootScope,$http,Aut
     $scope.getTicket = function(){
     	apiService.getData('/api/v1/orders/'+$routeParams.orderId)
             .then(function(response){
-            	console.log("Order");
-            	console.log(response);
+            	//console.log("Order");
+            	//console.log(response);
                 $scope.order = response;
                 $scope.loading = false;
                 $rootScope.title = "Order | Gamehedge";
@@ -68761,8 +68761,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
     $scope.getEventInfo = function(){
 		return apiService.getData('/api/v1/events/'+$routeParams.eventId)
             .then(function(response){
-            	console.log("Event");
-            	console.log(response);
+            	//console.log("Event");
+            	//console.log(response);
                 $scope.event  = response;
                 $rootScope.title = $scope.event.name + " Tickets | Gamehedge";
     			$rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by "+$scope.event.home_performer.sport.ggg+" or more, get 50% of your ticket price back.";
@@ -69211,7 +69211,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	            	$scope.filterBySection = true;
 	                $scope.section = Section.Name;
                     $scope.selectedSections.push(Section.Name);
-                    console.log($scope.selectedSections);
+                    //console.log($scope.selectedSections);
 	                if(Section.SectionViewAvailable){
 	                   	$scope.sectionUrl = Section.SectionViewUrl;
 	                }
@@ -69304,7 +69304,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                 
         $("#tickets_list > div").removeClass("row-selected");
 
-        console.log($("#tickets_list").scrollTop());
+        //console.log($("#tickets_list").scrollTop());
 
         var ini_element = parseInt($("#tickets_list").scrollTop() / 60) - 2;
         if(ini_element < 0){
