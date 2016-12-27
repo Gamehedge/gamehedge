@@ -588,7 +588,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 
 				mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': 'All fields are requierd'});
 
-				swal("Error", "All fields are requierd", "warning");
+				swal("Error", "All fields are required", "warning");
 			}
 			else if($.payment.validateCardExpiry($scope.card.expiration_month,$scope.card.expiration_year) == false){
 				$scope.processing = false;
