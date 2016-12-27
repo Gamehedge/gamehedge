@@ -14,7 +14,7 @@
 	  			<div class="col-md-8 card-element payments-left-form">
 	  				<div class="card">
 	  					<div class="card-in summary hidden-md hidden-lg hidden-xl" style="padding-bottom:0;">
-						    <div class="title">{{ticket.event.name}}</div>
+						    <div class="title">{{ticket.event.name}}</div>							
 						    <div class="info">
 						    	{{event.occurs_at | date: "EEE,	MMM dd, yyyy hh:mm a" : 'UTC'}}<br>
 						    	{{event.venue.name}}, {{event.venue.location}}<br>
@@ -1056,8 +1056,57 @@
 						  <div class="summary-box ticket-details">						  
 							    <span style="font-size: 14px;"><b>Section:</b> {{ticket.section}}, <b>Row:</b> {{ticket.row}}</span>
 								<span class="seats-note m-invis" id="seats_note2" style="padding-left: 0px;">Your seats will be together</span>
-
+								<span  class="public-note" ng-if="ticket.public_notes != ''">{{ticket.public_notes}}</span>
                             	<!--<span>ADDITIONAL INFO WILL BE HERE</span>-->
+						  </div>
+
+  						  <div class="summary-subtitle"><i class="fa fa-angle-double-right" aria-hidden="true"></i>Delivery Details</div>
+						  <div class="summary-box delivery-details">
+						  		<div ng-if="ticket.instant_delivery == true">
+									E- tickets will be available for download typically within a few minutes after order is confirmed.
+								</div>
+						  		<div ng-if="ticket.instant_delivery == false">
+								  	<div ng-if="ticket.format == 'Physical'">
+									  	<div ng-if="ticket.in_hand == true">
+											Tickets will be shipped to the address provided
+										</div>
+									  	<div ng-if="ticket.in_hand == false">
+											Tickets will be ready to ship via Fedex by {{ticket.in_hand_on | date:'MM/dd/yyyy'}}
+										</div>
+									</div>
+								  	<div ng-if="ticket.format != 'Physical'">
+									  	<div ng-if="ticket.in_hand == true">
+										  	<div ng-if="ticket.format == 'Eticket'">
+												Printable tickets will be ready for download once order is confirmed
+											</div>
+										  	<div ng-if="ticket.format == 'Flash_seats'">
+												Mobile entry using Flash, you will need to set up a Flash Seats account to access your tickets
+											</div>
+										  	<div ng-if="ticket.format == 'TM_mobile'">
+												Mobile entry using Ticketmaster, you will need to set up a Ticketmaster account to access your tickets
+											</div>
+										</div>
+									  	<div ng-if="ticket.in_hand == false">
+										  	<div ng-if="ticket.format == 'Eticket'">
+												Printable tickets will be ready for download on {{ticket.in_hand_on | date:'MM/dd/yyyy'}}
+											</div>
+										  	<div ng-if="ticket.format == 'Flash_seats'">
+												Tickets available on {{ticket.in_hand_on | date:'MM/dd/yyyy'}}. Mobile entry using Flash, you will need to set up a Flash Seats account to access your tickets
+											</div>
+										  	<div ng-if="ticket.format == 'TM_mobile'">
+												Tickets available on {{ticket.in_hand_on | date:'MM/dd/yyyy'}}. Mobile entry using Ticketmaster, you will need to set up a Ticketmaster account to access your tickets
+											</div>
+
+										</div>
+									</div>									
+								</div>
+								<div style="font-size: 12px; color: red;">						  
+								DEBUG:<br/>						  
+								Delivery type:{{ticket.format}}<br/>
+								IN Hand: {{ticket.in_hand}}<br/>
+								In Hands on: {{ticket.in_hand_on}}<br/>
+								Instant: {{ticket.instant_delivery}}
+								</div>
 						  </div>
 
 
@@ -1190,6 +1239,7 @@
     </div>
   </div>
 </div>
+
 
 
 <script type="text/javascript">
