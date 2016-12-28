@@ -2248,6 +2248,48 @@ a {
     width: 80%;
 }
 
+.delivery-details{
+    font-size: 14px;
+    color: #444452;
+}
+
+.listing-row .info-ico{
+    
+}
+
+.seui-mobile-banner{
+    text-align: center;
+    margin-top: 24px;
+}
+.seui-mobile-banner .line1{
+
+}
+.seui-mobile-banner .line2{
+    font-size: 28px;
+    margin-left: 20px;
+    margin-right: 20px;
+    line-height: 29px;
+    margin-top: 17px;
+}
+.seui-mobile-banner .p50-refund{
+    color: #5e8e01;
+    text-transform: uppercase;
+    font-size: 60px;
+    line-height: 48px;
+    display: block;
+}
+.seui-mobile-banner .p50{
+    color: #5e8e01;
+    display: block;
+    font-size: 110px;
+    font-weight: bold;
+    line-height: 92px;
+}
+.seui-mobile-banner .line2 b{
+    text-transform: uppercase;
+}
+
+
 #confirmation .update-password button, #confirmation input[type="submit"]{
     width: 200px;
     margin-left: 15%;
@@ -5801,6 +5843,13 @@ main#admin #order-stats .stat-item span {
 	background-color: #f6f6f6;
 	border: 1px solid #c1c1c1;
 	border-radius: 5px;
+}
+
+.public-note{
+    margin-top: 5px;
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 /**

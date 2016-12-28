@@ -137,6 +137,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 		$scope.mob_index = index;
         $('#tickets_list').scrollTop(-200);
         $scope.filterEventsData();
+        
         //$scope.showing_list = 20;
 	}
 
@@ -373,11 +374,12 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
             for(j=0;j<amount.length;j++){
                 select_list += '<option value="'+amount[j]+'">'+amount[j]+'</option>'
             }
+            /*INFO ICON ON MOBILE ENABLED*/
             if(list[i].public_notes == null || list[i].public_notes.split(' ').join('') == "" || list[i].public_notes == undefined){
-                htm += '<div class="row listing-row" data-info="'+amount+'" data-section="'+list[i].section+'" data-row="'+list[i].row+'" data-price="'+list[i].retail_price+'" data-type="'+list[i].type+'" data-id="'+list[i].id+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button class="redirect-button">$'+list[i].retail_price+'/ea</button><p class="format">'+list[i].format+'</span></div></div>'
+                htm += '<div class="row listing-row" data-info="'+amount+'" data-section="'+list[i].section+'" data-row="'+list[i].row+'" data-price="'+list[i].retail_price+'" data-type="'+list[i].type+'" data-id="'+list[i].id+'"><div class=" col-xs-1 info-ico vertical-center full-height"></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button class="redirect-button">$'+list[i].retail_price+'/ea</button><p class="format">'+list[i].format+'</span></div></div>'
             }
             else{
-                htm +='<div class="row listing-row"  data-info="'+amount+'" data-section="'+list[i].section+'" data-row="'+list[i].row+'" data-price="'+list[i].retail_price+'" data-type="'+list[i].type+'" data-id="'+list[i].id+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"><span aria-hidden="true" data-toggle="tooltip" data-placement="right" title="'+list[i].public_notes+'"><img src="'+info_url+'" alt="info" /></span></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button class="redirect-button">$'+list[i].retail_price+'/ea</button><p class="format">'+list[i].format+'</span></div></div>'
+                htm +='<div class="row listing-row"  data-info="'+amount+'" data-section="'+list[i].section+'" data-row="'+list[i].row+'" data-price="'+list[i].retail_price+'" data-type="'+list[i].type+'" data-id="'+list[i].id+'"><div class=" col-xs-1 info-ico vertical-center full-height"><span aria-hidden="true" data-toggle="tooltip" data-placement="right" title="'+list[i].public_notes+'"><img src="'+info_url+'" alt="info" /></span></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button class="redirect-button">$'+list[i].retail_price+'/ea</button><p class="format">'+list[i].format+'</span></div></div>'
             }
         }
         $('#tickets_list').html(htm);
@@ -419,7 +421,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                         $(this).addClass("hidden");
                     }
                     else{
-                        $(this).removeClass("hidden");
+                        $(this).removeClass("hidden");                        
                         break;
                     }
                 }
@@ -440,12 +442,20 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                 if($scope.index == 5){
                     if(Number($(this).attr('data-info').split(',')[0]) < $scope.index){
                         $(this).addClass("hidden");
+                    }else{
+                        //QTY FIX                        
+                        //FIX DEFAULT SELECTBOX VALUE WHEN QTY FILTER APPLY
+                        $(this).find("select").val($(this).attr('data-info').split(',')[0]);
                     }
                 }
                 else{
                     if($(this).attr('data-info').split(',').indexOf(String($scope.index)) == -1){
                         $(this).addClass("hidden");
-                    }    
+                    } else{
+                        //QTY FIX                        
+                        //FIX DEFAULT SELECTBOX VALUE WHEN QTY FILTER APPLY
+                        $(this).find("select").val($scope.index);
+                    }   
                 }
             });
         }
