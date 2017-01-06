@@ -234,3 +234,16 @@ text { /* Use a more applicable selector here - text is potentially too generic 
 .move_right{
     text-align: center !important;
 }
+
+
+
+/* 28-11-2016*/
+.ui-dialog{ width: 100% !important; }
+.dialog-custom-width{ width: 100% !important; }
+.section-heading{ font-size: 14px; color: #000; }
+.section-text{ font-size: 14px; color: #4c9ed9; }
+.checkout-btn-mobile{ background-color: #fff !important;
+    color: #4c9ed9; font-size: 13px; padding: 5px 10px; border:1px solid #4c9ed9; border-radius:5px;
+}
+
+.ui-dialog-titlebar-close { width: 50px !important; height: 27px !important; top: 40% !important }

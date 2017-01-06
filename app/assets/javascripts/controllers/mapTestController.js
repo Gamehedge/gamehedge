@@ -22,7 +22,20 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
 
     $rootScope.showHeader = false;
     $rootScope.windoWidth = window.innerWidth;
-    
+    $('#ticketDetails').hide();
+    $('#ticketDetails2').hide();
+    $scope.redirecttoorder = function(){
+        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            $rootScope.order_img =  $("#dialog_img").attr('src');
+        }
+        //$('#dialog1').dialog("close");
+        $( ".ui-icon-closethick" ).click();
+        var url = '/order/'+$scope.tvid+'?amount='+$scope.tval;
+        $location.url(url);
+    }
+    $scope.getQty = function(){
+        $scope.tval = $scope.select_qty;
+    }
     $scope.filterPriceFn = function(_ele) {
         val = true;
         if($scope.price_filter == true){
@@ -377,6 +390,30 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         $timeout(function () {
             $('[data-toggle="tooltip"]').tooltip();
             // $('.listing-row').mouseover($scope.higlightSection($(this).attr('data-section'), true));
+            $('.listing-row').mouseover(function(){
+                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                    $('#ticketDetails').show();
+                    $('#ticketDetails2').hide();
+                }
+                var vid = $(this).attr('data-ticketid');
+                var row = $(this).attr('data-row');
+                var qty = $(this).attr('data-info');
+                var prc = $(this).attr('data-price');
+                var val = $(this).find('select').val();
+                var select_list = "";
+                $('#tvid').val(vid);
+                $scope.tvid = vid;
+                $scope.tval = val;
+                var qty = qty.split(',');
+                for(j=0;j<qty.length;j++){
+                    select_list += '<option value="'+qty[j]+'">'+qty[j]+'</option>'
+                }
+                $('#selectVal').html(select_list);
+                $("#ticket_row").html(row);
+                $("#ticket_price").html(prc);
+                //$rootScope.trow = row;
+                //$rootScope.tqty = qty;
+            });
             $('.redirect-button').click(function(){
                 var vid = $(this).parents().eq('2').attr('data-ticketid');
                 var val = $(this).parents().eq('2').find('select').val()
@@ -427,12 +464,22 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
                 if($scope.index == 5){
                     if(Number($(this).attr('data-info').split(',')[0]) < $scope.index){
                         $(this).addClass("hidden");
+                    }else{
+                        //QTY FIX                        
+                        //FIX DEFAULT SELECTBOX VALUE WHEN QTY FILTER APPLY
+                        
+                        $(this).find("select").val($(this).attr('data-info').split(',')[0]);
                     }
                 }
                 else{
                     if($(this).attr('data-info').split(',').indexOf(String($scope.index)) == -1){
                         $(this).addClass("hidden");
-                    }    
+                    } else{
+                        
+                        //QTY FIX                        
+                        //FIX DEFAULT SELECTBOX VALUE WHEN QTY FILTER APPLY
+                        $(this).find("select").val($scope.index);
+                    }      
                 }
             });
         }
@@ -478,7 +525,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     }
 
     $scope.higlightSection = function(section,highlight){
-        console.log(section);
+        // console.log(section);
         if(section != undefined){
             if(highlight == true){
                 $("#MapContainer").tuMap("HighlightSection",section);
@@ -537,24 +584,45 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
             'tickets_data_object': DATA_TICKTES,
             'static_map': '',
         };
-        // console.log("DVM_map_params")
-        // console.log(DVM_map_params);
+        console.log('Event ID' + String($scope.event.te_uid))
+        console.log('Headliner ID' + String($scope.event.home_performer.te_uid))
+        console.log('Venue ID' + String($scope.event.venue.te_uid))
+        console.log('Venue Conf' + String($scope.event.venue_configuration_id))
+        console.log('Ticket Data Object' + DATA_TICKTES)
         $timeout(function(){
-            angularLoad.loadScript("/dvm.js?v=105").then(function() {
-                console.log("dvm.js loadded successfully");
+            $.ajax({
+               url: '/dvm.js?v=104',
+               dataType: "script",
+               success: success
+             });
+             function success(){
                 $timeout(function(){
                     document.body.addEventListener("sectionSelected", function (e) {
                         console.log(e);
                     },false);
                 },1000);
-                // Script loaded succesfully.
-                // We can now start using the functions from someplugin.js
-            }).catch(function() {
-                console.log("failure");
-                // There was some error loading the script. Meh
-            });
+            }
+
         },100);
-    };
+     };
+        //console.log("DVM_map_params")
+        //console.log(DVM_map_params);
+    //     $timeout(function(){
+    //         angularLoad.loadScript("/dvm.js?v=104").then(function() {
+    //             console.log("dvm.js loadded successfully");
+    //             $timeout(function(){
+    //                 document.body.addEventListener("sectionSelected", function (e) {
+    //                     console.log(e);
+    //                 },false);
+    //             },1000);
+    //             // Script loaded succesfully.
+    //             // We can now start using the functions from someplugin.js
+    //         }).catch(function() {
+    //             console.log("failure");
+    //             // There was some error loading the script. Meh
+    //         });
+    //     },100);
+    // };
     $("body").on( "sectionSelected", function(event,section,selected) {
         var bare_section = section.split("-")[section.split("-").length - 1]
         if(selected == true){
@@ -563,7 +631,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         else{
             $scope.selectedSections.splice($scope.selectedSections.indexOf(bare_section),1);
         }
-        // console.log($scope.selectedSections);
+        //console.log('--------'+$scope.selectedSections);
         $scope.filterEventsData();
     });
     $scope.compareDates = function(event_date,format){
@@ -598,10 +666,62 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         //console.log(url);
         $location.url(url);
     };
+    // Scroll Functionality on Mobile Map
 
-    $("#tickets_list").scroll(function() {
-        console.log("jeje");
-    });
+    // $("#tickets_list").scroll(function() {
+    //     console.log("jeje");
+    // });
+    // -------------------------------------------------------
+    // var changedZones = [];
+    // var currentZone = [];
+    // var RowOffset = $('.filter-header').offset().top;
+    // var runOnce = true;
+    // var oldData = {};
+    // var tempVar = true;
+    // $("#tickets_list").scroll(function() {
+    //     if(runOnce){
+    //         $("path").each(function(){
+    //             pathID = $(this).attr('id');
+    //             oldData[pathID+"-fill"] = $(this).attr('fill');
+    //             oldData[pathID+"-stroke"] = $(this).attr('stroke');
+    //         });
+    //         runOnce = false;
+    //     }
+    //     //var resetOldColour = true;
+    //     $(".listing-row").each(function(){
+    //         if($(this).offset().top <= (RowOffset+104)){
+    //             if($(this).offset().top > (RowOffset+34)){
+    //                 var topRowId = $(this).attr('data-section');
+    //                 topRowIdLength = topRowId.length;
+    //                 $('path').each(function(){
+    //                     var pathID = $(this).attr('id');
+    //                     var subStrPathId = pathID.substr(pathID.length - topRowIdLength);
+    //                     if(subStrPathId == topRowId){
+    //                         if (changedZones.indexOf(pathID) == -1) {
+    //                             changedZones.push(pathID);
+    //                         }
+    //                         currentZone = [];
+    //                         currentZone.push(pathID);
+    //                         $(this).attr({fill:'#e5df00',stroke:'#000000'});
+    //                     }
+    //                 })
+    //             }else{
+    //                 //if(resetOldColour){
+    //                     for (i = 0; i < changedZones.length; i++) {
+    //                         var index = changedZones[i];
+    //                         if (currentZone.indexOf(index) == -1) {
+    //                             $('#'+changedZones[i]).attr({fill:oldData[index+"-fill"],stroke:oldData[index+"-stroke"]});
+    //                            var temp = currentZone.indexOf(index);
+    //                            changedZones.splice(temp, 1);
+
+    //                         }
+    //                     }
+    //                    // resetOldColour = false;
+    //                 //}
+    //             }
+    //         }
+    //     })
+    // });
     
     $scope.showMore = function(){
         // //$scope.showing_list = //$scope.showing_list + 20;

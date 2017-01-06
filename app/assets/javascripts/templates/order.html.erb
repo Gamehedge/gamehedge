@@ -14,7 +14,8 @@
 	  			<div class="col-md-8 card-element payments-left-form">
 	  				<div class="card">
 	  					<div class="card-in summary hidden-md hidden-lg hidden-xl" style="padding-bottom:0;">
-						    <div class="title">{{ticket.event.name}}</div>							
+						    <div class="title">{{ticket.event.name}}</div>
+						    <img id="order_img" width="100%" src={{order_img}}>
 						    <div class="info">
 						    	{{event.occurs_at | date: "EEE,	MMM dd, yyyy hh:mm a" : 'UTC'}}<br>
 						    	{{event.venue.name}}, {{event.venue.location}}<br>

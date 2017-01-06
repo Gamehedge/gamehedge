@@ -9496,6 +9496,46 @@ text {
   text-align: center !important;
 }
 
+/* 28-11-2016*/
+/* line 241, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/style_maps.css */
+.ui-dialog {
+  width: 100% !important;
+}
+
+/* line 242, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/style_maps.css */
+.dialog-custom-width {
+  width: 100% !important;
+}
+
+/* line 243, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/style_maps.css */
+.section-heading {
+  font-size: 14px;
+  color: #000;
+}
+
+/* line 244, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/style_maps.css */
+.section-text {
+  font-size: 14px;
+  color: #4c9ed9;
+}
+
+/* line 245, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/style_maps.css */
+.checkout-btn-mobile {
+  background-color: #fff !important;
+  color: #4c9ed9;
+  font-size: 13px;
+  padding: 5px 10px;
+  border: 1px solid #4c9ed9;
+  border-radius: 5px;
+}
+
+/* line 249, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/style_maps.css */
+.ui-dialog-titlebar-close {
+  width: 50px !important;
+  height: 27px !important;
+  top: 40% !important;
+}
+
 /*!
  * Ladda
  * http://lab.hakim.se/ladda

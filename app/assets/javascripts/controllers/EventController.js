@@ -445,6 +445,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                     }else{
                         //QTY FIX                        
                         //FIX DEFAULT SELECTBOX VALUE WHEN QTY FILTER APPLY
+                        
                         $(this).find("select").val($(this).attr('data-info').split(',')[0]);
                     }
                 }
@@ -452,6 +453,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                     if($(this).attr('data-info').split(',').indexOf(String($scope.index)) == -1){
                         $(this).addClass("hidden");
                     } else{
+                        
                         //QTY FIX                        
                         //FIX DEFAULT SELECTBOX VALUE WHEN QTY FILTER APPLY
                         $(this).find("select").val($scope.index);
