@@ -2304,6 +2304,22 @@ a {
     margin-top: 20px;
 }
 
+.sbwl-banner{
+    background-color: #5e8e01;
+    padding: 10px;
+    color: #fff;
+    text-align: center;
+    font-size: 28px;
+}
+.sbwl-banner a, .sbwl-banner a:hover{
+    color: #fff;
+    text-decoration: none;
+}
+
+.card-in .sbwl-banner{
+    font-size: 18px;
+    margin-top: 20px;
+}
 
 #confirmation .update-password .forgot{
     color: #005e9b;
@@ -6152,6 +6168,11 @@ main#admin #order-stats .stat-item span {
 		padding: 1px;
 	}
 
+    .sbwl-banner{
+        font-size: 16px;
+    }
+
+
 }
 
 
@@ -6167,6 +6188,10 @@ main#admin #order-stats .stat-item span {
 	header nav ul li#header-search {
 		display:none;
 	}
+
+    .sbwl-banner{
+        font-size: 16px;
+    }
 
 	#home section#hero {
 		/*height:54vh;*/
@@ -6458,6 +6483,7 @@ main#admin #order-stats .stat-item span {
 
 .badge-container {
     display: flex;
+    padding-top: 5px !important;
 }
 
 .pledge-left {

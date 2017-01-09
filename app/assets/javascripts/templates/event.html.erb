@@ -31,7 +31,7 @@
         <div class="hidden-xs hidden-sm ggg-event vertical-center">
             <div class="singlebanner-left" id='ggg_explanation'>
               <div class='ref'>50% Refund</div>
-              If <b>Home Team</b> loses by <b>{{event.home_performer.sport.ggg}} </b> or more
+              If <b ng-if="event.id != '168734'">home team</b><b ng-if="event.id == '168734'">either team</b> loses by <b>{{event.home_performer.sport.ggg}} </b> or more
             </div>
             <div class="singlebanner-right">
               <img src="<%= image_url "icon coin.png" %>">
@@ -42,7 +42,7 @@
                   <div class="ggg-tooltip" style="display: none;" id="ggg-tooltip">
 										<ul class="qtip_ul1">
 										<li>Buy your tickets</li>
-										<li>If <b>Home Team</b> loses by</li>
+										<li>If <b ng-if="event.id != '168734'">home team</b><b ng-if="event.id == '168734'">either team</b> loses by</li>
 											<ul class="qtip_ul2">
 												<li>{{event.home_performer.sport.ggg}} or more</li>
 											</ul>
