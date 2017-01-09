@@ -23,7 +23,7 @@ var client_data = {
     'dvm_injection_details': 'DVM_map_params : client_id : ' + DVM_map_params['client_id'] + ' - tickets_url : ' + DVM_map_params['tickets_url'] + ' - tickets_url_type : ' + DVM_map_params['tickets_url_type']
     
 };
-console.log(client_data);
+//console.log(client_data);
 $.ajax({
     url: 'https://dynamicvenuemaps.com/maps/svg_ajax/check_client.php',
     data: client_data,
@@ -368,7 +368,7 @@ head.js(
 //        "https://dynamicvenuemaps.com/maps/js/maps_general_settings.js",
         ///
         // "https://dynamicvenuemaps.com/maps/js/essentiels.min.js?v=201310031607",
-        "/essentiels.js?v=103",
+        "/essentiels.js?v=105",
         ///
 
         "https://dynamicvenuemaps.com/maps/js/jquery.fancybox.js?v=2.1.4",
@@ -376,7 +376,7 @@ head.js(
         "https://dynamicvenuemaps.com/maps/maps_setting/" + venue_folder + "/map_shapes.js",
         "https://dynamicvenuemaps.com/maps/maps_setting/" + venue_folder + "/section_matching.js?v=201401071606",
         "https://dynamicvenuemaps.com/maps/maps_setting/" + venue_folder + "/synonyms.js?v=201403071228",
-        "/DVM_functions.js?v=103",
+        "/DVM_functions.js?v=105",
         function () {
              if(DVM_map_params['tickets_url']){
             var tickets_url = DVM_map_params['tickets_url'];

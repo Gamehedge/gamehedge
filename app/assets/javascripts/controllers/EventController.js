@@ -96,7 +96,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
             	console.log(response);
                 $scope.event  = response;
                 $rootScope.title = $scope.event.name + " Tickets | Gamehedge";
-    			$rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team loses by "+$scope.event.home_performer.sport.ggg+" or more, get 50% of your ticket price back.";
+    			$rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by "+$scope.event.home_performer.sport.ggg+" or more, get 50% of your ticket price back.";
                 if($scope.event.is_active == false){
                     $location.path("/");
                 }
@@ -445,7 +445,6 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                     }else{
                         //QTY FIX                        
                         //FIX DEFAULT SELECTBOX VALUE WHEN QTY FILTER APPLY
-                        
                         $(this).find("select").val($(this).attr('data-info').split(',')[0]);
                     }
                 }
@@ -453,7 +452,6 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                     if($(this).attr('data-info').split(',').indexOf(String($scope.index)) == -1){
                         $(this).addClass("hidden");
                     } else{
-                        
                         //QTY FIX                        
                         //FIX DEFAULT SELECTBOX VALUE WHEN QTY FILTER APPLY
                         $(this).find("select").val($scope.index);

@@ -66,14 +66,10 @@ app = angular.module('gamehedge',[
             templateUrl: "venue.html",
             controller: 'VenueController',
         })
-        .when('/events_OLD/:eventId/:slug', {
+        .when('/events/:eventId/:slug', {
             templateUrl: "event.html",
             controller: 'EventController',
         })
-        .when('/events/:eventId/:slug', {
-            templateUrl: "map-test.html",
-            controller: 'mapTestController',
-        })	
         .when('/order/:ticektId', {
             templateUrl: "order.html",
             controller: 'OrderController',
@@ -113,10 +109,6 @@ app = angular.module('gamehedge',[
         .when('/testimonials', {
             templateUrl: "testimonials.html",
             controller: 'Testimonials',
-        })
-        .when('/superbowl', {
-            templateUrl: "superbowl.html",
-            controller: 'Superbowl',
         })
         .when('/privacy-policy', {
             templateUrl: "privacy-policy.html",
