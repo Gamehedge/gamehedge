@@ -5,7 +5,7 @@ controllers.controller('privacyPolicyController', function($scope,$rootScope,$lo
     $rootScope.showHeader = true;
     $scope.searchTerm = "";
     $rootScope.title = "Privacy policy | Gamehedge";
-    $rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by a certain amount or more, get 50% of your ticket price back.";
+    $rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team loses by a certain amount or more, get 50% of your ticket price back.";
     $scope.getSearchHints = function(val) {
         var now = new Date();
         now.setHours(now.getHours() + 1);

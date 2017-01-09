@@ -25,7 +25,7 @@ controllers.controller('MemberController', function($scope,$rootScope,$http,$loc
         //console.log(user); // => {id: 1, ect: '...'}
         $rootScope.user = user;
         $rootScope.title = $rootScope.user.name + " | Gamehedge";
-    	$rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by a certain amount or more, get 50% of your ticket price back.";
+    	$rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team loses by a certain amount or more, get 50% of your ticket price back.";
         $rootScope.isLoggedin = true;
         $scope.getClient();
     }, function(error) {

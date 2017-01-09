@@ -10,7 +10,7 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
     $scope.car_noWrapSlides = false;
     $scope.car_active = 0;
     $rootScope.title = "Home | Gamehedge";
-    $rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by a certain amount or more, get 50% of your ticket price back.";
+    $rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team loses by a certain amount or more, get 50% of your ticket price back.";
 
   $scope.getTiles = function(){
     apiService.getData('/api/v1/tiles/')
