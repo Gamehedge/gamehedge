@@ -936,10 +936,10 @@
 		  					</div>
 
 <div class="sbwl-banner" ng-if="event.id == '168734'">
- <span>SuperBowl</span> - Get <span>50% REFUND</span> if <span>EITHER TEAM</span> loses by <span>28 points</span> or more
+ <span>Super Bowl</span> - Get <span>50% REFUND</span> if <span>EITHER TEAM</span> loses by <span>28 points</span> or more
 </div>
 
-							  
+
 		  					<hr class="hidden-xs hidden-sm hidden">
 
 		  					<div class="badge-container">
@@ -981,7 +981,7 @@
 									Good Game Guarantee
 									</div>
 									<div class="ggg-body"  style="background: URL(/assets/ggg-logo-new-e62d9a67b0f924d1def5986f25cdf91514253a75374263407f5825a9de8148d5.png); background-repeat: no-repeat;background-size: 85px;background-position: 8px 6px;">
-										If the home team loses by <span id="ggg_rule">{{event.home_performer.sport.ggg}}</span> or more, <span class="ggg-bold"><a href='#' id='ggg_explanation'>GameHedge will refund 50% of your ticket price</a></span> at no additional cost to you.
+										If the <span ng-if="event.id == '168734'">either team</span><span ng-if="event.id != '168734'">home team</span> loses by <span id="ggg_rule">{{event.home_performer.sport.ggg}}</span> or more, <span class="ggg-bold"><a href='#' id='ggg_explanation'>GameHedge will refund 50% of your ticket price</a></span> at no additional cost to you.
 									</div>
 									<div class="ggg-tooltip" style="display: none;" id="ggg-tooltip">
 										<ul class="qtip_ul1">
