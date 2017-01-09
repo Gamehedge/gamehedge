@@ -1,10 +1,10 @@
 controllers = angular.module('gamehedge')
 
-controllers.controller('howWorksController', function($scope,$rootScope,$location,$window, dataService, $timeout){
+controllers.controller('Superbowl', function($scope,$rootScope,$location,$window, dataService, $timeout){
     $window.scrollTo(0, 0);
     $rootScope.showHeader = true;
     $scope.searchTerm = "";
-    $rootScope.title = "How it works | Gamehedge";
+    $rootScope.title = "Superbowl | Gamehedge";
     $rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team loses by a certain amount or more, get 50% of your ticket price back.";
     $scope.getSearchHints = function(val) {
         var now = new Date();

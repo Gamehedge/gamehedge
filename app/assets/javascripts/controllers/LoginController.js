@@ -4,7 +4,7 @@ controllers.controller('LoginController', function($scope,$rootScope,Auth,$locat
     $rootScope.locat = $location.url();
     $rootScope.showHeader = true;
     $rootScope.title = "Login | Gamehedge";
-    $rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by a certain amount or more, get 50% of your ticket price back.";
+    $rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team loses by a certain amount or more, get 50% of your ticket price back.";
     Auth.currentUser().then(function(user) {
         // User was logged in, or Devise returned
         // previously authenticated session.
