@@ -6,6 +6,9 @@
   <em>{{::italic}}</em>
 </div>
 <span id="home" class=leagues>
+<div class="nl-top-bg" style="background-image: URL(<%= image_url 'green_background.png' %>);">
+  <div class="container nl-container">
+
   <section id="hero" style="background: transparent url({{::league.image_url}}) center;background-size:cover;">
     <div id="shader"></div>
     <div id="wrapper">
@@ -32,7 +35,8 @@
       </div>
     </div>
   </section>
-
+</div>
+</div>
   <script type="text/ng-template" id="typeahead/bind-node.html">
     <a href="#" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
   </script>
