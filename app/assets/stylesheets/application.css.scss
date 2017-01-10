@@ -149,6 +149,26 @@ a {
     
 }
 
+
+
+
+
+
+.nl-logo{
+    min-height: 64px;  
+      
+}
+.nl-logo a{
+    display: block;
+    min-height: 64px;        
+}
+.nl-logo img{
+    
+}
+
+
+
+
 #home-loading-data img{
     width: 40px !important;
 }
@@ -344,20 +364,22 @@ a {
 
 .navbar-myaccount .dropdown{
 	padding-right: 0px;
-    padding-top: 9px;
-    padding-bottom: 9px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 .navbar-myaccount .login{
-	padding-right: 60px;
-    padding-top: 11px;
+	padding-right: 20px;
+    padding-top: 0px;
+    margin-left: 20px;
 }
 
 .navbar-myaccount .press{
 	margin-left: auto;
-    padding-top: 12px;
-    padding-bottom: 9px;
     margin-right: 26px;
+    min-height: 64px;
+    padding: 0px;
+    line-height: 64px;
 }
 
 .hw-login{
@@ -550,11 +572,11 @@ a {
 
 
 .dropdown-menu > li > a{
-	color: #6d6d6d;
+	color: #505050;
 	padding-left: 80px;
 	padding-top: 10px;
     padding-bottom: 10px;
-    font-size: 24px;
+    font-size: 16px;
 }
 
 
@@ -1455,12 +1477,25 @@ a {
     margin-left: 5px;
 }
 
+.nl-featured-in{
+    display: block;
+}
+.nl-featured-in img{
+    width: 99%;
+}
 #tickets-map .tickets-data{
     height: 300px;
     overflow-y: scroll;
     overflow-x: hidden;
     font-size:15px;
     -webkit-overflow-scrolling: touch;
+}
+
+#hero{
+    height: 235px;
+}
+#shader{
+    display: none;
 }
 
 #tickets-map .tickets-data .row{
@@ -2309,7 +2344,7 @@ a {
     padding: 10px;
     color: #fff;
     text-align: center;
-    font-size: 28px;
+    font-size: 26px;
 }
 .sbwl-banner a, .sbwl-banner a:hover{
     color: #fff;
@@ -2385,6 +2420,7 @@ a {
 
 .mnav-container{        
         width: 100%;
+        min-height: 64px;
 }
 
 .m-invis{
@@ -2393,27 +2429,19 @@ a {
 
 
 .header-claim-refund{
-    background-repeat: no-repeat;
-    background-size: 46px;
-    background-position: 0px 23px;
-    padding-left: 32px;
-    line-height: 18px;
-    margin-top: -10px;
-    padding-right: 10px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    border-radius: 3px;
+    line-height: 64px;
     display: block;
 }
 
 .header-claim-refund span{
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     background-repeat: no-repeat;
-    background-size: 18px;
+    background-size: 25px;
     position: absolute;
-    left: 13px;
+    top: 17px;
+    left: -27px;
 }
 
 .refund-box{
@@ -3045,11 +3073,16 @@ a {
 }
 
 
-.logo-image {
+.logo-image_OLD {
 	width: 100%;
 	max-width: 300px;
 	height: auto;
 	margin-top: 10px;
+}
+
+.logo-image{
+    height: 44px;
+    margin-top: 10px;
 }
 
 nav.order-page .mnav-container{
@@ -3097,10 +3130,11 @@ nav.order-page .mnav-container .navbar-header.help{
     z-index: 10;
     height: 0;
     min-height: 64px;
+    background-color: #363C3F;
 }
 
 .dark-header .navbar-gamehedge{
-    background-color: #373d3f;
+    background-color: #363C3F;
 }
 
 .navbar-gamehedge .navbar-nav > .open > a, .navbar-gamehedge .navbar-nav > .open > a:focus,
@@ -3557,7 +3591,7 @@ footer .footer-signature img{
 #home section#hero #wrapper #content {
 	position: relative;
 	z-index: 4;
-    padding-top: 75px;
+    margin-top: 80px;
     padding-bottom: 0px;
 	/*top: 30%;
 	-webkit-transform: translateY(-30%);
@@ -4424,7 +4458,8 @@ footer .footer-signature img{
 	border-radius: 5px;
 	padding-left: 78px;
 	font-size: 24px;
-	color: #6d6d6d;
+	color: #111;
+    border: 0px;
 }
 
 #home section#hero #wrapper #content #hero-search .no-results{
@@ -4443,7 +4478,7 @@ footer .footer-signature img{
 }
 
 #home section#hero #wrapper #content #hero-search .form-control:focus{
-	border: 1px solid #ccc;
+	border: 0px;
 	-webkit-box-shadow: none;
     box-shadow: none;
 }
@@ -4768,6 +4803,11 @@ section#games ul li .date, section#game-header .date, section#order-header .date
 }
 
 @media(min-width: 768px) {
+    .navbar-nav > li > a{
+        padding-top: 22px;
+        padding-bottom: 22px;
+    }
+
     section#games ul li .date, section#game-header .date, section#order-header .date {
         float: left !important;
         width: 85px !important;
@@ -6028,6 +6068,13 @@ main#admin #order-stats .stat-item span {
 		margin-left:7%;
 		padding-bottom: 15px;
 	}
+#hero{
+    height: inherit;
+}
+.logo-image{
+    padding-top: 4px;
+    padding-bottom: 0px;
+}
 
 
 .top-banner .logo-left .b-title {
@@ -6172,6 +6219,10 @@ main#admin #order-stats .stat-item span {
         font-size: 16px;
     }
 
+#home section#hero #wrapper #content{
+    padding-top: 0px;
+}
+
 
 }
 
@@ -6188,6 +6239,17 @@ main#admin #order-stats .stat-item span {
 	header nav ul li#header-search {
 		display:none;
 	}
+#hero{
+    height: inherit;
+}
+
+.logo-image{
+    padding-top: 4px;
+    padding-bottom: 0px;
+}
+#home section#hero #wrapper #content{
+    padding-top: 0px;
+}
 
     .sbwl-banner{
         font-size: 16px;

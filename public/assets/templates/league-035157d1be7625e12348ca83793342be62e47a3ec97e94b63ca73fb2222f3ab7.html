@@ -44,7 +44,7 @@
       <div class="ggg-blogo"><span>Good Game Guarantee</span></div>
       <div class="logo-left">
         <div class="b-title"><span class="b-perc">50%</span> Refund</div>
-        <div class="b-sub"><span>If <b>home team</b> loses by </span><b>{{::league.ggg}}</b> or more</div>
+        <div class="b-sub"><span>If <b>home team</b> loses by </span><b>{{::league.ggg}}</b><span ng-if="league.name == 'NFL'">*</span> or more</div>
       </div>
       <div class="logo-right">
         <div class="b-sm-left">
@@ -112,7 +112,7 @@
       <div class="sep"></div>
 
 <div class="sbwl-banner" ng-if="league.name == 'NFL'">
- <span>Super Bowl</span> - Get <span>50% REFUND</span> if <span>EITHER TEAM</span> loses by <span>28 points</span> or more
+ <a href="/events/983953/super-bowl-li-tickets">*<span>Super Bowl</span> tickets only - <span>50% Refund</span> if <span style="font-weight: bold;">EITHER</span> team loses by <span style="font-weight: bold;">28 points</span> or more</a>
 </div>
       
       </div>

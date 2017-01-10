@@ -14,7 +14,7 @@
                 </div>
                 <div class="navbar-header col-xs-8">
                     <a href="/" ng-click="hideMenus()">
-                        <img class="logo-image menu" alt="GameHedge.com" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/logo.png">
+                        <img class="logo-image menu" alt="GameHedge.com" src="<%= image_url 'nl-logo1.png' %>">
                     </a>
                 </div>
                 <div class="col-xs-2"></div>
@@ -144,9 +144,9 @@
                     </button>
                 </div>
             </div>
-            <div class="navbar-header col-md-4 col-xs-8">
+            <div class="navbar-header col-md-4 col-xs-8 nl-logo">
                 <a href="/" >
-                    <img class="logo-image" alt="GameHedge.com" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/logo.png">
+                    <img class="logo-image" alt="GameHedge.com" src="<%= image_url 'nl-logo1.png' %>">
                 </a>
             </div>
             <div class="navbar-header col-md-8 hidden-xs hidden-xm vertical-center help" ng-show="$root.isOrder">
@@ -200,6 +200,16 @@
                         </ul>
                     </li>
                 </ul>
+
+
+
+                <ul class="nav navbar-nav navbar-leagues vertical-center horizontal-center" ng-show="!$root.isOrder" >
+                   <li class="dropdown main-dropdown yamm-fw">
+                                <a class="" href="/performer/14528/super-bowl-tickets" style="color: #97c639 !important; width: 166px;">SUPER BOWL</a>
+                   </li>
+                </ul>   
+
+
             </div>
             <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs" ng-show="!$root.isOrder">
                 <div class="press" ng-show="$root.locat == '/'">
@@ -224,7 +234,7 @@
 
 
                  <div class="dropdown login" ng-show="!$root.isLoggedin">
-                    <a href="/how-it-works" class="header-claim-refund" style="background-image: URL(<%= image_url 'hand_white.png' %>);"><span style="background-image: URL(<%= image_url 'money_white.png' %>);"></span>Claim Refund</a>
+                    <a href="/how-it-works" class="header-claim-refund"><span style="background-image: URL(<%= image_url 'money_white.png' %>);"></span>Claim Refund</a>
                 </div>
             </div>
           </div>

@@ -20,6 +20,7 @@
           </div>
           
         </div>
+        <!--
         <div class="press-images hidden-xs hidden-sm">
           <div class="container">
           <a href="/press" class="ftr-link">
@@ -32,6 +33,10 @@
             </a>
           </div>
         </div>
+        -->
+        <br/><br/>
+
+
       </div>
     </div>
   </section>
@@ -39,6 +44,14 @@
   <script type="text/ng-template" id="typeahead/bind-node.html">
     <a href="{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
   </script>
+
+  <div class="nl-featured-in hidden-xs hidden-sm" id="good-game-guarantee">
+  <div class="container" style="margin-top: 0px;">
+    <center>
+      <img src="<%= image_url 'featured_logos.png' %>">
+    </center>    
+  </div>
+  </div>
 
   <main>
     <section id="good-game-guarantee" class="">
@@ -50,7 +63,7 @@
       <div class="logo-left">
         <div class="b-title"><span class="b-perc">50%</span> Refund</div>
         <div class="b-sub"><span>If <b class="ht">home team</b> loses by </span>
-          <b><img class="icon-img" src="<%= image_url "football icon.png" %>"> 17 points</b>
+          <b><img class="icon-img" src="<%= image_url "football icon.png" %>"> 17 points*</b>
           <b><img class="icon-img" src="<%= image_url "basketball icon.png" %>"> 20 points</b>
           <b><img class="icon-img" src="<%= image_url "baseball icon.png" %>"> 5 runs</b>
           <b><img class="icon-img" src="<%= image_url "hockey icon.png" %>"> 4 goals</b>
@@ -133,7 +146,7 @@
 
 
 <div class="sbwl-banner">
-  <a href="/events/983953/super-bowl-li-tickets"><span>Super Bowl</span> - Get <span>50% REFUND</span> if <span>EITHER TEAM</span> loses by <span>28 points</span> or more</a>
+  <a href="/events/983953/super-bowl-li-tickets">*<span>Super Bowl</span> tickets only - <span>50% Refund</span> if <span style="font-weight: bold;">EITHER</span> team loses by <span style="font-weight: bold;">28 points</span> or more</a>
 </div>
 
 
