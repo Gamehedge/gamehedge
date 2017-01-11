@@ -2297,8 +2297,10 @@ a {
 }
 
 .seui-mobile-banner{
+    position: absolute;
+    bottom: 0px;
     text-align: center;
-    margin-top: 24px;
+    width: 100%;
 }
 .seui-mobile-banner .line1{
 
@@ -4049,8 +4051,8 @@ footer .footer-signature img{
     #filters_prev_mobile {
         position: absolute;
         width: 100vw;
-        background-color: rgba(255,255,255,0.9);
-        height: 100vh;
+        background-color: #9fcd58;
+        height: 91vh;
         z-index: 100000;
     }
 
@@ -4065,7 +4067,7 @@ footer .footer-signature img{
     .filter_prev_number {
         display: inline-block;
         padding: 5px 30px;
-        box-shadow: 0px 0px 2px #333;
+        border: 1px solid #013503;
         margin-left: 10px;
         margin-right: 10px;
         font-size: 2em;
@@ -4086,7 +4088,7 @@ footer .footer-signature img{
 
     .how_prev_filter {
         text-align: center;
-        color: #999999;
+        color: #fff;
         font-size: 1.8em;
         font-weight: bolder;
         margin-top: 70px;
@@ -6096,6 +6098,12 @@ main#admin #order-stats .stat-item span {
 #hero{
     height: inherit;
 }
+
+#game_info{
+    height: 9vh !important;
+    background-color: #dddddd;    
+}
+
 .logo-image{
     padding-top: 4px;
     padding-bottom: 0px;
@@ -6269,6 +6277,10 @@ main#admin #order-stats .stat-item span {
 	}
 #hero{
     height: inherit;
+}
+#game_info{
+    height: 9vh !important;
+    background-color: #dddddd;    
 }
 
 .nl-container{
