@@ -19184,7 +19184,7 @@ footer .footer-signature img {
 #home section#hero {
   position: relative;
   /*height: 35vh;*/
-  background: transparent url(/assets/home-hero-a4a67e8371d4d3b948d3aa129f4151a7b831daee80725b7c6a7cf476dd3935f8.jpg) center;
+  background: transparent url(/images/home-hero.png) center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
