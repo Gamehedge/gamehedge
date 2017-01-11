@@ -96,6 +96,17 @@
     margin-bottom: 8px;
 }
 
+.nl-call{
+    position: absolute;
+    width: 200px;
+    text-align: center;
+    background-color: rgba(76, 111, 5, 0.32);
+    border-radius: 3px;
+    z-index: 999;
+    top: 7px;
+}
+
+
 .main-menu .dropdown-menu .performer-holder{
     margin-bottom: 29px;
 }
@@ -2302,8 +2313,22 @@ a {
     text-align: center;
     width: 100%;
 }
+.seui-mobile-banner img{
+    width: 100%;
+}
 .seui-mobile-banner .line1{
 
+}
+
+.splash-logo{
+    display: block;
+    background-color: #363C3F;
+}
+.splash-logo img{
+    display: block;
+    height: 60px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 .seui-mobile-banner .line2{
     font-size: 28px;
@@ -4052,10 +4077,12 @@ footer .footer-signature img{
         position: absolute;
         width: 100vw;
         background-color: #9fcd58;
-        height: 91vh;
+        height: 100vh;
         z-index: 100000;
+        top: 0px;
     }
 
+    
     #filters_mobile {
         position: absolute;
         width: 100vw;
