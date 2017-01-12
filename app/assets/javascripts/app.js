@@ -110,6 +110,10 @@ app = angular.module('gamehedge',[
             templateUrl: "testimonials.html",
             controller: 'Testimonials',
         })
+        .when('/superbowl', {
+            templateUrl: "superbowl.html",
+            controller: 'Superbowl',
+        })        
         .when('/privacy-policy', {
             templateUrl: "privacy-policy.html",
             controller: 'privacyPolicyController',

@@ -1,5 +1,10 @@
 
+<div class="nl-call hidden-xs hidden-sm">Need Help? Call 888-804-4330</div>
+
 <span id="home">
+<div class="nl-top-bg" style="background-image: URL(<%= image_url 'green_background.png' %>);">
+  <div class="container nl-container">
+
   <section id="hero">
     <div id="shader"></div>
     <div id="wrapper">
@@ -20,6 +25,7 @@
           </div>
           
         </div>
+        <!--
         <div class="press-images hidden-xs hidden-sm">
           <div class="container">
           <a href="/press" class="ftr-link">
@@ -32,13 +38,26 @@
             </a>
           </div>
         </div>
+        -->
+        <br/><br/>
+
+
       </div>
     </div>
   </section>
-
+</div>
+</div>
   <script type="text/ng-template" id="typeahead/bind-node.html">
     <a href="{{match.model.url}}" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
   </script>
+
+  <div class="nl-featured-in hidden-xs hidden-sm" id="good-game-guarantee">
+  <div class="container" style="margin-top: 0px;">
+    <center>
+      <img src="<%= image_url 'featured_logos.png' %>">
+    </center>    
+  </div>
+  </div>
 
   <main>
     <section id="good-game-guarantee" class="">
@@ -127,6 +146,15 @@
       </div>
       <div class="sep"></div>
       </div>
+
+
+
+
+<!--
+<div class="sbwl-banner">
+  <a href="/events/983953/super-bowl-li-tickets">*<span>Super Bowl</span> tickets only - <span>50% Refund</span> if <span style="font-weight: bold;">EITHER</span> team loses by <span style="font-weight: bold;">28 points</span> or more</a>
+</div>
+-->
 
 <!--
         <div class="title">Every Ticket Comes With Our Good Game Guarantee!</div>

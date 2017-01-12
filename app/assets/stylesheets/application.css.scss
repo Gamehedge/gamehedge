@@ -97,6 +97,23 @@
     margin-bottom: 8px;
 }
 
+.nl-call{
+    position: absolute;
+    width: 230px;
+    text-align: center;
+    background-color: #bad887;
+    border-radius: 5px;
+    z-index: 999;
+    top: 64px;
+    right: 26px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    padding: 3px;
+    color: #666;
+    font-size: 13px
+}
+
+
 .main-menu .dropdown-menu .performer-holder{
     margin-bottom: 29px;
 }
@@ -149,6 +166,31 @@ a {
 #home-loading-data{
     
 }
+
+
+
+.nl-top-bg{
+    background-repeat: repeat-y;
+    background-size: contain;
+}
+
+
+.nl-logo{
+    min-height: 64px;  
+      
+}
+.nl-logo a{
+    display: block;
+    min-height: 64px;        
+}
+.nl-logo img{
+    
+}
+
+
+
+
+
 
 #home-loading-data img{
     width: 40px !important;
@@ -345,20 +387,22 @@ a {
 
 .navbar-myaccount .dropdown{
 	padding-right: 0px;
-    padding-top: 9px;
-    padding-bottom: 9px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 .navbar-myaccount .login{
-	padding-right: 60px;
-    padding-top: 11px;
+	padding-right: 20px;
+    padding-top: 0px;
+    margin-left: 20px;
 }
 
 .navbar-myaccount .press{
 	margin-left: auto;
-    padding-top: 12px;
-    padding-bottom: 9px;
     margin-right: 26px;
+    min-height: 64px;
+    padding: 0px;
+    line-height: 64px;
 }
 
 .hw-login{
@@ -551,11 +595,11 @@ a {
 
 
 .dropdown-menu > li > a{
-	color: #6d6d6d;
+	color: #505050;
 	padding-left: 80px;
 	padding-top: 10px;
     padding-bottom: 10px;
-    font-size: 24px;
+    font-size: 16px;
 }
 
 
@@ -1164,7 +1208,7 @@ a {
 
 .hp-header-ggg-text{
     margin-bottom: 0px; 
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 .performers #performer .event-info .first-line a:hover{
@@ -1456,12 +1500,25 @@ a {
     margin-left: 5px;
 }
 
+.nl-featured-in{
+    display: block;
+}
+.nl-featured-in img{
+    width: 99%;
+}
 #tickets-map .tickets-data{
     height: 300px;
     overflow-y: scroll;
     overflow-x: hidden;
     font-size:15px;
     -webkit-overflow-scrolling: touch;
+}
+
+#hero{
+    height: 235px;
+}
+#shader{
+    display: none;
 }
 
 #tickets-map .tickets-data .row{
@@ -2258,11 +2315,27 @@ a {
 }
 
 .seui-mobile-banner{
+    position: absolute;
+    bottom: 0px;
     text-align: center;
-    margin-top: 24px;
+    width: 100%;
+}
+.seui-mobile-banner img{
+    width: 100%;
 }
 .seui-mobile-banner .line1{
 
+}
+
+.splash-logo{
+    display: block;
+    background-color: #363C3F;
+}
+.splash-logo img{
+    display: block;
+    height: 60px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 .seui-mobile-banner .line2{
     font-size: 28px;
@@ -2305,6 +2378,22 @@ a {
     margin-top: 20px;
 }
 
+.sbwl-banner{
+    background-color: #5e8e01;
+    padding: 10px;
+    color: #fff;
+    text-align: center;
+    font-size: 26px;
+}
+.sbwl-banner a, .sbwl-banner a:hover{
+    color: #fff;
+    text-decoration: none;
+}
+
+.card-in .sbwl-banner{
+    font-size: 18px;
+    margin-top: 20px;
+}
 
 #confirmation .update-password .forgot{
     color: #005e9b;
@@ -2368,8 +2457,29 @@ a {
 
 
 
+.nl-perf-superbowl{
+    display: block;
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+.nl-perf-superbowl h1{
+    display: block;
+    text-align: left !important;
+    margin-bottom: 0px !important;
+    margin-top: 12px;
+}
+
+.nl-perf-superbowl span{
+    display: block;
+}
+
 .mnav-container{        
-        width: 100%;
+       
+        min-height: 64px;
+        padding-left: 0px;
+        padding-right: 0px;
 }
 
 .m-invis{
@@ -2378,27 +2488,19 @@ a {
 
 
 .header-claim-refund{
-    background-repeat: no-repeat;
-    background-size: 46px;
-    background-position: 0px 23px;
-    padding-left: 32px;
-    line-height: 18px;
-    margin-top: -10px;
-    padding-right: 10px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    border-radius: 3px;
+    line-height: 64px;
     display: block;
 }
 
 .header-claim-refund span{
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     background-repeat: no-repeat;
-    background-size: 18px;
+    background-size: 25px;
     position: absolute;
-    left: 13px;
+    top: 17px;
+    left: -27px;
 }
 
 .refund-box{
@@ -3030,11 +3132,16 @@ a {
 }
 
 
-.logo-image {
+.logo-image_OLD {
 	width: 100%;
 	max-width: 300px;
 	height: auto;
 	margin-top: 10px;
+}
+
+.logo-image{
+    height: 44px;
+    margin-top: 10px;
 }
 
 nav.order-page .mnav-container{
@@ -3082,10 +3189,11 @@ nav.order-page .mnav-container .navbar-header.help{
     z-index: 10;
     height: 0;
     min-height: 64px;
+    background-color: #363C3F;
 }
 
 .dark-header .navbar-gamehedge{
-    background-color: #373d3f;
+    background-color: #363C3F;
 }
 
 .navbar-gamehedge .navbar-nav > .open > a, .navbar-gamehedge .navbar-nav > .open > a:focus,
@@ -3517,7 +3625,7 @@ footer .footer-signature img{
 #home section#hero {
 	position: relative;
 	/*height: 35vh;*/
-	background: transparent image_url('home-hero.jpg') center;
+	background: transparent image_url('home-hero.png') center;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -3542,7 +3650,7 @@ footer .footer-signature img{
 #home section#hero #wrapper #content {
 	position: relative;
 	z-index: 4;
-    padding-top: 75px;
+    margin-top: 80px;
     padding-bottom: 0px;
 	/*top: 30%;
 	-webkit-transform: translateY(-30%);
@@ -3558,7 +3666,7 @@ footer .footer-signature img{
 }
 
 #home section#hero #wrapper #content p {
-    font-size: 30px;
+    font-size: 26px;
     text-align: center;
     margin-bottom: 25px;
 }
@@ -3975,11 +4083,13 @@ footer .footer-signature img{
     #filters_prev_mobile {
         position: absolute;
         width: 100vw;
-        background-color: rgba(255,255,255,0.9);
+        background-color: #9fcd58;
         height: 100vh;
         z-index: 100000;
+        top: 0px;
     }
 
+    
     #filters_mobile {
         position: absolute;
         width: 100vw;
@@ -3991,7 +4101,7 @@ footer .footer-signature img{
     .filter_prev_number {
         display: inline-block;
         padding: 5px 30px;
-        box-shadow: 0px 0px 2px #333;
+        border: 1px solid #013503;
         margin-left: 10px;
         margin-right: 10px;
         font-size: 2em;
@@ -4012,10 +4122,10 @@ footer .footer-signature img{
 
     .how_prev_filter {
         text-align: center;
-        color: #999999;
+        color: #fff;
         font-size: 1.8em;
         font-weight: bolder;
-        margin-top: 70px;
+        margin-top: 30px;
         margin-bottom: 20px;
     }
     
@@ -4408,9 +4518,29 @@ footer .footer-signature img{
 	height: 50px;
 	border-radius: 5px;
 	padding-left: 78px;
-	font-size: 24px;
-	color: #6d6d6d;
+	font-size: 14px;
+	color: #111;
+    border: 0px;
 }
+
+
+#home section#hero #wrapper #content #hero-search .form-control::-webkit-input-placeholder {
+color: #b9b9b9 !important;
+} 
+#home section#hero #wrapper #content #hero-search .form-control:-moz-placeholder { /* Firefox 18- */
+color: #b9b9b9 !important;  
+} 
+#home section#hero #wrapper #content #hero-search .form-control::-moz-placeholder {  /* Firefox 19+ */
+color: #b9b9b9 !important;  
+} 
+#home section#hero #wrapper #content #hero-search .form-control:-ms-input-placeholder {  
+color: #b9b9b9 !important;  
+}
+
+
+
+
+
 
 #home section#hero #wrapper #content #hero-search .no-results{
     background-color: white;
@@ -4428,7 +4558,7 @@ footer .footer-signature img{
 }
 
 #home section#hero #wrapper #content #hero-search .form-control:focus{
-	border: 1px solid #ccc;
+	border: 0px;
 	-webkit-box-shadow: none;
     box-shadow: none;
 }
@@ -4753,6 +4883,11 @@ section#games ul li .date, section#game-header .date, section#order-header .date
 }
 
 @media(min-width: 768px) {
+    .navbar-nav > li > a{
+        padding-top: 22px;
+        padding-bottom: 22px;
+    }
+
     section#games ul li .date, section#game-header .date, section#order-header .date {
         float: left !important;
         width: 85px !important;
@@ -6013,7 +6148,23 @@ main#admin #order-stats .stat-item span {
 		margin-left:7%;
 		padding-bottom: 15px;
 	}
+#hero{
+    height: inherit;
+}
 
+#game_info{
+    height: 9vh !important;
+    background-color: #dddddd;    
+}
+
+.logo-image{
+    padding-top: 4px;
+    padding-bottom: 0px;
+}
+.nl-container{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
 
 .top-banner .logo-left .b-title {
     float: left;
@@ -6153,6 +6304,15 @@ main#admin #order-stats .stat-item span {
 		padding: 1px;
 	}
 
+    .sbwl-banner{
+        font-size: 16px;
+    }
+
+#home section#hero #wrapper #content{
+    padding-top: 0px;
+}
+
+
 }
 
 
@@ -6168,6 +6328,30 @@ main#admin #order-stats .stat-item span {
 	header nav ul li#header-search {
 		display:none;
 	}
+#hero{
+    height: inherit;
+}
+#game_info{
+    height: 9vh !important;
+    background-color: #dddddd;    
+}
+
+.nl-container{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.logo-image{
+    padding-top: 4px;
+    padding-bottom: 0px;
+}
+#home section#hero #wrapper #content{
+    padding-top: 0px;
+}
+
+    .sbwl-banner{
+        font-size: 16px;
+    }
 
 	#home section#hero {
 		/*height:54vh;*/
@@ -6459,6 +6643,7 @@ main#admin #order-stats .stat-item span {
 
 .badge-container {
     display: flex;
+    padding-top: 5px !important;
 }
 
 .pledge-left {

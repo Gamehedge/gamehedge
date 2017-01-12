@@ -31,7 +31,7 @@
         <div class="hidden-xs hidden-sm ggg-event vertical-center">
             <div class="singlebanner-left" id='ggg_explanation'>
               <div class='ref'>50% Refund</div>
-              If <b>Home Team</b> loses by <b>{{event.home_performer.sport.ggg}} </b> or more
+              If <b ng-if="event.id != '168734'">home team</b><b ng-if="event.id == '168734'">either team</b> loses by <b>{{event.home_performer.sport.ggg}} </b> or more
             </div>
             <div class="singlebanner-right">
               <img src="<%= image_url "icon coin.png" %>">
@@ -42,7 +42,7 @@
                   <div class="ggg-tooltip" style="display: none;" id="ggg-tooltip">
 										<ul class="qtip_ul1">
 										<li>Buy your tickets</li>
-										<li>If <b>Home Team</b> loses by</li>
+										<li>If <b ng-if="event.id != '168734'">home team</b><b ng-if="event.id == '168734'">either team</b> loses by</li>
 											<ul class="qtip_ul2">
 												<li>{{event.home_performer.sport.ggg}} or more</li>
 											</ul>
@@ -113,6 +113,13 @@
     <div class="close_mobile_x" ng-click="closePrevFilter()">
         <img width="15px" src="<%= image_url 'close-menu-black.png' %>">
     </div>
+
+    <div class="splash-logo">
+      <center>
+        <img alt="GameHedge" src="<%= image_url 'gamehedge_logo_white.png' %>">
+      </center>   
+    </div>
+
     <div class="how_prev_filter">HOW MANY TICKETS?</div>
     <div class="row text-center">
       <div class="filter_prev_number" ng-click="updateFilter(1)">1</div>
@@ -123,19 +130,15 @@
       <div class="filter_prev_number" ng-click="updateFilter(4)">4</div>
       <div class="filter_prev_number" ng-click="updateFilter(5)">5+</div>
     </div>
-    <!--YO-->
 
     <div class="seui-mobile-banner">
-      <div class="line1">
-        <span class="p50">50%</span>
-        <span class="p50-refund">refund</span>
-      </div>
-      <div class="line2">
-        If <b>home team</b> loses by <b>{{event.home_performer.sport.ggg}}</b> or more
-      </div>      
+      <center>
+        <img src="<%= image_url 'mobile-splash-image.png' %>">
+      </center>  
     </div>
 
-    <!--ENDYO-->
+
+
   </div>
 
   <div id="filters_mobile" ng-if="filter_active" class="zipper">

@@ -95,7 +95,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
                 // console.log(response);
                 $scope.event  = response;
                 $rootScope.title = $scope.event.name + " Tickets | Gamehedge";
-                $rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team losses by "+$scope.event.home_performer.sport.ggg+" or more, get 50% of your ticket price back.";
+                $rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team loses by "+$scope.event.home_performer.sport.ggg+" or more, get 50% of your ticket price back.";
                 
                 if($routeParams.slug != $scope.event.slug){
                     $location.path("/");

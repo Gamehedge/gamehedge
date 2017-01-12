@@ -115,7 +115,7 @@ mixpanel.init(mxpnl_id);</script><!-- end Mixpanel -->
   
   mxpnl_super_props.ScreenResolution = screen.width+'x'+ screen.height;
 
-  mixpanel.register(mxpnl_super_props);
+  mixpanel.register_once(mxpnl_super_props);
   /*
   var fvd = (new Date).toISOString();
   mixpanel.register_once({

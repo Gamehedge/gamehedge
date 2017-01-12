@@ -5,7 +5,13 @@
   <strong>{{::bold}}</strong>
   <em>{{::italic}}</em>
 </div>
+
+<div class="nl-call hidden-xs hidden-sm">Need Help? Call 888-804-4330</div>
+
 <span id="home" class=leagues>
+<div class="nl-top-bg" style="background-image: URL(<%= image_url 'green_background.png' %>);">
+  <div class="container nl-container">
+
   <section id="hero" style="background: transparent url({{::league.image_url}}) center;background-size:cover;">
     <div id="shader"></div>
     <div id="wrapper">
@@ -32,7 +38,8 @@
       </div>
     </div>
   </section>
-
+</div>
+</div>
   <script type="text/ng-template" id="typeahead/bind-node.html">
     <a href="#" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
   </script>
@@ -44,7 +51,7 @@
       <div class="ggg-blogo"><span>Good Game Guarantee</span></div>
       <div class="logo-left">
         <div class="b-title"><span class="b-perc">50%</span> Refund</div>
-        <div class="b-sub"><span>If <b>home team</b> loses by </span><b>{{::league.ggg}}</b> or more</div>
+        <div class="b-sub"><span>If <b>home team</b> loses by </span><b>{{::league.ggg}}</b><span ng-if="league.name == 'NFL'">*</span> or more</div>
       </div>
       <div class="logo-right">
         <div class="b-sm-left">
@@ -110,6 +117,11 @@
         <div class="sep"></div>        
       </div>
       <div class="sep"></div>
+
+<div class="sbwl-banner" ng-if="league.name == 'NFL'">
+ <a href="/events/983953/super-bowl-li-tickets">*<span>Super Bowl</span> tickets only - <span>50% Refund</span> if <span style="font-weight: bold;">EITHER</span> team loses by <span style="font-weight: bold;">28 points</span> or more</a>
+</div>
+      
       </div>
 
 
