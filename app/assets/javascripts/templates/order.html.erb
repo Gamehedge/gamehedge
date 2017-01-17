@@ -1115,8 +1115,8 @@
 						  <div class="summary-box purchace-summary">						  
 
 						    <div class="description-line">
-						    	<div class="description">Ticket Price</div>
-						    	<div class="value">{{ticket.retail_price | currency}} ea.</div>
+						    	<div class="description">Price per ticket</div>
+						    	<div class="value">{{ticket.retail_price | currency}}</div>
 						    </div>
 						    <div class="description-line">
 						    	<div class="description">Quantity</div>
@@ -1134,8 +1134,8 @@
                             <hr>
 							-->
                             <div class="description-line">
-						    	<div class="description short">Fee</div>
-						    	<div class="value short">{{service_fee/amount | currency}} ea.</div>
+						    	<div class="description short">Fee per ticket</div>
+						    	<div class="value short">{{service_fee/amount | currency}}</div>
 						    </div>
                             <div class="description-line" ng-show="ticket.format == 'Physical'">
 						    	<div class="description">Delivery Option</div>
