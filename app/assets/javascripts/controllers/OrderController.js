@@ -1,7 +1,21 @@
 controllers = angular.module('gamehedge')
 
 controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,$location,$routeParams,$timeout,apiService,$filter,$window,Analytics){
-    
+
+	var paybuttonloadingtime = 0;
+
+    var trigger555 = setInterval(function() {
+			paybuttonloadingtime++;
+			if ($('.confirm_pay').offset().top > 0){
+                    clearInterval(trigger555);
+					mixpanel.track("PayButton Visible", {
+			        	"WaitingTime": Math.round(paybuttonloadingtime/10*100)/100,
+    				});
+			}
+     }, 100);
+
+
+
     var trigger = setInterval(function() {
         if ($(window).width() > 992){
             if($(".badge-container").offset().top > 0){

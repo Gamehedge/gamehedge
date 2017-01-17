@@ -84,8 +84,21 @@ for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElemen
 mixpanel.init(mxpnl_id);</script><!-- end Mixpanel -->      
 
 
+<script>
+function getBrowserWidth(){
+   return window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth||0;
+}
+function getBrowserHeight(){
+   return window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight||0;
+}
+</script>
+
+
 <script type="text/javascript">
   var mxpnl_super_props = {};
+  var mxpnl_props = {};
+
+
   mxpnl_super_props.AdChannel = 'none';
   mxpnl_super_props.AdCmp = 'none';
   mxpnl_super_props.AdGroup = 'none';
@@ -114,14 +127,20 @@ mixpanel.init(mxpnl_id);</script><!-- end Mixpanel -->
   }
   
   mxpnl_super_props.ScreenResolution = screen.width+'x'+ screen.height;
+  mxpnl_props.BrowserWSize = getBrowserWidth()+'x'+ getBrowserHeight();
 
   mixpanel.register_once(mxpnl_super_props);
+  mixpanel.register(mxpnl_props);
+
   /*
   var fvd = (new Date).toISOString();
   mixpanel.register_once({
         "FirstVisitDate3": fvd.toString()
   });
   */
+
+
+
 
 </script>
 
