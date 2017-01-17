@@ -942,7 +942,7 @@
 
 		  					<hr class="hidden-xs hidden-sm hidden">
 
-		  					<div class="badge-container">
+		  					<div class="badge-container hidden-xs hidden-sm">
 			  					<!--div class="ggg-badge-pledge pledge-left">
 				  					<div class="badge-left-element">
 				  						<img src="<%= image_url "badge-gamehedge.png" %>" class="ggg-img">
@@ -1070,7 +1070,7 @@
   						  <div class="summary-subtitle"><i class="fa fa-angle-double-right" aria-hidden="true"></i>Delivery Details</div>
 						  <div class="summary-box delivery-details">
 						  		<div ng-if="ticket.instant_delivery == true">
-									E- tickets will be available for download typically within a few minutes after order is confirmed.
+									E-tickets will be available for download typically within a few minutes after order is confirmed.
 								</div>
 						  		<div ng-if="ticket.instant_delivery == false">
 								  	<div ng-if="ticket.format == 'Physical'">
@@ -1078,7 +1078,7 @@
 											Tickets will be shipped to the address provided
 										</div>
 									  	<div ng-if="ticket.in_hand == false">
-											Tickets will be ready to ship via Fedex by {{ticket.in_hand_on | date:'MM/dd/yyyy'}}
+											Tickets will be ready to ship by {{ticket.in_hand_on | date:'MM/dd/yyyy'}}
 										</div>
 									</div>
 								  	<div ng-if="ticket.format != 'Physical'">
