@@ -16657,7 +16657,7 @@ a {
 
 /* line 1555, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 #tickets-map .map-container {
-  display: flex;
+  display: block;
   justify-content: center;
 }
 
