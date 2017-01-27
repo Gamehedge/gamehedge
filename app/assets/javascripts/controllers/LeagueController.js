@@ -11,7 +11,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
                 }
                 if($scope.league.name == "NHL"){
                     $rootScope.title = "NHL Hockey Tickets | Gamehedge";
-                    $rootScope.description = "Meta Description - Buy and Save up to 60% on all NHL Hockey game tickets. If the home team loses by 4 goals or more, get 50% of your ticket price back.";
+                    $rootScope.description = "Buy and Save up to 60% on all NHL Hockey game tickets. If the home team loses by 4 goals or more, get 50% of your ticket price back.";
                     $scope.h1Text = "NHL Hockey Tickets"
                     $scope.h2Text = "NHL Hockey Ticket Prices | Teams | Schedule | Interactive Seating Charts"
                     $scope.bold = "Verified tickets delivered on time | 100% Buyer Guarantee | Secure Checkout"
@@ -19,7 +19,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
                 }
                 else if($scope.league.name == "NBA"){
                     $rootScope.title = "NBA Basketball Tickets | Gamehedge";
-                    $rootScope.description = "Meta Description - Buy and Save up to 60% on all NBA Basketball game tickets. If the home team loses by 15 points or more, get 50% of your ticket price back.";
+                    $rootScope.description = "Buy and Save up to 60% on all NBA Basketball game tickets. If the home team loses by 15 points or more, get 50% of your ticket price back.";
                     $scope.h1Text = "NBA Basketball Tickets"
                     $scope.h2Text = "NBA Basketball Game Tickets | NBA Schedule | Interactive Seating Chart"
                     $scope.bold = "Verified tickets delivered on time | 100% Buyer Guarantee | Secure Checkout"
@@ -27,7 +27,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
                 }
                 else if($scope.league.name == "NCAAFB"){
                     $rootScope.title = "NCAAFB Football Tickets | Gamehedge";
-                    $rootScope.description = "Meta Description - Buy and Save up to 60% on all NCAAFB Football game tickets. If the home team loses by 17 points or more, get 50% of your ticket price back.";
+                    $rootScope.description = "Buy and Save up to 60% on all NCAAFB Football game tickets. If the home team loses by 17 points or more, get 50% of your ticket price back.";
                     $scope.h1Text = "NCAAFB Football Tickets"
                     $scope.h2Text = "NCAAFB Football Game Tickets | Schedule | Interactive Seating Chart"
                     $scope.bold = "Verified tickets delivered on time | 100% Buyer Guarantee | Secure Checkout"
@@ -35,7 +35,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
                 }
                 else if($scope.league.name == "NFL"){
                     $rootScope.title = "NFL Football Tickets | Gamehedge";
-                    $rootScope.description = "Meta Description - Buy and Save up to 60% on all NFL Football game tickets. If the home team loses by 17 points or more, get 50% of your ticket price back.";
+                    $rootScope.description = "Buy and Save up to 60% on all NFL Football game tickets. If the home team loses by 17 points or more, get 50% of your ticket price back.";
                     $scope.h1Text = "NFL Football Tickets"
                     $scope.h2Text = "By Division | NFC | NFC East | NFC North | NFC South| NFC West | AFC | AFC East | AFC North | AFC South | AFC West Los Angeles Rams, San Francisco 49ers, Chicago Bears, New York Giants, New York Jets, Detroit Lions, Dallas Cowboys, Pittsburgh Steelers, Cleveland Browns, Atlanta Falcons, Houston Texans, New England Patriots, Minnesota Vikings, Denver Broncos, Seattle Seahawks, Washington Redskins, Miami Dolphins, Philadelphia Eagles, Cincinnati Bengals, Oakland Raiders, Kansas City Chiefs, San Diego Chargers, Arizona Cardinals, Baltimore Ravens, Green Bay Packers, New Orleans Saints, Tennessee Titans, Jacksonville Jaguars, Carolina Panthers, Buffalo Bills, Tampa Bay Buccaneers, Indianapolis Colts"
                     $scope.bold = "Verified tickets delivered on time | 100% Buyer Guarantee | Secure Checkout"
@@ -43,7 +43,7 @@ app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataS
                 }
                 else if($scope.league.name == "MLB"){
                     $rootScope.title = "MLB Baseball Tickets | Gamehedge";
-                    $rootScope.description = "Meta Description - Buy and Save up to 60% on all MLB Baseball game tickets. If the home team loses by 5 runs or more, get 50% of your ticket price back.";
+                    $rootScope.description = "Buy and Save up to 60% on all MLB Baseball game tickets. If the home team loses by 5 runs or more, get 50% of your ticket price back.";
                     $scope.h1Text = "MLB Baseball Tickets"
                     $scope.h2Text = "By Division | National League | National League East | National League Central | National League West | American League East | American League Central | American League West Los Angeles Dodgers, San Francisco Giants, Chicago Cubs, New York Mets, Los Angeles Angels, Detroit Tigers, Texas Rangers, New York Yankees, Pittsburgh Pirates, Cleveland Indians, Atlanta Braves, Houston Astros, Boston Red Sox, Minnesota Twins, Colorado Rockies, Seattle Mariners, Washington Nationals, Miami Marlins, Philadelphia Phillies, Cincinnati Reds, Tampa Bay Rays, Oakland Athletics, Chicago White Sox, St. Louis Cardinals, Kansas City Royals, San Diego Padres, Arizona Diamondbacks, Baltimore Orioles, Cleveland Indians, Toronto Blue Jays, Milwaukee Brewers"
                     $scope.bold = "Verified tickets delivered on time | 100% Buyer Guarantee | Secure Checkout"
