@@ -1552,7 +1552,7 @@ a {
 }
 
 #tickets-map .map-container {
-    display: block;
+    display: flex;
     justify-content: center;
 }
 
@@ -5477,6 +5477,10 @@ main#checkout #shipping_options ul {
 	#already_acc{
 	margin:0;
 	margin-bottom:10px;
+}
+
+#tickets-map .map-container {
+    display: block;
 }
 }
 
