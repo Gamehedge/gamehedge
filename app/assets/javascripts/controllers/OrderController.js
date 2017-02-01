@@ -48,6 +48,19 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 					$rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team loses by "+$scope.event.home_performer.sport.ggg+" or more, get 50% of your ticket price back.";
 	                $scope.amount = $location.search()['amount'];
 	                $scope.calculateValues();
+
+
+					Moengage.track_event('CheckoutPage Visit', {'url': window.location.href , 
+						'away_team': $scope.event.away_performer.name, 
+						'home_team': $scope.event.home_performer.name, 
+						'event_date_time': $scope.event.occurs_at, 
+						'event_location': $scope.event.venue.name, 
+						'ticket_section': $scope.ticket.section,
+						'ticket_row': $scope.ticket.row,
+						'ticket_price_each': $scope.ticket.retail_price
+					});
+
+
 	        });
 	        if($scope.ticket.format == "Physical"){
 	    		$scope.shipping_fee = "25.0";
@@ -316,7 +329,12 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	    		$scope.edit_deliver = 1;
 				$scope.edit_billing = 1;
 				$scope.edit_credit_card = 3;
-				swal("Error", response.data.error, "error");
+				/*Scroll to CC Input field*/
+				jQuery('html, body').animate({
+        			scrollTop: $(".pay_with_title").offset().top
+    			}, 500);
+
+				swal("Credit Card Error", response.data.error, "error");
 	    	}
 	    	else{
 		    	$scope.card = response.data;

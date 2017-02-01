@@ -68578,11 +68578,27 @@ controllers.controller('ConfirmController', function($scope,$rootScope,$http,Aut
             .then(function(response){
             	console.log("Order");
             	console.log(response);
+
+            	//console.log($scope);
+				
                 $scope.order = response;
                 $scope.loading = false;
                 $rootScope.title = "Order | Gamehedge";
 				$rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team loses by a certain amount or more, get 50% of your ticket price back.";
                 
+
+				
+					Moengage.track_event('Order Complete', {'url': window.location.href , 
+						'event_date_time': $scope.order.event_date, 
+						'event_location_addr': $scope.order.event_location, 
+						'event_name': $scope.order.event_name,
+						'event_quantity': $scope.order.number_of_tickets,
+						'event_quantity': $scope.order.number_of_tickets,
+						'ticket_section': $scope.order.ticket_section,
+						'order_total': $scope.order.total
+					});
+				
+
         });
 	}
 
@@ -68768,6 +68784,15 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
             	console.log("Event");
             	console.log(response);
                 $scope.event  = response;
+
+                /*MOENGAGE START*/
+                Moengage.track_event('SingleEventPage Visit', {'url': window.location.href , 
+                    'away_team': $scope.event.away_performer.name, 
+                    'home_team': $scope.event.home_performer.name, 
+                    'event_date_time': $scope.event.occurs_at, 
+                    'event_location': $scope.event.venue.name});
+                /*MOENGAGE END*/
+
                 $rootScope.title = $scope.event.name + " Tickets | Gamehedge";
     			$rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team loses by "+$scope.event.home_performer.sport.ggg+" or more, get 50% of your ticket price back.";
                 if($scope.event.is_active == false){
@@ -70257,6 +70282,19 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 					$rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team loses by "+$scope.event.home_performer.sport.ggg+" or more, get 50% of your ticket price back.";
 	                $scope.amount = $location.search()['amount'];
 	                $scope.calculateValues();
+
+
+					Moengage.track_event('CheckoutPage Visit', {'url': window.location.href , 
+						'away_team': $scope.event.away_performer.name, 
+						'home_team': $scope.event.home_performer.name, 
+						'event_date_time': $scope.event.occurs_at, 
+						'event_location': $scope.event.venue.name, 
+						'ticket_section': $scope.ticket.section,
+						'ticket_row': $scope.ticket.row,
+						'ticket_price_each': $scope.ticket.retail_price
+					});
+
+
 	        });
 	        if($scope.ticket.format == "Physical"){
 	    		$scope.shipping_fee = "25.0";
@@ -70525,7 +70563,12 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	    		$scope.edit_deliver = 1;
 				$scope.edit_billing = 1;
 				$scope.edit_credit_card = 3;
-				swal("Error", response.data.error, "error");
+				/*Scroll to CC Input field*/
+				jQuery('html, body').animate({
+        			scrollTop: $(".pay_with_title").offset().top
+    			}, 500);
+
+				swal("Credit Card Error", response.data.error, "error");
 	    	}
 	    	else{
 		    	$scope.card = response.data;

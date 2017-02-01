@@ -95,6 +95,15 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
             	console.log("Event");
             	console.log(response);
                 $scope.event  = response;
+
+                /*MOENGAGE START*/
+                Moengage.track_event('SingleEventPage Visit', {'url': window.location.href , 
+                    'away_team': $scope.event.away_performer.name, 
+                    'home_team': $scope.event.home_performer.name, 
+                    'event_date_time': $scope.event.occurs_at, 
+                    'event_location': $scope.event.venue.name});
+                /*MOENGAGE END*/
+
                 $rootScope.title = $scope.event.name + " Tickets | Gamehedge";
     			$rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team loses by "+$scope.event.home_performer.sport.ggg+" or more, get 50% of your ticket price back.";
                 if($scope.event.is_active == false){
