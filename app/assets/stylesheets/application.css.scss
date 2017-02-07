@@ -2175,6 +2175,19 @@ a {
     width: 50%;
 }
 
+.watch-video{
+    margin-left: 230px;
+    background: #363c3f;
+    color: #fff !important;
+    font-weight: normal;
+    font-family: verdana;
+    font-size: 12px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 3px;
+}
+
 #payments .summary .total .description, #payments .summary .total .value{
     font-size: 20px;
     color: #222222;
@@ -3642,7 +3655,7 @@ footer .footer-signature img{
 #home section#hero {
 	position: relative;
 	/*height: 35vh;*/
-	background: transparent image_url('home-hero.png') center;
+	background: transparent image_url('generic_hero.png') center;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
