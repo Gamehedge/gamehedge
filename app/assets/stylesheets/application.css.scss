@@ -6224,6 +6224,10 @@ main#admin #order-stats .stat-item span {
 }
 
 
+.watch-video{
+    display: none;
+}
+
 .half-left2, .half-right2{
     float: none !important;
     width: 100% !important;
@@ -6373,6 +6377,11 @@ main#admin #order-stats .stat-item span {
     height: 9vh !important;
     background-color: #dddddd;    
 }
+
+.watch-video{
+    display: none;
+}
+
 
 .nl-container{
     padding-left: 0px !important;
