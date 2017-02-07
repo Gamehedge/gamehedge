@@ -2176,6 +2176,23 @@ a {
     width: 50%;
 }
 
+.watch-video{
+    margin-left: 230px;
+    background: #363c3f;
+    color: #fff !important;
+    font-weight: normal;
+    font-family: verdana;
+    font-size: 12px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 3px;
+    margin-top: 31px;
+    display: inline-block;
+    position: absolute;
+    bottom: 4px;
+}
+
 #payments .summary .total .description, #payments .summary .total .value{
     font-size: 20px;
     color: #222222;
@@ -3643,7 +3660,7 @@ footer .footer-signature img{
 #home section#hero {
 	position: relative;
 	/*height: 35vh;*/
-	background: transparent image_url('home-hero.png') center;
+	background: transparent image_url('generic_hero.png') center;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -6208,6 +6225,10 @@ main#admin #order-stats .stat-item span {
 }
 
 
+.watch-video{
+    display: none;
+}
+
 .half-left2, .half-right2{
     float: none !important;
     width: 100% !important;
@@ -6357,6 +6378,11 @@ main#admin #order-stats .stat-item span {
     height: 9vh !important;
     background-color: #dddddd;    
 }
+
+.watch-video{
+    display: none;
+}
+
 
 .nl-container{
     padding-left: 0px !important;

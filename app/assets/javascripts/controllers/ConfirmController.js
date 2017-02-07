@@ -6,13 +6,29 @@ controllers.controller('ConfirmController', function($scope,$rootScope,$http,Aut
     $scope.getTicket = function(){
     	apiService.getData('/api/v1/orders/'+$routeParams.orderId)
             .then(function(response){
-            	//console.log("Order");
-            	//console.log(response);
+            	console.log("Order");
+            	console.log(response);
+
+            	//console.log($scope);
+				
                 $scope.order = response;
                 $scope.loading = false;
                 $rootScope.title = "Order | Gamehedge";
 				$rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team loses by a certain amount or more, get 50% of your ticket price back.";
                 
+
+				
+					Moengage.track_event('Order Complete', {'url': window.location.href , 
+						'event_date_time': $scope.order.event_date, 
+						'event_location_addr': $scope.order.event_location, 
+						'event_name': $scope.order.event_name,
+						'event_quantity': $scope.order.number_of_tickets,
+						'event_quantity': $scope.order.number_of_tickets,
+						'ticket_section': $scope.order.ticket_section,
+						'order_total': $scope.order.total
+					});
+				
+
         });
 	}
 
