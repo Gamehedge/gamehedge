@@ -1387,6 +1387,8 @@ a {
 
 #game_info .date-holder{
     padding: 0;
+    margin-left: 154px;
+    width: 10%;
 }
 
 #game_info .event-info{
@@ -1677,6 +1679,35 @@ a {
     background: #FFFFFF;
     border-color: #D93800;
     color: #000000;
+}
+
+.pp-badge{
+    display: block;
+    position: absolute;
+    width: 110px;
+    background: #6d9620;
+    top: 0px;
+    height: 94px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 3px;
+    text-align: center;
+    margin-left: 45px;
+}
+.pp-badge span{
+    color: #fff;
+    display: block;
+    font-size: 14px;
+}
+.pp-badge .pp-badge-plus{
+    color: #fff;
+        font-size: 22px;
+    line-height: 11px;
+}
+.pp-badge .pp-badge-ggg{
+    color: #fff;
+    font-size: 12px;
+    text-shadow: 1px 1px 1px #555;
 }
 
 .navbar-header{
