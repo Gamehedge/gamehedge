@@ -1387,8 +1387,8 @@ a {
 
 #game_info .date-holder{
     padding: 0;
-    margin-left: 112px;
-    width: 10%;
+    margin-left: 0px;
+    width: 14%;
 }
 
 #game_info .event-info{
@@ -1693,6 +1693,7 @@ a {
     padding: 3px;
     text-align: center;
     z-index: 999;
+    display: none;
 }
 .pp-badge span{
     color: #fff;
@@ -2074,7 +2075,7 @@ a {
     cursor: pointer;
 }
 .singlebanner-left .ref{
-    color: #226ea5;
+    color: #91c33f;
     text-transform: uppercase;
     font-size: 38px;
     line-height: 40px;
@@ -6688,8 +6689,8 @@ main#admin #order-stats .stat-item span {
 }
 
 .max-container-width {
-    max-width: 1440px;
     max-width: 1170px;
+    max-width: 1440px;
     margin: 0 auto;
 }
 
