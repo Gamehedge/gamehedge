@@ -651,9 +651,9 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				$scope.edit_billing = 3;
 				$scope.edit_credit_card = 3;
 
-				mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': 'Email and confirm email fields shpuld be equal'});
+				mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': 'Email and confirm email fields should be equal'});
 
-				swal("Error", "Email and confirm email fields shpuld be equal", "warning");
+				swal("Error", "Email and confirm email fields should be equal", "warning");
 			}
 			else{
 				$http({

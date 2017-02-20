@@ -1388,6 +1388,8 @@ a {
 
 #game_info .date-holder{
     padding: 0;
+    margin-left: 0px;
+    width: 14%;
 }
 
 #game_info .event-info{
@@ -1678,6 +1680,36 @@ a {
     background: #FFFFFF;
     border-color: #D93800;
     color: #000000;
+}
+
+.pp-badge{
+    display: block;
+    position: absolute;
+    width: 110px;
+    background: #6d9620;
+    top: 0px;
+    height: 94px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 3px;
+    text-align: center;
+    z-index: 999;
+    display: none;
+}
+.pp-badge span{
+    color: #fff;
+    display: block;
+    font-size: 14px;
+}
+.pp-badge .pp-badge-plus{
+    color: #fff;
+        font-size: 22px;
+    line-height: 11px;
+}
+.pp-badge .pp-badge-ggg{
+    color: #fff;
+    font-size: 12px;
+    text-shadow: 1px 1px 1px #555;
 }
 
 .navbar-header{
@@ -2044,9 +2076,9 @@ a {
     cursor: pointer;
 }
 .singlebanner-left .ref{
-    color: #226ea5;
+    color: #91c33f;
     text-transform: uppercase;
-    font-size: 40px;
+    font-size: 38px;
     line-height: 40px;
 }
 .singlebanner-right{
@@ -6658,6 +6690,7 @@ main#admin #order-stats .stat-item span {
 }
 
 .max-container-width {
+    max-width: 1170px;
     max-width: 1440px;
     margin: 0 auto;
 }

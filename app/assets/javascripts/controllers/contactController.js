@@ -9,7 +9,7 @@ controllers.controller('contactController', function($scope,$rootScope,$location
     $scope.answer = $scope.value_1 + $scope.value_2;
 
     $rootScope.title = "Contact us | Gamehedge";
-    $rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team loses by a certain amount or more, get 50% of your ticket price back.";
+    $rootScope.description = "Buy and Save up to 75% on all game tickets. If the home team loses by a certain amount or more, get 50% of your ticket price back.";
     
     $scope.proccessing = false;
     $scope.getSearchHints = function(val) {
