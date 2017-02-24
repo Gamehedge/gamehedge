@@ -27,6 +27,12 @@ controllers.controller('ConfirmController', function($scope,$rootScope,$http,Aut
 						'ticket_section': $scope.order.ticket_section,
 						'order_total': $scope.order.total
 					});
+
+
+					fbq('track', 'Purchase', {
+						value: $scope.order.total,
+						currency: 'USD'
+					});
 				
 
         });
