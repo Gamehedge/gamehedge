@@ -451,6 +451,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				$scope.processing = false;
 				$scope.addCardProcess = false;
 				swal("Error", "All fields are required", "warning");
+
+
 			}
 		}
 		else if(type == "billing"){
@@ -486,6 +488,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				$scope.processing = false;
 			    $scope.addBillingProcess = false;
 			    swal("Error", "All fields are required", "warning");
+
 			}
 		}
 	}
@@ -496,6 +499,9 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		$scope.edit_deliver = 1;
 		$scope.edit_billing = 1;
 		$scope.edit_credit_card = 1;
+
+
+		jQuery('.form-control').removeClass('form-error');
 
 		if($rootScope.isLoggedin == true){
 			if($scope.last_digits == ""){
@@ -618,9 +624,12 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				$scope.edit_billing = 3;
 				$scope.edit_credit_card = 3;
 
-				mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': 'All fields are requierd'});
 
-				swal("Error", "All fields are required", "warning");
+
+				var error_to_show = orderControlErrors($scope);
+				swal("Error", error_to_show, "warning");
+				mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': error_to_show});
+
 			}
 			else if($.payment.validateCardExpiry($scope.card.expiration_month,$scope.card.expiration_year) == false){
 				$scope.processing = false;
@@ -1058,3 +1067,80 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
         return text.replace(/\_/g, ' '); // Replaces all occurences
     };
 });
+
+
+
+
+
+function orderControlErrors($scope){
+	var oc_err_msg = 'All fields are required';
+	var oc_err_cnt = 0;
+
+	if($scope.client.primary_phone_number.number == ""){
+		jQuery('#phone-billing').addClass('form-error');
+		oc_err_msg = 'Phone Number is missing';
+		oc_err_cnt++;
+	}
+	if($scope.billing_address.locality == ""){
+		jQuery('#city-billing').addClass('form-error');
+		oc_err_msg = 'City is missing';
+		oc_err_cnt++;
+	}
+	if($scope.billing_address.region == ""){
+		jQuery('#state_id-billing').addClass('form-error');
+		oc_err_msg = 'Please select state';
+		oc_err_cnt++;
+	}
+	if($scope.billing_address.postal_code == ""){
+		jQuery('#zipcode-billing').addClass('form-error');
+		oc_err_msg = 'Zip Code is missing';
+		oc_err_cnt++;
+	}
+	if($scope.billing_address.country_code == ""){
+		jQuery('#country-billing').addClass('form-error');
+		oc_err_msg = 'Please select country';		
+		oc_err_cnt++;
+	}
+	if($scope.billing_address.street_address == ""){
+		jQuery('#address-billing').addClass('form-error');
+		oc_err_msg = 'Billing Address is missing';
+		oc_err_cnt++;
+	}
+	if($scope.billing_address.name == ""){
+		jQuery('#first-name-billing').addClass('form-error');
+		oc_err_msg = 'Name is missing';
+		oc_err_cnt++;
+	}
+	if($scope.card.cvv == ""){
+		jQuery('#cvv').addClass('form-error');
+		oc_err_msg = 'Security Code is missing';
+		oc_err_cnt++;
+	}
+	if($scope.card.expiration_year == ""){
+		jQuery('#exp-year').addClass('form-error');
+		oc_err_msg = 'Please select exp. year';
+		oc_err_cnt++;
+	}
+	if($scope.card.expiration_month == "" ){
+		jQuery('#exp-month').addClass('form-error');
+		oc_err_msg = 'Please select exp. month';	
+		oc_err_cnt++;
+	}
+	if($scope.card.last_digits == ""){
+		jQuery('#cc').addClass('form-error');
+		oc_err_msg = 'Credit card number is missing';
+		oc_err_cnt++;
+	}
+	if($scope.client.confirm_email == ""){
+		jQuery('#confirm-email-shipping').addClass('form-error');
+		oc_err_msg = 'Confirm Email address is missing';
+		oc_err_cnt++;
+	}
+	if($scope.client.email == ""){
+		jQuery('#email-shipping').addClass('form-error');
+		oc_err_msg = 'Email address is missing';
+		oc_err_cnt++;
+	}
+
+	return 	oc_err_msg;
+}
