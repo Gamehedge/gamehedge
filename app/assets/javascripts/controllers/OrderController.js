@@ -162,6 +162,9 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			jQuery('#seats_note').addClass('m-invis');
 			jQuery('#seats_note2').addClass('m-invis');
 		}
+		//Fix for promocodes. All should be uppercased
+		$scope.promo_code = $scope.promo_code.toUpperCase();
+
 
 		for(i=0;i<$scope.promo_codes.length;i++){
 			// console.log($scope.promo_codes[i].code);
