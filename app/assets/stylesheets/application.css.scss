@@ -2054,6 +2054,10 @@ a {
     width: 50%;
 }
 
+.form-error{
+    border: 1px solid red !important;
+}
+
 #payments .summary .description.promo-btn{
     cursor: pointer;
     color: #005e9b;
