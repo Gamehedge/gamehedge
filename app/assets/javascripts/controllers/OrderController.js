@@ -175,7 +175,12 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 					$scope.discount = ($scope.subtotal + $scope.service_fee)*Number($scope.promo_codes[i].value)/100;
 				}
 				else{
-					$scope.discount = Number($scope.promo_codes[i].value);
+					if($scope.subtotal >= 200){
+						//alert($scope.subtotal);
+						$scope.discount = Number($scope.promo_codes[i].value);
+					}else{
+						$scope.discount = 0;						
+					}
 				}
 				break;
 			}
