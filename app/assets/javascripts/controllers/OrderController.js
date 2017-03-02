@@ -193,6 +193,35 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		}
 	}
 
+
+	$scope.order_country_change2 = function(){
+
+		if ( ((document.getElementById("country-billing").value == 'us')&&(document.getElementById('state_id-billing').length < 25)) || (document.getElementById("country-billing").value != 'us')){
+
+			//if ($scope.billing_address.country_code != ''){
+			$scope.billing_address.region = '';
+			//}
+			var order_cnt_value = document.getElementById("country-billing").value;
+			if(order_cnt_value == 'ca'){
+				var main_country_sel = document.getElementById('state_id-billing');
+				var sel_country_ca = document.getElementById('state_ca');
+				//main_country_sel.selectedIndex = 0;
+				main_country_sel.innerHTML = sel_country_ca.innerHTML;
+			}	
+			if(order_cnt_value == 'us'){
+				var main_country_sel = document.getElementById('state_id-billing');
+				var sel_country_us = document.getElementById('state_us');
+				//main_country_sel.selectedIndex = 0;
+				main_country_sel.innerHTML = sel_country_us.innerHTML;
+			}
+			
+
+		}
+
+	}
+
+
+
 	$scope.selectAddress = function(type){
 		if(type == "shipping"){
 			$scope.shipping_address = $scope.addresses[$scope.shipping_address_index];
@@ -1078,17 +1107,21 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 
 
 function order_country_change(){
+/*
 	var order_cnt_value = document.getElementById("country-billing").value;
 	if(order_cnt_value == 'ca'){
 		var main_country_sel = document.getElementById('state_id-billing');
 		var sel_country_ca = document.getElementById('state_ca');
+		//main_country_sel.selectedIndex = 0;
 		main_country_sel.innerHTML = sel_country_ca.innerHTML;
 	}
 	if(order_cnt_value == 'us'){
 		var main_country_sel = document.getElementById('state_id-billing');
 		var sel_country_us = document.getElementById('state_us');
+		//main_country_sel.selectedIndex = 0;
 		main_country_sel.innerHTML = sel_country_us.innerHTML;
-	}	
+	}
+	*/	
 }
 
 
@@ -1106,10 +1139,12 @@ function orderControlErrors($scope){
 		oc_err_msg = 'City is missing';
 		oc_err_cnt++;
 	}
+
 	if($scope.billing_address.region == ""){
 		jQuery('#state_id-billing').addClass('form-error');
 		oc_err_msg = 'Please select state';
 		oc_err_cnt++;
+		
 	}
 	if($scope.billing_address.postal_code == ""){
 		jQuery('#zipcode-billing').addClass('form-error');
