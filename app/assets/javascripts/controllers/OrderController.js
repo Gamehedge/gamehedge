@@ -162,6 +162,10 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			jQuery('#seats_note').addClass('m-invis');
 			jQuery('#seats_note2').addClass('m-invis');
 		}
+		//Fix for promocodes. All should be uppercased
+		if($scope.promo_code != undefined){
+			$scope.promo_code = $scope.promo_code.toUpperCase();
+		}
 
 		for(i=0;i<$scope.promo_codes.length;i++){
 			// console.log($scope.promo_codes[i].code);
@@ -502,6 +506,10 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 
 
 		jQuery('.form-control').removeClass('form-error');
+
+		jQuery('#state_id-billing').removeClass('form-error');
+		jQuery('#country-billing').removeClass('form-error');
+
 
 		if($rootScope.isLoggedin == true){
 			if($scope.last_digits == ""){
@@ -1069,7 +1077,19 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 });
 
 
-
+function order_country_change(){
+	var order_cnt_value = document.getElementById("country-billing").value;
+	if(order_cnt_value == 'ca'){
+		var main_country_sel = document.getElementById('state_id-billing');
+		var sel_country_ca = document.getElementById('state_ca');
+		main_country_sel.innerHTML = sel_country_ca.innerHTML;
+	}
+	if(order_cnt_value == 'us'){
+		var main_country_sel = document.getElementById('state_id-billing');
+		var sel_country_us = document.getElementById('state_us');
+		main_country_sel.innerHTML = sel_country_us.innerHTML;
+	}	
+}
 
 
 function orderControlErrors($scope){
