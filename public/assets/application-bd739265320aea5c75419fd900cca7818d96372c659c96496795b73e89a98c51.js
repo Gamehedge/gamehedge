@@ -70747,6 +70747,10 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 
 		jQuery('.form-control').removeClass('form-error');
 
+		jQuery('#state_id-billing').removeClass('form-error');
+		jQuery('#country-billing').removeClass('form-error');
+
+
 		if($rootScope.isLoggedin == true){
 			if($scope.last_digits == ""){
 				$scope.processing = false;
