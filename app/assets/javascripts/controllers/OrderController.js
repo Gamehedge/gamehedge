@@ -175,7 +175,12 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 					$scope.discount = ($scope.subtotal + $scope.service_fee)*Number($scope.promo_codes[i].value)/100;
 				}
 				else{
-					$scope.discount = Number($scope.promo_codes[i].value);
+					if($scope.subtotal >= 200){
+						//alert($scope.subtotal);
+						$scope.discount = Number($scope.promo_codes[i].value);
+					}else{
+						$scope.discount = 0;						
+					}
 				}
 				break;
 			}
@@ -623,12 +628,15 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    	if(response.data.error == undefined){
 			    		$scope.order = response.data;
 			    		$scope.order_success = true;
+
+						/*
 			    		// Create transaction
 			    		Analytics.addTrans($scope.order.id, 'www.gamehedge.com', $scope.total, 0, 0);
 			    		// Add items to transaction
 						Analytics.addItem($scope.order.id, $scope.ticket.id, $scope.event.name, $scope.event.sport.name, $scope.ticket.retail_price, Number($scope.amount));
 						// Complete transaction
 						Analytics.trackTrans();
+						*/
 						
 						mixpanel.track("PayButton Click", {'Status':'Success'});
 
@@ -733,6 +741,17 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    		$scope.billing_address = $scope.client.primary_billing_address;
 			    		$scope.shipping_address = $scope.client.primary_shipping_address;
                         console.log("GO TO LOGIN");
+
+
+
+						//GA Transactions Fix
+						/*
+			    		Analytics.addTrans($scope.order.id, 'www.gamehedge.com', $scope.total, 0, 0);
+			    		// Add items to transaction
+						Analytics.addItem($scope.order.id, $scope.ticket.id, $scope.event.name, $scope.event.sport.name, $scope.ticket.retail_price, Number($scope.amount));
+						// Complete transaction
+						Analytics.trackTrans();
+						*/
 
 						mixpanel.track("PayButton Click", {'Status':'Success'});
 						

@@ -92,8 +92,10 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
     $scope.getEventInfo = function(){
 		return apiService.getData('/api/v1/events/'+$routeParams.eventId)
             .then(function(response){
-            	//console.log("Event");
-            	//console.log(response);
+            	console.log("Event");
+            	console.log(response);
+
+
                 $scope.event  = response;
 
                 /*MOENGAGE START*/
@@ -412,9 +414,12 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
     }
 
     $scope.relocateURL = function(id,val){
-        $location.search('amount', val);
-        $location.path('/order/'+id);
-        $scope.applyChanges();
+        //$location.search('amount', val);
+        //$location.path('/order/'+id);    
+        //$scope.applyChanges();
+
+        //Checkount new window open
+        $window.open('/order/'+id+'?amount='+val,'_blank');
     }
 
     $scope.filterEventsData = function(){
@@ -561,7 +566,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 	            	$scope.filterBySection = true;
 	                $scope.section = Section.Name;
                     $scope.selectedSections.push(Section.Name);
-                    //console.log($scope.selectedSections);
+                    console.log($scope.selectedSections);
 	                if(Section.SectionViewAvailable){
 	                   	$scope.sectionUrl = Section.SectionViewUrl;
 	                }
@@ -654,7 +659,7 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
                 
         $("#tickets_list > div").removeClass("row-selected");
 
-        //console.log($("#tickets_list").scrollTop());
+        console.log($("#tickets_list").scrollTop());
 
         var ini_element = parseInt($("#tickets_list").scrollTop() / 60) - 2;
         if(ini_element < 0){
