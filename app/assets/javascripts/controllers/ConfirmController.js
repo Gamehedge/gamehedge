@@ -19,9 +19,9 @@ controllers.controller('ConfirmController', function($scope,$rootScope,$http,Aut
 
 				console.log('Scope');
 				console.log($scope);
-	    		Analytics.addTrans($scope.order.id, 'www.gamehedge.com', $scope.total, 0, 0);
+	    		Analytics.addTrans($scope.order.te_order_id, 'www.gamehedge.com', $scope.order.total, 0, 0);
 	    		// Add items to transaction
-				Analytics.addItem($scope.order.id, $scope.ticket.id, $scope.event.name, $scope.event.sport.name, $scope.ticket.retail_price, Number($scope.amount));
+				Analytics.addItem($scope.order.te_order_id, $scope.order.client_id+''+$scope.order.te_order_id, $scope.order.event_name, 'sport', $scope.order.sale_price_per_ticket, Number($scope.order.total));
 				// Complete transaction
 				Analytics.trackTrans();
 
