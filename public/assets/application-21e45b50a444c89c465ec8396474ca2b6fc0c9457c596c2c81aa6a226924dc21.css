@@ -23382,9 +23382,29 @@ main#admin #order-stats .stat-item span {
 /* line 6686, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .desktop-event-name {
   font-size: 20px;
+  font-size: 16px;
 }
 
 /* line 6690, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+.breadcrumbs {
+  color: #000;
+  margin-top: 4px !important;
+  font-size: 11px;
+}
+
+/* line 6695, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+.breadcrumbs .fa {
+  display: inline-block;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* line 6700, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+.breadcrumbs a {
+  color: #034f92;
+}
+
+/* line 6703, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .ggg-event {
   padding: 10px;
   color: #999999;
@@ -23392,43 +23412,43 @@ main#admin #order-stats .stat-item span {
   height: 100%;
 }
 
-/* line 6697, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6710, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .max-container-width {
   max-width: 1170px;
   max-width: 1440px;
   margin: 0 auto;
 }
 
-/* line 6703, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6716, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .event-container {
   background-color: #fff !important;
 }
 
-/* line 6707, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6720, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
 
 /* The starting CSS styles for the enter animation */
 /* The finishing CSS styles for the enter animation */
-/* line 6722, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6735, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fade-intro.ng-leave {
   transition: 0.5s linear all;
   opacity: 1;
 }
 
-/* line 6726, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6739, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fade-intro.ng-leave.ng-leave-active {
   opacity: 0;
 }
 
-/* line 6730, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6743, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .badge-container {
   display: flex;
   padding-top: 5px !important;
 }
 
-/* line 6735, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6748, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .pledge-left {
   padding: 5px;
   border: 1px #aaaaaa solid;
@@ -23437,7 +23457,7 @@ main#admin #order-stats .stat-item span {
   width: 50%;
 }
 
-/* line 6743, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6756, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .pledge-right {
   padding: 5px;
   border: 1px #cccccc solid;
@@ -23446,24 +23466,24 @@ main#admin #order-stats .stat-item span {
   width: 50%;
 }
 
-/* line 6751, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6764, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .badge-left-element {
   width: 40%;
   text-align: center;
 }
 
-/* line 6755, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6768, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .badge-right-element {
   width: 60%;
 }
 
-/* line 6759, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6772, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 #payments .ggg-badge-pledge ul {
   margin-bottom: 0px !important;
   padding-right: 5px;
 }
 
-/* line 6764, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6777, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .badge-right-element .title {
   text-align: justify;
   -moz-text-align-last: justify;
@@ -23475,26 +23495,26 @@ main#admin #order-stats .stat-item span {
   margin-top: 5px;
 }
 
-/* line 6773, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6786, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .badge-right-element .title:after {
   content: "";
   display: inline-block;
   width: 100%;
 }
 
-/* line 6779, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6792, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .badge-right-element .title-1 {
   font-weight: bold;
   font-size: 13px;
   text-align: center;
 }
 
-/* line 6784, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6797, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .badge-right-element .cont {
   text-align: justify;
 }
 
-/* line 6788, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6801, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .sub-cont {
   text-align: center;
   font-size: 8px;
@@ -23502,35 +23522,35 @@ main#admin #order-stats .stat-item span {
   margin: 2px 0px;
 }
 
-/* line 6795, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6808, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .ggg-left {
   width: 50%;
   margin-right: 7px;
 }
 
-/* line 6800, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6813, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .ggg-left img, .ggg-right img {
   width: 100%;
 }
 
-/* line 6804, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6817, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .ggg-right {
   width: 50%;
   margin-left: 7px;
 }
 
-/* line 6809, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6822, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .ggg-bold {
   color: #424242;
 }
 
-/* line 6814, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6827, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .half-left2 {
   float: left;
   width: 70%;
 }
 
-/* line 6818, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6831, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .half-right2 {
   float: right;
   width: 29%;
@@ -23538,12 +23558,12 @@ main#admin #order-stats .stat-item span {
 }
 
 @media (max-width: 992px) {
-  /* line 6827, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+  /* line 6840, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
   .badge-container {
     display: block;
   }
 
-  /* line 6831, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+  /* line 6844, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
   .ggg-left {
     width: 100%;
     margin-right: 0px;
@@ -23551,13 +23571,13 @@ main#admin #order-stats .stat-item span {
     margin-top: 10px;
   }
 
-  /* line 6838, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+  /* line 6851, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
   .ggg-right {
     width: 100%;
     margin-left: 0px;
   }
 
-  /* line 6843, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+  /* line 6856, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
   .ggg-text {
     width: 60% !important;
     margin-left: 17% !important;
@@ -23566,14 +23586,14 @@ main#admin #order-stats .stat-item span {
   }
 }
 @media (max-width: 400px) {
-  /* line 6852, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+  /* line 6865, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
   .ggg-text {
     font-size: 9px !important;
     width: 57% !important;
   }
 }
 @media (min-width: 1200px) {
-  /* line 6859, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+  /* line 6872, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
   .ggg-text {
     text-align: justify;
     position: absolute;
@@ -23585,7 +23605,7 @@ main#admin #order-stats .stat-item span {
   }
 }
 @media (max-width: 1199px) {
-  /* line 6871, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+  /* line 6884, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
   .ggg-text {
     text-align: justify;
     position: absolute;
@@ -23598,7 +23618,7 @@ main#admin #order-stats .stat-item span {
 }
 /*Fancybox*/
 /*! fancyBox v2.1.5 fancyapps.com | fancyapps.com/fancybox/#license */
-/* line 6886, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6899, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-wrap,
 .fancybox-skin,
 .fancybox-outer,
@@ -23616,7 +23636,7 @@ main#admin #order-stats .stat-item span {
   vertical-align: top;
 }
 
-/* line 6904, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6917, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-wrap {
   position: absolute;
   top: 0;
@@ -23624,7 +23644,7 @@ main#admin #order-stats .stat-item span {
   z-index: 8020;
 }
 
-/* line 6911, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6924, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-skin {
   position: relative;
   background: #f9f9f9;
@@ -23635,34 +23655,34 @@ main#admin #order-stats .stat-item span {
   border-radius: 4px;
 }
 
-/* line 6921, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6934, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-opened {
   z-index: 8030;
 }
 
-/* line 6925, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6938, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-opened .fancybox-skin {
   -webkit-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
 
-/* line 6931, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6944, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-outer, .fancybox-inner {
   position: relative;
 }
 
-/* line 6935, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6948, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-inner {
   overflow: hidden;
 }
 
-/* line 6939, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6952, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-type-iframe .fancybox-inner {
   -webkit-overflow-scrolling: touch;
 }
 
-/* line 6943, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6956, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-error {
   color: #444;
   font: 14px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -23671,25 +23691,25 @@ main#admin #order-stats .stat-item span {
   white-space: nowrap;
 }
 
-/* line 6951, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6964, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-image, .fancybox-iframe {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-/* line 6957, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6970, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-image {
   max-width: 100%;
   max-height: 100%;
 }
 
-/* line 6962, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6975, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 #fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {
   background-image: url("/assets/fancybox_sprite-b9d6fddb0988440902fcfc72f371ecfa80ee2eb36073f9eebc17449ee41c886f.png");
 }
 
-/* line 6966, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6979, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 #fancybox-loading {
   position: fixed;
   top: 50%;
@@ -23702,14 +23722,14 @@ main#admin #order-stats .stat-item span {
   z-index: 8060;
 }
 
-/* line 6978, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6991, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 #fancybox-loading div {
   width: 44px;
   height: 44px;
   background: url("fancybox_loading.gif") center center no-repeat;
 }
 
-/* line 6984, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 6997, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-close {
   position: absolute;
   top: -18px;
@@ -23720,7 +23740,7 @@ main#admin #order-stats .stat-item span {
   z-index: 8040;
 }
 
-/* line 6994, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 7007, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-nav {
   position: absolute;
   top: 0;
@@ -23734,17 +23754,17 @@ main#admin #order-stats .stat-item span {
   z-index: 8040;
 }
 
-/* line 7006, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 7019, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-prev {
   left: 0;
 }
 
-/* line 7010, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 7023, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-next {
   right: 0;
 }
 
-/* line 7014, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 7027, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-nav span {
   position: absolute;
   top: 50%;
@@ -23756,24 +23776,24 @@ main#admin #order-stats .stat-item span {
   visibility: hidden;
 }
 
-/* line 7025, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 7038, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-prev span {
   left: 10px;
   background-position: 0 -36px;
 }
 
-/* line 7030, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 7043, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-next span {
   right: 10px;
   background-position: 0 -72px;
 }
 
-/* line 7035, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 7048, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-nav:hover span {
   visibility: visible;
 }
 
-/* line 7039, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 7052, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-tmp {
   position: absolute;
   top: -99999px;
@@ -23785,23 +23805,23 @@ main#admin #order-stats .stat-item span {
 }
 
 /* Overlay helper */
-/* line 7051, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 7064, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-lock {
   overflow: hidden !important;
   width: auto;
 }
 
-/* line 7056, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 7069, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-lock body {
   overflow: hidden !important;
 }
 
-/* line 7060, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 7073, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-lock-test {
   overflow-y: hidden !important;
 }
 
-/* line 7064, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 7077, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-overlay {
   position: absolute;
   top: 0;
@@ -23812,21 +23832,21 @@ main#admin #order-stats .stat-item span {
   background: url("/assets/fancybox_overlay-92c791ca67a8c1c00457e2c509d97a70a63207b119f353b81254b808f41d7824.png");
 }
 
-/* line 7074, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 7087, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-overlay-fixed {
   position: fixed;
   bottom: 0;
   right: 0;
 }
 
-/* line 7080, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 7093, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-lock .fancybox-overlay {
   overflow: auto;
   overflow-y: scroll;
 }
 
 /* Title helper */
-/* line 7087, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 7100, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-title {
   visibility: hidden;
   font: normal 13px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -23835,12 +23855,12 @@ main#admin #order-stats .stat-item span {
   z-index: 8050;
 }
 
-/* line 7095, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 7108, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-opened .fancybox-title {
   visibility: visible;
 }
 
-/* line 7099, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 7112, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-title-float-wrap {
   position: absolute;
   bottom: 0;
@@ -23850,7 +23870,7 @@ main#admin #order-stats .stat-item span {
   text-align: center;
 }
 
-/* line 7108, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 7121, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-title-float-wrap .child {
   display: inline-block;
   margin-right: -100%;
@@ -23868,19 +23888,19 @@ main#admin #order-stats .stat-item span {
   white-space: nowrap;
 }
 
-/* line 7124, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 7137, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-title-outside-wrap {
   position: relative;
   margin-top: 10px;
   color: #fff;
 }
 
-/* line 7130, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 7143, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-title-inside-wrap {
   padding-top: 10px;
 }
 
-/* line 7134, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 7147, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 .fancybox-title-over-wrap {
   position: absolute;
   bottom: 0;
@@ -23893,14 +23913,14 @@ main#admin #order-stats .stat-item span {
 
 /*Retina graphics!*/
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
-  /* line 7149, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+  /* line 7162, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
   #fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {
     background-image: url("fancybox_sprite@2x.png");
     background-size: 44px 152px;
     /*The size of the normal image, half the size of the hi-res image*/
   }
 
-  /* line 7154, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+  /* line 7167, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
   #fancybox-loading div {
     background-image: url("fancybox_loading@2x.gif");
     background-size: 24px 24px;
