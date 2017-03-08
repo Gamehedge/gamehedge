@@ -70987,12 +70987,13 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 
 
 						//GA Transactions Fix
+						/*
 			    		Analytics.addTrans($scope.order.id, 'www.gamehedge.com', $scope.total, 0, 0);
 			    		// Add items to transaction
 						Analytics.addItem($scope.order.id, $scope.ticket.id, $scope.event.name, $scope.event.sport.name, $scope.ticket.retail_price, Number($scope.amount));
 						// Complete transaction
 						Analytics.trackTrans();
-
+						*/
 
 						mixpanel.track("PayButton Click", {'Status':'Success'});
 						
