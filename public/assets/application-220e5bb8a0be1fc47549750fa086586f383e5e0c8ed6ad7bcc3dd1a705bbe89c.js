@@ -68587,6 +68587,16 @@ controllers.controller('ConfirmController', function($scope,$rootScope,$http,Aut
 				$rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team loses by a certain amount or more, get 50% of your ticket price back.";
                 
 
+				console.log('Scope');
+				console.log($scope);
+	    		Analytics.addTrans($scope.order.id, 'www.gamehedge.com', $scope.total, 0, 0);
+	    		// Add items to transaction
+				Analytics.addItem($scope.order.id, $scope.ticket.id, $scope.event.name, $scope.event.sport.name, $scope.ticket.retail_price, Number($scope.amount));
+				// Complete transaction
+				Analytics.trackTrans();
+
+
+
 				
 					Moengage.track_event('Order Complete', {'url': window.location.href , 
 						'event_date_time': $scope.order.event_date, 
