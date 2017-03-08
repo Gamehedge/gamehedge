@@ -94,6 +94,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
             .then(function(response){
             	console.log("Event");
             	console.log(response);
+
+
                 $scope.event  = response;
 
                 /*MOENGAGE START*/
@@ -412,9 +414,12 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
     }
 
     $scope.relocateURL = function(id,val){
-        $location.search('amount', val);
-        $location.path('/order/'+id);
-        $scope.applyChanges();
+        //$location.search('amount', val);
+        //$location.path('/order/'+id);    
+        //$scope.applyChanges();
+
+        //Checkount new window open
+        $window.open('/order/'+id+'?amount='+val,'_blank');
     }
 
     $scope.filterEventsData = function(){
