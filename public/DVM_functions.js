@@ -3594,16 +3594,17 @@ function jsonp_display_tooltip_section(data) {
             $("#ticket_sec").html(name);
             $("#ticket_sec2").html(name);
             var width = $(window).width(), height = $(window).height();
-            //$( "#dialog1" ).dialog({});
-
+            $( "#dialog1" ).dialog({});
+            
+            /*
             $( "#dialog1" ).dialog({
                 open: function(){
                     $('.ui-dialog-titlebar-close').bind('click',function(){
-                        $('#dialog').dialog('close');
+                        $('#dialog1').dialog('close');
                     })
                 }
             });
-
+            */
 
 
             // $('#dialog1').css({'height':height,'width':width});
@@ -3611,16 +3612,22 @@ function jsonp_display_tooltip_section(data) {
             $('#dialog_img').css({'width':width});
 
 
-            
+            /*
             $('.ui-icon-closethick').click(function(){
                 $("#ticket_details").hide();
             })
-            
+            */
+            $('.ui-dialog-titlebar-close').click(function(){
+                $("#ticket_details").hide();
+                $('#dialog1').dialog('close');
+            })
+
 /*
             $('.ui-dialog-titlebar-close').on("tap taphold",function(){
                 $("#ticket_details").hide();
+                $('#dialog1').dialog('close');
             });
- */           
+  */          
 
 
         }   
