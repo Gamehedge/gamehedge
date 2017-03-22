@@ -415,9 +415,14 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
                 //$rootScope.tqty = qty;
             });
             $('.redirect-button').click(function(){
-                var vid = $(this).parents().eq('2').attr('data-ticketid');
-                var val = $(this).parents().eq('2').find('select').val()
-                $scope.relocateURL(vid,val);
+                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+
+                }else{
+                    var vid = $(this).parents().eq('2').attr('data-ticketid');
+                    var val = $(this).parents().eq('2').find('select').val()
+                    $scope.relocateURL(vid,val);
+                }
+
             });
         }, 100);
         $scope.filterEventsData();

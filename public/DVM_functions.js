@@ -3594,7 +3594,9 @@ function jsonp_display_tooltip_section(data) {
             $("#ticket_sec").html(name);
             $("#ticket_sec2").html(name);
             var width = $(window).width(), height = $(window).height();
-            $( "#dialog1" ).dialog({});
+            $( "#dialog1" ).dialog({
+                position: ['center',0]
+            });
             
 /*            
             $( "#dialog1" ).dialog({
@@ -3616,8 +3618,8 @@ function jsonp_display_tooltip_section(data) {
 
 
             $('.ui-icon-closethick').click(function(){
-                //$("#ticket_details").hide();
-                $('#dialog1').dialog('close');
+                $("#ticket_details").hide();
+                //$('#dialog1').dialog('close');
             })
             
 
