@@ -23582,3 +23582,9 @@ main#admin #order-stats .stat-item span {
     /*The size of the normal image, half the size of the hi-res image*/
   }
 }
+@media only screen and (min-device-width: 320px) and (max-device-width: 736px) {
+  /* line 7185, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+  #sectionTooltip {
+    display: none !important;
+  }
+}
