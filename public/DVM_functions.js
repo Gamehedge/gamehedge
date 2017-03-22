@@ -3692,7 +3692,7 @@ function jsonp_display_tooltip_section(data) {
             //var bprice = $("#sectionTooltip #fdprice").text();
             var name= $("#sectionTooltip #fdsection").text();
             $("#ticket_sec").html(name);
-            ("#ticket_sec2").html(name);
+            $("#ticket_sec2").html(name);
             $("#sectionTooltip").css({
                 "border": "3px solid black",
                 "borderRadius": "10px"
