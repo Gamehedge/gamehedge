@@ -66,10 +66,14 @@ app = angular.module('gamehedge',[
             templateUrl: "venue.html",
             controller: 'VenueController',
         })
-        .when('/events/:eventId/:slug', {
+        .when('/events_old/:eventId/:slug', {
             templateUrl: "event.html",
             controller: 'EventController',
         })
+        .when('/events/:eventId/:slug', {
+            templateUrl: "map-test.html",
+            controller: 'mapTestController',
+        })	
         .when('/order/:ticektId', {
             templateUrl: "order.html",
             controller: 'OrderController',
