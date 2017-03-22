@@ -3616,7 +3616,7 @@ function jsonp_display_tooltip_section(data) {
             $('.ui-icon-closethick').click(function(){
                 $("#ticket_details").hide();
             })
-            */
+            */  
             $('.ui-dialog-titlebar-close').click(function(){
                 $("#ticket_details").hide();
                 $('#dialog1').dialog('close');
