@@ -3617,17 +3617,13 @@ function jsonp_display_tooltip_section(data) {
                 $("#ticket_details").hide();
             })
             */  
-            $('.ui-dialog-titlebar-close').click(function(){
-                $("#ticket_details").hide();
-                $('#dialog1').dialog('close');
-            })
+            
 
-/*
             $('.ui-dialog-titlebar-close').on("tap taphold",function(){
                 $("#ticket_details").hide();
                 $('#dialog1').dialog('close');
             });
-  */          
+            
 
 
         }   
