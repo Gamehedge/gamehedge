@@ -7185,5 +7185,16 @@ main#admin #order-stats .stat-item span {
         display: none !important;
     }
 
+    .tiq-details-checkout-cta{
+        cursor: pointer;
+        background: #84b533;
+        border: 0px;
+        color: #fff;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border-radius: 3px;
+    }
 
 }

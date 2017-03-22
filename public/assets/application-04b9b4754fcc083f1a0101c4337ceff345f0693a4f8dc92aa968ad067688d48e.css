@@ -23587,4 +23587,17 @@ main#admin #order-stats .stat-item span {
   #sectionTooltip {
     display: none !important;
   }
+
+  /* line 7189, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+  .tiq-details-checkout-cta {
+    cursor: pointer;
+    background: #84b533;
+    border: 0px;
+    color: #fff;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 3px;
+  }
 }

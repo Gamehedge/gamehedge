@@ -3598,9 +3598,21 @@ function jsonp_display_tooltip_section(data) {
             // $('#dialog1').css({'height':height,'width':width});
             //$('#dialog1').css({'top':0,'bottom':0,'left':0,'right':0,'height':height+(height*10)/100});
             $('#dialog_img').css({'width':width});
+
+
+            /*
             $('.ui-icon-closethick').click(function(){
                 $("#ticket_details").hide();
             })
+            */
+
+            $('.ui-dialog-titlebar-close').on("tap",function(){
+                alert('1');
+                $("#ticket_details").hide();
+            });
+            
+
+
         }   
     }else{
         if (data.status === 1)
