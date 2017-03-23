@@ -2,13 +2,22 @@
   
   <section id="game_info">
     <div class="row max-container-width">
+    <!--
       <div class="col-md-3 col-xs-12 ggg-logo vertical-center hidden-xs hidden-sm">
           <img src="/assets/badge-gamehedge-c6f8f51039f93f77379348b708f4f6cc8b087a2556df007b205cd85c4953a04e.png" alt="GameHedge" />
           Your tickets come with the<br>
           GOOD GAME GUARANTEE!
       </div>
-      <div class="col-md-5 col-xs-12 moto vertical-center hidden-xs hidden-sm">
-        
+      -->
+      <div class="col-md-5 col-xs-12 moto vertical-center hidden-xs hidden-sm" style="width: 45%;">
+        <div class="pp-badge">
+          <span>Same Tickets</span>
+          <span>Low Prices</span>
+          <span class="pp-badge-plus">+</span>
+          <span class="pp-badge-ggg">Our Good Game Guarantee</span>
+        </div>
+
+
         <div class="col-md-2 date-holder hidden-xs hidden-sm">
           <p class="date1">{{event.occurs_at | date:'MMM': 'UTC' | uppercase}}</p>
           <p class="date2">{{event.occurs_at | date:'dd' : 'UTC'| uppercase}}</p>
@@ -16,19 +25,87 @@
         </div>
         <div class="col-md-10 col-xs-12 event-info vertical-center mobile-event-info hidden-xs hidden-sm">
           <span class="mobile-event-span">
-            <p class="first-line desktop-event-name"><span class="blue-span">{{event.away_performer.name}}</span><span class="at"> at </span><span class="blue-span">{{event.home_performer.name}}</span></p>
+            <!-- <p class="first-line desktop-event-name"><span class="blue-span">{{event.away_performer.name}}</span><span class="at"> at </span><span class="blue-span">{{event.home_performer.name}}</span></p> -->
+            <p class="first-line desktop-event-name"><span class="blue-span">{{event.name}}</span></p>
             <p class="second-line" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'hh:mm a' : 'UTC'| uppercase}} at <span class="blue-span">{{event.venue.name}}</span> - {{event.location}}</p>
             <p class="second-line" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD at <span class="blue-span">{{event.venue.name}}</span> - {{event.location}}</p>
+
+            <p class="second-line breadcrumbs"><a href='/'>HOME</a> <i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{event.sport.url}}">{{event.sport.name | uppercase}}</a> <i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{event.home_performer.url}}">{{event.home_performer.name | uppercase}}</a></p>
+
           </span>
         </div>
           
       </div>
-      <div class="col-md-4 col-xs-12 mobile-event-container" style="height: 100%;">
+
+
+
+<div class="hidden-xs hidden-sm" style="width: 21%;float: left;padding-top: 21px;line-height: 20px;text-align: right;color: green;">
+  <span style="display: block;">Millions of tickets. Best Prices.</span>
+  <span style="display: block;">+ Our Good Game Guarantee</span>
+</div>
+
+
+
+      <div class="col-md-4 col-xs-12 mobile-event-container" style="height: 100%; float: right;">
         
         <div class="hidden-xs hidden-sm ggg-event vertical-center">
-            All GameHedge tickets come with our exclusive Good Game Guarantee at no additional cost. So, if the home team loses by {{event.home_performer.sport.ggg}} or more, we will refund 50% of the price of your ticket. No gimmicks. No catches.  
+            <div class="singlebanner-left" id='ggg_explanation'>
+              <div class='ref'>50% Refund</div>
+              If <b ng-if="event.id != '168734'">home team</b><b ng-if="event.id == '168734'">either team</b> loses by <b>{{event.home_performer.sport.ggg}} </b> or more
+            </div>
+            <div class="singlebanner-right">
+              <img src="/assets/icon coin-a40eea64c1a1891b66756011ec48e43d67950c96647117597546d112983d9af7.png">
+            </div>
+            <div class="sep"></div>              
         </div>
-          
+
+                  <div class="ggg-tooltip" style="display: none;" id="ggg-tooltip">
+										<ul class="qtip_ul1">
+										<li>Buy your tickets</li>
+										<li>If <b ng-if="event.id != '168734'">home team</b><b ng-if="event.id == '168734'">either team</b> loses by</li>
+											<ul class="qtip_ul2">
+												<li>{{event.home_performer.sport.ggg}} or more</li>
+											</ul>
+                    <li>Click on Claim Refund</li>  
+										<li>We will refund to your credit card in 3-4 days</li>
+										</ul>
+                    <!--
+                    <a href="/how-it-works" target='_blank' style="font-size: 11px;">Read more <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                    -->
+									</div>
+	                <script>
+									jQuery( document ).ready(function() {
+										
+    									jQuery("#ggg_explanation").qtip({											
+         									hide: {												 
+             								    fixed: true,
+                								delay: 300
+            								},
+											
+										      position: {
+        									  	my: 'right center', 
+        										  at: 'left center', 
+        										  target: jQuery('#ggg_explanation')
+    										  },	
+											    style: {
+     										     classes: 'qtip-light qtip-shadow qtip-checkout'
+    										  },										
+        									content: {
+											      	title: 'How Good Game Guarantee works',
+            									text: jQuery("#ggg-tooltip")
+        									},
+    											events: {
+       										   show: function(event, api) {
+            										mixpanel.track("GGG Tooltip Pops");
+        										}
+    	  									}
+
+    									
+										});
+										
+									})
+									</script>
+
           
         <div class="col-md-10 col-xs-12 event-info vertical-center mobile-event-info hidden-md hidden-lg hidden-xl">
            <div class="mobile-top-bt">
@@ -40,7 +117,8 @@
            </div>
             
           <span class="mobile-event-span">
-            <p class="first-line"><span class="blue-span">{{event.away_performer.name}}</span><span class="at"> at </span><span class="blue-span">{{event.home_performer.name}}</span></p>
+            <!-- <p class="first-line"><span class="blue-span">{{event.away_performer.name}}</span><span class="at"> at </span><span class="blue-span">{{event.home_performer.name}}</span></p> -->
+            <p class="first-line"><span class="blue-span">{{event.name}}</span></p>
             <p class="second-line capitalize" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'EEE, MMM dd hh:mm a' : 'UTC'}} at <span class="blue-span">{{event.venue.name}}</span></p>
             <p class="second-line capitalize" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'EEE, MMM dd' : 'UTC'}} TBD at <span class="blue-span">{{event.venue.name}}</span></p>
           </span>
@@ -55,6 +133,13 @@
     <div class="close_mobile_x" ng-click="closePrevFilter()">
         <img width="15px" src="/assets/close-menu-black-9dd50ffa9d7058e6b0dd61ecb88a5d6f282972acfbd760204d93bc0f8d949877.png">
     </div>
+
+    <div class="splash-logo">
+      <center>
+        <img alt="GameHedge" src="/assets/gamehedge_logo_white-d6ced5ecb6527a6329ba2b48b054c2b0587a30375a9cbd9f9783fb1d4ae4d3e8.png">
+      </center>   
+    </div>
+
     <div class="how_prev_filter">HOW MANY TICKETS?</div>
     <div class="row text-center">
       <div class="filter_prev_number" ng-click="updateFilter(1)">1</div>
@@ -65,6 +150,15 @@
       <div class="filter_prev_number" ng-click="updateFilter(4)">4</div>
       <div class="filter_prev_number" ng-click="updateFilter(5)">5+</div>
     </div>
+
+    <div class="seui-mobile-banner">
+      <center>
+        <img src="/assets/mobile-splash-image-1f2b5868e7ca8464073d4b9ba9918912377bdd600268cb9b3acfeef94141bccc.png">
+      </center>  
+    </div>
+
+
+
   </div>
 
   <div id="filters_mobile" ng-if="filter_active" class="zipper">
@@ -360,3 +454,7 @@
   
 </div>
 
+
+<script>
+mixpanel.track("SingleEventPage Visit");
+</script>
