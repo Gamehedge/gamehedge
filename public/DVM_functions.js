@@ -3724,9 +3724,16 @@ function jsonp_display_tooltip_section(data) {
             }
             );
 
+            //650
+            //300
+            var tooltip_x = (currentMousePos.x-($("#sectionTooltip").outerWidth()/2));
+            var tooltip_y = (currentMousePos.y-100-$("#sectionTooltip").outerHeight());
+            if (tooltip_y < 0){
+                tooltip_y = (currentMousePos.y);                                
+            }
             $("#sectionTooltip").css({
-                "left": 650 + "px",
-                "top": 300 + "px"
+                "left": tooltip_x + "px",
+                "top":  tooltip_y + "px"
             }).delay(500).queue(function (next) {
                 $(this).show();
                 next();
@@ -3734,6 +3741,16 @@ function jsonp_display_tooltip_section(data) {
         }    
     }  
 }
+
+
+var currentMousePos = { x: -1, y: -1 };
+$(document).mousemove(function(event) {
+    currentMousePos.x = event.pageX;
+    currentMousePos.y = event.pageY;
+});
+
+
+
 
 function hide_tooltip_arrows(tooltipId)
 {

@@ -7172,6 +7172,17 @@ main#admin #order-stats .stat-item span {
 
 
 
+.dskt-tooltip{
+    border-radius: 6px !important;
+    border: 0px solid #5f6061 !important;
+}
+.dskt-tooltip .tpit{
+    border: 0px !important;
+}
+
+
+
+
 
 
 
@@ -7195,6 +7206,10 @@ main#admin #order-stats .stat-item span {
         padding-top: 5px;
         padding-bottom: 5px;
         border-radius: 3px;
+    }
+
+    #seatzone_map svg{
+        left: 0px !important;
     }
 
 }

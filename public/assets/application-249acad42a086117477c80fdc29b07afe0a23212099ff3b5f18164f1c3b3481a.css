@@ -23582,13 +23582,24 @@ main#admin #order-stats .stat-item span {
     /*The size of the normal image, half the size of the hi-res image*/
   }
 }
+/* line 7176, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+.dskt-tooltip {
+  border-radius: 6px !important;
+  border: 0px solid #5f6061 !important;
+}
+
+/* line 7180, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+.dskt-tooltip .tpit {
+  border: 0px !important;
+}
+
 @media only screen and (min-device-width: 320px) and (max-device-width: 736px) {
-  /* line 7185, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+  /* line 7196, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
   #sectionTooltip {
     display: none !important;
   }
 
-  /* line 7189, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+  /* line 7200, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
   .tiq-details-checkout-cta {
     cursor: pointer;
     background: #84b533;
@@ -23599,5 +23610,10 @@ main#admin #order-stats .stat-item span {
     padding-top: 5px;
     padding-bottom: 5px;
     border-radius: 3px;
+  }
+
+  /* line 7212, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+  #seatzone_map svg {
+    left: 0px !important;
   }
 }
