@@ -3614,6 +3614,10 @@ function jsonp_display_tooltip_section(data) {
             $( "#dialog1" ).dialog({
                 position: ['center',0]
             });
+            //$('.ui-dialog-titlebar-close').on( 'touchstart', function(){
+            //    $('#dialog1').dialog("close");
+            //    alert('1');
+            //} );
             
 /*            
             $( "#dialog1" ).dialog({
