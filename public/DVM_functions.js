@@ -981,8 +981,20 @@ function set_map(args) {
                     e.preventDefault();
                     //$('#ticketDetails').hide();
                   //  $('#ticketDetails2').show();
+                    //clickSection(st, section, section_has_tix);
+                    st[0].tstart = (new Date).getTime();
+                };
+
+                st[0].ontouchend = function (e) {
+                //st[0].onclick = function (e) {
+                    //$('#ticketDetails').hide();
+                    e.preventDefault();
+                    //$('#ticketDetails').hide();
+                  //  $('#ticketDetails2').show();
+                  alert((new Date).getTime() - st[0].tstart);
                     clickSection(st, section, section_has_tix);
                 };
+                
             }else{
                 st[0].onclick = function (e) {
                     e.preventDefault();
