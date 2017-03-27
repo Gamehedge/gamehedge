@@ -923,8 +923,11 @@ function set_map(args) {
         //-------------------------------------------------------------------------------------------------------------------
 
                                 }
-                                
-                                display_tooltip_section(section, x, y);
+                                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+
+                                }else{
+                                    display_tooltip_section(section, x, y);
+                                }
                             }
                         } else {
                             var indexOfSeat = selectedSeats.indexOf(section);
@@ -974,9 +977,9 @@ function set_map(args) {
             if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
                 st[0].ontouchstart = function (e) {
                 //st[0].onclick = function (e) {
-                    $('#ticketDetails').hide();
+                    //$('#ticketDetails').hide();
                     e.preventDefault();
-                    $('#ticketDetails').hide();
+                    //$('#ticketDetails').hide();
                   //  $('#ticketDetails2').show();
                     clickSection(st, section, section_has_tix);
                 };
