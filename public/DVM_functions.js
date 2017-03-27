@@ -973,11 +973,11 @@ function set_map(args) {
             };
             if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
                 st[0].ontouchstart = function (e) {
-                    $('#ticketDetails').hide();
-                    e.preventDefault();
-                    $('#ticketDetails').hide();
-                    $('#ticketDetails2').show();
-                    clickSection(st, section, section_has_tix);
+                    //$('#ticketDetails').hide();
+                    //e.preventDefault();
+                    //$('#ticketDetails').hide();
+                    //$('#ticketDetails2').show();
+                    //clickSection(st, section, section_has_tix);
                 };
             }else{
                 st[0].onclick = function (e) {
