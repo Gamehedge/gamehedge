@@ -991,8 +991,9 @@ function set_map(args) {
                     e.preventDefault();
                     //$('#ticketDetails').hide();
                   //  $('#ticketDetails2').show();
-                  alert((new Date).getTime() - st[0].tstart);
+                  if (((new Date).getTime() - st[0].tstart) < 250){
                     clickSection(st, section, section_has_tix);
+                  }
                 };
                 
             }else{
