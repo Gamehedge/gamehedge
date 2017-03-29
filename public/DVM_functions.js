@@ -3606,7 +3606,11 @@ function jsonp_display_tooltip_section(data) {
    data = $.parseJSON(data);
    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
         if (data.status === 1){
-            $("#dialog_img").attr('src',data.bimg);
+            if(data.bimg.indexOf('noimg') !== -1){
+                $("#dialog_img").attr('src','/no_seat_view_1.png');
+            }else{
+                $("#dialog_img").attr('src',data.bimg);
+            }
             var name= $("#sectionTooltip #fdsection").text();
             $("#ticket_sec").html(name);
             $("#ticket_sec2").html(name);
@@ -3682,13 +3686,14 @@ function jsonp_display_tooltip_section(data) {
                 });
 
             } else {
-                $("#sectionTooltip #smallimg").attr("class", "fancybox_no");
-                //$("#sectionTooltip #smallimg").attr("href", bimg);
+                //$("#sectionTooltip #smallimg").attr("class", "fancybox_no");
+                ////$("#sectionTooltip #smallimg").attr("href", bimg);
+                simg = '/no_seat_view_1.png';
                 $("#sectionTooltip #imgsmall").attr("src", simg);
-                $("#sectionTooltip #imgsmall").attr("class", "lb_img_no");
-                //tooltip in small size
-                $("#sectionTooltip .lti").attr("class", "lti lti_no_img"); //big container
-                $("#sectionTooltip .tpit").attr("class", "tpit tpit_no_img"); //small container
+                //$("#sectionTooltip #imgsmall").attr("class", "lb_img_no");
+                ////tooltip in small size
+                //$("#sectionTooltip .lti").attr("class", "lti lti_no_img"); //big container
+                //$("#sectionTooltip .tpit").attr("class", "tpit tpit_no_img"); //small container
             }
             //######right or LEfT , top or bottom Display
             //
@@ -3792,6 +3797,7 @@ function fill_tooltip_section(parts, x, y) {
 //            ext = "swf";
 //        }
         var limg = "https://dynamicvenuemaps.com/maps/seatviews/loadimg.gif";
+        //var limg = "/map-loader.gif";
         //loading img and class (small if tooltip is small and vice versa)
         if ($("#sectionTooltip #imgsmall").attr("src").indexOf('noimg_') !== -1) {
             $("#sectionTooltip #imgsmall").attr("class", "lb_img_loading");
