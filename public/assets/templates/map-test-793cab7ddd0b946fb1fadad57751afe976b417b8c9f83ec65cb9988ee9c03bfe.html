@@ -454,6 +454,12 @@
   
 </div>
 
+<script>
+$( "body" ).on( "click", '.ui-dialog-titlebar',function() {
+  //$('#dialog1').dialog("close");
+  $('.ui-dialog').css('display','none');
+});
+</script>
 
 <script>
 mixpanel.track("SingleEventPage Visit");
