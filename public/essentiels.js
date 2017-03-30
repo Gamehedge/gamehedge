@@ -6232,15 +6232,17 @@
                 if (s.currPos.x < 0) {
                     s.currPos.x = 0
                 } else {
-                    if (s.currPos.x > (j.width * s.currZoom * m.zoomStep)) {
-                        s.currPos.x = (j.width * s.currZoom * m.zoomStep)
-                    }
+                    /*DANIEL FIX*/
+                    //if (s.currPos.x > (j.width * s.currZoom * m.zoomStep)) {
+                    //    s.currPos.x = (j.width * s.currZoom * m.zoomStep)
+                    //}
                 }
                 if (s.currPos.y < 0) {
                     s.currPos.y = 0
                 } else {
                     d = m.map_width * 100 / m.map_original_width / 100;
                     f = m.map_height * 100 / m.map_original_height / 100;
+                    /*DANIEL FIX*/
                     //if (s.currPos.y > (j.height * s.currZoom * m.zoomStep)) {
                     //    s.currPos.y = (j.height * s.currZoom * m.zoomStep)
                     //}
