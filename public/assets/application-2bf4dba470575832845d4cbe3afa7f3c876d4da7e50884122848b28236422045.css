@@ -23617,3 +23617,7 @@ main#admin #order-stats .stat-item span {
     left: 0px !important;
   }
 }
+/* line 7219, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+#seatzone_map, #seatzone_map svg {
+  height: 282px !important;
+}
