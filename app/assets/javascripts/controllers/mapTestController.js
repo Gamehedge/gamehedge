@@ -557,7 +557,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
         // console.log(tickets)
         var DATA_TICKTES={"list":tickets};
         var map_width = window.innerWidth;
-        var map_height = window.innerHeight - 180;
+        var map_height = window.innerHeight - 140; //180 DANIEL HEIGHT FIX
         if(map_width > 991){
             map_width = map_width*0.58;
         }

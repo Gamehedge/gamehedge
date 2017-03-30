@@ -228,7 +228,8 @@ function set_map(args) {
     $("#" + map_name).width(map_width + 'px');
     $("#" + map_name).height(map_height + 'px');
 
-    $('.mobile-event-span').html(map_width+'x'+map_height);
+    /*DANIEL DEBUG*/
+    //$('.mobile-event-span').html(map_width+'x'+map_height);
 
     //some hiddens used to show or hide tickets
     $("#" + map_name).html(
