@@ -469,11 +469,19 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
                 if($scope.index == 5){
                     if(Number($(this).attr('data-info').split(',')[0]) < $scope.index){
                         $(this).addClass("hidden");
+                    }else{
+                        //QTY FIX                        
+                        //FIX DEFAULT SELECTBOX VALUE WHEN QTY FILTER APPLY
+                        $(this).find("select").val($(this).attr('data-info').split(',')[0]);
                     }
                 }
                 else{
                     if($(this).attr('data-info').split(',').indexOf(String($scope.index)) == -1){
                         $(this).addClass("hidden");
+                    }  else{
+                        //QTY FIX                        
+                        //FIX DEFAULT SELECTBOX VALUE WHEN QTY FILTER APPLY
+                        $(this).find("select").val($scope.index);
                     }    
                 }
             });
@@ -562,7 +570,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
             map_width = map_width*0.58;
         }
         else{
-            map_height = window.innerHeight - 300;//385;
+            map_height = window.innerHeight - 310;//385; DANIEL HEIGHT FIX IPHONE 6 PLUS
         }
         DVM_map_params = {
             'client_id':'99',
