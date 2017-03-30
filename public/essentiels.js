@@ -6241,9 +6241,9 @@
                 } else {
                     d = m.map_width * 100 / m.map_original_width / 100;
                     f = m.map_height * 100 / m.map_original_height / 100;
-                    if (s.currPos.y > (j.height * s.currZoom * m.zoomStep)) {
-                        s.currPos.y = (j.height * s.currZoom * m.zoomStep)
-                    }
+                    //if (s.currPos.y > (j.height * s.currZoom * m.zoomStep)) {
+                    //    s.currPos.y = (j.height * s.currZoom * m.zoomStep)
+                    //}
                 }
                 
                 if(ix != undefined){
