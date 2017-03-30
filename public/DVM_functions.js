@@ -3759,11 +3759,31 @@ function jsonp_display_tooltip_section(data) {
 
             //650
             //300
+            
             var tooltip_x = (currentMousePos.x-($("#sectionTooltip").outerWidth()/2));
             var tooltip_y = (currentMousePos.y-100-$("#sectionTooltip").outerHeight());
+            //var tooltip_x = data.x;
+            //var tooltip_y = data.y;
             if (tooltip_y < 0){
                 tooltip_y = (currentMousePos.y);                                
             }
+
+
+
+            //NO ZONE INFORMATION WHEN HOVER OVER THE LISTING
+            var zoomerpos = $('#seatzone_map').position();
+            var zoomer_right_x = zoomerpos.left+$("#seatzone_map").outerWidth();
+            if (currentMousePos.x > zoomer_right_x){
+                $('.lti').css('display','none');
+                $('.tpit').css('padding-bottom','10px');
+            }else{
+                $('.lti').css('display','inherit');
+                $('.tpit').css('padding-bottom','0px');
+            }
+
+
+
+
             $("#sectionTooltip").css({
                 "left": tooltip_x + "px",
                 "top":  tooltip_y + "px"

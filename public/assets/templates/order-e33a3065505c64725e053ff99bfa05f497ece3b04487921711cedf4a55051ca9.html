@@ -49,7 +49,7 @@
 										    <input type="email" class="form-control" id="email" placeholder="Email" ng-model="$parent.client.email" name="email" ng-change="checkEmail()">
 										</div>
 										<div class="email right">
-										    <input type="email" class="form-control" id="email-confirm" placeholder="Confirm Email"  ng-model="$parent.client.confirm_email" name="confirm_email">
+										    <input type="email" class="form-control" id="email-confirm" placeholder="Confirm Email"  ng-model="$parent.client.confirm_email" ng-change="checkConfirmEmail()" name="confirm_email">
 										</div>
 									</div>
 								</span>
@@ -90,7 +90,7 @@
 			  							<input type="email" class="form-control" id="email-shipping" ng-model="$parent.$parent.client.email" placeholder="Email" name="email"  ng-change="checkEmail()">
 								    </div>
 								    <div class="confirm-email">
-			  							<input type="email" class="form-control" id="confirm-email-shipping" ng-model="$parent.$parent.client.confirm_email" placeholder="Confirm Email" name="confirm_email">
+			  							<input type="email" class="form-control" id="confirm-email-shipping" ng-model="$parent.$parent.client.confirm_email" placeholder="Confirm Email" name="confirm_email" ng-change="checkConfirmEmail()" >
 								    </div>
 		  						</div>
 							    <div class="inputs" ng-if="$root.isLoggedin">
