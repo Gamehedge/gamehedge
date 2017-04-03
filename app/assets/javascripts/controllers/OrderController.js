@@ -74,7 +74,17 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
         });
 	}
 
+	$scope.checkConfirmEmail =function(){
+		if ($scope.client.confirm_email != undefined){
+			$scope.client.confirm_email = $scope.client.confirm_email.toLowerCase(); 		
+		}
+	}
+
 	$scope.checkEmail =function(){
+		if ($scope.client.email != undefined){
+			$scope.client.email = $scope.client.email.toLowerCase(); 		
+		}
+
 		var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 		if(re.test($scope.client.email) == true){
 			$http({

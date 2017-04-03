@@ -17,10 +17,8 @@ class Api::V1::TilesController < ApplicationApiController
 
   def index
     if params == nil
-      # @tiles = Tile.all.order(:position)
-      @tiles = Tile.includes(:sport, :event1, :event2, :event3, :venue, :tile_type, :performer).order(:position).limit(10)
+      @tiles = Tile.includes(:sport, :event1, :event2, :event3, :venue, :tile_type, :performer).all.order(:position).limit(10)
     else
-      # @tiles = Tile.where(data_params).order(:position)
       @tiles = Tile.includes(:sport, :event1, :event2, :event3, :venue, :tile_type, :performer).where(data_params).order(:position).limit(10)
     end
     respond_to do |format|

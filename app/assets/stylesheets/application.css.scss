@@ -7168,3 +7168,54 @@ main#admin #order-stats .stat-item span {
         background-size: 24px 24px; /*The size of the normal image, half the size of the hi-res image*/
     }
 }
+
+
+
+
+
+.dskt-tooltip{
+    border-radius: 6px !important;
+    border: 0px solid #5f6061 !important;
+}
+.dskt-tooltip .tpit{
+    border: 0px !important;
+}
+
+
+
+
+
+
+
+
+
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 736px)
+{
+    #sectionTooltip{
+        display: none !important;
+    }
+
+    .tiq-details-checkout-cta{
+        cursor: pointer;
+        background: #84b533;
+        border: 0px;
+        color: #fff;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border-radius: 3px;
+    }
+
+    #seatzone_map svg{
+        left: 0px !important;
+    }
+
+}
+
+
+#seatzone_map_DIS, #seatzone_map_DIS svg{
+    height: 282px !important;
+}

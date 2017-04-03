@@ -7,6 +7,7 @@ function(a,b,c,e){a="object"===typeof a?a:{test:a,success:b?v("Array",b)?b:[b]:!
 return d};d.ready(e,function(){q()&&g(l.ALL,function(a){h(a)});d.feature&&d.feature("domloaded",!0)});if("complete"===e.readyState)i();else if(e.addEventListener)e.addEventListener("DOMContentLoaded",t,!1),f.addEventListener("load",i,!1);else{e.attachEvent("onreadystatechange",t);f.attachEvent("onload",i);var u=!1;try{u=null==f.frameElement&&e.documentElement}catch(F){}u&&u.doScroll&&function b(){if(!j){try{u.doScroll("left")}catch(c){f.clearTimeout(d.readyTimeout);d.readyTimeout=f.setTimeout(b,50);
 return}i()}}()}setTimeout(function(){C=!0;g(B,function(b){b()})},300)})(window);
 
+
 var is_static_map = true;
 var client_data = { 
     'dvm_client_id': DVM_map_params["client_id"],
@@ -37,7 +38,6 @@ function injection_alert() {
     alert('You are not allowed to show the map Or invalid venue, please contact the support');
 }
 function display_map(data) {
-	
     data = $.parseJSON(data);
     /*if(JSON){
         data = JSON.parse(data);
@@ -368,7 +368,7 @@ head.js(
 //        "https://dynamicvenuemaps.com/maps/js/maps_general_settings.js",
         ///
         // "https://dynamicvenuemaps.com/maps/js/essentiels.min.js?v=201310031607",
-        "/essentiels.js?v=105",
+        "/essentiels.js?v=107",
         ///
 
         "https://dynamicvenuemaps.com/maps/js/jquery.fancybox.js?v=2.1.4",
@@ -376,7 +376,7 @@ head.js(
         "https://dynamicvenuemaps.com/maps/maps_setting/" + venue_folder + "/map_shapes.js",
         "https://dynamicvenuemaps.com/maps/maps_setting/" + venue_folder + "/section_matching.js?v=201401071606",
         "https://dynamicvenuemaps.com/maps/maps_setting/" + venue_folder + "/synonyms.js?v=201403071228",
-        "/DVM_functions.js?v=105",
+        "/DVM_functions.js?v=131",
         function () {
              if(DVM_map_params['tickets_url']){
             var tickets_url = DVM_map_params['tickets_url'];

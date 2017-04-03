@@ -192,11 +192,15 @@ function set_map(args) {
         //interv       //intervals = set_intervals(prices);
         intervals = set_intervals();
     }
+    $(document).ready(function(){
+       $('#seatzone_map').children('svg').attr('viewBox','0 0 800 600').css('left','25');
+    });
+
 
     //set the containers
     //zoom & pan buttons
     $('#' + map_name).before(
-            '<div class="left" id="zoom_div">' +
+            '<div class="left" id="zoom_div" style="z-index: 99;">' +
             '<a id="map_zoom_plus" href="javascript:void()" title="Zoom In"><img src="https://dynamicvenuemaps.com/maps/images/plus.png" alt="Zoom In" border="0" /></a>' +
             '<div id="slider-vertical"></div>' +
             '<a id="map_zoom_less" href="javascript:void()" title="Zoom Out">' +
@@ -223,6 +227,10 @@ function set_map(args) {
     //map width and height
     $("#" + map_name).width(map_width + 'px');
     $("#" + map_name).height(map_height + 'px');
+
+    /*DANIEL DEBUG*/
+    //$('.mobile-event-span').html(map_width+'x'+map_height);
+
     //some hiddens used to show or hide tickets
     $("#" + map_name).html(
             //hidden that saves all selected sections
@@ -710,7 +718,7 @@ function set_map(args) {
                 section_has_tix = true;
             }
             mouseoverSection = function (sts, section, section_has_tix) {
-              if(isSeatClicked == 0) {
+              if(isSeatClicked == 0) { 
                   if (section_as_row(section) || (this_map_params['rows_display'] === false) ) {// || (this_map_params['rows_display'] && panZoom.getCurrentZoom()<1)
                       //tooltip display
                       if (section_has_tix ) {
@@ -755,7 +763,7 @@ function set_map(args) {
                         if (section_as_row(section) || (this_map_params['rows_display'] === false) ) {// || (this_map_params['rows_display'] && panZoom.getCurrentZoom()<1)
                             //tooltip display
                             if (section_has_tix ) {
-                                //mouse coordinates &&  groub_zon_km.length  === 0
+                                //mouse coordinates && groub_zon_km.length  === 0
 
         //                        x = e.pageX;
 
@@ -768,7 +776,7 @@ function set_map(args) {
                                     //st.attr(attrs);
                                     sts.animate(attrs, 200);
 
-         //-----------------------------------------------------KM-Select------------------------------------------------                           
+//-----------------------------------------------------KM-Select------------------------------------------------
                                     var chaine = $("#" + hiddenClickedSections).val();
                                     if (chaine.length )
                                     {
@@ -776,15 +784,15 @@ function set_map(args) {
                                         // console.log(tableau);
                                         for (var i = 0; i < tableau.length; i++) {
                                          // console.log("tableau[" + i + "] = " + 's-' + tableau[i]);
-                                          click_attr_section_setting('s-' + tableau[i]);
+                                            click_attr_section_setting('s-' + tableau[i]);
                                         }
                                     }
-             
-                                   
-        //-------------------------------------------------------------------------------------------------------------------
+
+
+//-------------------------------------------------------------------------------------------------------------------
 
                                 }
-                                
+
                                 display_tooltip_section(section, x, y);
                             }
                             //correction bug safari
@@ -795,11 +803,10 @@ function set_map(args) {
                 }
             };
             st[0].onmouseover = function (e) {
-                
                 e = jQuery.event.fix(e);
-                
                 mouseoverSection(st, section, section_has_tix);
             };
+
             var mouseoutSection = function (sts, e, section, section_has_tix) {
                 e = jQuery.event.fix(e);
                 //if (section_as_row(section) || panZoom.getCurrentZoom()<1) {
@@ -920,8 +927,11 @@ function set_map(args) {
         //-------------------------------------------------------------------------------------------------------------------
 
                                 }
-                                
-                                display_tooltip_section(section, x, y);
+                                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+
+                                }else{
+                                    display_tooltip_section(section, x, y);
+                                }
                             }
                         } else {
                             var indexOfSeat = selectedSeats.indexOf(section);
@@ -968,10 +978,34 @@ function set_map(args) {
 //-------------------------------------------------------------------------------------------------------------------
 
             };
-            st[0].onclick = function (e) {
-                e.preventDefault();
-                clickSection(st, section, section_has_tix);
-            };
+            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                st[0].ontouchstart = function (e) {
+                //st[0].onclick = function (e) {
+                    //$('#ticketDetails').hide();
+                    e.preventDefault();
+                    //$('#ticketDetails').hide();
+                  //  $('#ticketDetails2').show();
+                    //clickSection(st, section, section_has_tix);
+                    st[0].tstart = (new Date).getTime();
+                };
+
+                st[0].ontouchend = function (e) {
+                //st[0].onclick = function (e) {
+                    //$('#ticketDetails').hide();
+                    e.preventDefault();
+                    //$('#ticketDetails').hide();
+                  //  $('#ticketDetails2').show();
+                  if (((new Date).getTime() - st[0].tstart) < 250){
+                    clickSection(st, section, section_has_tix);
+                  }
+                };
+                
+            }else{
+                st[0].onclick = function (e) {
+                    e.preventDefault();
+                    clickSection(st, section, section_has_tix);
+                };
+            }
         })($sections[section], section);
 
         sectionsCopy = $sections;
@@ -1170,42 +1204,42 @@ function set_map(args) {
     //show sections and hide rows
     rows_or_sections_display();
     //add tooltips html to body
-    $(
-            //tooltip div
-            '<div id="sectionTooltip" class="move_right" style="position: absolute; display:none;z-index:900;">' +
-            '<div class="tpit tpit_no_img">' +
-            '<div class="had">' +
-            '<div class="colr">' +
-            '</div>' +
-            '&nbsp;<span id="fdsection">No section selected</span>&nbsp;    ' +
-            '</div>' +
-            '<a class="fancybox_no" id="smallimg"><img class="lb_img" src="" id="imgsmall" width="250" height="140" border="0"/></a>' +
-            '<div class="lti lti_no_img">' +
-            '<span class="vrt">QUANTITY </span>: <span id="fdqty">No</span> SEAT(S)<br />' +
-            '<span class="vrt">ROW(S) </span>: <span id="fdrow">-</span><br />' +
-            '<span class="vrt">PRICE </span>: <span id="fdprice">-</span>' +
-            '<p></p>' + //Click this section to view  corresponding listings
-            '</div>' +
-            '</div>' +
-            '</div>' +
-            '<div id="rowTooltip" style="position: absolute; display:none;z-index:900;">' +
-            '<div class="tpit tpit_no_img">' +
-            '<div class="had">' +
-            '<div class="colr"></div>' +
-            '<div class="s_r_labels">' +
-            '<div class="section_label"><span>Section : </span> <span id="fdsection">-</span></div>' +
-            '<div class="row_label"><span>Row : </span> <span id="fdrow">-</span></div>' +
-            '</div>' +
-            '</div>' +
-            '<a class="fancybox_no" id="smallimg"><img class="lb_img" src="" id="imgsmall" width="250" height="140" border="0"/></a>' +
-            '<div class="lti lti_no_img">' +
-            //'AVAILABILITY<br /><br />'+
-            '<span class="vrt">QUANTITY </span>: <span id="fdqty">No</span> SEAT(S)<br />' +
-            '<span class="vrt">PRICE </span>: <span id="fdprice">-</span>' +
-            '<p></p>' + //Click this row to view  corresponding listings
-            '</div>' +
-            '</div>' +
-            '</div>').appendTo('body');
+    // $(
+    //         //tooltip div
+    //         '<div id="sectionTooltip" class="move_right" style="position: absolute; display:none;z-index:99;">' +
+    //         '<div class="tpit tpit_no_img">' +
+    //         '<div class="had">' +
+    //         '<div class="colr">' +
+    //         '</div>' +
+    //         '&nbsp;<span id="fdsection">No section selected</span>&nbsp;    ' +
+    //         '</div>' +
+    //         '<a class="fancybox_no" id="smallimg"><img class="lb_img" src="" id="imgsmall" width="250" height="140" border="0"/></a>' +
+    //         '<div class="lti lti_no_img">' +
+    //         '<span class="vrt">QUANTITY </span>: <span id="fdqty">No</span> SEAT(S)<br />' +
+    //         '<span class="vrt">ROW(S) </span>: <span id="fdrow">-</span><br />' +
+    //         '<span class="vrt">PRICE </span>: <span id="fdprice">-</span>' +
+    //         '<p></p>' + //Click this section to view  corresponding listings
+    //         '</div>' +
+    //         '</div>' +
+    //         '</div>' +
+    //         '<div id="rowTooltip" style="position: absolute; display:none;z-index:900;">' +
+    //         '<div class="tpit tpit_no_img">' +
+    //         '<div class="had">' +
+    //         '<div class="colr"></div>' +
+    //         '<div class="s_r_labels">' +
+    //         '<div class="section_label"><span>Section : </span> <span id="fdsection">-</span></div>' +
+    //         '<div class="row_label"><span>Row : </span> <span id="fdrow">-</span></div>' +
+    //         '</div>' +
+    //         '</div>' +
+    //         '<a class="fancybox_no" id="smallimg"><img class="lb_img" src="" id="imgsmall" width="250" height="140" border="0"/></a>' +
+    //         '<div class="lti lti_no_img">' +
+    //         //'AVAILABILITY<br /><br />'+
+    //         '<span class="vrt">QUANTITY </span>: <span id="fdqty">No</span> SEAT(S)<br />' +
+    //         '<span class="vrt">PRICE </span>: <span id="fdprice">-</span>' +
+    //         '<p></p>' + //Click this row to view  corresponding listings
+    //         '</div>' +
+    //         '</div>' +
+    //         '</div>').appendTo('body');
     //initialiser la position du tooltip
     $("#sectionTooltip").css({
         "left": $("#" + map_name).offset().left,
@@ -1235,7 +1269,7 @@ function set_map(args) {
     });
     //mouseleave
     $("#" + map_name).on('mouseleave', function (event) {
-        event.preventDefault();
+        //event.preventDefault();
 //        console.log("#"+map_name+' mouseleave');
 //        console.log('ifInsideTooltipSection : '+ifInsideTooltipSection);
 //        if (!ifInsideTooltipSection) {
@@ -1295,6 +1329,15 @@ function set_map(args) {
                 }
             }
     );
+
+ 
+   // $('#sectionTooltip').click(function(){
+    
+    
+   // // $('#smallimg').show();
+   // // alert($('#sectionTooltip').next().html());
+   // });
+
     //tooltip display
     $('#sectionTooltip').on('mouseenter', inTooltip).on('mouseleave', outTooltip);
     $('#rowTooltip').on('mouseenter', inTooltipRow).on('mouseleave', outTooltipRow);
@@ -1882,7 +1925,7 @@ $(document).ready(function () {
     if(map_args['client_id'] != 50 && map_args['client_id'] != 96 ){
     
         //section_zon('134663424');
-        console.log("-------"+map_args['client_id']+'---------');
+        // console.log("-------"+map_args['client_id']+'---------');
         event.preventDefault();
          // if(!scrolling){
          //                   var $this = $(this).find(".tickets_checkout_btn"); 
@@ -2087,17 +2130,6 @@ $(document).ready(function () {
         }
     }
     );
-
-
-    $('.fancybox').fancybox({
-        //<? if ($isswfimg==1) { ?>width :620,
-        //height :300, <? } else { ?>
-        width: 512,
-        height: 384, //<? } ?>
-        openEffect: 'elastic',
-        openSpeed: 300,
-        closeEffect: 'elastic',
-        closeSpeed: 150});
 });
 
 
@@ -2508,7 +2540,7 @@ function dvm_reset_maps(init_filtre_vals) {
             var y = 10 - (10 * x);
             // console.log("zommed");
             // console.log(Number(y.toFixed(0)));
-            panZoom.zoomIn(y,true);
+            //panZoom.zoomIn(y,true);
             rows_or_sections_display();
             //zoom seeker change
             zoom_seeker_change('+');
@@ -3575,90 +3607,203 @@ function format_section_to_id(section) {
 function jsonp_display_tooltip_section(data) {
     //data = JSON && JSON.parse(data) || $.parseJSON(data);
     //console.log('data tooltip'+data);
-    data = $.parseJSON(data);
-    if (data.status === 1)
-    {
-        bimg = data.bimg;
-        simg = data.simg;
-        is_tooltip_big = data.iszoom;
-        if (is_tooltip_big === 1)
-        {
-            $("#sectionTooltip #smallimg").attr("class", "fancybox");
-            //$("#sectionTooltip #smallimg").attr("href", bimg);
-            $("#sectionTooltip #imgsmall").attr("src", simg);
-            $("#sectionTooltip #imgsmall").attr("class", "lb_img");
-            //tooltip in big size
-            $("#sectionTooltip .lti").attr("class", "lti"); //big container
-            $("#sectionTooltip .tpit").attr("class", "tpit"); //small container
-            $(".fancybox").fancybox({
-               openEffect  : 'none',
-               closeEffect : 'none',
-               content : '<img src='+bimg+' height="600" width="750" alt="" />'
+   data = $.parseJSON(data);
+   if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        if (data.status === 1){
+            if(data.bimg.indexOf('noimg') !== -1){
+                $("#dialog_img").attr('src','/no_seat_view_1.png');
+            }else{
+                $("#dialog_img").attr('src',data.bimg);
+            }
+            var name= $("#sectionTooltip #fdsection").text();
+            $("#ticket_sec").html(name);
+            $("#ticket_sec2").html(name);
+            var width = $(window).width(), height = $(window).height();
+            $( "#dialog1" ).dialog({
+                position: ['center',0]
             });
 
-        } else {
-            $("#sectionTooltip #smallimg").attr("class", "fancybox_no");
-            //$("#sectionTooltip #smallimg").attr("href", bimg);
-            $("#sectionTooltip #imgsmall").attr("src", simg);
-            $("#sectionTooltip #imgsmall").attr("class", "lb_img_no");
-            //tooltip in small size
-            $("#sectionTooltip .lti").attr("class", "lti lti_no_img"); //big container
-            $("#sectionTooltip .tpit").attr("class", "tpit tpit_no_img"); //small container
-        }
-        //######right or LEfT , top or bottom Display
-        //
-        //Get section position
-        var bbox = $sections['s-' + matchedSecId].getBBox();
-        //alert(data.x+'***'+data.y);
-      //console.log(matchedSecId);
-        //Note : data.x and data.y are the exact postion where the tooltip appears
 
-        //make the tooltip appear next to the section
 
-        //tooltip section color and name on the left
-        $('#sectionTooltip .colr').css('float', 'left');
-        $('#sectionTooltip #fdsection').css('float', 'left');
-        //left or right
-        half_width_map = map_width / 2;
-        if (bbox.x > half_width_map) {
-            //deduce tooltip width
-            //data.x = parseFloat(data.x) - $('#sectionTooltip').width();
-        }
-        else
+            //$('.ui-dialog-titlebar-close').on( 'touchstart', function(){
+            //    $('#dialog1').dialog("close");
+            //    alert('1');
+            //} );
+            
+/*            
+            $( "#dialog1" ).dialog({
+                open: function(){
+                    alert('2');
+                    $('.ui-dialog-titlebar-close').bind('click',function(){
+                        alert('1');
+                        $('#dialog1').dialog('close');
+
+                    })
+                }
+            });
+  */          
+
+
+            // $('#dialog1').css({'height':height,'width':width});
+            //$('#dialog1').css({'top':0,'bottom':0,'left':0,'right':0,'height':height+(height*10)/100});
+            $('#dialog_img').css({'width':width});
+
+
+            $('.ui-icon-closethick').click(function(){
+                $("#ticket_details").hide();
+                //$('#dialog1').dialog('close');
+            })
+            
+
+            
+
+
+        }   
+    }else{
+        if (data.status === 1)
         {
-            //add section width
-            //data.x = parseFloat(data.x) + bbox.width;
-        }
-        //top or bottom
-        var half_height_map = map_height / 2;
-        if (bbox.y > half_height_map) {
-            //deduce tooltip height if the section is on the bottom
-            // data.y = parseFloat(data.y) - $('#sectionTooltip').height();
+            bimg = data.bimg;
+            simg = data.simg;
+            is_tooltip_big = data.iszoom;
+            if (is_tooltip_big === 1)
+            {
+                $("#sectionTooltip #smallimg").attr("class", "fancybox");
+                //$("#sectionTooltip #smallimg").attr("href", bimg);
+                $("#sectionTooltip #imgsmall").attr("src", simg);
+                $("#sectionTooltip #imgsmall").attr("class", "lb_img");
+                //tooltip in big size
+                $("#sectionTooltip .lti").attr("class", "lti"); //big container
+                $("#sectionTooltip .tpit").attr("class", "tpit"); //small container
 
-        }
 
-        data.y = parseFloat(data.y) + bbox.height / 2;
-        if (is_mapped === false) {
-            //hide arrow
-            //hide_tooltip_arrows('sectionTooltip');
-        }
-        data.x = data.x;
-        data.y = data.y + 28;
-        $("#sectionTooltip").css({
-            "border": "3px solid black",
-            "borderRadius": "10px"
-        }
-        );
+                // $("#sectionTooltip #fdqty").text(pars[2]);
+                // rw = pars[1].split('-');
+                // rw.sort(sortAlphaNum);
+                // $("#sectionTooltip #fdrow").text(rw.join(', ').toUpperCase());
+                // $("#sectionTooltip #fdprice").text(pars[3]);
+                var bqty = $("#sectionTooltip #fdqty").text();
+                var brow = $("#sectionTooltip #fdrow").text();
+                var bprice = $("#sectionTooltip #fdprice").text();
+                //console.log('======'+Bqty);
 
-        $("#sectionTooltip").css({
-            "left": 600 + "px",
-            "top": 295 + "px"
-        }).delay(500).queue(function (next) {
-            $(this).show();
-            next();
-        });
-    }
+                $(".fancybox").fancybox({
+                   openEffect  : 'none',
+                   closeEffect : 'none',
+                   content : '<img src='+bimg+' height="500" width="500" alt="" />'
+                });
+
+            } else {
+                //$("#sectionTooltip #smallimg").attr("class", "fancybox_no");
+                ////$("#sectionTooltip #smallimg").attr("href", bimg);
+                simg = '/no_seat_view_1.png';
+                $("#sectionTooltip #imgsmall").attr("src", simg);
+                //$("#sectionTooltip #imgsmall").attr("class", "lb_img_no");
+                ////tooltip in small size
+                //$("#sectionTooltip .lti").attr("class", "lti lti_no_img"); //big container
+                //$("#sectionTooltip .tpit").attr("class", "tpit tpit_no_img"); //small container
+            }
+            //######right or LEfT , top or bottom Display
+            //
+            //Get section position
+            var bbox = $sections['s-' + matchedSecId].getBBox();
+            //alert(data.x+'***'+data.y);
+          //console.log(matchedSecId);
+            //Note : data.x and data.y are the exact postion where the tooltip appears
+
+            //make the tooltip appear next to the section
+
+            //tooltip section color and name on the left
+            $('#sectionTooltip .colr').css('float', 'left');
+            $('#sectionTooltip #fdsection').css('float', 'left');
+            //left or right
+            half_width_map = map_width / 2;
+            if (bbox.x > half_width_map) {
+                //deduce tooltip width
+                //data.x = parseFloat(data.x) - $('#sectionTooltip').width();
+            }
+            else
+            {
+                //add section width
+                //data.x = parseFloat(data.x) + bbox.width;
+            }
+            //top or bottom
+            var half_height_map = map_height / 2;
+            if (bbox.y > half_height_map) {
+                //deduce tooltip height if the section is on the bottom
+                // data.y = parseFloat(data.y) - $('#sectionTooltip').height();
+
+            }
+
+            data.y = parseFloat(data.y) + bbox.height / 2;
+            if (is_mapped === false) {
+                //hide arrow
+                //hide_tooltip_arrows('sectionTooltip');
+            }
+            data.x = data.x;
+            data.y = data.y + 28;
+            //$('#dialog1').show();
+            // $( "#dialog1" ).dialog({});
+            $("#dialog_img" ).attr('src', data.bimg); 
+            //var name1= $("#sectionTooltip #fdsection").text(format_section_to_display(matchedSecId));
+            //var bqty = $("#sectionTooltip #fdqty").text();
+            //var brow = $("#sectionTooltip #fdrow").text();
+            //var bprice = $("#sectionTooltip #fdprice").text();
+            var name= $("#sectionTooltip #fdsection").text();
+            $("#ticket_sec").html(name);
+            $("#ticket_sec2").html(name);
+            $("#sectionTooltip").css({
+                "border": "3px solid black",
+                "borderRadius": "10px"
+            }
+            );
+
+            //650
+            //300
+            
+            var tooltip_x = (currentMousePos.x-($("#sectionTooltip").outerWidth()/2));
+            var tooltip_y = (currentMousePos.y-100-$("#sectionTooltip").outerHeight());
+            //var tooltip_x = data.x;
+            //var tooltip_y = data.y;
+            if (tooltip_y < 0){
+                tooltip_y = (currentMousePos.y);                                
+            }
+
+
+
+            //NO ZONE INFORMATION WHEN HOVER OVER THE LISTING
+            var zoomerpos = $('#seatzone_map').position();
+            var zoomer_right_x = zoomerpos.left+$("#seatzone_map").outerWidth();
+            if (currentMousePos.x > zoomer_right_x){
+                $('.lti').css('display','none');
+                $('.tpit').css('padding-bottom','10px');
+            }else{
+                $('.lti').css('display','inherit');
+                $('.tpit').css('padding-bottom','0px');
+            }
+
+
+
+
+            $("#sectionTooltip").css({
+                "left": tooltip_x + "px",
+                "top":  tooltip_y + "px"
+            }).delay(500).queue(function (next) {
+                $(this).show();
+                next();
+            });
+        }    
+    }  
 }
+
+
+var currentMousePos = { x: -1, y: -1 };
+$(document).mousemove(function(event) {
+    currentMousePos.x = event.pageX;
+    currentMousePos.y = event.pageY;
+});
+
+
+
 
 function hide_tooltip_arrows(tooltipId)
 {
@@ -3669,7 +3814,7 @@ function hide_tooltip_arrows(tooltipId)
 }
 
 function fill_tooltip_section(parts, x, y) {
-    pars = parts.split(';');
+    var pars = parts.split(';');
     matchedSecId = pars[0];
     if (matchedSecId != "") {
         $("#sectionTooltip").clearQueue();
@@ -3679,6 +3824,7 @@ function fill_tooltip_section(parts, x, y) {
 //            ext = "swf";
 //        }
         var limg = "https://dynamicvenuemaps.com/maps/seatviews/loadimg.gif";
+        //var limg = "/map-loader.gif";
         //loading img and class (small if tooltip is small and vice versa)
         if ($("#sectionTooltip #imgsmall").attr("src").indexOf('noimg_') !== -1) {
             $("#sectionTooltip #imgsmall").attr("class", "lb_img_loading");
@@ -3838,7 +3984,7 @@ function hide_tooltip_row(delayHide) {
         } else {
             //if (document.getElementById('hfdivRow').value === 0) {
             if (imgRowHidden === false) {
-                $("#rowTooltip").show().delay(5000).queue(function () {
+                $("#rowTooltip").show().delay(3000).queue(function () {
                     if (!ifInsideTooltipRow)
                     {
                         $(this).hide();
@@ -4005,3 +4151,4 @@ function trimString(string) {
     return string.replace(/^\s+|\s+$/g, '');
 }
 //---------------------------------------------------------------
+
