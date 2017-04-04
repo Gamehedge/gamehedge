@@ -369,7 +369,7 @@ head.js(
         ///
         // "https://dynamicvenuemaps.com/maps/js/essentiels.min.js?v=201310031607",
         "/essentiels.js?v=107",
-        ///
+        /// 
 
         "https://dynamicvenuemaps.com/maps/js/jquery.fancybox.js?v=2.1.4",
         "https://dynamicvenuemaps.com/maps/maps_setting/" + venue_folder + "/map_settings.js",
