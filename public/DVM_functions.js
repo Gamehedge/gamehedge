@@ -3927,12 +3927,21 @@ function hide_tooltip_section(delayHide) {
         } else {
             if (imgSectionHidden === false)
             {
-                $("#sectionTooltip").show().delay(3000).queue(function () {
-                    if (!ifInsideTooltipSection)
-                    {
-                        $("#sectionTooltip").hide();
-                    }
-                });
+                //Sectionview tooltip in listing fix
+
+                var zoomerpos = $('#seatzone_map').position();
+                var zoomer_right_x = zoomerpos.left+$("#seatzone_map").outerWidth();
+                if (currentMousePos.x < (zoomer_right_x+5)){
+
+
+                    $("#sectionTooltip").show().delay(3000).queue(function () {
+                        if (!ifInsideTooltipSection)
+                        {
+                            $("#sectionTooltip").hide();
+                        }
+                    });
+                }
+
             }
         }
         imgSectionHidden = true;
