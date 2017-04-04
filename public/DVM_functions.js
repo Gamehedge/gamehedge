@@ -3786,7 +3786,7 @@ function jsonp_display_tooltip_section(data) {
 
             var zoomerpos = $('#seatzone_map').position();
             var zoomer_right_x = zoomerpos.left+$("#seatzone_map").outerWidth();
-            if (currentMousePos.x < (zoomer_right_x+5){
+            if (currentMousePos.x < (zoomer_right_x+5)){
 
                 $("#sectionTooltip").css({
                     "left": tooltip_x + "px",
@@ -3796,7 +3796,7 @@ function jsonp_display_tooltip_section(data) {
                     next();
                 });
             }
-            
+
         }    
     }  
 }
