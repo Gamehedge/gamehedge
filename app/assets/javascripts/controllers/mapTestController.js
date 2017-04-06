@@ -316,6 +316,57 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
                 }
             }
         })
+
+
+
+
+
+
+$timeout(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            // $('.listing-row').mouseover($scope.higlightSection($(this).attr('data-section'), true));
+            $('.listing-row').mouseover(function(){
+                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                    $('#ticketDetails').show();
+                    $('#ticketDetails2').hide();
+                }
+                var vid = $(this).attr('data-ticketid');
+                var row = $(this).attr('data-row');
+                var qty = $(this).attr('data-info');
+                var prc = $(this).attr('data-price');
+                var val = $(this).find('select').val();
+                var select_list = "";
+                $('#tvid').val(vid);
+                $scope.tvid = vid;
+                $scope.tval = val;
+                var qty = qty.split(',');
+                for(j=0;j<qty.length;j++){
+                    select_list += '<option value="'+qty[j]+'">'+qty[j]+'</option>'
+                }
+                $('#selectVal').html(select_list);
+                $("#ticket_row").html(row);
+                $("#ticket_price").html(prc);
+                //$rootScope.trow = row;
+                //$rootScope.tqty = qty;
+            });
+            $('.redirect-button').click(function(){
+                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+
+                }else{
+                    var vid = $(this).parents().eq('2').attr('data-ticketid');
+                    var val = $(this).parents().eq('2').find('select').val()
+                    $scope.relocateURL(vid,val);
+                }
+
+            });
+        }, 100);
+
+
+
+
+
+
+
         $('#tickets_list').html(htm);
         $('#tickets_list').scrollTop(-200);
         //$scope.showing_list = 20;
