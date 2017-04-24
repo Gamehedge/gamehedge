@@ -63,7 +63,9 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 
 	        });
 	        if($scope.ticket.format == "Physical"){
-	    		$scope.shipping_fee = "25.0";
+				//FREE DELIVERY FIX
+	    		//$scope.shipping_fee = "25.0";
+				$scope.shipping_fee = "0.0";
 	    	}
 	    	else{
 	    		$scope.shipping_fee = 0;
@@ -970,6 +972,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
         url: '/signature?url=settings/shipping?',
     }).then(function successCallback(response) {
     	$scope.shipping_list = response.data.settings;
+		//console.log($scope.shipping_list);
     }, function errorCallback(response) {
         //console.log(response);
     });
