@@ -50,7 +50,7 @@
         
         <div class="hidden-xs hidden-sm ggg-event vertical-center">
             <div class="singlebanner-left" id='ggg_explanation'>
-              <div class='ref'>50% Refund</div>
+              <div class='ref'>*50% Refund</div>
               If <b ng-if="event.id != '168734'">home team</b><b ng-if="event.id == '168734'">either team</b> loses by <b>{{event.home_performer.sport.ggg}} </b> or more
             </div>
             <div class="singlebanner-right">
@@ -313,7 +313,15 @@
 
       <tr>
         <td colspan="2">
-        <span id='m_refund'></span>/ea Refund
+          <div class="ggg-m-line">
+            <div style="float: left; width: 40%;">
+              <span id="m_refund">$35</span>/ea Refund
+            </div>
+            <div style="float: right;width: 55%;text-align: right;">
+              Good Game Guarantee
+            </div>
+            <div class="sep"></div>
+          </div>
         </td>
       </tr>
 

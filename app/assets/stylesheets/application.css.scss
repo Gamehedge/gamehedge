@@ -1430,7 +1430,7 @@ a {
     border: 1px solid #999;    
     position: absolute;
     z-index: 999;
-    width: 146px;
+    width: 154px;
     height: 44px;
     display: none;
 }
@@ -1441,8 +1441,24 @@ a {
     display: block;
     float: left;
     height: 40px;
-    line-height: 40px;
+    line-height: 20px;
+    text-align: center;
 }
+#ref_amount b{
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.ggg-m-line{
+    background-color: #2ca02c;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 10px;
+    padding: 5px;
+    color: #fff;
+
+}
+
 .seui-lbl-img{
     width: 40px;
     height: 40px;
@@ -5203,14 +5219,14 @@ section#game-guarantee p {
 }
 
 #home-why .page-title{
-	margin-bottom: 65px;
+	margin-bottom: 10px;
 	margin-top: 65px;
 }
 
 #home-why p{
-	font-size: 20px;
-	text-align: justify;
-	color: #a9a9a9;
+    font-size: 17px;
+    text-align: justify;
+    color: #6b6b6b;
 }
 
 @media(max-width: 991px) {
@@ -7272,7 +7288,6 @@ main#admin #order-stats .stat-item span {
         padding-bottom: 5px;
         border-radius: 3px;
 
-        position: absolute;
         height: 40px;
         bottom: 10px;
         right: 11px;
