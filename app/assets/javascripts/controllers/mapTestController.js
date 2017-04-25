@@ -348,7 +348,7 @@ $timeout(function () {
 
                     $('#seuilbl').css('top',rowoffset.top-135+'px');
                     $('#seuilbl').css('left','-153px');
-                    $('#ref_amount').html('Potential Refund<br/>'+'<b>$'+prc/2+'/ea*</b>');
+                    $('#ref_amount').html('Potential Refund<br/>'+'<b>$'+(prc/2).toFixed(2).replace(/\.0+$/,"")+'/ea*</b>');
                     $('#seuilbl').css('display','block');                    
                 }
 
@@ -363,7 +363,7 @@ $timeout(function () {
                 $('#selectVal').html(select_list);
                 $("#ticket_row").html(row);
                 $("#ticket_price").html(prc);
-                $("#m_refund").html('$'+prc/2);
+                $("#m_refund").html('$'+(prc/2).toFixed(2).replace(/\.0+$/,""));
 
                 //$rootScope.trow = row;
                 //$rootScope.tqty = qty;
@@ -490,7 +490,7 @@ $timeout(function () {
 
                     $('#seuilbl').css('top',rowoffset.top-135+'px');
                     $('#seuilbl').css('left','-153px');
-                    $('#ref_amount').html('Potential Refund<br/>'+'<b>$'+prc/2+'/ea*</b>');
+                    $('#ref_amount').html('Potential Refund<br/>'+'<b>$'+(prc/2).toFixed(2).replace(/\.0+$/,"")+'/ea*</b>');
                     $('#seuilbl').css('display','block');                    
                 }
 
@@ -507,7 +507,7 @@ $timeout(function () {
                 $('#selectVal').html(select_list);
                 $("#ticket_row").html(row);
                 $("#ticket_price").html(prc);
-                $("#m_refund").html('$'+prc/2);
+                $("#m_refund").html('$'+(prc/2).toFixed(2).replace(/\.0+$/,""));
                 //$rootScope.trow = row;
                 //$rootScope.tqty = qty;
             });
