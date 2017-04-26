@@ -324,17 +324,34 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
 
 $timeout(function () {
             $('[data-toggle="tooltip"]').tooltip();
+            var tismobile = false;
+
             // $('.listing-row').mouseover($scope.higlightSection($(this).attr('data-section'), true));
+            $('.listing-row').mouseout(function(){
+                    $('#seuilbl').css('display','none');                    
+            });
             $('.listing-row').mouseover(function(){
                 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
                     $('#ticketDetails').show();
                     $('#ticketDetails2').hide();
                 }
+                
                 var vid = $(this).attr('data-ticketid');
                 var row = $(this).attr('data-row');
                 var qty = $(this).attr('data-info');
                 var prc = $(this).attr('data-price');
                 var val = $(this).find('select').val();
+
+                if (!tismobile){
+                    var rowpos = $(this).position();
+                    var rowoffset = $(this).offset();
+
+                    $('#seuilbl').css('top',rowoffset.top-135+'px');
+                    $('#seuilbl').css('left','-153px');
+                    $('#ref_amount').html('Potential Refund<br/>'+'<b>$'+(prc/2).toFixed(2).replace(/\.0+$/,"")+'/ea*</b>');
+                    $('#seuilbl').css('display','block');                    
+                }
+
                 var select_list = "";
                 $('#tvid').val(vid);
                 $scope.tvid = vid;
@@ -346,6 +363,8 @@ $timeout(function () {
                 $('#selectVal').html(select_list);
                 $("#ticket_row").html(row);
                 $("#ticket_price").html(prc);
+                $("#m_refund").html('$'+(prc/2).toFixed(2).replace(/\.0+$/,""));
+
                 //$rootScope.trow = row;
                 //$rootScope.tqty = qty;
             });
@@ -439,18 +458,44 @@ $timeout(function () {
         }
         $('#tickets_list').html(htm);
         $timeout(function () {
+            var tismobile = false;
             $('[data-toggle="tooltip"]').tooltip();
             // $('.listing-row').mouseover($scope.higlightSection($(this).attr('data-section'), true));
+            $('.listing-row').mouseout(function(){
+                    $('#seuilbl').css('display','none');                    
+            });
+
+            $('#tickets_list').scroll(function(){
+                    $('#seuilbl').css('display','none');                    
+            });
+
+
             $('.listing-row').mouseover(function(){
                 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
                     $('#ticketDetails').show();
                     $('#ticketDetails2').hide();
+                    tismobile = true;
                 }
+                
                 var vid = $(this).attr('data-ticketid');
                 var row = $(this).attr('data-row');
                 var qty = $(this).attr('data-info');
                 var prc = $(this).attr('data-price');
                 var val = $(this).find('select').val();
+
+
+                if (!tismobile){
+                    var rowpos = $(this).position();
+                    var rowoffset = $(this).offset();
+
+                    $('#seuilbl').css('top',rowoffset.top-135+'px');
+                    $('#seuilbl').css('left','-153px');
+                    $('#ref_amount').html('Potential Refund<br/>'+'<b>$'+(prc/2).toFixed(2).replace(/\.0+$/,"")+'/ea*</b>');
+                    $('#seuilbl').css('display','block');                    
+                }
+
+
+
                 var select_list = "";
                 $('#tvid').val(vid);
                 $scope.tvid = vid;
@@ -462,6 +507,7 @@ $timeout(function () {
                 $('#selectVal').html(select_list);
                 $("#ticket_row").html(row);
                 $("#ticket_price").html(prc);
+                $("#m_refund").html('$'+(prc/2).toFixed(2).replace(/\.0+$/,""));
                 //$rootScope.trow = row;
                 //$rootScope.tqty = qty;
             });
