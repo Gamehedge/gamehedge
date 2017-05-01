@@ -1591,6 +1591,28 @@ a {
 }
 
 
+.mobile-menu-row{
+    display: block;
+}
+.mobile-menu-row div{
+    display: block;
+}
+.mobile-menu-row div a{
+    display: block;
+    padding-left: 20px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+.mobile-menu-row-sep{
+    display: block;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-top: 1px solid #6f6f6f;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+
 #tickets-map .tickets-data .right-content{
     justify-content: flex-start;
 }
