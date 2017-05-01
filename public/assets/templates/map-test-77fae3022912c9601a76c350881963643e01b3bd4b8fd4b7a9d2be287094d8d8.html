@@ -122,6 +122,11 @@
             <p class="second-line capitalize" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'EEE, MMM dd hh:mm a' : 'UTC'}} at <span class="blue-span">{{event.venue.name}}</span></p>
             <p class="second-line capitalize" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'EEE, MMM dd' : 'UTC'}} TBD at <span class="blue-span">{{event.venue.name}}</span></p>
           </span>
+          <div class="mobile-top-phone">
+            <div class="mobile-top-phone-icon" onclick="displayPhoneInfo();">
+              <i class="fa fa-phone-square" aria-hidden="true"></i>
+            </div>
+          </div>
         </div>  
           
       </div>
@@ -476,6 +481,20 @@
   </section>
   
 </div>
+
+<script>
+function displayPhoneInfo(){
+  //alert('1');
+  $( "#phoneDialog" ).dialog({dialogClass: "phone-d"});
+}
+</script>
+<div id="phoneDialog" title="Call Us" style="display: none;">
+<center>
+  <p>Call us and we'll beat any price and fees by 10%!</p>
+  <div style=""><a href="tel:1-888-804-4330">888-804-4330</a></div>
+</center>  
+</div>
+
 
 <script>
 $( "body" ).on( "touchstart", '.ui-dialog-titlebar',function() {

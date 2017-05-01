@@ -2712,6 +2712,23 @@ a {
     color: #9aca3c;
 }
 
+.mobile-top-phone{
+    display: flex;
+}
+.mobile-top-phone-icon{
+    width: 30px;
+    height: 30px;
+    display: block;
+    margin-right: 10px;
+}
+.mobile-top-phone-icon .fa-phone-square{
+    font-size: 34px;
+}
+.phone-d{
+    top: 67px !important;
+}
+
+
 @media(max-width: 1200px) {
     .top-banner .logo-left .b-title{
         font-size: 88px;
