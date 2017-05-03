@@ -70820,7 +70820,12 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 
 
 		if($rootScope.isLoggedin == true){
-			if(($scope.card.last_digits == "") || ($scope.card.last_digits == undefined)){
+			if ($scope.card == null){
+				$scope.processing = false;
+				$scope.payProcess = false;
+				mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': 'No credit card selected'});
+				swal("Error", "No credit card selected", "warning");				
+			}else if(($scope.card.last_digits == "") || ($scope.card.last_digits == undefined)){
 				$scope.processing = false;
 				$scope.payProcess = false;
 				mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': 'No credit card selected'});
