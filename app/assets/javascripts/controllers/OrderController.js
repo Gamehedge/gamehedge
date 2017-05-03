@@ -558,7 +558,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 
 
 		if($rootScope.isLoggedin == true){
-			if($scope.last_digits == ""){
+			if(($scope.last_digits == "") || ($scope.last_digits == undefined)){
 				$scope.processing = false;
 				$scope.payProcess = false;
 				mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': 'No credit card selected'});
@@ -660,9 +660,14 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			    	}
 			    	else{
 			    		console.log("Error");
+						console.log("Post processing");
 			    		console.log(response);
 
 						mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': 'Unknown Error'});
+
+
+			    		$scope.processing = false;
+			    		$scope.payProcess = false;
 
 			    		swal("Error", response.data.error, "error");
 			    	}
