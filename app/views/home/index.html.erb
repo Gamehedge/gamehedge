@@ -20,6 +20,8 @@
                 <div class="col-xs-2"></div>
             </div>
         </div>
+
+<!--
         <div class="menu-container">
             <div class="row menu-row" ng-show="!$root.isLoggedin">
                 <div class="col-xs-3"><img class="user-icon" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/profile icon.png"></div>
@@ -50,12 +52,6 @@
                 <div class="col-xs-3" ng-if="league.active == true"></div>
                 <div class="col-xs-9" ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()" ng-cloak>{{league.name | uppercase}}</a></div>
             </div>
-<!--
-            <div class="row menu-row">
-                <div class="col-xs-3"></div>
-                <div class="col-xs-9"><a href="/performer/14528/super-bowl-tickets" ng-click="hideMenus()">Super Bowl</a></div>
-            </div>
--->
 
             <div class="row menu-row">
                 <div class="col-xs-3"></div>
@@ -80,6 +76,62 @@
                 <div class="col-xs-9"><a href="/contact/" ng-click="hideMenus()">Contact Us</a></div>
             </div>
         </div>
+-->
+
+
+        <div class="menu-container" style="padding-top: 5px;">
+            <div class="mobile-menu-row" ng-show="!$root.isLoggedin">
+                <div><a href="/login" ng-click="hideMenus()">Login</a></div>
+            </div>
+            <div class="mobile-menu-row" ng-show="$root.isLoggedin">
+                <div><p ng-cloak>{{$root.user.name | uppercase}}</p></div>
+            </div>
+            <div class="mobile-menu-row" ng-show="$root.isLoggedin">
+                <div><a href="/member" ng-click="hideMenus()">Your profile</a></div>
+            </div>
+            <div class="mobile-menu-row" ng-show="$root.isLoggedin">
+                <div><a  href="/order_history" ng-click="hideMenus()">Order history</a></div>
+            </div>
+            <div class="mobile-menu-row" ng-show="$root.isLoggedin">
+                <div><a ng-click="logout()" ng-click="hideMenus()">Logout</a></div>
+            </div>
+
+            <div class="mobile-menu-row-sep"></div>
+
+
+            <div class="mobile-menu-row" ng-repeat-start="league in leagueList" ng-if="$first">
+                <div ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()" ng-cloak>{{league.name | uppercase}}</a></div>
+            </div>
+            <div class="mobile-menu-row" ng-repeat-end ng-if="!$first">
+                <div ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()" ng-cloak>{{league.name | uppercase}}</a></div>
+            </div>
+
+
+            <div class="mobile-menu-row-sep"></div>
+
+            <div class="mobile-menu-row">
+                <div><a href="/how-it-works/" ng-click="hideMenus()">Claim Refund</a></div>
+            </div>
+
+            <div class="mobile-menu-row">
+                <div><a href="/testimonials/" ng-click="hideMenus()">Testimonials</a></div>
+            </div>
+
+            <div class="mobile-menu-row">
+                <div><a href="/faq/" ng-click="hideMenus()">FAQ</a></div>
+            </div>
+            <div class="mobile-menu-row">
+                <div><a href="/contact/" ng-click="hideMenus()">Contact Us</a></div>
+            </div>
+
+            <div class="mobile-menu-row-sep"></div>
+            
+            <div class="mobile-menu-row">
+                <div><a href="tel:8888044330">Toll Free: 888-804-4330</a></div>
+            </div>            
+        </div>
+
+
         <div class="mobile-menu-footer">
             <h2>Connect with us</h2>
             <nav role="navigation" class="footer-social-media">

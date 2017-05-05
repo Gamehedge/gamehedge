@@ -1569,6 +1569,51 @@ a {
     font-weight: normal;
 }
 
+.phone-dialog1{
+    display: block;
+    position: absolute;
+    width: 100%;
+    top: 67px;
+    background-color: #7ba733;
+    z-index: 99;
+    padding: 20px;
+    font-size: 26px;
+    color: #fff;
+}
+.phone-dialog1 .fa-times{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 26px;
+    color: #555;
+}
+.phone-dialog1 a{
+    color: #000 !important;
+}
+
+
+.mobile-menu-row{
+    display: block;
+}
+.mobile-menu-row div{
+    display: block;
+}
+.mobile-menu-row div a{
+    display: block;
+    padding-left: 20px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+.mobile-menu-row-sep{
+    display: block;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-top: 1px solid #6f6f6f;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+
 #tickets-map .tickets-data .right-content{
     justify-content: flex-start;
 }
@@ -2712,6 +2757,23 @@ a {
 .subheader1m span{
     color: #9aca3c;
 }
+
+.mobile-top-phone{
+    display: flex;
+}
+.mobile-top-phone-icon{
+    width: 30px;
+    height: 30px;
+    display: block;
+    margin-right: 10px;
+}
+.mobile-top-phone-icon .fa-phone-square{
+    font-size: 34px;
+}
+.phone-d{
+    top: 67px !important;
+}
+
 
 @media(max-width: 1200px) {
     .top-banner .logo-left .b-title{

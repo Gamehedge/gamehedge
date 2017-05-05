@@ -515,7 +515,7 @@
 									    </div>
 			  						</div>
 			  						<div ng-if="$root.isLoggedin">
-				  						<button ladda="$parent.addCardProcess" ng-disabled="$parent.$parent.processing" ng-click="confirmSave('card')">SAVE</button>
+				  						<button style="background-color: green; border-color: green;" ladda="$parent.addCardProcess" ng-disabled="$parent.$parent.processing" ng-click="confirmSave('card')">SAVE</button>
 				  						<button ng-disabled="$parent.$parent.processing" ng-click="cancelAdd('card')">CANCEL</button>
 				  					</div>
 								</div>
@@ -553,7 +553,7 @@
 					  						<div class="title">No Credit Cards</div>
 					  					</span>
 				  					</span>
-				  					<button ng-disabled="$parent.processing" ng-click="selectAddress('card')">DONE</button><button ng-disabled="$parent.processing" ng-click="addField('card')">ADD</button>
+				  					<button ng-disabled="$parent.processing" ng-click="selectAddress('card')" >DONE</button><button ng-disabled="$parent.processing" ng-click="addField('card')" style="background-color: green; border-color: green;">ADD</button>
 			  					</div>
 							</div>
 

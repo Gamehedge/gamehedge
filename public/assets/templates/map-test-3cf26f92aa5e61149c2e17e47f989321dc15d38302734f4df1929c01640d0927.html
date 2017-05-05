@@ -122,6 +122,11 @@
             <p class="second-line capitalize" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'EEE, MMM dd hh:mm a' : 'UTC'}} at <span class="blue-span">{{event.venue.name}}</span></p>
             <p class="second-line capitalize" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'EEE, MMM dd' : 'UTC'}} TBD at <span class="blue-span">{{event.venue.name}}</span></p>
           </span>
+          <div class="mobile-top-phone">
+            <div class="mobile-top-phone-icon" id="mobile_phone_btn">
+              <i class="fa fa-phone-square" aria-hidden="true"></i>
+            </div>
+          </div>
         </div>  
           
       </div>
@@ -476,6 +481,37 @@
   </section>
   
 </div>
+
+<script>
+var phonedcnt = 0;
+$("#mobile_phone_btn").click(function() {
+    displayPhoneInfo2();
+});
+
+function displayPhoneInfo2(){
+/*
+  $( "#phoneDialog" ).dialog(
+    {
+      dialogClass: "phone-d"
+    }
+    );
+*/
+
+  $('#phoneDialog').removeClass('m-invis');
+}
+function closePhoneInfo2(){
+  $('#phoneDialog').addClass('m-invis');
+}
+</script>
+
+<div id="phoneDialog" title="Call Us" class="phone-dialog1 m-invis">
+<i class="fa fa-times" aria-hidden="true" onclick="closePhoneInfo2();"></i>
+<center>
+  <p>Call us and we'll beat any price and fees by 10%!</p>
+  <div style=""><a href="tel:1-888-804-4330">888-804-4330</a></div>
+</center>  
+</div>
+
 
 <script>
 $( "body" ).on( "touchstart", '.ui-dialog-titlebar',function() {
