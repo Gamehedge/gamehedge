@@ -68472,9 +68472,17 @@ app = angular.module('gamehedge',[
             templateUrl: "map-test.html",
             controller: 'mapTestController',
         })	
+        .when('/govx/:eventId/:slug', {
+            templateUrl: "govx.html",
+            controller: 'govxController',
+        })	
         .when('/order/:ticektId', {
             templateUrl: "order.html",
             controller: 'OrderController',
+        })
+        .when('/govx-order/:ticektId', {
+            templateUrl: "govx-order.html",
+            controller: 'GovxOrderController',
         })
         .when('/confirm/:orderId', {
             templateUrl: "confirm.html",
@@ -69514,6 +69522,1250 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 });
 controllers = angular.module('gamehedge')
 
+controllers.controller('GovxOrderController', function($scope,$rootScope,$http,Auth,$location,$routeParams,$timeout,apiService,$filter,$window,Analytics){
+
+	var paybuttonloadingtime = 0;
+
+    var trigger555 = setInterval(function() {
+			paybuttonloadingtime++;
+			if ($('.confirm_pay').offset().top > 0){
+                    clearInterval(trigger555);
+					mixpanel.track("PayButton Visible", {
+			        	"WaitingTime": Math.round(paybuttonloadingtime/10*100)/100,
+    				});
+			}
+     }, 100);
+
+
+
+    var trigger = setInterval(function() {
+        if ($(window).width() > 992){
+            if($(".badge-container").offset().top > 0){
+                if($(".confirm_pay").offset().top > $(".badge-container").offset().top){
+                    var diff = $(".confirm_pay").offset().top - $(".badge-container").offset().top;
+                    $(".badge-container").css("padding-top", diff + "px");
+                    clearInterval(trigger);
+                 }else{
+                    clearInterval(trigger);
+                 }
+             }
+         }
+     }, 100);
+    
+    $rootScope.showHeader = true;
+    $scope.getTicket = function(){
+		$http({
+            method: 'GET',
+            url: '/tickets/show?id='+$routeParams.ticektId,
+        }).then(function successCallback(response) {
+        	$scope.ticket = response.data;
+        	//console.log("Ticket")
+        	//console.log($scope.ticket);
+        	apiService.getData('/api/v1/events/'+$scope.ticket.event.id)
+	            .then(function(response){
+	            	// console.log("Event");
+	            	// console.log(response);
+	                $scope.event = response;
+	                $rootScope.title = "Order | Gamehedge";
+					$rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team loses by "+$scope.event.home_performer.sport.ggg+" or more, get 50% of your ticket price back.";
+	                $scope.amount = $location.search()['amount'];
+	                $scope.calculateValues();
+
+
+					Moengage.track_event('CheckoutPage Visit', {'url': window.location.href , 
+						'away_team': $scope.event.away_performer.name, 
+						'home_team': $scope.event.home_performer.name, 
+						'event_date_time': $scope.event.occurs_at, 
+						'event_location': $scope.event.venue.name, 
+						'ticket_section': $scope.ticket.section,
+						'ticket_row': $scope.ticket.row,
+						'ticket_price_each': $scope.ticket.retail_price
+					});
+
+
+	        });
+	        if($scope.ticket.format == "Physical"){
+				//FREE DELIVERY FIX
+	    		//$scope.shipping_fee = "25.0";
+				$scope.shipping_fee = "0.0";
+	    	}
+	    	else{
+	    		$scope.shipping_fee = 0;
+	    	}
+	    	$scope.ticketsLoaded = true;
+        }, function errorCallback(response) {
+            //console.log(response);
+        });
+	}
+
+	$scope.checkConfirmEmail =function(){
+		if ($scope.client.confirm_email != undefined){
+			$scope.client.confirm_email = $scope.client.confirm_email.toLowerCase(); 		
+		}
+	}
+
+	$scope.checkEmail =function(){
+		if ($scope.client.email != undefined){
+			$scope.client.email = $scope.client.email.toLowerCase(); 		
+		}
+
+		var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		if(re.test($scope.client.email) == true){
+			$http({
+	            method: 'POST',
+	            url: '/clients/exists',
+	            data: {
+	            	email: $scope.client.email,
+	            },
+	        }).then(function successCallback(response) {
+	        	//console.log(response.data)
+	        	if(response.data == "true"){
+	        		$('#myModal').modal('show');
+	        	}
+	        });
+		}
+	}
+
+	$scope.getPromoCodes = function(){
+		apiService.getData('/api/v1/promo_codes/')
+            .then(function(response){
+                //console.log("Promo Codes");
+            	//console.log(response);
+                $scope.promo_codes = response;
+                var today = new Date()
+                today.setHours(today.getHours()-(today.getTimezoneOffset()/60));
+                today = today.toISOString();
+                today = today.split('T')[0] + "T00:00:00.000Z";
+                for(i=0;i<$scope.promo_codes.length;i++){
+                	var date_1 = new Date($scope.promo_codes[i].start_date).toISOString();
+                	var date_2 = new Date($scope.promo_codes[i].end_date).toISOString();
+                	today = new Date(today);
+                	date_1 = new Date(date_1);
+                	date_2 = new Date(date_2);
+                	if($scope.promo_codes[i].active == true && today >= date_1 && today <= date_2){
+                		$scope.active_promos = true;
+                		break;
+                	}
+                }
+                $scope.getServiceFees();
+        });
+	}
+
+	$scope.getServiceFees= function(){
+		apiService.getData('/api/v1/service_fees/')
+            .then(function(response){
+                $scope.service_fees = response
+                angular.forEach($scope.service_fees, function (fee) {
+			    	fee.minimum_amount = Number(fee.minimum_amount);
+			   	});
+            	$scope.service_fees = $filter('orderBy')($scope.service_fees,'minimum_amount');
+            	//console.log("Service Fees");
+            	//console.log($scope.service_fees);
+            	$scope.getTicket();
+        });
+	}
+
+	$scope.checkCardNumber = function(){
+		$scope.card.card_company = $.payment.cardType($scope.card.last_digits);
+	}
+
+	$scope.calculateValues = function(){
+		if($scope.ticket && $scope.amount){
+			$scope.subtotal = (Number($scope.ticket.retail_price) * Number($scope.amount));
+		}
+		if(typeof $scope.service_fees != "undefined" && $scope.service_fees.length != 0){
+			for(i=0;i<$scope.service_fees.length;i++){
+				if(i+1 == $scope.service_fees.length){
+					$scope.service_fee = Number($scope.service_fees[i].fee_amount)*$scope.subtotal/100;
+					break;
+				}
+				else if($scope.subtotal > $scope.service_fees[i].minimum_amount && $scope.subtotal <= $scope.service_fees[i+1].minimum_amount){
+					$scope.service_fee = Number($scope.service_fees[i].fee_amount)*$scope.subtotal/100;
+					break;
+				}
+			}
+		}
+		else{
+			$scope.service_fee = 0;
+		}
+
+		if ($scope.amount > 1){
+			jQuery('#seats_note').removeClass('m-invis');
+			jQuery('#seats_note2').removeClass('m-invis');
+		}else{
+			jQuery('#seats_note').addClass('m-invis');
+			jQuery('#seats_note2').addClass('m-invis');
+		}
+		//Fix for promocodes. All should be uppercased
+		if($scope.promo_code != undefined){
+			$scope.promo_code = $scope.promo_code.toUpperCase();
+		}
+
+		for(i=0;i<$scope.promo_codes.length;i++){
+			// console.log($scope.promo_codes[i].code);
+			// console.log($scope.promo_code);
+			if($scope.promo_code == $scope.promo_codes[i].code){
+				if($scope.promo_codes[i].is_percentage == true){
+					$scope.discount = ($scope.subtotal + $scope.service_fee)*Number($scope.promo_codes[i].value)/100;
+				}
+				else{
+					if($scope.subtotal >= 200){
+						//alert($scope.subtotal);
+						$scope.discount = Number($scope.promo_codes[i].value);
+					}else{
+						$scope.discount = 0;						
+					}
+				}
+				break;
+			}
+			else{
+				$scope.discount = 0;
+			}
+		}
+		if(typeof $scope.service_fees != "undefined"){
+			if($scope.ticket.format == "Physical"){
+				$scope.total = $scope.subtotal + $scope.service_fee + Number($scope.shipping_fee) - $scope.discount;
+			}
+			else{
+				$scope.total = Number($scope.subtotal) + Number($scope.service_fee) - $scope.discount;
+			}
+		}
+	}
+
+
+	$scope.order_country_change2 = function(){
+
+		if ( ((document.getElementById("country-billing").value == 'us')&&(document.getElementById('state_id-billing').length < 25)) || (document.getElementById("country-billing").value != 'us')){
+
+			//if ($scope.billing_address.country_code != ''){
+			$scope.billing_address.region = '';
+			//}
+			var order_cnt_value = document.getElementById("country-billing").value;
+			if(order_cnt_value == 'ca'){
+				var main_country_sel = document.getElementById('state_id-billing');
+				var sel_country_ca = document.getElementById('state_ca');
+				//main_country_sel.selectedIndex = 0;
+				main_country_sel.innerHTML = sel_country_ca.innerHTML;
+			}	
+			if(order_cnt_value == 'us'){
+				var main_country_sel = document.getElementById('state_id-billing');
+				var sel_country_us = document.getElementById('state_us');
+				//main_country_sel.selectedIndex = 0;
+				main_country_sel.innerHTML = sel_country_us.innerHTML;
+			}
+			
+
+		}
+
+	}
+
+
+
+	$scope.selectAddress = function(type){
+		if(type == "shipping"){
+			$scope.shipping_address = $scope.addresses[$scope.shipping_address_index];
+			$scope.changed_shipping_address = true;
+			$scope.edit_deliver = 1;
+		}
+		else if(type == "billing"){
+			$scope.billing_address = $scope.addresses[$scope.billing_address_index];
+			$scope.changed_billing_address = true;
+			$scope.edit_billing = 1;
+		}
+		if(type == "card"){
+			$scope.card = $scope.cards[$scope.credit_card_index];
+			$scope.changed_credit_card = true;
+			$scope.edit_credit_card = 1;
+		}
+		$scope.editing = false;
+	}
+
+	$scope.toogleReview = function(toogle){
+		$scope.editing = true;
+		if(toogle == "card"){
+			if($rootScope.isLoggedin == false){
+				$scope.edit_credit_card = 3;
+			}
+			else{
+				$scope.edit_credit_card = 2;
+			}
+		}
+		else if(toogle == "billing"){
+			if($rootScope.isLoggedin == false){
+				$scope.edit_billing = 3;
+			}
+			else{
+				$scope.edit_billing = 2;
+			}
+		}
+		else if(toogle == "deliver"){
+			if($rootScope.isLoggedin == false){
+				$scope.edit_deliver = 3;
+			}
+			else{
+				$scope.edit_deliver = 2;
+			}
+		}
+		$scope.creditCardFieldEnable();
+	}
+	$scope.creditCardFieldEnable = function(){
+		$timeout(function(){
+			$('input#cc').payment('formatCardNumber');
+			$('input#cvv').payment('formatCardCVC');
+			$('input.numeric').payment('restrictNumeric');
+		},100);
+	}
+
+	$scope.addField = function(type){
+		if(type == "shipping"){
+			$scope.edit_deliver = 3;
+			$scope.shipping_address = {};
+			$scope.shipping_address.country_code = "";
+			$scope.shipping_address.id = "";
+			$scope.shipping_address.locality = "";
+			$scope.shipping_address.name = "";
+			$scope.shipping_address.postal_code = "";
+			$scope.shipping_address.region = "";
+			$scope.shipping_address.street_address = "";
+		}
+		else if(type == "card"){
+			$scope.edit_credit_card = 3;
+			$scope.card.cvv = ""
+			$scope.card.expiration_month = ""
+			$scope.card.expiration_year = ""
+			$scope.card.last_digits = ""
+			$scope.card.card_company = ""
+			$scope.creditCardFieldEnable();
+		}
+		else if(type == "billing"){
+			$scope.edit_billing = 3;
+			$scope.billing_address = {};
+			$scope.billing_address.country_code = "";
+			$scope.billing_address.id = "";
+			$scope.billing_address.locality = "";
+			$scope.billing_address.name = "";
+			$scope.billing_address.postal_code = "";
+			$scope.billing_address.region = "";
+			$scope.billing_address.street_address = "";
+		}
+	}
+
+	$scope.cancelAdd = function(type){
+		if(type == "shipping"){
+			$scope.edit_deliver = 1;
+			if($scope.changed_shipping_address == true){
+				$scope.shipping_address = $scope.addresses[$scope.shipping_address_index];
+			}
+			else{
+				$scope.shipping_address = $scope.client.primary_shipping_address;
+			}
+		}
+		else if(type == "card"){
+			$scope.edit_credit_card = 1;
+			if($scope.changed_credit_card == true){
+				$scope.card = $scope.cards[$scope.credit_card_index];
+			}
+			else{
+				$scope.card = $scope.client.primary_credit_card;
+			}
+		}
+		else if(type == "billing"){
+			$scope.edit_billing = 1;
+			if($scope.changed_billing_address == true){
+				$scope.billing_address = $scope.addresses[$scope.billing_address_index];
+			}
+			else{
+				$scope.billing_address = $scope.client.primary_billing_address;
+			}
+		}
+		$scope.editing = false;
+	}
+
+	$scope.createCard = function(){
+		$http({
+	        method: 'POST',
+	        url: '/clients/add_credit_card',
+	        data: { 
+	        	id: $scope.client.id,
+	        	address_id: $scope.billing_address.id,
+	        	number: $scope.card.last_digits,
+	        	expiration_month: $scope.card.expiration_month,
+	        	expiration_year: $scope.card.expiration_year,
+	        	verification_code: $scope.card.cvv,
+	        	name: $scope.client.name,
+	        },
+	    }).then(function successCallback(response) {
+	    	if(response.data.error != undefined){
+	    		$scope.processing = false;
+	    		$scope.payProcess = false;
+	    		$scope.edit_deliver = 1;
+				$scope.edit_billing = 1;
+				$scope.edit_credit_card = 3;
+				/*Scroll to CC Input field*/
+				jQuery('html, body').animate({
+        			scrollTop: $(".pay_with_title").offset().top
+    			}, 500);
+
+				swal("Credit Card Error", response.data.error, "error");
+	    	}
+	    	else{
+		    	$scope.card = response.data;
+		    	$scope.cards.push($scope.card);
+		    	$scope.credit_card_index = 0;
+		    	//console.log($scope.card);
+		    	$scope.confirmPay();
+		    }
+	    }, function errorCallback(response) {
+	    	//console.log(response);
+	    	scope.processing = false;
+			$scope.payProcess = false;
+		    $scope.edit_credit_card = 3;
+		    $scope.edit_billing = 1;
+		    $scope.edit_deliver = 1;
+	    });
+	}
+		
+	$scope.goToConfirm = function(){
+		// $rootScope.orderId = $scope.order.id;
+		$rootScope.orderId = 873465873465;
+		window.location.href = '/confirm/'+String($scope.order.id)+'?new_client='+$scope.first_time;
+	}
+
+	$scope.confirmSave = function(type){
+		$scope.processing = true;
+		$scope.editing = false;
+		if(type == "shipping"){
+			$scope.addShippingProcess = true;
+			if($scope.shipping_address.name != "" && $scope.shipping_address.street_address != "" && $scope.shipping_address.locality != "" && $scope.shipping_address.region != "" && $scope.shipping_address.postal_code != "" && $scope.shipping_address.country_code != ""){
+				$http({
+			        method: 'POST',
+			        url: '/clients/add_address',
+			        data: { 
+			        	id: $scope.client.id,
+			        	name: $scope.shipping_address.name,
+			        	street_address: $scope.shipping_address.street_address,
+			        	locality: $scope.shipping_address.locality,
+			        	region: $scope.shipping_address.region,
+			        	postal_code: $scope.shipping_address.postal_code,
+			        	country_code: $scope.shipping_address.country_code,
+			        },
+			    }).then(function successCallback(response) {
+			    	$scope.shipping_address = response.data;
+			    	$scope.addresses.push($scope.shipping_address);
+			    	$scope.shipping_address_index = $scope.addresses.length - 1;
+			    	//console.log($scope.shipping_address);
+			    	$scope.edit_deliver = 1;
+			    	$scope.processing = false;
+			    	$scope.addShippingProcess = false;
+			    }, function errorCallback(response) {
+			    	//console.log(response);
+			    	$scope.processing = false;
+			    	$scope.addShippingProcess = false;
+			    });
+			}
+			else{
+				$scope.addShippingProcess = false;
+				$scope.processing = false;
+				swal("Error", "All fields are required", "warning");
+			}
+		}
+		else if(type == "card"){
+			$scope.addCardProcess = true;
+			if($scope.card.cvv != "" && $scope.card.expiration_month != "" && $scope.card.expiration_year != "" && $scope.card.last_digits != "" && $.payment.validateCardNumber($scope.card.last_digits) == true && $.payment.validateCardExpiry($scope.card.expiration_month,$scope.card.expiration_year) == true){
+				$http({
+			        method: 'POST',
+			        url: '/clients/add_credit_card',
+			        data: { 
+			        	id: $scope.client.id,
+			        	address_id: $scope.billing_address.id,
+			        	number: $scope.card.last_digits,
+			        	expiration_month: $scope.card.expiration_month,
+			        	expiration_year: $scope.card.expiration_year,
+			        	verification_code: $scope.card.cvv,
+			        	name: $scope.client.name,
+			        },
+			    }).then(function successCallback(response) {
+			    	if(response.data.error != undefined){
+			    		if($scope.changed_credit_card == true){
+							$scope.card = $scope.cards[$scope.credit_card_index];
+						}
+						else{
+							$scope.card = $scope.client.primary_credit_card;
+						}
+						swal("Error", response.data.error, "error");
+			    	}
+			    	else{
+				    	$scope.card = response.data;
+				    	$scope.cards.push($scope.card);
+				    	$scope.credit_card_index = $scope.cards.length - 1;
+				    	//console.log($scope.card);
+				    }
+				    $scope.processing = false;
+				    $scope.addCardProcess = false;
+				    $scope.edit_credit_card = 1;
+			    }, function errorCallback(response) {
+			    	//console.log(response);
+			    	$scope.processing = false;
+			    	$scope.addCardProcess = false;
+			    });
+			}
+			else if($.payment.validateCardExpiry($scope.card.expiration_month,$scope.card.expiration_year) == false){
+				$scope.processing = false;
+				$scope.addCardProcess = false;
+				swal("Error", "Expiration date not valid!", "warning");
+			}
+			else if($.payment.validateCardNumber($scope.card.last_digits) == false){
+				$scope.processing = false;
+				$scope.addCardProcess = false;
+				swal("Error", "Card number not valid!", "warning");
+			}
+			else{
+				$scope.processing = false;
+				$scope.addCardProcess = false;
+				swal("Error", "All fields are required", "warning");
+
+
+			}
+		}
+		else if(type == "billing"){
+			$scope.addBillingProcess = true;
+			if($scope.billing_address.name != "" && $scope.billing_address.street_address != "" && $scope.billing_address.locality != "" && $scope.billing_address.region != "" && $scope.billing_address.postal_code != "" && $scope.billing_address.country_code != ""){
+				$http({
+			        method: 'POST',
+			        url: '/clients/add_address',
+			        data: { 
+			        	id: $scope.client.id,
+			        	name: $scope.billing_address.name,
+			        	street_address: $scope.billing_address.street_address,
+			        	locality: $scope.billing_address.locality,
+			        	region: $scope.billing_address.region,
+			        	postal_code: $scope.billing_address.postal_code,
+			        	country_code: $scope.billing_address.country_code,
+			        },
+			    }).then(function successCallback(response) {
+			    	$scope.billing_address = response.data;
+			    	$scope.addresses.push($scope.billing_address);
+			    	$scope.billing_address_index = $scope.addresses.length - 1;
+			    	//console.log($scope.billing_address);
+			    	$scope.edit_billing = 1;
+			    	$scope.processing = false;
+			    	$scope.addBillingProcess = false;
+			    }, function errorCallback(response) {
+			    	//console.log(response);
+			    	$scope.processing = false;
+			    	$scope.addBillingProcess = false;
+			    });
+			}
+			else{
+				$scope.processing = false;
+			    $scope.addBillingProcess = false;
+			    swal("Error", "All fields are required", "warning");
+
+			}
+		}
+	}
+
+	$scope.confirmPay = function(){
+		$scope.processing = true;
+		$scope.payProcess = true;
+		$scope.edit_deliver = 1;
+		$scope.edit_billing = 1;
+		$scope.edit_credit_card = 1;
+
+
+		jQuery('.form-control').removeClass('form-error');
+
+		jQuery('#state_id-billing').removeClass('form-error');
+		jQuery('#country-billing').removeClass('form-error');
+
+
+		if($rootScope.isLoggedin == true){
+			if ($scope.card == null){
+				$scope.processing = false;
+				$scope.payProcess = false;
+				mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': 'No credit card selected'});
+				swal("Error", "No credit card selected", "warning");				
+			}else if(($scope.card.last_digits == "") || ($scope.card.last_digits == undefined)){
+				$scope.processing = false;
+				$scope.payProcess = false;
+				mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': 'No credit card selected'});
+				swal("Error", "No credit card selected", "warning");				
+			}
+			else{
+				var service_type = "LEAST_EXPENSIVE"
+				if($("#shipping option:selected").text() == "Priority Overnight"){
+					service_type = "PRIORITY_OVERNIGHT";
+				}
+				else if($("#shipping option:selected").text() == "FedEx 2 Day"){
+					service_type = "FEDEX_2_DAY";
+				}
+				var type = $scope.ticket.format;
+				if($scope.ticket.format == "Physical"){
+					type = "FedEx";
+				}
+				else if($scope.ticket.format == "Eticket"){
+					type = "Eticket";
+				}
+				else if($scope.ticket.format == "Flash_seats"){
+					type = "FlashSeats";
+				}
+				else if($scope.ticket.format == "TM_mobile"){
+					type = "TMMobile";
+				}
+                var away_team = "";
+                if($scope.event.away_performer != undefined){
+                    away_team = $scope.event.away_performer.name
+                }
+				$http({
+			        method: 'POST',
+			        url: '/orders/create',
+			        data: { 
+			        	user_id: $rootScope.user.te_uid,
+			        	billing_address_id: $scope.billing_address.id,
+			        	ship_address_id: $scope.shipping_address.id,
+			        	credit_card_id: $scope.card.id,
+			        	quantity: $scope.amount,
+			        	ticket_group_id: $scope.ticket.id,
+			        	price: $scope.ticket.retail_price,
+			        	ticket_group_signature: $scope.ticket.signature,
+			        	type: type,
+			        	service_type: service_type,
+			        	ship_to_name: $rootScope.user.name,
+			        	amount: Number($scope.total.toFixed(2)),
+			        	email_address_id: $scope.client.primary_email_address.id,
+			        	pay_type: "credit_card",
+			        	shipment_price: Number($scope.shipping_fee),
+			        	session_id: $scope.session_id,
+			        	user_agent: navigator.userAgent,
+			        	selectedPhone: $scope.client.primary_phone_number.id,
+			        	event_id: $scope.event.id,
+			        	event_name: $scope.event.name,
+			        	event_occurs_at: $scope.event.occurs_at,
+			        	event_location: $scope.event.venue.name + ", " +$scope.event.location,
+			        	section: $scope.ticket.section,
+			        	row: $scope.ticket.row,
+			        	ticket_type: $scope.ticket.format,
+			        	service_fee:  Number($scope.service_fee.toFixed(2)),
+			        	ticket_format: $scope.ticket.format,
+			        	cost: $scope.ticket.wholesale_price,
+			        	discount: Number($scope.discount.toFixed(2)),
+			        	subtotal: Number($scope.subtotal.toFixed(2)),
+			        	email: $scope.client.primary_email_address.address,
+			        	broker_name: $scope.ticket.office.name,
+			        	last_digits: $scope.card.last_digits,
+			        	address: $scope.shipping_address.street_address,
+			        	phone: $scope.client.primary_phone_number.number,
+			        	event_home_team: $scope.event.home_performer.name,
+			        	event_away_team: away_team,
+			        	event_te_uid: $scope.event.id,
+			        	ticket_notes: $scope.ticket.public_notes,
+			        	sport_id: $scope.event.home_performer.sport.id
+			        },
+			    }).then(function successCallback(response) {
+			    	$scope.processing = false;
+			    	$scope.payProcess = false;
+			    	if(response.data.error == undefined){
+			    		$scope.order = response.data;
+			    		$scope.order_success = true;
+
+						/*
+			    		// Create transaction
+			    		Analytics.addTrans($scope.order.id, 'www.gamehedge.com', $scope.total, 0, 0);
+			    		// Add items to transaction
+						Analytics.addItem($scope.order.id, $scope.ticket.id, $scope.event.name, $scope.event.sport.name, $scope.ticket.retail_price, Number($scope.amount));
+						// Complete transaction
+						Analytics.trackTrans();
+						*/
+						
+						mixpanel.track("PayButton Click", {'Status':'Success'});
+
+						$scope.goToConfirm();
+						// Clear transaction
+						// Analytics.clearTrans();
+			    		//console.log("Order");
+			    		//console.log($scope.order);
+			    	}
+			    	else{
+			    		console.log("Error");
+						console.log("Post processing");
+			    		console.log(response);
+
+						mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': 'Unknown Error'});
+
+
+			    		$scope.processing = false;
+			    		$scope.payProcess = false;
+
+			    		swal("Error", response.data.error, "error");
+			    	}
+			    }, function errorCallback(response) {
+			    	//console.log(response);
+			    	$scope.processing = false;
+			    	$scope.payProcess = false;
+			    });
+			}
+		}
+		else{
+			if($scope.client.email == "" || $scope.client.confirm_email == "" || $scope.card.last_digits == "" || $scope.card.expiration_month == "" || $scope.card.expiration_year == "" || $scope.card.cvv == "" || $scope.billing_address.name == "" || $scope.billing_address.street_address == "" || $scope.billing_address.country_code == "" || $scope.billing_address.postal_code == "" || $scope.billing_address.region == "" || $scope.billing_address.locality == "" || $scope.client.primary_phone_number.number == ""){
+				$scope.processing = false;
+				$scope.payProcess = false;
+				$scope.edit_deliver = 3;
+				$scope.edit_billing = 3;
+				$scope.edit_credit_card = 3;
+
+
+
+				var error_to_show = orderControlErrors($scope);
+				swal("Error", error_to_show, "warning");
+				mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': error_to_show});
+
+			}
+			else if($.payment.validateCardExpiry($scope.card.expiration_month,$scope.card.expiration_year) == false){
+				$scope.processing = false;
+				$scope.payProcess = false;
+				$scope.edit_deliver = 3;
+				$scope.edit_billing = 3;
+				$scope.edit_credit_card = 3;
+
+				mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': 'Expiration date not valid!'});
+
+				swal("Error", "Expiration date not valid!", "warning");
+			}
+			else if($.payment.validateCardNumber($scope.card.last_digits) == false){
+				$scope.processing = false;
+				$scope.payProcess = false;
+				$scope.edit_deliver = 3;
+				$scope.edit_billing = 3;
+				$scope.edit_credit_card = 3;
+
+				mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': 'Card number not valid'});
+				
+				swal("Error", "Card number not valid.", "warning");
+			}
+			else if($scope.client.email != $scope.client.confirm_email){
+				$scope.processing = false;
+				$scope.payProcess = false;
+				$scope.edit_deliver = 3;
+				$scope.edit_billing = 3;
+				$scope.edit_credit_card = 3;
+
+				mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': 'Email and confirm email fields should be equal'});
+
+				swal("Error", "Email and confirm email fields should be equal", "warning");
+			}
+			else{
+				$http({
+			        method: 'POST',
+			        url: '/clients/create',
+			        data: { 
+			        	name: $scope.billing_address.name,
+			        	email: $scope.client.email,
+			        	region: $scope.billing_address.region,
+			        	country_code: $scope.billing_address.country_code,
+			        	postal_code: $scope.billing_address.postal_code,
+			        	street_address: $scope.billing_address.street_address,
+			        	locality: $scope.billing_address.locality,
+			        	phone_number: $scope.client.primary_phone_number.number,
+			        },
+			    }).then(function successCallback(response) {
+			    	if(response.data.error == undefined){
+			    		console.log("Client created");
+			    		console.log("Client");
+			    		console.log(response.data.client);
+			    		console.log("User");
+                        console.log(response.data.temp_password);
+			    		console.log(response.data.user);
+			    		$scope.client = response.data.client;
+			    		$scope.temp_password = response.data.temp_password;
+			    		$rootScope.isLoggedin = true;
+			    		$rootScope.isLoggedin = true;
+                        console.log("pre login...");
+			    		$rootScope.user = response.data.user;
+			    		$scope.addresses = $scope.client.addresses;
+			    		$scope.billing_address = $scope.client.primary_billing_address;
+			    		$scope.shipping_address = $scope.client.primary_shipping_address;
+                        console.log("GO TO LOGIN");
+
+
+
+						//GA Transactions Fix
+						/*
+			    		Analytics.addTrans($scope.order.id, 'www.gamehedge.com', $scope.total, 0, 0);
+			    		// Add items to transaction
+						Analytics.addItem($scope.order.id, $scope.ticket.id, $scope.event.name, $scope.event.sport.name, $scope.ticket.retail_price, Number($scope.amount));
+						// Complete transaction
+						Analytics.trackTrans();
+						*/
+
+						mixpanel.track("PayButton Click", {'Status':'Success'});
+						
+			    		$scope.loginFcn();
+			    	}
+			    	else{
+			    		//console.log("Error");
+			    		//console.log(response);
+			    		$scope.processing = false;
+						$scope.payProcess = false;
+						$scope.edit_deliver = 3;
+						$scope.edit_billing = 3;
+						$scope.edit_credit_card = 3;
+
+						mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': 'Unknown Error'});
+						
+						swal("Error", response.data.error, "error");
+			    	}
+			    }, function errorCallback(response) {
+			    	//console.log(response);
+			    	$scope.processing = false;
+					$scope.payProcess = false;
+					$scope.edit_deliver = 3;
+					$scope.edit_billing = 3;
+					$scope.edit_credit_card = 3;
+
+					mixpanel.track("PayButton Click", {'Status':'Error', 'ErrorMsg': 'Unknown Error'});
+					
+			    });
+			}
+			
+		}
+	}
+
+	$scope.updatePassword = function(){
+        
+		if($scope.password == $scope.confirm_password && $scope.password != ""){
+			$http({
+		        method: 'POST',
+		        url: '/clients/update_password',
+		        data: {password: $scope.password,
+		        	confirm_password: $scope.confirm_password,
+		        	email: $scope.client.primary_email_address.address,
+		        },
+		    }).then(function successCallback(response) {
+		    	swal("Success", "Your password has been updated", "success");
+		    	$scope.login2();
+		    }, function errorCallback(response) {
+		    	//console.log(response);
+		    });
+		}
+		else if($scope.password == ""){
+			swal("Error", "Password cannot be empty", "warning");
+		}
+		else{
+			swal("Error", "Both password fields must be the same", "warning");
+		}
+	}
+
+	$scope.loginFcn = function(){
+        console.log("login ENTER");
+        console.log(credentials);
+		var credentials = {
+            email: $scope.client.email,
+            password: $scope.temp_password,
+        };
+        var config = {
+            headers: {
+                'X-HTTP-Method-Override': 'POST'
+            }
+        };
+        //console.log(credentials);
+        Auth.login(credentials, config).then(function(user) {
+            //console.log(user); // => {id: 1, ect: '...'}
+        }, function(error) {
+            // Authentication failed...
+            //console.log("failed");
+            $rootScope.user = undefined;
+            $rootScope.isLoggedin = false;
+            //console.log("Email or password incorrect");
+        });
+
+        $scope.$on('devise:login', function(event, currentUser) {
+            // after a login, a hard refresh, a new tab
+            //console.log(currentUser);
+            $rootScope.user = currentUser;
+            $rootScope.isLoggedin = true;
+            if($scope.order_success == false){
+                $scope.createCard();
+            }
+        });
+
+        $scope.$on('devise:new-session', function(event, currentUser) {
+            // user logged in by Auth.login({...})
+        });
+	}
+
+	$scope.login2 = function(){
+		var credentials = {
+            email: $scope.client.primary_email_address.address,
+            password: $scope.password,
+        };
+        var config = {
+            headers: {
+                'X-HTTP-Method-Override': 'POST'
+            }
+        };
+        //console.log(credentials);
+        Auth.login(credentials, config).then(function(user) {
+            //console.log(user); // => {id: 1, ect: '...'}
+        }, function(error) {
+            // Authentication failed...
+            //console.log("failed");
+            $rootScope.user = undefined;
+            $rootScope.isLoggedin = false;
+            //console.log("Email or password incorrect");
+        });
+
+        $scope.$on('devise:login', function(event, currentUser) {
+            // after a login, a hard refresh, a new tab
+            //console.log(currentUser);
+            $rootScope.user = currentUser;
+            $rootScope.isLoggedin = true;
+            $scope.first_time = false;
+        });
+
+        $scope.$on('devise:new-session', function(event, currentUser) {
+            // user logged in by Auth.login({...})
+        });
+	}
+
+	$scope.checkLogin = function(){
+		Auth.currentUser().then(function(user) {
+	        // User was logged in, or Devise returned
+	        // previously authenticated session.
+	        //console.log(user); // => {id: 1, ect: '...'}
+	        $rootScope.user = user;
+	        $rootScope.isLoggedin = true;
+	    }, function(error) {
+	        // unauthenticated error
+	        //console.log("error login");
+	        $rootScope.user = undefined;
+	        $rootScope.isLoggedin = false;
+	    });
+	}
+
+	$scope.getClient = function(){
+		Auth.currentUser().then(function(user) {
+			$http({
+		        method: 'GET',
+		        url: '/clients/show?id='+user.te_uid,
+		    }).then(function successCallback(response) {
+		    	$scope.client = response.data.client;
+		    	$scope.cards = response.data.cards;
+		    	$scope.addresses = response.data.client.addresses;
+		    	//console.log("Client");
+		    	//console.log($scope.client);
+		    	//console.log("Cards");
+		    	//console.log($scope.cards);
+		    	//console.log("Addresses");
+		    	//console.log($scope.addresses);
+		    	$scope.edit_deliver = 1;
+				$scope.edit_credit_card = 1;
+				$scope.edit_billing = 1;
+				$scope.shipping_address = $scope.client.primary_shipping_address;
+				$scope.billing_address = $scope.client.primary_billing_address;
+				$scope.card = $scope.client.primary_credit_card;
+				$rootScope.isLoggedin = true;
+				$rootScope.user = user;
+				$scope.first_time = false;
+				$('#myModal').modal('hide');
+				$scope.logging_in = false;
+				$scope.clientLoaded = true;
+				//console.log($scope.shipping_address);
+
+		    }, function errorCallback(response) {
+		    	$rootScope.user = undefined;
+		    	$rootScope.isLoggedin = false;
+		    	$scope.edit_deliver = 3;
+				$scope.edit_credit_card = 3;
+				$scope.edit_billing = 3;
+				$scope.first_time = true;
+				$scope.creditCardFieldEnable();
+				$('#myModal').modal('hide');
+				$scope.logging_in = false;
+				$scope.clientLoaded = true;
+				//console.log("Not logged in");
+		        //console.log(response);
+		    });
+	    }, function(error) {
+	    	$rootScope.user = undefined;
+	        $rootScope.isLoggedin = false;
+	    	$scope.edit_deliver = 3;
+			$scope.edit_credit_card = 3;
+			$scope.edit_billing = 3;
+			$scope.first_time = true;
+			$scope.clientLoaded = true;
+			$scope.creditCardFieldEnable();
+			//console.log("Not logged in");
+	        //console.log(error);
+	    });
+	}
+
+	$http({
+        method: 'GET',
+        url: '/signature?url=settings/shipping?',
+    }).then(function successCallback(response) {
+    	$scope.shipping_list = response.data.settings;
+		//console.log($scope.shipping_list);
+    }, function errorCallback(response) {
+        //console.log(response);
+    });
+    $http({
+        method: 'POST',
+        url: '/clients/get_session',
+        data: {},
+    }).then(function successCallback(response) {
+    	$scope.session_id = response.data;
+    	$("#session_iframe").html('<iframe frameborder="0" height="1" scrolling="no" src="/clients/info?session=' + $scope.session_id + '" width="1"></iframe>');
+    }, function errorCallback(response) {
+        //console.log(response);
+    });
+	// Initializers
+	$scope.client = {}
+	$scope.client.email = "";
+	$scope.client.confirm_email = "";
+	
+	$scope.cards = [];
+	$scope.card = {};
+	$scope.card.card_company = ""
+	$scope.card.cvv = ""
+	$scope.card.expiration_month = ""
+	$scope.card.expiration_year = ""
+	$scope.card.last_digits = ""
+	$scope.card.name = ""
+	$scope.client.primary_phone_number = {};
+	$scope.client.primary_phone_number.number = ""
+	$scope.client.primary_phone_number.id = ""
+	$scope.changed_credit_card = false;
+
+	$scope.addresses = [];
+	$scope.shipping_address = {};
+	$scope.shipping_address.country_code = "";
+	$scope.shipping_address.id = "";
+	$scope.shipping_address.locality = "";
+	$scope.shipping_address.name = "";
+	$scope.shipping_address.postal_code = "";
+	$scope.shipping_address.region = "";
+	$scope.shipping_address.street_address = "";
+	$scope.changed_shipping_address = false;
+
+
+	$scope.billing_address = {};
+	$scope.billing_address.country_code = "";
+	$scope.billing_address.id = "";
+	$scope.billing_address.locality = "";
+	$scope.billing_address.name = "";
+	$scope.billing_address.postal_code = "";
+	$scope.billing_address.region = "";
+	$scope.billing_address.street_address = "";
+	$scope.changed_billing_address = false;
+	$scope.discount = 0;
+	$scope.active_promos = false;
+
+	$scope.processing = false;
+	$scope.shipping_address_index = 0;
+	$scope.billing_address_index = 0;
+	$scope.credit_card_index = 0;
+	$scope.getPromoCodes();
+	$scope.getClient();
+	$rootScope.isOrder = true;
+    $rootScope.isEvent = false;
+	$rootScope.darkHeader = true;
+	$rootScope.noFooter = true;
+	$scope.order_success = false;
+	$scope.editing = false;
+	$scope.password = "";
+
+	// $scope.script = '<script ng-src="https://cdn.ywxi.net/js/inline.js?w=96"></script>';
+	$scope.script = $("#mcafee-seal").html()
+	
+	$scope.searchTerm = "";
+	$window.scrollTo(0, 0);
+
+
+
+
+
+	//Login Scripts
+	$scope.clearPassword = function(){
+		$scope.password = "";
+	}
+
+	$scope.login = function(){
+        $scope.logging_in = true;
+		var credentials = {
+            email: $scope.client.email,
+            password: $scope.password,
+        };
+        var config = {
+            headers: {
+                'X-HTTP-Method-Override': 'POST'
+            }
+        };
+        //console.log(credentials);
+        Auth.login(credentials, config).then(function(user) {
+            //console.log(user); // => {id: 1, ect: '...'}
+        }, function(error) {
+            // Authentication failed...
+            //console.log("failed");
+            $rootScope.user = undefined;
+            $rootScope.isLoggedin = false;
+            $scope.logging_in = false;
+            swal("Error", "Email or password incorrect. Please check amd try again.", "error");
+        });
+
+        $scope.$on('devise:login', function(event, currentUser) {
+            // after a login, a hard refresh, a new tab
+            //console.log(currentUser);
+            $rootScope.user = currentUser;
+            $rootScope.isLoggedin = true;
+            $scope.getClient();
+        });
+
+        $scope.$on('devise:new-session', function(event, currentUser) {
+            // user logged in by Auth.login({...})
+        });
+	}
+
+    $scope.forgotPass = function(value){
+        $scope.forgot_password = value;
+    }
+
+    $scope.updatePasswordAuth = function(){
+        $scope.sending_password = true;
+        var parameters = {
+            email: $scope.client.email
+        };
+        
+        Auth.sendResetPasswordInstructions(parameters).then(function() {
+            $scope.sending_password = false;
+            swal("Request submitted", "You will be receiving an email with the recovery password instructions shortly.", "success");
+            
+        },function(error){
+            if(error.data.errors){
+                $scope.sending_password = false;
+                swal("Request failed", "E-mail not found. Please check your e-mail address.", "error");
+            }
+        });
+    }
+
+    $scope.showPromoField = function(){
+    	$scope.show_promo_field = !$scope.show_promo_field;
+    }
+
+    $scope.logging_in = false;
+    $scope.clientLoaded = false;
+    $scope.ticketsLoaded = false;
+    $scope.sending_password = false;
+    $scope.forgot_password = false;
+    $scope.show_promo_field = false;
+	
+})
+.filter('replaceText', function () {
+    return function (text) {
+        if (!text) {
+            return text;
+        }
+
+        return text.replace(/\_/g, ' '); // Replaces all occurences
+    };
+});
+
+
+function order_country_change(){
+/*
+	var order_cnt_value = document.getElementById("country-billing").value;
+	if(order_cnt_value == 'ca'){
+		var main_country_sel = document.getElementById('state_id-billing');
+		var sel_country_ca = document.getElementById('state_ca');
+		//main_country_sel.selectedIndex = 0;
+		main_country_sel.innerHTML = sel_country_ca.innerHTML;
+	}
+	if(order_cnt_value == 'us'){
+		var main_country_sel = document.getElementById('state_id-billing');
+		var sel_country_us = document.getElementById('state_us');
+		//main_country_sel.selectedIndex = 0;
+		main_country_sel.innerHTML = sel_country_us.innerHTML;
+	}
+	*/	
+}
+
+
+function orderControlErrors($scope){
+	var oc_err_msg = 'All fields are required';
+	var oc_err_cnt = 0;
+
+	if($scope.client.primary_phone_number.number == ""){
+		jQuery('#phone-billing').addClass('form-error');
+		oc_err_msg = 'Phone Number is missing';
+		oc_err_cnt++;
+	}
+	if($scope.billing_address.locality == ""){
+		jQuery('#city-billing').addClass('form-error');
+		oc_err_msg = 'City is missing';
+		oc_err_cnt++;
+	}
+
+	if($scope.billing_address.region == ""){
+		jQuery('#state_id-billing').addClass('form-error');
+		oc_err_msg = 'Please select state';
+		oc_err_cnt++;
+		
+	}
+	if($scope.billing_address.postal_code == ""){
+		jQuery('#zipcode-billing').addClass('form-error');
+		oc_err_msg = 'Zip Code is missing';
+		oc_err_cnt++;
+	}
+	if($scope.billing_address.country_code == ""){
+		jQuery('#country-billing').addClass('form-error');
+		oc_err_msg = 'Please select country';		
+		oc_err_cnt++;
+	}
+	if($scope.billing_address.street_address == ""){
+		jQuery('#address-billing').addClass('form-error');
+		oc_err_msg = 'Billing Address is missing';
+		oc_err_cnt++;
+	}
+	if($scope.billing_address.name == ""){
+		jQuery('#first-name-billing').addClass('form-error');
+		oc_err_msg = 'Name is missing';
+		oc_err_cnt++;
+	}
+	if($scope.card.cvv == ""){
+		jQuery('#cvv').addClass('form-error');
+		oc_err_msg = 'Security Code is missing';
+		oc_err_cnt++;
+	}
+	if($scope.card.expiration_year == ""){
+		jQuery('#exp-year').addClass('form-error');
+		oc_err_msg = 'Please select exp. year';
+		oc_err_cnt++;
+	}
+	if($scope.card.expiration_month == "" ){
+		jQuery('#exp-month').addClass('form-error');
+		oc_err_msg = 'Please select exp. month';	
+		oc_err_cnt++;
+	}
+	if($scope.card.last_digits == ""){
+		jQuery('#cc').addClass('form-error');
+		oc_err_msg = 'Credit card number is missing';
+		oc_err_cnt++;
+	}
+	if($scope.client.confirm_email == ""){
+		jQuery('#confirm-email-shipping').addClass('form-error');
+		oc_err_msg = 'Confirm Email address is missing';
+		oc_err_cnt++;
+	}
+	if($scope.client.email == ""){
+		jQuery('#email-shipping').addClass('form-error');
+		oc_err_msg = 'Email address is missing';
+		oc_err_cnt++;
+	}
+
+	return 	oc_err_msg;
+}
+;
+controllers = angular.module('gamehedge')
+
 controllers.controller('HomeController', function($scope,$rootScope,$http,$location,dataService,$window, $timeout,Auth,apiService){
     $rootScope.showHeader = true;
   $scope.TilesIndex = 0;
@@ -70033,10 +71285,11 @@ controllers.controller('LoginController', function($scope,$rootScope,Auth,$locat
         }, function(error) {
             // Authentication failed...
             //console.log("failed");
+            //console.log(error);
             $rootScope.user = undefined;
             $rootScope.isLoggedin = false;
             $scope.logging_in = false;
-            swal("Error", "Email or password incorrect. Please check amd try again.", "error");
+            swal("Error", "Email or password incorrect. Please check and try again.", "error");
         });
 
         $scope.$on('devise:login', function(event, currentUser) {
@@ -70062,6 +71315,8 @@ controllers.controller('LoginController', function($scope,$rootScope,Auth,$locat
             email: $scope.email
         };
         
+//console.log($scope.email);
+
         Auth.sendResetPasswordInstructions(parameters).then(function() {
             $scope.sending_password = false;
             swal("Request submitted", "You will be receiving an email with the recovery password instructions shortly.", "success");
@@ -72402,6 +73657,876 @@ controllers.controller('faqController', function($scope,$rootScope,$location,$wi
             }
         }
     }
+});
+controllers = angular.module('gamehedge')
+
+controllers.controller('govxController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http,$timeout,$location,$rootScope,Auth,angularLoad){
+    $scope.prev_filter = true;
+    $scope.mob_price = 0;
+    $scope.mob_price_a = false;
+    $scope.mob_price_b = false;
+    $scope.mob_price_c = false;
+    $scope.mob_price_d = false;
+    
+    $scope.mob_price_a_real = false;
+    $scope.mob_price_b_real = false;
+    $scope.mob_price_c_real = false;
+    $scope.mob_price_d_real = false;
+    
+    $scope.secH = [];
+    
+    $scope.mob_real_price = 0;
+    $scope.price_filter = false;
+    $scope.price_filter_down_limit = 0;
+    $scope.price_filter_up_limit = 0;
+
+    $rootScope.showHeader = false;
+    $rootScope.windoWidth = window.innerWidth;
+    $('#ticketDetails').hide();
+    $('#ticketDetails2').hide();
+    $scope.redirecttoorder = function(){
+        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            $rootScope.order_img =  $("#dialog_img").attr('src');
+        }
+        //$('#dialog1').dialog("close");
+        $( ".ui-icon-closethick" ).click();
+        var url = '/govx-order/'+$scope.tvid+'?amount='+$scope.tval;
+        $location.url(url);
+    }
+    $scope.getQty = function(){
+        $scope.tval = $scope.select_qty;
+    }
+    $scope.filterPriceFn = function(_ele) {
+        val = true;
+        if($scope.price_filter == true){
+            val = false;
+            
+            if($scope.mob_price_a_real) {
+                $scope.price_filter_down_limit = 0;
+                $scope.price_filter_up_limit = 100;
+                if( _ele.retail_price > $scope.price_filter_down_limit && _ele.retail_price <= $scope.price_filter_up_limit ) {
+                    val =  true;
+                }
+            }
+            
+            if($scope.mob_price_b_real){
+                $scope.price_filter_down_limit = 100;
+                $scope.price_filter_up_limit = 200;
+                if( _ele.retail_price > $scope.price_filter_down_limit && _ele.retail_price <= $scope.price_filter_up_limit ) {
+                    val =  true;
+                }
+            }
+            
+            if($scope.mob_price_c_real){
+                $scope.price_filter_down_limit = 200;
+                $scope.price_filter_up_limit = 300;
+                if( _ele.retail_price > $scope.price_filter_down_limit && _ele.retail_price <= $scope.price_filter_up_limit ) {
+                    val =  true;
+                }
+            }
+            
+            if($scope.mob_price_d_real){
+                $scope.price_filter_down_limit = 300;
+                $scope.price_filter_up_limit = 99999999999999999999999;
+                if( _ele.retail_price > $scope.price_filter_down_limit && _ele.retail_price <= $scope.price_filter_up_limit ) {
+                    val =  true;
+                }
+            }
+        }
+        else {
+            val = true;
+        }
+        
+        return val;
+    }
+    
+    $scope.filterSectionsFn = function(_ele) {
+        var _result = false;
+        if($scope.selectedSections.length > 0){
+            var indexSection = 0;
+            for(indexSection = 0; indexSection < $scope.selectedSections.length; indexSection++){
+                if( _ele.section.indexOf( $scope.selectedSections[indexSection] ) != -1){
+                    _result = true;
+                    break;
+                }
+                else {
+                    _result = false;
+                }
+            }
+        }
+        else {
+            _result = true;
+        }
+        
+        return _result;
+    }
+    
+    $scope.getEventInfo = function(){
+        return apiService.getData('/api/v1/events/'+$routeParams.eventId)
+            .then(function(response){
+                // console.log("Event");
+                // console.log(response);
+                $scope.event  = response;
+                $rootScope.title = $scope.event.name + " Tickets | Gamehedge";
+                $rootScope.description = "Buy and Save up to 75% on all game tickets. If the home team loses by "+$scope.event.home_performer.sport.ggg+" or more, get 50% of your ticket price back.";
+                
+                if($routeParams.slug != $scope.event.slug){
+                    $location.path("/");
+                }
+                else{
+                    $scope.getTicketList();
+                }
+        });
+    };
+    
+    $scope.filter_active = false;
+    
+    $scope.openFilter = function() {
+        $scope.filter_active = true;
+    }
+    
+    $scope.closeFilter = function() {
+        $scope.filter_active = false;
+        
+        $scope.mob_index = $scope.index;
+        $scope.mob_eticket = $scope.etickets;
+        
+        if($scope.onlyParking == false){
+            $scope.mob_delivery = 0;
+        }
+        else {
+            $scope.mob_delivery = 1;
+        }
+        
+        $scope.mob_price_a = $scope.mob_price_a_real;
+        $scope.mob_price_b = $scope.mob_price_b_real;
+        $scope.mob_price_c = $scope.mob_price_c_real;
+        $scope.mob_price_d = $scope.mob_price_d_real;
+    }
+
+    $scope.updateFilter = function(index){
+        $scope.index = index;
+        $scope.prev_filter = false;
+        $scope.mob_index = index;
+        $('#tickets_list').scrollTop(-200);
+        $scope.filterEventsData();
+        //$scope.showing_list = 20;
+    }
+
+    $scope.closePrevFilter = function() {
+        $scope.prev_filter = false;
+    }
+    
+    $scope.updateMobFilter = function(index){
+        $scope.mob_index = index;
+        $('#tickets_list').scrollTop(-200);
+        //$scope.showing_list = 20;
+    }
+    
+    $scope.updateMobDelivery = function(index) {
+        $scope.mob_delivery = index;
+        $('#tickets_list').scrollTop(-200);
+        //$scope.showing_list = 20;
+    }
+    
+    $scope.updateMobEticket = function(index) {
+        $scope.mob_eticket = !$scope.mob_eticket;
+        $('#tickets_list').scrollTop(-200);
+        //$scope.showing_list = 20;
+    }
+    
+    $scope.mob_price_update = function(_val) {
+        switch(_val) {
+            case 1: $scope.mob_price_a = !$scope.mob_price_a;
+                    break;
+            case 2: $scope.mob_price_b = !$scope.mob_price_b;
+                    break;
+            case 3: $scope.mob_price_c = !$scope.mob_price_c;
+                    break;
+            case 4: $scope.mob_price_d = !$scope.mob_price_d;
+                    break;
+        }
+        //$scope.mob_price = _val;
+        $('#tickets_list').scrollTop(-200);
+        //$scope.showing_list = 20;
+    }
+    
+    $scope.mob_price_update_real = function(_val) {
+        switch(_val) {
+            case 1: $scope.mob_price_a_real = !$scope.mob_price_a_real;
+                    break;
+            case 2: $scope.mob_price_b_real = !$scope.mob_price_b_real;
+                    break;
+            case 3: $scope.mob_price_c_real = !$scope.mob_price_c_real;
+                    break;
+            case 4: $scope.mob_price_d_real = !$scope.mob_price_d_real;
+                    break;
+        }
+        
+        if($scope.mob_price_a_real == false && $scope.mob_price_b_real == false && $scope.mob_price_c_real == false && $scope.mob_price_d_real == false) {
+            $scope.price_filter = false;
+        }
+        else {
+            $scope.price_filter = true;
+        }
+        
+        //$scope.mob_price = _val;
+        $('#tickets_list').scrollTop(-200);
+        //$scope.showing_list = 20;
+        $scope.filterEventsData();
+    }
+    
+    $scope.showMobFilters = function() {
+        $scope.index = $scope.mob_index;
+        
+        $scope.etickets = $scope.mob_eticket;
+        
+        switch($scope.mob_delivery){
+            case 0: $scope.onlyParking = false;
+                    break;
+            case 1: $scope.onlyParking = true;
+                    break;
+        }
+        //console.log($scope.mob_delivery);
+        //console.log($scope.etickets);
+        $scope.filter_active = false;
+        
+        $scope.mob_price_a_real = $scope.mob_price_a;
+        $scope.mob_price_b_real = $scope.mob_price_b;
+        $scope.mob_price_c_real = $scope.mob_price_c;
+        $scope.mob_price_d_real = $scope.mob_price_d;
+        
+        //console.log($scope.mob_price);
+        
+        if($scope.mob_price_a == false && $scope.mob_price_b == false && $scope.mob_price_c == false && $scope.mob_price_d == false) {
+            $scope.price_filter = false;
+        }
+        else {
+            $scope.price_filter = true;
+        }
+        $scope.filterEventsData();
+    }
+    
+    $scope.displayDetail = false;
+    
+    $scope.selectedTicket = null;
+    
+    $scope.showDetail = function(_amount, _ticket){
+        $scope.displayDetail = true;
+        $scope.selectedTicket = _ticket;
+        
+        $("#MapContainer").tuMap("HighlightSection", _ticket.section);
+    }
+    
+    $scope.goToCheckout = function(){
+        $scope.redirect($scope.selectedTicket.amount, $scope.selectedTicket.id);
+    }
+    
+    $scope.closeDetail = function(){
+        $scope.displayDetail = false;
+    }
+    
+    $scope.updateSort = function(sort){
+        if(sort == $scope.ordering.replace("-","")){
+            if($scope.ordering.indexOf("-") == -1){
+                $scope.ordering = "-"+sort
+            }
+            else{
+                $scope.ordering = sort
+            }
+        }
+        else{
+            $scope.ordering = sort
+        }
+        var reA = /[^a-zA-Z]/g;
+        var reN = /[^0-9]/g;
+        var htm = $('.listing-row').sort(function (a1, b1) {
+            var a = "";
+            var b = "";
+            if($scope.ordering.indexOf("section") != -1){
+                a = $(a1).attr('data-section');
+                b = $(b1).attr('data-section');
+            }
+            else if($scope.ordering.indexOf("row") != -1){
+                a = $(a1).attr('data-row');
+                b = $(b1).attr('data-row');
+            }
+            else if($scope.ordering.indexOf("retail_price") != -1){
+                a = $(a1).attr('data-price');
+                b = $(b1).attr('data-price');
+            }
+            var aA = a.replace(reA, "");
+            var bA = b.replace(reA, "");
+            if($scope.ordering.indexOf("-") == -1){
+                if(aA === bA) {
+                var aN = parseInt(a.replace(reN, ""), 10);
+                    var bN = parseInt(b.replace(reN, ""), 10);
+                    return aN === bN ? 0 : aN > bN ? 1 : -1;
+                } else {
+                    return aA > bA ? 1 : -1;
+                }
+            }
+            else{
+                if(aA === bA) {
+                var aN = parseInt(a.replace(reN, ""), 10);
+                    var bN = parseInt(b.replace(reN, ""), 10);
+                    return aN === bN ? 0 : aN > bN ? -1 : 1;
+                } else {
+                    return aA > bA ? -1 : 1;
+                }
+            }
+        })
+
+
+
+
+
+
+$timeout(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            var tismobile = false;
+
+            // $('.listing-row').mouseover($scope.higlightSection($(this).attr('data-section'), true));
+            $('.listing-row').mouseout(function(){
+                    $('#seuilbl').css('display','none');                    
+            });
+            $('.listing-row').mouseover(function(){
+                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                    $('#ticketDetails').show();
+                    $('#ticketDetails2').hide();
+                }
+                
+                var vid = $(this).attr('data-ticketid');
+                var row = $(this).attr('data-row');
+                var qty = $(this).attr('data-info');
+                var prc = $(this).attr('data-price');
+                var val = $(this).find('select').val();
+
+                if (!tismobile){
+                    var rowpos = $(this).position();
+                    var rowoffset = $(this).offset();
+
+                    $('#seuilbl').css('top',rowoffset.top-135+'px');
+                    $('#seuilbl').css('left','-153px');
+                    $('#ref_amount').html('Potential Refund<br/>'+'<b>$'+(prc/2).toFixed(2).replace(/\.0+$/,"")+'/ea*</b>');
+                    $('#seuilbl').css('display','block');                    
+                }
+
+                var select_list = "";
+                $('#tvid').val(vid);
+                $scope.tvid = vid;
+                $scope.tval = val;
+                var qty = qty.split(',');
+                for(j=0;j<qty.length;j++){
+                    select_list += '<option value="'+qty[j]+'">'+qty[j]+'</option>'
+                }
+                $('#selectVal').html(select_list);
+                $("#ticket_row").html(row);
+                $("#ticket_price").html(prc);
+                $("#m_refund").html('$'+(prc/2).toFixed(2).replace(/\.0+$/,""));
+
+                //$rootScope.trow = row;
+                //$rootScope.tqty = qty;
+            });
+            $('.redirect-button').click(function(){
+                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+
+                }else{
+                    var vid = $(this).parents().eq('2').attr('data-ticketid');
+                    var val = $(this).parents().eq('2').find('select').val()
+                    $scope.relocateURL(vid,val);
+                }
+
+            });
+        }, 100);
+
+
+
+
+
+
+
+        $('#tickets_list').html(htm);
+        $('#tickets_list').scrollTop(-200);
+        //$scope.showing_list = 20;
+    }
+
+    $scope.updateEtickets = function(){
+        $scope.etickets = !$scope.etickets;
+        
+        $('#tickets_list').scrollTop(-200);
+        //$scope.showing_list = 20;
+    }
+
+    $scope.updateParking = function(ids){
+        $scope.onlyParking = ids;
+        $('#tickets_list').scrollTop(-200);
+         $scope.filterEventsData();
+        //$scope.showing_list = 20;
+    }
+
+    $scope.getTicketList = function(){
+
+        
+        $http({
+            method: 'GET',
+            url: '/tickets/list/?id='+$routeParams.eventId,
+        }).then(function successCallback(response) {
+            $scope.tickets = response.data.ticket_groups;
+            $scope.loading = false;
+            console.log($scope.tickets);
+            var sections = [];
+            angular.forEach($scope.tickets , function(value, key) {
+                value.amount = value.splits[value.splits.length-1];
+                if(sections.indexOf(value.section) == -1){
+                    sections.push(value.section);
+                    $scope.Data.push({"section":value.section,"price":0,"quantity":1});
+                }   
+            });
+            $scope.fillEventsData();
+        }, function errorCallback(response) {
+            //console.log(response);
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
+    }
+
+    $scope.resetMap = function(){
+        isSeatClicked = 0;
+        selectedSeats = [];
+        client_dvm_reset_maps();
+        $scope.selectedSections = [];
+        $scope.filterEventsData();
+     }
+
+    $scope.fillEventsData = function(){
+        var htm = "";
+        var list = $scope.tickets;
+        var select_list = "";
+        for(i=0;i<list.length;i++){
+            select_list = "";
+            var amount = list[i].splits.reverse();
+            for(j=0;j<amount.length;j++){
+                select_list += '<option value="'+amount[j]+'">'+amount[j]+'</option>'
+            }
+            if(list[i].public_notes == null || list[i].public_notes == ""){
+                htm += '<div class="row listing-row rowTicket" data-info="'+amount+'" data-section="'+list[i].section+'" data-row="'+list[i].row+'" data-price="'+list[i].retail_price+'" data-type="'+list[i].type+'" data-ticketid="'+list[i].id+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section2 full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select class="rowAvail" value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button class="redirect-button">$'+list[i].retail_price+'/ea</button><p class="format">'+list[i].format+'</span></div></div>'
+            }
+            else{
+                htm +='<div class="row listing-row rowTicket" data-info="'+amount+'" data-section="'+list[i].section+'" data-row="'+list[i].row+'" data-price="'+list[i].retail_price+'" data-type="'+list[i].type+'" data-ticketid="'+list[i].id+'"><div class="hidden-xs hidden-sm col-xs-1 info-ico vertical-center full-height"><span aria-hidden="true" data-toggle="tooltip" data-placement="right" title="'+list[i].public_notes+'"><img src="'+info_url+'" alt="info" /></span></div><div class="col-xs-3 col-md-3 vertical-center horizontal-center section2 full-height">'+list[i].section+'</div><div class="col-xs-2 vertical-center horizontal-center full-height">'+list[i].row+'</div><div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height"><div class="select-container custom-select"><select class="rowAvail" value="list[i].amount">+'+select_list+'</select></div></div><div class="col-xs-4 vertical-center horizontal-center buy-btn full-height"><span class="buy-btn-span"><button class="redirect-button">$'+list[i].retail_price+'/ea</button><p class="format">'+list[i].format+'</span></div></div>'
+            }
+        }
+        $('#tickets_list').html(htm);
+        $timeout(function () {
+            var tismobile = false;
+            $('[data-toggle="tooltip"]').tooltip();
+            // $('.listing-row').mouseover($scope.higlightSection($(this).attr('data-section'), true));
+            $('.listing-row').mouseout(function(){
+                    $('#seuilbl').css('display','none');                    
+            });
+
+            $('#tickets_list').scroll(function(){
+                    $('#seuilbl').css('display','none');                    
+            });
+
+
+            $('.listing-row').mouseover(function(){
+                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                    $('#ticketDetails').show();
+                    $('#ticketDetails2').hide();
+                    tismobile = true;
+                }
+                
+                var vid = $(this).attr('data-ticketid');
+                var row = $(this).attr('data-row');
+                var qty = $(this).attr('data-info');
+                var prc = $(this).attr('data-price');
+                var val = $(this).find('select').val();
+
+
+                if (!tismobile){
+                    var rowpos = $(this).position();
+                    var rowoffset = $(this).offset();
+
+                    $('#seuilbl').css('top',rowoffset.top-135+'px');
+                    $('#seuilbl').css('left','-153px');
+                    $('#ref_amount').html('Potential Refund<br/>'+'<b>$'+(prc/2).toFixed(2).replace(/\.0+$/,"")+'/ea*</b>');
+                    $('#seuilbl').css('display','block');                    
+                }
+
+
+
+                var select_list = "";
+                $('#tvid').val(vid);
+                $scope.tvid = vid;
+                $scope.tval = val;
+                var qty = qty.split(',');
+                for(j=0;j<qty.length;j++){
+                    select_list += '<option value="'+qty[j]+'">'+qty[j]+'</option>'
+                }
+                $('#selectVal').html(select_list);
+                $("#ticket_row").html(row);
+                $("#ticket_price").html(prc);
+                $("#m_refund").html('$'+(prc/2).toFixed(2).replace(/\.0+$/,""));
+                //$rootScope.trow = row;
+                //$rootScope.tqty = qty;
+            });
+            $('.redirect-button').click(function(){
+                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+
+                }else{
+                    var vid = $(this).parents().eq('2').attr('data-ticketid');
+                    var val = $(this).parents().eq('2').find('select').val()
+                    $scope.relocateURL(vid,val);
+                }
+
+            });
+        }, 100);
+        $scope.filterEventsData();
+        $scope.loadMap();
+    }
+
+    $scope.relocateURL = function(id,val){
+        $location.search('amount', val);
+        $location.path('/govx-order/'+id);
+        $scope.applyChanges();
+    }
+
+    $scope.filterEventsData = function(){
+        $('.listing-row').removeClass('hidden');
+        $('.listing-row').each(function(){
+            if($scope.selectedSections.length > 0){
+                var a = "";
+                var b = "";
+                for(i=0;i<$scope.selectedSections.length;i++){
+                    a = $(this).attr('data-section').replace(/[^0-9]/g, '');
+                    b = $scope.selectedSections[i].replace(/[^0-9]/g, '');
+                    if(a != b){
+                        $(this).addClass("hidden");
+                    }
+                    else{
+                        $(this).removeClass("hidden");
+                        break;
+                    }
+                }
+            }
+            if($scope.onlyParking == true){
+                if($(this).attr('data-type') == 'event'){
+                    $(this).addClass("hidden");
+                }
+            }
+            else{
+                if($(this).attr('data-type') == 'parking'){
+                    $(this).addClass("hidden");
+                }
+            }
+        });
+        if($scope.index != 0){
+            $('.listing-row').each(function(){
+                if($scope.index == 5){
+                    if(Number($(this).attr('data-info').split(',')[0]) < $scope.index){
+                        $(this).addClass("hidden");
+                    }else{
+                        //QTY FIX                        
+                        //FIX DEFAULT SELECTBOX VALUE WHEN QTY FILTER APPLY
+                        $(this).find("select").val($(this).attr('data-info').split(',')[0]);
+                    }
+                }
+                else{
+                    if($(this).attr('data-info').split(',').indexOf(String($scope.index)) == -1){
+                        $(this).addClass("hidden");
+                    }  else{
+                        //QTY FIX                        
+                        //FIX DEFAULT SELECTBOX VALUE WHEN QTY FILTER APPLY
+                        $(this).find("select").val($scope.index);
+                    }    
+                }
+            });
+        }
+        if($scope.price_filter == true){
+            $('.listing-row').each(function(){
+                var val = false;
+                if($scope.mob_price_a_real) {
+                    $scope.price_filter_down_limit = 0;
+                    $scope.price_filter_up_limit = 100;
+                    if(Number($(this).attr('data-price')) > $scope.price_filter_down_limit && Number($(this).attr('data-price')) <= $scope.price_filter_up_limit ) {
+                        val =  true;
+                    }
+                }
+                
+                if($scope.mob_price_b_real){
+                    $scope.price_filter_down_limit = 100;
+                    $scope.price_filter_up_limit = 200;
+                    if( Number($(this).attr('data-price')) > $scope.price_filter_down_limit && Number($(this).attr('data-price')) <= $scope.price_filter_up_limit ) {
+                        val =  true;
+                    }
+                }
+                
+                if($scope.mob_price_c_real){
+                    $scope.price_filter_down_limit = 200;
+                    $scope.price_filter_up_limit = 300;
+                    if( Number($(this).attr('data-price')) > $scope.price_filter_down_limit && Number($(this).attr('data-price')) <= $scope.price_filter_up_limit ) {
+                        val =  true;
+                    }
+                }
+                
+                if($scope.mob_price_d_real){
+                    $scope.price_filter_down_limit = 300;
+                    $scope.price_filter_up_limit = 99999999999999999999999;
+                    if( Number($(this).attr('data-price')) > $scope.price_filter_down_limit && Number($(this).attr('data-price')) <= $scope.price_filter_up_limit ) {
+                        val =  true;
+                    }
+                }
+                if(val == false){
+                    $(this).addClass("hidden");
+                }
+            });
+        }
+    }
+
+    $scope.higlightSection = function(section,highlight){
+        // console.log(section);
+        if(section != undefined){
+            if(highlight == true){
+                $("#MapContainer").tuMap("HighlightSection",section);
+            }
+            else{
+                $("#MapContainer").tuMap("ResetSection",section);
+            }
+        }
+    }
+
+    $scope.loadMap = function(){
+        var tickets = []
+        for(i=0;i<$scope.tickets.length;i++){
+            var b = "";
+            for(j=0;j<$scope.tickets[i].splits.length;j++){
+                if(j==0){
+                    b = b + $scope.tickets[i].splits[j];
+                }
+                else{
+                    b = b + "," + $scope.tickets[i].splits[j];
+                }
+            }
+            var a = {
+                id:String($scope.tickets[i].id),
+                section:String($scope.tickets[i].section),
+                row:String($scope.tickets[i].row),
+                price:String($scope.tickets[i].retail_price),
+                qty:String($scope.tickets[i].available_quantity),
+                avail:String(b),
+                notes:String($scope.tickets[i].public_notes),
+            }
+            tickets.push(a)
+        }
+        // console.log(tickets)
+        var DATA_TICKTES={"list":tickets};
+        var map_width = window.innerWidth;
+        var map_height = window.innerHeight - 180; //180 DANIEL HEIGHT FIX
+        if(map_width > 991){
+            map_width = map_width*0.58;
+        }
+        else{
+            map_height = window.innerHeight - 310;//385; DANIEL HEIGHT FIX IPHONE 6 PLUS
+        }
+        DVM_map_params = {
+            'client_id':'99',
+            'map_name':'seatzone_map',
+            'key_map_name':'map_key',
+            'tickets_container':'tickets_list',
+            'map_width':map_width,
+            'map_height':map_height,
+            'feed_type':'te',
+            'event_id': String($scope.event.te_uid),
+            'headliner_id':String($scope.event.home_performer.te_uid),
+            'venue_id':String($scope.event.venue.te_uid),
+            'venue_conf':String($scope.event.venue_configuration_id),
+            'tickets_data_object': DATA_TICKTES,
+            'static_map': '',
+        };
+        console.log('Event ID' + String($scope.event.te_uid))
+        console.log('Headliner ID' + String($scope.event.home_performer.te_uid))
+        console.log('Venue ID' + String($scope.event.venue.te_uid))
+        console.log('Venue Conf' + String($scope.event.venue_configuration_id))
+        console.log('Ticket Data Object' + DATA_TICKTES)
+        $timeout(function(){
+            $.ajax({
+               url: '/dvm.js?v=104',
+               dataType: "script",
+               success: success
+             });
+             function success(){
+                $timeout(function(){
+                    document.body.addEventListener("sectionSelected", function (e) {
+                        console.log(e);
+                    },false);
+                },1000);
+            }
+
+        },100);
+     };
+        //console.log("DVM_map_params")
+        //console.log(DVM_map_params);
+    //     $timeout(function(){
+    //         angularLoad.loadScript("/dvm.js?v=104").then(function() {
+    //             console.log("dvm.js loadded successfully");
+    //             $timeout(function(){
+    //                 document.body.addEventListener("sectionSelected", function (e) {
+    //                     console.log(e);
+    //                 },false);
+    //             },1000);
+    //             // Script loaded succesfully.
+    //             // We can now start using the functions from someplugin.js
+    //         }).catch(function() {
+    //             console.log("failure");
+    //             // There was some error loading the script. Meh
+    //         });
+    //     },100);
+    // };
+    $("body").on( "sectionSelected", function(event,section,selected) {
+        var bare_section = section.split("-")[section.split("-").length - 1]
+        if(selected == true){
+            $scope.selectedSections.push(bare_section)
+        }
+        else{
+            $scope.selectedSections.splice($scope.selectedSections.indexOf(bare_section),1);
+        }
+        //console.log('--------'+$scope.selectedSections);
+        $scope.filterEventsData();
+    });
+    $scope.compareDates = function(event_date,format){
+        if(format == "Physical"){
+            if(moment().add(72,'h').isAfter(event_date.replace("Z",""))){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+        else{
+            return true;
+        }
+    }
+
+    $scope.applyChanges = function(){
+        $scope.$apply()
+    };
+
+    $scope.zoomIn = function(){
+        var Result=$("Selector").tuMap("ZoomIn");
+    }
+
+    $scope.zoomOut = function(){
+        var Result=$("Selector").tuMap("ZoomOut");
+    }
+
+    $scope.redirect = function(amount,id) {
+        //var amount = $($event.currentTarget).parent().parent().parent().find("select").val();
+        var url = '/govx-order/'+id+'?amount='+String(amount);
+        //console.log(url);
+        $location.url(url);
+    };
+    // Scroll Functionality on Mobile Map
+
+    // $("#tickets_list").scroll(function() {
+    //     console.log("jeje");
+    // });
+    // -------------------------------------------------------
+    // var changedZones = [];
+    // var currentZone = [];
+    // var RowOffset = $('.filter-header').offset().top;
+    // var runOnce = true;
+    // var oldData = {};
+    // var tempVar = true;
+    // $("#tickets_list").scroll(function() {
+    //     if(runOnce){
+    //         $("path").each(function(){
+    //             pathID = $(this).attr('id');
+    //             oldData[pathID+"-fill"] = $(this).attr('fill');
+    //             oldData[pathID+"-stroke"] = $(this).attr('stroke');
+    //         });
+    //         runOnce = false;
+    //     }
+    //     //var resetOldColour = true;
+    //     $(".listing-row").each(function(){
+    //         if($(this).offset().top <= (RowOffset+104)){
+    //             if($(this).offset().top > (RowOffset+34)){
+    //                 var topRowId = $(this).attr('data-section');
+    //                 topRowIdLength = topRowId.length;
+    //                 $('path').each(function(){
+    //                     var pathID = $(this).attr('id');
+    //                     var subStrPathId = pathID.substr(pathID.length - topRowIdLength);
+    //                     if(subStrPathId == topRowId){
+    //                         if (changedZones.indexOf(pathID) == -1) {
+    //                             changedZones.push(pathID);
+    //                         }
+    //                         currentZone = [];
+    //                         currentZone.push(pathID);
+    //                         $(this).attr({fill:'#e5df00',stroke:'#000000'});
+    //                     }
+    //                 })
+    //             }else{
+    //                 //if(resetOldColour){
+    //                     for (i = 0; i < changedZones.length; i++) {
+    //                         var index = changedZones[i];
+    //                         if (currentZone.indexOf(index) == -1) {
+    //                             $('#'+changedZones[i]).attr({fill:oldData[index+"-fill"],stroke:oldData[index+"-stroke"]});
+    //                            var temp = currentZone.indexOf(index);
+    //                            changedZones.splice(temp, 1);
+
+    //                         }
+    //                     }
+    //                    // resetOldColour = false;
+    //                 //}
+    //             }
+    //         }
+    //     })
+    // });
+    
+    $scope.showMore = function(){
+        // //$scope.showing_list = //$scope.showing_list + 20;
+    }
+
+    $scope.getEventInfo();
+    //$scope.showing_list = 20;
+    $scope.Data = [];
+    $scope.filterBySection = false;
+    $scope.section = "";
+    $scope.selectedSections = [];
+    $scope.loading = true;
+    $scope.sectionUrl = "";
+    $scope.onlyParking = false;
+    $scope.index = 0;
+    $scope.mob_index = 0;
+    $scope.mob_delivery = 0;
+    $scope.mob_eticket = false;
+    $scope.ordering = 'retail_price';
+    $scope.etickets = false;
+    $scope.physicals = false;
+    $rootScope.isOrder = false;
+    $rootScope.isEvent = true;
+    $rootScope.darkHeader = true;
+    $rootScope.noFooter = true;
+    $scope.searchTerm = "";
+    $scope.compareDate =  "2015-09-05T00:00:00.000Z"
+    $window.scrollTo(0, 0);
+
+
+    $rootScope.govx = true;
+    
+    //The global variable locat gets the current location.path
+    Auth.currentUser().then(function(user) {
+        // User was logged in, or Devise returned
+        // previously authenticated session.
+        //console.log(user); // => {id: 1, ect: '...'}
+        $rootScope.user = user;
+        $rootScope.isLoggedin = true;
+    }, function(error) {
+        // unauthenticated error
+        //console.log("error login");
+        $rootScope.user = undefined;
+        $rootScope.isLoggedin = false;
+    });
 });
 controllers = angular.module('gamehedge')
 
@@ -82923,6 +85048,20 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
   $templateCache.put("faq.html", '<section id="home">\n<div class="nl-top-bg" style="background-image: URL(/assets/green_background-7f59e17363a6062d461c61cc7a501a050db1a1f76cb06ff5ab5dcf728f4d44ab.png);">\n  <div class="container nl-container">\n\n    <section id="hero">\n        <div id="shader"></div>\n        <div id="wrapper">\n          <div id="content">\n            <div class="container">\n              <p class="hidden-md hidden-lg hidden-xl">Every Ticket Comes With Our Good Game Guarantee!</p>\n              <div id="hero-search">\n                <form id="form-home-search" name="formSearch" onsubmit="function(){return false;};">\n                  <input type="hidden" name="type" value="full" />\n                  <div class="form-group">\n                    <img src="/assets/search icon-ddc57ae24d1e0b6ebb55f1742da8cca2a6b75cfc1339e507c71d46c821390c82.png" ng-click="goToSearch()">\n                    <input id="search_element" type="text" class="form-control" placeholder="Search by team, league, game, stadium or player..." ng-model="searchTerm" uib-typeahead="hint as hint.name for hint in getSearchHints($viewValue)" typeahead-template-url="typeahead/bind-node.html" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" typeahead-on-select="onSelect($item, $model, $label)" typeahead-no-results="noResults">\n                     <div class="no-results" ng-show="noResults && searchTerm != \'\'">\n                      No results. Please try again\n                    </div>\n                  </div>\n                </form>\n              </div>\n              \n            </div>\n            <!--\n            <div class="press-images hidden-xs hidden-sm">\n              <div class="container">\n                <div class="spacing-div">AS FEATURED IN</div>\n                <div class="spacing-div"><img src="/assets/press2/CNBC copy-fdb267aa4588c98a366e9d0afdef0302f0a98668135fac84e3ef06d35299dc88.png"></div>\n                <div class="spacing-div"><img src="/assets/press2/USA Today copy-474cc69f1ed05583320007bcafaf7008ee68c472237462fc4717e0e7bc5b5ed6.png"></div>\n                <div class="spacing-div"><img src="/assets/press2/Sports Illustrated Red-edc91d6b8d994df6ccb1e356910ff05576abe1eefc7f4abc8d72d179d7ac14b1.png"></div>\n                <div class="spacing-div"><img src="/assets/press2/Yahoo Finance-d458f43938d57599491d23cf4bf31ae36cc034756bad2f485b2b08825292fc59.png"></div>\n                <div class="spacing-div"><img src="/assets/press2/ESPN Radio copy-0a5f89dc91d4e272652ec987df0ecab5b0db6a93e2bbf88fb36076a7d9efbd4d.png"></div>\n              </div>\n            </div>\n            -->\n          </div>\n        </div>\n    </section>\n</div>\n</div>\n    <main id="faq_container">\n\n  <div class="nl-featured-in hidden-xs hidden-sm" id="good-game-guarantee">\n  <div class="container" style="margin-top: 0px;">\n    <center>\n      <img src="/assets/featured_logos-cd6431176f2cd8d32fc39822a87decb7760a536b82d2dbae9bf65ad8ca3e56e9.png">\n    </center>    \n  </div>\n  </div>\n\n\n        <div class="container">\n            <section id="legal">\n                <h1>GAMEHEDGE FAQ</h1>\n                <br />\n               \n\n\n<p><strong><u>WHAT IS GAMEHEDGE?</u></strong></p>\n<p>GameHedge is a ticket marketplace. We accept orders for tickets from our customers. Once we secure the requested tickets, we will send a confirmation to the customer that they will receive their tickets. <p>\n<p><strong><u>ARE TICKETS PURCHASED ON GAMEHEDGE GUARANTEED? </u></strong></p>\n<p>Yes. Once an order is confirmed by GameHedge, we guarantee that the customer will receive authentic tickets for their event, prior to the event, or they will receive their money back. If we are unable to secure the tickets which have been ordered by the customer, we will notify the customer that they will not receive their tickets. TICKETS ARE NOT DEEMED PURCHASED BY THE CUSTOMER UNTIL THE CUSTOMER RECEIVES AN EMAIL CONFIRMING THE PURCHASE. <p>\n<p><strong><u>WHAT IS THE GOOD GAME GUARANTEE? </u></strong></p>\n<p>All tickets purchased on GameHedge come with the Good Game Guarantee, which means that if the home team loses by the number of runs or points as specified in Terms and Conditions, the customer will be entitled to a refund of 50% of the GameHedge ticket price. To be entitled to receive the refund, the customer must follow the rules set forth in the Terms and Conditions. <p>\n<p><strong><u>DO I PAY ANYTHING EXTRA FOR THE GOOD GAME GUARANTEE? </u></strong></p>\n<p>No. All tickets purchased from GameHedge come with the Good Game Guarantee. Our ticket prices are consistent with market prices for sports tickets. <p>\n<p><strong><u>WHEN AM I ELIGIBLE FOR A GOOD GAME GUARANTEE REFUND? </u></strong></p>\n<p>MLB Baseball: If the home team loses by 5 runs or more in an officially completed MLB game. <p>\n<p>NFL Football:  If the home team loses by 17 points or more in an officially completed NFL game (does not apply to Super Bowl tickets). <p>\n<p>NBA Basketball:  If the home team loses by 20 points or more in an officially completed NBA game. <p>\n<p>NHL Hockey:  If the home team loses by 4 goals or more in an officially completed NHL game. <p>\n<p>Super Bowl LI: If either team loses by 28 points or more. <p>\n<p><strong><u>HOW IS MY GOOD GAME GUARANTEE REFUND CALCULATED? </u></strong></p>\n<p>It is 50% of the ticket price that you paid. It does not include any shipping or other fees. <p>\n<p><strong><u>HOW DO I REQUEST MY GOOD GAME GUARANTEE REFUND? </u></strong></p>\n<p>Go to "My Account" and complete the Refund Request Form. <p>\n<p><strong><u>WHAT HAPPENS AFTER I REQUEST MY GOOD GAME GUARANTEE REFUND? </u></strong></p>\n<p>After you submit your Refund Request, it will be credited back to the credit card that you used to make your ticket purchase, within 5-10 business days after you submit the request. <p>\n<p><strong><u>CAN I CHOOSE TO HAVE THE REFUND BASED ON THE VISITING TEAM? </u></strong></p>\n<p>No. It is always the home team (other than in the Super Bowl, in which case it’s either team). <p>\n<p><strong><u>WHY ARE THERE DIFFERENT RULES FOR SUPER BOWL TICKETS? </u></strong></p>\n<p>Since the Super Bowl is played in a neutral location, there are many fans of each team at the game.  So, we feel that it’s a bad game if either team gets blown out. Therefore, we decided the Good Game Guarantee would apply if either team loses—but by 28 points or more (instead of 17). <p>\n<p><strong><u>IF I SELL MY TICKETS, WILL THE BUYER BE ENTITLED TO THE REFUND? </u></strong></p>\n<p>No. Only the person that purchased tickets directly on GameHedge.com is entitled to a refund. <p>\n<p><strong><u>IS THERE A TIME LIMIT TO SUBMIT MY REFUND REQUEST? </u></strong></p>\n<p>Yes. You must submit your Refund Request within 90 days of the game for which the refund applies. <p>\n<p><strong><u>THE PRICE OF TICKETS</u></strong></p>\n<p>THE PRICE THAT YOU PAY FOR TICKETS ON GAMEHEDGE MAY BE ABOVE OR BELOW THE FACE VALUE PRICE PRINTED ON THE TICKETS. GameHedge provides you with the service of locating tickets that may not be available through standard channels. Tickets listed on GameHedge are purchased and supplied by GameHedge, from pre-qualified, screened, professional ticket agencies as well as individual resellers of tickets. Those resellers list these tickets at prices determined by the reseller, which may be above or below the price printed on the face of the ticket. The market value price for a ticket is quite volatile, determined by many factors including seat location, supply and demand, date and location of event, etc. <p>\n<p><strong><u>WHAT IS THE ORDER CONFIRMATION PROCESS? </u></strong></p>\n<p>After you submit your request for tickets, you will receive an email notifying you that we have received your request. This does not confirm ticket availability or prices. It only indicates that we have received your request for those tickets and have begun the process for securing the requested tickets. Once the requested tickets have been secured by us, your credit card will be charged and you should receive an Order Confirmation or link to print your tickets confirming that your request has been finalized and we have purchased the tickets on your behalf. You should also receive a copy of your invoice. In some instances, when the physical tickets or bar code electronic ticket are not yet available, the delivery update acts as your confirmation until the ticket is delivered. Your order may be finalized even if you do not receive an Order Confirmation, finalized invoice or an updated status email from us. If you have not heard from us, or have only received a confirmation that we received your ticket request, please call our office to check on your order. <p>\n<p><strong><u>HOW DO I RECEIVE MY TICKETS? </u></strong></p>\n<p>If your tickets are being delivered via E-Mail, you will receive a link containing the actual tickets for the event. We monitor all outbound e-mails to ensure they are received by you. <p>\n<p>Choosing to have tickets shipped does not ensure that the ticket will be a hard ticket. All tickets shipped will be done so via an express delivery service (i.e., Federal Express, Express Mail, messenger, etc.) and will require an adult signature. We use express delivery services requiring signature to ensure that your tickets arrive safely and that they can be tracked at any time. It is your responsibility to track your package and to be available to accept the package. You agree to provide us with a secure delivery location and authorize someone at that address to act as your agent in your absence to accept delivery of the package. If you provide a delivery location other than your credit card billing location, you hereby specifically agree to be responsible for that delivery and the tickets once delivered to the address you specify. You agree not to dispute such charges. Your expected ticket arrival date is based on the actual date we ship the order. <p>\n<p>As example; if you choose “One Day Shipping” you will get your tickets one business day after the seller ships the tickets and not necessarily one business day after you place your order. <p>\n<p>If for any reason your tickets are returned to us, we will try to contact you to arrange for another delivery attempt. If you are unavailable or if you refuse delivery of your tickets, the tickets may be listed for sale on consignment with GameHedge at a price and on terms determined by GameHedge. <p>\n<p><strong><u>WHAT HAPPENS IF I LOSE MY TICKETS? </u></strong></p>\n<p>When you receive your tickets keep them in a safe place. Unfortunately, GameHedge cannot guarantee that tickets can be replaced if they are lost, stolen, or damaged. <p>\n<p><strong><u>WHAT IF AN EVENT IS CANCELLED? </u></strong></p>\n<p>If an event is cancelled for any reason other than an act of God (rainout, earthquake, flood, etc.), war, terrorism, strike, or lockout, we will provide a full refund for the amount that you paid for the tickets. Shipping charges are not refundable. TICKETS MUST BE RECEIVED BACK IN OUR OFFICE WITHIN 14 DAYS OF THE ANNOUNCEMENT OF THE EVENT CANCELLATION. In case of a rainout or strike for a sporting event, no refunds will be made. <p>\n<p><strong><u>WHAT IF AN EVENT IS POSTPONED OR RESCHEDULED? </u></strong></p>\n<p>If an event is postponed or rescheduled, the tickets will be honored for the rescheduled event date. New tickets will not need to be issued for most rescheduled events or postponements. Since we are unable to recover our costs on the tickets that we acquired for you, we in turn are unable to offer customers refunds on postponed or rescheduled events. </p>\n\n\n            </section>\n        </div>\n    </main>\n</section>')
+}]);
+
+// Angular Rails Template
+// source: app/assets/javascripts/templates/govx-order.html.erb
+
+angular.module("templates").run(["$templateCache", function($templateCache) {
+  $templateCache.put("govx-order.html", '<div id="home-loading-data" class="row horizontal-center" ng-if="!clientLoaded || !ticketsLoaded">\n  <div class=\'uil-default-css\' style=\'transform:scale(0.32);\'><div style=\'top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(0deg) translate(0,-60px);transform:rotate(0deg) translate(0,-60px);border-radius:10px;position:absolute;\'></div><div style=\'top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(30deg) translate(0,-60px);transform:rotate(30deg) translate(0,-60px);border-radius:10px;position:absolute;\'></div><div style=\'top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(60deg) translate(0,-60px);transform:rotate(60deg) translate(0,-60px);border-radius:10px;position:absolute;\'></div><div style=\'top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(90deg) translate(0,-60px);transform:rotate(90deg) translate(0,-60px);border-radius:10px;position:absolute;\'></div><div style=\'top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(120deg) translate(0,-60px);transform:rotate(120deg) translate(0,-60px);border-radius:10px;position:absolute;\'></div><div style=\'top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(150deg) translate(0,-60px);transform:rotate(150deg) translate(0,-60px);border-radius:10px;position:absolute;\'></div><div style=\'top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(180deg) translate(0,-60px);transform:rotate(180deg) translate(0,-60px);border-radius:10px;position:absolute;\'></div><div style=\'top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(210deg) translate(0,-60px);transform:rotate(210deg) translate(0,-60px);border-radius:10px;position:absolute;\'></div><div style=\'top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(240deg) translate(0,-60px);transform:rotate(240deg) translate(0,-60px);border-radius:10px;position:absolute;\'></div><div style=\'top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(270deg) translate(0,-60px);transform:rotate(270deg) translate(0,-60px);border-radius:10px;position:absolute;\'></div><div style=\'top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(300deg) translate(0,-60px);transform:rotate(300deg) translate(0,-60px);border-radius:10px;position:absolute;\'></div><div style=\'top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(330deg) translate(0,-60px);transform:rotate(330deg) translate(0,-60px);border-radius:10px;position:absolute;\'></div>\n  </div>\n</div>\n<span id="home" ng-show="clientLoaded && ticketsLoaded">\n	<section id="payments" ng-show="!order_success">\n	  	<div class="container">\n            <div class="row hidden-md hidden-lg hidden-xl">\n                <div class="col-xs-12 text-right order-tel">\n                    <span style="font-size: 0.8em;">Contact us</span> <i style="color:#A8C94B; font-size: 1.2em;" class="fa fa-phone-square" aria-hidden="true"></i> Toll free <a href="tel:8888044330">888-804-4330</a>    \n                </div>\n            </div>\n	  		<div class="row row-eq-height payment-container">\n	  			<div class="col-md-8 card-element payments-left-form">\n	  				<div class="card">\n	  					<div class="card-in summary hidden-md hidden-lg hidden-xl" style="padding-bottom:0;">\n						    <div class="title">{{ticket.event.name}}</div>							\n						    <div class="info">\n						    	{{event.occurs_at | date: "EEE,	MMM dd, yyyy hh:mm a" : \'UTC\'}}<br>\n						    	{{event.venue.name}}, {{event.venue.location}}<br>\n						    	<div class="top-location"><strong class="info-summary">Section {{ticket.section}}, Row {{ticket.row}}</strong></div>\n								<div class="top-price-ea">{{ticket.retail_price | currency}} Each</div>\n\n								<div class="ggg-m-line" style="margin-top: 10px; font-size: 14px;">\n            						<div>\n              							<span id="m_refund">{{ticket.retail_price/2 | currency}}</span>/ea Potential Refund\n            						</div>\n          						</div>\n\n                                <!--\n								<div class="top-info-price">\n                                    <div class="price-top-mobile">{{ticket.retail_price | currency}} ea.</div>\n                                </div>\n								-->\n								<br/>                                                                \n						    </div>\n\n                            <div class="top-desc-container">\n								<div style="margin-bottom: 8px;">Quantity:</div>\n\n						    	<div class="top-val mobile-margin-select" >\n							    	<select class="mobile-top-amount" id="amount" ng-model="amount" ng-change="calculateValues()" >\n							    		<option  ng-repeat="o in ticket.splits | orderBy:\'-\'" value="{{o}}">{{o}}</option>\n							    	</select>\n						    	</div>\n								 <span class="seats-note m-invis" id="seats_note">Your seats will be together</span>\n\n						    </div>\n	  					</div>\n	  					<div class="card-in deliver">\n	  						Deliver Tickets To\n	  						<div ng-if="edit_deliver == 4">\n		  						<span>\n		  							<div class="inputs">\n			  							<div class="email left">\n										    <input type="email" class="form-control" id="email" placeholder="Email" ng-model="$parent.client.email" name="email" ng-change="checkEmail()">\n										</div>\n										<div class="email right">\n										    <input type="email" class="form-control" id="email-confirm" placeholder="Confirm Email"  ng-model="$parent.client.confirm_email" ng-change="checkConfirmEmail()" name="confirm_email">\n										</div>\n									</div>\n								</span>\n		  					</div>\n		  					<div class="review" ng-if="edit_deliver == 2">\n	  							<div ng-repeat="a in addresses" style="display:flex;">\n	  								<input type="radio" ng-model="$parent.$parent.shipping_address_index" value="{{$index}}">\n	  								<div>\n		  								<div class="title">{{a.name}}</div>\n				  						<div>{{a.street_address}}<br>\n				  						{{a.locality}}, {{a.region}} {{a.postal_code}}<br>\n				  						{{a.country_code}}</div>\n					  				</div>\n	  							</div>\n	  							<span ng-if="!addresses.length">\n			  						<div class="title">No addresses</div>\n			  					</span>\n	  							<button ng-disabled="$parent.processing" ng-click="selectAddress(\'shipping\')">DONE</button><button ng-disabled="$parent.processing" ng-click="addField(\'shipping\')">ADD</button>\n		  					</div>\n		  					<div class="review" ng-if="edit_deliver == 1">\n		  						<span ng-if="addresses.length">\n			  						<div class="title">{{shipping_address.name}}</div>\n			  						<span>\n				  						<div>{{client.email}}</div>\n				  					</span>\n			  						<div>{{shipping_address.street_address}}<br>\n			  						{{shipping_address.locality}}, {{shipping_address.region}} {{shipping_address.postal_code}}<br>\n			  						{{shipping_address.country_code}}</div>\n			  					</span>\n			  					<span ng-if="!addresses.length">\n			  						<div class="title">No addresses</div>\n			  					</span>\n			  					<button ng-disabled="$parent.processing" ng-click="toogleReview(\'deliver\')">EDIT</button>\n		  					</div>\n		  					<div ng-if="edit_deliver == 3">\n		  						<div class="mobile-margin inputs mobile-email" ng-if="!$root.isLoggedin">\n		  							<div class="email bottom-line">\n			  							<input type="email" class="form-control" id="email-shipping" ng-model="$parent.$parent.client.email" placeholder="Email" name="email"  ng-change="checkEmail()">\n								    </div>\n								    <div class="confirm-email">\n			  							<input type="email" class="form-control" id="confirm-email-shipping" ng-model="$parent.$parent.client.confirm_email" placeholder="Confirm Email" name="confirm_email" ng-change="checkConfirmEmail()" >\n								    </div>\n		  						</div>\n							    <div class="inputs" ng-if="$root.isLoggedin">\n		  							<div class="full-name">\n			  							<input type="text" class="form-control" id="first-name-billing" ng-model="$parent.$parent.shipping_address.name" placeholder="Name as it appears on card" name="name">\n								    </div>\n		  						</div>\n		  						<div class="inputs" ng-if="$root.isLoggedin">\n		  							<div class="address">\n			  							<input type="text" class="form-control" id="address-billing" ng-model="$parent.$parent.shipping_address.street_address" placeholder="Address" name="address">\n								    </div>\n								    <div class="country">\n									    <select id="country-billing" ng-model="$parent.$parent.shipping_address.country_code" name="country">\n											<option value="">Select Country</option>\n											<option value="us">United States</option>\n											<option value="af">Afghanistan</option>\n											<option value="al">Albania</option>\n											<option value="dz">Algeria</option>\n											<option value="as">American Samoa</option>\n											<option value="ad">Andorra</option>\n											<option value="ao">Angola</option>\n											<option value="ai">Anguilla</option>\n											<option value="aq">Antarctica</option>\n											<option value="ag">Antigua and Barbuda</option>\n											<option value="ar">Argentina</option>\n											<option value="am">Armenia</option>\n											<option value="aw">Aruba</option>\n											<option value="au">Australia</option>\n											<option value="at">Austria</option>\n											<option value="az">Azerbaijan</option>\n											<option value="bs">Bahamas</option>\n											<option value="bh">Bahrain</option>\n											<option value="bd">Bangladesh</option>\n											<option value="bb">Barbados</option>\n											<option value="by">Belarus</option>\n											<option value="be">Belgium</option>\n											<option value="bz">Belize</option>\n											<option value="bj">Benin</option>\n											<option value="bm">Bermuda</option>\n											<option value="bt">Bhutan</option>\n											<option value="bo">Bolivia</option>\n											<option value="ba">Bosnia and Herzegovina</option>\n											<option value="bw">Botswana</option>\n											<option value="bv">Bouvet Island</option>\n											<option value="br">Brazil</option>\n											<option value="io">British Indian Ocean Territory</option>\n											<option value="vg">British Virgin Islands</option>\n											<option value="bn">Brunei Darussalam</option>\n											<option value="bg">Bulgaria</option>\n											<option value="bf">Burkina Faso</option>\n											<option value="bi">Burundi</option>\n											<option value="kh">Cambodia</option>\n											<option value="cm">Cameroon</option>\n											<option value="ca">Canada</option>\n											<option value="cv">Cape Verde</option>\n											<option value="ky">Cayman Islands</option>\n											<option value="cf">Central African Republic</option>\n											<option value="td">Chad</option>\n											<option value="cl">Chile</option>\n											<option value="cn">China</option>\n											<option value="cx">Christmas Island</option>\n											<option value="cc">Cocos (Keeling) Islands</option>\n											<option value="co">Colombia</option>\n											<option value="km">Comoros</option>\n											<option value="cg">Congo-Brazzaville</option>\n											<option value="cd">Congo-Kinshasa</option>\n											<option value="ck">Cook Islands</option>\n											<option value="cr">Costa Rica</option>\n											<option value="hr">Croatia</option>\n											<option value="cu">Cuba</option>\n											<option value="cy">Cyprus</option>\n											<option value="cz">Czech Republic</option>\n											<option value="dk">Denmark</option>\n											<option value="dj">Djibouti</option>\n											<option value="dm">Dominica</option>\n											<option value="do">Dominican Republic</option>\n											<option value="ec">Ecuador</option>\n											<option value="eg">Egypt</option>\n											<option value="sv">El Salvador</option>\n											<option value="gq">Equatorial Guinea</option>\n											<option value="er">Eritrea</option>\n											<option value="ee">Estonia</option>\n											<option value="et">Ethiopia</option>\n											<option value="fk">Falkland Islands (Malvinas)</option>\n											<option value="fo">Faroe Islands</option>\n											<option value="fj">Fiji</option>\n											<option value="fi">Finland</option>\n											<option value="fr">France</option>\n											<option value="gf">French Guiana</option>\n											<option value="pf">French Polynesia</option>\n											<option value="tf">French Southern Territories</option>\n											<option value="ga">Gabon</option>\n											<option value="gm">Gambia</option>\n											<option value="ge">Georgia</option>\n											<option value="de">Germany</option>\n											<option value="gh">Ghana</option>\n											<option value="gi">Gibraltar</option>\n											<option value="gr">Greece</option>\n											<option value="gl">Greenland</option>\n											<option value="gd">Grenada</option>\n											<option value="gp">Guadeloupe</option>\n											<option value="gu">Guam</option>\n											<option value="gt">Guatemala</option>\n											<option value="gg">Guernsey</option>\n											<option value="gn">Guinea</option>\n											<option value="gw">Guinea-Bissau</option>\n											<option value="gy">Guyana</option>\n											<option value="ht">Haiti</option>\n											<option value="hm">Heard Island and McDonald Islands</option>\n											<option value="hn">Honduras</option>\n											<option value="hk">Hong Kong</option>\n											<option value="hu">Hungary</option>\n											<option value="is">Iceland</option>\n											<option value="in">India</option>\n											<option value="id">Indonesia</option>\n											<option value="ir">Iran</option>\n											<option value="iq">Iraq</option>\n											<option value="ie">Ireland</option>\n											<option value="im">Isle of Man</option>\n											<option value="il">Israel</option>\n											<option value="it">Italy</option>\n											<option value="ci">Ivory Coast</option>\n											<option value="jm">Jamaica</option>\n											<option value="jp">Japan</option>\n											<option value="je">Jersey</option>\n											<option value="jo">Jordan</option>\n											<option value="kz">Kazakhstan</option>\n											<option value="ke">Kenya</option>\n											<option value="ki">Kiribati</option>\n											<option value="kw">Kuwait</option>\n											<option value="kg">Kyrgyzstan</option>\n											<option value="la">Laos</option>\n											<option value="lv">Latvia</option>\n											<option value="lb">Lebanon</option>\n											<option value="ls">Lesotho</option>\n											<option value="lr">Liberia</option>\n											<option value="ly">Libya</option>\n											<option value="li">Liechtenstein</option>\n											<option value="lt">Lithuania</option>\n											<option value="lu">Luxembourg</option>\n											<option value="mo">Macao</option>\n											<option value="mk">Macedonia, F.Y.R. of</option>\n											<option value="mg">Madagascar</option>\n											<option value="mw">Malawi</option>\n											<option value="my">Malaysia</option>\n											<option value="mv">Maldives</option>\n											<option value="ml">Mali</option>\n											<option value="mt">Malta</option>\n											<option value="mh">Marshall Islands</option>\n											<option value="mq">Martinique</option>\n											<option value="mr">Mauritania</option>\n											<option value="mu">Mauritius</option>\n											<option value="yt">Mayotte</option>\n											<option value="mx">Mexico</option>\n											<option value="fm">Micronesia</option>\n											<option value="md">Moldova</option>\n											<option value="mc">Monaco</option>\n											<option value="mn">Mongolia</option>\n											<option value="me">Montenegro</option>\n											<option value="ms">Montserrat</option>\n											<option value="ma">Morocco</option>\n											<option value="mz">Mozambique</option>\n											<option value="mm">Myanmar</option>\n											<option value="na">Namibia</option>\n											<option value="nr">Nauru</option>\n											<option value="np">Nepal</option>\n											<option value="nl">Netherlands</option>\n											<option value="an">Netherlands Antilles</option>\n											<option value="nc">New Caledonia</option>\n											<option value="nz">New Zealand</option>\n											<option value="ni">Nicaragua</option>\n											<option value="ne">Niger</option>\n											<option value="ng">Nigeria</option>\n											<option value="nu">Niue</option>\n											<option value="nf">Norfolk Island</option>\n											<option value="kp">North Korea</option>\n											<option value="mp">Northern Mariana Islands</option>\n											<option value="no">Norway</option>\n											<option value="ps">Occupied Palestinian Territory</option>\n											<option value="om">Oman</option>\n											<option value="pk">Pakistan</option>\n											<option value="pw">Palau</option>\n											<option value="pa">Panama</option>\n											<option value="pg">Papua New Guinea</option>\n											<option value="py">Paraguay</option>\n											<option value="pe">Peru</option>\n											<option value="ph">Philippines</option>\n											<option value="pn">Pitcairn</option>\n											<option value="pl">Poland</option>\n											<option value="pt">Portugal</option>\n											<option value="pr">Puerto Rico</option>\n											<option value="qa">Qatar</option>\n											<option value="re">Reunion</option>\n											<option value="ro">Romania</option>\n											<option value="ru">Russian Federation</option>\n											<option value="rw">Rwanda</option>\n											<option value="bl">Saint Barthélemy</option>\n											<option value="sh">Saint Helena</option>\n											<option value="kn">Saint Kitts and Nevis</option>\n											<option value="lc">Saint Lucia</option>\n											<option value="mf">Saint Martin</option>\n											<option value="pm">Saint Pierre and Miquelon</option>\n											<option value="vc">Saint Vincent and the Grenadines</option>\n											<option value="ws">Samoa</option>\n											<option value="sm">San Marino</option>\n											<option value="st">Sao Tome and Principe</option>\n											<option value="sa">Saudi Arabia</option>\n											<option value="sn">Senegal</option>\n											<option value="rs">Serbia</option>\n											<option value="sc">Seychelles</option>\n											<option value="sl">Sierra Leone</option>\n											<option value="sg">Singapore</option>\n											<option value="sk">Slovakia</option>\n											<option value="si">Slovenia</option>\n											<option value="sb">Solomon Islands</option>\n											<option value="so">Somalia</option>\n											<option value="za">South Africa</option>\n											<option value="gs">South Georgia and the South Sandwich Islands</option>\n											<option value="kr">South Korea</option>\n											<option value="es">Spain</option>\n											<option value="lk">Sri Lanka</option>\n											<option value="sd">Sudan</option>\n											<option value="sr">Suriname</option>\n											<option value="sj">Svalbard and Jan Mayen</option>\n											<option value="sz">Swaziland</option>\n											<option value="se">Sweden</option>\n											<option value="ch">Switzerland</option>\n											<option value="sy">Syria</option>\n											<option value="tw">Taiwan</option>\n											<option value="tj">Tajikistan</option>\n											<option value="tz">Tanzania</option>\n											<option value="th">Thailand</option>\n											<option value="tl">Timor-Leste</option>\n											<option value="tg">Togo</option>\n											<option value="tk">Tokelau</option>\n											<option value="to">Tonga</option>\n											<option value="tt">Trinidad and Tobago</option>\n											<option value="tn">Tunisia</option>\n											<option value="tr">Turkey</option>\n											<option value="tm">Turkmenistan</option>\n											<option value="tc">Turks and Caicos Islands</option>\n											<option value="tv">Tuvalu</option>\n											<option value="ae">U.A.E.</option>\n											<option value="vi">U.S. Virgin Islands</option>\n											<option value="ug">Uganda</option>\n											<option value="ua">Ukraine</option>\n											<option value="gb">United Kingdom</option>\n											<option value="um">United States Minor Outlying Islands</option>\n											<option value="uy">Uruguay</option>\n											<option value="uz">Uzbekistan</option>\n											<option value="vu">Vanuatu</option>\n											<option value="va">Vatican City</option>\n											<option value="ve">Venezuela</option>\n											<option value="vn">Vietnam</option>\n											<option value="wf">Wallis and Futuna</option>\n											<option value="eh">Western Sahara</option>\n											<option value="ye">Yemen</option>\n											<option value="zm">Zambia</option>\n											<option value="zw">Zimbabwe</option>\n											<option value="ax">Åland Islands</option>\n							  			</select>\n								    </div>\n		  						</div>\n		  						<div class="inputs" ng-if="$root.isLoggedin">\n		  							<div class="zipcode">\n			  							<input type="text" class="form-control" id="zipcode-billing" ng-model="$parent.$parent.shipping_address.postal_code" placeholder="Zip Code" name="zipcode">\n								    </div>\n								    <div class="city">\n									    <input type="text" class="form-control" id="city-billing" ng-model="$parent.$parent.shipping_address.locality" placeholder="City" name="city">	\n								    </div>\n								    <div class="state">\n									    <select id="state_id-billing" data-value="shortcode" ng-model="$parent.$parent.shipping_address.region" name="state">\n									    	<option value="">State</option>\n											<option value="AK">AK</option>\n							  				<option value="AL">AL</option>\n							  				<option value="AS">AS</option>\n							  				<option value="AZ">AZ</option>\n							  				<option value="AR">AR</option>\n							  				<option value="CA">CA</option>\n							  				<option value="CO">CO</option>\n							  				<option value="CT">CT</option>\n							  				<option value="DE">DE</option>\n							  				<option value="DC">DC</option>\n							  				<option value="FM">FM</option>\n							  				<option value="FL">FL</option>\n							  				<option value="GA">GA</option>\n							  				<option value="GU">GU</option>\n							  				<option value="HI">HI</option>\n							  				<option value="ID">ID</option>\n							  				<option value="IL">IL</option>\n							  				<option value="IN">IN</option>\n							  				<option value="IA">IA</option>\n							  				<option value="KS">KS</option>\n							  				<option value="KY">KY</option>\n							  				<option value="LA">LA</option>\n							  				<option value="ME">ME</option>\n							  				<option value="MH">MH</option>\n							  				<option value="MD">MD</option>\n							  				<option value="MA">MA</option>\n							  				<option value="MI">MI</option>\n							  				<option value="MN">MN</option>\n							  				<option value="MS">MS</option>\n							  				<option value="MO">MO</option>\n							  				<option value="MT">MT</option>\n							  				<option value="NE">NE</option>\n							  				<option value="NV">NV</option>\n							  				<option value="NH">NH</option>\n							  				<option value="NJ">NJ</option>\n							  				<option value="NM">NM</option>\n							  				<option value="NY">NY</option>\n							  				<option value="NC">NC</option>\n							  				<option value="ND">ND</option>\n							  				<option value="MP">MP</option>\n							  				<option value="OH">OH</option>\n							  				<option value="OK">OK</option>\n							  				<option value="OR">OR</option>\n							  				<option value="PW">PW</option>\n							  				<option value="PA">PA</option>\n							  				<option value="PR">PR</option>\n							  				<option value="RI">RI</option>\n							  				<option value="SC">SC</option>\n							  				<option value="SD">SD</option>\n							  				<option value="TN">TN</option>\n							  				<option value="TX">TX</option>\n							  				<option value="UT">UT</option>\n							  				<option value="VT">VT</option>\n							  				<option value="VI">VI</option>\n							  				<option value="VA">VA</option>\n							  				<option value="WA">WA</option>\n							  				<option value="WV">WV</option>\n							  				<option value="WI">WI</option>\n							  				<option value="WY">WY</option>\n							  			</select>\n								    </div>\n		  						</div>\n		  						<div ng-if="$root.isLoggedin">\n		  							<button ladda="$parent.$parent.addShippingProcess" ng-disabled="$parent.processing" ng-click="confirmSave(\'shipping\')">SAVE</button>\n		  							<button ng-disabled="$parent.$parent.processing" ng-click="cancelAdd(\'shipping\')">CANCEL</button>\n		  						</div>\n		  					</div>\n		  					<hr>\n\n		  					<div class="pay_with_title">\n		  					Pay With\n		  					<div class="img-holder">\n						    	<img src="/assets/visa-3ab4a39fbb8319cdcb82b2d91996ec378cb86a9140d6520a4d49f91b6ba7ca4f.png">\n						    	<img src="/assets/mastercard-87ffc649f4f4e58fd0c8a45b740105d6cc277dd5c8ca8d53ca83e046d8f28dc3.png">\n						    	<img src="/assets/amex-6a0a73c3b5952c522d0fdb371e47285563e143498c7805615dfc83920ec4c79b.png">\n						    	<img src="/assets/discover-e1c2e888d89671848706052194a0cc5303b8f4b60affd94127ee4163542411cf.png">\n						    </div></div>\n		  					<div style="position:relative;">\n		  						<div ng-if="edit_credit_card == 3" class="edit_credit_card mobile-margin">\n			  						<div class="row">\n			  							<div class="cc col-md-5 bottom-line">\n				  							<input type="tel"  ng-model="$parent.card.last_digits" class="form-control" id="cc" placeholder="Credit Card Number" ng-change="checkCardNumber()" name="credit_card">\n										    <div class="img-holder">\n										    	<img src="/assets/visa-3ab4a39fbb8319cdcb82b2d91996ec378cb86a9140d6520a4d49f91b6ba7ca4f.png" ng-if="($parent.card.card_company | lowercase) == \'visa\'">\n										    	<img src="/assets/mastercard-87ffc649f4f4e58fd0c8a45b740105d6cc277dd5c8ca8d53ca83e046d8f28dc3.png" ng-if="($parent.card.card_company | lowercase) == \'mastercard\'">\n										    	<img src="/assets/amex-6a0a73c3b5952c522d0fdb371e47285563e143498c7805615dfc83920ec4c79b.png" ng-if="($parent.card.card_company | lowercase) == \'amex\'">\n										    	<img src="/assets/discover-e1c2e888d89671848706052194a0cc5303b8f4b60affd94127ee4163542411cf.png" ng-if="($parent.card.card_company | lowercase) == \'discover\'">\n										    </div>\n									    </div>\n									    <div class="col-md-7">\n									    	<div class="row">\n					  							<div class="cvv col-xs-4 right-line">\n						  							<select class="form-control" id="exp-month" ng-model="$parent.card.expiration_month" name="month">\n												    	<option value="">Month</option>\n												    	<option value="01">JAN</option>\n												    	<option value="02">FEB</option>\n												    	<option value="03">MAR</option>\n												    	<option value="04">APR</option>\n												    	<option value="05">MAY</option>\n												    	<option value="06">JUN</option>\n												    	<option value="07">JUL</option>\n												    	<option value="08">AUG</option>\n												    	<option value="09">SEP</option>\n												    	<option value="10">OCT</option>\n												    	<option value="11">NOV</option>\n												    	<option value="12">DEC</option>\n												    </select>\n											    </div>\n											    <div class="exp-month col-xs-4 right-line">\n												    <select class="form-control" id="exp-year" ng-model="$parent.card.expiration_year" name="year">\n												    	<option value="">Year</option>\n												    	<option value="2016">2016</option>\n												    	<option value="2017">2017</option>\n												    	<option value="2018">2018</option>\n												    	<option value="2019">2019</option>\n												    	<option value="2020">2020</option>\n												    	<option value="2021">2021</option>\n												    	<option value="2022">2022</option>\n												    	<option value="2023">2023</option>\n												    	<option value="2024">2024</option>\n												    	<option value="2025">2025</option>\n												    	<option value="2026">2026</option>\n												    	<option value="2027">2027</option>\n												    	<option value="2028">2028</option>\n												    	<option value="2029">2029</option>\n												    	<option value="2030">2030</option>\n												    	<option value="2031">2031</option>\n												    	<option value="2032">2032</option>\n												    	<option value="2033">2033</option>\n												    	<option value="2034">2034</option>\n												    	<option value="2035">2035</option>\n												    	<option value="2036">2036</option>\n												    	<option value="2037">2037</option>\n												    	<option value="2038">2038</option>\n												    	<option value="2039">2039</option>\n												    </select>\n											    </div>\n                                                <div class="col-xs-4 exp-year">\n												    <input type="tel" class="form-control" id="cvv" placeholder="CVV" ng-model="$parent.card.cvv" name="cvv">	\n											    </div>\n											</div>\n									    </div>\n			  						</div>\n			  						<div ng-if="$root.isLoggedin">\n				  						<button style="background-color: green; border-color: green;" ladda="$parent.addCardProcess" ng-disabled="$parent.$parent.processing" ng-click="confirmSave(\'card\')">SAVE</button>\n				  						<button ng-disabled="$parent.$parent.processing" ng-click="cancelAdd(\'card\')">CANCEL</button>\n				  					</div>\n								</div>\n								<div class="review" ng-if="edit_credit_card == 1">\n			  						<span ng-if="cards.length">\n				  						<div class="title">Credit Card</div>\n				  						<div class="ccard vertical-center">\n					  						<div class="img-holder">\n										    	<img src="/assets/visa-3ab4a39fbb8319cdcb82b2d91996ec378cb86a9140d6520a4d49f91b6ba7ca4f.png" ng-if="($parent.card.card_company | lowercase) == \'visa\'">\n										    	<img src="/assets/mastercard-87ffc649f4f4e58fd0c8a45b740105d6cc277dd5c8ca8d53ca83e046d8f28dc3.png" ng-if="($parent.card.card_company | lowercase) == \'mastercard\'">\n										    	<img src="/assets/amex-6a0a73c3b5952c522d0fdb371e47285563e143498c7805615dfc83920ec4c79b.png" ng-if="($parent.card.card_company | lowercase) == \'amex\'">\n										    	<img src="/assets/discover-e1c2e888d89671848706052194a0cc5303b8f4b60affd94127ee4163542411cf.png" ng-if="($parent.card.card_company | lowercase) == \'discover\'">\n										    </div>\n				  							ending in {{$parent.card.last_digits | limitTo:-4}}\n				  						</div>\n				  					</span>\n				  					<span ng-if="!cards.length">\n				  						<div class="title">No Credit Cards</div>\n				  					</span>\n				  					<button ng-disabled="$parent.processing" ng-click="toogleReview(\'card\')">EDIT</button>\n			  					</div>\n			  					<div class="review" ng-if="edit_credit_card == 2">\n			  						<span>\n				  						<div class="ccard vertical-center" ng-repeat="c in cards">\n				  							<input type="radio" ng-model="$parent.$parent.credit_card_index" value="{{$index}}">\n					  						<div class="img-holder">\n										    	<img src="/assets/visa-3ab4a39fbb8319cdcb82b2d91996ec378cb86a9140d6520a4d49f91b6ba7ca4f.png" ng-if="(c.card_company | lowercase) == \'visa\'">\n										    	<img src="/assets/mastercard-87ffc649f4f4e58fd0c8a45b740105d6cc277dd5c8ca8d53ca83e046d8f28dc3.png" ng-if="(c.card_company | lowercase) == \'mastercard\'">\n										    	<img src="/assets/amex-6a0a73c3b5952c522d0fdb371e47285563e143498c7805615dfc83920ec4c79b.png" ng-if="(c.card_company | lowercase) == \'amex\'">\n										    	<img src="/assets/discover-e1c2e888d89671848706052194a0cc5303b8f4b60affd94127ee4163542411cf.png" ng-if="(c.card_company | lowercase) == \'discover\'">\n										    </div>\n				  							ending in {{c.last_digits | limitTo:-4}}\n				  						</div>\n				  						<span ng-if="!cards.length">\n					  						<div class="title">No Credit Cards</div>\n					  					</span>\n				  					</span>\n				  					<button ng-disabled="$parent.processing" ng-click="selectAddress(\'card\')" >DONE</button><button ng-disabled="$parent.processing" ng-click="addField(\'card\')" style="background-color: green; border-color: green;">ADD</button>\n			  					</div>\n							</div>\n\n		  					<hr>\n\n		  					<div class="billing_title">Billing Address</div>\n	  				\n	  						<div class="review" ng-if="edit_billing == 2">\n	  							<div ng-repeat="a in addresses" style="display:flex;">\n	  								<input type="radio" ng-model="$parent.$parent.billing_address_index" value="{{$index}}">\n	  								<div>\n		  								<div class="title">{{a.name}}</div>\n				  						<div>{{a.street_address}}<br>\n				  						{{a.locality}}, {{a.region}} {{a.postal_code}}<br>\n				  						{{a.country_code}}</div>\n					  				</div>\n	  							</div>\n	  							<span ng-if="!addresses.length">\n			  						<div class="title">No addresses</div>\n			  					</span>\n	  							<button ng-disabled="$parent.processing" ng-click="selectAddress(\'billing\')">DONE</button><button ng-disabled="$parent.processing" ng-click="addField(\'billing\')">ADD</button>\n		  					</div>\n		  					<div class="review" ng-if="edit_billing == 1">\n		  						<span ng-if="addresses.length">\n			  						<div class="title">{{billing_address.name}}</div>\n			  						<span>\n				  						<div>{{client.email}}</div>\n				  					</span>\n			  						<div>{{billing_address.street_address}}<br>\n			  						{{billing_address.locality}}, {{billing_address.region}} {{billing_address.postal_code}}<br>\n			  						{{billing_address.country_code}}</div>\n			  					</span>\n		  						<span ng-if="!addresses.length">\n			  						<div class="title">No addresses</div>\n			  					</span>\n			  					<button ng-disabled="$parent.processing" ng-click="toogleReview(\'billing\')">EDIT</button>\n		  					</div>\n		  					<div ng-if="edit_billing == 3" class="mobile-margin">\n							    <div class="inputs bottom-line">\n		  							<div class="full-name">\n			  							<input type="text" class="form-control" id="first-name-billing" ng-model="$parent.billing_address.name" placeholder="Name as it appears on card" name="name">\n								    </div>\n		  						</div>\n		  						<div class="inputs bottom-line">\n		  							<div class="address">\n			  							<input type="text" class="form-control" id="address-billing" ng-model="$parent.billing_address.street_address" placeholder="Address" name="address">\n								    </div>\n		  						</div>\n                                \n                                <div class="inputs bottom-line">\n                                    <div class="address">\n									    <input type="text" class="form-control" id="city-billing" ng-model="$parent.billing_address.locality" placeholder="City" name="city">	\n								    </div>\n                                </div>\n                                \n		  						<div class="inputs bottom-line">\n								    <div class="country right-line">\n									    <select id="state_id-billing" data-value="shortcode" ng-model="$parent.billing_address.region" name="state">\n									    	<option value="">State</option>\n											<option value="AK">AK</option>\n							  				<option value="AL">AL</option>\n							  				<option value="AS">AS</option>\n							  				<option value="AZ">AZ</option>\n							  				<option value="AR">AR</option>\n							  				<option value="CA">CA</option>\n							  				<option value="CO">CO</option>\n							  				<option value="CT">CT</option>\n							  				<option value="DE">DE</option>\n							  				<option value="DC">DC</option>\n							  				<option value="FM">FM</option>\n							  				<option value="FL">FL</option>\n							  				<option value="GA">GA</option>\n							  				<option value="GU">GU</option>\n							  				<option value="HI">HI</option>\n							  				<option value="ID">ID</option>\n							  				<option value="IL">IL</option>\n							  				<option value="IN">IN</option>\n							  				<option value="IA">IA</option>\n							  				<option value="KS">KS</option>\n							  				<option value="KY">KY</option>\n							  				<option value="LA">LA</option>\n							  				<option value="ME">ME</option>\n							  				<option value="MH">MH</option>\n							  				<option value="MD">MD</option>\n							  				<option value="MA">MA</option>\n							  				<option value="MI">MI</option>\n							  				<option value="MN">MN</option>\n							  				<option value="MS">MS</option>\n							  				<option value="MO">MO</option>\n							  				<option value="MT">MT</option>\n							  				<option value="NE">NE</option>\n							  				<option value="NV">NV</option>\n							  				<option value="NH">NH</option>\n							  				<option value="NJ">NJ</option>\n							  				<option value="NM">NM</option>\n							  				<option value="NY">NY</option>\n							  				<option value="NC">NC</option>\n							  				<option value="ND">ND</option>\n							  				<option value="MP">MP</option>\n							  				<option value="OH">OH</option>\n							  				<option value="OK">OK</option>\n							  				<option value="OR">OR</option>\n							  				<option value="PW">PW</option>\n							  				<option value="PA">PA</option>\n							  				<option value="PR">PR</option>\n							  				<option value="RI">RI</option>\n							  				<option value="SC">SC</option>\n							  				<option value="SD">SD</option>\n							  				<option value="TN">TN</option>\n							  				<option value="TX">TX</option>\n							  				<option value="UT">UT</option>\n							  				<option value="VT">VT</option>\n							  				<option value="VI">VI</option>\n							  				<option value="VA">VA</option>\n							  				<option value="WA">WA</option>\n							  				<option value="WV">WV</option>\n							  				<option value="WI">WI</option>\n							  				<option value="WY">WY</option>\n							  			</select>\n\n\n\n									    <select id="state_us" name="state_us" style="display: none !important;">\n									    	<option value="">State</option>\n											<option value="AK">AK</option>\n							  				<option value="AL">AL</option>\n							  				<option value="AS">AS</option>\n							  				<option value="AZ">AZ</option>\n							  				<option value="AR">AR</option>\n							  				<option value="CA">CA</option>\n							  				<option value="CO">CO</option>\n							  				<option value="CT">CT</option>\n							  				<option value="DE">DE</option>\n							  				<option value="DC">DC</option>\n							  				<option value="FM">FM</option>\n							  				<option value="FL">FL</option>\n							  				<option value="GA">GA</option>\n							  				<option value="GU">GU</option>\n							  				<option value="HI">HI</option>\n							  				<option value="ID">ID</option>\n							  				<option value="IL">IL</option>\n							  				<option value="IN">IN</option>\n							  				<option value="IA">IA</option>\n							  				<option value="KS">KS</option>\n							  				<option value="KY">KY</option>\n							  				<option value="LA">LA</option>\n							  				<option value="ME">ME</option>\n							  				<option value="MH">MH</option>\n							  				<option value="MD">MD</option>\n							  				<option value="MA">MA</option>\n							  				<option value="MI">MI</option>\n							  				<option value="MN">MN</option>\n							  				<option value="MS">MS</option>\n							  				<option value="MO">MO</option>\n							  				<option value="MT">MT</option>\n							  				<option value="NE">NE</option>\n							  				<option value="NV">NV</option>\n							  				<option value="NH">NH</option>\n							  				<option value="NJ">NJ</option>\n							  				<option value="NM">NM</option>\n							  				<option value="NY">NY</option>\n							  				<option value="NC">NC</option>\n							  				<option value="ND">ND</option>\n							  				<option value="MP">MP</option>\n							  				<option value="OH">OH</option>\n							  				<option value="OK">OK</option>\n							  				<option value="OR">OR</option>\n							  				<option value="PW">PW</option>\n							  				<option value="PA">PA</option>\n							  				<option value="PR">PR</option>\n							  				<option value="RI">RI</option>\n							  				<option value="SC">SC</option>\n							  				<option value="SD">SD</option>\n							  				<option value="TN">TN</option>\n							  				<option value="TX">TX</option>\n							  				<option value="UT">UT</option>\n							  				<option value="VT">VT</option>\n							  				<option value="VI">VI</option>\n							  				<option value="VA">VA</option>\n							  				<option value="WA">WA</option>\n							  				<option value="WV">WV</option>\n							  				<option value="WI">WI</option>\n							  				<option value="WY">WY</option>\n							  			</select>\n\n									    <select id="state_ca" name="state_ca" style="display: none !important;">\n									    	<option value="">State</option>\n							  				<option value="AB">AB</option>\n							  				<option value="BC">BC</option>\n							  				<option value="MB">MB</option>\n							  				<option value="NB">NB</option>\n							  				<option value="NL">NL</option>\n							  				<option value="NT">NT</option>\n							  				<option value="NS">NS</option>\n							  				<option value="NU">NU</option>\n							  				<option value="ON">ON</option>\n							  				<option value="PE">PE</option>\n							  				<option value="QC">QC</option>\n							  				<option value="SK">SK</option>\n							  				<option value="YT">YT</option>\n							  			</select>\n\n\n\n\n								    </div>\n                                    <div class="phone">\n			  							<input type="text" class="form-control" id="zipcode-billing" ng-model="$parent.billing_address.postal_code" placeholder="Zip Code" name="zipcode">\n								    </div>\n		  						</div>\n                                <div class="inputs">\n                                    <div class="country right-line">\n									    <select id="country-billing" ng-model="$parent.billing_address.country_code"  ng-change="order_country_change2()">\n											<option value="">Select Country</option>\n											<option value="us">United States</option>\n											<option value="af">Afghanistan</option>\n											<option value="al">Albania</option>\n											<option value="dz">Algeria</option>\n											<option value="as">American Samoa</option>\n											<option value="ad">Andorra</option>\n											<option value="ao">Angola</option>\n											<option value="ai">Anguilla</option>\n											<option value="aq">Antarctica</option>\n											<option value="ag">Antigua and Barbuda</option>\n											<option value="ar">Argentina</option>\n											<option value="am">Armenia</option>\n											<option value="aw">Aruba</option>\n											<option value="au">Australia</option>\n											<option value="at">Austria</option>\n											<option value="az">Azerbaijan</option>\n											<option value="bs">Bahamas</option>\n											<option value="bh">Bahrain</option>\n											<option value="bd">Bangladesh</option>\n											<option value="bb">Barbados</option>\n											<option value="by">Belarus</option>\n											<option value="be">Belgium</option>\n											<option value="bz">Belize</option>\n											<option value="bj">Benin</option>\n											<option value="bm">Bermuda</option>\n											<option value="bt">Bhutan</option>\n											<option value="bo">Bolivia</option>\n											<option value="ba">Bosnia and Herzegovina</option>\n											<option value="bw">Botswana</option>\n											<option value="bv">Bouvet Island</option>\n											<option value="br">Brazil</option>\n											<option value="io">British Indian Ocean Territory</option>\n											<option value="vg">British Virgin Islands</option>\n											<option value="bn">Brunei Darussalam</option>\n											<option value="bg">Bulgaria</option>\n											<option value="bf">Burkina Faso</option>\n											<option value="bi">Burundi</option>\n											<option value="kh">Cambodia</option>\n											<option value="cm">Cameroon</option>\n											<option value="ca">Canada</option>\n											<option value="cv">Cape Verde</option>\n											<option value="ky">Cayman Islands</option>\n											<option value="cf">Central African Republic</option>\n											<option value="td">Chad</option>\n											<option value="cl">Chile</option>\n											<option value="cn">China</option>\n											<option value="cx">Christmas Island</option>\n											<option value="cc">Cocos (Keeling) Islands</option>\n											<option value="co">Colombia</option>\n											<option value="km">Comoros</option>\n											<option value="cg">Congo-Brazzaville</option>\n											<option value="cd">Congo-Kinshasa</option>\n											<option value="ck">Cook Islands</option>\n											<option value="cr">Costa Rica</option>\n											<option value="hr">Croatia</option>\n											<option value="cu">Cuba</option>\n											<option value="cy">Cyprus</option>\n											<option value="cz">Czech Republic</option>\n											<option value="dk">Denmark</option>\n											<option value="dj">Djibouti</option>\n											<option value="dm">Dominica</option>\n											<option value="do">Dominican Republic</option>\n											<option value="ec">Ecuador</option>\n											<option value="eg">Egypt</option>\n											<option value="sv">El Salvador</option>\n											<option value="gq">Equatorial Guinea</option>\n											<option value="er">Eritrea</option>\n											<option value="ee">Estonia</option>\n											<option value="et">Ethiopia</option>\n											<option value="fk">Falkland Islands (Malvinas)</option>\n											<option value="fo">Faroe Islands</option>\n											<option value="fj">Fiji</option>\n											<option value="fi">Finland</option>\n											<option value="fr">France</option>\n											<option value="gf">French Guiana</option>\n											<option value="pf">French Polynesia</option>\n											<option value="tf">French Southern Territories</option>\n											<option value="ga">Gabon</option>\n											<option value="gm">Gambia</option>\n											<option value="ge">Georgia</option>\n											<option value="de">Germany</option>\n											<option value="gh">Ghana</option>\n											<option value="gi">Gibraltar</option>\n											<option value="gr">Greece</option>\n											<option value="gl">Greenland</option>\n											<option value="gd">Grenada</option>\n											<option value="gp">Guadeloupe</option>\n											<option value="gu">Guam</option>\n											<option value="gt">Guatemala</option>\n											<option value="gg">Guernsey</option>\n											<option value="gn">Guinea</option>\n											<option value="gw">Guinea-Bissau</option>\n											<option value="gy">Guyana</option>\n											<option value="ht">Haiti</option>\n											<option value="hm">Heard Island and McDonald Islands</option>\n											<option value="hn">Honduras</option>\n											<option value="hk">Hong Kong</option>\n											<option value="hu">Hungary</option>\n											<option value="is">Iceland</option>\n											<option value="in">India</option>\n											<option value="id">Indonesia</option>\n											<option value="ir">Iran</option>\n											<option value="iq">Iraq</option>\n											<option value="ie">Ireland</option>\n											<option value="im">Isle of Man</option>\n											<option value="il">Israel</option>\n											<option value="it">Italy</option>\n											<option value="ci">Ivory Coast</option>\n											<option value="jm">Jamaica</option>\n											<option value="jp">Japan</option>\n											<option value="je">Jersey</option>\n											<option value="jo">Jordan</option>\n											<option value="kz">Kazakhstan</option>\n											<option value="ke">Kenya</option>\n											<option value="ki">Kiribati</option>\n											<option value="kw">Kuwait</option>\n											<option value="kg">Kyrgyzstan</option>\n											<option value="la">Laos</option>\n											<option value="lv">Latvia</option>\n											<option value="lb">Lebanon</option>\n											<option value="ls">Lesotho</option>\n											<option value="lr">Liberia</option>\n											<option value="ly">Libya</option>\n											<option value="li">Liechtenstein</option>\n											<option value="lt">Lithuania</option>\n											<option value="lu">Luxembourg</option>\n											<option value="mo">Macao</option>\n											<option value="mk">Macedonia, F.Y.R. of</option>\n											<option value="mg">Madagascar</option>\n											<option value="mw">Malawi</option>\n											<option value="my">Malaysia</option>\n											<option value="mv">Maldives</option>\n											<option value="ml">Mali</option>\n											<option value="mt">Malta</option>\n											<option value="mh">Marshall Islands</option>\n											<option value="mq">Martinique</option>\n											<option value="mr">Mauritania</option>\n											<option value="mu">Mauritius</option>\n											<option value="yt">Mayotte</option>\n											<option value="mx">Mexico</option>\n											<option value="fm">Micronesia</option>\n											<option value="md">Moldova</option>\n											<option value="mc">Monaco</option>\n											<option value="mn">Mongolia</option>\n											<option value="me">Montenegro</option>\n											<option value="ms">Montserrat</option>\n											<option value="ma">Morocco</option>\n											<option value="mz">Mozambique</option>\n											<option value="mm">Myanmar</option>\n											<option value="na">Namibia</option>\n											<option value="nr">Nauru</option>\n											<option value="np">Nepal</option>\n											<option value="nl">Netherlands</option>\n											<option value="an">Netherlands Antilles</option>\n											<option value="nc">New Caledonia</option>\n											<option value="nz">New Zealand</option>\n											<option value="ni">Nicaragua</option>\n											<option value="ne">Niger</option>\n											<option value="ng">Nigeria</option>\n											<option value="nu">Niue</option>\n											<option value="nf">Norfolk Island</option>\n											<option value="kp">North Korea</option>\n											<option value="mp">Northern Mariana Islands</option>\n											<option value="no">Norway</option>\n											<option value="ps">Occupied Palestinian Territory</option>\n											<option value="om">Oman</option>\n											<option value="pk">Pakistan</option>\n											<option value="pw">Palau</option>\n											<option value="pa">Panama</option>\n											<option value="pg">Papua New Guinea</option>\n											<option value="py">Paraguay</option>\n											<option value="pe">Peru</option>\n											<option value="ph">Philippines</option>\n											<option value="pn">Pitcairn</option>\n											<option value="pl">Poland</option>\n											<option value="pt">Portugal</option>\n											<option value="pr">Puerto Rico</option>\n											<option value="qa">Qatar</option>\n											<option value="re">Reunion</option>\n											<option value="ro">Romania</option>\n											<option value="ru">Russian Federation</option>\n											<option value="rw">Rwanda</option>\n											<option value="bl">Saint Barthélemy</option>\n											<option value="sh">Saint Helena</option>\n											<option value="kn">Saint Kitts and Nevis</option>\n											<option value="lc">Saint Lucia</option>\n											<option value="mf">Saint Martin</option>\n											<option value="pm">Saint Pierre and Miquelon</option>\n											<option value="vc">Saint Vincent and the Grenadines</option>\n											<option value="ws">Samoa</option>\n											<option value="sm">San Marino</option>\n											<option value="st">Sao Tome and Principe</option>\n											<option value="sa">Saudi Arabia</option>\n											<option value="sn">Senegal</option>\n											<option value="rs">Serbia</option>\n											<option value="sc">Seychelles</option>\n											<option value="sl">Sierra Leone</option>\n											<option value="sg">Singapore</option>\n											<option value="sk">Slovakia</option>\n											<option value="si">Slovenia</option>\n											<option value="sb">Solomon Islands</option>\n											<option value="so">Somalia</option>\n											<option value="za">South Africa</option>\n											<option value="gs">South Georgia and the South Sandwich Islands</option>\n											<option value="kr">South Korea</option>\n											<option value="es">Spain</option>\n											<option value="lk">Sri Lanka</option>\n											<option value="sd">Sudan</option>\n											<option value="sr">Suriname</option>\n											<option value="sj">Svalbard and Jan Mayen</option>\n											<option value="sz">Swaziland</option>\n											<option value="se">Sweden</option>\n											<option value="ch">Switzerland</option>\n											<option value="sy">Syria</option>\n											<option value="tw">Taiwan</option>\n											<option value="tj">Tajikistan</option>\n											<option value="tz">Tanzania</option>\n											<option value="th">Thailand</option>\n											<option value="tl">Timor-Leste</option>\n											<option value="tg">Togo</option>\n											<option value="tk">Tokelau</option>\n											<option value="to">Tonga</option>\n											<option value="tt">Trinidad and Tobago</option>\n											<option value="tn">Tunisia</option>\n											<option value="tr">Turkey</option>\n											<option value="tm">Turkmenistan</option>\n											<option value="tc">Turks and Caicos Islands</option>\n											<option value="tv">Tuvalu</option>\n											<option value="ae">U.A.E.</option>\n											<option value="vi">U.S. Virgin Islands</option>\n											<option value="ug">Uganda</option>\n											<option value="ua">Ukraine</option>\n											<option value="gb">United Kingdom</option>\n											<option value="um">United States Minor Outlying Islands</option>\n											<option value="uy">Uruguay</option>\n											<option value="uz">Uzbekistan</option>\n											<option value="vu">Vanuatu</option>\n											<option value="va">Vatican City</option>\n											<option value="ve">Venezuela</option>\n											<option value="vn">Vietnam</option>\n											<option value="wf">Wallis and Futuna</option>\n											<option value="eh">Western Sahara</option>\n											<option value="ye">Yemen</option>\n											<option value="zm">Zambia</option>\n											<option value="zw">Zimbabwe</option>\n											<option value="ax">Åland Islands</option>\n							  			</select>\n								    </div>\n                                    <div class="phone">\n			  							<input type="tel" class="form-control numeric" id="phone-billing" ng-model="$parent.client.primary_phone_number.number" placeholder="Phone Number" name="phone_number">\n								    </div>\n                                </div>\n                                \n                                \n		  						<div ng-if="$root.isLoggedin">\n		  							<button ladda="$parent.$parent.addBillingProcess" ng-disabled="$parent.processing" ng-click="confirmSave(\'billing\')">SAVE</button>\n		  							<button ng-disabled="$parent.$parent.processing" ng-click="cancelAdd(\'billing\')">CANCEL</button>\n		  						</div>\n		  					</div>\n\n<div class="sbwl-banner" ng-if="event.id == \'168734-111\'">\n <span>Super Bowl</span> - Get <span>50% REFUND</span> if <span>EITHER TEAM</span> loses by <span>28 points</span> or more\n</div>\n\n\n		  					<hr class="hidden-xs hidden-sm hidden">\n\n		  					<div class="badge-container hidden-xs hidden-sm">\n			  					<!--div class="ggg-badge-pledge pledge-left">\n				  					<div class="badge-left-element">\n				  						<img src="/assets/badge-gamehedge-c6f8f51039f93f77379348b708f4f6cc8b087a2556df007b205cd85c4953a04e.png" class="ggg-img">\n				  					</div>\n				  					<div class="badge-right-element">\n					  					<div class="title">\n					  						YOUR TICKETS COME WITH THE GOOD GAME GUARANTEE! \n					  					</div>\n					  					<div class="cont">\n					  						If the home team loses by {{event.home_performer.sport.ggg}} or more, GameHedge will refund 50% of your ticket price at no additional cost to you.\n					  					</div>\n					  				</div>\n				  				</div-->\n				  				<!-- <div class="ggg-badge-pledge pledge-right">\n				  					<div class="badge-left-element left-custom">\n				  						<img src="/assets/pledge-21b8f9f7cfe598cb92212f283c1d3ebd79bffc3100184d07481778edf6898f46.png" class="pledge-img">\n				  					</div>\n				  					<div class="badge-right-element right-custom">\n					  					<div class="title-1">\n					  						GAMEHEDE PLEDGE\n					  					</div>\n                                        <div class="sub-cont">\n                                            Tickets will always be…\n                                        </div>\n					  					<div class="cont">\n					  						<ul>\n					  							<li>In time for the event</li>\n					  							<li>Refunded if the event is canceled &amp; not resecheduled</li>\n					  							<li>Authentic</li>\n					  						</ul>\n					  					</div>\n					  				</div>\n				  				</div> -->\n                                <div class="ggg-left" id="ggg-mainbox">\n									<div class="ggg-header">\n									Good Game Guarantee\n									</div>\n									<div class="ggg-body"  style="background: URL(/assets/ggg-logo-new-e62d9a67b0f924d1def5986f25cdf91514253a75374263407f5825a9de8148d5.png); background-repeat: no-repeat;background-size: 85px;background-position: 8px 6px;">\n										If the <span ng-if="event.id == \'168734\'">either team</span><span ng-if="event.id != \'168734\'">home team</span> loses by <span id="ggg_rule">{{event.home_performer.sport.ggg}}</span> or more, <span class="ggg-bold"><a href=\'#\' id=\'ggg_explanation\'>GameHedge will refund 50% of your ticket price</a></span> at no additional cost to you.\n									</div>\n									<div class="ggg-tooltip" style="display: none;" id="ggg-tooltip">\n										<ul class="qtip_ul1">\n										<li>Buy your tickets</li>\n										<li>If <b>Home Team</b> loses by</li>\n											<ul class="qtip_ul2">\n												<li>{{event.home_performer.sport.ggg}} or more</li>\n											</ul>\n					                    <li>Click on Claim Refund</li>  \n										<li>We will refund to your credit card in 3-4 days</li>\n\n										</ul>\n									</div>\n									<script>\n									jQuery( document ).ready(function() {\n										\n    									jQuery("#ggg_explanation").qtip({											\n         									hide: {												 \n             								    fixed: true,\n                								delay: 300\n            								},\n											\n										    position: {\n        										my: \'bottom center\',  // Position my top left...\n        										at: \'top center\', // at the bottom right of...\n        										target: jQuery(\'#ggg_explanation\') // my target\n    										},	\n											style: {\n     										   classes: \'qtip-light qtip-shadow qtip-checkout\'\n    										},										\n        									content: {\n												title: \'How Good Game Guarantee works\',\n            									text: jQuery("#ggg-tooltip")\n        									},\n											events: {\n     										   show: function(event, api) {\n            										mixpanel.track("GGG Tooltip Pops");\n        										}\n    										}\n    									\n										});\n										\n									})\n									</script>\n                                </div>\n                                <div class="ggg-right">\n									<div class="ggg-header">\n									The GameHedge Pledge\n									</div>\n									<div class="ggg-body"  style="background: URL(/assets/chcekmark-0664338d921bb15b5e232eaee9dac3f52c1847c665178d71e2c1236a7e7e639d.png); background-repeat: no-repeat;background-size: 71px;background-position: 14px 6px;">\n										<div><b>REFUND</b> if event is canceled</div>\n										<div><b>ON TIME</b> delivery</div>\n										<div><b>AUTHENTIC</b> tickets</div>\n										<div><b>SECURE</b> transaction</div>\n\n									</div>\n                                </div>\n				  				\n				  			</div>\n	  					</div>\n	  				</div>\n	  			</div>\n	  			<div class="col-md-4 mobile-separator card-element second-card">\n	  				<div class="card">\n	  					<div class="card-in summary">\n	  						<div class="title hidden-md hidden-lg hidden-xl hidden-sm" style="display: none;">Order Summary</div>\n						  <!--<div class="summary-subtitle hidden-xs hidden-sm" style="border-top-right-radius: 0px;"><i class="fa fa-angle-double-right" aria-hidden="true"></i>Event Details</div>-->\n						  <div class="summary-box hidden-xs hidden-sm">						  \n							  \n	  						<span class="hidden-xs hidden-sm">\n							    <div class="title">{{ticket.event.name}}</div>\n							    <div class="info event-location">\n							    	{{event.occurs_at | date: "EEE,	MMM dd, yyyy hh:mm a" : \'UTC\'}} <span class="def-markup">at\n							    	{{event.venue.name}}, {{event.venue.location}}</span>\n							    </div>\n							</span>\n 						  </div>	\n						  <div class="summary-subtitle"><i class="fa fa-angle-double-right" aria-hidden="true"></i>Ticket Details</div>\n						  <div class="summary-box ticket-details">						  \n							    <span style="font-size: 14px;"><b>Section:</b> {{ticket.section}}, <b>Row:</b> {{ticket.row}}</span>\n								<span class="seats-note m-invis" id="seats_note2" style="padding-left: 0px;">Your seats will be together</span>\n								<span  class="public-note" ng-if="ticket.public_notes != \'\'">{{ticket.public_notes}}</span>\n                            	<!--<span>ADDITIONAL INFO WILL BE HERE</span>-->\n						  </div>\n\n  						  <div class="summary-subtitle"><i class="fa fa-angle-double-right" aria-hidden="true"></i>Delivery Details</div>\n						  <div class="summary-box delivery-details">\n						  		<div ng-if="ticket.instant_delivery == true">\n									E-tickets will be available for download typically within a few minutes after order is confirmed.\n								</div>\n						  		<div ng-if="ticket.instant_delivery == false">\n								  	<div ng-if="ticket.format == \'Physical\'">\n									  	<div ng-if="ticket.in_hand == true">\n											Tickets will be shipped to the address provided\n										</div>\n									  	<div ng-if="ticket.in_hand == false">\n											Tickets will be ready to ship by {{ticket.in_hand_on | date:\'MM/dd/yyyy\'}}\n										</div>\n									</div>\n								  	<div ng-if="ticket.format != \'Physical\'">\n									  	<div ng-if="ticket.in_hand == true">\n										  	<div ng-if="ticket.format == \'Eticket\'">\n												Printable tickets will be ready for download once order is confirmed\n											</div>\n										  	<div ng-if="ticket.format == \'Flash_seats\'">\n												Mobile entry using Flash, you will need to set up a Flash Seats account to access your tickets\n											</div>\n										  	<div ng-if="ticket.format == \'TM_mobile\'">\n												Mobile entry using Ticketmaster, you will need to set up a Ticketmaster account to access your tickets\n											</div>\n										</div>\n									  	<div ng-if="ticket.in_hand == false">\n										  	<div ng-if="ticket.format == \'Eticket\'">\n												Printable tickets will be ready for download on {{ticket.in_hand_on | date:\'MM/dd/yyyy\'}}\n											</div>\n										  	<div ng-if="ticket.format == \'Flash_seats\'">\n												Tickets available on {{ticket.in_hand_on | date:\'MM/dd/yyyy\'}}. Mobile entry using Flash, you will need to set up a Flash Seats account to access your tickets\n											</div>\n										  	<div ng-if="ticket.format == \'TM_mobile\'">\n												Tickets available on {{ticket.in_hand_on | date:\'MM/dd/yyyy\'}}. Mobile entry using Ticketmaster, you will need to set up a Ticketmaster account to access your tickets\n											</div>\n\n										</div>\n									</div>									\n								</div>\n								\n						  </div>\n\n\n  						  <div class="summary-subtitle"><i class="fa fa-angle-double-right" aria-hidden="true"></i>Order Summary</div>\n						  <div class="summary-box purchace-summary">						  \n\n						    <div class="description-line">\n						    	<div class="description">Price per ticket</div>\n						    	<div class="value">{{ticket.retail_price | currency}}</div>\n						    </div>\n						    <div class="description-line">\n						    	<div class="description">Quantity</div>\n						    	<div class="value" >\n							    	<select class="amount select-mobile" id="amount" ng-model="amount" ng-change="calculateValues()" >\n							    		<option ng-repeat="o in ticket.splits | orderBy:\'-\'" value="{{o}}">{{o}}</option>\n							    	</select>\n						    	</div>\n						    </div>\n							<!--\n						    <div class="description-line">\n						    	<div class="description">Subtotal</div>\n						    	<div class="value">{{subtotal | currency}}</div>\n						    </div>\n                            <hr>\n							-->\n                            <div class="description-line">\n						    	<div class="description short">Fee per ticket</div>\n						    	<div class="value short">{{service_fee/amount | currency}}</div>\n						    </div>\n                            <div class="description-line" ng-show="ticket.format == \'Physical\'">\n						    	<div class="description">Delivery Option</div>\n						    	<div class="value" >\n							    	<select id="shipping" class="select-mobile" ng-model="shipping_fee" ng-change="calculateValues()" >\n							    		<option ng-repeat="o in shipping_list | limitTo:2" value="{{o.price}}">{{o.name}}</option>\n							    	</select>\n						    	</div>\n						    </div>\n						    <div class="description-line" ng-show="ticket.format == \'Physical\'">\n						    	<div class="description short">Shipping Fee</div>\n						    	<div class="value short">{{shipping_fee | currency}}</div>\n						    </div>\n						    <div class="description-line">\n						    	<div class="description short">Shipping</div>\n						    	<div class="value short" ng-if="ticket.format == \'Physical\'">Physical Delivery</div>\n					    		<div class="value short" ng-if="ticket.format == \'Eticket\'">Email Delivery</div>\n					    		<div class="value short" ng-if="ticket.format != \'Eticket\' && ticket.format != \'Physical\'">{{ticket.format | replaceText}}</div>\n						    </div>\n						    <div class="description-line ggg">\n						    	<div class="description short" style="width: 66%;">Good Game Guarantee</div>\n						    	<div class="value short" style="width: 34%;">FREE</div>\n						    </div>\n						    <div class="description-line" ng-if="active_promos">\n						    	<div class="description promo-btn" ng-click="showPromoField()">Promo Code</div>\n						    	<div class="value">\n							    	<input ng-d-show="show_promo_field" id="promo" ng-model="$parent.promo_code" ng-change="calculateValues()" name="promo_code" style="border: solid 1px #d3d3d3;">\n						    	</div>\n						    </div>\n						    <div class="description-line" ng-show="discount != 0">\n						    	<div class="description">Discount</div>\n						    	<div class="value">-{{discount | currency}}</div>\n						    </div>\n						    <hr>\n						    <div class="description-line total">\n						    	<div class="description">TOTAL</div>\n						    	<div class="value" style="color: #2b74a9;">{{total | currency}}</div>\n						    </div>\n						    <button class="confirm_pay" ladda="payProcess" ng-disabled="processing || editing" ng-click="confirmPay()"><i class="fa fa-lock" aria-hidden="true"></i> Place Order</button>\n						    <div class="terms">By clicking "Place Order", you agree to GameHedge <a href="/privacy-policy"  target="_blank">Terms and Privacy Policy.</a></div>\n                            \n                            <div class="seals">\n                                <div class="row">\n								<center>\n<span> \n<a href="http://www.bbb.org/new-york-city/business-reviews/ticket-sales-events/gamehedge-llc-in-new-york-ny-165250/#bbbonlineclick" target="_blank" rel="nofollow"><img src="https://seal-newyork.bbb.org/seals/blue-seal-96-50-bbb-165250.png" style="border: 0; height: 35px;" alt="GameHedge LLC BBB Business Review" /></a>\n</span>								\n                                        <span id="siteseal" style="display: inline;">\n                                            <script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qGUZ4cVXP8fzh4gJM9WNOM8Lhm3GV8MAOuZcgI4ynEm7EcjgKcT8zguOJYzw"></script>											\n                                        </span>\n										</center>\n                                </div>\n                                \n                            </div>\n						</div>	\n                            \n						    <div id="session_iframe" ng-bind-html="session_iframe"></div>\n	  					</div>\n                    \n	  				</div>\n	  			</div>\n	  		</div>\n	  	</div>\n	</section>\n</span>\n\n\n\n\n<!-- Modal -->\n<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">\n  <div class="modal-dialog" role="document">\n    <div class="modal-content">\n      <div class="modal-header">\n        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>\n        <h4 class="modal-title" id="myModalLabel">You already have an account with us. Please Login.</h4>\n      </div>\n      <div id="confirmation">\n      	<div class="modal-body">\n\n	     \n			<div class="row update-password" ng-if="!forgot_password">\n				<div class="col-xs-12">\n					<input type="email" name="email" placeholder="Email" ng-model="$parent.client.email">\n				</div>\n				<div class="col-xs-12">\n					<input type="password" name="password" placeholder="Password" ng-model="$parent.password">\n				</div>\n				<div class="col-xs-12">\n					<button ng-click="login()" ladda="logging_in">Login</button>\n				</div>\n				<div class="forgot" ng-click="forgotPass(true)">Forgot password?</div>\n			</div>\n\n\n			<div class="row update-password" ng-if="forgot_password">\n				<div class="col-xs-12">\n					<input type="email" name="email" placeholder="Email" ng-model="$parent.client.email">\n				</div>\n				<div class="col-xs-12">\n					<button ng-click="updatePasswordAuth()" ladda="sending_password">Send Password</button>\n				</div>\n				<div class="forgot" ng-click="forgotPass(false)">Login</div>\n			</div>\n		</div>\n	  </div>\n    </div>\n  </div>\n</div>\n\n\n<script type="text/javascript">\n  (function() {var s = document.createElement(\'script\');s.type = \'text/javascript\';s.async = true;\n  s.src = document.location.protocol + \'//loader.wisepops.com/default/index/get-loader?user_id=30476\';\n  var s2 = document.getElementsByTagName(\'script\')[0];s2.parentNode.insertBefore(s, s2);})();\n</script>\n\n\n<script>\nmixpanel.track("CheckoutPage Visit");\n</script>\n\n')
+}]);
+
+// Angular Rails Template
+// source: app/assets/javascripts/templates/govx.html.erb
+
+angular.module("templates").run(["$templateCache", function($templateCache) {
+  $templateCache.put("govx.html", '<div id="home" class="event-container">\n  \n  <section id="game_info">\n    <div class="row max-container-width">\n    <!--\n      <div class="col-md-3 col-xs-12 ggg-logo vertical-center hidden-xs hidden-sm">\n          <img src="/assets/badge-gamehedge-c6f8f51039f93f77379348b708f4f6cc8b087a2556df007b205cd85c4953a04e.png" alt="GameHedge" />\n          Your tickets come with the<br>\n          GOOD GAME GUARANTEE!\n      </div>\n      -->\n      <div class="col-md-5 col-xs-12 moto vertical-center hidden-xs hidden-sm" style="width: 45%;">\n        <div class="pp-badge">\n          <span>Same Tickets</span>\n          <span>Low Prices</span>\n          <span class="pp-badge-plus">+</span>\n          <span class="pp-badge-ggg">Our Good Game Guarantee</span>\n        </div>\n\n\n        <div class="col-md-2 date-holder hidden-xs hidden-sm">\n          <p class="date1">{{event.occurs_at | date:\'MMM\': \'UTC\' | uppercase}}</p>\n          <p class="date2">{{event.occurs_at | date:\'dd\' : \'UTC\'| uppercase}}</p>\n          <p class="date3">{{event.occurs_at | date:\'EEE\': \'UTC\' | uppercase}}</p>  \n        </div>\n        <div class="col-md-10 col-xs-12 event-info vertical-center mobile-event-info hidden-xs hidden-sm">\n          <span class="mobile-event-span">\n            <!-- <p class="first-line desktop-event-name"><span class="blue-span">{{event.away_performer.name}}</span><span class="at"> at </span><span class="blue-span">{{event.home_performer.name}}</span></p> -->\n            <p class="first-line desktop-event-name"><span class="blue-span">{{event.name}}</span></p>\n            <p class="second-line" ng-if="(event.occurs_at | date:\'hh:mm:ss\' : \'UTC\') != (compareDate | date:\'hh:mm:ss\' : \'UTC\')">{{event.occurs_at | date:\'hh:mm a\' : \'UTC\'| uppercase}} at <span class="blue-span">{{event.venue.name}}</span> - {{event.location}}</p>\n            <p class="second-line" ng-if="(event.occurs_at | date:\'hh:mm:ss\' : \'UTC\') == (compareDate | date:\'hh:mm:ss\' : \'UTC\')">TBD at <span class="blue-span">{{event.venue.name}}</span> - {{event.location}}</p>\n\n            <p class="second-line breadcrumbs"><a href=\'/\'>HOME</a> <i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{event.sport.url}}">{{event.sport.name | uppercase}}</a> <i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{event.home_performer.url}}">{{event.home_performer.name | uppercase}}</a></p>\n\n          </span>\n        </div>\n          \n      </div>\n\n\n\n<div class="hidden-xs hidden-sm" style="width: 21%;float: left;padding-top: 21px;line-height: 20px;text-align: right;color: green;">\n  <span style="display: block;">Millions of tickets. Best Prices.</span>\n  <span style="display: block;">+ Our Good Game Guarantee</span>\n</div>\n\n\n\n      <div class="col-md-4 col-xs-12 mobile-event-container" style="height: 100%; float: right;">\n        \n        <div class="hidden-xs hidden-sm ggg-event vertical-center">\n            <div class="singlebanner-left" id=\'ggg_explanation\'>\n              <div class=\'ref\'>*50% Refund</div>\n              If <b ng-if="event.id != \'168734\'">home team</b><b ng-if="event.id == \'168734\'">either team</b> loses by <b>{{event.home_performer.sport.ggg}} </b> or more\n            </div>\n            <div class="singlebanner-right">\n              <img src="/assets/icon coin-a40eea64c1a1891b66756011ec48e43d67950c96647117597546d112983d9af7.png">\n            </div>\n            <div class="sep"></div>              \n        </div>\n\n                  <div class="ggg-tooltip" style="display: none;" id="ggg-tooltip">\n										<ul class="qtip_ul1">\n										<li>Buy your tickets</li>\n										<li>If <b ng-if="event.id != \'168734\'">home team</b><b ng-if="event.id == \'168734\'">either team</b> loses by</li>\n											<ul class="qtip_ul2">\n												<li>{{event.home_performer.sport.ggg}} or more</li>\n											</ul>\n                    <li>Click on Claim Refund</li>  \n										<li>We will refund to your credit card in 3-4 days</li>\n										</ul>\n                    <!--\n                    <a href="/how-it-works" target=\'_blank\' style="font-size: 11px;">Read more <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>\n                    -->\n									</div>\n	                <script>\n									jQuery( document ).ready(function() {\n										\n    									jQuery("#ggg_explanation").qtip({											\n         									hide: {												 \n             								    fixed: true,\n                								delay: 300\n            								},\n											\n										      position: {\n        									  	my: \'right center\', \n        										  at: \'left center\', \n        										  target: jQuery(\'#ggg_explanation\')\n    										  },	\n											    style: {\n     										     classes: \'qtip-light qtip-shadow qtip-checkout\'\n    										  },										\n        									content: {\n											      	title: \'How Good Game Guarantee works\',\n            									text: jQuery("#ggg-tooltip")\n        									},\n    											events: {\n       										   show: function(event, api) {\n            										mixpanel.track("GGG Tooltip Pops");\n        										}\n    	  									}\n\n    									\n										});\n										\n									})\n									</script>\n\n          \n        <div class="col-md-10 col-xs-12 event-info vertical-center mobile-event-info hidden-md hidden-lg hidden-xl">\n           <div class="mobile-top-bt">\n                <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target="#slideMenu" data-canvas="body" ng-click="showSlideMain()">\n                    <span class="icon-bar"></span>\n                    <span class="icon-bar"></span>\n                    <span class="icon-bar"></span>\n                </button>\n           </div>\n            \n          <span class="mobile-event-span">\n            <!-- <p class="first-line"><span class="blue-span">{{event.away_performer.name}}</span><span class="at"> at </span><span class="blue-span">{{event.home_performer.name}}</span></p> -->\n            <p class="first-line"><span class="blue-span">{{event.name}}</span></p>\n            <p class="second-line capitalize" ng-if="(event.occurs_at | date:\'hh:mm:ss\' : \'UTC\') != (compareDate | date:\'hh:mm:ss\' : \'UTC\')">{{event.occurs_at | date:\'EEE, MMM dd hh:mm a\' : \'UTC\'}} at <span class="blue-span">{{event.venue.name}}</span></p>\n            <p class="second-line capitalize" ng-if="(event.occurs_at | date:\'hh:mm:ss\' : \'UTC\') == (compareDate | date:\'hh:mm:ss\' : \'UTC\')">{{event.occurs_at | date:\'EEE, MMM dd\' : \'UTC\'}} TBD at <span class="blue-span">{{event.venue.name}}</span></p>\n          </span>\n          <div class="mobile-top-phone">\n            <div class="mobile-top-phone-icon" id="mobile_phone_btn">\n              <i class="fa fa-phone-square" aria-hidden="true"></i>\n            </div>\n          </div>\n        </div>  \n          \n      </div>\n    </div>\n  </section>\n    \n  <div id="filters_prev_mobile" ng-if="prev_filter" class="zipper hidden-md hidden-lg hidden-xl">\n    \n    <div class="close_mobile_x" ng-click="closePrevFilter()">\n        <img width="15px" src="/assets/close-menu-black-9dd50ffa9d7058e6b0dd61ecb88a5d6f282972acfbd760204d93bc0f8d949877.png">\n    </div>\n\n    <div class="splash-logo">\n      <center>\n        <img alt="GameHedge" src="/assets/govx-0aa1bc97b22949d9878ee6595d825df949c2767852ddb4d00b4e29e98930907f.png">\n      </center>   \n    </div>\n\n    <div class="how_prev_filter">HOW MANY TICKETS?</div>\n    <div class="row text-center">\n      <div class="filter_prev_number" ng-click="updateFilter(1)">1</div>\n      <div class="filter_prev_number" ng-click="updateFilter(2)">2</div>\n      <div class="filter_prev_number" ng-click="updateFilter(3)">3</div>\n    </div>\n    <div class="row text-center">\n      <div class="filter_prev_number" ng-click="updateFilter(4)">4</div>\n      <div class="filter_prev_number" ng-click="updateFilter(5)">5+</div>\n    </div>\n\n    <div class="seui-mobile-banner">\n      <center>\n        <img src="/assets/mobile-splash-image-1f2b5868e7ca8464073d4b9ba9918912377bdd600268cb9b3acfeef94141bccc.png">\n      </center>  \n    </div>\n\n\n\n  </div>\n\n  <div id="filters_mobile" ng-if="filter_active" class="zipper">\n    <div class="close_mobile_x" ng-click="closeFilter()">\n        <img width="15px" src="/assets/close-menu-black-9dd50ffa9d7058e6b0dd61ecb88a5d6f282972acfbd760204d93bc0f8d949877.png">\n    </div>\n    \n    <div class="filters-mobile">\n        <div class="col-xs-12 text-center filter-title">\n            PRICE RANGE\n        </div>\n        <div class="col-xs-12 filter-row filter-buttons text-center">  \n            <button class="price_filter_bt" ng-class="{\'active\': mob_price_a == true}" ng-click="mob_price_update(1)">$1-$100</button>\n            <button class="price_filter_bt" ng-class="{\'active\': mob_price_b == true}" ng-click="mob_price_update(2)">$100-$200</button>\n            <br/>\n            <button class="price_filter_bt" ng-class="{\'active\': mob_price_c == true}" ng-click="mob_price_update(3)">$200-$300</button>\n            <button class="price_filter_bt" ng-class="{\'active\': mob_price_d == true}" ng-click="mob_price_update(4)">$300+</button>\n        </div>\n        <div class="col-xs-12 filter-divisor">\n            <hr>\n        </div>\n        <div class="col-xs-12 text-center filter-title">\n            HOW MANY TICKETS?\n        </div>\n        <div class="col-xs-12 filter-row filter-buttons text-center">  \n            <button ng-class="{\'active\': mob_index == 0}" ng-click="updateMobFilter(0)">Any</button>\n            <button ng-class="{\'active\': mob_index == 1}" ng-click="updateMobFilter(1)">1</button>\n            <button ng-class="{\'active\': mob_index == 2}" ng-click="updateMobFilter(2)">2</button>\n            <button ng-class="{\'active\': mob_index == 3}" ng-click="updateMobFilter(3)">3</button>\n            <button ng-class="{\'active\': mob_index == 4}" ng-click="updateMobFilter(4)">4</button>\n            <button ng-class="{\'active\': mob_index == 5}" ng-click="updateMobFilter(5)">5+</button>\n        </div>\n        <div class="col-xs-12 filter-divisor">\n            <hr>\n        </div>\n        \n        <div class="col-xs-12 text-center filter-title">\n            SHOW\n        </div>\n        \n        <div class="col-xs-12 filter-row text-center">\n            <button ng-class="{\'active\': mob_delivery == 0}" ng-click="updateMobDelivery(0)">Tickets Only</button>\n            <button ng-class="{\'active\': mob_delivery == 1}" ng-click="updateMobDelivery(1)">Parking Only</button>\n            <!--button ng-class="{\'active\': mob_eticket == true}" ng-click="updateMobEticket()">EDelivery</button-->\n        </div>\n        \n        <div class="show-button" ng-click="showMobFilters()">\n            SHOW RESULTS\n        </div>\n\n    </div>\n    \n  </div>\n    \n  <div id="detail_mobile" ng-if="displayDetail" class="zipper">\n    <div class="close_mobile_x" ng-click="closeDetail()">\n        <img width="15px" src="/assets/close-menu-black-9dd50ffa9d7058e6b0dd61ecb88a5d6f282972acfbd760204d93bc0f8d949877.png">\n    </div>\n      \n    <div class="detail_title">ORDER DETAILS</div>\n    <div ng-if="sectionUrl != \'\'">\n        <img width="100%" ng-src="{{sectionUrl}}">\n    </div>\n    <div class="row detail-content first-detail">\n        <div class="col-xs-7">\n            <p class="subtitle">Section</p>\n            <p class="content">{{selectedTicket.section}}</p>\n        </div>\n        <div class="col-xs-5">\n            <p class="subtitle">Row</p>\n            <p class="content">{{selectedTicket.row}}</p>\n        </div>\n        <div class="col-xs-12 notes">\n            {{selectedTicket.public_notes}}\n        </div>\n    </div>\n    <div class="col-xs-12 filter-divisor">\n        <hr>\n    </div>\n    <div class="row detail-content">\n        <div class="col-xs-12 subtitle">\n            <strong>DELIVERY {{selectedTicket.format}}</strong>\n        </div>\n        <div class="col-xs-12 msg" ng-if="selectedTicket.format == \'Eticket\'">\n            Email Delivery\n        </div>\n        <div class="col-xs-12 msg" ng-if="selectedTicket.format == \'Physical\'">\n            Physical Delivery\n        </div>\n    </div>\n    <div class="col-xs-12 filter-divisor">\n        <hr>\n    </div>\n    <div class="row detail-content">\n        <div class="col-xs-7">\n            <p class="subtitle">Ticket Price</p>\n            <p class="content price">{{selectedTicket.retail_price | currency : \'$\' : 2 }}</p>\n            <p class="msg">each</p>\n        </div>\n        <div class="col-xs-5">\n            <p class="subtitle">Number of tickets</p>\n            <p class="content">{{selectedTicket.amount}} tickets</p>\n        </div>\n    </div>\n    \n    <div class="show-button go-checkout" ng-click="goToCheckout()">\n        GO TO CHECKOUT\n    </div>\n  </div>\n  <div id="overlayid" class="ui-widget-overlay ui-front" style="display:none;"></div>\n  <script type="text/ng-template" id="typeahead/bind-node.html">\n    <a href="#" tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>\n  </script>\n    <input type="hidden" id="tvid">\n  <div id="dialog1" title="Ticket Details" style="display:none;" class="dialog-custom-width">\n    <table style="width:100%;display:none;" id=\'dialogImage\'>\n      <tr style="width:100%"><img id="dialog_img" class="img-responsive dialog-custom-width"></tr>\n    </table>\n    <table style="width:100%;display:none;" id=\'ticketDetails\'>\n      <tr>\n        <td>&nbsp;</td>\n        <td>&nbsp;</td>\n      </tr>\n      <tr style="width:100%">\n        <td style="width:80%">\n          <div style="float:left;" class="section-heading">Section: &nbsp;</div>\n          <div style="float:left;" id="ticket_sec" class="col-md-8 pull-left section-text"></div>\n        </td>\n        <td style="width:25%">\n          <div style="float:left;" class="section-heading">Row: &nbsp;</div>\n          <div id="ticket_row" class="section-text"> </div>\n        </td>\n      </tr>\n      <tr>\n        <td colspan="2">\n        <hr>\n        </td>\n      </tr>\n\n\n      <tr>\n        <td colspan="2">\n          <div class="ggg-m-line">\n            <div style="float: left; width: 52%;">\n              <span id="m_refund">$</span>/ea Potential Refund\n            </div>\n            <div style="float: right;width: 46%;text-align: right;">\n              Good Game Guarantee\n            </div>\n            <div class="sep"></div>\n          </div>\n        </td>\n      </tr>\n\n\n\n      <tr style="width:100%">\n        <td>\n          <div class="section-heading" style="float:left;">$</div>\n          <div id="ticket_price" class = "section-heading" style="float:left;" ></div><div class="section-heading" style="float:left;">/ea</div>\n          <div id="ticket_qty" style="float:left;">\n           &nbsp; <select id="selectVal"></select>\n          </div>\n        </td>\n        <td>\n          \n          <button class="tiq-details-checkout-cta" ontouchstart="redirecttoorderpage()" style="cursor:pointer"> Checkout</button>\n        </td>\n      </tr>\n\n\n\n    </table>\n    <table style="width:100%;display:none;" id=\'ticketDetails2\'>\n      <tr>\n        <td>\n          <div style="float:left;" class="section-heading">Section: &nbsp;</div>\n          <div style="float:left;" id="ticket_sec2" class="col-md-8 pull-left section-text"></div>\n        </td>\n      </tr>\n    </table>\n    <script>\n      function redirecttoorderpage(){\n        var tvid = $(\'#tvid\').val();\n        var tval = $(\'#selectVal\').val();\n        var img = $("#dialog_img").attr(\'src\');\n        window.location.href = location.protocol+\'//\'+document.domain+\'/order/\'+tvid+\'?amount=\'+tval+\'&img=\'+img;\n      }\n    </script>\n  </div>\n  <section id="tickets-map" class="max-container-width">\n    <div class="row">\n      <div class="col-md-8">\n        <div class="map-container">\n          <!-- <span class="glyphicon glyphicon-zoom-in hidden-xs hidden-sm" id="map_zoom_plus_mine" aria-hidden="true"></span>\n          <span class="glyphicon glyphicon-zoom-out hidden-xs hidden-sm" id="map_zoom_less_mine" aria-hidden="true"></span> -->\n          <div id="mapkey">\n            <div id="seatzone_map"></div>\n            <div id="map_key" class="hidden"></div>\n            <button id="reset-map-button" ng-click="resetMap()">Reset</button>\n          </div>\n        </div>\n      </div>\n      <div id="sectionTooltip" class="move_right dskt-tooltip"  style="position: absolute; display:none;z-index:99;">\n            <div class="tpit tpit_no_img">\n            <div class="had">\n            <div class="colr">\n            </div>\n            &nbsp;<span id="fdsection">No section selected</span>&nbsp;\n            </div>\n            <a class="fancybox_no" id="smallimg"><img class="lb_img" src="" id="imgsmall" width="250" height="140" border="0"/></a>\n            <div class="lti lti_no_img">\n            <span class="vrt">QUANTITY </span>: <span id="fdqty">No</span> SEAT(S)<br />\n            <span class="vrt">ROW(S) </span>: <span id="fdrow">-</span><br />\n            <span class="vrt">PRICE </span>: <span id="fdprice">-</span>\n            <p></p>\n            </div>\n            </div>\n            </div>\n            <div id="rowTooltip" style="position: absolute; display:none;z-index:900;">\n            <div class="tpit tpit_no_img">\n            <div class="had">\n            <div class="colr"></div>\n            <div class="s_r_labels">\n            <div class="section_label"><span>Section : </span> <span id="fdsection">-</span></div>\n            <div class="row_label"><span>Row : </span> <span id="fdrow">-</span></div>\n            </div>\n            </div>\n            <a class="fancybox_no" id="smallimg"><img class="lb_img" src="" id="imgsmall" width="250" height="140" border="0"/></a>\n            <div class="lti lti_no_img">\n            //\'AVAILABILITY<br /><br />\n            <span class="vrt">QUANTITY </span>: <span id="fdqty">No</span> SEAT(S)<br />\n            <span class="vrt">PRICE </span>: <span id="fdprice">-</span>\n            <p></p>//Click this row to view  corresponding listings\n            </div>\n            </div>\n            </div>\n      <div class="col-md-4 tickets">\n        <div class="filters">\n            \n          <div class="col-xs-12 filter-row vertical-center hidden-xs hidden-sm">\n            Price range\n            <button class="price_filter_bt" ng-class="{\'active\': mob_price_a_real == true}" ng-click="mob_price_update_real(1)">$1-$100</button>\n            <button class="price_filter_bt" ng-class="{\'active\': mob_price_b_real == true}" ng-click="mob_price_update_real(2)">$100-$200</button>\n            <button class="price_filter_bt" ng-class="{\'active\': mob_price_c_real == true}" ng-click="mob_price_update_real(3)">$200-$300</button>\n            <button class="price_filter_bt" ng-class="{\'active\': mob_price_d_real == true}" ng-click="mob_price_update_real(4)">$300+</button>\n            \n          </div>    \n            \n          <div class="col-xs-12 filter-row vertical-center hidden-xs hidden-sm">\n            Quantity\n            <button ng-class="{\'active\': index == 0}" ng-click="updateFilter(0)">Any</button>\n            <button ng-class="{\'active\': index == 1}" ng-click="updateFilter(1)">1</button>\n            <button ng-class="{\'active\': index == 2}" ng-click="updateFilter(2)">2</button>\n            <button ng-class="{\'active\': index == 3}" ng-click="updateFilter(3)">3</button>\n            <button ng-class="{\'active\': index == 4}" ng-click="updateFilter(4)">4</button>\n            <button ng-class="{\'active\': index == 5}" ng-click="updateFilter(5)">5+</button>\n          </div>\n          <div class="col-xs-12 filter-row vertical-center hidden-xs hidden-sm">\n            Show\n            <button ng-click="updateParking(false)" ng-class="{\'active\': !onlyParking}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Tickets Only</button>\n            <button ng-click="updateParking(true)" ng-class="{\'active\': onlyParking}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Parking Only</button>\n            <!--button ng-click="updateEtickets()" ng-class="{\'active\': etickets}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> EDelivery</button-->\n           <!--  <button ng-click="updateFilter($event,1)"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Parking Only</button> -->\n          </div>\n          <div class="col-xs-12 section-image hidden-xs hidden-sm" ng-if="sectionUrl != \'\'">\n            <img ng-src="{{sectionUrl}}">\n          </div>\n\n\n\n\n          <div class="col-xs-12 filter-header">\n            <div class="row full-height">\n              <div class="col-xs-1 hidden" ng-click="openFilter()"><img width="20px" src="/assets/filter_icon-c5783f85a4e2ae0238ae00d9ef825fc5f5ff7c97b544b913142707b0f5dba7f3.png"></div>\n              <div class="col-xs-3 col-md-4 vertical-center horizontal-center sorting full-height" ng-click="updateSort(\'section\')">\n                Section <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>\n              </div>\n              <div class="hidden-xs hidden-sm col-xs-2 vertical-center horizontal-center sorting full-height" ng-click="updateSort(\'row\')">\n                Row <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>\n              </div>\n              <div class="hidden-md hidden-lg hidden-xl col-xs-2 vertical-center horizontal-center sorting full-height">\n                Row\n              </div>\n              <div class="col-xs-3 col-md-2 vertical-center horizontal-center full-height">\n                Quantity\n              </div>\n              <div class="hidden-xs hidden-sm col-xs-4 vertical-center horizontal-center sorting full-height" ng-click="updateSort(\'retail_price\')">\n                Price <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>\n              </div>\n              <div class="hidden-md hidden-lg hidden-xl col-xs-4 vertical-center horizontal-center sorting full-height">\n                <button class="mobile_filter_bt" ng-click="openFilter()">Filters</button>\n              </div>\n            </div>\n          </div>\n\n\n\n          <div id="home-loading-data" class="col-xs-12 horizontal-center" ng-if="loading">\n            <div class=\'uil-default-css\' style=\'transform:scale(0.32);\'><div style=\'top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(0deg) translate(0,-60px);transform:rotate(0deg) translate(0,-60px);border-radius:10px;position:absolute;\'></div><div style=\'top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(30deg) translate(0,-60px);transform:rotate(30deg) translate(0,-60px);border-radius:10px;position:absolute;\'></div><div style=\'top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(60deg) translate(0,-60px);transform:rotate(60deg) translate(0,-60px);border-radius:10px;position:absolute;\'></div><div style=\'top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(90deg) translate(0,-60px);transform:rotate(90deg) translate(0,-60px);border-radius:10px;position:absolute;\'></div><div style=\'top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(120deg) translate(0,-60px);transform:rotate(120deg) translate(0,-60px);border-radius:10px;position:absolute;\'></div><div style=\'top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(150deg) translate(0,-60px);transform:rotate(150deg) translate(0,-60px);border-radius:10px;position:absolute;\'></div><div style=\'top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(180deg) translate(0,-60px);transform:rotate(180deg) translate(0,-60px);border-radius:10px;position:absolute;\'></div><div style=\'top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(210deg) translate(0,-60px);transform:rotate(210deg) translate(0,-60px);border-radius:10px;position:absolute;\'></div><div style=\'top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(240deg) translate(0,-60px);transform:rotate(240deg) translate(0,-60px);border-radius:10px;position:absolute;\'></div><div style=\'top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(270deg) translate(0,-60px);transform:rotate(270deg) translate(0,-60px);border-radius:10px;position:absolute;\'></div><div style=\'top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(300deg) translate(0,-60px);transform:rotate(300deg) translate(0,-60px);border-radius:10px;position:absolute;\'></div><div style=\'top:80px;left:93px;width:14px;height:40px;background:#000000;-webkit-transform:rotate(330deg) translate(0,-60px);transform:rotate(330deg) translate(0,-60px);border-radius:10px;position:absolute;\'></div></div>\n          </div>\n            \n          <div class="hidden-xs hidden-sm arrow_box2 seui-lbl" id="seuilbl"><span class=\'seui-lbl-img\' style="background-image: url(/assets/refund_square-6e7fccca43d954c6ee8244e02743a140d201bfdc6be68281e76e83c18b7109e9.png);"></span><span id=\'ref_amount\'></span></div>\n\n          <div class="col-xs-12 tickets-data" id="tickets_list">\n            \n          </div>\n\n\n\n\n        </div>\n      </div>\n    </div>\n  </section>\n  \n</div>\n\n<script>\nvar phonedcnt = 0;\n$("#mobile_phone_btn").click(function() {\n    displayPhoneInfo2();\n});\n\nfunction displayPhoneInfo2(){\n/*\n  $( "#phoneDialog" ).dialog(\n    {\n      dialogClass: "phone-d"\n    }\n    );\n*/\n\n  $(\'#phoneDialog\').removeClass(\'m-invis\');\n}\nfunction closePhoneInfo2(){\n  $(\'#phoneDialog\').addClass(\'m-invis\');\n}\n</script>\n\n<div id="phoneDialog" title="Call Us" class="phone-dialog1 m-invis">\n<i class="fa fa-times" aria-hidden="true" onclick="closePhoneInfo2();"></i>\n<center>\n  <p>Call us and we\'ll beat any price and fees by 10%!</p>\n  <div style=""><a href="tel:1-888-804-4330">888-804-4330</a></div>\n</center>  \n</div>\n\n\n<script>\n$( "body" ).on( "touchstart", \'.ui-dialog-titlebar\',function() {\n  //$(\'#dialog1\').dialog("close");\n  $(\'.ui-dialog\').css(\'display\',\'none\');\n});\n</script>\n\n\n\n<script type="text/javascript">\n  (function() {var s = document.createElement(\'script\');s.type = \'text/javascript\';s.async = true;\n  s.src = document.location.protocol + \'//loader.wisepops.com/default/index/get-loader?user_id=30476\';\n  var s2 = document.getElementsByTagName(\'script\')[0];s2.parentNode.insertBefore(s, s2);})();\n</script>\n\n\n<script>\nmixpanel.track("SingleEventPage Visit");\n</script>')
 }]);
 
 // Angular Rails Template
