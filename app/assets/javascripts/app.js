@@ -74,9 +74,17 @@ app = angular.module('gamehedge',[
             templateUrl: "map-test.html",
             controller: 'mapTestController',
         })	
+        .when('/govx/:eventId/:slug', {
+            templateUrl: "govx.html",
+            controller: 'govxController',
+        })	
         .when('/order/:ticektId', {
             templateUrl: "order.html",
             controller: 'OrderController',
+        })
+        .when('/govx-order/:ticektId', {
+            templateUrl: "govx-order.html",
+            controller: 'GovxOrderController',
         })
         .when('/confirm/:orderId', {
             templateUrl: "confirm.html",

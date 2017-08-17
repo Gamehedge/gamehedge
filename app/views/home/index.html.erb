@@ -14,7 +14,9 @@
                 </div>
                 <div class="navbar-header col-xs-8">
                     <a href="/" ng-click="hideMenus()">
-                        <img class="logo-image menu" alt="GameHedge.com" src="<%= image_url 'nl-logo1.png' %>">
+
+                        <img ng-if="!$root.govx" class="logo-image menu" alt="GameHedge.com" src="<%= image_url 'nl-logo1.png' %>">
+                        <img ng-if="$root.govx" class="logo-image menu" alt="GovX" src="<%= image_url 'govx.png' %>">
                     </a>
                 </div>
                 <div class="col-xs-2"></div>
@@ -203,8 +205,11 @@
                 </div>
             </div>
             <div class="navbar-header col-md-4 col-xs-8 nl-logo">
-                <a href="/" >
+                <a href="/" ng-if="!$root.govx">
                     <img class="logo-image" alt="GameHedge.com" src="<%= image_url 'gamehedge_logo_white.png' %>">
+                </a>
+                <a href="/" ng-if="$root.govx">
+                    <img class="logo-image" alt="GovX" src="<%= image_url 'govx.png' %>">
                 </a>
             </div>
             <div class="navbar-header col-md-8 hidden-xs hidden-xm vertical-center help" ng-show="$root.isOrder">
