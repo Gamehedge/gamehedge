@@ -15,8 +15,9 @@
                 <div class="navbar-header col-xs-8">
                     <a href="/" ng-click="hideMenus()">
 
-                        <img ng-if="!$root.govx" class="logo-image menu" alt="GameHedge.com" src="<%= image_url 'nl-logo1.png' %>">
-                        <img ng-if="$root.govx" class="logo-image menu" alt="GovX" src="<%= image_url 'govx.png' %>">
+                        <img ng-if="!$root.govx && !$root.govxseui" class="logo-image menu" alt="GameHedge.com" src="<%= image_url 'nl-logo1.png' %>">
+                        <img ng-if="$root.govx && !$root.govxseui" class="logo-image menu" alt="GovX" src="<%= image_url 'govx.png' %>">
+                        <img ng-if="$root.govxseui" class="logo-image menu" alt="GovX" src="<%= image_url 'govx.png' %>">
                     </a>
                 </div>
                 <div class="col-xs-2"></div>
@@ -205,12 +206,16 @@
                 </div>
             </div>
             <div class="navbar-header col-md-4 col-xs-8 nl-logo">
-                <a href="/" ng-if="!$root.govx">
+                <a href="/" ng-if="!$root.govx && !$root.govxseui">
                     <img class="logo-image" alt="GameHedge.com" src="<%= image_url 'gamehedge_logo_white.png' %>">
                 </a>
-                <a href="/" ng-if="$root.govx">
+                <a href="/" ng-if="$root.govx && !$root.govxseui">
                     <img class="logo-image" alt="GovX" src="<%= image_url 'govx.png' %>">
                 </a>
+                <a href="/" ng-if="$root.govxseui">
+                    <img class="logo-image" alt="GovX" src="<%= image_url 'govx.png' %>">
+                </a>
+
             </div>
             <div class="navbar-header col-md-8 hidden-xs hidden-xm vertical-center help" ng-show="$root.isOrder">
                       
@@ -341,7 +346,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="footer-nav">
+                    <div class="footer-nav" ng-if="!$root.govx">
                         <h2>Connect with us</h2>
                         <nav role="navigation" class="footer-social-media">
                             <a href="http://www.facebook.com/gamehedge" target="_blank" class="hidden-sm hidden-xs"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/facebook-footer.png" alt="Like GameHedge on Facebook" /></a>
@@ -374,12 +379,12 @@
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <div class="footer-nav text-center">
+                    <div class="footer-nav text-center" ng-if="!$root.govx">
                         <div class="col-md-4"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/badge-gamehedge.png" alt="GameHedge" /></div>
                     </div>
                 </div>
             </div>
-            <div class="footer-signature">
+            <div class="footer-signature" ng-if="!$root.govx">
                 <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/GameHedge_Logo_Footer.png" alt="Gamehedge" />
                 <div class="footer-bottom clearfix">
                     © <%= @year %> GameHedge and Good Game Guarantee are trademarks of GameHedge LLC.<br>All Rights Reserved. Patent Pending.

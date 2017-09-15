@@ -1252,14 +1252,14 @@
 						    	<div class="description short" style="width: 66%;">Good Game Guarantee</div>
 						    	<div class="value short" style="width: 34%;">FREE</div>
 						    </div>
-						    <div class="description-line" ng-if="active_promos">
+						    <div class="description-line" ng-if="active_promos" style="display: none;">
 						    	<div class="description promo-btn" ng-click="showPromoField()">Promo Code</div>
 						    	<div class="value">
 							    	<input ng-d-show="show_promo_field" id="promo" ng-model="$parent.promo_code" ng-change="calculateValues()" name="promo_code" style="border: solid 1px #d3d3d3;">
 						    	</div>
 						    </div>
 						    <div class="description-line" ng-show="discount != 0">
-						    	<div class="description">Discount</div>
+						    	<div class="description">GOVX Discount</div>
 						    	<div class="value">-{{discount | currency}}</div>
 						    </div>
 						    <hr>

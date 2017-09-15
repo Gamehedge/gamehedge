@@ -74,12 +74,45 @@
   return query_string;
   }();
  
+  
 
   var host_base = window.location.hostname;  
   var mxpnl_id = "08f62d786d58b558399462b5f5dd843f";
+  console.log('Reg mxp');
   if(host_base.indexOf("gamehedge.com") == -1){
     mxpnl_id = "4b7832a4489a00193f53083b54e3defd";
+    console.log('Stg mxp');
+  
   }
+
+//alert(document.referrer);
+console.log('Ref:'+document.referrer);
+  //Check for govx cookie and set vars
+    var govxcookie = '';
+    var nameEQ5 = "isghgovx" + "=";
+    var ca5 = document.cookie.split(';');
+    for(var i5=0;i5 < ca5.length;i5++) {
+        var c5 = ca5[i5];
+        while (c5.charAt(0)==' ') c5 = c5.substring(1,c5.length);
+        if (c5.indexOf(nameEQ5) == 0) {
+            govxcookie = c5.substring(nameEQ5.length,c5.length);
+        }
+    }
+    if(govxcookie == "1"){
+         mxpnl_id = "1d93c1c371ff3b55b53e887936b5e926";
+         console.log('gx mxp');
+    }else{
+              if(document.referrer.indexOf("smarttvgeek") > -1){
+                mxpnl_id = "1d93c1c371ff3b55b53e887936b5e926";
+                console.log('gx mxp');
+              }
+      
+    }
+
+
+
+
+  
 </script>
 <!-- start Mixpanel --><script type="text/javascript">(function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
 0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");

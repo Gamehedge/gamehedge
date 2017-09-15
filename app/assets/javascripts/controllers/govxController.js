@@ -851,9 +851,39 @@ $timeout(function () {
     $scope.compareDate =  "2015-09-05T00:00:00.000Z"
     $window.scrollTo(0, 0);
 
-
-    $rootScope.govx = true;
     
+
+
+    $rootScope.govxseui = true;            
+    //Check if legal or not
+    if (!$rootScope.govx){
+//        alert(document.referrer);
+        if(document.referrer.indexOf("smarttvgeek") > -1){
+            $rootScope.govx = true;            
+            $rootScope.govxlegal = true;
+            
+            //mixpanel.register_once({'GovX User': 'yes'});
+            
+ //           alert('y');            
+
+            //Set cookie for govx visitors
+            
+            var govxcdate = new Date();
+            govxcdate.setTime(govxcdate.getTime() + (1*60*60*1000));//1 hour
+            govxexpires = "; expires=" + govxcdate.toUTCString();
+            document.cookie = "isghgovx" + "=" + "1" + govxexpires + "; path=/";
+            
+        }else{
+            $rootScope.govx = false;            
+            $rootScope.govxlegal = false;
+        }
+    }else{
+        $rootScope.govxlegal = true;        
+    }
+
+
+
+
     //The global variable locat gets the current location.path
     Auth.currentUser().then(function(user) {
         // User was logged in, or Devise returned

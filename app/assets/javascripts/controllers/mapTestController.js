@@ -1,6 +1,12 @@
 controllers = angular.module('gamehedge')
 
 controllers.controller('mapTestController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http,$timeout,$location,$rootScope,Auth,angularLoad){
+
+ 
+    if($rootScope.govx){
+        $location.path($location.path().replace("/events/", "/govx/"));
+    }
+
     $scope.prev_filter = true;
     $scope.mob_price = 0;
     $scope.mob_price_a = false;
@@ -19,6 +25,7 @@ controllers.controller('mapTestController', function($scope,$routeParams,dataSer
     $scope.price_filter = false;
     $scope.price_filter_down_limit = 0;
     $scope.price_filter_up_limit = 0;
+
 
     $rootScope.showHeader = false;
     $rootScope.windoWidth = window.innerWidth;
@@ -527,8 +534,13 @@ $timeout(function () {
     }
 
     $scope.relocateURL = function(id,val){
+        
         $location.search('amount', val);
-        $location.path('/order/'+id);
+        if($rootScope.govx){
+            $location.path('/govx-order/'+id);
+        }else{        
+            $location.path('/order/'+id);
+        }
         $scope.applyChanges();
     }
 

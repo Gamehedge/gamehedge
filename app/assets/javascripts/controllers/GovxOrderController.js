@@ -2,8 +2,16 @@ controllers = angular.module('gamehedge')
 
 controllers.controller('GovxOrderController', function($scope,$rootScope,$http,Auth,$location,$routeParams,$timeout,apiService,$filter,$window,Analytics){
 
-	var paybuttonloadingtime = 0;
 
+    if(!$rootScope.govx){
+        $location.path($location.path().replace("/govx-order/", "/order/"));
+    }
+
+
+	var paybuttonloadingtime = 0;
+	//$rootScope.govx = true;
+
+//alert($rootScope.govx);
     var trigger555 = setInterval(function() {
 			paybuttonloadingtime++;
 			if ($('.confirm_pay').offset().top > 0){
@@ -14,7 +22,7 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 			}
      }, 100);
 
-
+	$scope.promo_code = "GOVX";
 
     var trigger = setInterval(function() {
         if ($(window).width() > 992){

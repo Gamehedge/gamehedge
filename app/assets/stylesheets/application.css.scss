@@ -51,6 +51,79 @@
   right: 0;
 }
 
+
+.govxnl-overlay{
+    display: block;
+    position: absolute;
+    z-index: 999999;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    background-color: #000;
+    width: 100%;
+    opacity: 0.7;    
+}
+.govxnl{
+    display: block;
+    width: 50%;
+    background-color: #fff;    
+    border-radius: 3px;
+    position: absolute;
+    top: 100px;
+    z-index: 9999999;
+    left: 25%;
+    text-align: center;
+}
+
+.govxnl-header{
+    display: block;
+    line-height: 60px;
+    font-size: 24px;
+    background-color: #e8e8e8;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.govxnl-body{
+    display: block;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+.govxnl-body span{
+    display: block;
+    font-size: 18px;
+    color: #444;
+    line-height: 30px;
+}
+.govxnl-body a{
+    display: inline-block;
+    margin-top: 20px;
+    background-color: green;
+    color: #fff;
+    padding: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+    text-transform: uppercase;
+    border-radius: 3px;
+}
+.govxnl-body a:hover{    
+    background-color: #159015;
+}
+.govx-seui-header{
+    text-align: center;
+    height: 30px !important;
+    background-color: #6f882b;
+    color: #fff;
+    border: 0px !important;
+}
+.govx-seui-header a{
+    display: inline-block;
+    margin-right: 10px;
+    text-decoration: underline;
+    color: #fff;
+}
+
+
 .dropdown.main-dropdown:hover .dropdown-menu {
     display: block;
     margin-top: 0; // remove the gap so it doesn't close
@@ -7358,6 +7431,13 @@ main#admin #order-stats .stat-item span {
 
     #seatzone_map svg{
         left: 0px !important;
+    }
+
+
+
+    .govxnl{
+        width: 90%;
+        left: 5%;
     }
 
 }

@@ -1,3 +1,17 @@
+<div class="govxnl-overlay" ng-if="!$root.govxlegal"></div>
+  
+  <div class="govxnl" ng-if="!$root.govxlegal">
+    <div class="govxnl-header">
+      Log in to your GovX account
+    </div>
+    <div class="govxnl-body">
+      <span>Log in or create an account</span>
+      <span>with GovX to access the discounts.</span>
+      <a href="https://www.govx.com/?gxweba=gamehedge&gxwebb=gamehedge_site&utm_source=gamehedge&utm_medium=text_link&utm_campaign=gamehedge_site">Log in or sign up now</a>
+    </div>
+  </div>
+
+
 <div id="home" class="event-container">
   
   <section id="game_info">
@@ -141,7 +155,7 @@
 
     <div class="splash-logo">
       <center>
-        <img alt="GameHedge" src="/assets/govx-0aa1bc97b22949d9878ee6595d825df949c2767852ddb4d00b4e29e98930907f.png">
+        <img alt="GameHedge" src="/assets/govx-5fdfc909c9e7ceabd2d5bedf0f4e3a20f2cd0260eba12af453c30a4dbf2d60cf.png">
       </center>   
     </div>
 
@@ -429,6 +443,9 @@
             <!--button ng-click="updateEtickets()" ng-class="{'active': etickets}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> EDelivery</button-->
            <!--  <button ng-click="updateFilter($event,1)"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Parking Only</button> -->
           </div>
+          <div class="col-xs-12 filter-row vertical-center hidden-xs hidden-sm govx-seui-header">
+            <a href="http://www.govx.com" target="_blank">Military Discount:</a> 5% to 45% below average market price
+          </div>          
           <div class="col-xs-12 section-image hidden-xs hidden-sm" ng-if="sectionUrl != ''">
             <img ng-src="{{sectionUrl}}">
           </div>
@@ -532,3 +549,5 @@ $( "body" ).on( "touchstart", '.ui-dialog-titlebar',function() {
 <script>
 mixpanel.track("SingleEventPage Visit");
 </script>
+
+
