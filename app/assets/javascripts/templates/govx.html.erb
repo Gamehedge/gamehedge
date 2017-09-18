@@ -44,7 +44,7 @@
             <p class="second-line" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'hh:mm a' : 'UTC'| uppercase}} at <span class="blue-span">{{event.venue.name}}</span> - {{event.location}}</p>
             <p class="second-line" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD at <span class="blue-span">{{event.venue.name}}</span> - {{event.location}}</p>
 
-            <p class="second-line breadcrumbs"><a href='/'>HOME</a> <i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{event.sport.url}}">{{event.sport.name | uppercase}}</a> <i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{event.home_performer.url}}">{{event.home_performer.name | uppercase}}</a></p>
+            <p class="second-line breadcrumbs">HOME <i class="fa fa-angle-right" aria-hidden="true"></i> {{event.sport.name | uppercase}} <i class="fa fa-angle-right" aria-hidden="true"></i> {{event.home_performer.name | uppercase}}</p>
 
           </span>
         </div>
@@ -444,7 +444,8 @@
            <!--  <button ng-click="updateFilter($event,1)"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Parking Only</button> -->
           </div>
           <div class="col-xs-12 filter-row vertical-center hidden-xs hidden-sm govx-seui-header">
-            <a href="http://www.govx.com" target="_blank">Military Discount:</a> 5% to 45% below average market price
+            <div style="float: left; width: 49%;">GovX Discount: Save up to 45%</div>
+            <div style="float: right; width: 49%;" id="govx_explanation"><u>What is GovX Discount?</u>&nbsp;</div>
           </div>          
           <div class="col-xs-12 section-image hidden-xs hidden-sm" ng-if="sectionUrl != ''">
             <img ng-src="{{sectionUrl}}">
@@ -551,3 +552,45 @@ mixpanel.track("SingleEventPage Visit");
 </script>
 
 
+
+<script>
+jQuery( document ).ready(function() {
+										
+    									jQuery("#govx_explanation").qtip({											
+         									hide: {												 
+             								    fixed: true,
+                								delay: 300
+            								},
+											
+										      position: {
+        									  	my: 'right center', 
+        										  at: 'left center', 
+        										  target: jQuery('#govx_explanation')
+    										  },	
+											    style: {
+     										     classes: 'qtip-light qtip-shadow qtip-checkout'
+    										  },										
+        									content: {
+											      	title: 'GovX Military Discount',
+            									text: jQuery("#govx-tooltip")
+        									},
+    											events: {
+       										   show: function(event, api) {
+
+        										}
+    	  									}
+
+    									
+										});
+										
+									})
+</script>
+
+
+<div class="ggg-tooltip" style="display: none; max-width: 300px;" id="govx-tooltip">
+<div>        
+<p>GameHedge is proud to provide GovX members with an additional discount on the best tickets in the secondary market.</p>
+
+<p>Through this partnership, <b>GovX members will receive their military discount at checkout while still benefiting from the Good Game Guarantee</b>. With affordable tickets and the ability to request a refund after a bad game, GameHedge’s goal is to provide you with the best game day experience possible.</p>
+</div>
+</div>

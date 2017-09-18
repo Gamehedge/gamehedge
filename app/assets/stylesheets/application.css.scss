@@ -112,9 +112,10 @@
 .govx-seui-header{
     text-align: center;
     height: 30px !important;
-    background-color: #6f882b;
+    background-color: #141819;
     color: #fff;
     border: 0px !important;
+    border-bottom: 1px solid #757575 !important;
 }
 .govx-seui-header a{
     display: inline-block;
@@ -2356,6 +2357,17 @@ a {
     float: right;
     width: 30%;
     padding-top: 16px;
+}
+
+
+.govx-discount{
+    background-color: #363c3f;
+    border-radius: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.govx-discount .description, .govx-discount .value{
+    color: #fff !important;
 }
 
 .top-banner .logo-right img{

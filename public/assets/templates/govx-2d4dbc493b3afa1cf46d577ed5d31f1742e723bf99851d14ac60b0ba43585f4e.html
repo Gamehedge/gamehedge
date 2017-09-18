@@ -1,3 +1,17 @@
+<div class="govxnl-overlay" ng-if="!$root.govxlegal"></div>
+  
+  <div class="govxnl" ng-if="!$root.govxlegal">
+    <div class="govxnl-header">
+      Log in to your GovX account
+    </div>
+    <div class="govxnl-body">
+      <span>Log in or create an account</span>
+      <span>with GovX to access the discounts.</span>
+      <a href="https://www.govx.com/?gxweba=gamehedge&gxwebb=gamehedge_site&utm_source=gamehedge&utm_medium=text_link&utm_campaign=gamehedge_site">Log in or sign up now</a>
+    </div>
+  </div>
+
+
 <div id="home" class="event-container">
   
   <section id="game_info">
@@ -30,7 +44,7 @@
             <p class="second-line" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'hh:mm a' : 'UTC'| uppercase}} at <span class="blue-span">{{event.venue.name}}</span> - {{event.location}}</p>
             <p class="second-line" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD at <span class="blue-span">{{event.venue.name}}</span> - {{event.location}}</p>
 
-            <p class="second-line breadcrumbs"><a href='/'>HOME</a> <i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{event.sport.url}}">{{event.sport.name | uppercase}}</a> <i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{event.home_performer.url}}">{{event.home_performer.name | uppercase}}</a></p>
+            <p class="second-line breadcrumbs">HOME <i class="fa fa-angle-right" aria-hidden="true"></i> {{event.sport.name | uppercase}} <i class="fa fa-angle-right" aria-hidden="true"></i> {{event.home_performer.name | uppercase}}</p>
 
           </span>
         </div>
@@ -141,7 +155,7 @@
 
     <div class="splash-logo">
       <center>
-        <img alt="GameHedge" src="/assets/gamehedge_logo_white-d6ced5ecb6527a6329ba2b48b054c2b0587a30375a9cbd9f9783fb1d4ae4d3e8.png">
+        <img alt="GameHedge" src="/assets/govx-5fdfc909c9e7ceabd2d5bedf0f4e3a20f2cd0260eba12af453c30a4dbf2d60cf.png">
       </center>   
     </div>
 
@@ -429,12 +443,10 @@
             <!--button ng-click="updateEtickets()" ng-class="{'active': etickets}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> EDelivery</button-->
            <!--  <button ng-click="updateFilter($event,1)"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Parking Only</button> -->
           </div>
-
           <div class="col-xs-12 filter-row vertical-center hidden-xs hidden-sm govx-seui-header">
-            <a href="http://www.govx.com" target="_blank">Military Discount:</a> 5% to 45% below average market price
+            <div style="float: left; width: 49%;">GovX Discount: Save up to 45%</div>
+            <div style="float: right; width: 49%;" id="govx_explanation"><u>What is GovX Discount?</u>&nbsp;</div>
           </div>          
-
-
           <div class="col-xs-12 section-image hidden-xs hidden-sm" ng-if="sectionUrl != ''">
             <img ng-src="{{sectionUrl}}">
           </div>
@@ -538,3 +550,47 @@ $( "body" ).on( "touchstart", '.ui-dialog-titlebar',function() {
 <script>
 mixpanel.track("SingleEventPage Visit");
 </script>
+
+
+
+<script>
+jQuery( document ).ready(function() {
+										
+    									jQuery("#govx_explanation").qtip({											
+         									hide: {												 
+             								    fixed: true,
+                								delay: 300
+            								},
+											
+										      position: {
+        									  	my: 'right center', 
+        										  at: 'left center', 
+        										  target: jQuery('#govx_explanation')
+    										  },	
+											    style: {
+     										     classes: 'qtip-light qtip-shadow qtip-checkout'
+    										  },										
+        									content: {
+											      	title: 'GovX Military Discount',
+            									text: jQuery("#govx-tooltip")
+        									},
+    											events: {
+       										   show: function(event, api) {
+
+        										}
+    	  									}
+
+    									
+										});
+										
+									})
+</script>
+
+
+<div class="ggg-tooltip" style="display: none; max-width: 300px;" id="govx-tooltip">
+<div>        
+<p>GameHedge is proud to provide GovX members with an additional discount on the best tickets in the secondary market.</p>
+
+<p>Through this partnership, <b>GovX members will receive their military discount at checkout while still benefiting from the Good Game Guarantee</b>. With affordable tickets and the ability to request a refund after a bad game, GameHedge’s goal is to provide you with the best game day experience possible.</p>
+</div>
+</div>

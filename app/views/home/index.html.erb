@@ -99,13 +99,13 @@
                 <div><a ng-click="logout()" ng-click="hideMenus()">Logout</a></div>
             </div>
 
-            <div class="mobile-menu-row-sep"></div>
+            <div class="mobile-menu-row-sep" ng-if="!$root.govx"></div>
 
 
-            <div class="mobile-menu-row" ng-repeat-start="league in leagueList" ng-if="$first">
+            <div class="mobile-menu-row" ng-repeat-start="league in leagueList" ng-if="$first && !$root.govx">
                 <div ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()" ng-cloak>{{league.name | uppercase}}</a></div>
             </div>
-            <div class="mobile-menu-row" ng-repeat-end ng-if="!$first">
+            <div class="mobile-menu-row" ng-repeat-end ng-if="!$first && !$root.govx">
                 <div ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()" ng-cloak>{{league.name | uppercase}}</a></div>
             </div>
 
@@ -209,10 +209,10 @@
                 <a href="/" ng-if="!$root.govx && !$root.govxseui">
                     <img class="logo-image" alt="GameHedge.com" src="<%= image_url 'gamehedge_logo_white.png' %>">
                 </a>
-                <a href="/" ng-if="$root.govx && !$root.govxseui">
+                <a href="#" ng-if="$root.govx && !$root.govxseui">
                     <img class="logo-image" alt="GovX" src="<%= image_url 'govx.png' %>">
                 </a>
-                <a href="/" ng-if="$root.govxseui">
+                <a href="#" ng-if="$root.govxseui">
                     <img class="logo-image" alt="GovX" src="<%= image_url 'govx.png' %>">
                 </a>
 
@@ -230,7 +230,11 @@
                     </button>
                 </div>
             </div>
-            <div class="col-md-4 hidden-sm hidden-xs horizontal-center main-menu">
+
+            <div class="col-md-4 hidden-sm hidden-xs horizontal-center main-menu" ng-if="$root.govx">
+
+            </div>
+            <div class="col-md-4 hidden-sm hidden-xs horizontal-center main-menu" ng-if="!$root.govx">
                 <ul class="nav navbar-nav navbar-leagues vertical-center horizontal-center" ng-show="!$root.isOrder" ng-repeat="league in leagueList | orderBy:'name' track by $index" ng-if="league.active == true">
                    <li class="dropdown main-dropdown yamm-fw">
                          <a class="dropdown-toggle" href="{{league.url}}" ng-cloak>{{league.name | uppercase}}</a>
