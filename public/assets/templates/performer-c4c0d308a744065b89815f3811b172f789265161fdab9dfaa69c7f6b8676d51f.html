@@ -6,8 +6,9 @@
   <em>At GameHedge every ticket comes with the Good Game Guarantee at no additional cost. Buy {{performer.name}} tickets on GameHedge and if the Predators lose by {{performer.sport.ggg}} or more, GameHedge will refund 50% of the ticket price</em>
 </div>
 
-<div class="nl-call hidden-xs hidden-sm">Need Help? Call 888-804-4330</div>
-  
+<div class="nl-call hidden-xs hidden-sm" ng-if="!$root.govx">Need Help? Call 888-804-4330</div>
+<div class="nl-call hidden-xs hidden-sm" ng-if="$root.govx">Need Help? Call 800-294-6954</div>
+
 
 <span id="home" class=performers>
 <div class="nl-top-bg" style="background-image: URL(/assets/green_background-7f59e17363a6062d461c61cc7a501a050db1a1f76cb06ff5ab5dcf728f4d44ab.png);">

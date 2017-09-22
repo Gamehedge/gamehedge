@@ -22,7 +22,7 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 			}
      }, 100);
 
-	$scope.promo_code = "GOVX";
+	$scope.promo_code = "GOVX817299AS";
 
     var trigger = setInterval(function() {
         if ($(window).width() > 992){

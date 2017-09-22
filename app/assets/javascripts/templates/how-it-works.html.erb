@@ -1,4 +1,7 @@
-<div class="nl-call hidden-xs hidden-sm">Need Help? Call 888-804-4330</div>
+<div class="nl-call hidden-xs hidden-sm" ng-if="!$root.govx">Need Help? Call 888-804-4330</div>
+<div class="nl-call hidden-xs hidden-sm" ng-if="$root.govx">Need Help? Call 800-294-6954</div>
+
+
 
 <section id="home">
 <div class="nl-top-bg" style="background-image: URL(<%= image_url 'green_background.png' %>);">

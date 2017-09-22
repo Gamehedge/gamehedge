@@ -41,6 +41,9 @@ controllers.controller('ConfirmController', function($scope,$rootScope,$http,Aut
 						'order_total': $scope.order.total
 					});
 
+					mixpanel.track("Order Complete", {"OrderID": $scope.order.te_order_id, "order_total": $scope.order.total});
+
+
 
 					fbq('track', 'Purchase', {
 						value: $scope.order.total,
