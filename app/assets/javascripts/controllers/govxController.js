@@ -858,7 +858,7 @@ $timeout(function () {
     //Check if legal or not
     if (!$rootScope.govx){
 //        alert(document.referrer);
-        if(document.referrer.indexOf("govx") > -1){
+        if(document.referrer.indexOf("govx") >= -1){
             $rootScope.govx = true;            
             $rootScope.govxlegal = true;
             
