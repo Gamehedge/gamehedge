@@ -130,7 +130,8 @@
             <div class="mobile-menu-row-sep"></div>
             
             <div class="mobile-menu-row">
-                <div><a href="tel:8888044330">Toll Free: 888-804-4330</a></div>
+                <div ng-if="!$root.govx"><a href="tel:8888044330">Toll Free: 888-804-4330</a></div>
+                <div ng-if="$root.govx"><a href="tel:8002946954">Toll Free: 800-294-6954</a></div>
             </div>            
         </div>
 
@@ -295,7 +296,8 @@
                 </div>
 
                 <div class="press" ng-show="$root.locat != '/'">
-                    <a href="/testimonials">Testimonials</a>
+                    <a ng-if="!$root.govx" href="/testimonials">Testimonials</a>
+                    <a ng-if="$root.govx" href="/how-it-works">How it works</a>
                 </div>
                 
                 </div>
@@ -312,7 +314,8 @@
 
 
                  <div class="dropdown login" ng-show="!$root.isLoggedin">
-                    <a href="/how-it-works" class="header-claim-refund"><span style="background-image: URL(<%= image_url 'money_white.png' %>);"></span>Claim Refund</a>
+                    <a ng-if="!$root.govx" href="/how-it-works" class="header-claim-refund"><span style="background-image: URL(<%= image_url 'money_white.png' %>);"></span>Claim Refund</a>
+                    <a ng-if="$root.govx" href="/login/" class="header-claim-refund"><span style="background-image: URL(<%= image_url 'money_white.png' %>);"></span>Claim Refund</a>
                 </div>
             </div>
           </div>
