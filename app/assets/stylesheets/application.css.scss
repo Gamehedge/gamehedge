@@ -2410,19 +2410,31 @@ a {
 }
 
 .gx-ads{
-
+    text-align: center;
+}
+.gx-ads h3{
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    font-family: verdana;
+    font-size: 20px;
+    color: #000;
+    clear: both;
+    margin-bottom: 14px;
 }
 .gx-ads div{
     width: 23%;
     float: left;
     margin-left: 1%;
     margin-right: 1%;
+    text-align: center;
 }
 .gx-ads h5{
     display: block;
+    text-decoration: underline;
 }
 .gx-ads img{
     display: block;
+    width: 100%;
 }
     
     
@@ -7485,6 +7497,28 @@ main#admin #order-stats .stat-item span {
         left: 5%;
     }
 
+
+    .gx-ads h3{
+        font-size: 15px;    
+    }
+    .gx-ads div{
+        float: none;
+        width: 98%;
+        margin-bottom: 15px;
+    }
+    .gx-ads h5{
+        font-size: 20px;
+    }
+
+    #confirmation .info{
+        font-size: 16px;
+    }
+    #confirmation .inner .row{
+        margin-bottom: 10px !important;
+    }
+    .order-page .logo-image{
+        padding: 32px !important;
+    }
 }
 
 
