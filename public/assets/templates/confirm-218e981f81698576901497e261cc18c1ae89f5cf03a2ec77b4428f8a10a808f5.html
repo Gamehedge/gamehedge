@@ -9,13 +9,13 @@
 <span id="home" ng-show="!loading">	
 	<section id="confirmation">
 		<div class="container">
-			<div class="row">
+			<div class="row" style="margin: 4px;">
 				<div class="col-xs-12">
 					<h1>THANK YOU FOR YOUR ORDER</h1>
 					<h4>Your order number is {{order.te_order_id}}</h4>
-					<div class="outter">
-						<div class="inner">
-							<div class="row">
+					<div class="outter" style="margin-bottom: 20px;">
+						<div class="inner" style="padding: 3px;">
+							<div class="row"  style="margin: 4px;">
 								<div class="col-xs-6">
 									<div class="label-confirm">Game</div>
 									<div class="info">{{order.event_name}}</div>
@@ -31,7 +31,7 @@
 									</span>
 								</div>
 							</div>
-							<div class="row">
+							<div class="row"  style="margin: 4px;">
 								<div class="col-xs-6">
 									<div class="label-confirm">Date & Time</div>
 									<div class="info">{{order.event_date | date: "EEE, MMM dd, yyyy - hh:mm a" : 'UTC'}}</div>
@@ -41,7 +41,7 @@
 									<div class="info">{{order.event_location}}</div>
 								</div>
 							</div>
-							<div class="row">
+							<div class="row" style="margin: 4px;">
 								<div class="col-xs-6">
 									<div class="label-confirm">Shipping</div>
 									<div class="info" ng-if="order.ticket_format == 'Physical'">Physical Delivery</div>
@@ -53,7 +53,7 @@
 									<div class="info">{{order.ticket_notes}}</div>
 								</div>
 							</div>
-							<div class="row update-password" ng-if="first_time">
+							<div class="row update-password" ng-if="first_time"  style="margin: 4px;">
 							<h4>To receive any Good Game Guarantee refund, please provide:</h4>
 								<div class="col-md-6">
 									<input type="password" name="password" placeholder="password" ng-model="$parent.password" name="password">
@@ -66,7 +66,41 @@
 								</div>
 							</div>
 						</div>
+
+						<center>
+							<a href="/faq/" class="thx_faq">Have questions about this order?</a>
+						</center>
 					</div>
+
+					<div class="gx-ads" ng-if="$root.govx">
+						<div>
+							<a href="https://www.govx.com/p/44037/nfl-adventure-wagon">
+								<h5>Adventure Wagon</h5>
+								<img src="/assets/ravens_wagon-a6701382a1d067c6153425b806c03a01da7c5f5611f28d490ca6b098f40b825c.jpg"></img>
+							</a>
+						</div>
+						<div>
+							<a href="https://www.govx.com/p/44026/nfl-canasta-grande">
+								<h5>Canasta Basket</h5>
+								<img src="/assets/ravens_basket-ed2d33148286604b60735759a1a644e2274186427d2904d8cb33ca49b96f31c9.jpg"></img>
+							</a>
+						</div>
+						<div>
+							<a href="https://www.govx.com/p/37045/nfl-mens-ravens-sweatshirt">
+								<h5>Sweatshirt</h5>
+								<img src="/assets/ravens_sweatshirt-8d3e730426bf764dd784ebaeac2cfe68ec77b24aa2e0f493cf4dfaa6eef5796d.jpg"></img>
+							</a>
+						</div>
+						<div>
+							<a href="https://www.govx.com/p/44018/nfl-asiago">
+								<h5>Cheese Board</h5>
+								<img src="/assets/ravens_cheese-588311028006a761a2bba1c7c71222cd2d0ddedeb14d116357c11541ced124c0.jpg"></img>
+							</a>
+						</div>
+						<div class="sep"></div>
+					</div>
+
+
 				</div>
 			</div>
 		</div>

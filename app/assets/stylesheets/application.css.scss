@@ -125,6 +125,20 @@
 }
 
 
+.thx_faq{
+    display: inline-block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-decoration: underline;
+    font-size: 16px;
+    background-color: #fff;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+
 .dropdown.main-dropdown:hover .dropdown-menu {
     display: block;
     margin-top: 0; // remove the gap so it doesn't close
@@ -2394,6 +2408,24 @@ a {
 .sep{
     clear: both;
 }
+
+.gx-ads{
+
+}
+.gx-ads div{
+    width: 23%;
+    float: left;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+.gx-ads h5{
+    display: block;
+}
+.gx-ads img{
+    display: block;
+}
+    
+    
 
 .qtip-checkout .qtip-title{
     font-sizE: 13px;

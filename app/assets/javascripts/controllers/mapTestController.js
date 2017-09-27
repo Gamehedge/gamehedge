@@ -355,7 +355,7 @@ $timeout(function () {
 
                     $('#seuilbl').css('top',rowoffset.top-135+'px');
                     $('#seuilbl').css('left','-153px');
-                    $('#ref_amount').html('Potential Refund<br/>'+'<b>$'+(prc/2).toFixed(2).replace(/\.0+$/,"")+'/ea*</b>');
+                    $('#ref_amount').html('Potential Refund<br/>'+'<b>$'+(prc/2).toFixed(2).replace(/\.0+$/,"")+'/ea</b>');
                     $('#seuilbl').css('display','block');                    
                 }
 
@@ -497,7 +497,7 @@ $timeout(function () {
 
                     $('#seuilbl').css('top',rowoffset.top-135+'px');
                     $('#seuilbl').css('left','-153px');
-                    $('#ref_amount').html('Potential Refund<br/>'+'<b>$'+(prc/2).toFixed(2).replace(/\.0+$/,"")+'/ea*</b>');
+                    $('#ref_amount').html('Potential Refund<br/>'+'<b>$'+(prc/2).toFixed(2).replace(/\.0+$/,"")+'/ea</b>');
                     $('#seuilbl').css('display','block');                    
                 }
 

@@ -348,7 +348,7 @@ $timeout(function () {
 
                     $('#seuilbl').css('top',rowoffset.top-135+'px');
                     $('#seuilbl').css('left','-153px');
-                    $('#ref_amount').html('Potential Refund<br/>'+'<b>$'+(prc/2).toFixed(2).replace(/\.0+$/,"")+'/ea*</b>');
+                    $('#ref_amount').html('Potential Refund<br/>'+'<b>$'+(prc/2).toFixed(2).replace(/\.0+$/,"")+'/ea</b>');
                     $('#seuilbl').css('display','block');                    
                 }
 
@@ -490,7 +490,7 @@ $timeout(function () {
 
                     $('#seuilbl').css('top',rowoffset.top-135+'px');
                     $('#seuilbl').css('left','-153px');
-                    $('#ref_amount').html('Potential Refund<br/>'+'<b>$'+(prc/2).toFixed(2).replace(/\.0+$/,"")+'/ea*</b>');
+                    $('#ref_amount').html('Potential Refund<br/>'+'<b>$'+(prc/2).toFixed(2).replace(/\.0+$/,"")+'/ea</b>');
                     $('#seuilbl').css('display','block');                    
                 }
 
@@ -858,7 +858,7 @@ $timeout(function () {
     //Check if legal or not
     if (!$rootScope.govx){
 //        alert(document.referrer);
-        if(document.referrer.indexOf("govx") > -1){
+        if(document.referrer.indexOf("govx") >= -1){
             $rootScope.govx = true;            
             $rootScope.govxlegal = true;
             
