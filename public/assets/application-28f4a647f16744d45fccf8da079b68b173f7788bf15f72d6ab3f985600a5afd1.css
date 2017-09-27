@@ -23969,10 +23969,11 @@ main#admin #order-stats .stat-item span {
 
   /* line 7520, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
   .order-page .logo-image {
-    padding: 32px !important;
+    padding-right: 30px;
+    padding-left: 30px;
   }
 }
-/* line 7526, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
+/* line 7527, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
 #seatzone_map_DIS, #seatzone_map_DIS svg {
   height: 282px !important;
 }
