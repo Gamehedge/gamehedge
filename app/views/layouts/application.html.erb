@@ -85,6 +85,8 @@
   
   }
 
+var enable_moengage = 1;
+
 //alert(document.referrer);
 console.log('Ref:'+document.referrer);
   //Check for govx cookie and set vars
@@ -99,12 +101,14 @@ console.log('Ref:'+document.referrer);
         }
     }
     if(govxcookie == "1"){
+         enable_moengage = 0;
          mxpnl_id = "1d93c1c371ff3b55b53e887936b5e926";
          console.log('gx mxp');
     }else{
               if(document.referrer.indexOf("govx") >= -1){
                 mxpnl_id = "1d93c1c371ff3b55b53e887936b5e926";
                 console.log('gx mxp');
+                enable_moengage = 0;
               }
       
     }
@@ -121,7 +125,12 @@ mixpanel.init(mxpnl_id);</script><!-- end Mixpanel -->
 
 
 <link rel="manifest" href="/manifest.json"> 
-<script type="text/javascript" src="https://cdn.moengage.com/webpush/moe_webSdk.min.latest.js"></script> <script type="text/javascript"> Moengage = moe( { app_id: "X56DG7CUCZM9MX10V09IG605", debug_logs: 0 }); </script>
+<script type="text/javascript" src="https://cdn.moengage.com/webpush/moe_webSdk.min.latest.js"></script> 
+<script type="text/javascript"> 
+    if(enable_moengage == "1"){
+        Moengage = moe( { app_id: "X56DG7CUCZM9MX10V09IG605", debug_logs: 0 }); 
+    }
+</script>
 
 
 <script>

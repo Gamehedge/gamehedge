@@ -57,7 +57,7 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 	                $scope.amount = $location.search()['amount'];
 	                $scope.calculateValues();
 
-
+				if(!$rootScope.govx){
 					Moengage.track_event('CheckoutPage Visit', {'url': window.location.href , 
 						'away_team': $scope.event.away_performer.name, 
 						'home_team': $scope.event.home_performer.name, 
@@ -67,7 +67,7 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 						'ticket_row': $scope.ticket.row,
 						'ticket_price_each': $scope.ticket.retail_price
 					});
-
+				}
 
 	        });
 	        if($scope.ticket.format == "Physical"){

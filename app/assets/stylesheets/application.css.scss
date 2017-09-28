@@ -7504,7 +7504,7 @@ main#admin #order-stats .stat-item span {
     .gx-ads h3{
         font-size: 15px;    
     }
-    .gx-ads div{
+    .gx-ads .gx-product{
         float: none;
         width: 98%;
         margin-bottom: 15px;
@@ -7512,6 +7512,11 @@ main#admin #order-stats .stat-item span {
     .gx-ads h5{
         font-size: 20px;
     }
+
+    .gx-travel img{
+        width: 100%;
+    }
+
 
     #confirmation .info{
         font-size: 16px;

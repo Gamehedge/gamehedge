@@ -30,7 +30,7 @@ controllers.controller('ConfirmController', function($scope,$rootScope,$http,Aut
 
 
 
-				
+				if(!$rootScope.govx){				
 					Moengage.track_event('Order Complete', {'url': window.location.href , 
 						'event_date_time': $scope.order.event_date, 
 						'event_location_addr': $scope.order.event_location, 
@@ -40,7 +40,9 @@ controllers.controller('ConfirmController', function($scope,$rootScope,$http,Aut
 						'ticket_section': $scope.order.ticket_section,
 						'order_total': $scope.order.total
 					});
+				}
 
+				
 					mixpanel.track("Order Complete", {"OrderID": $scope.order.te_order_id, "order_total": $scope.order.total});
 
 					//console.log('ht:'+$scope.order.event_name);					
