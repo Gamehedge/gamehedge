@@ -14,7 +14,10 @@
                 </div>
                 <div class="navbar-header col-xs-8">
                     <a href="/" ng-click="hideMenus()">
-                        <img class="logo-image menu" alt="GameHedge.com" src="<%= image_url 'nl-logo1.png' %>">
+
+                        <img ng-if="!$root.govx && !$root.govxseui" class="logo-image menu" alt="GameHedge.com" src="<%= image_url 'nl-logo1.png' %>">
+                        <img ng-if="$root.govx && !$root.govxseui" class="logo-image menu" alt="GovX" src="<%= image_url 'govx.png' %>">
+                        <img ng-if="$root.govxseui" class="logo-image menu" alt="GovX" src="<%= image_url 'govx.png' %>">
                     </a>
                 </div>
                 <div class="col-xs-2"></div>
@@ -96,13 +99,13 @@
                 <div><a ng-click="logout()" ng-click="hideMenus()">Logout</a></div>
             </div>
 
-            <div class="mobile-menu-row-sep"></div>
+            <div class="mobile-menu-row-sep" ng-if="!$root.govx"></div>
 
 
-            <div class="mobile-menu-row" ng-repeat-start="league in leagueList" ng-if="$first">
+            <div class="mobile-menu-row" ng-repeat-start="league in leagueList" ng-if="$first && !$root.govx">
                 <div ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()" ng-cloak>{{league.name | uppercase}}</a></div>
             </div>
-            <div class="mobile-menu-row" ng-repeat-end ng-if="!$first">
+            <div class="mobile-menu-row" ng-repeat-end ng-if="!$first && !$root.govx">
                 <div ng-if="league.active == true"><a href="{{league.url}}" ng-click="hideMenus()" ng-cloak>{{league.name | uppercase}}</a></div>
             </div>
 
@@ -127,7 +130,8 @@
             <div class="mobile-menu-row-sep"></div>
             
             <div class="mobile-menu-row">
-                <div><a href="tel:8888044330">Toll Free: 888-804-4330</a></div>
+                <div ng-if="!$root.govx"><a href="tel:8888044330">Toll Free: 888-804-4330</a></div>
+                <div ng-if="$root.govx"><a href="tel:8002946954">Toll Free: 800-294-6954</a></div>
             </div>            
         </div>
 
@@ -203,13 +207,29 @@
                 </div>
             </div>
             <div class="navbar-header col-md-4 col-xs-8 nl-logo">
-                <a href="/" >
+                <a href="/" ng-if="!$root.govx && !$root.govxseui">
                     <img class="logo-image" alt="GameHedge.com" src="<%= image_url 'gamehedge_logo_white.png' %>">
                 </a>
+                <a href="#" ng-if="$root.govx && !$root.govxseui">
+                    <img class="logo-image" alt="GovX" src="<%= image_url 'govx.png' %>">
+                </a>
+                <a href="#" ng-if="$root.govxseui">
+                    <img class="logo-image" alt="GovX" src="<%= image_url 'govx.png' %>">
+                </a>
+
             </div>
             <div class="navbar-header col-md-8 hidden-xs hidden-xm vertical-center help" ng-show="$root.isOrder">
                       
-                    <p>NEED HELP? CALL TOLL FREE <br><span>(888) 804-4330</span></p>
+                    <p ng-if="!$root.govx">NEED HELP? CALL TOLL FREE <br><span>(888) 804-4330</span></p>
+                    <p ng-if="$root.govx" style="line-height: 16px;">
+                        NEED HELP? CALL TOLL FREE<br/>
+                        <span>800-294-6954</span><br/>
+                        <a href="mailto:govx@gamehedge.com" style="color: #fff; text-decoration: underline;">govx@gamehedge.com</a>
+                    </p>
+
+
+
+
                     <img class="help-image" alt="Call Us" src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/help.png">
                 
             </div>
@@ -220,7 +240,20 @@
                     </button>
                 </div>
             </div>
-            <div class="col-md-4 hidden-sm hidden-xs horizontal-center main-menu">
+
+            <div class="col-md-4 hidden-sm hidden-xs horizontal-center main-menu" style="justify-content: flex-end;" ng-if="$root.govx">
+
+                    <p ng-if="$root.govx && !$root.isOrder" style="line-height: 16px; color: #fff; margin-top: 7px;">
+                        NEED HELP? CALL TOLL FREE<br/>
+                        <span>800-294-6954</span><br/>
+                        <a href="mailto:govx@gamehedge.com" style="color: #fff; text-decoration: underline;">govx@gamehedge.com</a>
+                    </p>
+
+
+            </div>
+
+
+            <div class="col-md-4 hidden-sm hidden-xs horizontal-center main-menu" ng-if="!$root.govx">
                 <ul class="nav navbar-nav navbar-leagues vertical-center horizontal-center" ng-show="!$root.isOrder" ng-repeat="league in leagueList | orderBy:'name' track by $index" ng-if="league.active == true">
                    <li class="dropdown main-dropdown yamm-fw">
                          <a class="dropdown-toggle" href="{{league.url}}" ng-cloak>{{league.name | uppercase}}</a>
@@ -275,7 +308,8 @@
                 </div>
 
                 <div class="press" ng-show="$root.locat != '/'">
-                    <a href="/testimonials">Testimonials</a>
+                    <a ng-if="!$root.govx" href="/testimonials">Testimonials</a>
+                    <a ng-if="$root.govx" href="/how-it-works">How it works</a>
                 </div>
                 
                 </div>
@@ -292,7 +326,8 @@
 
 
                  <div class="dropdown login" ng-show="!$root.isLoggedin">
-                    <a href="/how-it-works" class="header-claim-refund"><span style="background-image: URL(<%= image_url 'money_white.png' %>);"></span>Claim Refund</a>
+                    <a ng-if="!$root.govx" href="/how-it-works" class="header-claim-refund"><span style="background-image: URL(<%= image_url 'money_white.png' %>);"></span>Claim Refund</a>
+                    <a ng-if="$root.govx" href="/login/" class="header-claim-refund"><span style="background-image: URL(<%= image_url 'money_white.png' %>);"></span>Claim Refund</a>
                 </div>
             </div>
           </div>
@@ -336,7 +371,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="footer-nav">
+                    <div class="footer-nav" ng-if="!$root.govx">
                         <h2>Connect with us</h2>
                         <nav role="navigation" class="footer-social-media">
                             <a href="http://www.facebook.com/gamehedge" target="_blank" class="hidden-sm hidden-xs"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/facebook-footer.png" alt="Like GameHedge on Facebook" /></a>
@@ -369,12 +404,12 @@
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <div class="footer-nav text-center">
+                    <div class="footer-nav text-center" ng-if="!$root.govx">
                         <div class="col-md-4"><img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/badge-gamehedge.png" alt="GameHedge" /></div>
                     </div>
                 </div>
             </div>
-            <div class="footer-signature">
+            <div class="footer-signature" ng-if="!$root.govx">
                 <img src="https://d2fj37dggc6l3c.cloudfront.net/assets/images/GameHedge_Logo_Footer.png" alt="Gamehedge" />
                 <div class="footer-bottom clearfix">
                     © <%= @year %> GameHedge and Good Game Guarantee are trademarks of GameHedge LLC.<br>All Rights Reserved. Patent Pending.

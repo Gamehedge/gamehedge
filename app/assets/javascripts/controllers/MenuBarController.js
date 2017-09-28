@@ -4,6 +4,23 @@ app.controller('MenuBarController', function($scope,$rootScope,Auth,$location,da
     
     $scope.page_loading = true;
     
+    //Check for govx cookie and set vars
+    var govxcookie = '';
+    var nameEQ5 = "isghgovx" + "=";
+    var ca5 = document.cookie.split(';');
+    for(var i5=0;i5 < ca5.length;i5++) {
+        var c5 = ca5[i5];
+        while (c5.charAt(0)==' ') c5 = c5.substring(1,c5.length);
+        if (c5.indexOf(nameEQ5) == 0) {
+            govxcookie = c5.substring(nameEQ5.length,c5.length);
+        }
+    }
+    if(govxcookie == "1"){
+        $rootScope.govx = true;
+    }
+
+
+
 	$scope.logout = function(){
         $scope.hideMenus();
         var config = {

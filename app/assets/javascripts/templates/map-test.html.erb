@@ -50,7 +50,7 @@
         
         <div class="hidden-xs hidden-sm ggg-event vertical-center">
             <div class="singlebanner-left" id='ggg_explanation'>
-              <div class='ref'>*50% Refund</div>
+              <div class='ref'>50% Refund</div>
               If <b ng-if="event.id != '168734'">home team</b><b ng-if="event.id == '168734'">either team</b> loses by <b>{{event.home_performer.sport.ggg}} </b> or more
             </div>
             <div class="singlebanner-right">
@@ -429,6 +429,12 @@
             <!--button ng-click="updateEtickets()" ng-class="{'active': etickets}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> EDelivery</button-->
            <!--  <button ng-click="updateFilter($event,1)"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Parking Only</button> -->
           </div>
+
+          <div class="col-xs-12 filter-row vertical-center hidden-xs hidden-sm govx-seui-header">
+            <a href="https://www.govx.com/?gxweba=gamehedge&gxwebb=gamehedge_seui&utm_source=gamehedge&utm_medium=text_link&utm_campaign=gamehedge_seui" target="_blank">Military Discount:</a> Up to 45% below average market price
+          </div>          
+
+
           <div class="col-xs-12 section-image hidden-xs hidden-sm" ng-if="sectionUrl != ''">
             <img ng-src="{{sectionUrl}}">
           </div>

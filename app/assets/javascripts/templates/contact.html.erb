@@ -1,5 +1,5 @@
 <section id="home">
-<div class="nl-top-bg" style="background-image: URL(<%= image_url 'green_background.png' %>);">
+<div class="nl-top-bg" ng-if="!$root.govx"  style="background-image: URL(<%= image_url 'green_background.png' %>);">
   <div class="container nl-container">
 
     <section id="hero">
@@ -55,7 +55,7 @@
             <section id="contact-us">
                 <div class="row">
                     <div class="col-md-12 text-center" style="font-size:18px; margin-bottom:10px;">
-                        <img width="40px" src="<%= image_url 'icon_home.png' %>"><div style="display:inline; margin-left:10px;">GameHedge 1460 Broadway New York, NY 10036</div>
+                        <img width="40px" src="<%= image_url 'icon_home.png' %>"><div style="display:inline; margin-left:10px;">GameHedge 1412 Broadway, 21st Floor, New York, NY 10018</div>
                     </div>
                 </div>
                 <div class="row">
@@ -64,7 +64,9 @@
                             <img width="100" src="<%= image_url 'phone_icon_grey.png' %>">
                         </div>
                         <div class="col-md-12 text-center">
-                            <h3><a href="tel:1-888-804-4330">(888) 804-4330</a></h3>
+                            <h3 ng-if="!$root.govx"><a href="tel:1-888-804-4330">(888) 804-4330</a></h3>
+                            <h3 ng-if="$root.govx"><a href="tel:1-800-294-6954">800-294-6954</a></h3>
+
                         </div>
                     </div>
                     <div class="col-md-6">

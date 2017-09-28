@@ -32,10 +32,11 @@ controllers.controller('LoginController', function($scope,$rootScope,Auth,$locat
         }, function(error) {
             // Authentication failed...
             //console.log("failed");
+            //console.log(error);
             $rootScope.user = undefined;
             $rootScope.isLoggedin = false;
             $scope.logging_in = false;
-            swal("Error", "Email or password incorrect. Please check amd try again.", "error");
+            swal("Error", "Email or password incorrect. Please check and try again.", "error");
         });
 
         $scope.$on('devise:login', function(event, currentUser) {
@@ -61,6 +62,8 @@ controllers.controller('LoginController', function($scope,$rootScope,Auth,$locat
             email: $scope.email
         };
         
+//console.log($scope.email);
+
         Auth.sendResetPasswordInstructions(parameters).then(function() {
             $scope.sending_password = false;
             swal("Request submitted", "You will be receiving an email with the recovery password instructions shortly.", "success");

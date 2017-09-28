@@ -18,7 +18,7 @@ class TicketEvolutionService
       @longitude = params[:longitude]
       @geolocated = params[:geolocated]
       @office_id = 3100;
-      
+       
       @connection = TicketEvolution::Connection.new({
           :token => '5bfd4b6110681d224a8c1fa6333f375f',       # => (required) The API token, used to identify you
           :secret => 'g3iR2RLeuzQA9vhDGfw5hRtGMnMDsimyOfQAJ4bi',      # => (required) The API secret, used to sign requests
@@ -48,18 +48,23 @@ class TicketEvolutionService
         #@events = Order.all
         puts "Updating events began"
         Sport.all.order(:id).each do |s|
-          puts String(s.name)
-          @events = @connection.events.list({:category_id => s.te_uid, :per_page => 10000000})
+  (1..5).each do |bq|
+
+          puts String(s.name) + " Page "+String(bq)
+          @events = @connection.events.list({:category_id => s.te_uid, :per_page => 100, :page => bq})
           @events.each do |e|
+            puts "Working on "+String(s.name)+" event: " + String(e.id)
+            puts "["+String(e.id)+"] "+String(e.name)
+            puts "["+String(e.id)+"] "+ "Total performances: "+String(e.performances.count)
             if e.performances.count == 0
-              puts "Not added. Event with no performers."
+              puts "["+String(e.id)+"] "+ "Not added. Event with no performers."
             else
               is_home = true
               primaries = 0
               e.performances.each do |p|
                 if p.primary == true
                   if Performer.where(te_uid: p.performer.id).first == nil
-                    puts "Not a home game"
+                    #puts "Not a home game"
                     is_home = false
                   end
                   primaries += 1
@@ -69,9 +74,9 @@ class TicketEvolutionService
                 if is_home == true
                   stop = false
                   if e.performances.count == 2 && (Performer.where(te_uid: e.performances[0].performer.id).first == nil || Performer.where(te_uid: e.performances[1].performer.id).first == nil)
-                    puts "Not added. One of the performers doesn't belong to our database."
+                    puts "["+String(e.id)+"] " + "Not added. One of the performers doesn't belong to our database."
                   elsif e.performances.count == 1 && (Performer.where(te_uid: e.performances[0].performer.id).first == nil)
-                    puts "Not added. One of the performers doesn't belong to our database."
+                    puts "["+String(e.id)+"] " + "Not added. One of the performers doesn't belong to our database."
                   else
                     name = (e.name.gsub '/', '-')
                     te_uid = e.id
@@ -87,7 +92,7 @@ class TicketEvolutionService
                     venue_id = nil
                     ven = Venue.where(te_uid: te_venue_id).first
                     if ven == nil
-                      puts "Adding venue"
+                      puts "["+String(e.id)+"] "+ "Adding venue"
                       @venue = @connection.venues.show(te_venue_id)
                       Venue.create(name: @venue.name, address: @venue.address, te_uid: @venue.id, location: @venue.location )
                       ven = Venue.where(te_uid: te_venue_id).first
@@ -99,17 +104,17 @@ class TicketEvolutionService
                         if p.primary == true
                           te_performer_home_id = p.performer.id
                           home_performer_id = @performer.id
-                          puts "primary"
+                          puts "["+String(e.id)+"] "+ "primary"
                         else
                           te_performer_visit_id = p.performer.id
                           away_performer_id = @performer.id
-                          puts "not primary"
+                          puts "["+String(e.id)+"] " + "not primary"
                         end
                         sport_id = @performer.sport.id
-                        puts "exist on db"
-                        puts e.id
+                        puts "["+String(e.id)+"] "+ "exist on db"
+                        #puts e.id
                       else
-                        puts "doesnt exist on db"
+                        puts "["+String(e.id)+"] "+ "doesnt exist on db"
                       end
                     end
                     if Event.where(te_uid: e.id).first == nil
@@ -128,7 +133,7 @@ class TicketEvolutionService
                         venue_configuration_id: venue_configuration_id,
                         url: '/events/' + String(te_uid) + '/' + ((name.downcase.gsub ' ', '-') + "-tickets")
                       )
-                      puts "Doesn't exist. Event Created " + String(e.name)
+                      puts "["+String(e.id)+"] " + "Doesn't exist. Event Created " + String(e.name)
                     else
                       @event = Event.where(te_uid: e.id).first
                       @event.te_uid = te_uid
@@ -146,15 +151,16 @@ class TicketEvolutionService
                       @event.slug = ((name.downcase.gsub ' ', '-') + "-tickets"),
                       @event.url = '/events/' + String(te_uid) + '/' + ((name.downcase.gsub ' ', '-') + "-tickets")
                       @event.save
-                      puts "Exists. Event Updated " + String(e.name)
+                      puts "["+String(e.id)+"] " + "Exists. Event Updated " + String(e.name)
                     end
                   end
                 end
               else
-                "No home team or more than one"
+                puts "["+String(e.id)+"] "  + "No home team or more than one"
               end
             end
           end
+  end        
         end
         puts "Update completed"
       else

@@ -30,7 +30,7 @@ controllers.controller('ConfirmController', function($scope,$rootScope,$http,Aut
 
 
 
-				
+				if(!$rootScope.govx){				
 					Moengage.track_event('Order Complete', {'url': window.location.href , 
 						'event_date_time': $scope.order.event_date, 
 						'event_location_addr': $scope.order.event_location, 
@@ -40,6 +40,25 @@ controllers.controller('ConfirmController', function($scope,$rootScope,$http,Aut
 						'ticket_section': $scope.order.ticket_section,
 						'order_total': $scope.order.total
 					});
+				}
+
+				
+					mixpanel.track("Order Complete", {"OrderID": $scope.order.te_order_id, "order_total": $scope.order.total});
+
+					//console.log('ht:'+$scope.order.event_name);					
+					//console.dir('o:'+$scope.order);					
+					//console.log('ht:'+$scope.order.event_home_team);
+					//console.log('at:'+$scope.order.event_away_team);
+					
+
+					$rootScope.tmpPerformer = '';
+					if ($scope.order.event_name.indexOf('Baltimore Ravens') !== -1){
+						$rootScope.tmpPerformer = 'ravens';						
+					}
+					if ($scope.order.event_name.indexOf('Pittsburgh Steelers') !== -1){
+						$rootScope.tmpPerformer = 'steelers';						
+					}
+
 
 
 					fbq('track', 'Purchase', {
