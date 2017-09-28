@@ -75,6 +75,7 @@
 					<div class="gx-ads" ng-if="$root.govx">
 					<h3>DON'T FORGET YOUR DISCOUNTED GEAR!</h3>
 					
+					<div ng-if="$root.tmpPerformer == 'ravens'" >
 						<div class="gx-product">
 							<a href="https://www.govx.com/p/44037/nfl-adventure-wagon?gxweba=gamehedge&gxwebb=ravens_confirmation&utm_source=gamehedge&utm_medium=ravens_confirmation&utm_campaign=gamehedge_ravens_confirmation">
 								<img src="<%= image_url 'ravens_wagon.jpg' %>"></img>
@@ -96,9 +97,12 @@
 							</a>
 						</div>
 						<div class="sep"></div>
-					
+					</div>
 
+					<div ng-if="$root.tmpPerformer == 'steelers'" >
+						Steelers
 
+					</div>
 
 
 						<div class="gx-travel">
