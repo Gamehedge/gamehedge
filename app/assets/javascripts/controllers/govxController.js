@@ -370,7 +370,9 @@ $timeout(function () {
             });
             $('.redirect-button').click(function(){
                 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-
+                    var vid = $(this).parents().eq('2').attr('data-ticketid');
+                    var val = $(this).parents().eq('2').find('select').val()
+                    $scope.relocateURL(vid,val);
                 }else{
                     var vid = $(this).parents().eq('2').attr('data-ticketid');
                     var val = $(this).parents().eq('2').find('select').val()
@@ -513,7 +515,9 @@ $timeout(function () {
             });
             $('.redirect-button').click(function(){
                 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-
+                    var vid = $(this).parents().eq('2').attr('data-ticketid');
+                    var val = $(this).parents().eq('2').find('select').val()
+                    $scope.relocateURL(vid,val);
                 }else{
                     var vid = $(this).parents().eq('2').attr('data-ticketid');
                     var val = $(this).parents().eq('2').find('select').val()
