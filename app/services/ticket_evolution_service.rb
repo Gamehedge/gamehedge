@@ -48,7 +48,7 @@ class TicketEvolutionService
         #@events = Order.all
         puts "Updating events began"
         Sport.all.order(:id).each do |s|
-  (1..10).each do |bq|
+  (1..5).each do |bq|
 
           puts String(s.name) + " Page "+String(bq)
           @events = @connection.events.list({:category_id => s.te_uid, :per_page => 100, :page => bq})
