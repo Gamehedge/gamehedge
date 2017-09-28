@@ -68659,7 +68659,7 @@ controllers.controller('ConfirmController', function($scope,$rootScope,$http,Aut
 					mixpanel.track("Order Complete", {"OrderID": $scope.order.te_order_id, "order_total": $scope.order.total});
 
 					console.log('ht:'+$scope.order.event_name);					
-					console.log('o:'+$scope.order);					
+					console.dir('o:'+$scope.order);					
 					console.log('ht:'+$scope.order.event_home_team);
 					console.log('at:'+$scope.order.event_away_team);
 					
