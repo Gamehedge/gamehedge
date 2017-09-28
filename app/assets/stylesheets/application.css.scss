@@ -2420,6 +2420,7 @@ a {
     color: #000;
     clear: both;
     margin-bottom: 14px;
+    font-family: geomanist-medium,Helvetica,sans-serif;
 }
 .gx-ads div{
     width: 23%;
@@ -2436,7 +2437,9 @@ a {
     display: block;
     width: 100%;
 }
-    
+.gx-travel{
+    margin-top: 50px;
+}    
     
 
 .qtip-checkout .qtip-title{
@@ -7520,6 +7523,10 @@ main#admin #order-stats .stat-item span {
         padding-right: 30px;
         padding-left: 30px;
     }
+    .logo-image{
+        height: 58px;
+        width: inherit;
+    }    
 }
 
 
