@@ -17730,7 +17730,7 @@ a {
 }
 
 /* line 2426, /Users/dan/Documents/Git/gamehedge-dev.com/gamehedge/app/assets/stylesheets/application.css.scss */
-.gx-ads div {
+.gx-ads .gx-product {
   width: 23%;
   float: left;
   margin-left: 1%;
