@@ -150,7 +150,11 @@ controllers.controller('ConfirmController', function($scope,$rootScope,$http,Aut
 	$rootScope.darkHeader = true;
 	$rootScope.noFooter = true;
 	$scope.order_success = false;
-	$scope.first_time = ($location.search()['first_time'] === 'true');
+	//$scope.first_time = ($location.search()['first_time'] === 'true');
+	//Password issue fix
+	$scope.first_time = ($location.search()['new_client'] === 'true');
+	
+//	console.dir($location);
 	$scope.loading = true;
 	$scope.password = "";
 	$scope.checkLogin();
