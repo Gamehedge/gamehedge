@@ -2622,6 +2622,9 @@ a {
 #confirmation .update-password, #confirmation .actions, #confirmation .field{
     text-align: center;
 }
+#confirmation .update-password{
+    border-top: 3px solid #d8d8d8;
+}
 #confirmation input{
     height: 30px;
     border-radius: 5px;
