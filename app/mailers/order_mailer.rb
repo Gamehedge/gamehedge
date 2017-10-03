@@ -4,7 +4,7 @@ class OrderMailer < ApplicationMailer
     def refund_available(_id)
         @order = Order.where(:id => _id).first
         @user = Client.where(:te_uid => @order.client_id).first
-        mail(to: @user.email, subject: "Refund Available")
+        mail(to: @user.email, subject: "GameHedge Refund Available")
     end
 
     def refund_requested(_id)
