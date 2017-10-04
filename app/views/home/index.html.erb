@@ -309,9 +309,9 @@
 
                 <div class="press" ng-show="$root.locat != '/'">
                     <a ng-if="!$root.govx" href="/testimonials">Testimonials</a>
-                    <a ng-if="$root.govx" href="/how-it-works">How it works</a>
+                    <a ng-if="$root.govx" href="#" id="govx_explanation2">How it works</a>
                 </div>
-                
+
                 </div>
             <div class="navbar-myaccount col-md-2 hidden-sm hidden-xs" ng-show="!$root.isOrder">
                 <div class="dropdown" ng-show="$root.isLoggedin">
@@ -336,6 +336,50 @@
     <div class="view-container">
         <div ng-view class="view-frame animate-view"></div>
     </div>
+
+
+
+
+<div class="ggg-tooltip" style="display: none; max-width: 300px;" id="govx-tooltip-header">
+<div>        
+<p>
+For NFL, if the Home Team loses by 17 points or more, we'll refund you 50% of the ticket price!
+</p>
+</div>
+</div>
+
+<script>
+jQuery( document ).ready(function() {
+										
+    									jQuery("#govx_explanation2").qtip({											
+         									hide: {												 
+             								    fixed: true,
+                								delay: 300
+            								},
+											
+										      position: {
+        									  	my: 'top center', 
+        										  at: 'bottom center', 
+        										  target: jQuery('#govx_explanation2')
+    										  },	
+											    style: {
+     										     classes: 'qtip-light qtip-shadow qtip-checkout'
+    										  },										
+        									content: {
+											      	title: 'How it works',
+            									text: jQuery("#govx-tooltip-header")
+        									},
+    											events: {
+       										   show: function(event, api) {
+
+        										}
+    	  									}
+
+    									
+										});
+										
+									})
+</script>
 
 
 

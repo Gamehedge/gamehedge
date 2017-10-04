@@ -72,7 +72,7 @@ controllers.controller('ConfirmController', function($scope,$rootScope,$http,Aut
 
 	$scope.updatePassword = function(){
         
-		if($scope.password == $scope.confirm_password && $scope.password != ""){
+		if($scope.password == $scope.confirm_password && $scope.password != "" && $scope.password.length>=6){
 			$http({
 		        method: 'POST',
 		        url: '/clients/update_password',
@@ -89,6 +89,9 @@ controllers.controller('ConfirmController', function($scope,$rootScope,$http,Aut
 		}
 		else if($scope.password == ""){
 			swal("Error", "Password cannot be empty", "warning");
+		}
+		else if($scope.password.length < 6){
+			swal("Error", "Password too short - minimum length is 6 characters", "warning");			
 		}
 		else{
 			swal("Error", "Both password fields must be the same", "warning");
