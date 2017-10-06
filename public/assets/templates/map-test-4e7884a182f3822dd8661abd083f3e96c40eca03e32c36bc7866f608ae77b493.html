@@ -1,17 +1,3 @@
-<div class="govxnl-overlay" ng-if="!$root.govxlegal"></div>
-  
-  <div class="govxnl" ng-if="!$root.govxlegal">
-    <div class="govxnl-header">
-      Log in to your GovX account
-    </div>
-    <div class="govxnl-body">
-      <span>Log in or create an account</span>
-      <span>with GovX to access the discounts.</span>
-      <a href="https://www.govx.com/?gxweba=gamehedge&gxwebb=gamehedge_site&utm_source=gamehedge&utm_medium=text_link&utm_campaign=gamehedge_site">Log in or sign up now</a>
-    </div>
-  </div>
-
-
 <div id="home" class="event-container">
   
   <section id="game_info">
@@ -44,7 +30,7 @@
             <p class="second-line" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') != (compareDate | date:'hh:mm:ss' : 'UTC')">{{event.occurs_at | date:'hh:mm a' : 'UTC'| uppercase}} at <span class="blue-span">{{event.venue.name}}</span> - {{event.location}}</p>
             <p class="second-line" ng-if="(event.occurs_at | date:'hh:mm:ss' : 'UTC') == (compareDate | date:'hh:mm:ss' : 'UTC')">TBD at <span class="blue-span">{{event.venue.name}}</span> - {{event.location}}</p>
 
-            <p class="second-line breadcrumbs">HOME <i class="fa fa-angle-right" aria-hidden="true"></i> {{event.sport.name | uppercase}} <i class="fa fa-angle-right" aria-hidden="true"></i> {{event.home_performer.name | uppercase}}</p>
+            <p class="second-line breadcrumbs"><a href='/'>HOME</a> <i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{event.sport.url}}">{{event.sport.name | uppercase}}</a> <i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{event.home_performer.url}}">{{event.home_performer.name | uppercase}}</a></p>
 
           </span>
         </div>
@@ -53,10 +39,9 @@
 
 
 
-<div class="hidden-xs hidden-sm" style="width: 21%;float: left;padding-top: 22px;line-height: 20px;text-align: right;color: green;">
+<div class="hidden-xs hidden-sm" style="width: 21%;float: left;padding-top: 21px;line-height: 20px;text-align: right;color: green;">
   <span style="display: block;">Millions of tickets. Best Prices.</span>
   <span style="display: block;">+ Our Good Game Guarantee</span>
-
 </div>
 
 
@@ -156,7 +141,7 @@
 
     <div class="splash-logo">
       <center>
-        <img alt="GameHedge" src="/assets/govx-1e9d30a5f63817974e9f593448f87271ede198e0a7bfb085e0601ec376c2c28e.png">
+        <img alt="GameHedge" src="/assets/gamehedge_logo_white-d6ced5ecb6527a6329ba2b48b054c2b0587a30375a9cbd9f9783fb1d4ae4d3e8.png">
       </center>   
     </div>
 
@@ -365,7 +350,7 @@
         var tvid = $('#tvid').val();
         var tval = $('#selectVal').val();
         var img = $("#dialog_img").attr('src');
-        window.location.href = location.protocol+'//'+document.domain+'/govx-order/'+tvid+'?amount='+tval+'&img='+img;
+        window.location.href = location.protocol+'//'+document.domain+'/order/'+tvid+'?amount='+tval+'&img='+img;
       }
     </script>
   </div>
@@ -378,7 +363,7 @@
           <div id="mapkey">
             <div id="seatzone_map"></div>
             <div id="map_key" class="hidden"></div>
-            <button id="reset-map-button" ng-click="resetMap()">Reset Map</button>
+            <button id="reset-map-button" ng-click="resetMap()">Reset</button>
           </div>
         </div>
       </div>
@@ -444,14 +429,12 @@
             <!--button ng-click="updateEtickets()" ng-class="{'active': etickets}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> EDelivery</button-->
            <!--  <button ng-click="updateFilter($event,1)"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Parking Only</button> -->
           </div>
-          <div class="col-xs-12 filter-row vertical-center hidden-xs hidden-sm govx-seui-header" style="justify-content: inherit;">
-            <div style="float: left; width: 30%; text-align: left;">
-                      <img src="/assets/govx-1e9d30a5f63817974e9f593448f87271ede198e0a7bfb085e0601ec376c2c28e.png" style="height: 30px;margin-top: 5px;margin-bottom: 5px;">
-            </div>
-            <div style="float: right; width: 68%; text-align: left;" id="govx_explanation">
-            Members: Save up to 45%
-            <u>Learn more</u>&nbsp;</div>
+
+          <div class="col-xs-12 filter-row vertical-center hidden-xs hidden-sm govx-seui-header">
+            <a href="https://www.govx.com/?gxweba=gamehedge&gxwebb=gamehedge_seui&utm_source=gamehedge&utm_medium=text_link&utm_campaign=gamehedge_seui" target="_blank">GovX Military Discount?</a> GovX Members Receive 10% Off GameHedge Prices
           </div>          
+
+
           <div class="col-xs-12 section-image hidden-xs hidden-sm" ng-if="sectionUrl != ''">
             <img ng-src="{{sectionUrl}}">
           </div>
@@ -520,7 +503,7 @@ function displayPhoneInfo2(){
     );
 */
 
-  //$('#phoneDialog').removeClass('m-invis');
+  $('#phoneDialog').removeClass('m-invis');
 }
 function closePhoneInfo2(){
   $('#phoneDialog').addClass('m-invis');
@@ -531,7 +514,7 @@ function closePhoneInfo2(){
 <i class="fa fa-times" aria-hidden="true" onclick="closePhoneInfo2();"></i>
 <center>
   <p>Call us and we'll beat any price and fees by 10%!</p>
-  <div style=""><a href="tel:1-800-294-6954">800-294-6954</a></div>
+  <div style=""><a href="tel:1-888-804-4330">888-804-4330</a></div>
 </center>  
 </div>
 
@@ -555,47 +538,3 @@ $( "body" ).on( "touchstart", '.ui-dialog-titlebar',function() {
 <script>
 mixpanel.track("SingleEventPage Visit");
 </script>
-
-
-
-<script>
-jQuery( document ).ready(function() {
-										
-    									jQuery("#govx_explanation").qtip({											
-         									hide: {												 
-             								    fixed: true,
-                								delay: 300
-            								},
-											
-										      position: {
-        									  	my: 'right center', 
-        										  at: 'left center', 
-        										  target: jQuery('#govx_explanation')
-    										  },	
-											    style: {
-     										     classes: 'qtip-light qtip-shadow qtip-checkout'
-    										  },										
-        									content: {
-											      	title: 'GovX Discount',
-            									text: jQuery("#govx-tooltip")
-        									},
-    											events: {
-       										   show: function(event, api) {
-
-        										}
-    	  									}
-
-    									
-										});
-										
-									})
-</script>
-
-
-<div class="ggg-tooltip" style="display: none; max-width: 300px;" id="govx-tooltip">
-<div>        
-<p>GameHedge is proud to provide GovX members with an additional discount on the best tickets in the secondary market.</p>
-
-<p>Through this partnership, <b>GovX members will receive their discount at checkout while still benefiting from the Good Game Guarantee</b>. With affordable tickets and the ability to request a refund after a bad game, GameHedge’s goal is to provide you with the best game day experience possible.</p>
-</div>
-</div>
