@@ -2,12 +2,20 @@
   
   <div class="govxnl" ng-if="!$root.govxlegal">
     <div class="govxnl-header">
-      Log in to your GovX account
+      <span ng-if="!$root.oldbrowser">Log in to your GovX account</span>
+      <span ng-if="$root.oldbrowser">Your browser is out of date</span>
+
     </div>
     <div class="govxnl-body">
-      <span>Log in or create an account</span>
-      <span>with GovX to access the discounts.</span>
-      <a href="https://www.govx.com/?gxweba=gamehedge&gxwebb=gamehedge_site&utm_source=gamehedge&utm_medium=text_link&utm_campaign=gamehedge_site">Log in or sign up now</a>
+      <span ng-if="!$root.oldbrowser">Log in or create an account</span>
+      <span ng-if="$root.oldbrowser">Update your browser</span>
+
+      <span ng-if="!$root.oldbrowser">with GovX to access the discounts.</span>
+      <span ng-if="$root.oldbrowser">to view this website correctly.</span>
+
+      <a  ng-if="!$root.oldbrowser" href="https://www.govx.com/?gxweba=gamehedge&gxwebb=gamehedge_site&utm_source=gamehedge&utm_medium=text_link&utm_campaign=gamehedge_site">Log in or sign up now</a>
+      <a  ng-if="$root.oldbrowser" href="http://www.outdatedbrowser.com">UPDATE MY BROWSER NOW</a>
+
     </div>
   </div>
 
