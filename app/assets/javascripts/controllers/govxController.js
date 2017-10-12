@@ -888,6 +888,16 @@ $timeout(function () {
 
 
 
+        var uag=navigator.userAgent,temg,Mg=uag.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || []; 
+        if(/trident/i.test(Mg[1])){
+            temg=/\brv[ :]+(\d+)/g.exec(uag) || []; 
+            if (temg[1] != undefined){    
+                console.log(temg[1]);
+            }                
+        }       
+        
+
+
     //The global variable locat gets the current location.path
     Auth.currentUser().then(function(user) {
         // User was logged in, or Devise returned
