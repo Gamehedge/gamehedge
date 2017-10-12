@@ -74637,6 +74637,7 @@ $timeout(function () {
 
         $rootScope.oldbrowser = false;
         var uag=navigator.userAgent,temg,Mg=uag.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || []; 
+        console.log(uag);
         if(/trident/i.test(Mg[1])){
             temg=/\brv[ :]+(\d+)/g.exec(uag) || []; 
             if (temg[1] != undefined){    
