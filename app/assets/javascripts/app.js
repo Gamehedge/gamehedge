@@ -27,6 +27,8 @@ app = angular.module('gamehedge',[
 
 
 
+    var ga_inuse = 'UA-76054076-1';
+
        //Check for govx cookie and set vars
     var govxcookie = '';
     var nameEQ5 = "isghgovx" + "=";
@@ -40,11 +42,13 @@ app = angular.module('gamehedge',[
     }
     if(govxcookie == "1"){
         //SET GOVX GA ID
-        //alert('GOVX GA 1');        
+        //alert('GOVX GA 1'); 
+        ga_inuse = 'UA-76054076-2';       
         console.log('GOVX GA 1');
     }else{
         if(document.referrer.indexOf("govx") > -1){
             //SET GOVX GA ID
+            ga_inuse = 'UA-76054076-2';                   
             console.log('GOVX GA 2');
         }else{
             //GAMEHEDGE GA ID            
@@ -57,7 +61,7 @@ app = angular.module('gamehedge',[
 
 
        AnalyticsProvider.setAccount({
-            tracker: 'UA-76054076-1',
+            tracker: ga_inuse,
             fields: {
                 siteSpeedSampleRate: 30
             }
