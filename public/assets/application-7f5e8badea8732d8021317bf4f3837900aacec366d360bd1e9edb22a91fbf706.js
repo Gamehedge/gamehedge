@@ -74638,14 +74638,21 @@ $timeout(function () {
         $rootScope.oldbrowser = false;
         var uag=navigator.userAgent,temg,Mg=uag.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || []; 
         console.log(uag);
+        
         if(/trident/i.test(Mg[1])){
+            /*
             temg=/\brv[ :]+(\d+)/g.exec(uag) || []; 
             if (temg[1] != undefined){    
                 console.log(temg[1]);
                 if ((temg[1] == '10') || (temg[1] == '9')){
                     $rootScope.oldbrowser = true;
                 }
-            }                
+            } 
+            */
+            if((uag.indexOf("MSIE 10") !== -1) || (uag.indexOf("MSIE 9") !== -1)){
+                console.log('Old browser');
+                $rootScope.oldbrowser = true;                
+            }
         }       
         
 
