@@ -887,6 +887,19 @@ $timeout(function () {
 
 
 
+        $rootScope.oldbrowser = false;
+        /*
+        var uag=navigator.userAgent,temg,Mg=uag.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || []; 
+        console.log(uag);
+        
+        if(/trident/i.test(Mg[1])){
+            if((uag.indexOf("MSIE 10") !== -1) || (uag.indexOf("MSIE 9") !== -1)){
+                console.log('Old browser');
+                $rootScope.oldbrowser = true;                
+            }
+        }       
+        */
+
 
     //The global variable locat gets the current location.path
     Auth.currentUser().then(function(user) {
