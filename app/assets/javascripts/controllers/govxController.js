@@ -412,7 +412,7 @@ $timeout(function () {
         
         $http({
             method: 'GET',
-            url: '/tickets/list/?id='+$routeParams.eventId,
+            url: '/tickets/list/?id='+$routeParams.eventId+'&govx=1',
         }).then(function successCallback(response) {
             $scope.tickets = response.data.ticket_groups;
             $scope.loading = false;
@@ -862,7 +862,7 @@ $timeout(function () {
     //Check if legal or not
     if (!$rootScope.govx){
 //        alert(document.referrer);
-        if(document.referrer.indexOf("govx") > -1){
+        if(document.referrer.indexOf("govx") >= -1){
             $rootScope.govx = true;            
             $rootScope.govxlegal = true;
             

@@ -10,7 +10,7 @@ task :update_events => :environment do
   puts "Updating orders state"
   Order.all.each do |o|
   	if o.order_status != "rejected" && o.order_status != "completed"
-  		a = TicketEvolutionService.new({:type => "orders", :id => o.te_order_id}).show
+  		a = TicketEvolutionService.new({:type => "orders", :id => o.te_order_id, :core_account => "1"}).show
   		o.order_status = a["state"]
   		o.save
   	end

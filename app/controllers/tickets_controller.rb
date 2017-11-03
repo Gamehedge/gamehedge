@@ -3,10 +3,49 @@ class TicketsController < ActionController::Base
   	#@events = TicketEvolutionService.new({:type => "tickets", :id => request.GET["id"]}).list
   	#render json: @events
     
+    puts "URL: "+request.original_url
+
+    #puts "GOVX PARAM:"+request.GET["govx"]
+
+    govxrequest = "0";
+    if(params.has_key?(:govx))
+      puts "THIS IS GOVX"
+      govxrequest = "1"
+
+      if (cookies['govxss'].to_s == "1")
+
+        puts "GOVX COOKIE EXISTS"
+        
+      else
+        puts "SETTING GOVX COOKIE"
+        cookies['govxss'] = {
+          :value => '1',
+          :expires => 1.hour.from_now
+        }  
+      end
+
+    else
+      puts "THIS IS NOT GOVX"
+      govxrequest = "0"
+    end  
+
+    #if request.GET["govx"] == nil
+    #  govx_request = 0;  
+    #else
+    #  govx_request = 1;
+    #end
+
+    puts "GOVX: "+govxrequest
+
     ##Start API Signature generator
     require 'base64'
     require 'openssl'
-    secret = "g3iR2RLeuzQA9vhDGfw5hRtGMnMDsimyOfQAJ4bi"
+
+    if (govxrequest == "1")
+      secret = "g3iR2RLeuzQA9vhDGfw5hRtGMnMDsimyOfQAJ4bi"   #OLD CORE ACCOUNT
+    else
+      secret = "SsHigZENtzhrkpbXkhRLq95+AKK4HXSQKu2jMZF2"   #NEW CORE ACCOUNT      
+    end
     request = "GET api.ticketevolution.com/v9/ticket_groups?event_id=" + params[:id] + "&lightweight=true"
     digest = OpenSSL::Digest::Digest.new('sha256')
     signature = Base64.encode64(OpenSSL::HMAC.digest(digest, secret, request)).chomp
@@ -16,7 +55,12 @@ class TicketsController < ActionController::Base
     
     req = Net::HTTP::Get.new(url.to_s)
     req.add_field("X-Signature", signature.to_s)
-    req.add_field("X-Token", "5bfd4b6110681d224a8c1fa6333f375f")
+
+    if (govxrequest == "1")
+      req.add_field("X-Token", "5bfd4b6110681d224a8c1fa6333f375f")   #OLD CORE ACCOUNT
+    else 
+      req.add_field("X-Token", "bd2d4654ede63cb9d2434b1849890642")   #NEW CORE ACCOUNT         
+    end 
     req.add_field("Accept-Encoding", "gzip")
     req.add_field("User-Agent", "tickets (gzip)")
     res = Net::HTTP.new(url.host, url.port)
@@ -27,7 +71,12 @@ class TicketsController < ActionController::Base
       
   end
   def show
-  	@event = TicketEvolutionService.new({:type => "tickets", :id => request.GET["id"]}).show
+
+    core_account_use = "2"
+    if (cookies['govxss'].to_s == "1")
+      core_account_use = "1"
+    end
+  	@event = TicketEvolutionService.new({:type => "tickets", :id => request.GET["id"], :core_account => core_account_use}).show
   	render json: @event
   end
 end

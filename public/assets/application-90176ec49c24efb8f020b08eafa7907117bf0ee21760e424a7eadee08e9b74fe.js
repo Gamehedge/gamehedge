@@ -68444,7 +68444,7 @@ app = angular.module('gamehedge',[
         ga_inuse = 'UA-76054076-2';       
         console.log('GOVX GA 1');
     }else{
-        if(document.referrer.indexOf("govx") > -1){
+        if(document.referrer.indexOf("govx") >= -1){
             //SET GOVX GA ID
             ga_inuse = 'UA-76054076-2';                   
             console.log('GOVX GA 2');
@@ -74160,7 +74160,7 @@ $timeout(function () {
         
         $http({
             method: 'GET',
-            url: '/tickets/list/?id='+$routeParams.eventId,
+            url: '/tickets/list/?id='+$routeParams.eventId+'&govx=1',
         }).then(function successCallback(response) {
             $scope.tickets = response.data.ticket_groups;
             $scope.loading = false;
@@ -74610,7 +74610,7 @@ $timeout(function () {
     //Check if legal or not
     if (!$rootScope.govx){
 //        alert(document.referrer);
-        if(document.referrer.indexOf("govx") > -1){
+        if(document.referrer.indexOf("govx") >= -1){
             $rootScope.govx = true;            
             $rootScope.govxlegal = true;
             
