@@ -70701,7 +70701,7 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
         //console.log(credentials);
         Auth.login(credentials, config).then(function(user) {
 			//console.log(user); // => {id: 1, ect: '...'}
-			location.reload(true);
+			//location.reload(true);
         }, function(error) {
             // Authentication failed...
             //console.log("failed");
@@ -70718,7 +70718,7 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
             $rootScope.isLoggedin = true;
 			$scope.getClient();
 			
-			//location.reload(true);
+			location.reload(true);
         });
 
         $scope.$on('devise:new-session', function(event, currentUser) {
@@ -72784,7 +72784,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
         //console.log(credentials);
         Auth.login(credentials, config).then(function(user) {
 			//console.log(user); // => {id: 1, ect: '...'}
-			location.reload(true);
+			//location.reload(true);
 			//alert('2');
         }, function(error) {
             // Authentication failed...
@@ -72802,7 +72802,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
             $rootScope.isLoggedin = true;
 			$scope.getClient();
 			//alert('1');
-			//location.reload(true);
+			location.reload(true);
         });
 
         $scope.$on('devise:new-session', function(event, currentUser) {
@@ -73049,10 +73049,17 @@ controllers.controller('OrderHistoryController', function($scope,$rootScope,$htt
 			confirmButtonText: "Yes, request refund!",
 			closeOnConfirm: false 
 		},function(){
+
+			core_account_use = 1;
+			if(!$rootScope.govx){
+				core_account_use = 2;
+			}
+	
+
 			$http({
 	            method: 'POST',
 	            url: '/orders/request_refund/',
-	            data: {id: oid},
+	            data: {id: oid, core_account: core_account_use},
 	        }).then(function successCallback(response) {
 	        	//console.log(response);
 	        	if(response.data == "success"){

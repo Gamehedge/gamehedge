@@ -98,10 +98,17 @@ controllers.controller('OrderHistoryController', function($scope,$rootScope,$htt
 			confirmButtonText: "Yes, request refund!",
 			closeOnConfirm: false 
 		},function(){
+
+			core_account_use = 1;
+			if(!$rootScope.govx){
+				core_account_use = 2;
+			}
+	
+
 			$http({
 	            method: 'POST',
 	            url: '/orders/request_refund/',
-	            data: {id: oid},
+	            data: {id: oid, core_account: core_account_use},
 	        }).then(function successCallback(response) {
 	        	//console.log(response);
 	        	if(response.data == "success"){

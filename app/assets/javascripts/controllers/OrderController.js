@@ -1095,7 +1095,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
         //console.log(credentials);
         Auth.login(credentials, config).then(function(user) {
 			//console.log(user); // => {id: 1, ect: '...'}
-			location.reload(true);
+			//location.reload(true);
 			//alert('2');
         }, function(error) {
             // Authentication failed...
@@ -1113,7 +1113,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
             $rootScope.isLoggedin = true;
 			$scope.getClient();
 			//alert('1');
-			//location.reload(true);
+			location.reload(true);
         });
 
         $scope.$on('devise:new-session', function(event, currentUser) {

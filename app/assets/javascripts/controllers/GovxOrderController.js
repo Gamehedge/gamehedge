@@ -1116,7 +1116,7 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
         //console.log(credentials);
         Auth.login(credentials, config).then(function(user) {
 			//console.log(user); // => {id: 1, ect: '...'}
-			location.reload(true);
+			//location.reload(true);
         }, function(error) {
             // Authentication failed...
             //console.log("failed");
@@ -1133,7 +1133,7 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
             $rootScope.isLoggedin = true;
 			$scope.getClient();
 			
-			//location.reload(true);
+			location.reload(true);
         });
 
         $scope.$on('devise:new-session', function(event, currentUser) {
