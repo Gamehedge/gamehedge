@@ -41,11 +41,13 @@ class OrdersController < ApplicationController
 		@ticket_notes = request.POST["ticket_notes"]
 		@sport_id = request.POST["sport_id"]
 
+		core_account_use = request.POST["core_account"]		
 		
-		core_account_use = "2"
-		if (cookies['govxss'].to_s == "1")
-		  core_account_use = "1"
-		end
+		#core_account_use = "2"
+		#if (cookies['govxss'].to_s == "1")
+		#  core_account_use = "1"
+		#end
+		puts "LOG: orders_controller_1: "+core_account_use + " -- COOKIE:"+cookies['govxss'].to_s;
 
         
         @order = TicketEvolutionService.new({id: @user_id, core_account: core_account_use}).createShipment({ address_id: @ship_address_id, 
@@ -110,11 +112,13 @@ class OrdersController < ApplicationController
 				order_data: @order.to_s,
 			)
 
-
-			core_account_use = "2"
-			if (cookies['govxss'].to_s == "1")
-			  core_account_use = "1"
+			if (core_account_use.to_s == "")
+				core_account_use = "2"
+				if (cookies['govxss'].to_s == "1")
+			  	core_account_use = "1"
+				end
 			end
+			puts "LOG: orders_controller_2"+core_account_use;
 
 			a = TicketEvolutionService.new({:type => "orders", :id => @order["id"], :core_account=> core_account_use}).show
 	  		o.order_status = a["state"]
@@ -124,12 +128,16 @@ class OrdersController < ApplicationController
     end
 
 	def list
-		
-		core_account_use = "2"
-		if (cookies['govxss'].to_s == "1")
-		  core_account_use = "1"
-		end
 
+		core_account_use = request.GET["core_account"]
+		if (core_account_use.to_s == "")			
+			core_account_use = "2"
+			if (cookies['govxss'].to_s == "1")
+		  	core_account_use = "1"
+			end
+		end
+		puts "LOG: orders_controller_3"+core_account_use;		
+		
     	@orders = TicketEvolutionService.new({:type => "orders", :id => request.GET["id"], :core_account => core_account_use}).list
   		render json: @orders
     end

@@ -1,11 +1,24 @@
 controllers = angular.module('gamehedge')
 
 controllers.controller('MemberController', function($scope,$rootScope,$http,$location,Auth){
-    $rootScope.showHeader = true;
+	$rootScope.showHeader = true;
+	
+	core_account_use = 1;
+	if(!$rootScope.govx){
+		core_account_use = 2;
+	}
+
+
     $scope.getClient = function(){
+		core_account_use = 1;
+		if(!$rootScope.govx){
+			core_account_use = 2;
+		}
+		
+		
 		$http({
 	        method: 'GET',
-	        url: '/clients/show?id='+$rootScope.user.te_uid,
+	        url: '/clients/show?id='+$rootScope.user.te_uid+'&core_account='+core_account_use,
 	    }).then(function successCallback(response) {
 	    	$scope.client = response.data.client;
 	    	//console.log("Client");
@@ -13,7 +26,24 @@ controllers.controller('MemberController', function($scope,$rootScope,$http,$loc
 	    	$scope.loading = false;
 	    }, function errorCallback(response) {
 	        //console.log(response);
-	    });
+		});
+		
+
+		/*
+		$http({
+			method: 'POST',
+			url: '/clients/show',
+			data: {
+				id: $rootScope.user.te_uid,
+				core_account: core_account_use,
+			},
+		}).then(function successCallback(response) {
+	    	$scope.client = response.data.client;
+	    	//console.log("Client");
+	    	//console.log($scope.client);
+	    	$scope.loading = false;
+		});
+		*/
 	}
 
 	$rootScope.darkHeader = true;

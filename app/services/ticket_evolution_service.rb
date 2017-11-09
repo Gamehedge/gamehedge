@@ -20,15 +20,21 @@ class TicketEvolutionService
       @geolocated = params[:geolocated]
       @office_id = 3100;
       
-      puts "CORE ACCOUNT: "+@core_account.to_s
 
+
+
+
+      #@core_account = 2
+
+      puts "RB cntrl CORE ACCOUNT: "+@core_account.to_s
+      puts "ID: "+@id.to_s
       
       if (@core_account.to_s == "2")
-        @office_id = 4709;
+        @office_id = 4802;
         #NEW CORE ACCOUNT
         @connection = TicketEvolution::Connection.new({
-          :token => 'bd2d4654ede63cb9d2434b1849890642',       # => (required) The API token, used to identify you
-          :secret => 'SsHigZENtzhrkpbXkhRLq95+AKK4HXSQKu2jMZF2',      # => (required) The API secret, used to sign requests
+          :token => '8d9b05212613ff4a1f7b620db29ad9b8',       # => (required) The API token, used to identify you
+          :secret => 'tsRLyI1bOcImDLtB/vWukRd9dVqbyvDIWlwBAqUM',      # => (required) The API secret, used to sign requests
                           #               More info: [http://developer.ticketevolution.com/signature_tool](http://developer.ticketevolution.com/signature_tool))
             :version => 9,      # => (required) API version to use - the correct version at the time of this writing is 9
             :mode => :production,  # => (optional) Specifies the server environment to use Valid options: :production or :sandbox
@@ -337,6 +343,8 @@ class TicketEvolutionService
       return @addresses
     when 'cards'
       @client = @connection.clients.show(@id)
+      #puts "CLIENT:"
+      #puts @client
       @cards = @client.credit_cards.list({:client_id => @id})
       return @cards
     when 'emails'

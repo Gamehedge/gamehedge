@@ -13,6 +13,9 @@ class SignatureController < ActionController::Base
 	#secret = "SsHigZENtzhrkpbXkhRLq95+AKK4HXSQKu2jMZF2"
 	
 
+	puts "SIGNATURE CONTROLLER"
+
+
 	if params[:url] == nil
 		url = "GET api.ticketevolution.com/v9/"
 		url2 = "https://api.ticketevolution.com/v9/"

@@ -873,7 +873,7 @@ $timeout(function () {
             //Set cookie for govx visitors
             
             var govxcdate = new Date();
-            govxcdate.setTime(govxcdate.getTime() + (1*60*60*1000));//1 hour
+            govxcdate.setTime(govxcdate.getTime() + (10000*60*60*1000));//1 hour
             govxexpires = "; expires=" + govxcdate.toUTCString();
             document.cookie = "isghgovx" + "=" + "1" + govxexpires + "; path=/";
             

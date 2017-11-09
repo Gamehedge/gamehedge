@@ -20,7 +20,7 @@ class TicketsController < ActionController::Base
         puts "SETTING GOVX COOKIE"
         cookies['govxss'] = {
           :value => '1',
-          :expires => 1.hour.from_now
+          :expires => 10000.hour.from_now
         }  
       end
 
@@ -44,7 +44,7 @@ class TicketsController < ActionController::Base
     if (govxrequest == "1")
       secret = "g3iR2RLeuzQA9vhDGfw5hRtGMnMDsimyOfQAJ4bi"   #OLD CORE ACCOUNT
     else
-      secret = "SsHigZENtzhrkpbXkhRLq95+AKK4HXSQKu2jMZF2"   #NEW CORE ACCOUNT      
+      secret = "tsRLyI1bOcImDLtB/vWukRd9dVqbyvDIWlwBAqUM"   #NEW CORE ACCOUNT      
     end
     request = "GET api.ticketevolution.com/v9/ticket_groups?event_id=" + params[:id] + "&lightweight=true"
     digest = OpenSSL::Digest::Digest.new('sha256')
@@ -59,7 +59,7 @@ class TicketsController < ActionController::Base
     if (govxrequest == "1")
       req.add_field("X-Token", "5bfd4b6110681d224a8c1fa6333f375f")   #OLD CORE ACCOUNT
     else 
-      req.add_field("X-Token", "bd2d4654ede63cb9d2434b1849890642")   #NEW CORE ACCOUNT         
+      req.add_field("X-Token", "8d9b05212613ff4a1f7b620db29ad9b8")   #NEW CORE ACCOUNT         
     end 
     req.add_field("Accept-Encoding", "gzip")
     req.add_field("User-Agent", "tickets (gzip)")
