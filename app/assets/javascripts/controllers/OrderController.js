@@ -1111,7 +1111,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
             $rootScope.isLoggedin = true;
 			$scope.getClient();
 			
-			location.reload();
+			location.reload(true);
         });
 
         $scope.$on('devise:new-session', function(event, currentUser) {

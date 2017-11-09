@@ -70717,7 +70717,7 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
             $rootScope.isLoggedin = true;
 			$scope.getClient();
 			
-			location.reload();
+			location.reload(true);
         });
 
         $scope.$on('devise:new-session', function(event, currentUser) {
@@ -71403,7 +71403,7 @@ controllers.controller('LoginController', function($scope,$rootScope,Auth,$locat
 	                //console.log(response);
 		        });
             
-                location.reload();
+                location.reload(true);
 
         }, function(error) {
             // Authentication failed...
@@ -72798,7 +72798,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
             $rootScope.isLoggedin = true;
 			$scope.getClient();
 			
-			location.reload();
+			location.reload(true);
         });
 
         $scope.$on('devise:new-session', function(event, currentUser) {

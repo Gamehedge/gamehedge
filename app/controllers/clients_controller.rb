@@ -19,6 +19,28 @@ class ClientsController < ActionController::Base
     @id = @client["id"]
     puts "CLIENT ID: " + @id.to_s
 
+    if (@id.to_s != "") 
+      if (core_account_use == "1" || core_account_use == "")
+        cookies['govxss'] = {
+          :value => '1',
+          :expires => 10000.hour.from_now
+        }  
+        cookies['isghgovx'] = {
+          :value => '1',
+          :expires => 10000.hour.from_now
+        }  
+      else
+        cookies['govxss'] = {
+          :value => '1',
+          :expires => -1.hour.from_now
+        }  
+        cookies['isghgovx'] = {
+          :value => '1',
+          :expires => -1.hour.from_now
+        }  
+      end
+    end
+
 
     if (@id.to_s == "") #WRONG CORE ACCOUNT. SWIPING ACCOUNTS!
       if (core_account_use == "1")

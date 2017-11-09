@@ -48,7 +48,7 @@ controllers.controller('LoginController', function($scope,$rootScope,Auth,$locat
 	                //console.log(response);
 		        });
             
-                location.reload();
+                location.reload(true);
 
         }, function(error) {
             // Authentication failed...

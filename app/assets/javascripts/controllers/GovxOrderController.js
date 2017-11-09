@@ -1132,7 +1132,7 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
             $rootScope.isLoggedin = true;
 			$scope.getClient();
 			
-			location.reload();
+			location.reload(true);
         });
 
         $scope.$on('devise:new-session', function(event, currentUser) {
