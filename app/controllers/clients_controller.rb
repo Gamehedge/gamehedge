@@ -21,6 +21,7 @@ class ClientsController < ActionController::Base
 
     if (@id.to_s != "") 
       if (core_account_use == "1" || core_account_use == "")
+        
         cookies['govxss'] = {
           :value => '1',
           :expires => 10000.hour.from_now
@@ -52,7 +53,7 @@ class ClientsController < ActionController::Base
       #puts @client
   
       @id = @client["id"]
-      puts "CLIENT ID FROM OTHER ACCOUNT: " + @id.to_s  
+      puts "CLIENT ID FROM OTHER ACCOUNT: " + @id.to_s + " USING CORE ACCOUNT: "+ core_account_use
 
       if (@id.to_s != "") #FOUND ID ON ANOTHER ACCOUT. NOW LET'S SWIPE LAYOUTS
         if (core_account_use == "1")  #THIS IS GOVX CUSTOMER. SET IT TO GOVX

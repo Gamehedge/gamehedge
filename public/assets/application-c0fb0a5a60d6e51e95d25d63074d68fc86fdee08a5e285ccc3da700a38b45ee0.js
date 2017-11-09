@@ -71398,12 +71398,13 @@ controllers.controller('LoginController', function($scope,$rootScope,Auth,$locat
 	    	        //$scope.client = response.data.client;
 	    	        //console.log("Client");
 	    	        //console.log($scope.client);
-	    	        //$scope.loading = false;
+                    //$scope.loading = false;
+                    location.reload(true);
 	            }, function errorCallback(response) {
 	                //console.log(response);
 		        });
             
-                location.reload(true);
+                
 
         }, function(error) {
             // Authentication failed...
