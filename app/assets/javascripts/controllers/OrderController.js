@@ -934,12 +934,14 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	    });
 	}
 	
-	$scope.getClient = function(){
+	$scope.getClient = function(tgp){
+		//alert(tgp)
 		Auth.currentUser().then(function(user) {
 			$http({
 		        method: 'GET',
 		        url: '/clients/show?id='+user.te_uid+'&core_account=2',
 		    }).then(function successCallback(response) {
+				//alert(tgp)
 		    	$scope.client = response.data.client;
 		    	$scope.cards = response.data.cards;
 		    	$scope.addresses = response.data.client.addresses;
@@ -962,6 +964,12 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				$scope.logging_in = false;
 				$scope.clientLoaded = true;
 				//console.log($scope.shipping_address);
+
+				if (tgp != undefined){
+					if (tgp == '1'){
+						location.reload(true);
+					}
+				}
 
 		    }, function errorCallback(response) {
 		    	$rootScope.user = undefined;
@@ -1057,7 +1065,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	$scope.billing_address_index = 0;
 	$scope.credit_card_index = 0;
 	$scope.getPromoCodes();
-	$scope.getClient();
+	$scope.getClient('2');
 	$rootScope.isOrder = true;
     $rootScope.isEvent = false;
 	$rootScope.darkHeader = true;
@@ -1095,7 +1103,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
         //console.log(credentials);
         Auth.login(credentials, config).then(function(user) {
 			//console.log(user); // => {id: 1, ect: '...'}
-			//location.reload(true);
+			
 			//alert('2');
         }, function(error) {
             // Authentication failed...
@@ -1111,9 +1119,10 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
             //console.log(currentUser);
             $rootScope.user = currentUser;
             $rootScope.isLoggedin = true;
-			$scope.getClient();
+			$scope.getClient('1');
 			//alert('1');
-			location.reload(true);
+			//location.reload(true);
+		
         });
 
         $scope.$on('devise:new-session', function(event, currentUser) {

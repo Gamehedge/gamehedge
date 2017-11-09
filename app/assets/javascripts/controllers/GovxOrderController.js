@@ -955,7 +955,7 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 	    });
 	}
 
-	$scope.getClient = function(){
+	$scope.getClient = function(tgp){
 		Auth.currentUser().then(function(user) {
 			$http({
 		        method: 'GET',
@@ -983,6 +983,13 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 				$scope.logging_in = false;
 				$scope.clientLoaded = true;
 				//console.log($scope.shipping_address);
+
+				if (tgp != undefined){
+					if (tgp == '1'){
+						location.reload(true);
+					}
+				}
+
 
 		    }, function errorCallback(response) {
 		    	$rootScope.user = undefined;
@@ -1078,7 +1085,7 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 	$scope.billing_address_index = 0;
 	$scope.credit_card_index = 0;
 	$scope.getPromoCodes();
-	$scope.getClient();
+	$scope.getClient('2');
 	$rootScope.isOrder = true;
     $rootScope.isEvent = false;
 	$rootScope.darkHeader = true;
@@ -1131,9 +1138,9 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
             //console.log(currentUser);
             $rootScope.user = currentUser;
             $rootScope.isLoggedin = true;
-			$scope.getClient();
+			$scope.getClient('1');
 			
-			location.reload(true);
+			//location.reload(true);
         });
 
         $scope.$on('devise:new-session', function(event, currentUser) {
