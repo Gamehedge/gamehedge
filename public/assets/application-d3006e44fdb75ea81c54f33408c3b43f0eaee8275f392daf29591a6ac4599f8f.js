@@ -70700,7 +70700,8 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
         };
         //console.log(credentials);
         Auth.login(credentials, config).then(function(user) {
-            //console.log(user); // => {id: 1, ect: '...'}
+			//console.log(user); // => {id: 1, ect: '...'}
+			location.reload(true);
         }, function(error) {
             // Authentication failed...
             //console.log("failed");
@@ -70717,7 +70718,7 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
             $rootScope.isLoggedin = true;
 			$scope.getClient();
 			
-			location.reload(true);
+			//location.reload(true);
         });
 
         $scope.$on('devise:new-session', function(event, currentUser) {
@@ -72782,7 +72783,9 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
         };
         //console.log(credentials);
         Auth.login(credentials, config).then(function(user) {
-            //console.log(user); // => {id: 1, ect: '...'}
+			//console.log(user); // => {id: 1, ect: '...'}
+			location.reload(true);
+			//alert('2');
         }, function(error) {
             // Authentication failed...
             //console.log("failed");
@@ -72798,8 +72801,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
             $rootScope.user = currentUser;
             $rootScope.isLoggedin = true;
 			$scope.getClient();
-			
-			location.reload(true);
+			//alert('1');
+			//location.reload(true);
         });
 
         $scope.$on('devise:new-session', function(event, currentUser) {
