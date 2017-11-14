@@ -69680,13 +69680,19 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 			$scope.client.email = $scope.client.email.toLowerCase(); 		
 		}
 
+		core_account_use = 1;
+		if(!$rootScope.govx){
+			core_account_use = 2;
+		}
+
 		var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 		if(re.test($scope.client.email) == true){
 			$http({
 	            method: 'POST',
 	            url: '/clients/exists',
 	            data: {
-	            	email: $scope.client.email,
+					email: $scope.client.email,
+					core_account: "1",
 	            },
 	        }).then(function successCallback(response) {
 	        	//console.log(response.data)
@@ -69953,6 +69959,13 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 	}
 
 	$scope.createCard = function(){
+
+		core_account_use = 1;
+		if(!$rootScope.govx){
+			core_account_use = 2;
+		}
+
+
 		$http({
 	        method: 'POST',
 	        url: '/clients/add_credit_card',
@@ -69963,7 +69976,8 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 	        	expiration_month: $scope.card.expiration_month,
 	        	expiration_year: $scope.card.expiration_year,
 	        	verification_code: $scope.card.cvv,
-	        	name: $scope.client.name,
+				name: $scope.client.name,
+				core_account: "1",
 	        },
 	    }).then(function successCallback(response) {
 	    	if(response.data.error != undefined){
@@ -70005,6 +70019,13 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 	$scope.confirmSave = function(type){
 		$scope.processing = true;
 		$scope.editing = false;
+
+		core_account_use = 1;
+		if(!$rootScope.govx){
+			core_account_use = 2;
+		}
+
+
 		if(type == "shipping"){
 			$scope.addShippingProcess = true;
 			if($scope.shipping_address.name != "" && $scope.shipping_address.street_address != "" && $scope.shipping_address.locality != "" && $scope.shipping_address.region != "" && $scope.shipping_address.postal_code != "" && $scope.shipping_address.country_code != ""){
@@ -70018,7 +70039,8 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 			        	locality: $scope.shipping_address.locality,
 			        	region: $scope.shipping_address.region,
 			        	postal_code: $scope.shipping_address.postal_code,
-			        	country_code: $scope.shipping_address.country_code,
+						country_code: $scope.shipping_address.country_code,
+						core_account: "1",
 			        },
 			    }).then(function successCallback(response) {
 			    	$scope.shipping_address = response.data;
@@ -70053,7 +70075,8 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 			        	expiration_month: $scope.card.expiration_month,
 			        	expiration_year: $scope.card.expiration_year,
 			        	verification_code: $scope.card.cvv,
-			        	name: $scope.client.name,
+						name: $scope.client.name,
+						core_account: "1",
 			        },
 			    }).then(function successCallback(response) {
 			    	if(response.data.error != undefined){
@@ -70111,7 +70134,8 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 			        	locality: $scope.billing_address.locality,
 			        	region: $scope.billing_address.region,
 			        	postal_code: $scope.billing_address.postal_code,
-			        	country_code: $scope.billing_address.country_code,
+						country_code: $scope.billing_address.country_code,
+						core_account: "1",
 			        },
 			    }).then(function successCallback(response) {
 			    	$scope.billing_address = response.data;
@@ -70230,7 +70254,8 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 			        	event_away_team: away_team,
 			        	event_te_uid: $scope.event.id,
 			        	ticket_notes: $scope.ticket.public_notes,
-			        	sport_id: $scope.event.home_performer.sport.id
+						sport_id: $scope.event.home_performer.sport.id,
+						core_account: "1"
 			        },
 			    }).then(function successCallback(response) {
 			    	$scope.processing = false;
@@ -70336,7 +70361,8 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 			        	postal_code: $scope.billing_address.postal_code,
 			        	street_address: $scope.billing_address.street_address,
 			        	locality: $scope.billing_address.locality,
-			        	phone_number: $scope.client.primary_phone_number.number,
+						phone_number: $scope.client.primary_phone_number.number,
+						core_account: "1",
 			        },
 			    }).then(function successCallback(response) {
 			    	if(response.data.error == undefined){
@@ -70409,7 +70435,8 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 		        url: '/clients/update_password',
 		        data: {password: $scope.password,
 		        	confirm_password: $scope.confirm_password,
-		        	email: $scope.client.primary_email_address.address,
+					email: $scope.client.primary_email_address.address,
+					core_account: "1",
 		        },
 		    }).then(function successCallback(response) {
 		    	swal("Success", "Your password has been updated", "success");
@@ -70513,11 +70540,11 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 	    });
 	}
 
-	$scope.getClient = function(){
+	$scope.getClient = function(tgp){
 		Auth.currentUser().then(function(user) {
 			$http({
 		        method: 'GET',
-		        url: '/clients/show?id='+user.te_uid,
+		        url: '/clients/show?id='+user.te_uid+'&core_account=1',
 		    }).then(function successCallback(response) {
 		    	$scope.client = response.data.client;
 		    	$scope.cards = response.data.cards;
@@ -70541,6 +70568,13 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 				$scope.logging_in = false;
 				$scope.clientLoaded = true;
 				//console.log($scope.shipping_address);
+
+				if (tgp != undefined){
+					if (tgp == '1'){
+						location.reload(true);
+					}
+				}
+
 
 		    }, function errorCallback(response) {
 		    	$rootScope.user = undefined;
@@ -70582,10 +70616,10 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
     $http({
         method: 'POST',
         url: '/clients/get_session',
-        data: {},
+        data: {core_account: "1"},
     }).then(function successCallback(response) {
     	$scope.session_id = response.data;
-    	$("#session_iframe").html('<iframe frameborder="0" height="1" scrolling="no" src="/clients/info?session=' + $scope.session_id + '" width="1"></iframe>');
+    	$("#session_iframe").html('<iframe frameborder="0" height="1" scrolling="no" src="/clients/info?session=' + $scope.session_id + '&core_account=1" width="1"></iframe>');
     }, function errorCallback(response) {
         //console.log(response);
     });
@@ -70636,7 +70670,7 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 	$scope.billing_address_index = 0;
 	$scope.credit_card_index = 0;
 	$scope.getPromoCodes();
-	$scope.getClient();
+	$scope.getClient('2');
 	$rootScope.isOrder = true;
     $rootScope.isEvent = false;
 	$rootScope.darkHeader = true;
@@ -70673,7 +70707,8 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
         };
         //console.log(credentials);
         Auth.login(credentials, config).then(function(user) {
-            //console.log(user); // => {id: 1, ect: '...'}
+			//console.log(user); // => {id: 1, ect: '...'}
+			//location.reload(true);
         }, function(error) {
             // Authentication failed...
             //console.log("failed");
@@ -70688,12 +70723,16 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
             //console.log(currentUser);
             $rootScope.user = currentUser;
             $rootScope.isLoggedin = true;
-            $scope.getClient();
+			$scope.getClient('1');
+			
+			//location.reload(true);
         });
 
         $scope.$on('devise:new-session', function(event, currentUser) {
             // user logged in by Auth.login({...})
-        });
+		});
+		
+		
 	}
 
     $scope.forgotPass = function(value){
@@ -71353,6 +71392,28 @@ controllers.controller('LoginController', function($scope,$rootScope,Auth,$locat
         //console.log(credentials);
         Auth.login(credentials, config).then(function(user) {
             //console.log(user); // => {id: 1, ect: '...'}
+            console.log(user['te_uid']);
+            
+            var core_account_to_use_login = 1;
+            if(!$rootScope.govx){
+                core_account_to_use_login = 2;
+            }
+
+        		$http({
+	                method: 'GET',
+	                url: '/clients/show?id='+user['te_uid']+'&core_account='+core_account_to_use_login,
+	            }).then(function successCallback(response) {
+	    	        //$scope.client = response.data.client;
+	    	        //console.log("Client");
+	    	        //console.log($scope.client);
+                    //$scope.loading = false;
+                    location.reload(true);
+	            }, function errorCallback(response) {
+	                //console.log(response);
+		        });
+            
+                
+
         }, function(error) {
             // Authentication failed...
             //console.log("failed");
@@ -71426,11 +71487,24 @@ controllers.controller('MainScreenController', function($scope,$rootScope){
 controllers = angular.module('gamehedge')
 
 controllers.controller('MemberController', function($scope,$rootScope,$http,$location,Auth){
-    $rootScope.showHeader = true;
+	$rootScope.showHeader = true;
+	
+	core_account_use = 1;
+	if(!$rootScope.govx){
+		core_account_use = 2;
+	}
+
+
     $scope.getClient = function(){
+		core_account_use = 1;
+		if(!$rootScope.govx){
+			core_account_use = 2;
+		}
+		
+		
 		$http({
 	        method: 'GET',
-	        url: '/clients/show?id='+$rootScope.user.te_uid,
+	        url: '/clients/show?id='+$rootScope.user.te_uid+'&core_account='+core_account_use,
 	    }).then(function successCallback(response) {
 	    	$scope.client = response.data.client;
 	    	//console.log("Client");
@@ -71438,7 +71512,24 @@ controllers.controller('MemberController', function($scope,$rootScope,$http,$loc
 	    	$scope.loading = false;
 	    }, function errorCallback(response) {
 	        //console.log(response);
-	    });
+		});
+		
+
+		/*
+		$http({
+			method: 'POST',
+			url: '/clients/show',
+			data: {
+				id: $rootScope.user.te_uid,
+				core_account: core_account_use,
+			},
+		}).then(function successCallback(response) {
+	    	$scope.client = response.data.client;
+	    	//console.log("Client");
+	    	//console.log($scope.client);
+	    	$scope.loading = false;
+		});
+		*/
 	}
 
 	$rootScope.darkHeader = true;
@@ -71607,6 +71698,12 @@ controllers = angular.module('gamehedge')
 
 controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,$location,$routeParams,$timeout,apiService,$filter,$window,Analytics){
 
+
+    if($rootScope.govx){
+        $location.path($location.path().replace("/order/", "/govx-order/"));
+    }
+
+
 	var paybuttonloadingtime = 0;
 
     var trigger555 = setInterval(function() {
@@ -71698,7 +71795,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	            method: 'POST',
 	            url: '/clients/exists',
 	            data: {
-	            	email: $scope.client.email,
+					email: $scope.client.email,
+					core_account: "2",
 	            },
 	        }).then(function successCallback(response) {
 	        	//console.log(response.data)
@@ -71975,7 +72073,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	        	expiration_month: $scope.card.expiration_month,
 	        	expiration_year: $scope.card.expiration_year,
 	        	verification_code: $scope.card.cvv,
-	        	name: $scope.client.name,
+				name: $scope.client.name,
+				core_account: "2",
 	        },
 	    }).then(function successCallback(response) {
 	    	if(response.data.error != undefined){
@@ -72030,7 +72129,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			        	locality: $scope.shipping_address.locality,
 			        	region: $scope.shipping_address.region,
 			        	postal_code: $scope.shipping_address.postal_code,
-			        	country_code: $scope.shipping_address.country_code,
+						country_code: $scope.shipping_address.country_code,
+						core_account: "2",
 			        },
 			    }).then(function successCallback(response) {
 			    	$scope.shipping_address = response.data;
@@ -72065,7 +72165,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			        	expiration_month: $scope.card.expiration_month,
 			        	expiration_year: $scope.card.expiration_year,
 			        	verification_code: $scope.card.cvv,
-			        	name: $scope.client.name,
+						name: $scope.client.name,
+						core_account: "2",
 			        },
 			    }).then(function successCallback(response) {
 			    	if(response.data.error != undefined){
@@ -72123,7 +72224,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			        	locality: $scope.billing_address.locality,
 			        	region: $scope.billing_address.region,
 			        	postal_code: $scope.billing_address.postal_code,
-			        	country_code: $scope.billing_address.country_code,
+						country_code: $scope.billing_address.country_code,
+						core_account: "2",
 			        },
 			    }).then(function successCallback(response) {
 			    	$scope.billing_address = response.data;
@@ -72242,7 +72344,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			        	event_away_team: away_team,
 			        	event_te_uid: $scope.event.id,
 			        	ticket_notes: $scope.ticket.public_notes,
-			        	sport_id: $scope.event.home_performer.sport.id
+						sport_id: $scope.event.home_performer.sport.id,
+						core_account: "2"
 			        },
 			    }).then(function successCallback(response) {
 			    	$scope.processing = false;
@@ -72348,7 +72451,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 			        	postal_code: $scope.billing_address.postal_code,
 			        	street_address: $scope.billing_address.street_address,
 			        	locality: $scope.billing_address.locality,
-			        	phone_number: $scope.client.primary_phone_number.number,
+						phone_number: $scope.client.primary_phone_number.number,
+						core_account: "2",
 			        },
 			    }).then(function successCallback(response) {
 			    	if(response.data.error == undefined){
@@ -72421,7 +72525,8 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 		        url: '/clients/update_password',
 		        data: {password: $scope.password,
 		        	confirm_password: $scope.confirm_password,
-		        	email: $scope.client.primary_email_address.address,
+					email: $scope.client.primary_email_address.address,
+					core_account: "2",
 		        },
 		    }).then(function successCallback(response) {
 		    	swal("Success", "Your password has been updated", "success");
@@ -72524,13 +72629,15 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	        $rootScope.isLoggedin = false;
 	    });
 	}
-
-	$scope.getClient = function(){
+	
+	$scope.getClient = function(tgp){
+		//alert(tgp)
 		Auth.currentUser().then(function(user) {
 			$http({
 		        method: 'GET',
-		        url: '/clients/show?id='+user.te_uid,
+		        url: '/clients/show?id='+user.te_uid+'&core_account=2',
 		    }).then(function successCallback(response) {
+				//alert(tgp)
 		    	$scope.client = response.data.client;
 		    	$scope.cards = response.data.cards;
 		    	$scope.addresses = response.data.client.addresses;
@@ -72553,6 +72660,12 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 				$scope.logging_in = false;
 				$scope.clientLoaded = true;
 				//console.log($scope.shipping_address);
+
+				if (tgp != undefined){
+					if (tgp == '1'){
+						location.reload(true);
+					}
+				}
 
 		    }, function errorCallback(response) {
 		    	$rootScope.user = undefined;
@@ -72594,10 +72707,10 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
     $http({
         method: 'POST',
         url: '/clients/get_session',
-        data: {},
+        data: {core_account: "2"},
     }).then(function successCallback(response) {
     	$scope.session_id = response.data;
-    	$("#session_iframe").html('<iframe frameborder="0" height="1" scrolling="no" src="/clients/info?session=' + $scope.session_id + '" width="1"></iframe>');
+    	$("#session_iframe").html('<iframe frameborder="0" height="1" scrolling="no" src="/clients/info?session=' + $scope.session_id + '&core_account=2" width="1"></iframe>');
     }, function errorCallback(response) {
         //console.log(response);
     });
@@ -72648,7 +72761,7 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
 	$scope.billing_address_index = 0;
 	$scope.credit_card_index = 0;
 	$scope.getPromoCodes();
-	$scope.getClient();
+	$scope.getClient('2');
 	$rootScope.isOrder = true;
     $rootScope.isEvent = false;
 	$rootScope.darkHeader = true;
@@ -72685,7 +72798,9 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
         };
         //console.log(credentials);
         Auth.login(credentials, config).then(function(user) {
-            //console.log(user); // => {id: 1, ect: '...'}
+			//console.log(user); // => {id: 1, ect: '...'}
+			
+			//alert('2');
         }, function(error) {
             // Authentication failed...
             //console.log("failed");
@@ -72700,7 +72815,10 @@ controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,
             //console.log(currentUser);
             $rootScope.user = currentUser;
             $rootScope.isLoggedin = true;
-            $scope.getClient();
+			$scope.getClient('1');
+			//alert('1');
+			//location.reload(true);
+		
         });
 
         $scope.$on('devise:new-session', function(event, currentUser) {
@@ -72850,6 +72968,7 @@ function orderControlErrors($scope){
 controllers = angular.module('gamehedge')
 
 controllers.controller('OrderHistoryController', function($scope,$rootScope,$http,$location,Auth,apiService){
+	
     $rootScope.showHeader = true;
     $rootScope.title = "Order history | Gamehedge";
     $rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team loses by a certain amount or more, get 50% of your ticket price back.";
@@ -72865,25 +72984,74 @@ controllers.controller('OrderHistoryController', function($scope,$rootScope,$htt
 
 	$scope.getOrders = function(){
 		//console.log($rootScope.user.te_uid);
+		var core_acc_use = 1;
+		if(!$rootScope.govx){
+			core_acc_use = 2;			
+		}
+		//alert(core_acc_use);
+		//core_acc_use=2;
+
         $http({
             method: 'GET',
-            url: '/orders/list/?id='+$rootScope.user.te_uid,
+            url: '/orders/list/?id='+$rootScope.user.te_uid+"&core_account="+core_acc_use,
         }).then(function successCallback(response) {
+			var get_total_orders = 0;
+			
         	$scope.orders = response.data;
         	for(i=0;i<$scope.orders.length;i++){
+				get_total_orders++;
+				get_total_orders++;
             	var result = $.grep($scope.local_orders, function(e){ return e.te_order_id == $scope.orders[i].id; });
             	if(result.length > 0){
             		$scope.orders[i].refund_status = result[0].refund_status;
             	}
             }
             //console.log("Orders");
-            //console.log($scope.orders);
+			//console.log($scope.orders);
+
+				//TEVO FIX
+				//NO ORDERS FROM THIS ACCOUNT. CHECK SECOND ONE
+				if (get_total_orders == 0){
+					if (core_acc_use == "1") {
+						core_acc_use = "2";
+					}else{
+						core_acc_use = "1";
+					}
+					$http({
+						method: 'GET',
+						url: '/orders/list/?id='+$rootScope.user.te_uid+"&core_account="+core_acc_use,
+					}).then(function successCallback(response) {
+						var get_total_orders = 0;
+						
+						$scope.orders = response.data;
+						for(i=0;i<$scope.orders.length;i++){
+							get_total_orders++;
+							get_total_orders++;
+							var result = $.grep($scope.local_orders, function(e){ return e.te_order_id == $scope.orders[i].id; });
+							if(result.length > 0){
+								$scope.orders[i].refund_status = result[0].refund_status;
+							}
+						}
+						$scope.loading = false;
+					}, function errorCallback(response) {
+						console.log('no orders err');
+						//console.log(response);
+						// called asynchronously if an error occurs
+						// or server returns response with an error status.
+					});
+
+				}
+
             $scope.loading = false;
         }, function errorCallback(response) {
+			console.log('no orders err');
             //console.log(response);
             // called asynchronously if an error occurs
             // or server returns response with an error status.
-        });
+		});
+		
+		//console.log(get_total_orders);
+
 	}
 
 	$scope.requestRefund = function(oid,index){
@@ -72897,10 +73065,17 @@ controllers.controller('OrderHistoryController', function($scope,$rootScope,$htt
 			confirmButtonText: "Yes, request refund!",
 			closeOnConfirm: false 
 		},function(){
+
+			core_account_use = 1;
+			if(!$rootScope.govx){
+				core_account_use = 2;
+			}
+	
+
 			$http({
 	            method: 'POST',
 	            url: '/orders/request_refund/',
-	            data: {id: oid},
+	            data: {id: oid, core_account: core_account_use},
 	        }).then(function successCallback(response) {
 	        	//console.log(response);
 	        	if(response.data == "success"){
@@ -74160,7 +74335,7 @@ $timeout(function () {
         
         $http({
             method: 'GET',
-            url: '/tickets/list/?id='+$routeParams.eventId,
+            url: '/tickets/list/?id='+$routeParams.eventId+'&govx=1',
         }).then(function successCallback(response) {
             $scope.tickets = response.data.ticket_groups;
             $scope.loading = false;
@@ -74621,7 +74796,7 @@ $timeout(function () {
             //Set cookie for govx visitors
             
             var govxcdate = new Date();
-            govxcdate.setTime(govxcdate.getTime() + (1*60*60*1000));//1 hour
+            govxcdate.setTime(govxcdate.getTime() + (10000*60*60*1000));//1 hour
             govxexpires = "; expires=" + govxcdate.toUTCString();
             document.cookie = "isghgovx" + "=" + "1" + govxexpires + "; path=/";
             
