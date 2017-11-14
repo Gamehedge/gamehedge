@@ -46,7 +46,7 @@ app = angular.module('gamehedge',[
         ga_inuse = 'UA-76054076-2';       
         console.log('GOVX GA 1');
     }else{
-        if(document.referrer.indexOf("govx") >= -1){
+        if(document.referrer.indexOf("govx") > -1){
             //SET GOVX GA ID
             ga_inuse = 'UA-76054076-2';                   
             console.log('GOVX GA 2');
