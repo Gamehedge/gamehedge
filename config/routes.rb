@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'tickets/list'
   get 'tickets/show'
   get 'clients/show'
+  #post 'clients/show'
   post 'clients/add_address'
   post 'clients/add_credit_card'
   post 'clients/get_session'

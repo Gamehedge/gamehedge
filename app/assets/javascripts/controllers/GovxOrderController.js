@@ -95,13 +95,19 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 			$scope.client.email = $scope.client.email.toLowerCase(); 		
 		}
 
+		core_account_use = 1;
+		if(!$rootScope.govx){
+			core_account_use = 2;
+		}
+
 		var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 		if(re.test($scope.client.email) == true){
 			$http({
 	            method: 'POST',
 	            url: '/clients/exists',
 	            data: {
-	            	email: $scope.client.email,
+					email: $scope.client.email,
+					core_account: "1",
 	            },
 	        }).then(function successCallback(response) {
 	        	//console.log(response.data)
@@ -368,6 +374,13 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 	}
 
 	$scope.createCard = function(){
+
+		core_account_use = 1;
+		if(!$rootScope.govx){
+			core_account_use = 2;
+		}
+
+
 		$http({
 	        method: 'POST',
 	        url: '/clients/add_credit_card',
@@ -378,7 +391,8 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 	        	expiration_month: $scope.card.expiration_month,
 	        	expiration_year: $scope.card.expiration_year,
 	        	verification_code: $scope.card.cvv,
-	        	name: $scope.client.name,
+				name: $scope.client.name,
+				core_account: "1",
 	        },
 	    }).then(function successCallback(response) {
 	    	if(response.data.error != undefined){
@@ -420,6 +434,13 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 	$scope.confirmSave = function(type){
 		$scope.processing = true;
 		$scope.editing = false;
+
+		core_account_use = 1;
+		if(!$rootScope.govx){
+			core_account_use = 2;
+		}
+
+
 		if(type == "shipping"){
 			$scope.addShippingProcess = true;
 			if($scope.shipping_address.name != "" && $scope.shipping_address.street_address != "" && $scope.shipping_address.locality != "" && $scope.shipping_address.region != "" && $scope.shipping_address.postal_code != "" && $scope.shipping_address.country_code != ""){
@@ -433,7 +454,8 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 			        	locality: $scope.shipping_address.locality,
 			        	region: $scope.shipping_address.region,
 			        	postal_code: $scope.shipping_address.postal_code,
-			        	country_code: $scope.shipping_address.country_code,
+						country_code: $scope.shipping_address.country_code,
+						core_account: "1",
 			        },
 			    }).then(function successCallback(response) {
 			    	$scope.shipping_address = response.data;
@@ -468,7 +490,8 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 			        	expiration_month: $scope.card.expiration_month,
 			        	expiration_year: $scope.card.expiration_year,
 			        	verification_code: $scope.card.cvv,
-			        	name: $scope.client.name,
+						name: $scope.client.name,
+						core_account: "1",
 			        },
 			    }).then(function successCallback(response) {
 			    	if(response.data.error != undefined){
@@ -526,7 +549,8 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 			        	locality: $scope.billing_address.locality,
 			        	region: $scope.billing_address.region,
 			        	postal_code: $scope.billing_address.postal_code,
-			        	country_code: $scope.billing_address.country_code,
+						country_code: $scope.billing_address.country_code,
+						core_account: "1",
 			        },
 			    }).then(function successCallback(response) {
 			    	$scope.billing_address = response.data;
@@ -645,7 +669,8 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 			        	event_away_team: away_team,
 			        	event_te_uid: $scope.event.id,
 			        	ticket_notes: $scope.ticket.public_notes,
-			        	sport_id: $scope.event.home_performer.sport.id
+						sport_id: $scope.event.home_performer.sport.id,
+						core_account: "1"
 			        },
 			    }).then(function successCallback(response) {
 			    	$scope.processing = false;
@@ -751,7 +776,8 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 			        	postal_code: $scope.billing_address.postal_code,
 			        	street_address: $scope.billing_address.street_address,
 			        	locality: $scope.billing_address.locality,
-			        	phone_number: $scope.client.primary_phone_number.number,
+						phone_number: $scope.client.primary_phone_number.number,
+						core_account: "1",
 			        },
 			    }).then(function successCallback(response) {
 			    	if(response.data.error == undefined){
@@ -824,7 +850,8 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 		        url: '/clients/update_password',
 		        data: {password: $scope.password,
 		        	confirm_password: $scope.confirm_password,
-		        	email: $scope.client.primary_email_address.address,
+					email: $scope.client.primary_email_address.address,
+					core_account: "1",
 		        },
 		    }).then(function successCallback(response) {
 		    	swal("Success", "Your password has been updated", "success");
@@ -928,11 +955,11 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 	    });
 	}
 
-	$scope.getClient = function(){
+	$scope.getClient = function(tgp){
 		Auth.currentUser().then(function(user) {
 			$http({
 		        method: 'GET',
-		        url: '/clients/show?id='+user.te_uid,
+		        url: '/clients/show?id='+user.te_uid+'&core_account=1',
 		    }).then(function successCallback(response) {
 		    	$scope.client = response.data.client;
 		    	$scope.cards = response.data.cards;
@@ -956,6 +983,13 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 				$scope.logging_in = false;
 				$scope.clientLoaded = true;
 				//console.log($scope.shipping_address);
+
+				if (tgp != undefined){
+					if (tgp == '1'){
+						location.reload(true);
+					}
+				}
+
 
 		    }, function errorCallback(response) {
 		    	$rootScope.user = undefined;
@@ -997,10 +1031,10 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
     $http({
         method: 'POST',
         url: '/clients/get_session',
-        data: {},
+        data: {core_account: "1"},
     }).then(function successCallback(response) {
     	$scope.session_id = response.data;
-    	$("#session_iframe").html('<iframe frameborder="0" height="1" scrolling="no" src="/clients/info?session=' + $scope.session_id + '" width="1"></iframe>');
+    	$("#session_iframe").html('<iframe frameborder="0" height="1" scrolling="no" src="/clients/info?session=' + $scope.session_id + '&core_account=1" width="1"></iframe>');
     }, function errorCallback(response) {
         //console.log(response);
     });
@@ -1051,7 +1085,7 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
 	$scope.billing_address_index = 0;
 	$scope.credit_card_index = 0;
 	$scope.getPromoCodes();
-	$scope.getClient();
+	$scope.getClient('2');
 	$rootScope.isOrder = true;
     $rootScope.isEvent = false;
 	$rootScope.darkHeader = true;
@@ -1088,7 +1122,8 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
         };
         //console.log(credentials);
         Auth.login(credentials, config).then(function(user) {
-            //console.log(user); // => {id: 1, ect: '...'}
+			//console.log(user); // => {id: 1, ect: '...'}
+			//location.reload(true);
         }, function(error) {
             // Authentication failed...
             //console.log("failed");
@@ -1103,12 +1138,16 @@ controllers.controller('GovxOrderController', function($scope,$rootScope,$http,A
             //console.log(currentUser);
             $rootScope.user = currentUser;
             $rootScope.isLoggedin = true;
-            $scope.getClient();
+			$scope.getClient('1');
+			
+			//location.reload(true);
         });
 
         $scope.$on('devise:new-session', function(event, currentUser) {
             // user logged in by Auth.login({...})
-        });
+		});
+		
+		
 	}
 
     $scope.forgotPass = function(value){

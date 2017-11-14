@@ -1,19 +1,124 @@
 class ClientsController < ActionController::Base
   def show
-  	@client = TicketEvolutionService.new({:type => "clients", :id => request.GET["id"]}).show
-  	@id = @client["id"]
-  	@cards = TicketEvolutionService.new({:type => "cards", :id => @id}).list
+
+    core_account_use = request.POST["core_account"]
+    #core_account_use = "2"
+    #if (cookies['govxss'].to_s == "1")
+    #  core_account_use = "1"
+    #end
+    if (core_account_use.to_s == "")
+      core_account_use = request.GET["core_account"]      
+    end
+
+    puts "CLIENTS_CONTROLLER:: SHOW :: core_acc: "+core_account_use
+
+
+    @client = TicketEvolutionService.new({:type => "clients", :id => request.GET["id"], :core_account => core_account_use}).show
+    #puts @client
+
+    @id = @client["id"]
+    puts "CLIENT ID: " + @id.to_s
+
+    if (@id.to_s != "") 
+      if (core_account_use == "1" || core_account_use == "")
+        
+        cookies['govxss'] = {
+          :value => '1',
+          :expires => 10000.hour.from_now
+        }  
+        cookies['isghgovx'] = {
+          :value => '1',
+          :expires => 10000.hour.from_now
+        }  
+      else
+        cookies['govxss'] = {
+          :value => '1',
+          :expires => -1.hour.from_now
+        }  
+        cookies['isghgovx'] = {
+          :value => '1',
+          :expires => -1.hour.from_now
+        }  
+      end
+    end
+
+
+    if (@id.to_s == "") #WRONG CORE ACCOUNT. SWIPING ACCOUNTS!
+      if (core_account_use == "1")
+        core_account_use = "2"
+      else
+        core_account_use = "1"
+      end
+      @client = TicketEvolutionService.new({:type => "clients", :id => request.GET["id"], :core_account => core_account_use}).show
+      #puts @client
+  
+      @id = @client["id"]
+      puts "CLIENT ID FROM OTHER ACCOUNT: " + @id.to_s + " USING CORE ACCOUNT: "+ core_account_use
+
+      if (@id.to_s != "") #FOUND ID ON ANOTHER ACCOUT. NOW LET'S SWIPE LAYOUTS
+        if (core_account_use == "1")  #THIS IS GOVX CUSTOMER. SET IT TO GOVX
+          puts "CHANGING TO GOVX - SETTING GOVX COOKIE"
+          cookies['govxss'] = {
+            :value => '1',
+            :expires => 10000.hour.from_now
+          }  
+          cookies['isghgovx'] = {
+            :value => '1',
+            :expires => 10000.hour.from_now
+          }  
+  
+        else                          #THIS IS GAMEHEDGE CUSTOMER
+          puts "CHANGING TO GH - SETTING GOVX COOKIE"
+          cookies['govxss'] = {
+            :value => '1',
+            :expires => -1.hour.from_now
+          }  
+          cookies['isghgovx'] = {
+            :value => '1',
+            :expires => -1.hour.from_now
+          }  
+
+        end
+      end
+    end
+
+
+
+    @cards = TicketEvolutionService.new({:type => "cards", :id => @id, :core_account => core_account_use}).list
+    puts @cards
+    
   	render json: {:client => @client,:cards => @cards}
   end
   def add_address
-  	if request.post?
-	  	@address = TicketEvolutionService.new({:type => "address", :id => request.POST["id"]}).add({:name => request.POST["name"], :street_address => request.POST["street_address"], :locality => request.POST["locality"], :region => request.POST["region"], :postal_code => request.POST["postal_code"], :country_code => request.POST["country_code"]})
+    if request.post?
+
+      core_account_use = request.POST["core_account"]
+      if (core_account_use.to_s == "")
+        core_account_use = request.GET["core_account"]      
+      end
+        
+      #if (cookies['govxss'].to_s == "1")
+      #  core_account_use = "1"
+      #end
+
+	  	@address = TicketEvolutionService.new({:type => "address", :id => request.POST["id"], :core_account => core_account_use}).add({:name => request.POST["name"], :street_address => request.POST["street_address"], :locality => request.POST["locality"], :region => request.POST["region"], :postal_code => request.POST["postal_code"], :country_code => request.POST["country_code"]})
 	  	render json: @address
 	 end
   end
   def add_credit_card
-  	if request.post?
-	  	@cc = TicketEvolutionService.new({:type => "card", :id => request.POST["id"]}).add({:address_id => request.POST["address_id"], :number => request.POST["number"], :expiration_month => request.POST["expiration_month"], :expiration_year => request.POST["expiration_year"], :verification_code => request.POST["verification_code"], :name => request.POST["name"]})
+    if request.post?
+      
+      core_account_use = request.POST["core_account"]      
+      if (core_account_use.to_s == "")
+        core_account_use = request.GET["core_account"]      
+      end
+        
+      #core_account_use = "2"
+      #if (cookies['govxss'].to_s == "1")
+      #  core_account_use = "1"
+      #end
+
+	  	@cc = TicketEvolutionService.new({:type => "card", :id => request.POST["id"], :core_account => core_account_use}).add({:address_id => request.POST["address_id"], :number => request.POST["number"], :expiration_month => request.POST["expiration_month"], :expiration_year => request.POST["expiration_year"], :verification_code => request.POST["verification_code"], :name => request.POST["name"]})
 	  	render json: @cc
 	end
   end
@@ -42,7 +147,18 @@ class ClientsController < ActionController::Base
         @user.save
         if @user.id
           sign_in @user
-          @client = TicketEvolutionService.new({:type => "client"}).add({:name => request.POST["name"], :street_address => request.POST["street_address"], :locality => request.POST["locality"], :region => request.POST["region"], :postal_code => request.POST["postal_code"], :country_code => request.POST["country_code"], :email => request.POST["email"], :phone_number => request.POST["phone_number"]})
+
+          core_account_use = request.POST["core_account"]
+          if (core_account_use.to_s == "")
+            core_account_use = request.GET["core_account"]      
+          end
+                
+          #core_account_use = "2"
+          #if (cookies['govxss'].to_s == "1")
+          #  core_account_use = "1"
+          #end
+
+          @client = TicketEvolutionService.new({:type => "client", :core_account => core_account_use}).add({:name => request.POST["name"], :street_address => request.POST["street_address"], :locality => request.POST["locality"], :region => request.POST["region"], :postal_code => request.POST["postal_code"], :country_code => request.POST["country_code"], :email => request.POST["email"], :phone_number => request.POST["phone_number"]})
           if @client.error
             puts "error"
           else

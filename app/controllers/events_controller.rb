@@ -32,9 +32,20 @@ class EventsController < ApplicationController
 				latitude = info.latitude
 				longitude = info.longitude
 			end
-			@events = TicketEvolutionService.new({:type => request.GET["type"], :within => 25, :id => request.GET["id"], :geolocated => "true", :latitude => latitude, :longitude => longitude, :page => request.GET["page"], :source => request.GET["source"], :perpage => request.GET["perpage"]}).list
+
+			core_account_use = "2"
+			if (cookies['govxss'].to_s == "1")
+			  core_account_use = "1"
+			end
+
+			@events = TicketEvolutionService.new({:type => request.GET["type"], :within => 25, :id => request.GET["id"], :geolocated => "true", :latitude => latitude, :longitude => longitude, :page => request.GET["page"], :source => request.GET["source"], :perpage => request.GET["perpage"], :core_account => core_account_use}).list
 		else
-			@events = TicketEvolutionService.new({:type => request.GET["type"], :id => request.GET["id"], :geolocated => "false", :page => request.GET["page"], :source => request.GET["source"], :perpage => request.GET["perpage"]}).list
+			core_account_use = "2"
+			if (cookies['govxss'].to_s == "1")
+			  core_account_use = "1"
+			end
+
+			@events = TicketEvolutionService.new({:type => request.GET["type"], :id => request.GET["id"], :geolocated => "false", :page => request.GET["page"], :source => request.GET["source"], :perpage => request.GET["perpage"], :core_account => core_account_use}).list
 		end
 		render json: @events
 	end

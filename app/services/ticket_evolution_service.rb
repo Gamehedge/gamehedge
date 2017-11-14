@@ -7,6 +7,7 @@ class TicketEvolutionService
   #@events_tevo =  TicketEvolutionService.new({:type => "order_status"}).sync
   def initialize(params)
       #The parameter type can be: 1. categories, 2. performers, 3. venues, 4. venue_configurations
+      @core_account = params[:core_account]   #1 - old, 2 - new
       @type = params[:type]
       @id = params[:id]
       @perpage = params[:perpage]
@@ -18,18 +19,48 @@ class TicketEvolutionService
       @longitude = params[:longitude]
       @geolocated = params[:geolocated]
       @office_id = 3100;
-       
-      @connection = TicketEvolution::Connection.new({
+      
+
+
+
+
+      #@core_account = 2
+
+      puts "RB cntrl CORE ACCOUNT: "+@core_account.to_s
+      puts "ID: "+@id.to_s
+      
+      if (@core_account.to_s == "2")
+        @office_id = 4802;
+        #NEW CORE ACCOUNT
+        @connection = TicketEvolution::Connection.new({
+          :token => '8d9b05212613ff4a1f7b620db29ad9b8',       # => (required) The API token, used to identify you
+          :secret => 'tsRLyI1bOcImDLtB/vWukRd9dVqbyvDIWlwBAqUM',      # => (required) The API secret, used to sign requests
+                          #               More info: [http://developer.ticketevolution.com/signature_tool](http://developer.ticketevolution.com/signature_tool))
+            :version => 9,      # => (required) API version to use - the correct version at the time of this writing is 9
+            :mode => :production,  # => (optional) Specifies the server environment to use Valid options: :production or :sandbox
+            :logger => nil      # => (optional) Object to use for logging requests and
+                          #               responses. Any 'Logger' instance object
+                          #               is valid. EX: Logger.new('log/te_api.log')
+        })
+
+      else
+        #OLD CORE ACCOUNT
+        @connection = TicketEvolution::Connection.new({
           :token => '5bfd4b6110681d224a8c1fa6333f375f',       # => (required) The API token, used to identify you
           :secret => 'g3iR2RLeuzQA9vhDGfw5hRtGMnMDsimyOfQAJ4bi',      # => (required) The API secret, used to sign requests
-                        #               More info: [http://developer.ticketevolution.com/signature_tool](http://developer.ticketevolution.com/signature_tool))
-          :version => 9,      # => (required) API version to use - the correct version at the time of this writing is 9
-          :mode => :production,  # => (optional) Specifies the server environment to use Valid options: :production or :sandbox
-          :logger => nil      # => (optional) Object to use for logging requests and
-                        #               responses. Any 'Logger' instance object
-                        #               is valid. EX: Logger.new('log/te_api.log')
-      })
+                          #               More info: [http://developer.ticketevolution.com/signature_tool](http://developer.ticketevolution.com/signature_tool))
+            :version => 9,      # => (required) API version to use - the correct version at the time of this writing is 9
+            :mode => :production,  # => (optional) Specifies the server environment to use Valid options: :production or :sandbox
+            :logger => nil      # => (optional) Object to use for logging requests and
+                          #               responses. Any 'Logger' instance object
+                          #               is valid. EX: Logger.new('log/te_api.log')
+        })
+      end
+
+
       
+      
+
   end
 
   def sync
@@ -48,7 +79,7 @@ class TicketEvolutionService
         #@events = Order.all
         puts "Updating events began"
         Sport.all.order(:id).each do |s|
-  (1..4).each do |bq|
+  (1..9).each do |bq|
 
           puts String(s.name) + " Page "+String(bq)
           @events = @connection.events.list({:category_id => s.te_uid, :per_page => 100, :page => bq})
@@ -312,6 +343,8 @@ class TicketEvolutionService
       return @addresses
     when 'cards'
       @client = @connection.clients.show(@id)
+      #puts "CLIENT:"
+      #puts @client
       @cards = @client.credit_cards.list({:client_id => @id})
       return @cards
     when 'emails'

@@ -29,6 +29,28 @@ controllers.controller('LoginController', function($scope,$rootScope,Auth,$locat
         //console.log(credentials);
         Auth.login(credentials, config).then(function(user) {
             //console.log(user); // => {id: 1, ect: '...'}
+            console.log(user['te_uid']);
+            
+            var core_account_to_use_login = 1;
+            if(!$rootScope.govx){
+                core_account_to_use_login = 2;
+            }
+
+        		$http({
+	                method: 'GET',
+	                url: '/clients/show?id='+user['te_uid']+'&core_account='+core_account_to_use_login,
+	            }).then(function successCallback(response) {
+	    	        //$scope.client = response.data.client;
+	    	        //console.log("Client");
+	    	        //console.log($scope.client);
+                    //$scope.loading = false;
+                    location.reload(true);
+	            }, function errorCallback(response) {
+	                //console.log(response);
+		        });
+            
+                
+
         }, function(error) {
             // Authentication failed...
             //console.log("failed");

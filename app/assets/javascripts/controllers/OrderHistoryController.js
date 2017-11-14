@@ -1,6 +1,7 @@
 controllers = angular.module('gamehedge')
 
 controllers.controller('OrderHistoryController', function($scope,$rootScope,$http,$location,Auth,apiService){
+	
     $rootScope.showHeader = true;
     $rootScope.title = "Order history | Gamehedge";
     $rootScope.description = "Buy and Save up to 60% on all game tickets. If the home team loses by a certain amount or more, get 50% of your ticket price back.";
@@ -16,25 +17,74 @@ controllers.controller('OrderHistoryController', function($scope,$rootScope,$htt
 
 	$scope.getOrders = function(){
 		//console.log($rootScope.user.te_uid);
+		var core_acc_use = 1;
+		if(!$rootScope.govx){
+			core_acc_use = 2;			
+		}
+		//alert(core_acc_use);
+		//core_acc_use=2;
+
         $http({
             method: 'GET',
-            url: '/orders/list/?id='+$rootScope.user.te_uid,
+            url: '/orders/list/?id='+$rootScope.user.te_uid+"&core_account="+core_acc_use,
         }).then(function successCallback(response) {
+			var get_total_orders = 0;
+			
         	$scope.orders = response.data;
         	for(i=0;i<$scope.orders.length;i++){
+				get_total_orders++;
+				get_total_orders++;
             	var result = $.grep($scope.local_orders, function(e){ return e.te_order_id == $scope.orders[i].id; });
             	if(result.length > 0){
             		$scope.orders[i].refund_status = result[0].refund_status;
             	}
             }
             //console.log("Orders");
-            //console.log($scope.orders);
+			//console.log($scope.orders);
+
+				//TEVO FIX
+				//NO ORDERS FROM THIS ACCOUNT. CHECK SECOND ONE
+				if (get_total_orders == 0){
+					if (core_acc_use == "1") {
+						core_acc_use = "2";
+					}else{
+						core_acc_use = "1";
+					}
+					$http({
+						method: 'GET',
+						url: '/orders/list/?id='+$rootScope.user.te_uid+"&core_account="+core_acc_use,
+					}).then(function successCallback(response) {
+						var get_total_orders = 0;
+						
+						$scope.orders = response.data;
+						for(i=0;i<$scope.orders.length;i++){
+							get_total_orders++;
+							get_total_orders++;
+							var result = $.grep($scope.local_orders, function(e){ return e.te_order_id == $scope.orders[i].id; });
+							if(result.length > 0){
+								$scope.orders[i].refund_status = result[0].refund_status;
+							}
+						}
+						$scope.loading = false;
+					}, function errorCallback(response) {
+						console.log('no orders err');
+						//console.log(response);
+						// called asynchronously if an error occurs
+						// or server returns response with an error status.
+					});
+
+				}
+
             $scope.loading = false;
         }, function errorCallback(response) {
+			console.log('no orders err');
             //console.log(response);
             // called asynchronously if an error occurs
             // or server returns response with an error status.
-        });
+		});
+		
+		//console.log(get_total_orders);
+
 	}
 
 	$scope.requestRefund = function(oid,index){
@@ -48,10 +98,17 @@ controllers.controller('OrderHistoryController', function($scope,$rootScope,$htt
 			confirmButtonText: "Yes, request refund!",
 			closeOnConfirm: false 
 		},function(){
+
+			core_account_use = 1;
+			if(!$rootScope.govx){
+				core_account_use = 2;
+			}
+	
+
 			$http({
 	            method: 'POST',
 	            url: '/orders/request_refund/',
-	            data: {id: oid},
+	            data: {id: oid, core_account: core_account_use},
 	        }).then(function successCallback(response) {
 	        	//console.log(response);
 	        	if(response.data == "success"){
