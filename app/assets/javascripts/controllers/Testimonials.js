@@ -1,6 +1,10 @@
 controllers = angular.module('gamehedge')
 
 controllers.controller('Testimonials', function($scope,$rootScope,$location,$window, dataService, $timeout){
+    var url = '/comingsoon';
+    $location.url(url);
+
+    
     $window.scrollTo(0, 0);
     $rootScope.showHeader = true;
     $scope.searchTerm = "";

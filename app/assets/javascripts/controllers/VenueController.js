@@ -1,6 +1,10 @@
 app = angular.module('gamehedge')
 
 app.controller('VenueController', function($scope,$rootScope,$routeParams,dataService, apiService,$window,$location, $timeout,Auth){
+    var url = '/comingsoon';
+    $location.url(url);
+
+    
     $rootScope.showHeader = true;
     $scope.getVenueInfo = function(){
         apiService.getData('/api/v1/venues/'+$routeParams.venueId)

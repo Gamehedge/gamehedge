@@ -115,6 +115,10 @@ app = angular.module('gamehedge',[
             templateUrl: "govx.html",
             controller: 'govxController',
         })	
+        .when('/comingsoon', {
+            templateUrl: "cs.html",
+            controller: 'csController',
+        })	
         .when('/order/:ticektId', {
             templateUrl: "order.html",
             controller: 'OrderController',

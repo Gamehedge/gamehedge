@@ -7430,6 +7430,45 @@ main#admin #order-stats .stat-item span {
     background: rgba(0, 0, 0, .8);
 }
 
+
+
+
+.cs-left{
+    width: 49%;
+    float: left;
+}
+
+.cs-right{
+    width: 49%;
+    float: right;
+}
+.cs-cr{
+    width: 200px;
+    border-radius: 3px;
+    background-color: #91c33f;
+    border: none;
+    font-size: 16px;
+    text-align: center;
+    color: #ffffff;
+    margin-top: 20px;
+    display: block;
+    line-height: 47px;
+}
+.cs-cr:hover{
+    color: #fff;
+    text-decoration: none;
+}
+
+.navbar-gamehedge1{
+    display: none;
+}
+
+.footer-nav {
+    display: none;
+}
+img.icon-img {
+    width: 40px;
+}
 /*Retina graphics!*/
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
        only screen and (min--moz-device-pixel-ratio: 1.5),

@@ -68513,6 +68513,10 @@ app = angular.module('gamehedge',[
             templateUrl: "govx.html",
             controller: 'govxController',
         })	
+        .when('/comingsoon', {
+            templateUrl: "cs.html",
+            controller: 'csController',
+        })	
         .when('/order/:ticektId', {
             templateUrl: "order.html",
             controller: 'OrderController',
@@ -68784,7 +68788,10 @@ controllers.controller('ConfirmController', function($scope,$rootScope,$http,Aut
 controllers = angular.module('gamehedge')
 
 controllers.controller('EventController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http,$timeout,$location,$rootScope,Auth){
+    var url = '/comingsoon';
+    $location.url(url);
 
+    
 	$scope.prev_filter = true;
     $scope.mob_price = 0;
     $scope.mob_price_a = false;
@@ -69586,6 +69593,8 @@ controllers.controller('EventController', function($scope,$routeParams,dataServi
 controllers = angular.module('gamehedge')
 
 controllers.controller('GovxOrderController', function($scope,$rootScope,$http,Auth,$location,$routeParams,$timeout,apiService,$filter,$window,Analytics){
+    var url = '/comingsoon';
+    $location.url(url);
 
 
     if(!$rootScope.govx){
@@ -70888,6 +70897,12 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
     $rootScope.title = "Home | Gamehedge";
     $rootScope.description = "Save up to 75% on NBA, NHL, MLB and NFL tickets. Get 50% of your ticket price refunded with our Good Game Guarantee if the Home Team Loses by a certain margin.";
 
+
+    var url = '/comingsoon';
+    $location.url(url);
+
+
+
   $scope.getTiles = function(){
     apiService.getData('/api/v1/tiles/')
             .then(function(response){
@@ -71152,6 +71167,11 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
 app = angular.module('gamehedge')
 
 app.controller('LeagueController', function($scope,$rootScope,$routeParams,dataService,apiService,$window,$http,$location, $timeout,Auth){
+
+    var url = '/comingsoon';
+    $location.url(url);
+
+
   $rootScope.showHeader = true;
     $scope.getLeagueInfo = function(){
     apiService.getData('/api/v1/sports/'+$routeParams.leagueId)
@@ -71698,7 +71718,10 @@ controllers = angular.module('gamehedge')
 
 controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,$location,$routeParams,$timeout,apiService,$filter,$window,Analytics){
 
+    var url = '/comingsoon';
+    $location.url(url);
 
+	
     if($rootScope.govx){
         $location.path($location.path().replace("/order/", "/govx-order/"));
     }
@@ -73131,6 +73154,10 @@ controllers.controller('OrderHistoryController', function($scope,$rootScope,$htt
 app = angular.module('gamehedge')
 
 app.controller('PerformerController', function($scope,$rootScope,$routeParams,dataService, apiService,$window,$location, $timeout,Auth,Analytics){
+    var url = '/comingsoon';
+    $location.url(url);
+
+    
     $rootScope.showHeader = true;
   $scope.getPerformerInfo = function(){
     apiService.getData('/api/v1/performers/'+$routeParams.performerId)
@@ -73370,6 +73397,10 @@ app.controller('PerformerController', function($scope,$rootScope,$routeParams,da
 controllers = angular.module('gamehedge')
 
 controllers.controller('PressController', function($scope,$rootScope,$location,$window, dataService){
+    var url = '/comingsoon';
+    $location.url(url);
+
+    
     $window.scrollTo(0, 0);
     $rootScope.showHeader = true;
     $scope.searchTerm = "";
@@ -73502,6 +73533,10 @@ controllers.controller('Superbowl', function($scope,$rootScope,$location,$window
 controllers = angular.module('gamehedge')
 
 controllers.controller('Testimonials', function($scope,$rootScope,$location,$window, dataService, $timeout){
+    var url = '/comingsoon';
+    $location.url(url);
+
+    
     $window.scrollTo(0, 0);
     $rootScope.showHeader = true;
     $scope.searchTerm = "";
@@ -73596,6 +73631,10 @@ controllers.controller('Testimonials', function($scope,$rootScope,$location,$win
 app = angular.module('gamehedge')
 
 app.controller('VenueController', function($scope,$rootScope,$routeParams,dataService, apiService,$window,$location, $timeout,Auth){
+    var url = '/comingsoon';
+    $location.url(url);
+
+    
     $rootScope.showHeader = true;
     $scope.getVenueInfo = function(){
         apiService.getData('/api/v1/venues/'+$routeParams.venueId)
@@ -73807,6 +73846,9 @@ app.controller('VenueController', function($scope,$rootScope,$routeParams,dataSe
 controllers = angular.module('gamehedge')
 
 controllers.controller('contactController', function($scope,$rootScope,$location,$window, dataService, apiService){
+    var url = '/comingsoon';
+    $location.url(url);
+
     $window.scrollTo(0, 0);
     $rootScope.showHeader = true;
     $scope.searchTerm = "";
@@ -73885,7 +73927,50 @@ controllers.controller('contactController', function($scope,$rootScope,$location
 });
 controllers = angular.module('gamehedge')
 
+controllers.controller('csController', function($scope,$rootScope,$location,$window, dataService){
+    $window.scrollTo(0, 0);
+    $rootScope.showHeader = true;
+    $scope.searchTerm = "";
+    $rootScope.title = "Coming Soon | Gamehedge";
+    $rootScope.description = "Buy and Save up to 75% on all game tickets. If the home team loses by a certain amount or more, get 50% of your ticket price back.";
+    $scope.getSearchHints = function(val) {
+        var now = new Date();
+        now.setHours(now.getHours() + 1);
+        var today_date = [[AddZero(now.getFullYear()), AddZero(now.getMonth() + 1), now.getDate()].join("-"), [AddZero(now.getHours()), AddZero(now.getMinutes())].join(":")].join(" ");
+        //Pad given value to the left with "0"
+        function AddZero(num) {
+            return (num >= 0 && num < 10) ? "0" + num : num + "";
+        }
+        return dataService.getData("/search/?search=" + val + "&limit=4&today_date="+today_date)
+            .then(function(response){
+            	//console.log(response)
+                var width = $("#search_element").width() + 50;
+                //console.log("width: " + width);
+                $('#form-home-search [uib-typeahead-popup].dropdown-menu').width(width);
+                $scope.searchBarResults = response.data;
+                return response.data;
+        });
+    };
+    $scope.onSelect = function ($item, $model, $label) {
+        $location.path($scope.searchTerm.url);
+    };
+
+    $scope.goToSearch = function(){
+        if($scope.searchBarResults != undefined){
+            if($scope.searchBarResults.length > 0){
+                $location.path($scope.searchBarResults[0].url);
+            }
+        }
+    }
+});
+controllers = angular.module('gamehedge')
+
 controllers.controller('faqController', function($scope,$rootScope,$location,$window, dataService){
+
+    var url = '/comingsoon';
+    $location.url(url);
+
+
     $window.scrollTo(0, 0);
     $rootScope.showHeader = true;
     $scope.searchTerm = "";
@@ -73924,6 +74009,11 @@ controllers.controller('faqController', function($scope,$rootScope,$location,$wi
 controllers = angular.module('gamehedge')
 
 controllers.controller('govxController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http,$timeout,$location,$rootScope,Auth,angularLoad){
+
+    var url = '/comingsoon';
+    $location.url(url);
+
+    
     $scope.prev_filter = true;
     $scope.mob_price = 0;
     $scope.mob_price_a = false;
@@ -74841,6 +74931,9 @@ $timeout(function () {
 controllers = angular.module('gamehedge')
 
 controllers.controller('howWorksController', function($scope,$rootScope,$location,$window, dataService, $timeout){
+    var url = '/comingsoon';
+    $location.url(url);
+
     $window.scrollTo(0, 0);
     $rootScope.showHeader = true;
     $scope.searchTerm = "";
@@ -74936,7 +75029,9 @@ controllers = angular.module('gamehedge')
 
 controllers.controller('mapTestController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http,$timeout,$location,$rootScope,Auth,angularLoad){
 
- 
+    var url = '/comingsoon';
+    $location.url(url);
+
     if($rootScope.govx){
         $location.path($location.path().replace("/events/", "/govx/"));
     }
@@ -75814,6 +75909,10 @@ $timeout(function () {
 controllers = angular.module('gamehedge')
 
 controllers.controller('ourTermsController', function($scope,$rootScope,$location,$window, dataService){
+    var url = '/comingsoon';
+    $location.url(url);
+
+    
     $window.scrollTo(0, 0);
     $rootScope.showHeader = true;
     $scope.searchTerm = "";
@@ -75852,6 +75951,10 @@ controllers.controller('ourTermsController', function($scope,$rootScope,$locatio
 controllers = angular.module('gamehedge')
 
 controllers.controller('privacyPolicyController', function($scope,$rootScope,$location,$window, dataService){
+    var url = '/comingsoon';
+    $location.url(url);
+
+    
     $window.scrollTo(0, 0);
     $rootScope.showHeader = true;
     $scope.searchTerm = "";
@@ -85356,6 +85459,13 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
   $templateCache.put("contact.html", '<section id="home">\n<div class="nl-top-bg" ng-if="!$root.govx"  style="background-image: URL(/assets/green_background-7f59e17363a6062d461c61cc7a501a050db1a1f76cb06ff5ab5dcf728f4d44ab.png);">\n  <div class="container nl-container">\n\n    <section id="hero">\n        <div id="shader"></div>\n        <div id="wrapper">\n          <div id="content">\n            <div class="container">\n              <p class="hidden-md hidden-lg hidden-xl">Every Ticket Comes With Our Good Game Guarantee!</p>\n              <div id="hero-search">\n                <form id="form-home-search" name="formSearch" onsubmit="function(){return false;};">\n                  <input type="hidden" name="type" value="full" />\n                  <div class="form-group">\n                    <img src="/assets/search icon-ddc57ae24d1e0b6ebb55f1742da8cca2a6b75cfc1339e507c71d46c821390c82.png" ng-click="goToSearch()">\n                    <input id="search_element" type="text" class="form-control" placeholder="Search by team, league, game, stadium or player..." ng-model="searchTerm" uib-typeahead="hint as hint.name for hint in getSearchHints($viewValue)" typeahead-template-url="typeahead/bind-node.html" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" typeahead-on-select="onSelect($item, $model, $label)" typeahead-no-results="noResults">\n                     <div class="no-results" ng-show="noResults && searchTerm != \'\'">\n                      No results. Please try again\n                    </div>\n                  </div>\n                </form>\n              </div>\n              \n            </div>\n            <!--\n            <div class="press-images hidden-xs hidden-sm">\n              <div class="container">\n                <div class="spacing-div">AS FEATURED IN</div>\n                <div class="spacing-div"><img src="/assets/press2/CNBC copy-fdb267aa4588c98a366e9d0afdef0302f0a98668135fac84e3ef06d35299dc88.png"></div>\n                <div class="spacing-div"><img src="/assets/press2/USA Today copy-474cc69f1ed05583320007bcafaf7008ee68c472237462fc4717e0e7bc5b5ed6.png"></div>\n                <div class="spacing-div"><img src="/assets/press2/Sports Illustrated Red-edc91d6b8d994df6ccb1e356910ff05576abe1eefc7f4abc8d72d179d7ac14b1.png"></div>\n                <div class="spacing-div"><img src="/assets/press2/Yahoo Finance-d458f43938d57599491d23cf4bf31ae36cc034756bad2f485b2b08825292fc59.png"></div>\n                <div class="spacing-div"><img src="/assets/press2/ESPN Radio copy-0a5f89dc91d4e272652ec987df0ecab5b0db6a93e2bbf88fb36076a7d9efbd4d.png"></div>\n              </div>\n            </div>\n            -->\n          </div>\n        </div>\n    </section>\n</div>\n</div>\n    <main id="contact_container">\n\n  <div class="nl-featured-in hidden-xs hidden-sm" id="good-game-guarantee">\n  <div class="container" style="margin-top: 0px;">\n    <center>\n      <img src="/assets/featured_logos-cd6431176f2cd8d32fc39822a87decb7760a536b82d2dbae9bf65ad8ca3e56e9.png">\n    </center>    \n  </div>\n  </div>\n\n\n        <div class="container">\n            <h1 class="text-center">CONTACT US</h1>\n            <section id="contact-us">\n                <div class="row">\n                    <div class="col-md-12 text-center" style="font-size:18px; margin-bottom:10px;">\n                        <img width="40px" src="/assets/icon_home-fb9b8015360ce933e60fb1a7ca60cc99655dd606f173490b6eeaa6f1c7a197b1.png"><div style="display:inline; margin-left:10px;">GameHedge 1412 Broadway, 21st Floor, New York, NY 10018</div>\n                    </div>\n                </div>\n                <div class="row">\n                    <div class="col-md-6">\n                        <div class="col-md-12 text-center">\n                            <img width="100" src="/assets/phone_icon_grey-c0492f70ce887100d07d257c59feaa4de7503219891aae441c78101d8d13da06.png">\n                        </div>\n                        <div class="col-md-12 text-center">\n                            <h3 ng-if="!$root.govx"><a href="tel:1-888-804-4330">(888) 804-4330</a></h3>\n                            <h3 ng-if="$root.govx"><a href="tel:1-800-294-6954">800-294-6954</a></h3>\n\n                        </div>\n                    </div>\n                    <div class="col-md-6">\n                        <div class="col-md-12 text-center">\n                            <img width="100" src="/assets/email_icon_grey-b8c8311e7a5ba212b0e714344d943ac04d4058545386b1ce22dc55a4df3b4722.png">\n                        </div>\n                        <div class="col-md-12 text-center contact-mobile">\n                            <h3><a href="mailto:support@gamehedge.com">support@gamehedge.com</a></h3>\n                        </div>\n                    </div>\n                </div>\n                <div class="row">\n                    <div class="col-md-12"><h2 class="text-center">- OR -</h2></div>\n                </div>\n                <div class="row contact-form">\n                   \n                        <form name="contactForm" class="form-horizontal" ng-submit="submitForm()" novalidate>\n                            <div class="form-group" ng-class="{ \'has-error\' : contactForm.name.$invalid && !contactForm.name.$pristine }">\n                                <label for="name" class="col-sm-2 control-label">Name</label>\n                                <div class="col-sm-10">\n                                    <input type="text" class="form-control" ng-model="contact.name" name="name" placeholder="First & Last Name" required>\n                                    <p ng-show="contactForm.name.$invalid && !contactForm.name.$pristine" class="help-block">You name is required.</p>\n                                </div>\n                            </div>\n                            <div class="form-group" ng-class="{ \'has-error\' : contactForm.email.$invalid && !contactForm.email.$pristine }">\n                                <label for="email" class="col-sm-2 control-label">Email</label>\n                                <div class="col-sm-10">\n                                    <input type="email" class="form-control" ng-model="contact.email" name="email" placeholder="example@domain.com" required>\n                                    <p ng-show="contactForm.email.$invalid && !contactForm.email.$pristine" class="help-block">Enter a valid email.</p>\n                                </div>\n                            </div>\n                            <div class="form-group" ng-class="{ \'has-error\' : contactForm.message.$invalid && !contactForm.message.$pristine }">\n                                <label for="message" class="col-sm-2 control-label">Message</label>\n                                <div class="col-sm-10">\n                                    <textarea class="form-control" rows="4" ng-model="contact.message" name="message" required></textarea>\n                                    <p ng-show="contactForm.message.$invalid && !contactForm.message.$pristine" class="help-block">Enter a message.</p>\n                                </div>\n                            </div>\n                            <div class="form-group" ng-class="{ \'has-error\' : contactForm.human.$invalid && !contactForm.human.$pristine }">\n                                <label for="human" class="col-sm-2 control-label">{{value_1}} + {{value_2}} = ?</label>\n                                <div class="col-sm-10">\n                                    <input type="text" class="form-control myCustomRule" name="human" ng-model="contact.human" placeholder="Your Answer" required autocomplete=\'off\'>\n                                    <p ng-show="contactForm.human.$invalid && !contactForm.human.$pristine" class="help-block">The answer is required.</p>\n                                    <input type="hidden" name="human_1" id="human_1" value="{{value_1}}">\n                                    <input type="hidden" name="human_2" id="human_2" value="{{value_2}}">\n                                    <input type="hidden" name="human_answer" id="human_answer" value="{{answer}}">\n                                </div>\n                            </div>\n                            <div class="form-group">\n                                <div class="col-sm-10 col-sm-offset-2">\n                                    <button ladda="proccessing" type="submit" class="btn btn-primary" ng-disabled="contactForm.$invalid">Send</button>\n                                </div>\n                            </div>\n                        </form>\n                    \n                </div>\n            </section>\n        </div>\n    </main>\n</section>')
+}]);
+
+// Angular Rails Template
+// source: app/assets/javascripts/templates/cs.html.erb
+
+angular.module("templates").run(["$templateCache", function($templateCache) {
+  $templateCache.put("cs.html", '<section id="home">\n    <div class="nl-top-bg" style="background-image: URL(/assets/baseball_field_hero-099e6205fd7dc83228e62586a26f2e2186f69462a87b7ddb0f041c3d49b982ad.png);">\n      <div class="container nl-container">\n    \n        <section id="hero" style="background: none;">\n            <div id="shader"></div>\n            <div id="wrapper">\n              <div id="content">\n                <div class="container">\n                  <p class="hidden-md hidden-lg hidden-xl">Every Ticket Comes With Our Good Game Guarantee!</p>\n<br/><br/><br/>\n                <center>\n                  <h2>Coming Back Soon!</h2>\n                  <h4>GameHedge will be back with more fascinating features!</h4>\n                </center>\n\n                  <div id="hero-search" style="display: none;">\n                    <form id="form-home-search" name="formSearch" onsubmit="function(){return false;};">\n                      <input type="hidden" name="type" value="full" />\n                      <div class="form-group">\n                        <img src="/assets/search icon-ddc57ae24d1e0b6ebb55f1742da8cca2a6b75cfc1339e507c71d46c821390c82.png" ng-click="goToSearch()">\n                        <input id="search_element" type="text" class="form-control" placeholder="Search by team, league, game, stadium or player..." ng-model="searchTerm" uib-typeahead="hint as hint.name for hint in getSearchHints($viewValue)" typeahead-template-url="typeahead/bind-node.html" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" typeahead-on-select="onSelect($item, $model, $label)" typeahead-no-results="noResults">\n                         <div class="no-results" ng-show="noResults && searchTerm != \'\'">\n                          No results. Please try again\n                        </div>\n                      </div>\n                    </form>\n                  </div>\n                  \n                </div>\n                <!--\n                <div class="press-images hidden-xs hidden-sm">\n                  <div class="container">\n                    <div class="spacing-div">AS FEATURED IN</div>\n                    <div class="spacing-div"><img src="/assets/press2/CNBC copy-fdb267aa4588c98a366e9d0afdef0302f0a98668135fac84e3ef06d35299dc88.png"></div>\n                    <div class="spacing-div"><img src="/assets/press2/USA Today copy-474cc69f1ed05583320007bcafaf7008ee68c472237462fc4717e0e7bc5b5ed6.png"></div>\n                    <div class="spacing-div"><img src="/assets/press2/Sports Illustrated Red-edc91d6b8d994df6ccb1e356910ff05576abe1eefc7f4abc8d72d179d7ac14b1.png"></div>\n                    <div class="spacing-div"><img src="/assets/press2/Yahoo Finance-d458f43938d57599491d23cf4bf31ae36cc034756bad2f485b2b08825292fc59.png"></div>\n                    <div class="spacing-div"><img src="/assets/press2/ESPN Radio copy-0a5f89dc91d4e272652ec987df0ecab5b0db6a93e2bbf88fb36076a7d9efbd4d.png"></div>\n                  </div>\n                </div>\n                -->\n              </div>\n            </div>\n        </section>\n    </div>\n    </div>    \n    \n        <main id="press_container">\n          <div class="nl-featured-in hidden-xs hidden-sm" id="good-game-guarantee">\n      <div class="container" style="margin-top: 0px;">\n        <center>\n          <img src="/assets/featured_logos-cd6431176f2cd8d32fc39822a87decb7760a536b82d2dbae9bf65ad8ca3e56e9.png">\n        </center>    \n      </div>\n      </div>\n    \n            <div class="container">\n\n<div style="padding-top: 20px;">\n<div class="cs-left">\n<h3>What is GameHedge?</h3>\n<p>\nGameHedge sells MLB, NFL, NBA and NHL tickets with our patent pending\nGood Game Guarantee at no extra cost. If the home team loses by the \nnumber or runs below, we give you 50% of your ticket price back!%\n</p>\n<br/><br/>\n<div><b><img class="icon-img" src="/assets/baseball icon-836e64be846b054a8d6890a6af14ae0d63654eb2ed3b45723e9ae2241f802c12.png"> 5 RUNS FOR BASEBALL</b></div>\n<div><b><img class="icon-img" src="/assets/hockey icon-66b08d4368d6695e3871796d8aa5978d88f5efd669c056d01f8bbe0a170b4d3d.png"> 4 GOALS FOR HOCKEY</b></div>\n<div><b><img class="icon-img" src="/assets/football icon-9a7d20380f240bd4ab7c5f211260dfe2de8ad1fa737653dc6ea44b6e55c6b7d2.png"> 17 POINTS FOR FOOTBALL</b></div>\n<div><b><img class="icon-img" src="/assets/basketball icon-cdaf5028d46f84e9e9159e1eeb0b151eb7d2ec8e13fb8c00456084fb4e4e71f4.png"> 20 POINTS FOR BASKETBALL</b></div>\n\n\n</div>\n\n<div class="cs-right">\n  <div class="video-container" id="howitworksvideo">\n    <div class="videoWrapper">\n      <iframe width="560" height="315" src="https://www.youtube.com/embed/dh3Fes9Gob0" frameborder="0" allowfullscreen></iframe>\n    </div>\n  </div>\n\n</div>\n<div class="sep"></div>\n</div>\n\n\n<div style="padding-top: 20px;">\n<div class="cs-left">\n  <img src="/assets/football_field-bc2be560e00e6f359950ea5f2ff1f0c1b0beda246c2aadc750ee73b9c088e6e4.png" style="width: 100%;">\n</div>\n\n<div class="cs-right">\n<h3>Contact Us</h3>\n\n<p>For customer service or business development opportunities email us at:</p>\n<p style="font-size: 18px;">support@gamehege.com</p>\n<br/>\n<p>\n<b>To claim refund click here:</b>\n</p>\n<a class="cs-cr" href="/login/">CLAIM REFUND</a>\n\n</div>\n<div class="sep"></div>\n</div>\n<br/><br/><br/><br/>\n                \n                    <div class="col-xs-3"></div>\n                </div>\n            </div>\n        </main>\n    </section>')
 }]);
 
 // Angular Rails Template

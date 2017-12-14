@@ -1,6 +1,8 @@
 controllers = angular.module('gamehedge')
 
 controllers.controller('GovxOrderController', function($scope,$rootScope,$http,Auth,$location,$routeParams,$timeout,apiService,$filter,$window,Analytics){
+    var url = '/comingsoon';
+    $location.url(url);
 
 
     if(!$rootScope.govx){

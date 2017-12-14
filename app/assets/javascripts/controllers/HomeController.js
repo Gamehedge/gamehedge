@@ -12,6 +12,12 @@ controllers.controller('HomeController', function($scope,$rootScope,$http,$locat
     $rootScope.title = "Home | Gamehedge";
     $rootScope.description = "Save up to 75% on NBA, NHL, MLB and NFL tickets. Get 50% of your ticket price refunded with our Good Game Guarantee if the Home Team Loses by a certain margin.";
 
+
+    var url = '/comingsoon';
+    $location.url(url);
+
+
+
   $scope.getTiles = function(){
     apiService.getData('/api/v1/tiles/')
             .then(function(response){

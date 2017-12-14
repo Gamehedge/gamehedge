@@ -1,7 +1,10 @@
 controllers = angular.module('gamehedge')
 
 controllers.controller('EventController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http,$timeout,$location,$rootScope,Auth){
+    var url = '/comingsoon';
+    $location.url(url);
 
+    
 	$scope.prev_filter = true;
     $scope.mob_price = 0;
     $scope.mob_price_a = false;

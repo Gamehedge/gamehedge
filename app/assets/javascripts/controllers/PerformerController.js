@@ -1,6 +1,10 @@
 app = angular.module('gamehedge')
 
 app.controller('PerformerController', function($scope,$rootScope,$routeParams,dataService, apiService,$window,$location, $timeout,Auth,Analytics){
+    var url = '/comingsoon';
+    $location.url(url);
+
+    
     $rootScope.showHeader = true;
   $scope.getPerformerInfo = function(){
     apiService.getData('/api/v1/performers/'+$routeParams.performerId)
