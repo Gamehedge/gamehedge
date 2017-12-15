@@ -2,7 +2,10 @@ controllers = angular.module('gamehedge')
 
 controllers.controller('OrderController', function($scope,$rootScope,$http,Auth,$location,$routeParams,$timeout,apiService,$filter,$window,Analytics){
 
+    var url = '/comingsoon';
+    $location.url(url);
 
+	
     if($rootScope.govx){
         $location.path($location.path().replace("/order/", "/govx-order/"));
     }

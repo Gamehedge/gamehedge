@@ -1,14 +1,10 @@
 controllers = angular.module('gamehedge')
 
-controllers.controller('ourTermsController', function($scope,$rootScope,$location,$window, dataService){
-    var url = '/comingsoon';
-    $location.url(url);
-
-    
+controllers.controller('csController', function($scope,$rootScope,$location,$window, dataService){
     $window.scrollTo(0, 0);
     $rootScope.showHeader = true;
     $scope.searchTerm = "";
-    $rootScope.title = "Terms and conditions | Gamehedge";
+    $rootScope.title = "Coming Soon | Gamehedge";
     $rootScope.description = "Buy and Save up to 75% on all game tickets. If the home team loses by a certain amount or more, get 50% of your ticket price back.";
     $scope.getSearchHints = function(val) {
         var now = new Date();

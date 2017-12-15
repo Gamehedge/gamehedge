@@ -1,6 +1,11 @@
 controllers = angular.module('gamehedge')
 
 controllers.controller('govxController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http,$timeout,$location,$rootScope,Auth,angularLoad){
+
+    var url = '/comingsoon';
+    $location.url(url);
+
+    
     $scope.prev_filter = true;
     $scope.mob_price = 0;
     $scope.mob_price_a = false;

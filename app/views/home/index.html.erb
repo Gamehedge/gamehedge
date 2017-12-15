@@ -206,7 +206,7 @@
                     </button>
                 </div>
             </div>
-            <div class="navbar-header col-md-4 col-xs-8 nl-logo">
+            <div class="navbar-header col-md-4 col-xs-8 nl-logo">            
                 <a href="/" ng-if="!$root.govx && !$root.govxseui">
                     <img class="logo-image" alt="GameHedge.com" src="<%= image_url 'gamehedge_logo_white.png' %>">
                 </a>
@@ -241,7 +241,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4 hidden-sm hidden-xs horizontal-center main-menu" style="justify-content: flex-end;" ng-if="$root.govx">
+            <div class="col-md-4 hidden-sm hidden-xs horizontal-center main-menu" style="justify-content: flex-end;" DISng-if="$root.govx">
 
                     <p ng-if="$root.govx && !$root.isOrder" style="line-height: 16px; color: #fff; margin-top: 7px;">
                         NEED HELP? CALL TOLL FREE<br/>
@@ -253,7 +253,7 @@
             </div>
 
 
-            <div class="col-md-4 hidden-sm hidden-xs horizontal-center main-menu" ng-if="!$root.govx">
+            <div class="col-md-4 hidden-sm hidden-xs horizontal-center main-menu" ng-if="!$root.govx" style="display: none;">
                 <ul class="nav navbar-nav navbar-leagues vertical-center horizontal-center" ng-show="!$root.isOrder" ng-repeat="league in leagueList | orderBy:'name' track by $index" ng-if="league.active == true">
                    <li class="dropdown main-dropdown yamm-fw">
                          <a class="dropdown-toggle" href="{{league.url}}" ng-cloak>{{league.name | uppercase}}</a>
@@ -308,7 +308,7 @@
                 </div>
 
                 <div class="press" ng-show="$root.locat != '/'">
-                    <a ng-if="!$root.govx" href="/testimonials">Testimonials</a>
+                    <a ng-if="!$root.govx" href="/testimonials">&nbsp;</a>
                     <a ng-if="$root.govx" href="#" id="govx_explanation2">How it works</a>
                 </div>
 
@@ -326,7 +326,7 @@
 
 
                  <div class="dropdown login" ng-show="!$root.isLoggedin">
-                    <a ng-if="!$root.govx" href="/how-it-works" class="header-claim-refund"><span style="background-image: URL(<%= image_url 'money_white.png' %>);"></span>Claim Refund</a>
+                    <a ng-if="!$root.govx" href="/login/" class="header-claim-refund"><span style="background-image: URL(<%= image_url 'money_white.png' %>);"></span>Claim Refund</a>
                     <a ng-if="$root.govx" href="/login/" class="header-claim-refund"><span style="background-image: URL(<%= image_url 'money_white.png' %>);"></span>Claim Refund</a>
                 </div>
             </div>

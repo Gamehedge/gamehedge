@@ -2,7 +2,9 @@ controllers = angular.module('gamehedge')
 
 controllers.controller('mapTestController', function($scope,$routeParams,dataService,apiService,$window,$filter,$http,$timeout,$location,$rootScope,Auth,angularLoad){
 
- 
+    var url = '/comingsoon';
+    $location.url(url);
+
     if($rootScope.govx){
         $location.path($location.path().replace("/events/", "/govx/"));
     }
